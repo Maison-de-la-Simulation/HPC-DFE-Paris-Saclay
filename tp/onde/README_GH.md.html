@@ -1,0 +1,40 @@
+<h1>Cas de l'équation d'onde par la méthode des différences finies</h1>
+<p>Ce cas applicatif s'intéresse à la parallèlisation d'un code résolvant
+l'équation d'onde 2D avec la méthode des différences finies.</p>
+<p>L'équation d'onde que nous souhaitons résoudre correspond à l'équation dans un milieu homogène et isotrope :
+<p align="center"><img src="svgs/93c102b192a379c9a1541a17339633ee.svg?invert_in_darkmode" align=middle width=197.04135pt height=35.777445pt/></p>
+Où <img src="svgs/da26587c8582f87667b0c05aee338b31.svg?invert_in_darkmode" align=middle width=16.246395pt height=22.83138pt/> est la vitesse de propagation des ondes dans le milieu dans toutes les directions (isotropie).
+Le terme <img src="svgs/adebe424ff21807c6d2e5cd2f8e0e9b8.svg?invert_in_darkmode" align=middle width=18.94992pt height=22.83138pt/> est ici un terme source.</p>
+<p>En 2D, cette équation devient :
+<code>math
+\frac{\partial^2 U(\mathbf{x},t)}{\partial t^2} = c^2 \cdot \left[ \frac{\partial^2 U(\mathbf{x},t)}{\partial x^2}  + \frac{\partial^2 U(\mathbf{x},t)}{\partial y^2}\right] + f</code></p>
+<p>Dans cette exemple, nous utilisons des conditions limites de type Dirichlet.
+<code>math
+U(\mathbf{x},t)_{boundary} = 0</code>
+Cela correspond à une réflection parfaite de l'onde sur les bords du domaine.
+On peut noter qu'une condition de type Neumann nulle correspondrait à une absorption parfaite.</p>
+<p>La discrétisation par la méthode des différences finies donne:
+<code>math
+U^{n+1}_{i,j} = 2 U^{n}_{i,j} - U^{n-1}_{i,j} + D  \cdot \left( U^{n}_{i+1,j} + U^{n}_{i-1,j} - 4 U^{n}_{i,j} + U^{n}_{i,j+1} + U^{n}_{i,j-1}  \right) + \Delta t ^2 f</code>
+où <img src="svgs/c81c4840e92800e7ff99e5e3cd60ed4e.svg?invert_in_darkmode" align=middle width=23.198669999999996pt height=22.83138pt/> est un coefficient valant <img src="svgs/6eacc39a814e2cc2610a6146ebc26297.svg?invert_in_darkmode" align=middle width=92.833125pt height=31.360889999999998pt/></p>
+<p>Ici, <img src="svgs/f7d46579966c0776a4ee06b2a64b0234.svg?invert_in_darkmode" align=middle width=28.767255pt height=22.83138pt/> est le pas de temps. On a donc <img src="svgs/713282bc8540effe774c90aff9bf7edf.svg?invert_in_darkmode" align=middle width=78.35982pt height=22.83138pt/>. Il faut alors comprendre que pour obtenir le temps <img src="svgs/0d2a747a7bdaf44ca8311123afc6d55c.svg?invert_in_darkmode" align=middle width=47.30979pt height=22.83138pt/>
+nous avons besoin des deux pas de temps précédent.
+<img src="svgs/c787a616fbd76e9c6c23bb63a746d835.svg?invert_in_darkmode" align=middle width=32.22615pt height=22.83138pt/> représentent le pas d'espace à la fois dans les directions <img src="svgs/be12a978e6d1bafbac7cb59d0d63d3ba.svg?invert_in_darkmode" align=middle width=18.52752pt height=22.83138pt/> et <img src="svgs/c7dea865aff30fe079cee413fde80793.svg?invert_in_darkmode" align=middle width=17.78172pt height=22.83138pt/>.
+Les indices <img src="svgs/db08780ad2ba9746939e86b175ce5161.svg?invert_in_darkmode" align=middle width=14.795715pt height=22.83138pt/> et <img src="svgs/8bfa4e773baaafee75f9b9e78a22a43a.svg?invert_in_darkmode" align=middle width=16.84287pt height=22.83138pt/> correspondent aux positions suivant <img src="svgs/be12a978e6d1bafbac7cb59d0d63d3ba.svg?invert_in_darkmode" align=middle width=18.52752pt height=22.83138pt/> et <img src="svgs/c7dea865aff30fe079cee413fde80793.svg?invert_in_darkmode" align=middle width=17.78172pt height=22.83138pt/>
+sur la grille 2D de telle sorte que <img src="svgs/56cf14a9459efcebf4fe3e20aa316ea2.svg?invert_in_darkmode" align=middle width=81.07407pt height=22.83138pt/> et <img src="svgs/ed47dc1eaf7c938c0695701dc69b6046.svg?invert_in_darkmode" align=middle width=82.37542499999999pt height=22.83138pt/>.
+De la même façon, <img src="svgs/f7d46579966c0776a4ee06b2a64b0234.svg?invert_in_darkmode" align=middle width=28.767255pt height=22.83138pt/> est le pas de temps de telle sorte qu'en
+définissant l'itération <img src="svgs/fbdb696db6a1b0322aa20999d63696f2.svg?invert_in_darkmode" align=middle width=18.207915pt height=22.83138pt/>, nous obtenons <img src="svgs/d26936ddd4b2a81ce158189288fb89ce.svg?invert_in_darkmode" align=middle width=77.568315pt height=22.83138pt/>.</p>
+<p>La condition de stabilité du schéma est donnée par la formule :
+<code>math
+dt \leq dx / c</code></p>
+<p>Les implémentations présentées dans ce dossier respectent ce formalisme.</p>
+<h2>Implémentations</h2>
+<p>L'équation 2D est implémentée dans le code séquentiel fortran situé dans le dossier <a href="./fortran/">applications/onde/fortran</a>.
+Les instructions de compilation et d'éxecution du code sont disponibles sur ce <a href="./fortran/README.md">README</a>.</p>
+<h2>Analyse des résultats</h2>
+<p>L'éxecution du code genère des fichiers de sortie binaires dans un dossier <code>diags</code>
+qui sera créé au début de chaque <em>run</em>.
+Les fichiers de sortie portent le nom suivant <code>grid_&lt;numéro d'itération&gt;.dat</code>.
+Le dossier <a href="./python/`">applications/onde/python</a> contient des scripts Python
+dédiés à l'analyse des résultats.
+Les instructions pour utiliser ces scripts sont disponibles sur le <a href="./python/README.md">README</a> correspondant.</p>
