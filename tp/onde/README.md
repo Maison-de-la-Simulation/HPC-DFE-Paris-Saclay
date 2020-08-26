@@ -4,9 +4,9 @@ Ce cas applicatif s'intéresse à la parallèlisation d'un code résolvant
 l'équation d'onde 2D avec la méthode des différences finies.
 
 L'équation d'onde que nous souhaitons résoudre correspond à l'équation dans un milieu homogène et isotrope :
-```math
+$$
 \frac{\partial^2 U(\mathbf{x},t)}{\partial t ^2} = c^2 \Delta U(\mathbf{x},t) + f
-```
+$$
 Où $`c`$ est la vitesse de propagation des ondes dans le milieu dans toutes les directions (isotropie).
 Le terme $`f`$ est ici un terme source.
 
