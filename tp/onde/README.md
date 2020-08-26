@@ -12,28 +12,26 @@ En 2D, cette équation devient :
 <p align="center"><img src=".extra//f231920c6ee6e0dc13ded86340835292.svg?invert_in_darkmode" align=middle width=323.598pt height=40.118265pt/></p>
 
 Dans cette exemple, nous utilisons des conditions limites de type Dirichlet.
+
 <p align="center"><img src=".extra//9c51fbaac26ac4e98105263a6ad85255.svg?invert_in_darkmode" align=middle width=135.65722499999998pt height=17.031959999999998pt/></p>
+
 Cela correspond à une réflection parfaite de l'onde sur les bords du domaine.
 On peut noter qu'une condition de type Neumann nulle correspondrait à une absorption parfaite.
 
 La discrétisation par la méthode des différences finies donne:
-```math
-U^{n+1}_{i,j} = 2 U^{n}_{i,j} - U^{n-1}_{i,j} + D  \cdot \left( U^{n}_{i+1,j} + U^{n}_{i-1,j} - 4 U^{n}_{i,j} + U^{n}_{i,j+1} + U^{n}_{i,j-1}  \right) + \Delta t ^2 f
-```
-où <img src=".extra//c81c4840e92800e7ff99e5e3cd60ed4e.svg?invert_in_darkmode" align=middle width=23.198670000000003pt height=22.831379999999992pt/> est un coefficient valant <img src=".extra//6eacc39a814e2cc2610a6146ebc26297.svg?invert_in_darkmode" align=middle width=92.833125pt height=31.360889999999984pt/>
+<p align="center"><img src=".extra//8cb132f7fcd865f0f1637fbfe01228c2.svg?invert_in_darkmode" align=middle width=561.39765pt height=21.267014999999997pt/></p>
+où <img src=".extra//78ec2b7008296ce0561cf83393cb746d.svg?invert_in_darkmode" align=middle width=14.066250000000002pt height=22.46574pt/> est un coefficient valant <img src=".extra//8eedfdb979b5e344bbc89b1b615bdcb0.svg?invert_in_darkmode" align=middle width=77.399355pt height=31.360889999999984pt/>
 
-Ici, <img src=".extra//f7d46579966c0776a4ee06b2a64b0234.svg?invert_in_darkmode" align=middle width=28.767255000000002pt height=22.831379999999992pt/> est le pas de temps. On a donc <img src=".extra//713282bc8540effe774c90aff9bf7edf.svg?invert_in_darkmode" align=middle width=78.35982pt height=22.831379999999992pt/>. Il faut alors comprendre que pour obtenir le temps <img src=".extra//0d2a747a7bdaf44ca8311123afc6d55c.svg?invert_in_darkmode" align=middle width=47.30979pt height=22.831379999999992pt/>
+Ici, <img src=".extra//5a63739e01952f6a63389340c037ae29.svg?invert_in_darkmode" align=middle width=19.634835000000002pt height=22.46574pt/> est le pas de temps. On a donc <img src=".extra//920296fb97fdfa6eb814c39b79d4b30d.svg?invert_in_darkmode" align=middle width=69.2274pt height=22.46574pt/>. Il faut alors comprendre que pour obtenir le temps <img src=".extra//3f18d8f60c110e865571bba5ba67dcc6.svg?invert_in_darkmode" align=middle width=38.17737pt height=21.18732pt/>
 nous avons besoin des deux pas de temps précédent.
-<img src=".extra//c787a616fbd76e9c6c23bb63a746d835.svg?invert_in_darkmode" align=middle width=32.226150000000004pt height=22.831379999999992pt/> représentent le pas d'espace à la fois dans les directions <img src=".extra//be12a978e6d1bafbac7cb59d0d63d3ba.svg?invert_in_darkmode" align=middle width=18.527520000000003pt height=22.831379999999992pt/> et <img src=".extra//c7dea865aff30fe079cee413fde80793.svg?invert_in_darkmode" align=middle width=17.781720000000004pt height=22.831379999999992pt/>.
-Les indices <img src=".extra//db08780ad2ba9746939e86b175ce5161.svg?invert_in_darkmode" align=middle width=14.795715000000003pt height=22.831379999999992pt/> et <img src=".extra//8bfa4e773baaafee75f9b9e78a22a43a.svg?invert_in_darkmode" align=middle width=16.84287pt height=22.831379999999992pt/> correspondent aux positions suivant <img src=".extra//be12a978e6d1bafbac7cb59d0d63d3ba.svg?invert_in_darkmode" align=middle width=18.527520000000003pt height=22.831379999999992pt/> et <img src=".extra//c7dea865aff30fe079cee413fde80793.svg?invert_in_darkmode" align=middle width=17.781720000000004pt height=22.831379999999992pt/>
-sur la grille 2D de telle sorte que <img src=".extra//56cf14a9459efcebf4fe3e20aa316ea2.svg?invert_in_darkmode" align=middle width=81.07407pt height=22.831379999999992pt/> et <img src=".extra//ed47dc1eaf7c938c0695701dc69b6046.svg?invert_in_darkmode" align=middle width=82.37542499999999pt height=22.831379999999992pt/>.
-De la même façon, <img src=".extra//f7d46579966c0776a4ee06b2a64b0234.svg?invert_in_darkmode" align=middle width=28.767255000000002pt height=22.831379999999992pt/> est le pas de temps de telle sorte qu'en
-définissant l'itération <img src=".extra//fbdb696db6a1b0322aa20999d63696f2.svg?invert_in_darkmode" align=middle width=18.207915000000003pt height=22.831379999999992pt/>, nous obtenons <img src=".extra//d26936ddd4b2a81ce158189288fb89ce.svg?invert_in_darkmode" align=middle width=77.56831500000001pt height=22.831379999999992pt/>.
+<img src=".extra//3919bbc84b8079e27194efe99a1f6a80.svg?invert_in_darkmode" align=middle width=23.09373pt height=22.46574pt/> représentent le pas d'espace à la fois dans les directions <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.395100000000005pt height=14.155350000000013pt/> et <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649300000000004pt height=14.155350000000013pt/>.
+Les indices <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663295000000005pt height=21.683310000000006pt/> et <img src=".extra//36b5afebdba34564d884d347484ac0c7.svg?invert_in_darkmode" align=middle width=7.710483000000004pt height=21.683310000000006pt/> correspondent aux positions suivant <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.395100000000005pt height=14.155350000000013pt/> et <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649300000000004pt height=14.155350000000013pt/>
+sur la grille 2D de telle sorte que <img src=".extra//688c52dc242b204f9355f962fa0a785d.svg?invert_in_darkmode" align=middle width=71.941485pt height=22.46574pt/> et <img src=".extra//f377d7434d3ed286e5468c02610c5446.svg?invert_in_darkmode" align=middle width=73.24300500000001pt height=22.46574pt/>.
+De la même façon, <img src=".extra//5a63739e01952f6a63389340c037ae29.svg?invert_in_darkmode" align=middle width=19.634835000000002pt height=22.46574pt/> est le pas de temps de telle sorte qu'en
+définissant l'itération <img src=".extra//63bb9849783d01d91403bc9a5fea12a2.svg?invert_in_darkmode" align=middle width=9.075495000000004pt height=22.831379999999992pt/>, nous obtenons <img src=".extra//67b69ec298df7cfdfd3771e2719ba19b.svg?invert_in_darkmode" align=middle width=68.435895pt height=22.831379999999992pt/>.
 
 La condition de stabilité du schéma est donnée par la formule :
-```math
-dt \leq dx / c
-```
+<p align="center"><img src=".extra//14a85e84ef29e9208b124c8684811fc4.svg?invert_in_darkmode" align=middle width=69.69368999999999pt height=16.438356pt/></p>
 
 Les implémentations présentées dans ce dossier respectent ce formalisme.
 

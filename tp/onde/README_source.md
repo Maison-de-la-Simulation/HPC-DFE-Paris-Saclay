@@ -16,30 +16,32 @@ $$
 $$
 
 Dans cette exemple, nous utilisons des conditions limites de type Dirichlet.
+
 $$
 U(\mathbf{x},t)_{boundary} = 0
 $$
+
 Cela correspond à une réflection parfaite de l'onde sur les bords du domaine.
 On peut noter qu'une condition de type Neumann nulle correspondrait à une absorption parfaite.
 
 La discrétisation par la méthode des différences finies donne:
-```math
+$$
 U^{n+1}_{i,j} = 2 U^{n}_{i,j} - U^{n-1}_{i,j} + D  \cdot \left( U^{n}_{i+1,j} + U^{n}_{i-1,j} - 4 U^{n}_{i,j} + U^{n}_{i,j+1} + U^{n}_{i,j-1}  \right) + \Delta t ^2 f
-```
-où $`D`$ est un coefficient valant $`\left( c \Delta t / \Delta x \right)^2`$
+$$
+où $D$ est un coefficient valant $\left( c \Delta t / \Delta x \right)^2$
 
-Ici, $`\Delta t`$ est le pas de temps. On a donc $`t = n \cdot \Delta t `$. Il faut alors comprendre que pour obtenir le temps $`n+1`$
+Ici, $\Delta t$ est le pas de temps. On a donc $t = n \cdot \Delta t$. Il faut alors comprendre que pour obtenir le temps $n+1$
 nous avons besoin des deux pas de temps précédent.
-$`\Delta x`$ représentent le pas d'espace à la fois dans les directions $`x`$ et $`y`$.
-Les indices $`i`$ et $`j`$ correspondent aux positions suivant $`x`$ et $`y`$
-sur la grille 2D de telle sorte que $`x = i \cdot \Delta x`$ et $`y = j \cdot \Delta x`$.
-De la même façon, $`\Delta t`$ est le pas de temps de telle sorte qu'en
-définissant l'itération $`k`$, nous obtenons $`t = k \cdot \Delta t`$.
+$\Delta x$ représentent le pas d'espace à la fois dans les directions $x$ et $y$.
+Les indices $i$ et $j$ correspondent aux positions suivant $x$ et $y$
+sur la grille 2D de telle sorte que $x = i \cdot \Delta x$ et $y = j \cdot \Delta x$.
+De la même façon, $\Delta t$ est le pas de temps de telle sorte qu'en
+définissant l'itération $k$, nous obtenons $t = k \cdot \Delta t$.
 
 La condition de stabilité du schéma est donnée par la formule :
-```math
+$$
 dt \leq dx / c
-```
+$$
 
 Les implémentations présentées dans ce dossier respectent ce formalisme.
 
