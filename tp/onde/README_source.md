@@ -11,14 +11,14 @@ Où $c$ est la vitesse de propagation des ondes dans le milieu dans toutes les d
 Le terme $f$ est ici un terme source.
 
 En 2D, cette équation devient :
-```math
+$$
 \frac{\partial^2 U(\mathbf{x},t)}{\partial t^2} = c^2 \cdot \left[ \frac{\partial^2 U(\mathbf{x},t)}{\partial x^2}  + \frac{\partial^2 U(\mathbf{x},t)}{\partial y^2}\right] + f
-```
+$$
 
 Dans cette exemple, nous utilisons des conditions limites de type Dirichlet.
-```math
+$$
 U(\mathbf{x},t)_{boundary} = 0
-```
+$$
 Cela correspond à une réflection parfaite de l'onde sur les bords du domaine.
 On peut noter qu'une condition de type Neumann nulle correspondrait à une absorption parfaite.
 
