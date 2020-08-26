@@ -1,0 +1,16 @@
+*.mod
+*/*.mod
+*/*/*.mod
+*/*/*/*.mod
+
+*/*/*/*.o
+*/*/*/*/*.o
+
+executable
+*/executable
+*/*/executable
+*/*/*/executable
+*/*/*/*/executable
+
+*/*/*/*.h5
+*/*/*/*/*.h5

@@ -1,0 +1,4 @@
+make
+rm -r diags
+mpirun -np 4 ./executable
+python ../python/plot.py diags/grid_05000.h5
