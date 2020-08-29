@@ -7,6 +7,7 @@ L'équation d'onde que nous souhaitons résoudre correspond à l'équation dans 
 $$
 \frac{\partial^2 U(\mathbf{x},t)}{\partial t ^2} = c^2 \Delta U(\mathbf{x},t) + f
 $$
+
 Où $c$ est la vitesse de propagation des ondes dans le milieu dans toutes les directions (isotropie).
 Le terme $f$ est ici un terme source.
 
@@ -28,6 +29,7 @@ La discrétisation par la méthode des différences finies donne:
 $$
 U^{n+1}_{i,j} = 2 U^{n}_{i,j} - U^{n-1}_{i,j} + D  \cdot \left( U^{n}_{i+1,j} + U^{n}_{i-1,j} - 4 U^{n}_{i,j} + U^{n}_{i,j+1} + U^{n}_{i,j-1}  \right) + \Delta t ^2 f
 $$
+
 où $D$ est un coefficient valant $\left( c \Delta t / \Delta x \right)^2$
 
 Ici, $\Delta t$ est le pas de temps. On a donc $t = n \cdot \Delta t$. Il faut alors comprendre que pour obtenir le temps $n+1$
