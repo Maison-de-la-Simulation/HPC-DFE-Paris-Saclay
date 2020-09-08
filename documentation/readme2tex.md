@@ -13,5 +13,5 @@ python -m readme2tex README_source.md --output README.md --svgdir .extra/
 
 To generate the html version
 ```bash
-python -m readme2tex README_source.md --htmlize
+python -m readme2tex README_source.md --htmlize --svgdir .extra/
 ```
