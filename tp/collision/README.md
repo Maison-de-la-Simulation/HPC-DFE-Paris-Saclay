@@ -42,10 +42,10 @@ Et par ricochet les nouvelles vitesses après collision.
 On utilise <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663295000000005pt height=21.683310000000006pt/> pour désigner la i-ème particule dans notre domaine.
 On appelle <img src=".extra//4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode" align=middle width=5.936155500000004pt height=20.222069999999988pt/> le temps courant et <img src=".extra//5a63739e01952f6a63389340c037ae29.svg?invert_in_darkmode" align=middle width=19.634835000000002pt height=22.46574pt/> le pas en temps.
 La discrétisation des équations du mouvement se fait par une méthode explicite classique du type *leap-frog*.
-On décompose le vecteur vitesse suivant ses 3 composantes <img src=".extra//f3e82fa4e8995954825701a7c80f8494.svg?invert_in_darkmode" align=middle width=92.55988500000001pt height=23.488740000000007pt/>.
+On décompose le vecteur vitesse suivant ses 3 composantes <img src=".extra//7b9f8a1d71e9ae383f2545e50c5370fc.svg?invert_in_darkmode" align=middle width=109.82020499999999pt height=24.65759999999998pt/>.
 
 <p align="center"><img src=".extra//86f029d2718d94d075ea4f3e5474d555.svg?invert_in_darkmode" align=middle width=345.45554999999996pt height=49.31553pt/></p>
 
-De même, on décompose le vecteur position suivant ses 3 composantes <img src=".extra//fa3d60ab15e49b46f5a9c287ac69cf93.svg?invert_in_darkmode" align=middle width=72.555945pt height=23.488740000000007pt/>.
+De même, on décompose le vecteur position suivant ses 3 composantes <img src=".extra//fcf03b16104b392a5151096287fad486.svg?invert_in_darkmode" align=middle width=88.99440000000001pt height=24.65759999999998pt/>.
 
 <p align="center"><img src=".extra//a120f83e9e76184b2030e4cf29e1fe9c.svg?invert_in_darkmode" align=middle width=169.3362pt height=19.477095pt/></p>
