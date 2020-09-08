@@ -1,5 +1,7 @@
 # Simulation de particules par la mécanique du point avec collisions
 
+## Présentation des modèles
+
 Ce cas applicatif simule un ensemble de particules (sphère) par les équations classiques de Newton en 3D.
 La simulation intègre l'effet des frottements et de la gravité.
 Elle intègre également un module de collisions.
@@ -21,4 +23,21 @@ Le modèle implémenté est inspiré des sources suivantes :
 - https://sites.google.com/site/tipebillard/modelisation-des-frottements
 
 Les collisions supposent que les moments et l'énergie sont conservés.
+Soient deux particules entrant en collision, on utilise la notation $v_c$ pour désigner la vitesse après la collision :
+$$
+m_1 v_1 + m_2 v_2 = m_1 v_{c,1} + m_2 v_{c,2}
+$$
+Et :
+$$
+O.5 m_1 v_1^2 + 0.5 m_2 v_2^2 = O.5 m_1 v_{c,1}^2 + 0.5 m_2 v_{c,2}^2
+$$
+
+On appelle $\vec{x}$ le vecteur position d'une particule.
+De fait, le changement de direction s'opère suivant la direction :
+$$
+\vec{k} = \frac{\vec{x_1} - \vec{x_2} }{ \| \vec{x_1} - \vec{x_2} \|}
+$$
+
+## Discrétisation
+
 On utilise $i$ pour désigner la i-ème particule dans notre domaine.
