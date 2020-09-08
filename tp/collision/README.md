@@ -1,5 +1,7 @@
 # Simulation de particules par la mécanique du point avec collisions
 
+## Présentation des modèles
+
 Ce cas applicatif simule un ensemble de particules (sphère) par les équations classiques de Newton en 3D.
 La simulation intègre l'effet des frottements et de la gravité.
 Elle intègre également un module de collisions.
@@ -19,4 +21,15 @@ Le modèle implémenté est inspiré des sources suivantes :
 - https://sites.google.com/site/tipebillard/modelisation-des-frottements
 
 Les collisions supposent que les moments et l'énergie sont conservés.
+Soient deux particules entrant en collision, on utilise la notation <img src=".extra//59ee6605c4fda9aa685eda225e17ff16.svg?invert_in_darkmode" align=middle width=13.842840000000004pt height=14.155350000000013pt/> pour désigner la vitesse après la collision :
+<p align="center"><img src=".extra//154240037fa246f8af778fa14332a038.svg?invert_in_darkmode" align=middle width=229.43579999999997pt height=14.292217499999998pt/></p>
+Et :
+<p align="center"><img src=".extra//dfbcf748f13dfd51d648b1c20c207994.svg?invert_in_darkmode" align=middle width=324.18705pt height=20.504055pt/></p>
+
+On appelle <img src=".extra//19e3f7018228f8a8c6559d0ea5500aa2.svg?invert_in_darkmode" align=middle width=10.747935000000007pt height=23.488740000000007pt/> le vecteur position d'une particule.
+De fait, le changement de direction s'opère suivant la direction :
+<p align="center"><img src=".extra//55c2dcdfde5f239ca9bc7eddbe44231d.svg?invert_in_darkmode" align=middle width=103.87013999999999pt height=38.250465pt/></p>
+
+## Discrétisation
+
 On utilise <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663295000000005pt height=21.683310000000006pt/> pour désigner la i-ème particule dans notre domaine.
