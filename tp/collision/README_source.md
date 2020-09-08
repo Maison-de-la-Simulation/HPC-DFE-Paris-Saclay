@@ -41,11 +41,27 @@ Et la modification sur le moment de la particule peut s'écrire :
 $$
 m_1 \left( v_{c,1} - v_1 \right)  = - m_2 \left( v_{c,2} - v_2 \right) = a \vec{k}
 $$
+
 On en déduit ainsi la valeur de $a$ :
+
 $$
 a = 2  k \cdot \left( v_{1} - v_{2} \right) \frac{m_1 m_2}{m1 + m2}
 $$
+Et par ricochet les nouvelles vitesses après collision.
 
-## Discrétisation
+## Discrétisation et algorithmes
 
 On utilise $i$ pour désigner la i-ème particule dans notre domaine.
+On appelle $t$ le temps courant et $\Delta t$ le pas en temps.
+La discrétisation des équations du mouvement se fait par une méthode explicite classique du type *leap-frog*.
+On décompose le vecteur vitesse suivant ses 3 composantes $\vec{v} = {v_x, v_y, v_z}$.
+
+$$
+\vec{v}_{i}^{t + + 0.5 \Delta t} = \vec{v}_{i}^{t - 0.5 \Delta t} + \Delta t  \cdot \left( m \vec{g} + \alpha \frac{\vec{v}_i^{t - 0.5 \Delta t}}{\| \vec{v}_i^{t - 0.5 \Delta t} \|} \right)
+$$
+
+De même, on décompose le vecteur position suivant ses 3 composantes $\vec{x} = {x, y, z}$.
+
+$$
+\vec{x}_{i}^{t + \Delta t} = \vec{x}_{i}^{t} + \Delta t  \cdot \vec{v}_{i}^{t + \Delta t}
+$$
