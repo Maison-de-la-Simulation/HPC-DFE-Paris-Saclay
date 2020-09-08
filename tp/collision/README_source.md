@@ -57,7 +57,7 @@ La discrétisation des équations du mouvement se fait par une méthode explicit
 On décompose le vecteur vitesse suivant ses 3 composantes $\vec{v} = {v_x, v_y, v_z}$.
 
 $$
-\vec{v}_{i}^{t + + 0.5 \Delta t} = \vec{v}_{i}^{t - 0.5 \Delta t} + \Delta t  \cdot \left( m \vec{g} + \alpha \frac{\vec{v}_i^{t - 0.5 \Delta t}}{\| \vec{v}_i^{t - 0.5 \Delta t} \|} \right)
+\vec{v_{i}^{t + 0.5 \Delta t}} = \vec{v}_{i}^{t - 0.5 \Delta t} + \Delta t  \cdot \left( m \vec{g} + \alpha \frac{\vec{v}_i^{t - 0.5 \Delta t}}{\| \vec{v}_i^{t - 0.5 \Delta t} \|} \right)
 $$
 
 De même, on décompose le vecteur position suivant ses 3 composantes $\vec{x} = {x, y, z}$.
