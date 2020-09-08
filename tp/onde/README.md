@@ -1,10 +1,11 @@
 # Cas de l'équation d'onde par la méthode des différences finies
 
-Ce cas applicatif s'intéresse à la parallèlisation d'un code résolvant
+Ce cas applicatif s'intéresse à la parallélisation d'un code résolvant
 l'équation d'onde 2D avec la méthode des différences finies.
 
 L'équation d'onde que nous souhaitons résoudre correspond à l'équation dans un milieu homogène et isotrope :
 <p align="center"><img src=".extra//93c102b192a379c9a1541a17339633ee.svg?invert_in_darkmode" align=middle width=197.04135pt height=35.777445pt/></p>
+
 Où <img src=".extra//3e18a4a28fdee1744e5e3f79d13b9ff6.svg?invert_in_darkmode" align=middle width=7.113876000000004pt height=14.155350000000013pt/> est la vitesse de propagation des ondes dans le milieu dans toutes les directions (isotropie).
 Le terme <img src=".extra//190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.817500000000004pt height=22.831379999999992pt/> est ici un terme source.
 
@@ -20,6 +21,7 @@ On peut noter qu'une condition de type Neumann nulle correspondrait à une absor
 
 La discrétisation par la méthode des différences finies donne:
 <p align="center"><img src=".extra//8cb132f7fcd865f0f1637fbfe01228c2.svg?invert_in_darkmode" align=middle width=561.39765pt height=21.267014999999997pt/></p>
+
 où <img src=".extra//78ec2b7008296ce0561cf83393cb746d.svg?invert_in_darkmode" align=middle width=14.066250000000002pt height=22.46574pt/> est un coefficient valant <img src=".extra//8eedfdb979b5e344bbc89b1b615bdcb0.svg?invert_in_darkmode" align=middle width=77.399355pt height=31.360889999999984pt/>
 
 Ici, <img src=".extra//5a63739e01952f6a63389340c037ae29.svg?invert_in_darkmode" align=middle width=19.634835000000002pt height=22.46574pt/> est le pas de temps. On a donc <img src=".extra//920296fb97fdfa6eb814c39b79d4b30d.svg?invert_in_darkmode" align=middle width=69.2274pt height=22.46574pt/>. Il faut alors comprendre que pour obtenir le temps <img src=".extra//3f18d8f60c110e865571bba5ba67dcc6.svg?invert_in_darkmode" align=middle width=38.17737pt height=21.18732pt/>
