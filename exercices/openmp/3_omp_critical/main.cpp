@@ -15,7 +15,7 @@ int main( int argc, char *argv[] )
 {
 
     int N = 100000000;
-    double sum;
+    double sum = 0;
     
     #pragma omp parallel default(shared)
     {

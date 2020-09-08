@@ -17,10 +17,7 @@ int main( int argc, char *argv[] )
 
     int N = 100000000;
 
-    // std::vector<double > A(N);
-    // std::vector<double > B(N);
-    // std::vector<double > C(N);
-    // std::vector<double > D(N);
+    double cst = 15.8;
     
     double * A = new double[N];
     double * B = new double[N];
@@ -31,9 +28,9 @@ int main( int argc, char *argv[] )
     
     // Initialisation des tableaux
     for (int i = 0 ; i < N ; i++) {
-        B[i] = cos(2*i);
-        C[i] = sin(3*i);
-        D[i] = cos(4*i)*cos(i);
+        B[i] = cst*cos(2*i);
+        C[i] = cst*sin(3*i);
+        D[i] = cst*cos(4*i)*cos(i);
     }
     
     // Boucle à paralléliser
