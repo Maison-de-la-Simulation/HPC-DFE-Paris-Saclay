@@ -1,6 +1,6 @@
 # Cas de l'équation d'onde par la méthode des différences finies
 
-Ce cas applicatif s'intéresse à la parallèlisation d'un code résolvant
+Ce cas applicatif s'intéresse à la parallélisation d'un code résolvant
 l'équation d'onde 2D avec la méthode des différences finies.
 
 L'équation d'onde que nous souhaitons résoudre correspond à l'équation dans un milieu homogène et isotrope :
