@@ -29,13 +29,21 @@ m_1 v_1 + m_2 v_2 = m_1 v_{c,1} + m_2 v_{c,2}
 $$
 Et :
 $$
-O.5 m_1 v_1^2 + 0.5 m_2 v_2^2 = O.5 m_1 v_{c,1}^2 + 0.5 m_2 v_{c,2}^2
+0.5 m_1 v_1^2 + 0.5 m_2 v_2^2 = 0.5 m_1 v_{c,1}^2 + 0.5 m_2 v_{c,2}^2
 $$
 
 On appelle $\vec{x}$ le vecteur position d'une particule.
 De fait, le changement de direction s'opère suivant la direction :
 $$
 \vec{k} = \frac{\vec{x_1} - \vec{x_2} }{ \| \vec{x_1} - \vec{x_2} \|}
+$$
+Et la modification sur le moment de la particule peut s'écrire :
+$$
+m_1 \left( v_{c,1} - v_1 \right)  = - m_2 \left( v_{c,2} - v_2 \right) = a \vec{k}
+$$
+On en déduit ainsi la valeur de $a$ :
+$$
+a = 2  k \cdot \left( v_{1} - v_{2} \right) \frac{m_1 m_2}{m1 + m2}
 $$
 
 ## Discrétisation
