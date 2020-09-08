@@ -44,7 +44,7 @@ On appelle <img src=".extra//4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_dark
 La discrétisation des équations du mouvement se fait par une méthode explicite classique du type *leap-frog*.
 On décompose le vecteur vitesse suivant ses 3 composantes <img src=".extra//f3e82fa4e8995954825701a7c80f8494.svg?invert_in_darkmode" align=middle width=92.55988500000001pt height=23.488740000000007pt/>.
 
-<p align="center"><img src=".extra//3e453cbd874fe5627a03e02ca2040489.svg?invert_in_darkmode" align=middle width=345.45554999999996pt height=49.31553pt/></p>
+<p align="center"><img src=".extra//86f029d2718d94d075ea4f3e5474d555.svg?invert_in_darkmode" align=middle width=345.45554999999996pt height=49.31553pt/></p>
 
 De même, on décompose le vecteur position suivant ses 3 composantes <img src=".extra//fa3d60ab15e49b46f5a9c287ac69cf93.svg?invert_in_darkmode" align=middle width=72.555945pt height=23.488740000000007pt/>.
 
