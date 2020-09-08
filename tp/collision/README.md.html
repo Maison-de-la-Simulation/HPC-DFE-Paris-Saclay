@@ -23,8 +23,17 @@ Et :
 De fait, le changement de direction s'opère suivant la direction :
 <p align="center"><img src=".extra//55c2dcdfde5f239ca9bc7eddbe44231d.svg?invert_in_darkmode" align=middle width=103.87013999999999pt height=38.250465pt/></p>
 Et la modification sur le moment de la particule peut s'écrire :
-<p align="center"><img src=".extra//4499dc78d88246247aa45a5c1779b2ec.svg?invert_in_darkmode" align=middle width=270.996pt height=20.78538pt/></p>
-On en déduit ainsi la valeur de <img src=".extra//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.689230000000004pt height=14.155350000000013pt/> :
-<p align="center"><img src=".extra//1c50131d46cc28b91a36004206e67eac.svg?invert_in_darkmode" align=middle width=193.4427pt height=30.84411pt/></p></p>
-<h2>Discrétisation</h2>
-<p>On utilise <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663295000000005pt height=21.683310000000006pt/> pour désigner la i-ème particule dans notre domaine.</p>
+<p align="center"><img src=".extra//4499dc78d88246247aa45a5c1779b2ec.svg?invert_in_darkmode" align=middle width=270.996pt height=20.78538pt/></p></p>
+<p>On en déduit ainsi la valeur de <img src=".extra//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.689230000000004pt height=14.155350000000013pt/> :</p>
+<p align="center"><img src=".extra//1c50131d46cc28b91a36004206e67eac.svg?invert_in_darkmode" align=middle width=193.4427pt height=30.84411pt/></p>
+
+<p>Et par ricochet les nouvelles vitesses après collision.</p>
+<h2>Discrétisation et algorithmes</h2>
+<p>On utilise <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663295000000005pt height=21.683310000000006pt/> pour désigner la i-ème particule dans notre domaine.
+On appelle <img src=".extra//4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode" align=middle width=5.936155500000004pt height=20.222069999999988pt/> le temps courant et <img src=".extra//5a63739e01952f6a63389340c037ae29.svg?invert_in_darkmode" align=middle width=19.634835000000002pt height=22.46574pt/> le pas en temps.
+La discrétisation des équations du mouvement se fait par une méthode explicite classique du type <em>leap-frog</em>.
+On décompose le vecteur vitesse suivant ses 3 composantes <img src=".extra//f3e82fa4e8995954825701a7c80f8494.svg?invert_in_darkmode" align=middle width=92.55988500000001pt height=23.488740000000007pt/>.</p>
+<p align="center"><img src=".extra//48d97fbc4aa2ef5b8bc4e23d7870ff76.svg?invert_in_darkmode" align=middle width=356.1855pt height=49.31553pt/></p>
+
+<p>De même, on décompose le vecteur position suivant ses 3 composantes <img src=".extra//fa3d60ab15e49b46f5a9c287ac69cf93.svg?invert_in_darkmode" align=middle width=72.555945pt height=23.488740000000007pt/>.</p>
+<p align="center"><img src=".extra//a120f83e9e76184b2030e4cf29e1fe9c.svg?invert_in_darkmode" align=middle width=169.3362pt height=19.477095pt/></p>
