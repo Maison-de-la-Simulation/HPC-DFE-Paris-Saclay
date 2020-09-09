@@ -86,7 +86,7 @@ Ces conditions imposent notre pas de temps <img src=".extra//5a63739e01952f6a633
 Entre chaque pas de temps, la distance relative que deux particules peuvent parcourir ne doit pas dépasser deux rayons <img src=".extra//aadb079978519a78a2e0a1254286d2e7.svg?invert_in_darkmode" align=middle width=20.827785000000002pt height=22.46574pt/>.
 Dans le cas contraire certaines particules se traversent sans se collisionner.
 
-![Principe des collisions](../../../support/materiel/collision.png)
+![Principe des collisions](../../support/materiel/collision.png)
 
 ## Description du répertoire
 
