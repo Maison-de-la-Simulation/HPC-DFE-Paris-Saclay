@@ -110,8 +110,77 @@ Ces conditions imposent notre pas de temps $\Delta t$ pour prendre en compte tou
 Entre chaque pas de temps, la distance relative que deux particules peuvent parcourir ne doit pas dépasser deux rayons $2R$.
 Dans le cas contraire certaines particules se traversent sans se collisionner.
 
-![Principe des collisions](../../support/materiel/collision.png)
-<img src="../../support/materiel/collision.png" height="50">
+<img src="../../support/materiel/collision.png" height="200">
+
+Lorsqu'il y a collision, la vitesse des particules est actualisé suivant la méthode mathématique présentée au dessus.
+On appelle la vitesse post-collsion $v_n$.
+Il faut ensuite actualiser les positions.
+Etant donné que les particules se chevauchent au moment de la détection de la collision, il faut d'abord revenir en
+arrière au moment où les particules rentrent en contact.
+
+Pour cela, on utilise la vitesse avant collision pour déterminer le temps au moment de la collision $t_c$.
+Soit $\Delta t_c$ le laps de temps entre le moment de la collision et le temps de simulation alors $t_c = t - \Delta t_c$.
+Le but est de déterminer ce famueux $\Delta t_c$ afin de connaître les positions au moment de la collision.
+Le moment de la collision est le moment où les particles rentrent en contact soit $D = 2R$.
+
+Cela revient à résoudre le système suivant :
+
+$$
+2R = \| \left( \overrightarrow{x_1} - \overrightarrow{v_1} \Delta t_c \right)  - \left( \overrightarrow{x_2} - \overrightarrow{v_2} \Delta t_c \right)  \|
+$$
+
+On obtient une équation de second ordre :
+
+$$
+4 R^2 = v_{r,x}^2 + v_{r,y}^2 + v_{r,z}^2 -2 \left( x_r v_{r,x} + y_r v_{r,y} + z_r v_{r,z} \right) \Delta t_c + \left( v_{r,x}^2  + v_{r,y}^2 + v_{r,z}^2 \right) \Delta t_c^2
+$$
+
+La solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positivie.
+
+On calcule donc la position au moment de la collision en faisant simplement : $\overrightarrow{x_c} = \overrightarrow{x} - \Delta t_c \cdot \overrightarrow{v}$.
+Il s'agit d'une approximation car on ne prend pas en compte la gravité et les frottements.
+Une fois la position $\overrightarrow{x_c}$ connue, on calcule la position post-collision $\overrightarrow{x_n}$ grâce à la vitesse post-collision :
+
+$$
+\overrightarrow{x_n} = \overrightarrow{x_c} + \Delta t_c * \overrightarrow{v_n}
+$$
+
+L'opérateur suppose que chaque particule ne collisionne qu'une fois avec une autre particule.
+Pour cela, on utilise une algorithme à double boucles imbriquées où la seconde boucle démarre à partir de la particule $i+1$.
+Soit $N$ le nombre total de particules.
+```
+Pour chaque particle i de 1 jusqu'à N :
+
+    Si la particule i n'a pas déjà fait l'objet d'une collision :
+
+        Pour chaque particule j de i+1 jusqu'à N :
+            
+            Si la particule j n'a pas déjà fait l'objet d'une collision :
+            
+                Si collision entre la particule i et j validée :
+                
+                    Actualisation des propriétés
+                    
+                    Les particules i et j sont marquées comme ayant subi une collision
+```
+
+On applique ensuite ce même opérateur plusieurs fois pour simuler les collisions multiples.
+
+Il est possible de simuler des collisions inélastiques (perte d'énergie induite lors de la collision) en multipliant la nouvelle vitesse par un coefficient d'amortissement $\alpha$ de telle sorte que la nouvelle énergie de la particule vaut $0.5 \left( 1 - \alpha\right) m v^2$.
+
+## Conditions aux bords
+
+Les bords sont des murs réflécissants avec possibilité d'amortissement.
+On définit une collision avec un mur au moment où la distance entre le mur et le centre de la particule est inférieur à $2R$.
+Un mur est défini par une normal \overrightarrow{n} et un point \overrightarrow{p}. Par convention, la normale est orientée vers l'intéreur du domaine pour le calcul de la réflexion.
+Comme pour les collisions entre particules, on calcule le temps au moment exact de la collision, c'est à dire quand la distance entre le mur et la particule vaut exactement $2R$.
+Cela permet de calculer la position de la particule au moment de la collision avant d'actualiser sa vitesse et de calculer la position post-réflexion.
+
+La vitesse post-réflexion $\overrightarrow{v_n}$ se calcule facilement par réflexion spéculaire :
+$$
+\overrightarrow{v_n} = \overrightarrow{v} - 2 \left( \overrightarrow{v} \cdot \overrightarrow{n} \right) \overrightarrow{n}
+$$
+
 
 ## Description du répertoire
 
