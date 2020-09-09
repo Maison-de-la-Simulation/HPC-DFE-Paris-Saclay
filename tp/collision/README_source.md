@@ -110,7 +110,7 @@ Ces conditions imposent notre pas de temps $\Delta t$ pour prendre en compte tou
 Entre chaque pas de temps, la distance relative que deux particules peuvent parcourir ne doit pas dépasser deux rayons $2R$.
 Dans le cas contraire certaines particules se traversent sans se collisionner.
 
-![Principe des collisions](../../../support/materiel/collision.png)
+![Principe des collisions](../../support/materiel/collision.png)
 
 ## Description du répertoire
 
