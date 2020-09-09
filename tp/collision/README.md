@@ -86,8 +86,69 @@ Ces conditions imposent notre pas de temps <img src=".extra//5a63739e01952f6a633
 Entre chaque pas de temps, la distance relative que deux particules peuvent parcourir ne doit pas dépasser deux rayons <img src=".extra//aadb079978519a78a2e0a1254286d2e7.svg?invert_in_darkmode" align=middle width=20.827785000000002pt height=22.46574pt/>.
 Dans le cas contraire certaines particules se traversent sans se collisionner.
 
-![Principe des collisions](../../support/materiel/collision.png)
-<img src="../../support/materiel/collision.png" height="50">
+<img src="../../support/materiel/collision.png" height="200">
+
+Lorsqu'il y a collision, la vitesse des particules est actualisé suivant la méthode mathématique présentée au dessus.
+On appelle la vitesse post-collsion <img src=".extra//eb37fabb7c9f7599d9ef7e121c60b5f5.svg?invert_in_darkmode" align=middle width=16.094100000000005pt height=14.155350000000013pt/>.
+Il faut ensuite actualiser les positions.
+Etant donné que les particules se chevauchent au moment de la détection de la collision, il faut d'abord revenir en
+arrière au moment où les particules rentrent en contact.
+
+Pour cela, on utilise la vitesse avant collision pour déterminer le temps au moment de la collision <img src=".extra//23eda6b0b8aec6ac41ed8b7cb41c0942.svg?invert_in_darkmode" align=middle width=11.810865000000003pt height=20.222069999999988pt/>.
+Soit <img src=".extra//88748b5756467c6c663a0d87d2b05caa.svg?invert_in_darkmode" align=middle width=25.509495000000005pt height=22.46574pt/> le laps de temps entre le moment de la collision et le temps de simulation alors <img src=".extra//80ef692b454d0ca3ecad78b37fe23add.svg?invert_in_darkmode" align=middle width=86.08709999999999pt height=22.46574pt/>.
+Le but est de déterminer ce famueux <img src=".extra//88748b5756467c6c663a0d87d2b05caa.svg?invert_in_darkmode" align=middle width=25.509495000000005pt height=22.46574pt/> afin de connaître les positions au moment de la collision.
+Le moment de la collision est le moment où les particles rentrent en contact soit <img src=".extra//4c49c301c940274cf91c288e6f07968f.svg?invert_in_darkmode" align=middle width=56.811645pt height=22.46574pt/>.
+
+Cela revient à résoudre le système suivant :
+
+<p align="center"><img src=".extra//113efbb57ae11eb51f0b59780cfde951.svg?invert_in_darkmode" align=middle width=269.58689999999996pt height=20.776304999999997pt/></p>
+
+On obtient une équation de second ordre :
+
+<p align="center"><img src=".extra//495e5a4490379876d84f859a26fdce14.svg?invert_in_darkmode" align=middle width=584.4498pt height=20.504055pt/></p>
+
+La solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positivie.
+
+On calcule donc la position au moment de la collision en faisant simplement : <img src=".extra//a4e6865eacec45964af67e5cbc7f6a4b.svg?invert_in_darkmode" align=middle width=129.528465pt height=33.33363000000001pt/>.
+Il s'agit d'une approximation car on ne prend pas en compte la gravité et les frottements.
+Une fois la position <img src=".extra//3076985df29f467ae93a0bfbd9d228d3.svg?invert_in_darkmode" align=middle width=16.438785000000003pt height=33.33363000000001pt/> connue, on calcule la position post-collision <img src=".extra//dc2c0845e656d7462673ea305cb1db4e.svg?invert_in_darkmode" align=middle width=18.34305pt height=33.33363000000001pt/> grâce à la vitesse post-collision :
+
+<p align="center"><img src=".extra//d67f59ff13efb97bc38bf17fc2a5e515.svg?invert_in_darkmode" align=middle width=135.56284499999998pt height=19.13241pt/></p>
+
+L'opérateur suppose que chaque particule ne collisionne qu'une fois avec une autre particule.
+Pour cela, on utilise une algorithme à double boucles imbriquées où la seconde boucle démarre à partir de la particule <img src=".extra//48a0115fc523b1aae58ade9e16001f59.svg?invert_in_darkmode" align=middle width=33.973665000000004pt height=21.683310000000006pt/>.
+Soit <img src=".extra//f9c4988898e7f532b9f826a75014ed3c.svg?invert_in_darkmode" align=middle width=14.999985000000004pt height=22.46574pt/> le nombre total de particules.
+```
+Pour chaque particle i de 1 jusqu'à N :
+
+    Si la particule i n'a pas déjà fait l'objet d'une collision :
+
+        Pour chaque particule j de i+1 jusqu'à N :
+            
+            Si la particule j n'a pas déjà fait l'objet d'une collision :
+            
+                Si collision entre la particule i et j validée :
+                
+                    Actualisation des propriétés
+                    
+                    Les particules i et j sont marquées comme ayant subi une collision
+```
+
+On applique ensuite ce même opérateur plusieurs fois pour simuler les collisions multiples.
+
+Il est possible de simuler des collisions inélastiques (perte d'énergie induite lors de la collision) en multipliant la nouvelle vitesse par un coefficient d'amortissement <img src=".extra//c745b9b57c145ec5577b82542b2df546.svg?invert_in_darkmode" align=middle width=10.576500000000003pt height=14.155350000000013pt/> de telle sorte que la nouvelle énergie de la particule vaut <img src=".extra//d4810e5f7cbd7b818527291de114afa3.svg?invert_in_darkmode" align=middle width=107.69979000000001pt height=26.76201000000001pt/>.
+
+## Conditions aux bords
+
+Les bords sont des murs réflécissants avec possibilité d'amortissement.
+On définit une collision avec un mur au moment où la distance entre le mur et le centre de la particule est inférieur à <img src=".extra//aadb079978519a78a2e0a1254286d2e7.svg?invert_in_darkmode" align=middle width=20.827785000000002pt height=22.46574pt/>.
+Un mur est défini par une normal \overrightarrow{n} et un point \overrightarrow{p}. Par convention, la normale est orientée vers l'intéreur du domaine pour le calcul de la réflexion.
+Comme pour les collisions entre particules, on calcule le temps au moment exact de la collision, c'est à dire quand la distance entre le mur et la particule vaut exactement <img src=".extra//aadb079978519a78a2e0a1254286d2e7.svg?invert_in_darkmode" align=middle width=20.827785000000002pt height=22.46574pt/>.
+Cela permet de calculer la position de la particule au moment de la collision avant d'actualiser sa vitesse et de calculer la position post-réflexion.
+
+La vitesse post-réflexion <img src=".extra//0f0648ccd31339db8e20252b9e384e34.svg?invert_in_darkmode" align=middle width=16.916130000000003pt height=33.33363000000001pt/> se calcule facilement par réflexion spéculaire :
+<p align="center"><img src=".extra//f9bccd016a7101a4e11e0c2339255678.svg?invert_in_darkmode" align=middle width=163.035675pt height=20.776304999999997pt/></p>
+
 
 ## Description du répertoire
 
