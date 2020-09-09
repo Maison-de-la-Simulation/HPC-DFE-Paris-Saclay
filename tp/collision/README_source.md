@@ -168,7 +168,7 @@ On applique ensuite ce même opérateur plusieurs fois pour simuler les collisio
 
 Il est possible de simuler des collisions inélastiques (perte d'énergie induite lors de la collision) en multipliant la nouvelle vitesse par un coefficient d'amortissement $\alpha$ de telle sorte que la nouvelle énergie de la particule vaut $0.5 \left( 1 - \alpha\right) m v^2$.
 
-## Conditions aux bords
+### Conditions aux bords
 
 Les bords sont des murs réflécissants avec possibilité d'amortissement.
 On définit une collision avec un mur au moment où la distance entre le mur et le centre de la particule est inférieur à $2R$.
@@ -184,4 +184,55 @@ $$
 
 ## Description du répertoire
 
-## Installation des dépendances
+Ce TP se compose de plusieurs répertoires :
+- [cpp](./cpp/) : ce dossier contient l'ensemble des sources du code séquentiel.
+- [python](./python) : ce dossier contient des scripts dédiés à la visualization et à la comparaison des résultats (fichiers de sortie)
+- [.extra](./.extra) : ce dossier sert uniquement pour GitHub
+
+## Le code séquentiel
+
+### Description
+
+Le code est écrit en C++. C'est un C++ simple n'utilisant pas de capacité avancée du C++.
+La version séquentielle se compose des fichhiers suivant :
+- [main.cpp](./cpp/main.cpp)
+
+### Les dépendances
+
+Ce programme nécessite l'installation d'un compilateur C++.
+
+Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
+C'est normalement le cas de la plupart des compilateurs récents.
+C'est le cas sur les postes de travail de l'université.
+
+Vous aurez aussi besoin d'installer MPI.
+Sur les postes de travail de l'université, MPI est déjà installé.
+Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier [./documentation](../../documentation/mpi.md).
+
+Pour les sorties, vous aurez besoin d'HDF5.
+Sur les ordinateurs de l'université, une version parallèle est installée dans l'espace commun : `/public/m2_dfe/hdf5-1.10.4/build`.
+Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier [./documentation](../../documentation/hdf5.md).
+Si vraiment HDF5 vous pose problème il est possible de désactiver cette sortie dans le code.
+
+### Compilation et exécution
+
+Pour compiler ce programme, vous pouvez tout simplement utiliser le makefile dans le dossier des sources en tapant dans votre terminal :
+```bash
+make
+```
+
+La compilation génère un fichier exécutable du nom de `executable`. Vous pouvez lancer le programme en faisant :
+```bash
+./executable
+```
+
+### Visualization
+
+Pour visualiser les résultats, vous pouvez utiliser python. Pour cela, utilisez les scripts disponible dans le dossier [python](./python).
+Vous avez besoin de python avec la biblithèque `matplotlib` et `h5py`.
+
+Le code génère aussi des fichiers au format VTK.
+Les fichiers sont créés indépendament de la bilbiothèque VTK.
+Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview.
+
+## Consignes de TP

@@ -17,7 +17,7 @@ Le cours se divise en plusieurs parties :
 - [Cours sur OpenMP](./support/OpenMP.pdf)
 - [Cours sur la mesure de la performance](./support/mesure_performance.pdf)
 - [Bonnes pratiques](./support/bonnes_pratiques.pdf)
--
+
 ## Exercices
 
 Il y a plusieurs exercices en lien avec le cours que vous trouverez
@@ -47,3 +47,4 @@ dans [le dossier exercices](./exercices/).
 
 - [MPI](./documentation/mpi.md).
 - [HDF5](./documentation/hdf5.md).
+- [readme2tex](./documentation/readme2tex.md).
