@@ -2,6 +2,8 @@
 
 ## Présentation des modèles
 
+### Mouvement
+
 Ce cas applicatif simule un ensemble de particules (sphère) par les équations classiques de Newton en 3D.
 La simulation intègre l'effet des frottements et de la gravité.
 Elle intègre également un module de collisions.
@@ -12,7 +14,9 @@ L'équation du mouvement qui s'applique à chaque particule est la suivante :
 Où <img src=".extra//8b5bd5fd95868f24ad0a078d34768d7d.svg?invert_in_darkmode" align=middle width=10.747770000000003pt height=23.488740000000007pt/> est le vecteur gravité, <img src=".extra//0e51a2dede42189d77627c4d742822c3.svg?invert_in_darkmode" align=middle width=14.433210000000003pt height=14.155350000000013pt/> la masse de la particule, <img src=".extra//c745b9b57c145ec5577b82542b2df546.svg?invert_in_darkmode" align=middle width=10.576500000000003pt height=14.155350000000013pt/> un coefficient de freinage
 et <img src=".extra//cd74c822d31d457e590f28706c11499d.svg?invert_in_darkmode" align=middle width=10.747770000000004pt height=23.488740000000007pt/> le vecteur vitesse de la particule.
 
-L'opérateur de collision modélise les particules comme des sphères ayant un rayon <img src=".extra//89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode" align=middle width=7.873024500000003pt height=14.155350000000013pt/> donné.
+### Collisions
+
+L'opérateur de collision modélise les particules comme des sphères ayant un rayon <img src=".extra//1e438235ef9ec72fc51ac5025516017c.svg?invert_in_darkmode" align=middle width=12.608475000000004pt height=22.46574pt/> donné.
 Le modèle implémenté est inspiré des sources suivantes :
 - https://www.plasmaphysics.org.uk/collision3d.htm
 - https://www.plasmaphysics.org.uk/programs/coll3d_cpp.htm
@@ -39,6 +43,8 @@ Et par ricochet les nouvelles vitesses après collision.
 
 ## Discrétisation et algorithmes
 
+### Mouvement
+
 On utilise <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663295000000005pt height=21.683310000000006pt/> pour désigner la i-ème particule dans notre domaine.
 On appelle <img src=".extra//4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode" align=middle width=5.936155500000004pt height=20.222069999999988pt/> le temps courant et <img src=".extra//5a63739e01952f6a63389340c037ae29.svg?invert_in_darkmode" align=middle width=19.634835000000002pt height=22.46574pt/> le pas en temps.
 La discrétisation des équations du mouvement se fait par une méthode explicite classique du type *leap-frog*.
@@ -49,3 +55,39 @@ On décompose le vecteur vitesse suivant ses 3 composantes <img src=".extra//7b9
 De même, on décompose le vecteur position suivant ses 3 composantes <img src=".extra//fcf03b16104b392a5151096287fad486.svg?invert_in_darkmode" align=middle width=88.99440000000001pt height=24.65759999999998pt/>.
 
 <p align="center"><img src=".extra//a120f83e9e76184b2030e4cf29e1fe9c.svg?invert_in_darkmode" align=middle width=169.3362pt height=19.477095pt/></p>
+
+### Collision
+
+Cette partie décrit le fonctionnement de l'opérateur de collision.
+On commencer par décrire quelques grandeurs.
+On appelle <img src=".extra//4f9e14e83a8a906d39bd1389c1d8d277.svg?invert_in_darkmode" align=middle width=16.438785000000003pt height=33.33363000000001pt/> la vitesse relative entre deux particules :
+
+<p align="center"><img src=".extra//a6b378ac8bec8e1e6929b7843e0ac9f5.svg?invert_in_darkmode" align=middle width=91.325025pt height=19.13241pt/></p>
+
+Cela revient à se placer dans le repère de la première particule.
+
+Et <img src=".extra//debabec6b99de96eb2ea412dac9eb793.svg?invert_in_darkmode" align=middle width=16.674405000000004pt height=33.33363000000001pt/> la direction relative entre les deux positions :
+
+<p align="center"><img src=".extra//1f4f8c38a8b2b2c7eff02e53a68f3fd4.svg?invert_in_darkmode" align=middle width=108.66041999999999pt height=20.776304999999997pt/></p>
+
+Cela revient à placer la première particule au centre de notre repère.
+
+La distance entre 2 particules est donnée par :
+
+<p align="center"><img src=".extra//450d94234a101515c0408cb11a885f03.svg?invert_in_darkmode" align=middle width=69.096555pt height=20.776304999999997pt/></p>
+
+On dit qu'il y a collision entre deux particules lorsque la distance entre les deux centres de masse est inférieur à deux rayons <img src=".extra//52ed010363e449a7d1baf96c0141200f.svg?invert_in_darkmode" align=middle width=56.811645pt height=22.46574pt/>
+et lorsque les deux centres continuent de se rapprocher.
+Cela revient à dire que dans la direction relative des centres de masse, la vitesse projetée est positive :
+
+<p align="center"><img src=".extra//659268189f92aa2a29c3e11ce44f419c.svg?invert_in_darkmode" align=middle width=77.09443499999999pt height=39.063255pt/></p>
+
+Ces conditions imposent notre pas de temps <img src=".extra//5a63739e01952f6a63389340c037ae29.svg?invert_in_darkmode" align=middle width=19.634835000000002pt height=22.46574pt/> pour prendre en compte toutes les collisions.
+Entre chaque pas de temps, la distance relative que deux particules peuvent parcourir ne doit pas dépasser deux rayons <img src=".extra//aadb079978519a78a2e0a1254286d2e7.svg?invert_in_darkmode" align=middle width=20.827785000000002pt height=22.46574pt/>.
+Dans le cas contraire certaines particules se traversent sans se collisionner.
+
+![Principe des collisions](../../../support/materiel/collision.png)
+
+## Description du répertoire
+
+## Installation des dépendances
