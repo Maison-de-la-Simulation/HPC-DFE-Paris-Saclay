@@ -87,6 +87,7 @@ Entre chaque pas de temps, la distance relative que deux particules peuvent parc
 Dans le cas contraire certaines particules se traversent sans se collisionner.
 
 ![Principe des collisions](../../support/materiel/collision.png)
+<img src="../../support/materiel/collision.png" height="50">
 
 ## Description du répertoire
 
