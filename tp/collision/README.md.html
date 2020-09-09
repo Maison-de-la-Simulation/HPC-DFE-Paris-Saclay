@@ -105,7 +105,7 @@ Pour chaque particle i de 1 jusqu'à N :</p>
 <p>```</p>
 <p>On applique ensuite ce même opérateur plusieurs fois pour simuler les collisions multiples.</p>
 <p>Il est possible de simuler des collisions inélastiques (perte d'énergie induite lors de la collision) en multipliant la nouvelle vitesse par un coefficient d'amortissement <img src=".extra//c745b9b57c145ec5577b82542b2df546.svg?invert_in_darkmode" align=middle width=10.576500000000003pt height=14.155350000000013pt/> de telle sorte que la nouvelle énergie de la particule vaut <img src=".extra//d4810e5f7cbd7b818527291de114afa3.svg?invert_in_darkmode" align=middle width=107.69979000000001pt height=26.76201000000001pt/>.</p>
-<h2>Conditions aux bords</h2>
+<h3>Conditions aux bords</h3>
 <p>Les bords sont des murs réflécissants avec possibilité d'amortissement.
 On définit une collision avec un mur au moment où la distance entre le mur et le centre de la particule est inférieur à <img src=".extra//aadb079978519a78a2e0a1254286d2e7.svg?invert_in_darkmode" align=middle width=20.827785000000002pt height=22.46574pt/>.
 Un mur est défini par une normal \overrightarrow{n} et un point \overrightarrow{p}. Par convention, la normale est orientée vers l'intéreur du domaine pour le calcul de la réflexion.
@@ -114,4 +114,38 @@ Cela permet de calculer la position de la particule au moment de la collision av
 <p>La vitesse post-réflexion <img src=".extra//0f0648ccd31339db8e20252b9e384e34.svg?invert_in_darkmode" align=middle width=16.916130000000003pt height=33.33363000000001pt/> se calcule facilement par réflexion spéculaire :
 <p align="center"><img src=".extra//f9bccd016a7101a4e11e0c2339255678.svg?invert_in_darkmode" align=middle width=163.035675pt height=20.776304999999997pt/></p></p>
 <h2>Description du répertoire</h2>
-<h2>Installation des dépendances</h2>
+<p>Ce TP se compose de plusieurs répertoires :
+- <a href="./cpp/">cpp</a> : ce dossier contient l'ensemble des sources du code séquentiel.
+- <a href="./python">python</a> : ce dossier contient des scripts dédiés à la visualization et à la comparaison des résultats (fichiers de sortie)
+- <a href="./.extra">.extra</a> : ce dossier sert uniquement pour GitHub</p>
+<h2>Le code séquentiel</h2>
+<h3>Description</h3>
+<p>Le code est écrit en C++. C'est un C++ simple n'utilisant pas de capacité avancée du C++.
+La version séquentielle se compose des fichhiers suivant :
+- <a href="./cpp/main.cpp">main.cpp</a></p>
+<h3>Les dépendances</h3>
+<p>Ce programme nécessite l'installation d'un compilateur C++.</p>
+<p>Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
+C'est normalement le cas de la plupart des compilateurs récents.
+C'est le cas sur les postes de travail de l'université.</p>
+<p>Vous aurez aussi besoin d'installer MPI.
+Sur les postes de travail de l'université, MPI est déjà installé.
+Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier <a href="../../documentation/mpi.md">./documentation</a>.</p>
+<p>Pour les sorties, vous aurez besoin d'HDF5.
+Sur les ordinateurs de l'université, une version parallèle est installée dans l'espace commun : <code>/public/m2_dfe/hdf5-1.10.4/build</code>.
+Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier <a href="../../documentation/hdf5.md">./documentation</a>.
+Si vraiment HDF5 vous pose problème il est possible de désactiver cette sortie dans le code.</p>
+<h3>Compilation et exécution</h3>
+<p>Pour compiler ce programme, vous pouvez tout simplement utiliser le makefile dans le dossier des sources en tapant dans votre terminal :
+<code>bash
+make</code></p>
+<p>La compilation génère un fichier exécutable du nom de <code>executable</code>. Vous pouvez lancer le programme en faisant :
+<code>bash
+./executable</code></p>
+<h3>Visualization</h3>
+<p>Pour visualiser les résultats, vous pouvez utiliser python. Pour cela, utilisez les scripts disponible dans le dossier <a href="./python">python</a>.
+Vous avez besoin de python avec la biblithèque <code>matplotlib</code> et <code>h5py</code>.</p>
+<p>Le code génère aussi des fichiers au format VTK.
+Les fichiers sont créés indépendament de la bilbiothèque VTK.
+Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview.</p>
+<h2>Consignes de TP</h2>
