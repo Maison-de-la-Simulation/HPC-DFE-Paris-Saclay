@@ -193,9 +193,17 @@ Ce TP se compose de plusieurs répertoires :
 
 ### Description
 
-Le code est écrit en C++. C'est un C++ simple n'utilisant pas de capacité avancée du C++.
-La version séquentielle se compose des fichhiers suivant :
+Le code est écrit en C++.
+C'est un C++ simple n'utilisant pas de capacité avancée du C++.
+Néanmoins, il est nécessaire d'être familier avec la notion de classe et de méthode.
+
+
+
+La version séquentielle se compose des fichiers et headers suivant :
 - [main.cpp](./cpp/main.cpp)
+- [parameters.cpp](./cpp/parameters.cpp) et [parameters.h](./cpp/parameters.h) : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
+- [particles.cpp](./cpp/particles.cpp) et [particles.h](./cpp/particles.h) :
+- [patch.cpp](./cpp/patch.cpp) et [patch.h](./cpp/patch.h) :
 
 ### Les dépendances
 
@@ -232,7 +240,43 @@ Pour visualiser les résultats, vous pouvez utiliser python. Pour cela, utilisez
 Vous avez besoin de python avec la biblithèque `matplotlib` et `h5py`.
 
 Le code génère aussi des fichiers au format VTK.
-Les fichiers sont créés indépendament de la bilbiothèque VTK.
+Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
 Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview.
 
 ## Consignes de TP
+
+Dans ce TP, vous aurez à modifier un programme séquentiel afin de le rendre parallèle avec OpenMP puis MPI.
+Vous serez ensuite amené à étudier les performances des versions parallèles.
+Le TP se compose de 5 sous-sections :
+- Sous-section I : il s'agit de la découverte du code séquentiel
+- Sous-section II :
+- Sous-section III :
+- Sous-section IV :
+- Sous-section V :
+
+
+En plus de travailler dans un code de calcul, il vous est demandé d'écrire un rapport détaillant votre démarche.
+Le TP est divisé en questions successives vous invitant soit à modifier le code soit à compléter votre rapport, parfois les deux.
+Pour le rapport, vous êtes libre de choisir le format et le logiciel qui vous convient (LateX, Word, LibreOffice...).
+
+### I. Découverte du code séquentiel
+
+La première partie de ce TP est la découverte du code dans sa version non parallèle.
+
+**Fichier main.cpp :**
+
+Ouvrez le fichier [main.cpp](./main.cpp) et commencez par explorer la structure du code.
+La première partie de l'initialisation est la définition des paramètres de simulation du code :
+
+```fortran
+Nx                  = 500                 ! Nombre de points sur la grille dans la direction x
+Ny                  = 500                 ! Nombre de points sur la grille dans la direction y
+dx                  = 0.01                 ! Pas d'espace
+C                   = 1.                  ! Vitesse du son
+Amplitude           = 40                 ! Amplitude du terme source
+omega               = 2*PI                  ! Fréquence de la perturbation
+Nt                  = 4000                ! Nombre d'itérations temporelles
+alpha               = 0.5                 ! Facteur sur le pas en temps calculé avec la CFL
+print_period        = 500                ! Période de sortie à l'écran des itérations
+diagnostic_period   = 100                 ! Période en nombre d'itération entre chaque sortie de fichier
+```
