@@ -173,17 +173,23 @@ Le domaine de simulation est découpé en sous-domaine que l'on appelle *patch* 
 Chaque *patch* possède ses particules. Lorsque les particules changent de *patch*, il est nécessaire de les communiquer aux *patches* qui les reçoivent.
 Dans une version séquentielle normale, la décomposition en sous-domaine est inutile.
 Toutes les particules sont traitées comme appartenant au même domaine.
-Néanmoins, la décomposition de domaine sera nécessaire dans les version parallèles.
+Néanmoins, la décomposition de domaine sera nécessaire dans les versions parallèles.
 
 <img src="../../support/materiel/patch.png" height="400">
 
 La version séquentielle avec *patch* se compose des fichiers et headers suivant :
 - [main.cpp](./cpp/patch/main.cpp)
 - [parameters.cpp](./cpp/patch/parameters.cpp) et [parameters.h](./cpp/patch/parameters.h) : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
-- [particles.cpp](./cpp/patch/particles.cpp) et [particles.h](./cpp/patch/particles.h) :
-- [patch.cpp](./cpp/patch/patch.cpp) et [patch.h](./cpp/patch/patch.h) :
-- [walls.cpp](./cpp/patch/walls.cpp) et [walls.h](./cpp/patch/walls.h) :
-- [timers.cpp](./cpp/patch/timers.cpp) et [timers.h](./cpp/patch/timers.h) :
+- [particles.cpp](./cpp/patch/particles.cpp) et [particles.h](./cpp/patch/particles.h) : ce fichier décrit la classe `Particles`. Cette classe représente l'ensemble des patchs du domaine et donc l'ensemble des particules.
+- [patch.cpp](./cpp/patch/patch.cpp) et [patch.h](./cpp/patch/patch.h) : ce fichier décrit la classe `Patch`. Cette classe représente un *patch* du domaine de simulation et donc que les particules de cette sous-région.
+- [walls.cpp](./cpp/patch/walls.cpp) et [walls.h](./cpp/patch/walls.h) : ce fichier décrit la classe `Walls`. Celle classe représente un mur sur lequel les particules rebondissent.
+- [timers.cpp](./cpp/patch/timers.cpp) et [timers.h](./cpp/patch/timers.h) : ce fichier décrit la classe `Timer`. Cette classe est utilisée pour mesurer et gérer le temps passé dans chaque fonction du code.
+
+Dans la version par *patch*, on fait l'approximation que les collisions ne s'appliquent qu'au sein des *patches*.
+Cela signifie que l'on néglige les collisions qui devraient avoir lieu entre particules de *patches* différents proches des frontières respectives.
+La prise en compte de ce faible nombre de collisions nécessiteraient une complexication du code et des processus d'échange entrainant alors une complexification inutile de ce TP.
+
+### Les processus d'échange entre *patch*
 
 ### Les dépendances
 
@@ -214,6 +220,8 @@ La compilation génère un fichier exécutable du nom de `executable`. Vous pouv
 ./executable
 ```
 
+### Argument en ligne de commande
+
 ### Visualisation
 
 Le code peut générer plusieurs types de fichiers :
@@ -233,7 +241,6 @@ Le TP se compose de 5 sous-sections :
 - Sous-section IV :
 - Sous-section V :
 
-
 En plus de travailler dans un code de calcul, il vous est demandé d'écrire un rapport détaillant votre démarche.
 Le TP est divisé en questions successives vous invitant soit à modifier le code soit à compléter votre rapport, parfois les deux.
 Pour le rapport, vous êtes libre de choisir le format et le logiciel qui vous convient (LateX, Word, LibreOffice...).
@@ -242,20 +249,43 @@ Pour le rapport, vous êtes libre de choisir le format et le logiciel qui vous c
 
 La première partie de ce TP est la découverte du code dans sa version non parallèle.
 
+**Fichier parameters.cpp / .h :**
+
+Ouvrez le fichier [parameters.h](./patch/parameters.h) et regarder la structure du code.
+Ce header contient la définition de plusieurs structures de données.
+Ces structures contiennent les paramètres globaux du code permettant de décrire les propriétés de la simulation.
+On trouve les structures suivantes :
+- `TimeProperties` : tout ce qui se réfère au temps comme l'itération courante ou le temps final
+- `DomainProperties` : propriété spatiale et physique du domaine comme sa taille par exemple ou le niveau de gravité.
+  Dans la verison par *patch*, on y trouve aussi la façon de décomposer le domaine.
+- `ParticleProperties` : propriété générale des particules
+- `DiagProperties` : paramètres pour les diagnostiques diverses
+
+Ces structures sont régulièrement passées en argument des fonctions ayant besoin des données globales.
+
 **Fichier main.cpp :**
 
-Ouvrez le fichier [main.cpp](./main.cpp) et commencez par explorer la structure du code.
-La première partie de l'initialisation est la définition des paramètres de simulation du code :
+Ouvrez le fichier [main.cpp](./patch/main.cpp) et explorez la structure du code.
+La première partie concerne l'initialisation de la simulation :
+1. déclaration des variables
+2. initialisation des proriétés de la simulation
+3. initialisation des *timers*
+4. initialisation de la topologie (décomposition du domaine) et des particules présentent dans chaque *patch*
+5. création des conditions aux bords (murs)
+6. affichage des informations principales dans le terminal pour récapituler la simulation
+7. sortie de fichier avant le démarrage de la boucle en temps
 
-```fortran
-Nx                  = 500                 ! Nombre de points sur la grille dans la direction x
-Ny                  = 500                 ! Nombre de points sur la grille dans la direction y
-dx                  = 0.01                 ! Pas d'espace
-C                   = 1.                  ! Vitesse du son
-Amplitude           = 40                 ! Amplitude du terme source
-omega               = 2*PI                  ! Fréquence de la perturbation
-Nt                  = 4000                ! Nombre d'itérations temporelles
-alpha               = 0.5                 ! Facteur sur le pas en temps calculé avec la CFL
-print_period        = 500                ! Période de sortie à l'écran des itérations
-diagnostic_period   = 100                 ! Période en nombre d'itération entre chaque sortie de fichier
+La deuxième partie est la boucle en temps elle-même.
+Elle se compose des étapes suivantes pour chaque itération en temps :
+1. déplacement des particules suivant les équations du mouvement
+```c++
+particles.push(time_properties, domain_properties);
+```
+2. application de l'opérateur de collision
+```c++
+particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);
+```
+3. application des conditions limites
+```c++
+particles.walls(time_properties, domain_properties, walls);
 ```
