@@ -143,7 +143,18 @@ Néanmoins, la décomposition de domaine sera nécessaire dans les versions para
 Cela signifie que l'on néglige les collisions qui devraient avoir lieu entre particules de <em>patches</em> différents proches des frontières respectives.
 La prise en compte de ce faible nombre de collisions nécessiteraient une complexication du code et des processus d'échange entrainant alors une complexification inutile de ce TP.</p>
 <h3>Les processus d'échange entre <em>patch</em></h3>
-<h3>Les dépendances</h3>
+<p>La procédure d'échange fonctionne avec les étapes suivantes :
+1. Chaque <em>patch</em> identifie les particules qui doivent être transférer vers un voisin car elles ne sont plus dans ses limites spatiales.
+Les particules qui sortent du <em>patch</em> sont déplacées dans des <em>buffers</em>.
+Les buffers sont simplement des tableaux de particules pour mise en attente avant transfert.
+Il existe un buffer par directions.
+En 3D chaque patch a 26 voisins.
+De fait, il y a 26 directions en incluant les faces, les arrêtes et les coins.
+Dans le tableau des particules qui restent dans le <em>patch</em>, les particules reçoivent simplement un tag afin de les supprimer en même temps et de manière optimisée à l'étape suivante.
+2. La deuxième étape est la suppression des particules ayant quittée le <em>patch</em> du tableau principale. Il est préférable d'effectuer cette opération pour toutes les particules en une fois car l'algorithme utilisé est plus efficace.
+La méthode consiste à remplir les cases mémoires vides des particules ayant quittée le <em>patch</em> par les particules de la fin du tableau.
+3. Dans la troisème étape, chaque <em>patch</em> va chercher dans les <em>buffers</em> de ses voisins les particules qu'ils doivent recevoir.</p>
+<h3>Les dépendences</h3>
 <p>Ce programme nécessite l'installation d'un compilateur C++.</p>
 <p>Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
 C'est normalement le cas de la plupart des compilateurs récents.
@@ -214,4 +225,11 @@ particles.push(time_properties, domain_properties);</code>
 particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);</code>
 3. application des conditions limites
 <code>c++
-particles.walls(time_properties, domain_properties, walls);</code></p>
+particles.walls(time_properties, domain_properties, walls);</code>
+4. échange des particules entre <em>patch</em>
+<code>c++
+particles.exchange(domain_properties);</code>
+5. écriture sur le disque des fichiers de diagnostique (en fonction de la période demandée)
+<code>c++
+particles.writeDiags(time_properties, diag_properties);</code>
+6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.</p>
