@@ -130,15 +130,19 @@ Le domaine de simulation est découpé en sous-domaine que l'on appelle <em>patc
 Chaque <em>patch</em> possède ses particules. Lorsque les particules changent de <em>patch</em>, il est nécessaire de les communiquer aux <em>patches</em> qui les reçoivent.
 Dans une version séquentielle normale, la décomposition en sous-domaine est inutile.
 Toutes les particules sont traitées comme appartenant au même domaine.
-Néanmoins, la décomposition de domaine sera nécessaire dans les version parallèles.</p>
+Néanmoins, la décomposition de domaine sera nécessaire dans les versions parallèles.</p>
 <p><img src="../../support/materiel/patch.png" height="400"></p>
 <p>La version séquentielle avec <em>patch</em> se compose des fichiers et headers suivant :
 - <a href="./cpp/patch/main.cpp">main.cpp</a>
 - <a href="./cpp/patch/parameters.cpp">parameters.cpp</a> et <a href="./cpp/patch/parameters.h">parameters.h</a> : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
-- <a href="./cpp/patch/particles.cpp">particles.cpp</a> et <a href="./cpp/patch/particles.h">particles.h</a> :
-- <a href="./cpp/patch/patch.cpp">patch.cpp</a> et <a href="./cpp/patch/patch.h">patch.h</a> :
-- <a href="./cpp/patch/walls.cpp">walls.cpp</a> et <a href="./cpp/patch/walls.h">walls.h</a> :
-- <a href="./cpp/patch/timers.cpp">timers.cpp</a> et <a href="./cpp/patch/timers.h">timers.h</a> :</p>
+- <a href="./cpp/patch/particles.cpp">particles.cpp</a> et <a href="./cpp/patch/particles.h">particles.h</a> : ce fichier décrit la classe <code>Particles</code>. Cette classe représente l'ensemble des patchs du domaine et donc l'ensemble des particules.
+- <a href="./cpp/patch/patch.cpp">patch.cpp</a> et <a href="./cpp/patch/patch.h">patch.h</a> : ce fichier décrit la classe <code>Patch</code>. Cette classe représente un <em>patch</em> du domaine de simulation et donc que les particules de cette sous-région.
+- <a href="./cpp/patch/walls.cpp">walls.cpp</a> et <a href="./cpp/patch/walls.h">walls.h</a> : ce fichier décrit la classe <code>Walls</code>. Celle classe représente un mur sur lequel les particules rebondissent.
+- <a href="./cpp/patch/timers.cpp">timers.cpp</a> et <a href="./cpp/patch/timers.h">timers.h</a> : ce fichier décrit la classe <code>Timer</code>. Cette classe est utilisée pour mesurer et gérer le temps passé dans chaque fonction du code.</p>
+<p>Dans la version par <em>patch</em>, on fait l'approximation que les collisions ne s'appliquent qu'au sein des <em>patches</em>.
+Cela signifie que l'on néglige les collisions qui devraient avoir lieu entre particules de <em>patches</em> différents proches des frontières respectives.
+La prise en compte de ce faible nombre de collisions nécessiteraient une complexication du code et des processus d'échange entrainant alors une complexification inutile de ce TP.</p>
+<h3>Les processus d'échange entre <em>patch</em></h3>
 <h3>Les dépendances</h3>
 <p>Ce programme nécessite l'installation d'un compilateur C++.</p>
 <p>Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
@@ -158,6 +162,7 @@ make</code></p>
 <p>La compilation génère un fichier exécutable du nom de <code>executable</code>. Vous pouvez lancer le programme en faisant :
 <code>bash
 ./executable</code></p>
+<h3>Argument en ligne de commande</h3>
 <h3>Visualisation</h3>
 <p>Le code peut générer plusieurs types de fichiers :
 - Fichier HDF5 visualisable via <code>Python</code> : pour cela, utilisez les scripts disponible dans le dossier <a href="./python">python</a>.
@@ -178,17 +183,35 @@ Le TP est divisé en questions successives vous invitant soit à modifier le cod
 Pour le rapport, vous êtes libre de choisir le format et le logiciel qui vous convient (LateX, Word, LibreOffice...).</p>
 <h3>I. Découverte du code séquentiel</h3>
 <p>La première partie de ce TP est la découverte du code dans sa version non parallèle.</p>
+<p><strong>Fichier parameters.cpp / .h :</strong></p>
+<p>Ouvrez le fichier <a href="./patch/parameters.h">parameters.h</a> et regarder la structure du code.
+Ce header contient la définition de plusieurs structures de données.
+Ces structures contiennent les paramètres globaux du code permettant de décrire les propriétés de la simulation.
+On trouve les structures suivantes :
+- <code>TimeProperties</code> : tout ce qui se réfère au temps comme l'itération courante ou le temps final
+- <code>DomainProperties</code> : propriété spatiale et physique du domaine comme sa taille par exemple ou le niveau de gravité.
+  Dans la verison par <em>patch</em>, on y trouve aussi la façon de décomposer le domaine.
+- <code>ParticleProperties</code> : propriété générale des particules
+- <code>DiagProperties</code> : paramètres pour les diagnostiques diverses</p>
+<p>Ces structures sont régulièrement passées en argument des fonctions ayant besoin des données globales.</p>
 <p><strong>Fichier main.cpp :</strong></p>
-<p>Ouvrez le fichier <a href="./main.cpp">main.cpp</a> et commencez par explorer la structure du code.
-La première partie de l'initialisation est la définition des paramètres de simulation du code :</p>
-<p><code>fortran
-Nx                  = 500                 ! Nombre de points sur la grille dans la direction x
-Ny                  = 500                 ! Nombre de points sur la grille dans la direction y
-dx                  = 0.01                 ! Pas d'espace
-C                   = 1.                  ! Vitesse du son
-Amplitude           = 40                 ! Amplitude du terme source
-omega               = 2*PI                  ! Fréquence de la perturbation
-Nt                  = 4000                ! Nombre d'itérations temporelles
-alpha               = 0.5                 ! Facteur sur le pas en temps calculé avec la CFL
-print_period        = 500                ! Période de sortie à l'écran des itérations
-diagnostic_period   = 100                 ! Période en nombre d'itération entre chaque sortie de fichier</code></p>
+<p>Ouvrez le fichier <a href="./patch/main.cpp">main.cpp</a> et explorez la structure du code.
+La première partie concerne l'initialisation de la simulation :
+1. déclaration des variables
+2. initialisation des proriétés de la simulation
+3. initialisation des <em>timers</em>
+4. initialisation de la topologie (décomposition du domaine) et des particules présentent dans chaque <em>patch</em>
+5. création des conditions aux bords (murs)
+6. affichage des informations principales dans le terminal pour récapituler la simulation
+7. sortie de fichier avant le démarrage de la boucle en temps</p>
+<p>La deuxième partie est la boucle en temps elle-même.
+Elle se compose des étapes suivantes pour chaque itération en temps :
+1. déplacement des particules suivant les équations du mouvement
+<code>c++
+particles.push(time_properties, domain_properties);</code>
+2. application de l'opérateur de collision
+<code>c++
+particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);</code>
+3. application des conditions limites
+<code>c++
+particles.walls(time_properties, domain_properties, walls);</code></p>
