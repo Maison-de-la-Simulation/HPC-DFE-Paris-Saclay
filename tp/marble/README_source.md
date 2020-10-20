@@ -1,6 +1,6 @@
 # Simulation de particules par la mécanique du point avec collisions
 
-<img src="../../support/materiel/marble.png" height="200">
+<img src="../../support/materiel/marble.png" height="400">
 
 ## Présentation des modèles
 
@@ -187,7 +187,8 @@ $$
 ## Description du répertoire
 
 Ce TP se compose de plusieurs répertoires :
-- [cpp](./cpp/) : ce dossier contient l'ensemble des sources du code séquentiel.
+- [cpp/sequential](./cpp/sequential) : ce dossier contient l'ensemble des sources du code séquentiel.
+- [cpp/patch](./cpp/patch) : ce dossier contient l'ensemble des sources du code séquentiel avec décomposition en sous-domaine (*patch*).
 - [python](./python) : ce dossier contient des scripts dédiés à la visualization et à la comparaison des résultats (fichiers de sortie)
 - [.extra](./.extra) : ce dossier sert uniquement pour GitHub
 
@@ -199,15 +200,22 @@ Le code est écrit en C++.
 C'est un C++ simple n'utilisant pas de capacité avancée du C++.
 Néanmoins, il est nécessaire d'être familier avec la notion de classe et de méthode.
 
+Afin de préparer le terrain de la parallélisation, le code séquentiel a été développé en utilisant un modèle de décomposition de domaine.
+Le domaine de simulation est découpé en sous-domaine que l'on appelle *patch* comme le montre la figure ci-dessous.
+Chaque *patch* possède ses particules. Lorsque les particules changent de *patch*, il est nécessaire de les communiquer aux *patches* qui les reçoivent.
+Dans une version séquentielle normale, la décomposition en sous-domaine est inutile.
+Toutes les particules sont traitées comme appartenant au même domaine.
+Néanmoins, la décomposition de domaine sera nécessaire dans les version parallèles.
 
+<img src="../../support/materiel/patch.png" height="400">
 
-La version séquentielle se compose des fichiers et headers suivant :
-- [main.cpp](./cpp/main.cpp)
-- [parameters.cpp](./cpp/parameters.cpp) et [parameters.h](./cpp/parameters.h) : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
-- [particles.cpp](./cpp/particles.cpp) et [particles.h](./cpp/particles.h) :
-- [patch.cpp](./cpp/patch.cpp) et [patch.h](./cpp/patch.h) :
-- [walls.cpp](./cpp/walls.cpp) et [walls.h](./cpp/walls.h) :
-- [timers.cpp](./cpp/timers.cpp) et [timers.h](./cpp/timers.h) :
+La version séquentielle avec *patch* se compose des fichiers et headers suivant :
+- [main.cpp](./cpp/patch/main.cpp)
+- [parameters.cpp](./cpp/patch/parameters.cpp) et [parameters.h](./cpp/patch/parameters.h) : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
+- [particles.cpp](./cpp/patch/particles.cpp) et [particles.h](./cpp/patch/particles.h) :
+- [patch.cpp](./cpp/patch/patch.cpp) et [patch.h](./cpp/patch/patch.h) :
+- [walls.cpp](./cpp/patch/walls.cpp) et [walls.h](./cpp/patch/walls.h) :
+- [timers.cpp](./cpp/patch/timers.cpp) et [timers.h](./cpp/patch/timers.h) :
 
 ### Les dépendances
 
@@ -244,7 +252,7 @@ Le code peut générer plusieurs types de fichiers :
 - Fichier HDF5 visualisable via `Python` : pour cela, utilisez les scripts disponible dans le dossier [python](./python).
 Vous avez besoin de python avec la biblithèque `matplotlib` et `h5py`.
 - Fichier VTK : Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
-Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview.
+Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette [page](./paraview.md).
 
 ## Consignes de TP
 
