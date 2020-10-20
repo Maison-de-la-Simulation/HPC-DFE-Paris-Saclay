@@ -41,7 +41,7 @@ dans [le dossier exercices](./exercices/).
 
 - [Equation de diffusion (différences finies)](./tp/diffusion/).
 - [Equation d'onde (différences finies)](./tp/onde/).
-- [Simulation de particules avec collisions](./tp/collision/).
+- [Simulation de particules avec collisions](./tp/marble/).
 
 ## Installation des dépendances
 

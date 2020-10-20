@@ -1,4 +1,5 @@
 <h1>Simulation de particules par la mécanique du point avec collisions</h1>
+<p><img src="../../support/materiel/marble.png" height="200"></p>
 <h2>Présentation des modèles</h2>
 <h3>Mouvement</h3>
 <p>Ce cas applicatif simule un ensemble de particules (sphère) par les équations classiques de Newton en 3D.
@@ -120,9 +121,16 @@ Cela permet de calculer la position de la particule au moment de la collision av
 - <a href="./.extra">.extra</a> : ce dossier sert uniquement pour GitHub</p>
 <h2>Le code séquentiel</h2>
 <h3>Description</h3>
-<p>Le code est écrit en C++. C'est un C++ simple n'utilisant pas de capacité avancée du C++.
-La version séquentielle se compose des fichhiers suivant :
-- <a href="./cpp/main.cpp">main.cpp</a></p>
+<p>Le code est écrit en C++.
+C'est un C++ simple n'utilisant pas de capacité avancée du C++.
+Néanmoins, il est nécessaire d'être familier avec la notion de classe et de méthode.</p>
+<p>La version séquentielle se compose des fichiers et headers suivant :
+- <a href="./cpp/main.cpp">main.cpp</a>
+- <a href="./cpp/parameters.cpp">parameters.cpp</a> et <a href="./cpp/parameters.h">parameters.h</a> : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
+- <a href="./cpp/particles.cpp">particles.cpp</a> et <a href="./cpp/particles.h">particles.h</a> :
+- <a href="./cpp/patch.cpp">patch.cpp</a> et <a href="./cpp/patch.h">patch.h</a> :
+- <a href="./cpp/walls.cpp">walls.cpp</a> et <a href="./cpp/walls.h">walls.h</a> :
+- <a href="./cpp/timers.cpp">timers.cpp</a> et <a href="./cpp/timers.h">timers.h</a> :</p>
 <h3>Les dépendances</h3>
 <p>Ce programme nécessite l'installation d'un compilateur C++.</p>
 <p>Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
@@ -142,10 +150,37 @@ make</code></p>
 <p>La compilation génère un fichier exécutable du nom de <code>executable</code>. Vous pouvez lancer le programme en faisant :
 <code>bash
 ./executable</code></p>
-<h3>Visualization</h3>
-<p>Pour visualiser les résultats, vous pouvez utiliser python. Pour cela, utilisez les scripts disponible dans le dossier <a href="./python">python</a>.
-Vous avez besoin de python avec la biblithèque <code>matplotlib</code> et <code>h5py</code>.</p>
-<p>Le code génère aussi des fichiers au format VTK.
-Les fichiers sont créés indépendament de la bilbiothèque VTK.
+<h3>Visualisation</h3>
+<p>Le code peut générer plusieurs types de fichiers :
+- Fichier HDF5 visualisable via <code>Python</code> : pour cela, utilisez les scripts disponible dans le dossier <a href="./python">python</a>.
+Vous avez besoin de python avec la biblithèque <code>matplotlib</code> et <code>h5py</code>.
+- Fichier VTK : Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
 Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview.</p>
 <h2>Consignes de TP</h2>
+<p>Dans ce TP, vous aurez à modifier un programme séquentiel afin de le rendre parallèle avec OpenMP puis MPI.
+Vous serez ensuite amené à étudier les performances des versions parallèles.
+Le TP se compose de 5 sous-sections :
+- Sous-section I : il s'agit de la découverte du code séquentiel
+- Sous-section II :
+- Sous-section III :
+- Sous-section IV :
+- Sous-section V :</p>
+<p>En plus de travailler dans un code de calcul, il vous est demandé d'écrire un rapport détaillant votre démarche.
+Le TP est divisé en questions successives vous invitant soit à modifier le code soit à compléter votre rapport, parfois les deux.
+Pour le rapport, vous êtes libre de choisir le format et le logiciel qui vous convient (LateX, Word, LibreOffice...).</p>
+<h3>I. Découverte du code séquentiel</h3>
+<p>La première partie de ce TP est la découverte du code dans sa version non parallèle.</p>
+<p><strong>Fichier main.cpp :</strong></p>
+<p>Ouvrez le fichier <a href="./main.cpp">main.cpp</a> et commencez par explorer la structure du code.
+La première partie de l'initialisation est la définition des paramètres de simulation du code :</p>
+<p><code>fortran
+Nx                  = 500                 ! Nombre de points sur la grille dans la direction x
+Ny                  = 500                 ! Nombre de points sur la grille dans la direction y
+dx                  = 0.01                 ! Pas d'espace
+C                   = 1.                  ! Vitesse du son
+Amplitude           = 40                 ! Amplitude du terme source
+omega               = 2*PI                  ! Fréquence de la perturbation
+Nt                  = 4000                ! Nombre d'itérations temporelles
+alpha               = 0.5                 ! Facteur sur le pas en temps calculé avec la CFL
+print_period        = 500                ! Période de sortie à l'écran des itérations
+diagnostic_period   = 100                 ! Période en nombre d'itération entre chaque sortie de fichier</code></p>
