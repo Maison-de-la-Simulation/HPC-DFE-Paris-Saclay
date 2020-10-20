@@ -3,7 +3,12 @@
   3D spherical particle collision simulator
 
   Méthode :
+  
+  This code simulates the movement of particles including gravity, friction and collisions.
+  
   Conditions limites :
+  
+  This code uses reflective walls with possible damping.
 
  - https://www.plasmaphysics.org.uk/collision3d.htm
  - https://www.plasmaphysics.org.uk/programs/coll3d_cpp.htm
@@ -13,9 +18,8 @@
 
 ! ______________________________________________________________________________ */
 
-#include <iostream>
-#include <vector>
 #include "particles.h"
+#include "patch.h"
 #include "parameters.h"
 #include "walls.h"
 #include "timers.h"
@@ -37,11 +41,16 @@ int main( int argc, char *argv[] )
     unsigned int collision_counter; // Counter for collisions per timestep
     
     struct DomainProperties    domain_properties;   // Domain properties
-    struct TimeProperties      time;                // Time properties
+    struct TimeProperties      time_properties;                // Time properties
     struct DiagProperties      diag_properties;     // Diags properties
     struct ParticleProperties  particle_properties; // Diags properties
     
     // Default configuration __________________________________________________________________________
+    
+    domain_properties.n_patches_x = 3;
+    domain_properties.n_patches_y = 3;
+    domain_properties.n_patches_z = 3;
+    domain_properties.n_patches   = domain_properties.n_patches_x*domain_properties.n_patches_y*domain_properties.n_patches_z;
     
     domain_properties.xmin = 0;
     domain_properties.ymin = 0;
@@ -58,30 +67,33 @@ int main( int argc, char *argv[] )
     domain_properties.air_damping = 0.01;
     domain_properties.wall_damping = 0.01;
     
-    time.final           = 1;
-    time.final_iteration = 100;
+    time_properties.final           = 1;
+    time_properties.final_iteration = 100;
     
     // Particle properties for init
-    particle_properties.vmin     = 1E-5;
-    particle_properties.vmax     = 0.1;
-    particle_properties.number   = 2048;
-    particle_properties.radius   = 0.01;
-    particle_properties.damping  = 0.01;
-    particle_properties.mass_min = 0.1;
-    particle_properties.mass_max = 0.5;
+    particle_properties.vmin      = 1E-5;
+    particle_properties.vmax      = 0.1;
+    particle_properties.number    = 2048;
+    particle_properties.radius    = 0.01;
+    particle_properties.damping   = 0.01;
+    particle_properties.mass_min  = 0.1;
+    particle_properties.mass_max  = 0.5;
+    particle_properties.collision = true;
     
     // diagnostic parameters
     diag_properties.output_period = 1;
     diag_properties.print_period  = 20;
+    diag_properties.hdf5          = false;
+    diag_properties.vtk           = true;
     
     // Creation of the diag folder
     system("mkdir -p diags");
     
     // Command line arguments _________________________________________________________________________
     
-    commandLineArguments(argc, argv, time, particle_properties, domain_properties,diag_properties);
+    commandLineArguments(argc, argv, time_properties, particle_properties, domain_properties,diag_properties);
     
-    time.step = time.final / time.final_iteration;
+    time_properties.step = time_properties.final / time_properties.final_iteration;
     
     // Timers initialization ___________________________________________________________________________
     
@@ -90,15 +102,16 @@ int main( int argc, char *argv[] )
     timers.add("collisions");
     timers.add("pusher");
     timers.add("wall");
+    timers.add("exchange");
     
     // Particle initilization _________________________________________________________________________
     
     timers.start("initialization");
+
+    Particles particles( domain_properties );
     
-    Particles particles;
-    
-    particles.initialization(domain_properties, time, particle_properties);
-    //particles.initialization_2(domain_properties, time, particle_properties);
+    particles.initTopology(domain_properties);
+    particles.initParticles(domain_properties, time_properties, particle_properties);
     
     timers.stop("initialization");
     
@@ -148,20 +161,28 @@ int main( int argc, char *argv[] )
     std::cout << " PARTICLE SIMULATION"<< std::endl;
     std::cout << " ------------------------------------ "<< std::endl;
     std::cout << std::endl;
+    std::cout << " Topology:" << std::endl;
+    std::cout << "  - number of patches: " << domain_properties.n_patches << std::endl;
+
+    
+    std::cout << std::endl;
     std::cout << " Particles properties:" << std::endl;
-    std::cout << "  - number of particles: " << particle_properties.number << std::endl;
+    particles.getTotalParticleNumber(particle_number);
+    std::cout << "  - requested number of particles: " << particle_properties.number << std::endl;
+    std::cout << "  - real number of particles: " << particle_number << std::endl;
     std::cout << "  - particle radius: " << particle_properties.radius << std::endl;
     std::cout << "  - particle inelastic damping: " << particle_properties.damping << std::endl;
     std::cout << "  - particle mass min: " << particle_properties.mass_min << std::endl;
     std::cout << "  - particle mass max: " << particle_properties.mass_max << std::endl;
     std::cout << "  - particle speed min: " << particle_properties.vmin << std::endl;
     std::cout << "  - particle speed max: " << particle_properties.vmax << std::endl;
+    std::cout << "  - collision: " << particle_properties.collision << std::endl;
     
     std::cout << std::endl;
     std::cout << " Time properties:" << std::endl;
-    std::cout << "  - simulation time: " << time.final << std::endl;
-    std::cout << "  - time step: " << time.step << std::endl;
-    std::cout << "  - number of iterations: " << time.final_iteration << std::endl;
+    std::cout << "  - simulation time: " << time_properties.final << std::endl;
+    std::cout << "  - time step: " << time_properties.step << std::endl;
+    std::cout << "  - number of iterations: " << time_properties.final_iteration << std::endl;
     std::cout << "  - maximal time step: " <<  particle_properties.radius / (2 * particle_properties.vmax ) << std::endl;
     
     std::cout << std::endl;
@@ -190,7 +211,8 @@ int main( int argc, char *argv[] )
     
     timers.start("diags");
     
-    particles.writeDiags(0, diag_properties.output_period, true, true);
+    time_properties.iteration = 0;
+    particles.writeDiags(time_properties, diag_properties);
     
     timers.stop("diags");
     
@@ -202,15 +224,20 @@ int main( int argc, char *argv[] )
     
     timers.start("main loop");
     
-    for (time.iteration = 1 ; time.iteration <= time.final_iteration; time.iteration++) {
+    for (time_properties.iteration = 1 ; time_properties.iteration <= time_properties.final_iteration; time_properties.iteration++) {
+        
+        // Global variables initialized ____________
         
         collision_counter = 0;
+        total_energy = 0;
+        max_velocity = 0;
+        particle_number = 0;
         
         // Particle movements __________________
         
         timers.start("pusher");
         
-        particles.push(time.step, domain_properties);
+        particles.push(time_properties, domain_properties);
         
         timers.stop("pusher");
         
@@ -218,8 +245,8 @@ int main( int argc, char *argv[] )
         
         timers.start("collisions");
         
-        //collision_counter = particles.collisions(time, particle_properties);
-        collision_counter = particles.multipleCollisions(time, particle_properties);
+        //collision_counter = particles.collisions(time_properties, particle_properties);
+        particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);
         
         timers.stop("collisions");
         
@@ -227,23 +254,34 @@ int main( int argc, char *argv[] )
         
         timers.start("wall");
         
-        particles.walls(time.step, walls);
+        particles.walls(time_properties, domain_properties, walls);
         
         timers.stop("wall");
+        
+        // Exchange __________________
+        
+        timers.start("exchange");
+        
+        particles.exchange(domain_properties);
+        
+        timers.stop("exchange");
         
         // Diagnostics __________________
         
         timers.start("diags");
         
-        particles.writeDiags(time.iteration, diag_properties.output_period, true, true);
+        particles.writeDiags(time_properties, diag_properties);
         
-        if (time.iteration%diag_properties.print_period == 0) {
+        if (time_properties.iteration%diag_properties.print_period == 0) {
+        
+            particles.getTotalEnergy(total_energy);
+        
+            particles.getMaxVelocity(max_velocity);
             
-            total_energy = particles.totalEnergy();
-            
-            max_velocity = particles.maxVelocity();
-            
-            std::cout << " Iteration: " << std::setw(5) << time.iteration
+            particles.getTotalParticleNumber(particle_number);
+        
+            std::cout << " Iteration: " << std::setw(5) << time_properties.iteration
+                      << " - total particles: " << std::setw(10) << particle_number
                       << " - total energy: " << std::setw(10) << total_energy
                       << " - collisions: " << std::setw(3) << collision_counter
                       << " - max v: " << std::setw(3) << max_velocity
@@ -262,61 +300,4 @@ int main( int argc, char *argv[] )
     
     timers.print();
     
-}
-
-// Function to read the external arguments
-void commandLineArguments(int argc, char * argv[], struct TimeProperties & time_properties,
-                                                   struct ParticleProperties & particle_properties,
-                                                   struct DomainProperties & domain_properties,
-                                                   struct DiagProperties & diag_properties) {
-    if (argc > 1) {
-        unsigned int iarg = 1;
-        std::string key;
-        while(iarg < argc) {
-            key = argv[iarg];
-            if (key == "-t") {
-                time_properties.final = atof(argv[iarg+1]);
-                iarg++;
-            } else if (key == "-it") {
-                time_properties.final_iteration = atoi(argv[iarg+1]);
-                iarg++;
-            } else if (key == "-np") {
-                particle_properties.number = atoi(argv[iarg+1]);
-                iarg++;
-            } else if (key == "-r") {
-                particle_properties.radius = atof(argv[iarg+1]);
-                iarg++;
-            } else if (key == "-collision_damping") {
-                particle_properties.damping = atof(argv[iarg+1]);
-                iarg++;
-            } else if (key == "-wall_damping") {
-                domain_properties.wall_damping = atof(argv[iarg+1]);
-                iarg++;
-            } else if (key == "-air_damping") {
-                domain_properties.air_damping = atof(argv[iarg+1]);
-                iarg++;
-            } else if (key == "-ve") {
-                particle_properties.vmin = atoi(argv[iarg+1]);
-                particle_properties.vmax = atoi(argv[iarg+2]);
-                iarg+=2;
-            } else if (key == "-mass") {
-                particle_properties.mass_min = atof(argv[iarg+1]);
-                particle_properties.mass_max = atof(argv[iarg+2]);
-                iarg+=2;
-            } else if (key == "-gravity") {
-                domain_properties.gravity_x = atof(argv[iarg+1]);
-                domain_properties.gravity_y = atof(argv[iarg+2]);
-                domain_properties.gravity_z = atof(argv[iarg+3]);
-                iarg+=3;
-            } else if (key == "-print") {
-                diag_properties.print_period = atoi(argv[iarg+1]);
-                iarg++;
-            } else if (key == "-diags") {
-                diag_properties.output_period = atoi(argv[iarg+1]);
-                iarg++;
-            } else {
-                iarg++;
-            }
-        }
-    }
 }
