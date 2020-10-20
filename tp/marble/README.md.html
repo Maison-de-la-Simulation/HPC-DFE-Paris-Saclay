@@ -1,5 +1,5 @@
 <h1>Simulation de particules par la mécanique du point avec collisions</h1>
-<p><img src="../../support/materiel/marble.png" height="200"></p>
+<p><img src="../../support/materiel/marble.png" height="400"></p>
 <h2>Présentation des modèles</h2>
 <h3>Mouvement</h3>
 <p>Ce cas applicatif simule un ensemble de particules (sphère) par les équations classiques de Newton en 3D.
@@ -116,7 +116,8 @@ Cela permet de calculer la position de la particule au moment de la collision av
 <p align="center"><img src=".extra//f9bccd016a7101a4e11e0c2339255678.svg?invert_in_darkmode" align=middle width=163.035675pt height=20.776304999999997pt/></p></p>
 <h2>Description du répertoire</h2>
 <p>Ce TP se compose de plusieurs répertoires :
-- <a href="./cpp/">cpp</a> : ce dossier contient l'ensemble des sources du code séquentiel.
+- <a href="./cpp/sequential">cpp/sequential</a> : ce dossier contient l'ensemble des sources du code séquentiel.
+- <a href="./cpp/patch">cpp/patch</a> : ce dossier contient l'ensemble des sources du code séquentiel avec décomposition en sous-domaine (<em>patch</em>).
 - <a href="./python">python</a> : ce dossier contient des scripts dédiés à la visualization et à la comparaison des résultats (fichiers de sortie)
 - <a href="./.extra">.extra</a> : ce dossier sert uniquement pour GitHub</p>
 <h2>Le code séquentiel</h2>
@@ -124,13 +125,20 @@ Cela permet de calculer la position de la particule au moment de la collision av
 <p>Le code est écrit en C++.
 C'est un C++ simple n'utilisant pas de capacité avancée du C++.
 Néanmoins, il est nécessaire d'être familier avec la notion de classe et de méthode.</p>
-<p>La version séquentielle se compose des fichiers et headers suivant :
-- <a href="./cpp/main.cpp">main.cpp</a>
-- <a href="./cpp/parameters.cpp">parameters.cpp</a> et <a href="./cpp/parameters.h">parameters.h</a> : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
-- <a href="./cpp/particles.cpp">particles.cpp</a> et <a href="./cpp/particles.h">particles.h</a> :
-- <a href="./cpp/patch.cpp">patch.cpp</a> et <a href="./cpp/patch.h">patch.h</a> :
-- <a href="./cpp/walls.cpp">walls.cpp</a> et <a href="./cpp/walls.h">walls.h</a> :
-- <a href="./cpp/timers.cpp">timers.cpp</a> et <a href="./cpp/timers.h">timers.h</a> :</p>
+<p>Afin de préparer le terrain de la parallélisation, le code séquentiel a été développé en utilisant un modèle de décomposition de domaine.
+Le domaine de simulation est découpé en sous-domaine que l'on appelle <em>patch</em> comme le montre la figure ci-dessous.
+Chaque <em>patch</em> possède ses particules. Lorsque les particules changent de <em>patch</em>, il est nécessaire de les communiquer aux <em>patches</em> qui les reçoivent.
+Dans une version séquentielle normale, la décomposition en sous-domaine est inutile.
+Toutes les particules sont traitées comme appartenant au même domaine.
+Néanmoins, la décomposition de domaine sera nécessaire dans les version parallèles.</p>
+<p><img src="../../support/materiel/patch.png" height="400"></p>
+<p>La version séquentielle avec <em>patch</em> se compose des fichiers et headers suivant :
+- <a href="./cpp/patch/main.cpp">main.cpp</a>
+- <a href="./cpp/patch/parameters.cpp">parameters.cpp</a> et <a href="./cpp/patch/parameters.h">parameters.h</a> : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
+- <a href="./cpp/patch/particles.cpp">particles.cpp</a> et <a href="./cpp/patch/particles.h">particles.h</a> :
+- <a href="./cpp/patch/patch.cpp">patch.cpp</a> et <a href="./cpp/patch/patch.h">patch.h</a> :
+- <a href="./cpp/patch/walls.cpp">walls.cpp</a> et <a href="./cpp/patch/walls.h">walls.h</a> :
+- <a href="./cpp/patch/timers.cpp">timers.cpp</a> et <a href="./cpp/patch/timers.h">timers.h</a> :</p>
 <h3>Les dépendances</h3>
 <p>Ce programme nécessite l'installation d'un compilateur C++.</p>
 <p>Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
@@ -155,7 +163,7 @@ make</code></p>
 - Fichier HDF5 visualisable via <code>Python</code> : pour cela, utilisez les scripts disponible dans le dossier <a href="./python">python</a>.
 Vous avez besoin de python avec la biblithèque <code>matplotlib</code> et <code>h5py</code>.
 - Fichier VTK : Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
-Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview.</p>
+Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette <a href="./paraview.md">page</a>.</p>
 <h2>Consignes de TP</h2>
 <p>Dans ce TP, vous aurez à modifier un programme séquentiel afin de le rendre parallèle avec OpenMP puis MPI.
 Vous serez ensuite amené à étudier les performances des versions parallèles.
