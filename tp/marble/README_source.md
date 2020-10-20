@@ -1,5 +1,7 @@
 # Simulation de particules par la mécanique du point avec collisions
 
+<img src="../../support/materiel/marble.png" height="200">
+
 ## Présentation des modèles
 
 ### Mouvement
@@ -204,6 +206,8 @@ La version séquentielle se compose des fichiers et headers suivant :
 - [parameters.cpp](./cpp/parameters.cpp) et [parameters.h](./cpp/parameters.h) : ce fichier contient la description de structure décrivant les propriétés du domaine et de la simulation ainsi qu'une fonction permettant de lire les arguments en ligne de commande
 - [particles.cpp](./cpp/particles.cpp) et [particles.h](./cpp/particles.h) :
 - [patch.cpp](./cpp/patch.cpp) et [patch.h](./cpp/patch.h) :
+- [walls.cpp](./cpp/walls.cpp) et [walls.h](./cpp/walls.h) :
+- [timers.cpp](./cpp/timers.cpp) et [timers.h](./cpp/timers.h) :
 
 ### Les dépendances
 
@@ -234,13 +238,12 @@ La compilation génère un fichier exécutable du nom de `executable`. Vous pouv
 ./executable
 ```
 
-### Visualization
+### Visualisation
 
-Pour visualiser les résultats, vous pouvez utiliser python. Pour cela, utilisez les scripts disponible dans le dossier [python](./python).
+Le code peut générer plusieurs types de fichiers :
+- Fichier HDF5 visualisable via `Python` : pour cela, utilisez les scripts disponible dans le dossier [python](./python).
 Vous avez besoin de python avec la biblithèque `matplotlib` et `h5py`.
-
-Le code génère aussi des fichiers au format VTK.
-Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
+- Fichier VTK : Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
 Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview.
 
 ## Consignes de TP
