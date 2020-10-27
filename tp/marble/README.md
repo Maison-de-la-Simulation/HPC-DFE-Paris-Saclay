@@ -293,23 +293,23 @@ La première partie concerne l'initialisation de la simulation :
 La deuxième partie est la boucle en temps elle-même.
 Elle se compose des étapes suivantes pour chaque itération en temps :
 1. déplacement des particules suivant les équations du mouvement
-```c++
+```C++
 particles.push(time_properties, domain_properties);
 ```
 2. application de l'opérateur de collision
-```c++
+```C++
 particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);
 ```
 3. application des conditions limites
-```c++
+```C++
 particles.walls(time_properties, domain_properties, walls);
 ```
 4. échange des particules entre *patch*
-```c++
+```C++
 particles.exchange(domain_properties);
 ```
 5. écriture sur le disque des fichiers de diagnostique (en fonction de la période demandée)
-```c++
+```C++
 particles.writeDiags(time_properties, diag_properties);
 ```
 6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.
@@ -317,7 +317,7 @@ particles.writeDiags(time_properties, diag_properties);
 
 **Fichier particles.cpp / .h:**
 
-Ouvrez le fichier [particles.cpp](./patch/particles.cpp) pour explorer la structure du code.
+Ouvrez les fichiers [particles.h](./patch/particles.h) et [particles.cpp](./patch/particles.cpp) pour explorer la structure du code.
 Ce fichier contient la description de la classe `Particles`.
 Cette classe représente l'ensemble des particules du domaine et contient donc l'ensemble des *patchs*.
 Le header montre que la classe `Particles` contient un tableau d'objet `Patch`:
@@ -367,8 +367,127 @@ void writeVTK(unsigned int iteration);
 void writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties);
 ```
 
+**Fichier patch.cpp / .h :**
 
-**Fichier patch.cpp :**
+Ouvrez les fichiers [patch.h](./patch/patch.h) et [particles.cpp](./patch/patch.cpp) pour explorer la structure du code.
+Ces fichiers décrivent la classe `Patch`, c'est à dire une portion du domaine global.
+Chaque patch contient des tableaux pour décrire les propriétés des particules :
+```C++
+// Arrays for the particle positions
+std::vector <double> x;
+std::vector <double> y;
+std::vector <double> z;
+
+// Arrays for the particle velocities
+std::vector <double> vx;
+std::vector <double> vy;
+std::vector <double> vz;
+
+// Array for the mass
+std::vector <double> mass;
+
+// Array to tag the particles that leave the domain
+std::vector <bool> mask;
+```
+
+Chaque patch contient ses propres informations, notamment concernant son emplacement dans la topologie générale :
+```C++
+// Patch index
+unsigned int id;
+
+// Patch index in each direction in the cartesian topology
+unsigned int id_x;
+unsigned int id_z;
+unsigned int id_y;
+
+// Patch length in each direction
+double patch_x_length;
+double patch_y_length;
+double patch_z_length;
+
+// Flag to rapidly get if the patch is at the boundary
+bool at_mx_boundary;
+bool at_my_boundary;
+bool at_mz_boundary;
+bool at_px_boundary;
+bool at_py_boundary;
+bool at_pz_boundary;
+
+// Indexes of the neightbors
+std::vector <int> neighbor_indexes;
+
+// Local boundaries of the patch
+double xmin;
+double xmax;
+double ymin;
+double ymax;
+double zmin;
+double zmax;
+```
+
+On retrouve aussi les fonctions internes aux patchs.
+Il y a celle permettant l'initialisation :
+```C++
+// Topology
+// This function initializes the patch topology :
+// - number of patches in each direction
+// - id and coordinates of all patches
+void initTopology(struct DomainProperties domain_properties, unsigned int id);
+
+// Initialization functions
+void initParticles(struct DomainProperties domain_properties, struct TimeProperties time, struct ParticleProperties particle_properties);
+```
+
+Puis les fonctions permmettant de pousser les particules, de gérer les conditions limites et les collisions :
+```C++
+// Equation of movement applied to particles
+void push(struct TimeProperties time, struct DomainProperties domain_properties);
+
+// Applied the walls to the particles
+void walls(struct TimeProperties time_properties, Walls walls);
+
+// Perform the binary collisions
+unsigned int collisions(struct TimeProperties time, struct ParticleProperties particle_properties);
+
+// Multiple collison iterations
+unsigned int multipleCollisions(struct TimeProperties time, struct ParticleProperties particle_properties);
+```
+
+On y trouve les fonctions destinées à l'échange de particules :
+```C++
+// Determine particles to exchange
+void computeExchangeBuffers(struct DomainProperties domain_properties);
+
+// Delete the particles leaving particles marked by the mask vector
+void deleteLeavingParticles();
+
+// Each patch copies the neighbor buffer in their inner particle list
+void receivedParticlesFromNeighbors(std::vector<Patch> & patches);
+```
+
+Egalement les fonctions pour les diagnostiques :
+```C++
+// Write all type of diags
+void writeDiags(unsigned int iteration, unsigned int period, bool hdf5, bool vtk);
+
+// Output specifically the hdf5 files
+void writeHDF5(unsigned int iteration);
+
+// Output specifically the vtk files
+void writeVTK(unsigned int iteration);
+```
+
+Et enfin les fonctions permettant d'effectuer des bilans (réductions) :
+```C++
+// Return the total energy in the domain
+double getTotalEnergy();
+
+// Return the maximal particle velocity
+double getMaxVelocity();
+
+// Return the number of particles
+unsigned int getParticleNumber();
+```
 
 **Question 1.1 - première exécution :** Maintenant que vous avez une vision globale du code séquentiel. Compilez et exécutez-le avec
 les paramètres par défaut.
