@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: test onde
-        run:
+      - name: build and test onde
+        run: |
           cd tp/onde/fortran
           make
