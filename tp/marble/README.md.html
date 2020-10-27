@@ -351,15 +351,6 @@ void deleteLeavingParticles();</p>
 <p>// Each patch copies the neighbor buffer in their inner particle list
 void receivedParticlesFromNeighbors(std::vector<Patch> &amp; patches);
 ```</p>
-<p>Egalement les fonctions pour les diagnostiques :
-```C++
-// Write all type of diags
-void writeDiags(unsigned int iteration, unsigned int period, bool hdf5, bool vtk);</p>
-<p>// Output specifically the hdf5 files
-void writeHDF5(unsigned int iteration);</p>
-<p>// Output specifically the vtk files
-void writeVTK(unsigned int iteration);
-```</p>
 <p>Et enfin les fonctions permettant d'effectuer des bilans (réductions) :
 ```C++
 // Return the total energy in the domain
@@ -369,6 +360,7 @@ double getMaxVelocity();</p>
 <p>// Return the number of particles
 unsigned int getParticleNumber();
 ```</p>
+<p>Ces fonctions sont appelées dans la classe <code>Particles</code> (voir <a href="./cpp/patch/Particles.cpp">Particles.cpp</a>).</p>
 <p><strong>Question 1.1 - première exécution :</strong> Maintenant que vous avez une vision globale du code séquentiel. Compilez et exécutez-le avec
 les paramètres par défaut.</p>
 <p><strong>Question 1.2 :</strong> L'exécution a généré des fichiers dans le dossier <code>diags</code>. Il y a plusieurs types de fichiers.

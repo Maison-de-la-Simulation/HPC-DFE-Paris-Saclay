@@ -497,18 +497,6 @@ void deleteLeavingParticles();
 void receivedParticlesFromNeighbors(std::vector<Patch> & patches);
 ```
 
-Egalement les fonctions pour les diagnostiques :
-```C++
-// Write all type of diags
-void writeDiags(unsigned int iteration, unsigned int period, bool hdf5, bool vtk);
-
-// Output specifically the hdf5 files
-void writeHDF5(unsigned int iteration);
-
-// Output specifically the vtk files
-void writeVTK(unsigned int iteration);
-```
-
 Et enfin les fonctions permettant d'effectuer des bilans (réductions) :
 ```C++
 // Return the total energy in the domain
@@ -520,6 +508,8 @@ double getMaxVelocity();
 // Return the number of particles
 unsigned int getParticleNumber();
 ```
+
+Ces fonctions sont appelées dans la classe `Particles` (voir [Particles.cpp](./cpp/patch/Particles.cpp)).
 
 **Question 1.1 - première exécution :** Maintenant que vous avez une vision globale du code séquentiel. Compilez et exécutez-le avec
 les paramètres par défaut.
