@@ -228,9 +228,12 @@ La procédure d'échange fonctionne avec les étapes suivantes :
 Les particules qui sortent du *patch* sont déplacées dans des *buffers*.
 Les buffers sont simplement des tableaux de particules pour mise en attente avant transfert.
 Il existe un buffer par directions.
-En 3D chaque patch a 26 voisins.
+En 3D par exemple chaque patch a 26 voisins.
 De fait, il y a 26 directions en incluant les faces, les arrêtes et les coins.
-Dans le tableau des particules qui restent dans le *patch*, les particules reçoivent simplement un tag afin de les supprimer en même temps et de manière optimisée à l'étape suivante.
+Dans le tableau principal des particules (celles du *patch*), les particules sont simplement marquées afin de les supprimer de manière optimisée à l'étape suivante.
+
+<img src="../../support/materiel/particle_exchange_process.png" height="400">
+
 2. La deuxième étape est la suppression des particules ayant quittée le *patch* du tableau principale. Il est préférable d'effectuer cette opération pour toutes les particules en une fois car l'algorithme utilisé est plus efficace.
 La méthode consiste à remplir les cases mémoires vides des particules ayant quittée le *patch* par les particules de la fin du tableau.
 3. Dans la troisème étape, chaque *patch* va chercher dans les *buffers* de ses voisins les particules qu'ils doivent recevoir.
@@ -342,3 +345,8 @@ particles.exchange(domain_properties);
 particles.writeDiags(time_properties, diag_properties);
 ```
 6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.
+
+
+**Fichier particles.cpp :**
+
+**Fichier patch.cpp :**
