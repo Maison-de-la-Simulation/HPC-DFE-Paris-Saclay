@@ -221,23 +221,23 @@ La première partie concerne l'initialisation de la simulation :
 <p>La deuxième partie est la boucle en temps elle-même.
 Elle se compose des étapes suivantes pour chaque itération en temps :
 1. déplacement des particules suivant les équations du mouvement
-<code>c++
+<code>C++
 particles.push(time_properties, domain_properties);</code>
 2. application de l'opérateur de collision
-<code>c++
+<code>C++
 particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);</code>
 3. application des conditions limites
-<code>c++
+<code>C++
 particles.walls(time_properties, domain_properties, walls);</code>
 4. échange des particules entre <em>patch</em>
-<code>c++
+<code>C++
 particles.exchange(domain_properties);</code>
 5. écriture sur le disque des fichiers de diagnostique (en fonction de la période demandée)
-<code>c++
+<code>C++
 particles.writeDiags(time_properties, diag_properties);</code>
 6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.</p>
 <p><strong>Fichier particles.cpp / .h:</strong></p>
-<p>Ouvrez le fichier <a href="./patch/particles.cpp">particles.cpp</a> pour explorer la structure du code.
+<p>Ouvrez les fichiers <a href="./patch/particles.h">particles.h</a> et <a href="./patch/particles.cpp">particles.cpp</a> pour explorer la structure du code.
 Ce fichier contient la description de la classe <code>Particles</code>.
 Cette classe représente l'ensemble des particules du domaine et contient donc l'ensemble des <em>patchs</em>.
 Le header montre que la classe <code>Particles</code> contient un tableau d'objet <code>Patch</code>:
@@ -273,7 +273,102 @@ void writeVTK(unsigned int iteration);</p>
 <p>// Write all type of diags
 void writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties);
 ```</p>
-<p><strong>Fichier patch.cpp :</strong></p>
+<p><strong>Fichier patch.cpp / .h :</strong></p>
+<p>Ouvrez les fichiers <a href="./patch/patch.h">patch.h</a> et <a href="./patch/patch.cpp">particles.cpp</a> pour explorer la structure du code.
+Ces fichiers décrivent la classe <code>Patch</code>, c'est à dire une portion du domaine global.
+Chaque patch contient des tableaux pour décrire les propriétés des particules :
+```C++
+// Arrays for the particle positions
+std::vector <double> x;
+std::vector <double> y;
+std::vector <double> z;</p>
+<p>// Arrays for the particle velocities
+std::vector <double> vx;
+std::vector <double> vy;
+std::vector <double> vz;</p>
+<p>// Array for the mass
+std::vector <double> mass;</p>
+<p>// Array to tag the particles that leave the domain
+std::vector <bool> mask;
+```</p>
+<p>Chaque patch contient ses propres informations, notamment concernant son emplacement dans la topologie générale :
+```C++
+// Patch index
+unsigned int id;</p>
+<p>// Patch index in each direction in the cartesian topology
+unsigned int id_x;
+unsigned int id_z;
+unsigned int id_y;</p>
+<p>// Patch length in each direction
+double patch_x_length;
+double patch_y_length;
+double patch_z_length;</p>
+<p>// Flag to rapidly get if the patch is at the boundary
+bool at_mx_boundary;
+bool at_my_boundary;
+bool at_mz_boundary;
+bool at_px_boundary;
+bool at_py_boundary;
+bool at_pz_boundary;</p>
+<p>// Indexes of the neightbors
+std::vector <int> neighbor_indexes;</p>
+<p>// Local boundaries of the patch
+double xmin;
+double xmax;
+double ymin;
+double ymax;
+double zmin;
+double zmax;
+```</p>
+<p>On retrouve aussi les fonctions internes aux patchs.
+Il y a celle permettant l'initialisation :
+```C++
+// Topology
+// This function initializes the patch topology :
+// - number of patches in each direction
+// - id and coordinates of all patches
+void initTopology(struct DomainProperties domain_properties, unsigned int id);</p>
+<p>// Initialization functions
+void initParticles(struct DomainProperties domain_properties, struct TimeProperties time, struct ParticleProperties particle_properties);
+```</p>
+<p>Puis les fonctions permmettant de pousser les particules, de gérer les conditions limites et les collisions :
+```C++
+// Equation of movement applied to particles
+void push(struct TimeProperties time, struct DomainProperties domain_properties);</p>
+<p>// Applied the walls to the particles
+void walls(struct TimeProperties time_properties, Walls walls);</p>
+<p>// Perform the binary collisions
+unsigned int collisions(struct TimeProperties time, struct ParticleProperties particle_properties);</p>
+<p>// Multiple collison iterations
+unsigned int multipleCollisions(struct TimeProperties time, struct ParticleProperties particle_properties);
+```</p>
+<p>On y trouve les fonctions destinées à l'échange de particules :
+```C++
+// Determine particles to exchange
+void computeExchangeBuffers(struct DomainProperties domain_properties);</p>
+<p>// Delete the particles leaving particles marked by the mask vector
+void deleteLeavingParticles();</p>
+<p>// Each patch copies the neighbor buffer in their inner particle list
+void receivedParticlesFromNeighbors(std::vector<Patch> &amp; patches);
+```</p>
+<p>Egalement les fonctions pour les diagnostiques :
+```C++
+// Write all type of diags
+void writeDiags(unsigned int iteration, unsigned int period, bool hdf5, bool vtk);</p>
+<p>// Output specifically the hdf5 files
+void writeHDF5(unsigned int iteration);</p>
+<p>// Output specifically the vtk files
+void writeVTK(unsigned int iteration);
+```</p>
+<p>Et enfin les fonctions permettant d'effectuer des bilans (réductions) :
+```C++
+// Return the total energy in the domain
+double getTotalEnergy();</p>
+<p>// Return the maximal particle velocity
+double getMaxVelocity();</p>
+<p>// Return the number of particles
+unsigned int getParticleNumber();
+```</p>
 <p><strong>Question 1.1 - première exécution :</strong> Maintenant que vous avez une vision globale du code séquentiel. Compilez et exécutez-le avec
 les paramètres par défaut.</p>
 <p><strong>Question 1.2 :</strong> L'exécution a généré des fichiers dans le dossier <code>diags</code>. Il y a plusieurs types de fichiers.
