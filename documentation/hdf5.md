@@ -21,7 +21,7 @@ cd hdf5-1.10.*
 mkdir build
 ```
 
-- Ne rentrez pas dans `build`. Récupérer le chemin absolu vers le dossier `mpich-3.3` en faisant `pwd`:
+- Ne rentrez pas dans `build`. Récupérer le chemin absolu vers le dossier `hdf5` en faisant `pwd`:
 
 ```bash
 pwd
