@@ -325,23 +325,23 @@ La première partie concerne l'initialisation de la simulation :
 La deuxième partie est la boucle en temps elle-même.
 Elle se compose des étapes suivantes pour chaque itération en temps :
 1. déplacement des particules suivant les équations du mouvement
-```c++
+```C++
 particles.push(time_properties, domain_properties);
 ```
 2. application de l'opérateur de collision
-```c++
+```C++
 particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);
 ```
 3. application des conditions limites
-```c++
+```C++
 particles.walls(time_properties, domain_properties, walls);
 ```
 4. échange des particules entre *patch*
-```c++
+```C++
 particles.exchange(domain_properties);
 ```
 5. écriture sur le disque des fichiers de diagnostique (en fonction de la période demandée)
-```c++
+```C++
 particles.writeDiags(time_properties, diag_properties);
 ```
 6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.
@@ -349,7 +349,7 @@ particles.writeDiags(time_properties, diag_properties);
 
 **Fichier particles.cpp / .h:**
 
-Ouvrez le fichier [particles.cpp](./patch/particles.cpp) pour explorer la structure du code.
+Ouvrez les fichiers [particles.h](./patch/particles.h) et [particles.cpp](./patch/particles.cpp) pour explorer la structure du code.
 Ce fichier contient la description de la classe `Particles`.
 Cette classe représente l'ensemble des particules du domaine et contient donc l'ensemble des *patchs*.
 Le header montre que la classe `Particles` contient un tableau d'objet `Patch`:
@@ -399,8 +399,9 @@ void writeVTK(unsigned int iteration);
 void writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties);
 ```
 
+**Fichier patch.cpp / .h :**
 
-**Fichier patch.cpp :**
+Ouvrez les fichiers [patch.h](./patch/patch.h) et [particles.cpp](./patch/patch.cpp) pour explorer la structure du code.
 
 **Question 1.1 - première exécution :** Maintenant que vous avez une vision globale du code séquentiel. Compilez et exécutez-le avec
 les paramètres par défaut.
