@@ -236,5 +236,54 @@ particles.exchange(domain_properties);</code>
 <code>c++
 particles.writeDiags(time_properties, diag_properties);</code>
 6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.</p>
-<p><strong>Fichier particles.cpp :</strong></p>
+<p><strong>Fichier particles.cpp / .h:</strong></p>
+<p>Ouvrez le fichier <a href="./patch/particles.cpp">particles.cpp</a> pour explorer la structure du code.
+Ce fichier contient la description de la classe <code>Particles</code>.
+Cette classe représente l'ensemble des particules du domaine et contient donc l'ensemble des <em>patchs</em>.
+Le header montre que la classe <code>Particles</code> contient un tableau d'objet <code>Patch</code>:
+<code>C++
+std::vector &lt;Patch&gt; patches;</code>
+On retrouve ensuite la définitions des fonctions qui s'appliquent sur les patchs et qui sont appelelées soient pour l'initilisation :
+```C++
+// Initialize the topology for each patch
+void initTopology(struct DomainProperties domain_properties);</p>
+<p>// Initialize the particles for each patch
+void initParticles(struct DomainProperties domain_properties,
+                    struct TimeProperties time_properties,
+                    struct ParticleProperties particle_properties);
+<code>Soit dans la boucle en temps :</code>C++
+// Equation of movement applied to particles
+void push(struct TimeProperties time, struct DomainProperties domain_properties);</p>
+<p>// Applied the walls to the particles
+void walls(struct TimeProperties time_properties, struct DomainProperties domain_properties, Walls walls);</p>
+<p>// Perform the binary collisions
+unsigned int collisions(struct TimeProperties time, struct ParticleProperties particle_properties);</p>
+<p>// Multiple collison iterations
+void multipleCollisions(unsigned int &amp; collision_counter, struct TimeProperties time, struct DomainProperties domain_properties, struct ParticleProperties particle_properties);</p>
+<p>// Exchange particles between patches
+void exchange(struct DomainProperties domain_properties);</p>
+<p>// Return the total energy in the domain (all patches)
+void getTotalEnergy(double &amp; total_energy);</p>
+<p>// Return the maximal particle velocity in the domain (all patches)
+void getMaxVelocity(double &amp; max_velocity);</p>
+<p>// Return the total number of particles
+void getTotalParticleNumber(unsigned int &amp; total);</p>
+<p>// Output specifically the vtk files
+void writeVTK(unsigned int iteration);</p>
+<p>// Write all type of diags
+void writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties);
+```</p>
 <p><strong>Fichier patch.cpp :</strong></p>
+<p><strong>Question 1.1 - première exécution :</strong> Maintenant que vous avez une vision globale du code séquentiel. Compilez et exécutez-le avec
+les paramètres par défaut.</p>
+<p><strong>Question 1.2 :</strong> L'exécution a généré des fichiers dans le dossier <code>diags</code>. Il y a plusieurs types de fichiers.
+Les fichiers avec l'extension <code>.vtk</code> doivent être ouvert avec le logiciel <code>Paraview</code> ou <code>VisIt</code>.
+<a href="./paraview.md">Une petit documentation sur Paraview</a> vous aidera à visualiser les résultats.</p>
+<ul>
+<li>
+<p>a) Utilisez soit les scripts Python fournis dans le dossier <a href="../python">python</a> pour visualiser les résultats (utilisez le <a href="../python/README.md">README</a> pour plus d'information) ou Paraview.</p>
+</li>
+<li>
+<p>b) Placez dans le rapport plusieurs images à différentes itérations de simulation.</p>
+</li>
+</ul>

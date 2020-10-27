@@ -23,10 +23,10 @@ class Particles
     // Particles destructor
     ~Particles();
     
-    // Topology
+    // Initialize the topology for each patch
     void initTopology(struct DomainProperties domain_properties);
     
-    // Initialization
+    // Initialize the particles for each patch
     void initParticles(struct DomainProperties domain_properties,
                         struct TimeProperties time_properties,
                         struct ParticleProperties particle_properties);
@@ -63,8 +63,10 @@ class Particles
     
     private:
     
+    // Array containing all patches of the domain
     std::vector <Patch> patches;
     
+    // Total number of patches
     unsigned int n_patches;
     
 };
