@@ -148,10 +148,13 @@ void Particles::getTotalParticleNumber(unsigned int & total) {
 void Particles::writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties) {
     if (time_properties.iteration%diag_properties.output_period == 0) {
         // if (diag_properties.hdf5) {
-        //     writeHDF5(iteration);
+        //     writeHDF5(time_properties.iteration);
         // }
         if (diag_properties.vtk) {
             writeVTK(time_properties.iteration);
+        }
+        if (diag_properties.binary) {
+            writeBinary(time_properties.iteration);
         }
     }
 }
@@ -237,5 +240,51 @@ void Particles::writeVTK(unsigned int iteration) {
     {
         std::cerr << " Error while creating the file :" << file_name << std::endl;
     }
+    
+}
+
+// Write the particle properties in a binary file
+void Particles::writeBinary(unsigned int iteration) {
+    
+    std::string file_name = "diags/particles_" + std::to_string(iteration) + ".bin";
+    
+    std::ofstream binary_file(file_name.c_str(), std::ios::out | std::ios::binary);
+    
+    if(!binary_file) {
+        std::cerr << " Error while creating the file :" << file_name << std::endl;
+    }
+    
+    unsigned int number;
+    getTotalParticleNumber(number);
+    
+    binary_file.write((char *) &number, sizeof(number));
+    binary_file.write((char *) &patches[0].radius, sizeof(double));
+    
+    // Particle positions
+    for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+          binary_file.write((char *) &patches[i_patch].x[0], sizeof(double)*patches[i_patch].getParticleNumber());
+    }
+    for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+          binary_file.write((char *) &patches[i_patch].y[0], sizeof(double)*patches[i_patch].getParticleNumber());
+    }
+    for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+          binary_file.write((char *) &patches[i_patch].z[0], sizeof(double)*patches[i_patch].getParticleNumber());
+    }
+    
+    for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+          binary_file.write((char *) &patches[i_patch].vx[0], sizeof(double)*patches[i_patch].getParticleNumber());
+    }
+    for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+          binary_file.write((char *) &patches[i_patch].vy[0], sizeof(double)*patches[i_patch].getParticleNumber());
+    }
+    for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+          binary_file.write((char *) &patches[i_patch].vz[0], sizeof(double)*patches[i_patch].getParticleNumber());
+    }
+    
+    for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+          binary_file.write((char *) &patches[i_patch].mass[0], sizeof(double)*patches[i_patch].getParticleNumber());
+    }
+    
+    binary_file.close();
     
 }

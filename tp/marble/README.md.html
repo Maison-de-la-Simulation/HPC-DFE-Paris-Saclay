@@ -375,7 +375,9 @@ Les fichiers avec l'extension <code>.vtk</code> doivent être ouvert avec le log
 </li>
 </ul>
 <h3>IV. MPI</h3>
-<p>Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.</p>
+<p>Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.
+Pour cela, nous ferons en sorte que chaque patch soit traité par un processus MPI.
+Un patch sera donc associé à un rang MPI systématiquement.</p>
 <p><strong>Préparation :</strong> Faites maintenant une copie du dossier <code>sequentiel</code> et appelez-le <code>mpi</code>.
 On modifiera les sources de ce dossier pour y introduire la parallélisation MPI.</p>
 <p><strong>Question 4.1 - makefile :</strong> En premier lieu, il nous faut modifier le makefile pour pouvoir compiler avec MPI.
@@ -406,3 +408,37 @@ Ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du 
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
 Aidez-vous du premier exercice sur MPI si besoin <code>1_initialization</code>.
 Ensuite, rajouter la fonction permettant definaliser MPI tout de suite à la fin du programme.</p>
+<p><strong>Question 4.4 - Action réservée au rang 0 :</strong> Il est important de se rappeler que dans un programme MPI, le code que vous écrivez après l'initialisation de MPI est exécuté par tous les rangs. Cela diffère d'OpenMP pour lequel le code exécuté en parallèle dépend de l'emplacement des directives.
+Néanmoins, la similitude peut être faite avec l'ouverture d'une région parallèle en OpenMP à partir de laquelle le code est exécuté par tous les threads.
+A partir de là, il est important d'identifier les zones que l'on souhaite être exécuté que par un seul rang.
+a) Dans le fichier <a href="./cpp/patch/main.cpp">main.cpp</a> c'est le cas des parties suivantes :
+- la création du dossier <code>diags</code> :
+<code>C++
+system("mkdir -p diags");</code>
+- l'affichage des informations dans le terminal
+Pour éviter que tous les rangs n'effectuent ces actions, ajoutez une condition pour qu'uniquement le rang 0 les fasse.</p>
+<p>b) En plus de cela, rajoutez l'affichage du nombre de rangs dans l'onglet <code>Topology</code> :
+<code>C++
+std::cout &lt;&lt; " Topology:" &lt;&lt; std::endl;
+std::cout &lt;&lt; "  - number of ranks: " &lt;&lt; mpi_properties.number_of_ranks &lt;&lt; std::endl;</code></p>
+<p>c) Comilez le code pour vérifier que vous n'avez pas fait d'erreur.
+Vous pouvez également l'exécutre avec un seul rang.</p>
+<p><strong>Question 4.5 - Timers :</strong> Avant de rentrer dans le coeur du sujet, nous allons préparer le calcul du temps avec MPI.
+La définition des timers change de fait de l'utilisation de MPI.
+Ici le temps enregistré sera le temps propre à chaque rang.
+Etant donné que ce temps n'est pas forcément le même pour tous en fonction du la charge de travail à traiter, il est intéressant d'afficher le temps maximal, minimal et la moyenne sur l'ensemble des rangs.</p>
+<p>a) Ouvrez le fichier <a href="./cpp/patch/timers.cpp">timers.cpp</a>.</p>
+<p>b) En premier lieu, nous allons remplacer tous les appels à la fonction <code>gettimeofday</code> par la fonction MPI <code>MPI_WTIME()</code> plus adaptée.</p>
+<p>Chaque processus MPI va donc faire un calcul local du temps passé dans chaque partie.
+Les bilans temporels ne seront affichés que par un seul processus.
+En revanche, nous allons faire quelques statistiques en affichant le temps minimal, moyen et maximal entre tous les processus pour chaque partie du code.</p>
+<p>c) Au début de la fonction <code>Timers::print</code> de <a href="./cpp/patch/timers.cpp">timers.cpp</a>, déclarez les tableaux <code>minimum_times</code>, <code>average_times</code> et <code>maximum_times</code>.</p>
+<p>d) Ajoutez les fonctions MPI permettant de calculer la valeur maximale, minimale et la moyenne des valeurs accumulées dans le tableau <code>accumulated_times</code>.</p>
+<p>e) Améliorez l'affichage des timers en y ajoutant ces temps là au lieu du temps accumulé :
+<code>C++
+std::cout &lt;&lt; " ------------------------------------ "&lt;&lt; std::endl;
+std::cout &lt;&lt; " TIMERS"&lt;&lt; std::endl;
+std::cout &lt;&lt; " ------------------------------------ "&lt;&lt; std::endl;
+std::cout &lt;&lt; "            code part |   min (s)  | averag (s) |   max (s)  | percentage |"&lt;&lt; std::endl;
+std::cout &lt;&lt; " ---------------------|------------|------------|------------|------------|"&lt;&lt; std::endl;</code></p>
+<p>N'oubliez pas que seul le rang 0 s'occupe de l'affichage.</p>
