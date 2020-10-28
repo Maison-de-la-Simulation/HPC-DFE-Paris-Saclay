@@ -368,9 +368,41 @@ Les fichiers avec l'extension <code>.vtk</code> doivent être ouvert avec le log
 <a href="./paraview.md">Une petit documentation sur Paraview</a> vous aidera à visualiser les résultats.</p>
 <ul>
 <li>
-<p>a) Utilisez soit les scripts Python fournis dans le dossier <a href="../python">python</a> pour visualiser les résultats (utilisez le <a href="../python/README.md">README</a> pour plus d'information) ou Paraview.</p>
+<p>a) Utilisez soit les scripts Python fournis dans le dossier <a href="./python">python</a> pour visualiser les résultats (utilisez le <a href="./python/README.md">README</a> pour plus d'information) ou Paraview.</p>
 </li>
 <li>
 <p>b) Placez dans le rapport plusieurs images à différentes itérations de simulation.</p>
 </li>
 </ul>
+<h3>IV. MPI</h3>
+<p>Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.</p>
+<p><strong>Préparation :</strong> Faites maintenant une copie du dossier <code>sequentiel</code> et appelez-le <code>mpi</code>.
+On modifiera les sources de ce dossier pour y introduire la parallélisation MPI.</p>
+<p><strong>Question 4.1 - makefile :</strong> En premier lieu, il nous faut modifier le makefile pour pouvoir compiler avec MPI.
+Pour cela ouvrez le fichier <code>makefile</code> et remplacer <code>g++</code> par <code>mpic++</code> en tant que compilateur C++ (<code>CPP</code>).
+Supprimez les <em>flags</em> faisant référence à OpenMP : <code>-fopenmp</code>.
+L'entête du makefile devrait ressembler à ça :
+```makefile</p>
+<h1>Fortran compiler (MPI wrapper)</h1>
+<p>CPP = mpic++
+```</p>
+<p>La variable <code>CPPFLAGS</code> se limite à l'optimisation de niveau 3 :
+```makefile</p>
+<h1>Optimization</h1>
+<p>CPPFLAGS += -O3
+```</p>
+<p>Il est tout à fait possible de compiler un code séquentiel avec le <em>wrappper</em> MPI puisqu'il s'agit simplement d'un <em>wrapper</em> faisant appel au compilateur standard (<code>g++</code> ici).
+Compilez le code en faisant <code>make</code> pour vous assurez qu'il n'y a pas d'erreur dans le makefile.</p>
+<p><strong>Question 4.2 - Création d'une nouvelle structure :</strong> Avant d'initiliser MPI, nous allons créer une
+nouvelle structure dans <a href="./cpp/patch/parameters.h">parameters.h</a>.
+Appelez cette nouvelle structure <code>MPIProperties</code>.
+Rajoutez-y une variable pour stocker le nombre total de rangs MPI et une variable pour le rang en cours.
+Aidez-vous des autres structures pour créer cette dernière.</p>
+<p><strong>Question 4.3 - Initialisation de MPI :</strong> Nous allons commencer par préparer le programme à MPI.
+Pour cela, commencez par inclure le header MPI dans le fichier <a href="./cpp/patch/main.cpp">main.cpp</a>.
+Notez qu'il faudra l'inclure dans chaque fichier où sera appelées des fonctions MPI.</p>
+<p>Effectuez l'initialisation de MPI au début du fichier <a href="./cpp/patch/main.cpp">main.cpp</a>.
+Ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
+Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
+Aidez-vous du premier exercice sur MPI si besoin <code>1_initialization</code>.
+Ensuite, rajouter la fonction permettant definaliser MPI tout de suite à la fin du programme.</p>
