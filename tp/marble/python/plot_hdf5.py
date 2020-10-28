@@ -5,7 +5,7 @@
 # ______________________________________________________________________________
 
 import sys
-import struct
+import h5py
 import numpy as np
 from matplotlib import *
 from matplotlib.pyplot import *
@@ -42,34 +42,25 @@ file_path = ""
 if len(sys.argv) > 1:
     file_path = sys.argv[1]
 else:
-    sys.exit("Please, specify a valid path to a binary file as a first command line argument.")
+    sys.exit("Please, specify a valid path to a hdf5 file as a first command line argument.")
 
 # ______________________________________________________________________________
-# Read the binary file
+# Read the hdf5 file
 
-file = open(file_path, 'r')
+try:
+    f = h5py.File(file_path, "r")
+except IOError:
+    sys.exit("The specified hdf5 file is not valid.")
 
-content = file.read()
+mass = np.array(f['mass'])
+x = np.array(f['x'])
+y = np.array(f['y'])
+z = np.array(f['z'])
+vx = np.array(f['vx'])
+vy = np.array(f['vy'])
+vz = np.array(f['vz'])
 
-k = 0
-
-particle_number = struct.unpack('i',content[k:k+4])[0] ; k+= 4
-radius = struct.unpack('d',content[k:k+8])[0] ; k+= 8
-
-print(" Number of particles: {}".format(particle_number))
-print(" Radius: {}".format(radius))
-
-x = np.array(struct.unpack('{}d'.format(particle_number),content[k:k + 8*particle_number])) ; k+= 8*particle_number
-y = np.array(struct.unpack('{}d'.format(particle_number),content[k:k + 8*particle_number])) ; k+= 8*particle_number
-z = np.array(struct.unpack('{}d'.format(particle_number),content[k:k + 8*particle_number])) ; k+= 8*particle_number
-
-vx = np.array(struct.unpack('{}d'.format(particle_number),content[k:k + 8*particle_number])) ; k+= 8*particle_number
-vy = np.array(struct.unpack('{}d'.format(particle_number),content[k:k + 8*particle_number])) ; k+= 8*particle_number
-vz = np.array(struct.unpack('{}d'.format(particle_number),content[k:k + 8*particle_number])) ; k+= 8*particle_number
-
-mass = np.array(struct.unpack('{}d'.format(particle_number),content[k:k + 8*particle_number])) ; k+= 8*particle_number
-
-energy = 0.5 * mass * ( vx*vx + vy*vy + vz*vz)
+energy = 0.5 * mass * (vx*vx + vy*vy + vz*vz)
 
 # ______________________________________________________________________________
 # Figure and plot

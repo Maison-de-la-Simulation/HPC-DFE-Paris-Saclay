@@ -518,6 +518,47 @@ les paramètres par défaut.
 Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Paraview` ou `VisIt`.
 [Une petit documentation sur Paraview](./paraview.md) vous aidera à visualiser les résultats.
 
-- a) Utilisez soit les scripts Python fournis dans le dossier [python](../python) pour visualiser les résultats (utilisez le [README](../python/README.md) pour plus d'information) ou Paraview.
+- a) Utilisez soit les scripts Python fournis dans le dossier [python](./python) pour visualiser les résultats (utilisez le [README](./python/README.md) pour plus d'information) ou Paraview.
 
 - b) Placez dans le rapport plusieurs images à différentes itérations de simulation.
+
+### IV. MPI
+
+Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.
+
+**Préparation :** Faites maintenant une copie du dossier `sequentiel` et appelez-le `mpi`.
+On modifiera les sources de ce dossier pour y introduire la parallélisation MPI.
+
+**Question 4.1 - makefile :** En premier lieu, il nous faut modifier le makefile pour pouvoir compiler avec MPI.
+Pour cela ouvrez le fichier `makefile` et remplacer `g++` par `mpic++` en tant que compilateur C++ (`CPP`).
+Supprimez les *flags* faisant référence à OpenMP : `-fopenmp`.
+L'entête du makefile devrait ressembler à ça :
+```makefile
+# Fortran compiler (MPI wrapper)
+CPP = mpic++
+```
+
+La variable `CPPFLAGS` se limite à l'optimisation de niveau 3 :
+```makefile
+# Optimization
+CPPFLAGS += -O3
+```
+
+Il est tout à fait possible de compiler un code séquentiel avec le *wrappper* MPI puisqu'il s'agit simplement d'un *wrapper* faisant appel au compilateur standard (`g++` ici).
+Compilez le code en faisant `make` pour vous assurez qu'il n'y a pas d'erreur dans le makefile.
+
+**Question 4.2 - Création d'une nouvelle structure :** Avant d'initiliser MPI, nous allons créer une
+nouvelle structure dans [parameters.h](./cpp/patch/parameters.h).
+Appelez cette nouvelle structure `MPIProperties`.
+Rajoutez-y une variable pour stocker le nombre total de rangs MPI et une variable pour le rang en cours.
+Aidez-vous des autres structures pour créer cette dernière.
+
+**Question 4.3 - Initialisation de MPI :** Nous allons commencer par préparer le programme à MPI.
+Pour cela, commencez par inclure le header MPI dans le fichier [main.cpp](./cpp/patch/main.cpp).
+Notez qu'il faudra l'inclure dans chaque fichier où sera appelées des fonctions MPI.
+
+Effectuez l'initialisation de MPI au début du fichier [main.cpp](./cpp/patch/main.cpp).
+Ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
+Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
+Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
+Ensuite, rajouter la fonction permettant definaliser MPI tout de suite à la fin du programme.

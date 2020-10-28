@@ -24,12 +24,6 @@
 #include "walls.h"
 #include "timers.h"
 
-// Header for the function to read the external arguments
-void commandLineArguments(int argc, char * argv[], struct TimeProperties & time_properties,
-                                                   struct ParticleProperties & particle_properties,
-                                                   struct DomainProperties & domain_properties,
-                                                   struct DiagProperties & diag_properties);
-
 int main( int argc, char *argv[] )
 {
     
@@ -85,6 +79,7 @@ int main( int argc, char *argv[] )
     diag_properties.print_period  = 20;
     diag_properties.hdf5          = false;
     diag_properties.vtk           = true;
+    diag_properties.binary        = true;
     
     // Creation of the diag folder
     system("mkdir -p diags");
