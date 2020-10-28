@@ -493,6 +493,8 @@ Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Para
 ### IV. MPI
 
 Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.
+Pour cela, nous ferons en sorte que chaque patch soit traité par un processus MPI.
+Un patch sera donc associé à un rang MPI systématiquement.
 
 **Préparation :** Faites maintenant une copie du dossier `sequentiel` et appelez-le `mpi`.
 On modifiera les sources de ce dossier pour y introduire la parallélisation MPI.
@@ -530,3 +532,51 @@ Ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du 
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
 Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
 Ensuite, rajouter la fonction permettant definaliser MPI tout de suite à la fin du programme.
+
+**Question 4.4 - Action réservée au rang 0 :** Il est important de se rappeler que dans un programme MPI, le code que vous écrivez après l'initialisation de MPI est exécuté par tous les rangs. Cela diffère d'OpenMP pour lequel le code exécuté en parallèle dépend de l'emplacement des directives.
+Néanmoins, la similitude peut être faite avec l'ouverture d'une région parallèle en OpenMP à partir de laquelle le code est exécuté par tous les threads.
+A partir de là, il est important d'identifier les zones que l'on souhaite être exécuté que par un seul rang.
+a) Dans le fichier [main.cpp](./cpp/patch/main.cpp) c'est le cas des parties suivantes :
+- la création du dossier `diags` :
+```C++
+system("mkdir -p diags");
+```
+- l'affichage des informations dans le terminal
+Pour éviter que tous les rangs n'effectuent ces actions, ajoutez une condition pour qu'uniquement le rang 0 les fasse.
+
+b) En plus de cela, rajoutez l'affichage du nombre de rangs dans l'onglet `Topology` :
+```C++
+std::cout << " Topology:" << std::endl;
+std::cout << "  - number of ranks: " << mpi_properties.number_of_ranks << std::endl;
+```
+
+c) Comilez le code pour vérifier que vous n'avez pas fait d'erreur.
+Vous pouvez également l'exécutre avec un seul rang.
+
+**Question 4.5 - Timers :** Avant de rentrer dans le coeur du sujet, nous allons préparer le calcul du temps avec MPI.
+La définition des timers change de fait de l'utilisation de MPI.
+Ici le temps enregistré sera le temps propre à chaque rang.
+Etant donné que ce temps n'est pas forcément le même pour tous en fonction du la charge de travail à traiter, il est intéressant d'afficher le temps maximal, minimal et la moyenne sur l'ensemble des rangs.
+
+a) Ouvrez le fichier [timers.cpp](./cpp/patch/timers.cpp).
+
+b) En premier lieu, nous allons remplacer tous les appels à la fonction `gettimeofday` par la fonction MPI `MPI_WTIME()` plus adaptée.
+
+Chaque processus MPI va donc faire un calcul local du temps passé dans chaque partie.
+Les bilans temporels ne seront affichés que par un seul processus.
+En revanche, nous allons faire quelques statistiques en affichant le temps minimal, moyen et maximal entre tous les processus pour chaque partie du code.
+
+c) Au début de la fonction `Timers::print` de [timers.cpp](./cpp/patch/timers.cpp), déclarez les tableaux `minimum_times`, `average_times` et `maximum_times`.
+
+d) Ajoutez les fonctions MPI permettant de calculer la valeur maximale, minimale et la moyenne des valeurs accumulées dans le tableau `accumulated_times`.
+
+e) Améliorez l'affichage des timers en y ajoutant ces temps là au lieu du temps accumulé :
+```C++
+std::cout << " ------------------------------------ "<< std::endl;
+std::cout << " TIMERS"<< std::endl;
+std::cout << " ------------------------------------ "<< std::endl;
+std::cout << "            code part |   min (s)  | averag (s) |   max (s)  | percentage |"<< std::endl;
+std::cout << " ---------------------|------------|------------|------------|------------|"<< std::endl;
+```
+
+N'oubliez pas que seul le rang 0 s'occupe de l'affichage.

@@ -58,6 +58,9 @@ class Particles
     // Output specifically the vtk files
     void writeVTK(unsigned int iteration);
     
+    // Output specifically the binary files
+    void writeBinary(unsigned int iteration);
+    
     // Write all type of diags
     void writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties);
     

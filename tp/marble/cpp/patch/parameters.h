@@ -63,6 +63,7 @@ struct DiagProperties {
     unsigned int print_period;      // period in term of iteration between each diag
     bool hdf5;
     bool vtk;
+    bool binary;
     
 };
 
