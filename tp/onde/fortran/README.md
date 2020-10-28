@@ -273,13 +273,13 @@ avec la version séquentielle.
 
 Dans cette troisième partie, nous allons paralléliser le programme d'équation d'onde en utilisant la méthode par passage de message et la bibliothèque MPI.
 
-**Préparation :** Faites maintenant une copie du dossier `sequentiel` et appelez-la `mpi`.
+**Préparation :** Faites maintenant une copie du dossier `sequentiel` et appelez-le `mpi`.
 Vous allez modifier les sources pour y introduire la parallélisation MPI dans ce dossier.
 
 **Question 4.1 - makefile :** En premier lieu, il nous faut modifier le makefile pour pouvoir compiler avec MPI.
 Pour cela ouvrez le fichier `makefile` et remplacer `gfortran` par `mpif90` en tant que compilateur fortran (`FC`).
 Supprimez les *flags* faisant référence à OpenMP : `-fopenmp`.
-L'entête du makefle devrait ressembler à ça :
+L'entête du makefile devrait ressembler à ça :
 ```makefile
 # Fortran compiler (MPI wrapper)
 FC = mpif90
