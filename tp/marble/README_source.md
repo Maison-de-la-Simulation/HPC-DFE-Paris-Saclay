@@ -612,3 +612,25 @@ std::cout << " ---------------------|------------|------------|------------|----
 ```
 
 N'oubliez pas que seul le rang 0 s'occupe de l'affichage.
+
+f) Compilez le code et exécutez le en demandant qu'un processeur.
+```bash
+mpirun -np 1 ./executable
+```
+
+**Question 4.6 - Topologie :** Pour simplifier le développement, l'idée est de faire en sorte que chaque rang MPI ne possède qu'un patch.
+De fait, il n'y aura plus plusieurs patchs dans la classe `Particles` mais un seul.
+Avec le paradigme MPI, `Particles` représente maintenant les particules du rang courant puisque
+que la classe est dupliquée sur chaque rang (mémoire distribuée).
+Il est même possible en fonction des choix de chacun de faire disparaitre la classe `Particles`.
+
+a) Dans [Particles.cpp](./cpp/patch/particles.cpp), modifiez le constructeur pour ne laisser qu'un seul patch.
+
+b) Nous allons maintenant récrire la fonction `Patch::initTopology` dans [Patch.cpp](./cpp/patch/patch.cpp)
+pour créer une topologie MPI à partir des fonctions dédiées. Commencez par ajouter en argument la structure de donnée `MPIProperties` :
+```C++
+void Patch::initTopology(struct DomainProperties domain_properties, struct MPIProperties mpi_properties)
+```
+N'oubliez pas de modifier également la définitions de `Particles::initTopology` pour transmettre la structure `MPIProperties`.
+
+c) 
