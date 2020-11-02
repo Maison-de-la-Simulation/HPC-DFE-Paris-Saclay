@@ -1,7 +1,7 @@
 # Fonctionnement des communications point à point bloquantes SEND/RECV
 
-Ce second programme présente le fonctionnement des communications
-bloquantes sendrecv.
+Cet exercice présente le fonctionnement des communications
+bloquantes `MPI_Sendrecv`.
 On illustre ici son fonctionnement par une communication en anneau.
 Chaque processus envoie un message à son voisin de rang supérieur
 et reçoit de son voisin de rang inférieur.
@@ -41,6 +41,10 @@ end if
 
 ```bash
 mpif90 main.F90 -o executable
+```
+
+```bash
+mpic++ main.cpp -o executable
 ```
 
 ## Execution
