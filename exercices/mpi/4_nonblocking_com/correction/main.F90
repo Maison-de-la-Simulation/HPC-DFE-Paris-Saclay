@@ -17,7 +17,7 @@ program nonblocking
     integer               :: tag
     integer               :: send_rank          ! Le rang a qui on envoie des données
     integer               :: recv_rank          ! Le rang de qui on reçoit
-
+    integer, dimension(2) :: request            ! Numéro de la requête pour le MPI_WAIT
 
     ! Initialisation de MPI
 
@@ -58,7 +58,11 @@ program nonblocking
 
     tag = 0;
 
-
+    Call MPI_IRECV(recv_message,1,MPI_INTEGER,recv_rank,tag,MPI_COMM_WORLD,request(2),ierror)
+    
+    Call MPI_ISEND(rank,1,MPI_INTEGER,send_rank,tag,MPI_COMM_WORLD,request(1),ierror)
+    
+    Call MPI_WAITALL(2,request,MPI_STATUS_IGNORE,ierror)
 
     ! On affiche les résultats
 
