@@ -45,32 +45,32 @@ int main( int argc, char *argv[] )
     int ierror;
 
     if (rank == 0) {
-        send_rank = ???;
-        recv_rank = ???;
+        send_rank = 1;
+        recv_rank = number_of_ranks - 1;
     } else if (rank == number_of_ranks - 1) {
-        send_rank = ???;
-        recv_rank = ???;
+        send_rank = 0;
+        recv_rank = rank - 1;
     } else {
-        send_rank = ???;
-        recv_rank = ???
+        send_rank = rank + 1;
+        recv_rank = rank - 1;
     }
 
     std::cout << "Le rang " << rank << " envoie le message " << rank << " au rang " << send_rank << std::endl;
 
-    ierror = MPI_Barrier(MPI_COMM_WORLD);
+    ierror =  MPI_Barrier(MPI_COMM_WORLD);
 
-    ierror = MPI_???(???,                       // La partie du tableau à envoyer
-                  ???,                      // Le nombre d'éléments
-                  ???,                      // Le type de donnée utilisé
-                  ???,                      // Le rang du voisin destinataire
-                  tag,                      // tag de la communication
-                  ???,               // La partie du tableau qui va recevoir les données
-                  ???,               // Le nombre d'éléments
-                  ???,               // Le type de donnée pour les données reçues
-                  ???,               // Le rang du voisin qui va nous envoyer des données
+    ierror = MPI_Sendrecv(&rank,                       // La partie du tableau à envoyer
+                  1,                          // Le nombre d'éléments
+                  MPI_INT,                // Le type de donnée utilisé
+                  send_rank,                  // Le rang du voisin destinataire
+                  tag,                        // tag de la communication
+                  &recv_message,               // La partie du tableau qui va recevoir les données
+                  1,                          // Le nombre d'éléments
+                  MPI_INT,                // Le type de donnée pour les données reçues
+                  recv_rank,                  // Le rang du voisin qui va nous envoyer des données
                   tag,                        // tag de la communication
                   MPI_COMM_WORLD,             // Le communicateur
-                  MPI_STATUS_IGNORE          // Status de la communication
+                  MPI_STATUS_IGNORE          // Stat
                 );
 
     // On affiche les résultats
