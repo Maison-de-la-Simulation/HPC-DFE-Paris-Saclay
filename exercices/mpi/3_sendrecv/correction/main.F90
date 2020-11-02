@@ -40,19 +40,19 @@ program sendrecv
     ! Chaque processus envoie son rang au voisin de rang supérieur et
     ! reçoit donc le rang du voisin de rang inférieur
 
-    ! Calcul des rangs voisins
+    ! Calcul des rangs
     ! Rang au bord inférieur
     if (rank.eq.0) then
-        send_rank = ???
-        recv_rank = ???
+        send_rank = rank + 1
+        recv_rank = number_of_ranks-1
     ! Rang au bord supérieur
     else if (rank.eq.number_of_ranks-1) then
-        send_rank = ???
-        recv_rank = ???
+        send_rank = 0
+        recv_rank = rank-1
     ! Rang intérieur
     else
-        send_rank = ???
-        recv_rank = ???
+        send_rank = rank + 1
+        recv_rank = rank - 1
     end if
 
     write(0,'(X,"Le rang ",I3," envoie le message ",I3," au rang ",I3,".")') &
@@ -64,19 +64,19 @@ program sendrecv
 
     tag = 0;
 
-    Call MPI_???(???,                       & ! La partie du tableau à envoyer
-                  ???,                          & ! Le nombre d'éléments
-                  ???,                & ! Le type de donnée utilisé
-                  ???,                  & ! Le rang du voisin destinataire
-                  tag,                        & ! tag de la communication
-                  ???,               & ! La partie du tableau qui va recevoir les données
-                  ???,                          & ! Le nombre d'éléments
-                  ???,                & ! Le type de donnée pour les données reçues
-                  ???,                  & ! Le rang du voisin qui va nous envoyer des données
-                  tag,                        & ! tag de la communication
-                  MPI_COMM_WORLD,             & ! Le communicateur
-                  MPI_STATUS_IGNORE,          & ! Status de la communication
-                  ierror)                       ! Code d'erreur
+    Call MPI_SENDRECV(rank,                       & ! La partie du tableau à envoyer
+                      1,                          & ! Le nombre d'élèments
+                      MPI_INTEGER,                & ! Le type de donnée utilisé
+                      send_rank,                  & ! Le rang du voisin destinataire
+                      tag,                        & ! tag de la communication
+                      recv_message,               & ! La partie du tableau qui va recevoir les données
+                      1,                          & ! Le nombre d'élèments
+                      MPI_INTEGER,                & ! Le type de donnée pour les données reçues
+                      recv_rank,                  & ! Le rang du voisin qui va nous envoyer des données
+                      tag,                        & ! tag de la communication
+                      MPI_COMM_WORLD,             & ! Le communicateur
+                      MPI_STATUS_IGNORE,          & ! Status de la communication
+                      ierror)                       ! Code d'erreur
 
     ! On affiche les résultats
 
