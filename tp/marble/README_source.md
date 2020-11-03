@@ -626,11 +626,18 @@ Il est même possible en fonction des choix de chacun de faire disparaitre la cl
 
 a) Dans [Particles.cpp](./cpp/patch/particles.cpp), modifiez le constructeur pour ne laisser qu'un seul patch.
 
-b) Nous allons maintenant récrire la fonction `Patch::initTopology` dans [Patch.cpp](./cpp/patch/patch.cpp)
-pour créer une topologie MPI à partir des fonctions dédiées. Commencez par ajouter en argument la structure de donnée `MPIProperties` :
+Nous allons maintenant récrire la fonction `Particles::initTopology` dans [Particles.cpp](./cpp/patch/particles.cpp) et `Patch::initTopology` dans [Patch.cpp](./cpp/patch/patch.cpp) pour créer une topologie MPI à partir des fonctions dédiées.
+b) Commencez par ajouter dans la liste des arguments de ces fonctions la structure de donnée `MPIProperties` :
 ```C++
 void Patch::initTopology(struct DomainProperties domain_properties, struct MPIProperties mpi_properties)
 ```
-N'oubliez pas de modifier également la définitions de `Particles::initTopology` pour transmettre la structure `MPIProperties`.
+N'oubliez pas de modifier également la définitions de `Particles::initTopology` pour transmettre la structure `MPIProperties` jusqu'à la fonction `Patch::initTopology`.
 
-c) 
+c) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topolgie cartésienne 3D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
+Pour le moment on ne s'occupe pas des voisins.
+Vous ajouterez les paramètres adéquates dans la structure de donnée `MPIProperties`.
+Aidez-vous de l'exercice 6.
+
+d) Ici nous n'utiliserons pas `MPI_Cart_shift` pour déterminer les voisins car nous avons besoin des voisins en diagonal que nous ne donne pas cette fonction.
+Pour ce faire, nous allons simplement générer une carte de la topologie sur l'ensemble des processeurs comme dans l'exercice 6 en utilisant `MPI_Cart_coords`.
+Ajoutez la carte de la topologie dans la structure `MPIProperties`.

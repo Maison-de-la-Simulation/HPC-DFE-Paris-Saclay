@@ -28,13 +28,21 @@ program cartesian_com
     integer               :: rank_neighbors_my   ! rang du voisin en -y
     integer               :: rank_neighbors_px   ! rang du voisin en +x
     integer               :: rank_neighbors_py   ! rang du voisin en +y
-    integer               :: i
+    
+    character(len = 128) :: line                 ! Chaine de caractère pour l'affichage de la topologie
+    character(len = 8)   :: rank_char            ! Chaine de caractère pour le rang
+
+    integer, dimension(:), allocatable :: topology_map ! Carte de la topologie
+
+    integer               :: i, ix, iy
 
     ! Paramètres
 
     ranks_per_direction = (/3,4/)
     reorganisation      = .true.
     periodicity         = (/.true.,.true./)
+
+    allocate(topology_map(ranks_per_direction(1)*ranks_per_direction(2)))
 
     ! Initialisation de MPI
 
@@ -102,6 +110,32 @@ program cartesian_com
         Call MPI_BARRIER(cartesian_communicator,ierror)
 
     end do
+
+    ! Communication de la topologie totale au rang 0
+    
+    Call MPI_GATHER(rank,1,MPI_INTEGER,topology_map,1,MPI_INTEGER,0,cartesian_communicator,ierror)
+    
+    ! Affichage de la topologie
+    
+    if (rank.eq.0) then
+    
+        write(0,*) ""
+        write(0,*) "Carte de la topologie : "
+        write(0,*) "-----------------------------------------> y"
+    
+        do iy = 1,ranks_per_direction(1)
+                
+                write(line,*) topology_map((iy-1)*ranks_per_direction(2) + 1: (iy)*ranks_per_direction(2))
+                
+                !write(0,*) rank_char, topology_map((ix-1)*ranks_per_direction(2) + iy)
+                write(0,*) "| ",trim(line)
+                
+        enddo
+    
+        write(0,*) "v"
+        write(0,*) "x"
+    
+    endif
 
     ! Finalisation de MPI
 
