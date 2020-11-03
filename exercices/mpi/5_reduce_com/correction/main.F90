@@ -5,7 +5,7 @@
 !
 ! Dans cet exercice, nous intégrons la fonction f(x) = sin(x) de
 ! manière numérique entre 0 et pi/2 et de manière parallèle
-! On utilise une intégration par la méthode des rectangles.
+! On utilis une intégration par la méthode des rectangles.
 ! Le domaine est subdivisé suivant le nombre de processus MPI demandé.
 !
 !
@@ -58,21 +58,19 @@ program reduce
 
     ! Paramètres globaux
 
-    discretization_per_rank = 1000                      ! Discrétisation (nombre de points) par processus
+    discretization_per_rank = 1000                   ! Discrétisation par processus
     rank_length             = 0.5*pi / number_of_ranks  ! Taille d'un rang
 
     ! Paramètres locaux
 
-    min   = rank * rank_length                          ! Le minimum d'intégration du processus courant
-    max   = (rank+1) * rank_length                      ! La borne maximale d'intégration du processus courant
-    delta = rank_length / discretization_per_rank       ! La taille des rectangles (taille du sous-domaine divisé par la discrétisation)
+    min   = rank * rank_length
+    max   = (rank+1) * rank_length
+    delta = rank_length / discretization_per_rank
 
     ! On affiche à l'écran quelques paramètres
 
     write(0,'(X,"Le rang ",I3," s''occupe de la portion comprise entre",F8.3," et ",F8.3)') &
          rank,min,max
-
-    ! On attend tout le monde
 
     Call MPI_BARRIER(MPI_COMM_WORLD,ierror)
 
@@ -80,21 +78,24 @@ program reduce
 
     ! Intégration locale (chaque processus traite sa partie)
 
-    ! On boucle sur l'ensemble des points du sous-domaine MPI
     do i=1,discretization_per_rank
         x = min + (i-0.5)*delta
         local_integration = local_integration + sin(x)*delta
     enddo
 
-    ! On affiche les intégrations partielles
-
     write(0,'(X,"Le rang ",I3," a pour intégration locale ",F8.3)') &
          rank,local_integration
 
-    ! Réduction de `local_integration ` pour avoir la valeur finale
-    ! dans la variable `integration` sur le rang 0
+    ! Réduction dans `integration` pour avoir la valeur finale
 
-    Call MPI_???(???) 
+    Call MPI_REDUCE(local_integration,   & ! valeur local à réduire
+                    integration,         & ! valeur finale
+                    1,                   & ! Nombre d'élèments
+                    MPI_DOUBLE_PRECISION,& ! Type de donnée échangé
+                    MPI_SUM,             & ! Type de réduction
+                    0,                   & ! Rang de destination de la réduction
+                    MPI_COMM_WORLD,      & ! Communicateur
+                    ierror)                ! Code d'erreur
 
     ! Affichage du résultat depuis le rang 0
 
