@@ -11,6 +11,7 @@
 #include <vector>
 #include <cmath>
 #include <ctime>
+#include <iomanip>
 
 // il est important d'inclure la bibliothèque
 // sans quoi aucun de vos appels ne sera reconnu.
@@ -41,6 +42,7 @@ int main( int argc, char *argv[] )
     int periodicity[2] = {1, 1};
     int reorganisation = 1;
     MPI_Comm cartesian_communicator;
+    int topology_map[ranks_per_direction[0]*ranks_per_direction[1]];
     
 
     MPI_Cart_create(MPI_COMM_WORLD,
@@ -54,7 +56,7 @@ int main( int argc, char *argv[] )
     
     int rank;
     
-    MPI_Comm_rank( MPI_COMM_WORLD, &rank );
+    MPI_Comm_rank( cartesian_communicator, &rank );
     
     // On récupère les coordonnées du processus courant dans
     // la topologie cartésienne
@@ -92,6 +94,62 @@ int main( int argc, char *argv[] )
         MPI_Barrier(cartesian_communicator);
     }
 
+    // Communication de la topologie totale au rang 0
+    
+    MPI_Gather(&rank,1,MPI_INT,&topology_map,1,MPI_INT,0,cartesian_communicator);
+    
+    // Affichage de la topologie
+    
+    if (rank == 0) {
+    
+        std::cout << std::endl;
+        std::cout <<  " Carte de la topologie : "<< std::endl;
+        std::cout <<  " ---------------------------> y"<< std::endl;
+    
+        for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
+            for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {
+                
+                std::cout << " | " << std::setw(3) << topology_map[iy*ranks_per_direction[1] + ix] ;
+                
+            }
+            std::cout << std::endl;
+        }
+    
+        std::cout << " v" << std::endl;
+        std::cout << " x" << std::endl;
+    
+    }
+    
+    // Construction de la carte de la topologie  à partir de MPI_Cart_coords :
+    
+    int coordinates[2];
+    
+    for (int i = 0 ; i < number_of_ranks ; i++) {
+        MPI_Cart_coords( cartesian_communicator, i, 2, coordinates);
+        topology_map[coordinates[0]*ranks_per_direction[1] + coordinates[1]] = i;
+    }
+
+    // Affichage de la topologie
+    
+    if (rank == 0) {
+    
+        std::cout << std::endl;
+        std::cout <<  " Carte de la topologie : "<< std::endl;
+        std::cout <<  " ---------------------------> y"<< std::endl;
+    
+        for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
+            for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {
+                
+                std::cout << " | " << std::setw(3) << topology_map[iy*ranks_per_direction[1] + ix] ;
+                
+            }
+            std::cout << std::endl;
+        }
+    
+        std::cout << " v" << std::endl;
+        std::cout << " x" << std::endl;
+    
+    }
     
     MPI_Finalize();
 }

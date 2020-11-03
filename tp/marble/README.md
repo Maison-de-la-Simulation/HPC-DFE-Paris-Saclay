@@ -580,3 +580,32 @@ std::cout << " ---------------------|------------|------------|------------|----
 ```
 
 N'oubliez pas que seul le rang 0 s'occupe de l'affichage.
+
+f) Compilez le code et exécutez le en demandant qu'un processeur.
+```bash
+mpirun -np 1 ./executable
+```
+
+**Question 4.6 - Topologie :** Pour simplifier le développement, l'idée est de faire en sorte que chaque rang MPI ne possède qu'un patch.
+De fait, il n'y aura plus plusieurs patchs dans la classe `Particles` mais un seul.
+Avec le paradigme MPI, `Particles` représente maintenant les particules du rang courant puisque
+que la classe est dupliquée sur chaque rang (mémoire distribuée).
+Il est même possible en fonction des choix de chacun de faire disparaitre la classe `Particles`.
+
+a) Dans [Particles.cpp](./cpp/patch/particles.cpp), modifiez le constructeur pour ne laisser qu'un seul patch.
+
+Nous allons maintenant récrire la fonction `Particles::initTopology` dans [Particles.cpp](./cpp/patch/particles.cpp) et `Patch::initTopology` dans [Patch.cpp](./cpp/patch/patch.cpp) pour créer une topologie MPI à partir des fonctions dédiées.
+b) Commencez par ajouter dans la liste des arguments de ces fonctions la structure de donnée `MPIProperties` :
+```C++
+void Patch::initTopology(struct DomainProperties domain_properties, struct MPIProperties mpi_properties)
+```
+N'oubliez pas de modifier également la définitions de `Particles::initTopology` pour transmettre la structure `MPIProperties` jusqu'à la fonction `Patch::initTopology`.
+
+c) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topolgie cartésienne 3D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
+Pour le moment on ne s'occupe pas des voisins.
+Vous ajouterez les paramètres adéquates dans la structure de donnée `MPIProperties`.
+Aidez-vous de l'exercice 6.
+
+d) Ici nous n'utiliserons pas `MPI_Cart_shift` pour déterminer les voisins car nous avons besoin des voisins en diagonal que nous ne donne pas cette fonction.
+Pour ce faire, nous allons simplement générer une carte de la topologie sur l'ensemble des processeurs comme dans l'exercice 6 en utilisant `MPI_Cart_coords`.
+Ajoutez la carte de la topologie dans la structure `MPIProperties`.

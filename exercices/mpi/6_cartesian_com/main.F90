@@ -105,6 +105,32 @@ program cartesian_com
 
     end do
 
+    ! Communication de la topologie totale au rang 0
+    
+    Call MPI_???(???);
+    
+    ! Affichage de la topologie
+    
+    if (rank.eq.0) then
+    
+        write(0,*) ""
+        write(0,*) "Carte de la topologie : "
+        write(0,*) "-----------------------------------------> y"
+    
+        do iy = 1,ranks_per_direction(1)
+                
+                write(line,*) topology_map((iy-1)*ranks_per_direction(2) + 1: (iy)*ranks_per_direction(2))
+                
+                !write(0,*) rank_char, topology_map((ix-1)*ranks_per_direction(2) + iy)
+                write(0,*) "| ",trim(line)
+                
+        enddo
+    
+        write(0,*) "v"
+        write(0,*) "x"
+    
+    endif
+
     ! Finalisation de MPI
 
     Call MPI_FINALIZE(ierror)

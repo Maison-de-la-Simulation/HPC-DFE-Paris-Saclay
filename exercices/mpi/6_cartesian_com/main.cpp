@@ -91,6 +91,62 @@ int main( int argc, char *argv[] )
         MPI_Barrier(cartesian_communicator);
     }
 
+    // Communication de la topologie totale au rang 0
+    
+    MPI_???(???);
+    
+    // Affichage de la topologie
+    
+    if (rank == 0) {
+    
+        std::cout << std::endl;
+        std::cout <<  " Carte de la topologie : "<< std::endl;
+        std::cout <<  " ---------------------------> y"<< std::endl;
+    
+        for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
+            for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {
+                
+                std::cout << " | " << std::setw(3) << topology_map[iy*ranks_per_direction[1] + ix] ;
+                
+            }
+            std::cout << std::endl;
+        }
+    
+        std::cout << " v" << std::endl;
+        std::cout << " x" << std::endl;
+    
+    }
+    
+    // Construction de la carte de la topologie  à partir de MPI_Cart_coords :
+    
+    int coordinates[2];
+    
+    for (int i = 0 ; i < number_of_ranks ; i++) {
+        MPI_Cart_coords(???);
+        topology_map[???] = i;
+    }
+
+    // Affichage de la topologie
+    
+    if (rank == 0) {
+    
+        std::cout << std::endl;
+        std::cout <<  " Carte de la topologie : "<< std::endl;
+        std::cout <<  " ---------------------------> y"<< std::endl;
+    
+        for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
+            for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {
+                
+                std::cout << " | " << std::setw(3) << topology_map[iy*ranks_per_direction[1] + ix] ;
+                
+            }
+            std::cout << std::endl;
+        }
+    
+        std::cout << " v" << std::endl;
+        std::cout << " x" << std::endl;
+    
+    }
     
     MPI_Finalize();
 }
