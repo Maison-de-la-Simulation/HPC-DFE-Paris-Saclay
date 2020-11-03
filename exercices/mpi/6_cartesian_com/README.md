@@ -113,10 +113,13 @@ mpirun -np 12 ./executable
 7. Changez le nombre de processus en prenant soin de changer aussi
 le nombre de rangs dans chaque direction `ranks_per_dimension`.
 
-8. Question bonus : rapatriez sur le rang 0 l'ensemble des rangs et
-coordonnées de tous les processus.
+8. Rapatriez sur le rang 0 l'ensemble des rangs de tous les processus.
 Utilisez pour cela la bonne communication collective.
 Afficher à l'écran la matrice de la topologie cartésienne.
+
+9. Construisez maintenant la carte de la topologie sur tous les processurs en utilisant la fonction `MPI_Cart_coords`.
+Afficher à l'écran la matrice de la topologie cartésienne.
+Comparez les résultats avec la carte précédente.
 
 ## Compilation
 

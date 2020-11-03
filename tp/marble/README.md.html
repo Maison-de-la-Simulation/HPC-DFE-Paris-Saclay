@@ -442,3 +442,24 @@ std::cout &lt;&lt; " ------------------------------------ "&lt;&lt; std::endl;
 std::cout &lt;&lt; "            code part |   min (s)  | averag (s) |   max (s)  | percentage |"&lt;&lt; std::endl;
 std::cout &lt;&lt; " ---------------------|------------|------------|------------|------------|"&lt;&lt; std::endl;</code></p>
 <p>N'oubliez pas que seul le rang 0 s'occupe de l'affichage.</p>
+<p>f) Compilez le code et exécutez le en demandant qu'un processeur.
+<code>bash
+mpirun -np 1 ./executable</code></p>
+<p><strong>Question 4.6 - Topologie :</strong> Pour simplifier le développement, l'idée est de faire en sorte que chaque rang MPI ne possède qu'un patch.
+De fait, il n'y aura plus plusieurs patchs dans la classe <code>Particles</code> mais un seul.
+Avec le paradigme MPI, <code>Particles</code> représente maintenant les particules du rang courant puisque
+que la classe est dupliquée sur chaque rang (mémoire distribuée).
+Il est même possible en fonction des choix de chacun de faire disparaitre la classe <code>Particles</code>.</p>
+<p>a) Dans <a href="./cpp/patch/particles.cpp">Particles.cpp</a>, modifiez le constructeur pour ne laisser qu'un seul patch.</p>
+<p>Nous allons maintenant récrire la fonction <code>Particles::initTopology</code> dans <a href="./cpp/patch/particles.cpp">Particles.cpp</a> et <code>Patch::initTopology</code> dans <a href="./cpp/patch/patch.cpp">Patch.cpp</a> pour créer une topologie MPI à partir des fonctions dédiées.
+b) Commencez par ajouter dans la liste des arguments de ces fonctions la structure de donnée <code>MPIProperties</code> :
+<code>C++
+void Patch::initTopology(struct DomainProperties domain_properties, struct MPIProperties mpi_properties)</code>
+N'oubliez pas de modifier également la définitions de <code>Particles::initTopology</code> pour transmettre la structure <code>MPIProperties</code> jusqu'à la fonction <code>Patch::initTopology</code>.</p>
+<p>c) Ajoutez dans <code>Particles::initTopology</code> les fonctions permettant de créer une topolgie cartésienne 3D (<code>MPI_Cart_create</code>, <code>MPI_Comm_rank</code> et <code>MPI_Cart_coords</code>).
+Pour le moment on ne s'occupe pas des voisins.
+Vous ajouterez les paramètres adéquates dans la structure de donnée <code>MPIProperties</code>.
+Aidez-vous de l'exercice 6.</p>
+<p>d) Ici nous n'utiliserons pas <code>MPI_Cart_shift</code> pour déterminer les voisins car nous avons besoin des voisins en diagonal que nous ne donne pas cette fonction.
+Pour ce faire, nous allons simplement générer une carte de la topologie sur l'ensemble des processeurs comme dans l'exercice 6 en utilisant <code>MPI_Cart_coords</code>.
+Ajoutez la carte de la topologie dans la structure <code>MPIProperties</code>.</p>
