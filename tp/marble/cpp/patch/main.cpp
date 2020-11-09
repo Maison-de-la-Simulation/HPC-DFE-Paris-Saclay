@@ -44,7 +44,6 @@ int main( int argc, char *argv[] )
     domain_properties.n_patches_x = 3;
     domain_properties.n_patches_y = 3;
     domain_properties.n_patches_z = 3;
-    domain_properties.n_patches   = domain_properties.n_patches_x*domain_properties.n_patches_y*domain_properties.n_patches_z;
     
     domain_properties.xmin = 0;
     domain_properties.ymin = 0;
@@ -87,6 +86,8 @@ int main( int argc, char *argv[] )
     // Command line arguments _________________________________________________________________________
     
     commandLineArguments(argc, argv, time_properties, particle_properties, domain_properties,diag_properties);
+    
+    domain_properties.n_patches   = domain_properties.n_patches_x*domain_properties.n_patches_y*domain_properties.n_patches_z;
     
     time_properties.step = time_properties.final / time_properties.final_iteration;
     
