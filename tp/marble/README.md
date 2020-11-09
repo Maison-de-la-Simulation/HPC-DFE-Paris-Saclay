@@ -594,12 +594,15 @@ Il est même possible en fonction des choix de chacun de faire disparaitre la cl
 
 a) Dans [Particles.cpp](./cpp/patch/particles.cpp), modifiez le constructeur pour ne laisser qu'un seul patch.
 
-Nous allons maintenant récrire la fonction `Particles::initTopology` dans [Particles.cpp](./cpp/patch/particles.cpp) et `Patch::initTopology` dans [Patch.cpp](./cpp/patch/patch.cpp) pour créer une topologie MPI à partir des fonctions dédiées.
+Nous allons maintenant récrire la fonction `Particles::initTopology` dans [particles.cpp](./cpp/patch/particles.cpp) et `Patch::initTopology` dans [patch.cpp](./cpp/patch/patch.cpp) pour créer une topologie MPI à partir des fonctions dédiées.
+
 b) Commencez par ajouter dans la liste des arguments de ces fonctions la structure de donnée `MPIProperties` :
 ```C++
-void Patch::initTopology(struct DomainProperties domain_properties, struct MPIProperties mpi_properties)
+void Patch::initTopology(struct DomainProperties domain_properties, struct MPIProperties mpi_properties);
+void Particles::initTopology(struct DomainProperties domain_properties, struct MPIProperties & mpi_properties);
 ```
 N'oubliez pas de modifier également la définitions de `Particles::initTopology` pour transmettre la structure `MPIProperties` jusqu'à la fonction `Patch::initTopology`.
+On passe la structure par référence car on modifie données.
 
 c) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topolgie cartésienne 3D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
 Pour le moment on ne s'occupe pas des voisins.
@@ -609,3 +612,28 @@ Aidez-vous de l'exercice 6.
 d) Ici nous n'utiliserons pas `MPI_Cart_shift` pour déterminer les voisins car nous avons besoin des voisins en diagonal que nous ne donne pas cette fonction.
 Pour ce faire, nous allons simplement générer une carte de la topologie sur l'ensemble des processeurs comme dans l'exercice 6 en utilisant `MPI_Cart_coords`.
 Ajoutez la carte de la topologie dans la structure `MPIProperties`.
+
+**Important :** Je vous rappelle que la convention choisie par les dévelopeurs de MPI fait que la coordonnée continue est la dernière dimension.
+Dans ce TP, l'axe continu (indice continu dans le déroulement des boucles) est l'axe des `x`.
+
+e) Affichez dans le fichier [main.cpp](./cpp/patch/particles.cpp) la topologie à la fin du résumé des paramètres nuémriques (comme pour l'exercice 6 sur MPI).
+Vous pouvez vous inspirr du code suivant :
+```C++
+std::cout <<  " Topology map: "<< std::endl;
+
+for(int iz = 0; iz < mpi_properties.ranks_per_direction[0] ; iz++) {
+    std::cout << " z = " << iz << std::endl;
+    std::cout <<  " ---------------------------> x"<< std::endl;
+    for(int iy = 0; iy < mpi_properties.ranks_per_direction[1] ; iy++) {
+        for(int ix = 0; ix < mpi_properties.ranks_per_direction[2] ; ix++) {
+        
+            std::cout << " | " << std::setw(3) << mpi_properties.topology_map[iz*mpi_properties.ranks_per_direction[1]*mpi_properties.ranks_per_direction[2] + iy*mpi_properties.ranks_per_direction[2] + ix] ;
+        
+        }
+        std::cout << "" << std::endl;
+    }
+    std::cout << " v" << std::endl;
+    std::cout << " y" << std::endl;
+}
+std::cout << std::endl;
+```
