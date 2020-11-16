@@ -33,7 +33,7 @@ Patch::~Patch() {
 // This function initializes the patch topology :
 // - number of patches in each direction
 // - id and coordinates of all patches
-void Patch::initTopology(struct DomainProperties domain_properties,
+void Patch::initTopology(struct Parameters params,
                         unsigned int id) {
     
     // Patch index
@@ -41,12 +41,12 @@ void Patch::initTopology(struct DomainProperties domain_properties,
     
     // Local indexes in the cartesian topology
     // x is the fastest direction
-    patchIndex1DTo3D(domain_properties, id, this->id_x, this->id_y, this->id_z);
+    patchIndexToCoordinates(params, id, this->id_x, this->id_y, this->id_z);
     
     // Local boundaries computation
-    this->patch_x_length = (domain_properties.xmax - domain_properties.xmin) / domain_properties.n_patches_x;
-    this->patch_y_length = (domain_properties.ymax - domain_properties.ymin) / domain_properties.n_patches_y;
-    this->patch_z_length = (domain_properties.zmax - domain_properties.zmin) / domain_properties.n_patches_z;
+    this->patch_x_length = (params.xmax - params.xmin) / params.n_patches_x;
+    this->patch_y_length = (params.ymax - params.ymin) / params.n_patches_y;
+    this->patch_z_length = (params.zmax - params.zmin) / params.n_patches_z;
     
     if (patch_x_length <= 2*radius || patch_y_length <= 2*radius || patch_z_length <= 2*radius) {
         std::cerr << " CONFIGURATION ERROR: a patch must be larger than a particle diameter." << std::endl;
@@ -71,7 +71,7 @@ void Patch::initTopology(struct DomainProperties domain_properties,
                 
                 int k = ix+ 1 + (iy+1) * 3 + (iz+1) * 9;
                 
-                neighbor_indexes[k] = getNeighborIndex(domain_properties, ix, iy, iz);
+                neighbor_indexes[k] = getNeighborIndex(params, ix, iy, iz);
                 // if (neighbor_indexes[k] >= 0) {
                 //     std::cerr << neighbor_indexes[k] << " (" << ix << " " << iy << " " << iz << ")" << ", ";
                 // }
@@ -82,23 +82,21 @@ void Patch::initTopology(struct DomainProperties domain_properties,
     // std::cerr << std::endl;
     
     // Flag to know if the patch is at the boundary
-    this->at_mx_boundary = ((id_x - 1)<0);
-    this->at_my_boundary = ((id_y - 1)<0);
-    this->at_mz_boundary = ((id_z - 1)<0);
-    this->at_px_boundary = ((id_x+1)>=domain_properties.n_patches_x);
-    this->at_py_boundary = ((id_y+1)>=domain_properties.n_patches_y);
-    this->at_pz_boundary = ((id_z+1)>=domain_properties.n_patches_z);
+    this->at_mx_boundary = (id_x == 0);
+    this->at_my_boundary = (id_y == 0);
+    this->at_mz_boundary = (id_z == 0);
+    this->at_px_boundary = (id_x == params.n_patches_x-1);
+    this->at_py_boundary = (id_y == params.n_patches_y-1);
+    this->at_pz_boundary = (id_z == params.n_patches_z-1);
     
 };
 
 // Initialize the particles following a random pattern
-void Patch::initParticles(struct DomainProperties domain_properties,
-                               struct TimeProperties time,
-                               struct ParticleProperties particle_properties) {
+void Patch::initParticles(struct Parameters params) {
     
-    unsigned int local_number = particle_properties.number / domain_properties.n_patches;
+    unsigned int local_number = params.number / params.n_patches;
     
-    radius = particle_properties.radius;
+    radius = params.radius;
     x.resize(local_number,0);
     y.resize(local_number,0);
     z.resize(local_number,0);
@@ -165,9 +163,9 @@ void Patch::initParticles(struct DomainProperties domain_properties,
     // Mass and velocity initilization
     for (unsigned int ip = 0 ; ip < local_number ; ip++) {
     
-        mass[ip] = drand48() * (particle_properties.mass_max - particle_properties.mass_min) + particle_properties.mass_min;
+        mass[ip] = drand48() * (params.mass_max - params.mass_min) + params.mass_min;
     
-        double v     = drand48() * (particle_properties.vmax - particle_properties.vmin) + particle_properties.vmin;
+        double v     = drand48() * (params.vmax - params.vmin) + params.vmin;
         double theta = drand48() * 2 * M_PI;
         double phi   = drand48() * M_PI;
     
@@ -180,8 +178,8 @@ void Patch::initParticles(struct DomainProperties domain_properties,
 };
 
 // Initilization for tests
-void Patch::initParticlesTest(struct DomainProperties domain_properties, struct TimeProperties time, struct ParticleProperties particle_properties) {
-    radius = particle_properties.radius;
+void Patch::initParticlesTest(struct Parameters params) {
+    radius = params.radius;
     x.resize(2,0);
     y.resize(2,0);
     z.resize(2,0);
@@ -208,7 +206,7 @@ void Patch::initParticlesTest(struct DomainProperties domain_properties, struct 
 
 // Push the particles using the velocity during the given time step
 // This function solves the equations of movements
-void Patch::push(struct TimeProperties time, struct DomainProperties domain_properties) {
+void Patch::push(struct Parameters params)  {
     
     double kx, ky, kz;
     double inverse_mass;
@@ -226,15 +224,15 @@ void Patch::push(struct TimeProperties time, struct DomainProperties domain_prop
     
         // Gravity and friction
     
-        vx[ip] += (domain_properties.gravity_x - domain_properties.air_damping * kx * inverse_mass) * time.step;
-        vy[ip] += (domain_properties.gravity_y - domain_properties.air_damping * ky * inverse_mass) * time.step;
-        vz[ip] += (domain_properties.gravity_z - domain_properties.air_damping * kz * inverse_mass) * time.step;
+        vx[ip] += (params.gravity_x - params.air_damping * kx * inverse_mass) * params.step;
+        vy[ip] += (params.gravity_y - params.air_damping * ky * inverse_mass) * params.step;
+        vz[ip] += (params.gravity_z - params.air_damping * kz * inverse_mass) * params.step;
     
         // Position update
     
-        x[ip] += vx[ip] * time.step;
-        y[ip] += vy[ip] * time.step;
-        z[ip] += vz[ip] * time.step;
+        x[ip] += vx[ip] * params.step;
+        y[ip] += vy[ip] * params.step;
+        z[ip] += vz[ip] * params.step;
         
         // std::cout << " i: " << ip
         //           << " x: " << x[ip]
@@ -248,7 +246,7 @@ void Patch::push(struct TimeProperties time, struct DomainProperties domain_prop
     // std::cout << std::endl;
 }
 
-void Patch::walls(struct TimeProperties time_properties, Walls walls) {
+void Patch::walls(struct Parameters params, Walls walls) {
     
     for (unsigned int iw = 0 ; iw < walls.size() ; iw++) {
         
@@ -306,7 +304,7 @@ void Patch::walls(struct TimeProperties time_properties, Walls walls) {
 }
 
 // This function manages the collisions between particles
-unsigned int Patch::collisions(struct TimeProperties time, struct ParticleProperties particle_properties) {
+unsigned int Patch::collisions(struct Parameters params) {
     
     unsigned int i1;
     unsigned int i2;
@@ -379,7 +377,7 @@ unsigned int Patch::collisions(struct TimeProperties time, struct ParticleProper
                         y[i2] -= vy[i2] * dt_collision;
                         z[i2] -= vz[i2] * dt_collision;
                         
-                        double inelastic_coef = std::sqrt(1 - particle_properties.damping);
+                        double inelastic_coef = std::sqrt(1 - params.damping);
                         
                         // Velocity upadte after colliion
                         vx[i1] = inelastic_coef*(vx[i1] - a1 * kx);
@@ -410,7 +408,7 @@ unsigned int Patch::collisions(struct TimeProperties time, struct ParticleProper
 }
 
 // Multiple collison iterations
-unsigned int Patch::multipleCollisions(struct TimeProperties time_properties, struct ParticleProperties particle_properties) {
+unsigned int Patch::multipleCollisions(struct Parameters params) {
     
     unsigned int collision_counter = 0;
     unsigned int subcollision_counter = 0;
@@ -418,7 +416,7 @@ unsigned int Patch::multipleCollisions(struct TimeProperties time_properties, st
     unsigned int max_collision_iteration = 10;
     
     do {
-        subcollision_counter = collisions(time_properties,particle_properties);
+        subcollision_counter = collisions(params);
         collision_counter += subcollision_counter;
         collision_iteration++;
     } while (subcollision_counter > 0 && collision_iteration < max_collision_iteration);
@@ -428,7 +426,7 @@ unsigned int Patch::multipleCollisions(struct TimeProperties time_properties, st
 }
 
 // Determine particles to exchange
-void Patch::computeExchangeBuffers(struct DomainProperties domain_properties) {
+void Patch::computeExchangeBuffers(struct Parameters params) {
     
     int x_shift = 0;
     int y_shift = 0;
@@ -458,7 +456,7 @@ void Patch::computeExchangeBuffers(struct DomainProperties domain_properties) {
         getParticlePatchShift(ip, x_shift, y_shift, z_shift);
     
         // Get the neighbor to be sure the particle is in the domain
-        neighbor_index = getNeighborIndex(domain_properties, x_shift, y_shift, z_shift);
+        neighbor_index = getNeighborIndex(params, x_shift, y_shift, z_shift);
     
         // If the particle ip leave the patch...
         if (!(x_shift == 0 && y_shift == 0 && z_shift == 0) && neighbor_index > 0) {
@@ -633,16 +631,19 @@ unsigned int Patch::getParticleNumber() {
 
 // Return the index of the requested neighbor
 // If the neighbor does not exist the function returns -1
-int Patch::getNeighborIndex(struct DomainProperties domain_properties, int x_shift, int y_shift, int z_shift) {
+// x_shift : relative displacement regarding the current patch coordinates in the x direction
+// y_shift : relative displacement regarding the current patch coordinates in the y direction
+// z_shift : relative displacement regarding the current patch coordinates in the z direction
+int Patch::getNeighborIndex(struct Parameters params, int x_shift, int y_shift, int z_shift) {
     
     int index = -1;
     
-    if ((id_x + x_shift >= 0) && (id_x + x_shift < domain_properties.n_patches_x ) &&
-        (id_y + y_shift >= 0) && (id_y + y_shift < domain_properties.n_patches_y ) &&
-        (id_z + z_shift >= 0) && (id_z + z_shift < domain_properties.n_patches_z )) {
+    if ((id_x + x_shift >= 0) && (id_x + x_shift < params.n_patches_x ) &&
+        (id_y + y_shift >= 0) && (id_y + y_shift < params.n_patches_y ) &&
+        (id_z + z_shift >= 0) && (id_z + z_shift < params.n_patches_z )) {
         unsigned int index_2;
         
-        patchIndex3DTo1D(domain_properties, index_2, id_x + x_shift, id_y + y_shift, id_z + z_shift);
+        patchCoordinatesToIndex(params, index_2, id_x + x_shift, id_y + y_shift, id_z + z_shift);
         
         index = index_2;
     }
@@ -651,13 +652,44 @@ int Patch::getNeighborIndex(struct DomainProperties domain_properties, int x_shi
     
 }
 
+// Return in which patch the particle is located relatively to the current patch.
+// xmin : shift = -1
+// xmax : shift = 1
+// ...
+void Patch::getParticlePatchShift(unsigned int ip, int & x_shift, int & y_shift, int & z_shift) {
+    if (x[ip] < xmin) {
+        x_shift = -1;
+    } else if (x[ip] >= xmax) {
+        x_shift = 1;
+    } else {
+        x_shift = 0;
+    }
+    
+    if (y[ip] < ymin) {
+        y_shift = -1;
+    } else if (y[ip] >= ymax) {
+        y_shift = 1;
+    } else {
+        y_shift = 0;
+    }
+    
+    if (z[ip] < zmin) {
+        z_shift = -1;
+    } else if (z[ip] >= zmax) {
+        z_shift = 1;
+    } else {
+        z_shift = 0;
+    }
+    
+}
+
 // Check that all particles are in the domain
-void Patch::checkParticlesInDomain(struct DomainProperties domain_properties) {
+void Patch::checkParticlesInDomain(struct Parameters params) {
     
     for (unsigned int ip = 0 ; ip < x.size() ; ip++) {
-        if (x[ip] < domain_properties.xmin || x[ip] > domain_properties.xmax ||
-            y[ip] < domain_properties.ymin || y[ip] > domain_properties.ymax ||
-            z[ip] < domain_properties.zmin || z[ip] > domain_properties.zmax) {
+        if (x[ip] < params.xmin || x[ip] > params.xmax ||
+            y[ip] < params.ymin || y[ip] > params.ymax ||
+            z[ip] < params.zmin || z[ip] > params.zmax) {
             std::cerr << " In patch: "<< id << ", problem with particle: " << ip << std::endl;
         }
     }

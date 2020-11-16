@@ -1,9 +1,9 @@
 #include "particles.h"
 
 // Constructor for Particles
-Particles::Particles(struct DomainProperties domain_properties)
+Particles::Particles(struct Parameters params)
 {
-    n_patches = domain_properties.n_patches;
+    n_patches = params.n_patches;
     patches.resize(n_patches);
 };
 
@@ -13,72 +13,68 @@ Particles::~Particles() {
 };
 
 // Initialize the topology for each patch
-void Particles::initTopology(struct DomainProperties domain_properties) {
+void Particles::initTopology(struct Parameters params) {
     
-    if (domain_properties.n_patches != domain_properties.n_patches_x * domain_properties.n_patches_y * domain_properties.n_patches_z) {
+    if (params.n_patches != params.n_patches_x * params.n_patches_y * params.n_patches_z) {
         std::cerr << " CONFIGURATION ERROR: the total number of patches must match the topology." << std::endl;
         exit(0);
     }
     
-    for (unsigned int i_patch = 0 ; i_patch < domain_properties.n_patches; i_patch++) {
-        patches[i_patch].initTopology(domain_properties, i_patch);
+    for (unsigned int i_patch = 0 ; i_patch < params.n_patches; i_patch++) {
+        patches[i_patch].initTopology(params, i_patch);
     }
     
 };
 
 // Initialize the particles for each patch
-void Particles::initParticles(struct DomainProperties domain_properties,
-                               struct TimeProperties time_properties,
-                               struct ParticleProperties particle_properties) {
+void Particles::initParticles(struct Parameters params) {
 
-    if (2*particle_properties.vmax * time_properties.step > particle_properties.radius) {
+    if (2*params.vmax * params.step > params.radius) {
         std::cerr << " CONFIGURATION ERROR: a particle cannot cross more than a radius during a time step." << std::endl;
-        std::cerr << " Maximal distanced: " << 2*particle_properties.vmax * time_properties.step << " / radius: " << particle_properties.radius << std::endl;
+        std::cerr << " Maximal distanced: " << 2*params.vmax * params.step << " / radius: " << params.radius << std::endl;
         exit(0);
     }
 
-    for (unsigned int i_patch = 0 ; i_patch < domain_properties.n_patches; i_patch++) {
-       patches[i_patch].initParticles(domain_properties, time_properties, particle_properties);
+    for (unsigned int i_patch = 0 ; i_patch < params.n_patches; i_patch++) {
+       patches[i_patch].initParticles(params);
     }
     
 };
 
 // Push the particles using the velocity during the given time step
 // This function solves the equations of movements
-void Particles::push(struct TimeProperties time_properties, struct DomainProperties domain_properties) {
+void Particles::push(struct Parameters params) {
     
-    for (unsigned int i_patch = 0 ; i_patch < domain_properties.n_patches; i_patch++) {
-       patches[i_patch].push(time_properties, domain_properties);
+    for (unsigned int i_patch = 0 ; i_patch < params.n_patches; i_patch++) {
+       patches[i_patch].push(params);
     }
 
 }
 
 // Applied the walls to the particles
-void Particles::walls(struct TimeProperties time_properties, struct DomainProperties domain_properties, Walls walls) {
+void Particles::walls(struct Parameters params, Walls walls) {
     // We perform the walls several times in case of multiple rebound
     for (unsigned int iw = 0 ; iw < 3; iw++) {
-        for (unsigned int i_patch = 0 ; i_patch < domain_properties.n_patches; i_patch++) {
-            patches[i_patch].walls(time_properties, walls);
+        for (unsigned int i_patch = 0 ; i_patch < params.n_patches; i_patch++) {
+            patches[i_patch].walls(params, walls);
         }
     }
 }
 
 // Multiple collison iterations
 void Particles::multipleCollisions(unsigned int & collision_counter,
-                                           struct TimeProperties time_properties,
-                                           struct DomainProperties domain_properties,
-                                           struct ParticleProperties particle_properties) {
-    if (particle_properties.collision) {
+                                           struct Parameters params) {
+    if (params.collision) {
         
-        for (unsigned int i_patch = 0 ; i_patch < domain_properties.n_patches; i_patch++) {
-            collision_counter += patches[i_patch].multipleCollisions(time_properties, particle_properties);
+        for (unsigned int i_patch = 0 ; i_patch < params.n_patches; i_patch++) {
+            collision_counter += patches[i_patch].multipleCollisions(params);
         }
         
     }
 }
 
 // Exchange particles between patches
-void Particles::exchange(struct DomainProperties domain_properties) {
+void Particles::exchange(struct Parameters params) {
     
     // for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
     //     std::cerr << " i_patch: " << i_patch
@@ -89,7 +85,7 @@ void Particles::exchange(struct DomainProperties domain_properties) {
     
     
     for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
-        patches[i_patch].computeExchangeBuffers(domain_properties);
+        patches[i_patch].computeExchangeBuffers(params);
     }
     
     for (unsigned int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
@@ -145,16 +141,16 @@ void Particles::getTotalParticleNumber(unsigned int & total) {
 }
 
 // Write the particle diagnostics
-void Particles::writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties) {
-    if (time_properties.iteration%diag_properties.output_period == 0) {
-        // if (diag_properties.hdf5) {
-        //     writeHDF5(time_properties.iteration);
+void Particles::writeDiags(struct Parameters params) {
+    if (params.iteration%params.output_period == 0) {
+        // if (params.hdf5) {
+        //     writeHDF5(params.iteration);
         // }
-        if (diag_properties.vtk) {
-            writeVTK(time_properties.iteration);
+        if (params.vtk) {
+            writeVTK(params.iteration);
         }
-        if (diag_properties.binary) {
-            writeBinary(time_properties.iteration);
+        if (params.binary) {
+            writeBinary(params.iteration);
         }
     }
 }
