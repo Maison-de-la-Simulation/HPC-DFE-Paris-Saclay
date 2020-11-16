@@ -18,33 +18,31 @@ class Particles
     public:
     
     //Particles constructor
-    Particles( struct DomainProperties domain_properties );
+    Particles( struct Parameters params );
 
     // Particles destructor
     ~Particles();
     
     // Initialize the topology for each patch
-    void initTopology(struct DomainProperties domain_properties);
+    void initTopology(struct Parameters params);
     
     // Initialize the particles for each patch
-    void initParticles(struct DomainProperties domain_properties,
-                        struct TimeProperties time_properties,
-                        struct ParticleProperties particle_properties);
+    void initParticles(struct Parameters params);
     
     // Equation of movement applied to particles
-    void push(struct TimeProperties time, struct DomainProperties domain_properties);
+    void push(struct Parameters params);
     
     // Applied the walls to the particles
-    void walls(struct TimeProperties time_properties, struct DomainProperties domain_properties, Walls walls);
+    void walls(struct Parameters params, Walls walls);
     
     // Perform the binary collisions
-    unsigned int collisions(struct TimeProperties time, struct ParticleProperties particle_properties);
+    unsigned int collisions(struct Parameters params);
     
     // Multiple collison iterations
-    void multipleCollisions(unsigned int & collision_counter, struct TimeProperties time, struct DomainProperties domain_properties, struct ParticleProperties particle_properties);
+    void multipleCollisions(unsigned int & collision_counter, struct Parameters params);
     
     // Exchange particles between patches
-    void exchange(struct DomainProperties domain_properties);
+    void exchange(struct Parameters params);
     
     // Return the total energy in the domain (all patches)
     void getTotalEnergy(double & total_energy);
@@ -62,7 +60,7 @@ class Particles
     void writeBinary(unsigned int iteration);
     
     // Write all type of diags
-    void writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties);
+    void writeDiags(struct Parameters params);
     
     private:
     

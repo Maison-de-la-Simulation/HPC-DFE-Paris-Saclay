@@ -267,16 +267,16 @@ La première partie de ce TP est la découverte du code dans sa version non para
 **Fichier parameters.cpp / .h :**
 
 Ouvrez le fichier [parameters.h](./patch/parameters.h) et regarder la structure du code.
-Ce header contient la définition de plusieurs structures de données.
-Ces structures contiennent les paramètres globaux du code permettant de décrire les propriétés de la simulation.
-On trouve les structures suivantes :
-- `TimeProperties` : tout ce qui se réfère au temps comme l'itération courante ou le temps final
-- `DomainProperties` : propriété spatiale et physique du domaine comme sa taille par exemple ou le niveau de gravité.
+Ce header contient la définition d'une structure de données pour des paramètres globaux du nom de `Parameters`.
+Les paramètres globaux du code permettent de décrire les propriétés de la simulation.
+On trouve les sections suivantes :
+- `Time properties` : tout ce qui se réfère au temps comme l'itération courante ou le temps final
+- `Domain properties` : propriété spatiale et physique du domaine comme sa taille par exemple ou le niveau de gravité.
   Dans la verison par *patch*, on y trouve aussi la façon de décomposer le domaine.
-- `ParticleProperties` : propriété générale des particules
-- `DiagProperties` : paramètres pour les diagnostiques diverses
+- `Particle properties` : propriété générale des particules
+- `Diag properties` : paramètres pour les diagnostiques diverses
 
-Ces structures sont régulièrement passées en argument des fonctions ayant besoin des données globales.
+Cette structur est régulièrement passée en argument des fonctions ayant besoin des données globales.
 
 **Fichier main.cpp :**
 
@@ -294,23 +294,23 @@ La deuxième partie est la boucle en temps elle-même.
 Elle se compose des étapes suivantes pour chaque itération en temps :
 1. déplacement des particules suivant les équations du mouvement
 ```C++
-particles.push(time_properties, domain_properties);
+particles.push(parameters);
 ```
 2. application de l'opérateur de collision
 ```C++
-particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);
+particles.multipleCollisions(collision_counter, parameters);
 ```
 3. application des conditions limites
 ```C++
-particles.walls(time_properties, domain_properties, walls);
+particles.walls(parameters, walls);
 ```
 4. échange des particules entre *patch*
 ```C++
-particles.exchange(domain_properties);
+particles.exchange(parameters);
 ```
 5. écriture sur le disque des fichiers de diagnostique (en fonction de la période demandée)
 ```C++
-particles.writeDiags(time_properties, diag_properties);
+particles.writeDiags(parameters);
 ```
 6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.
 
@@ -327,29 +327,29 @@ std::vector <Patch> patches;
 On retrouve ensuite la définitions des fonctions qui s'appliquent sur les patchs et qui sont appelelées soient pour l'initilisation :
 ```C++
 // Initialize the topology for each patch
-void initTopology(struct DomainProperties domain_properties);
+void initTopology(struct Parameters params);
 
 // Initialize the particles for each patch
-void initParticles(struct DomainProperties domain_properties,
-                    struct TimeProperties time_properties,
-                    struct ParticleProperties particle_properties);
+void initParticles(struct DomainProperties params,
+                    struct TimeProperties params,
+                    struct ParticleProperties params);
 ```
 Soit dans la boucle en temps :
 ```C++
 // Equation of movement applied to particles
-void push(struct TimeProperties time, struct DomainProperties domain_properties);
+void push(struct TimeProperties time, struct DomainProperties params);
 
 // Applied the walls to the particles
-void walls(struct TimeProperties time_properties, struct DomainProperties domain_properties, Walls walls);
+void walls(struct TimeProperties params, struct DomainProperties params, Walls walls);
 
 // Perform the binary collisions
-unsigned int collisions(struct TimeProperties time, struct ParticleProperties particle_properties);
+unsigned int collisions(struct TimeProperties time, struct ParticleProperties params);
 
 // Multiple collison iterations
-void multipleCollisions(unsigned int & collision_counter, struct TimeProperties time, struct DomainProperties domain_properties, struct ParticleProperties particle_properties);
+void multipleCollisions(unsigned int & collision_counter, struct TimeProperties time, struct DomainProperties params, struct ParticleProperties params);
 
 // Exchange particles between patches
-void exchange(struct DomainProperties domain_properties);
+void exchange(struct DomainProperties params);
 
 // Return the total energy in the domain (all patches)
 void getTotalEnergy(double & total_energy);
@@ -364,7 +364,7 @@ void getTotalParticleNumber(unsigned int & total);
 void writeVTK(unsigned int iteration);
 
 // Write all type of diags
-void writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties);
+void writeDiags(struct TimeProperties params, struct DiagProperties params);
 ```
 
 **Fichier patch.cpp / .h :**
@@ -432,31 +432,31 @@ Il y a celle permettant l'initialisation :
 // This function initializes the patch topology :
 // - number of patches in each direction
 // - id and coordinates of all patches
-void initTopology(struct DomainProperties domain_properties, unsigned int id);
+void initTopology(struct DomainProperties params, unsigned int id);
 
 // Initialization functions
-void initParticles(struct DomainProperties domain_properties, struct TimeProperties time, struct ParticleProperties particle_properties);
+void initParticles(struct DomainProperties params, struct TimeProperties time, struct ParticleProperties params);
 ```
 
 Puis les fonctions permmettant de pousser les particules, de gérer les conditions limites et les collisions :
 ```C++
 // Equation of movement applied to particles
-void push(struct TimeProperties time, struct DomainProperties domain_properties);
+void push(struct TimeProperties time, struct DomainProperties params);
 
 // Applied the walls to the particles
-void walls(struct TimeProperties time_properties, Walls walls);
+void walls(struct TimeProperties params, Walls walls);
 
 // Perform the binary collisions
-unsigned int collisions(struct TimeProperties time, struct ParticleProperties particle_properties);
+unsigned int collisions(struct TimeProperties time, struct ParticleProperties params);
 
 // Multiple collison iterations
-unsigned int multipleCollisions(struct TimeProperties time, struct ParticleProperties particle_properties);
+unsigned int multipleCollisions(struct TimeProperties time, struct ParticleProperties params);
 ```
 
 On y trouve les fonctions destinées à l'échange de particules :
 ```C++
 // Determine particles to exchange
-void computeExchangeBuffers(struct DomainProperties domain_properties);
+void computeExchangeBuffers(struct DomainProperties params);
 
 // Delete the particles leaving particles marked by the mask vector
 void deleteLeavingParticles();
@@ -517,11 +517,9 @@ CPPFLAGS += -O3
 Il est tout à fait possible de compiler un code séquentiel avec le *wrappper* MPI puisqu'il s'agit simplement d'un *wrapper* faisant appel au compilateur standard (`g++` ici).
 Compilez le code en faisant `make` pour vous assurez qu'il n'y a pas d'erreur dans le makefile.
 
-**Question 4.2 - Création d'une nouvelle structure :** Avant d'initiliser MPI, nous allons créer une
-nouvelle structure dans [parameters.h](./cpp/patch/parameters.h).
-Appelez cette nouvelle structure `MPIProperties`.
+**Question 4.2 - Création d'une nouvelle structure :** Avant d'initiliser MPI, nous allons rajoutez les variables MPI
+dans la structure `Parameters` décrite dans [parameters.h](./cpp/patch/parameters.h).
 Rajoutez-y une variable pour stocker le nombre total de rangs MPI et une variable pour le rang en cours.
-Aidez-vous des autres structures pour créer cette dernière.
 
 **Question 4.3 - Initialisation de MPI :** Nous allons commencer par préparer le programme à MPI.
 Pour cela, commencez par inclure le header MPI dans le fichier [main.cpp](./cpp/patch/main.cpp).
@@ -547,7 +545,7 @@ Pour éviter que tous les rangs n'effectuent ces actions, ajoutez une condition 
 b) En plus de cela, rajoutez l'affichage du nombre de rangs dans l'onglet `Topology` :
 ```C++
 std::cout << " Topology:" << std::endl;
-std::cout << "  - number of ranks: " << mpi_properties.number_of_ranks << std::endl;
+std::cout << "  - number of ranks: " << params.number_of_ranks << std::endl;
 ```
 
 c) Comilez le code pour vérifier que vous n'avez pas fait d'erreur.
@@ -596,38 +594,41 @@ a) Dans [Particles.cpp](./cpp/patch/particles.cpp), modifiez le constructeur pou
 
 Nous allons maintenant récrire la fonction `Particles::initTopology` dans [particles.cpp](./cpp/patch/particles.cpp) et `Patch::initTopology` dans [patch.cpp](./cpp/patch/patch.cpp) pour créer une topologie MPI à partir des fonctions dédiées.
 
-b) Commencez par ajouter dans la liste des arguments de ces fonctions la structure de donnée `MPIProperties` :
+b) Commencez par modifier les arguments de ces fonctions pour que la structure de donnée `Parameters` soit passée par référence:
 ```C++
-void Patch::initTopology(struct DomainProperties domain_properties, struct MPIProperties mpi_properties);
-void Particles::initTopology(struct DomainProperties domain_properties, struct MPIProperties & mpi_properties);
+void Patch::initTopology(struct Parameters params);
+void Particles::initTopology(struct Parameters & params);
 ```
-N'oubliez pas de modifier également la définitions de `Particles::initTopology` pour transmettre la structure `MPIProperties` jusqu'à la fonction `Patch::initTopology`.
-On passe la structure par référence car on modifie données.
+On passe la structure par référence car on modifiera données dans ces fonctions.
 
 c) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topolgie cartésienne 3D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
 Pour le moment on ne s'occupe pas des voisins.
-Vous ajouterez les paramètres adéquates dans la structure de donnée `MPIProperties`.
-Aidez-vous de l'exercice 6.
+Vous ajouterez les paramètres adéquates dans la structure de donnée `Parameters`.
+Le nombre de processus MPI dans chaque direction w, y et z est donné par les paramètres `params.n_patches_x`, `params.n_patches_y` et `params.n_patches_z`
+car chaque processus MPI ne possède qu'un patch.
+Vous pouvez vous aider de l'exercice 6.
 
 d) Ici nous n'utiliserons pas `MPI_Cart_shift` pour déterminer les voisins car nous avons besoin des voisins en diagonal que nous ne donne pas cette fonction.
 Pour ce faire, nous allons simplement générer une carte de la topologie sur l'ensemble des processeurs comme dans l'exercice 6 en utilisant `MPI_Cart_coords`.
-Ajoutez la carte de la topologie dans la structure `MPIProperties`.
+Ajoutez la carte de la topologie dans la structure `Parameters`.
 
 **Important :** Je vous rappelle que la convention choisie par les dévelopeurs de MPI fait que la coordonnée continue est la dernière dimension.
 Dans ce TP, l'axe continu (indice continu dans le déroulement des boucles) est l'axe des `x`.
 
-e) Affichez dans le fichier [main.cpp](./cpp/patch/particles.cpp) la topologie à la fin du résumé des paramètres nuémriques (comme pour l'exercice 6 sur MPI).
+e) Affichez dans le fichier [main.cpp](./cpp/patch/main.cpp) la topologie à la fin du résumé des paramètres nuémriques (comme pour l'exercice 6 sur MPI).
 Vous pouvez vous inspirr du code suivant :
 ```C++
 std::cout <<  " Topology map: "<< std::endl;
 
-for(int iz = 0; iz < mpi_properties.ranks_per_direction[0] ; iz++) {
+for(int iz = 0; iz < params.ranks_per_direction[0] ; iz++) {
     std::cout << " z = " << iz << std::endl;
     std::cout <<  " ---------------------------> x"<< std::endl;
-    for(int iy = 0; iy < mpi_properties.ranks_per_direction[1] ; iy++) {
-        for(int ix = 0; ix < mpi_properties.ranks_per_direction[2] ; ix++) {
+    for(int iy = 0; iy < params.ranks_per_direction[1] ; iy++) {
+        for(int ix = 0; ix < params.ranks_per_direction[2] ; ix++)
+        {
         
-            std::cout << " | " << std::setw(3) << mpi_properties.topology_map[iz*mpi_properties.ranks_per_direction[1]*mpi_properties.ranks_per_direction[2] + iy*mpi_properties.ranks_per_direction[2] + ix] ;
+            std::cout << " | " << std::setw(3) << params.topology_map[iz*params.ranks_per_direction[1]
+            * params.ranks_per_direction[2] + iy*params.ranks_per_direction[2] + ix] ;
         
         }
         std::cout << "" << std::endl;
@@ -637,3 +638,33 @@ for(int iz = 0; iz < mpi_properties.ranks_per_direction[0] ; iz++) {
 }
 std::cout << std::endl;
 ```
+
+f) Nous allons maintenant modifier la fonction `Patch::initTopology` ([patch.cpp](./cpp/patch/patch.cpp)) pour prendre en compte les coordonnées MPI dans la configuration de chaque patch.
+Commencez par mettre à jour la définition des variables suivnate :
+- `this->id` qui représente l'index du patch
+- `id_x`, `id_y`, `id_z` qui représente les coordonnées du patch dans la topologie
+Le calcul de la taille du patch et des bornes maximales et minimales reste inchangé :
+```C++
+this->patch_x_length = (params.xmax - params.xmin) / params.n_patches_x;
+this->patch_y_length = (params.ymax - params.ymin) / params.n_patches_y;
+this->patch_z_length = (params.zmax - params.zmin) / params.n_patches_z;
+
+xmin = id_x * patch_x_length;
+xmax = (id_x+1) * patch_x_length;
+ymin = id_y * patch_y_length;
+ymax = (id_y+1) * patch_y_length;
+zmin = id_z * patch_z_length;
+zmax = (id_z+1) * patch_z_length;
+```
+
+g) Il faut maintenant mettre la jour le calcul des voisins dans le tableau `neighbor_indexes[k]`.
+On peut voir que cette partie du code utilise la fonction `Patch::getNeighborIndex`.
+Cette fonction renvoie l'index ou le rang du patch de coordonnées relative `id_x + x_shift`, `id_y + y_shift` et `id_z + z_shift`.
+On tourne ainsi autour du patch courant pour déterminiter les rangs voisins.
+La fonction `Patch::getNeighborIndex` utilise la fonction `Patch::patchCoordinatesToIndex` qui à partir des cooordonnées donne le rang du patch dans la topologie.
+Mettez à jour cette fonction pour prendre en compte la topologie `params.topology_map`.
+Pour compiler, vous devrez mettre à jour l'ensemble des appels à `Patch::getNeighborIndex`.
+
+h) Expliquez pourquoi la fonction `Patch::patchIndexToCoordinates` qui renvoyait les coordonnées d'un patch à partir de son index n'a plus lieu d'être ici ?
+
+La dernière partie de la fonction `Patch::initTopology` pour établir si le patch se trouve au bord ne requiert pas de modification.
