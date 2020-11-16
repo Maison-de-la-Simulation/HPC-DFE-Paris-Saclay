@@ -14,18 +14,19 @@
 /* _______________________________________________ */
 /* Parameters */
 
-// Parameters for the simulation time
-struct TimeProperties {
+struct Parameters {
+    
+    // ______________________________________
+    // Parameters for the simulation time
     
     double final;                       // Temps total de simulation
     double step;                        // Temps entre chaque itération
     unsigned int final_iteration;       // Final number of iterations
     unsigned int iteration;             // Number of iterations
     double current;                     // Current time
-};
 
-// Parameters for the domain properties
-struct DomainProperties {
+    // ______________________________________
+    // Parameters for the domain properties
     
     // Domain boundaries
     
@@ -54,11 +55,9 @@ struct DomainProperties {
     std::vector<unsigned int> id_patch_x;
     std::vector<unsigned int> id_patch_y;
     std::vector<unsigned int> id_patch_z;
-    
-};
 
-// Parameters for the diags
-struct DiagProperties {
+    // ______________________________________
+    // Parameters for the diags
     
     unsigned int output_period;     // period in term of iteration between each diag
     unsigned int print_period;      // period in term of iteration between each diag
@@ -66,10 +65,8 @@ struct DiagProperties {
     bool vtk;
     bool binary;
     
-};
-
-// Parameters for the particles
-struct ParticleProperties {
+    // ______________________________________
+    // Parameters for the particles
     
     double radius;          // Particle radius
     double mass_min;        // Minimum mass
@@ -85,9 +82,6 @@ struct ParticleProperties {
 /* Headers */
 
 // Header for the function to read the external arguments
-void commandLineArguments(int argc, char * argv[], struct TimeProperties & time_properties,
-                                                   struct ParticleProperties & particle_properties,
-                                                   struct DomainProperties & domain_properties,
-                                                   struct DiagProperties & diag_properties);
+void commandLineArguments(int argc, char * argv[], struct Parameters & params);
 
 #endif

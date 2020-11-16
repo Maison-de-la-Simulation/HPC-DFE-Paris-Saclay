@@ -34,62 +34,59 @@ int main( int argc, char *argv[] )
     double       max_velocity;      // Maximal velocity at each timestep
     unsigned int collision_counter; // Counter for collisions per timestep
     
-    struct DomainProperties    domain_properties;   // Domain properties
-    struct TimeProperties      time_properties;                // Time properties
-    struct DiagProperties      diag_properties;     // Diags properties
-    struct ParticleProperties  particle_properties; // Diags properties
+    struct Parameters    params;   // Global properties
     
     // Default configuration __________________________________________________________________________
     
-    domain_properties.n_patches_x = 3;
-    domain_properties.n_patches_y = 3;
-    domain_properties.n_patches_z = 3;
+    params.n_patches_x = 3;
+    params.n_patches_y = 3;
+    params.n_patches_z = 3;
     
-    domain_properties.xmin = 0;
-    domain_properties.ymin = 0;
-    domain_properties.zmin = 0;
+    params.xmin = 0;
+    params.ymin = 0;
+    params.zmin = 0;
     
-    domain_properties.xmax = 1;
-    domain_properties.ymax = 1;
-    domain_properties.zmax = 1;
+    params.xmax = 1;
+    params.ymax = 1;
+    params.zmax = 1;
     
-    domain_properties.gravity_x = 0;
-    domain_properties.gravity_y = 0;
-    domain_properties.gravity_z = -0.05;
+    params.gravity_x = 0;
+    params.gravity_y = 0;
+    params.gravity_z = -0.05;
     
-    domain_properties.air_damping = 0.01;
-    domain_properties.wall_damping = 0.01;
+    params.air_damping = 0.01;
+    params.wall_damping = 0.01;
     
-    time_properties.final           = 1;
-    time_properties.final_iteration = 100;
+    params.final           = 1;
+    params.final_iteration = 100;
     
     // Particle properties for init
-    particle_properties.vmin      = 1E-5;
-    particle_properties.vmax      = 0.1;
-    particle_properties.number    = 2048;
-    particle_properties.radius    = 0.01;
-    particle_properties.damping   = 0.01;
-    particle_properties.mass_min  = 0.1;
-    particle_properties.mass_max  = 0.5;
-    particle_properties.collision = true;
+    params.vmin      = 1E-5;
+    params.vmax      = 0.1;
+    params.number    = 2048;
+    params.radius    = 0.01;
+    params.damping   = 0.01;
+    params.mass_min  = 0.1;
+    params.mass_max  = 0.5;
+    params.collision = true;
     
     // diagnostic parameters
-    diag_properties.output_period = 1;
-    diag_properties.print_period  = 20;
-    diag_properties.hdf5          = false;
-    diag_properties.vtk           = true;
-    diag_properties.binary        = true;
+    params.output_period = 1;
+    params.print_period  = 20;
+    params.hdf5          = false;
+    params.vtk           = true;
+    params.binary        = true;
     
     // Creation of the diag folder
     system("mkdir -p diags");
     
     // Command line arguments _________________________________________________________________________
     
-    commandLineArguments(argc, argv, time_properties, particle_properties, domain_properties,diag_properties);
+    commandLineArguments(argc, argv, params);
     
-    domain_properties.n_patches   = domain_properties.n_patches_x*domain_properties.n_patches_y*domain_properties.n_patches_z;
+    params.n_patches   = params.n_patches_x*params.n_patches_y*params.n_patches_z;
     
-    time_properties.step = time_properties.final / time_properties.final_iteration;
+    params.step = params.final / params.final_iteration;
     
     // Timers initialization ___________________________________________________________________________
     
@@ -104,10 +101,10 @@ int main( int argc, char *argv[] )
     
     timers.start("initialization");
 
-    Particles particles( domain_properties );
+    Particles particles( params );
     
-    particles.initTopology(domain_properties);
-    particles.initParticles(domain_properties, time_properties, particle_properties);
+    particles.initTopology(params);
+    particles.initParticles(params);
     
     timers.stop("initialization");
     
@@ -119,38 +116,38 @@ int main( int argc, char *argv[] )
     double normal[3] = {0, 0, 0};
     
     // xmin
-    point[0] = domain_properties.xmin;
+    point[0] = params.xmin;
     normal[0] = 1;
-    walls.add(point, normal, domain_properties.wall_damping);
+    walls.add(point, normal, params.wall_damping);
     
     // xmax
-    point[0] = domain_properties.xmax;
+    point[0] = params.xmax;
     normal[0] = -1;
-    walls.add(point, normal, domain_properties.wall_damping);
+    walls.add(point, normal, params.wall_damping);
     
     // ymin
     point[0] = 0;
-    point[1] = domain_properties.ymin;
+    point[1] = params.ymin;
     normal[0] = 0;
     normal[1] = 1;
-    walls.add(point, normal, domain_properties.wall_damping);
+    walls.add(point, normal, params.wall_damping);
     
     // ymax
-    point[1] = domain_properties.ymax;
+    point[1] = params.ymax;
     normal[1] = -1;
-    walls.add(point, normal, domain_properties.wall_damping);
+    walls.add(point, normal, params.wall_damping);
     
     // zmin
     point[1] = 0;
-    point[2] = domain_properties.zmin;
+    point[2] = params.zmin;
     normal[1] = 0;
     normal[2] = 1;
-    walls.add(point, normal, domain_properties.wall_damping);
+    walls.add(point, normal, params.wall_damping);
     
     // ymax
-    point[2] = domain_properties.zmax;
+    point[2] = params.zmax;
     normal[2] = -1;
-    walls.add(point, normal, domain_properties.wall_damping);
+    walls.add(point, normal, params.wall_damping);
     
     // Terminal output summary ________________________________________________________________
     std::cout << " ------------------------------------ "<< std::endl;
@@ -158,42 +155,42 @@ int main( int argc, char *argv[] )
     std::cout << " ------------------------------------ "<< std::endl;
     std::cout << std::endl;
     std::cout << " Topology:" << std::endl;
-    std::cout << "  - number of patches: " << domain_properties.n_patches << std::endl;
+    std::cout << "  - number of patches: " << params.n_patches << std::endl;
 
     
     std::cout << std::endl;
     std::cout << " Particles properties:" << std::endl;
     particles.getTotalParticleNumber(particle_number);
-    std::cout << "  - requested number of particles: " << particle_properties.number << std::endl;
+    std::cout << "  - requested number of particles: " << params.number << std::endl;
     std::cout << "  - real number of particles: " << particle_number << std::endl;
-    std::cout << "  - particle radius: " << particle_properties.radius << std::endl;
-    std::cout << "  - particle inelastic damping: " << particle_properties.damping << std::endl;
-    std::cout << "  - particle mass min: " << particle_properties.mass_min << std::endl;
-    std::cout << "  - particle mass max: " << particle_properties.mass_max << std::endl;
-    std::cout << "  - particle speed min: " << particle_properties.vmin << std::endl;
-    std::cout << "  - particle speed max: " << particle_properties.vmax << std::endl;
-    std::cout << "  - collision: " << particle_properties.collision << std::endl;
+    std::cout << "  - particle radius: " << params.radius << std::endl;
+    std::cout << "  - particle inelastic damping: " << params.damping << std::endl;
+    std::cout << "  - particle mass min: " << params.mass_min << std::endl;
+    std::cout << "  - particle mass max: " << params.mass_max << std::endl;
+    std::cout << "  - particle speed min: " << params.vmin << std::endl;
+    std::cout << "  - particle speed max: " << params.vmax << std::endl;
+    std::cout << "  - collision: " << params.collision << std::endl;
     
     std::cout << std::endl;
     std::cout << " Time properties:" << std::endl;
-    std::cout << "  - simulation time: " << time_properties.final << std::endl;
-    std::cout << "  - time step: " << time_properties.step << std::endl;
-    std::cout << "  - number of iterations: " << time_properties.final_iteration << std::endl;
-    std::cout << "  - maximal time step: " <<  particle_properties.radius / (2 * particle_properties.vmax ) << std::endl;
+    std::cout << "  - simulation time: " << params.final << std::endl;
+    std::cout << "  - time step: " << params.step << std::endl;
+    std::cout << "  - number of iterations: " << params.final_iteration << std::endl;
+    std::cout << "  - maximal time step: " <<  params.radius / (2 * params.vmax ) << std::endl;
     
     std::cout << std::endl;
     std::cout << " Domain properties:" << std::endl;
-    std::cout << "  - domain x size: " << domain_properties.xmin << " " << domain_properties.xmax << std::endl;
-    std::cout << "  - domain y size: " << domain_properties.ymin << " " << domain_properties.ymax << std::endl;
-    std::cout << "  - domain z size: " << domain_properties.zmin << " " << domain_properties.zmax << std::endl;
-    std::cout << "  - gravity: " << domain_properties.gravity_x << " " << domain_properties.gravity_y << " " << domain_properties.gravity_z << std::endl;
-    std::cout << "  - air friction damping: " << domain_properties.air_damping << std::endl;
-    std::cout << "  - wall friction damping: " << domain_properties.wall_damping << std::endl;
+    std::cout << "  - domain x size: " << params.xmin << " " << params.xmax << std::endl;
+    std::cout << "  - domain y size: " << params.ymin << " " << params.ymax << std::endl;
+    std::cout << "  - domain z size: " << params.zmin << " " << params.zmax << std::endl;
+    std::cout << "  - gravity: " << params.gravity_x << " " << params.gravity_y << " " << params.gravity_z << std::endl;
+    std::cout << "  - air friction damping: " << params.air_damping << std::endl;
+    std::cout << "  - wall friction damping: " << params.wall_damping << std::endl;
     
     std::cout << std::endl;
     std::cout << " Diag properties:" << std::endl;
-    std::cout << "  - output period: " << diag_properties.output_period << std::endl;
-    std::cout << "  - print period: " << diag_properties.print_period << std::endl;
+    std::cout << "  - output period: " << params.output_period << std::endl;
+    std::cout << "  - print period: " << params.print_period << std::endl;
     
     std::cout << std::endl;
     std::cout << " List of walls: " << std::endl;
@@ -207,8 +204,8 @@ int main( int argc, char *argv[] )
     
     timers.start("diags");
     
-    time_properties.iteration = 0;
-    particles.writeDiags(time_properties, diag_properties);
+    params.iteration = 0;
+    particles.writeDiags(params);
     
     timers.stop("diags");
     
@@ -220,7 +217,7 @@ int main( int argc, char *argv[] )
     
     timers.start("main loop");
     
-    for (time_properties.iteration = 1 ; time_properties.iteration <= time_properties.final_iteration; time_properties.iteration++) {
+    for (params.iteration = 1 ; params.iteration <= params.final_iteration; params.iteration++) {
         
         // Global variables initialized ____________
         
@@ -233,7 +230,7 @@ int main( int argc, char *argv[] )
         
         timers.start("pusher");
         
-        particles.push(time_properties, domain_properties);
+        particles.push(params);
         
         timers.stop("pusher");
         
@@ -241,8 +238,8 @@ int main( int argc, char *argv[] )
         
         timers.start("collisions");
         
-        //collision_counter = particles.collisions(time_properties, particle_properties);
-        particles.multipleCollisions(collision_counter, time_properties, domain_properties, particle_properties);
+        //collision_counter = particles.collisions(params);
+        particles.multipleCollisions(collision_counter, params);
         
         timers.stop("collisions");
         
@@ -250,7 +247,7 @@ int main( int argc, char *argv[] )
         
         timers.start("wall");
         
-        particles.walls(time_properties, domain_properties, walls);
+        particles.walls(params, walls);
         
         timers.stop("wall");
         
@@ -258,7 +255,7 @@ int main( int argc, char *argv[] )
         
         timers.start("exchange");
         
-        particles.exchange(domain_properties);
+        particles.exchange(params);
         
         timers.stop("exchange");
         
@@ -266,9 +263,9 @@ int main( int argc, char *argv[] )
         
         timers.start("diags");
         
-        particles.writeDiags(time_properties, diag_properties);
+        particles.writeDiags(params);
         
-        if (time_properties.iteration%diag_properties.print_period == 0) {
+        if (params.iteration%params.print_period == 0) {
         
             particles.getTotalEnergy(total_energy);
         
@@ -276,7 +273,7 @@ int main( int argc, char *argv[] )
             
             particles.getTotalParticleNumber(particle_number);
         
-            std::cout << " Iteration: " << std::setw(5) << time_properties.iteration
+            std::cout << " Iteration: " << std::setw(5) << params.iteration
                       << " - total particles: " << std::setw(10) << particle_number
                       << " - total energy: " << std::setw(10) << total_energy
                       << " - collisions: " << std::setw(3) << collision_counter
