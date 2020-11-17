@@ -549,23 +549,34 @@ CPPFLAGS += -O3
 Il est tout à fait possible de compiler un code séquentiel avec le *wrappper* MPI puisqu'il s'agit simplement d'un *wrapper* faisant appel au compilateur standard (`g++` ici).
 Compilez le code en faisant `make` pour vous assurez qu'il n'y a pas d'erreur dans le makefile.
 
-**Question 4.2 - Création d'une nouvelle structure :** Avant d'initiliser MPI, nous allons rajoutez les variables MPI
+**Question 4.2 - Amélioration de la structure `Parameters` :** Avant d'initiliser MPI, nous allons rajoutez les variables MPI
 dans la structure `Parameters` décrite dans [parameters.h](./cpp/patch/parameters.h).
-Rajoutez-y une variable pour stocker le nombre total de rangs MPI et une variable pour le rang en cours.
+Rajoutez-y une variable pour stocker le nombre total de rangs MPI (par exemple `number_of_ranks`) et une variable pour le rang en cours (`ranks`).
+Notez que vous aurez à rajouter de nouvelles variables au dur et à mesure du développement.
 
 **Question 4.3 - Initialisation de MPI :** Nous allons commencer par préparer le programme à MPI.
-Pour cela, commencez par inclure le header MPI dans le fichier [main.cpp](./cpp/patch/main.cpp).
+
+a) Commencez par inclure le header MPI dans le fichier [main.cpp](./cpp/patch/main.cpp).
 Notez qu'il faudra l'inclure dans chaque fichier où sera appelées des fonctions MPI.
 
-Effectuez l'initialisation de MPI au début du fichier [main.cpp](./cpp/patch/main.cpp).
-Ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
+b) Effectuez l'initialisation de MPI au début du fichier [main.cpp](./cpp/patch/main.cpp).
+
+c) Toujours au début de [main.cpp](./cpp/patch/main.cpp), ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
 Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
-Ensuite, rajouter la fonction permettant definaliser MPI tout de suite à la fin du programme.
+
+d) Ensuite, rajoutez la fonction permettant definaliser MPI tout de suite à la fin du programme.
+
+e) Pour tester notre programme au fur et à mesure de l'implémentation, nous allons commenter les appels aux fonctions non parallélisées avec MPI dans [main.cpp](./cpp/patch/main.cpp).
+Identifiez les fonctions à commenter dans l'initialisation et la boucle en temps.
+**Rapport :** Justifiez votre choix dans votre rapport.
+
+f) Compilez et exécutez votre programme avec un seul rang pour tester son fonctionnement.
 
 **Question 4.4 - Action réservée au rang 0 :** Il est important de se rappeler que dans un programme MPI, le code que vous écrivez après l'initialisation de MPI est exécuté par tous les rangs. Cela diffère d'OpenMP pour lequel le code exécuté en parallèle dépend de l'emplacement des directives.
 Néanmoins, la similitude peut être faite avec l'ouverture d'une région parallèle en OpenMP à partir de laquelle le code est exécuté par tous les threads.
 A partir de là, il est important d'identifier les zones que l'on souhaite être exécuté que par un seul rang.
+
 a) Dans le fichier [main.cpp](./cpp/patch/main.cpp) c'est le cas des parties suivantes :
 - la création du dossier `diags` :
 ```C++
@@ -581,7 +592,7 @@ std::cout << "  - number of ranks: " << params.number_of_ranks << std::endl;
 ```
 
 c) Comilez le code pour vérifier que vous n'avez pas fait d'erreur.
-Vous pouvez également l'exécutre avec un seul rang.
+Vous pouvez également l'exécuter avec un seul rang.
 
 **Question 4.5 - Timers :** Avant de rentrer dans le coeur du sujet, nous allons préparer le calcul du temps avec MPI.
 La définition des timers change de fait de l'utilisation de MPI.
@@ -611,7 +622,7 @@ std::cout << " ---------------------|------------|------------|------------|----
 
 N'oubliez pas que seul le rang 0 s'occupe de l'affichage.
 
-f) Compilez le code et exécutez le en demandant qu'un processeur.
+f) Décommentez l'appel aux timers pour l'initialisation et l'affichage final. Compilez le code et exécutez le en demandant qu'un processeur.
 ```bash
 mpirun -np 1 ./executable
 ```
@@ -633,21 +644,23 @@ void Particles::initTopology(struct Parameters & params);
 ```
 On passe la structure par référence car on modifiera données dans ces fonctions.
 
-c) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topolgie cartésienne 3D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
+c) Ajoutez une condition afin de vérifier que le nombre de patchs est égal au nombre de rangs MPI spécifiés.
+
+d) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topolgie cartésienne 3D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
 Pour le moment on ne s'occupe pas des voisins.
 Vous ajouterez les paramètres adéquates dans la structure de donnée `Parameters`.
 Le nombre de processus MPI dans chaque direction w, y et z est donné par les paramètres `params.n_patches_x`, `params.n_patches_y` et `params.n_patches_z`
 car chaque processus MPI ne possède qu'un patch.
 Vous pouvez vous aider de l'exercice 6.
 
-d) Ici nous n'utiliserons pas `MPI_Cart_shift` pour déterminer les voisins car nous avons besoin des voisins en diagonal que nous ne donne pas cette fonction.
+e) Ici nous n'utiliserons pas `MPI_Cart_shift` pour déterminer les voisins car nous avons besoin des voisins en diagonal que nous ne donne pas cette fonction.
 Pour ce faire, nous allons simplement générer une carte de la topologie sur l'ensemble des processeurs comme dans l'exercice 6 en utilisant `MPI_Cart_coords`.
 Ajoutez la carte de la topologie dans la structure `Parameters`.
 
 **Important :** Je vous rappelle que la convention choisie par les dévelopeurs de MPI fait que la coordonnée continue est la dernière dimension.
 Dans ce TP, l'axe continu (indice continu dans le déroulement des boucles) est l'axe des `x`.
 
-e) Affichez dans le fichier [main.cpp](./cpp/patch/main.cpp) la topologie à la fin du résumé des paramètres nuémriques (comme pour l'exercice 6 sur MPI).
+f) Affichez dans le fichier [main.cpp](./cpp/patch/main.cpp) la topologie à la fin du résumé des paramètres nuémriques (comme pour l'exercice 6 sur MPI).
 Vous pouvez vous inspirr du code suivant :
 ```C++
 std::cout <<  " Topology map: "<< std::endl;
@@ -671,7 +684,7 @@ for(int iz = 0; iz < params.ranks_per_direction[0] ; iz++) {
 std::cout << std::endl;
 ```
 
-f) Nous allons maintenant modifier la fonction `Patch::initTopology` ([patch.cpp](./cpp/patch/patch.cpp)) pour prendre en compte les coordonnées MPI dans la configuration de chaque patch.
+g) Nous allons maintenant modifier la fonction `Patch::initTopology` ([patch.cpp](./cpp/patch/patch.cpp)) pour prendre en compte les coordonnées MPI dans la configuration de chaque patch.
 Commencez par mettre à jour la définition des variables suivnate :
 - `this->id` qui représente l'index du patch
 - `id_x`, `id_y`, `id_z` qui représente les coordonnées du patch dans la topologie
@@ -689,7 +702,7 @@ zmin = id_z * patch_z_length;
 zmax = (id_z+1) * patch_z_length;
 ```
 
-g) Il faut maintenant mettre la jour le calcul des voisins dans le tableau `neighbor_indexes[k]`.
+h) Il faut maintenant mettre la jour le calcul des voisins dans le tableau `neighbor_indexes[k]`.
 On peut voir que cette partie du code utilise la fonction `Patch::getNeighborIndex`.
 Cette fonction renvoie l'index ou le rang du patch de coordonnées relative `id_x + x_shift`, `id_y + y_shift` et `id_z + z_shift`.
 On tourne ainsi autour du patch courant pour déterminiter les rangs voisins.
@@ -697,6 +710,23 @@ La fonction `Patch::getNeighborIndex` utilise la fonction `Patch::patchCoordinat
 Mettez à jour cette fonction pour prendre en compte la topologie `params.topology_map`.
 Pour compiler, vous devrez mettre à jour l'ensemble des appels à `Patch::getNeighborIndex`.
 
-h) Expliquez pourquoi la fonction `Patch::patchIndexToCoordinates` qui renvoyait les coordonnées d'un patch à partir de son index n'a plus lieu d'être ici ?
+i) Expliquez pourquoi la fonction `Patch::patchIndexToCoordinates` qui renvoyait les coordonnées d'un patch à partir de son index n'a plus lieu d'être ici ?
 
 La dernière partie de la fonction `Patch::initTopology` pour établir si le patch se trouve au bord ne requiert pas de modification.
+
+j) Décommentez l'appel à la fonction `Particles::initTopology` dans [main.cpp](./cpp/patch/main.cpp).
+Compilez et exécutez le code avec plusieurs processus MPI cette fois.
+N'oubliez pas de spécifier un nombre de patchs cohérent avec le nombre total de processus MPI demandé.
+
+**A ce stade, vous avez maintenant correctement initialisé la topologie avec MPI.**
+
+**Question 4.7 - diagnostiques :**
+Avant de rendre parallèle la gestion des particules, nous allons nous occuper des diagnostiques.
+L'écriture parallèle étant hors programme, nous adoptons ici une méthode peu efficace mais pédagogique qui consiste à ne laisser qu'un processus écrire les données.
+L'écriture des particules dans un fichier se fera par le processus 0.
+Les autres processus devront envoyer la liste de leurs particules au rang 0.
+Le rang 0 devra donc réceptionner l'ensemble dans un tableau destiné à être ensuite écrit dans un fichier.
+L'écritude devra respecter les formats utilisés pour la compatibilité avec les scripts.
+
+a) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code dont les diagnostiques pour connaître le nombre total de particules dans la simulation.
+Modifiez cette fonction pour la rendre compatible avec MPI.
