@@ -96,7 +96,7 @@ void Timers::print() {
     std::cout << " | " ;
     std::cout << std::endl;
 
-    for (unsigned int i = 2 ; i < names.size() ; i++) {
+    for (int i = 2 ; i < names.size() ; i++) {
         
         percentage = accumulated_times[i] / (accumulated_times[1] + accumulated_times[0]) * 100;
         

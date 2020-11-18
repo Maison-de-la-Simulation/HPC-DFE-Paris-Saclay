@@ -21,8 +21,8 @@ struct Parameters {
     
     double final;                       // Temps total de simulation
     double step;                        // Temps entre chaque itération
-    unsigned int final_iteration;       // Final number of iterations
-    unsigned int iteration;             // Number of iterations
+    int final_iteration;       // Final number of iterations
+    int iteration;             // Number of iterations
     double current;                     // Current time
 
     // ______________________________________
@@ -47,20 +47,20 @@ struct Parameters {
     
     // Decomposition
     
-    unsigned int n_patches_x;
-    unsigned int n_patches_y;
-    unsigned int n_patches_z;
-    unsigned int n_patches;
+    int n_patches_x;
+    int n_patches_y;
+    int n_patches_z;
+    int n_patches;
     
-    std::vector<unsigned int> id_patch_x;
-    std::vector<unsigned int> id_patch_y;
-    std::vector<unsigned int> id_patch_z;
+    std::vector<int> id_patch_x;
+    std::vector<int> id_patch_y;
+    std::vector<int> id_patch_z;
 
     // ______________________________________
     // Parameters for the diags
     
-    unsigned int output_period;     // period in term of iteration between each diag
-    unsigned int print_period;      // period in term of iteration between each diag
+    int output_period;     // period in term of iteration between each diag
+    int print_period;      // period in term of iteration between each diag
     bool hdf5;
     bool vtk;
     bool binary;
@@ -73,7 +73,7 @@ struct Parameters {
     double mass_max;        // Maximum mass
     double vmin;            // Minimal velocity for init
     double vmax;            // Maximal velocity for init
-    unsigned int number;    // Initial number of particles
+    int number;    // Initial number of particles
     double damping;         // damping coefficient for inelastic collisions
     bool collision;         // Flag to activate the collisions
 };

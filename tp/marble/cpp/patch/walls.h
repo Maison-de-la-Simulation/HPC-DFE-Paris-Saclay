@@ -32,12 +32,12 @@ class Walls
     void add( double point[3], double normal[3], double damping);
     
     // Return the wall at index i
-    inline struct Wall * operator() (unsigned int i) {
+    inline struct Wall * operator() (int i) {
         return &list[i];
     };
     
     // Return the number of walls
-    inline unsigned int size() {
+    inline int size() {
         return list.size();
     }
     

@@ -29,10 +29,10 @@ int main( int argc, char *argv[] )
     
     // Parameters ____________________________________________________________________________________
     
-    unsigned int particle_number;   // Number of particles in the simulation
-    double       total_energy;      // Total energy at each timestep
-    double       max_velocity;      // Maximal velocity at each timestep
-    unsigned int collision_counter; // Counter for collisions per timestep
+    int particle_number = 0;   // Number of particles in the simulation
+    double       total_energy;          // Total energy at each timestep
+    double       max_velocity;          // Maximal velocity at each timestep
+    int collision_counter;     // Counter for collisions per timestep
     
     struct Parameters    params;   // Global properties
     
@@ -160,7 +160,7 @@ int main( int argc, char *argv[] )
     
     std::cout << std::endl;
     std::cout << " Particles properties:" << std::endl;
-    particles.getTotalParticleNumber(particle_number);
+    particles.getTotalParticleNumber(params, particle_number);
     std::cout << "  - requested number of particles: " << params.number << std::endl;
     std::cout << "  - real number of particles: " << particle_number << std::endl;
     std::cout << "  - particle radius: " << params.radius << std::endl;
@@ -194,7 +194,7 @@ int main( int argc, char *argv[] )
     
     std::cout << std::endl;
     std::cout << " List of walls: " << std::endl;
-    for(unsigned int iw = 0 ; iw < walls.size() ; iw++) {
+    for(int iw = 0 ; iw < walls.size() ; iw++) {
         std::cout << " - Wall " << iw << std::endl;
         std::cout << "   * normal: " << walls(iw)->normal[0] << " " << walls(iw)->normal[1] << " " << walls(iw)->normal[2] << std::endl;
         std::cout << "   * d: " << walls(iw)->d << std::endl;
@@ -267,11 +267,11 @@ int main( int argc, char *argv[] )
         
         if (params.iteration%params.print_period == 0) {
         
-            particles.getTotalEnergy(total_energy);
+            particles.getTotalEnergy(params, total_energy);
         
-            particles.getMaxVelocity(max_velocity);
+            particles.getMaxVelocity(params, max_velocity);
             
-            particles.getTotalParticleNumber(particle_number);
+            particles.getTotalParticleNumber(params, particle_number);
         
             std::cout << " Iteration: " << std::setw(5) << params.iteration
                       << " - total particles: " << std::setw(10) << particle_number

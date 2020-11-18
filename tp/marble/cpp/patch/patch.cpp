@@ -9,7 +9,7 @@ Patch::Patch() {
 };
 
 
-Patch::Patch( unsigned int number )
+Patch::Patch( int number )
 {
     radius = 0.02;
     x.resize(number,0);
@@ -34,7 +34,7 @@ Patch::~Patch() {
 // - number of patches in each direction
 // - id and coordinates of all patches
 void Patch::initTopology(struct Parameters params,
-                        unsigned int id) {
+                        int id) {
     
     // Patch index
     this->id = id;
@@ -94,7 +94,7 @@ void Patch::initTopology(struct Parameters params,
 // Initialize the particles following a random pattern
 void Patch::initParticles(struct Parameters params) {
     
-    unsigned int local_number = params.number / params.n_patches;
+    int local_number = params.number / params.n_patches;
     
     radius = params.radius;
     x.resize(local_number,0);
@@ -121,11 +121,11 @@ void Patch::initParticles(struct Parameters params) {
     if (at_pz_boundary) offset_pz = radius;
     
     // Position initialization while checking that 2 particles do not overlap
-    for (unsigned int ip = 0 ; ip < local_number ; ip++) {
+    for (int ip = 0 ; ip < local_number ; ip++) {
         
         bool position_validated = false;
         double distance;
-        unsigned int ip2;
+        int ip2;
         
         // std::cerr << "ip: " << ip
         //           << " local_number: " << local_number
@@ -161,7 +161,7 @@ void Patch::initParticles(struct Parameters params) {
     }
     
     // Mass and velocity initilization
-    for (unsigned int ip = 0 ; ip < local_number ; ip++) {
+    for (int ip = 0 ; ip < local_number ; ip++) {
     
         mass[ip] = drand48() * (params.mass_max - params.mass_min) + params.mass_min;
     
@@ -212,7 +212,7 @@ void Patch::push(struct Parameters params)  {
     double inverse_mass;
     double inverse_norm_v;
     
-    for (unsigned int ip = 0 ; ip < x.size() ; ip++) {
+    for (int ip = 0 ; ip < x.size() ; ip++) {
     
         inverse_mass = 1/mass[ip];
         
@@ -248,11 +248,11 @@ void Patch::push(struct Parameters params)  {
 
 void Patch::walls(struct Parameters params, Walls walls) {
     
-    for (unsigned int iw = 0 ; iw < walls.size() ; iw++) {
+    for (int iw = 0 ; iw < walls.size() ; iw++) {
         
         struct Wall wall = *walls(iw);
         
-        for (unsigned int ip = 0 ; ip < x.size() ; ip++) {
+        for (int ip = 0 ; ip < x.size() ; ip++) {
         
             double d = distance(ip,wall) - radius;
             
@@ -304,11 +304,11 @@ void Patch::walls(struct Parameters params, Walls walls) {
 }
 
 // This function manages the collisions between particles
-unsigned int Patch::collisions(struct Parameters params) {
+int Patch::collisions(struct Parameters params) {
     
-    unsigned int i1;
-    unsigned int i2;
-    unsigned int collision_counter = 0;
+    int i1;
+    int i2;
+    int collision_counter = 0;
     
     // Ensure that a particle is involved in 1 collision only
     bool not_collided[x.size()];
@@ -408,12 +408,12 @@ unsigned int Patch::collisions(struct Parameters params) {
 }
 
 // Multiple collison iterations
-unsigned int Patch::multipleCollisions(struct Parameters params) {
+int Patch::multipleCollisions(struct Parameters params) {
     
-    unsigned int collision_counter = 0;
-    unsigned int subcollision_counter = 0;
-    unsigned int collision_iteration = 0;
-    unsigned int max_collision_iteration = 10;
+    int collision_counter = 0;
+    int subcollision_counter = 0;
+    int collision_iteration = 0;
+    int max_collision_iteration = 10;
     
     do {
         subcollision_counter = collisions(params);
@@ -431,7 +431,7 @@ void Patch::computeExchangeBuffers(struct Parameters params) {
     int x_shift = 0;
     int y_shift = 0;
     int z_shift = 0;
-    unsigned int ibuffer;
+    int ibuffer;
     int neighbor_index ;
     
     // We reitnitialize the buffers
@@ -448,7 +448,7 @@ void Patch::computeExchangeBuffers(struct Parameters params) {
     // We resize the mask to mark the particles that go away from this patch
     mask.resize(x.size());
     
-    for (unsigned int ip = 0 ; ip < x.size() ; ip++) {
+    for (int ip = 0 ; ip < x.size() ; ip++) {
     
         mask[ip] = true;
                     
@@ -492,8 +492,8 @@ void Patch::computeExchangeBuffers(struct Parameters params) {
 
 // Delete the particles leaving particles marked by the mask vector
 void Patch::deleteLeavingParticles() {
-    unsigned int ip = 0;
-    unsigned int last_ip = x.size()-1;
+    int ip = 0;
+    int last_ip = x.size()-1;
     while (ip <= last_ip) {
         
         if (mask[ip] == false) {
@@ -543,7 +543,7 @@ void Patch::receivedParticlesFromNeighbors(std::vector<Patch> & patches) {
                 
                 if (neighbor_indexes[k] >= 0 && k != 13) {
                     
-                    unsigned int exchange_size = patches[neighbor_indexes[k]].exchange[l].x.size();
+                    int exchange_size = patches[neighbor_indexes[k]].exchange[l].x.size();
                     
                     // if (id == 4) {
                     //     std::cerr << " ix: " << ix << " iy: " << iy << " iz: " << iz
@@ -554,7 +554,7 @@ void Patch::receivedParticlesFromNeighbors(std::vector<Patch> & patches) {
                     
                     if (exchange_size > 0) {
                         
-                        unsigned int current_size = x.size();
+                        int current_size = x.size();
                         
                         // std::cerr << " k: " << k
                         //           << " id: " << id
@@ -595,7 +595,7 @@ void Patch::receivedParticlesFromNeighbors(std::vector<Patch> & patches) {
 }
 
 // Compute the distance between the specified particle and the given wall
-double Patch::distance(unsigned int ip, struct Wall wall) {
+double Patch::distance(int ip, struct Wall wall) {
     return wall.normal[0] * x[ip] + wall.normal[1] * y[ip] + wall.normal[2] * z[ip] + wall.d ;
 }
 
@@ -604,7 +604,7 @@ double Patch::getTotalEnergy() {
     
     double total_energy = 0;
     
-    for (unsigned int ip = 0 ; ip < x.size() ; ip++) {
+    for (int ip = 0 ; ip < x.size() ; ip++) {
         total_energy += 0.5 * mass[ip] * squareVelocity(ip);
     }
     
@@ -617,7 +617,7 @@ double Patch::getMaxVelocity() {
     
     double max_velocity = 0;
     
-    for (unsigned int ip = 0 ; ip < x.size() ; ip++) {
+    for (int ip = 0 ; ip < x.size() ; ip++) {
         max_velocity = std::max(max_velocity, squareVelocity(ip));
     }
     
@@ -625,7 +625,7 @@ double Patch::getMaxVelocity() {
 }
 
 // Return the number of particles
-unsigned int Patch::getParticleNumber() {
+int Patch::getParticleNumber() {
     return x.size();
 }
 
@@ -641,7 +641,7 @@ int Patch::getNeighborIndex(struct Parameters params, int x_shift, int y_shift, 
     if ((id_x + x_shift >= 0) && (id_x + x_shift < params.n_patches_x ) &&
         (id_y + y_shift >= 0) && (id_y + y_shift < params.n_patches_y ) &&
         (id_z + z_shift >= 0) && (id_z + z_shift < params.n_patches_z )) {
-        unsigned int index_2;
+        int index_2;
         
         patchCoordinatesToIndex(params, index_2, id_x + x_shift, id_y + y_shift, id_z + z_shift);
         
@@ -656,7 +656,7 @@ int Patch::getNeighborIndex(struct Parameters params, int x_shift, int y_shift, 
 // xmin : shift = -1
 // xmax : shift = 1
 // ...
-void Patch::getParticlePatchShift(unsigned int ip, int & x_shift, int & y_shift, int & z_shift) {
+void Patch::getParticlePatchShift(int ip, int & x_shift, int & y_shift, int & z_shift) {
     if (x[ip] < xmin) {
         x_shift = -1;
     } else if (x[ip] >= xmax) {
@@ -686,7 +686,7 @@ void Patch::getParticlePatchShift(unsigned int ip, int & x_shift, int & y_shift,
 // Check that all particles are in the domain
 void Patch::checkParticlesInDomain(struct Parameters params) {
     
-    for (unsigned int ip = 0 ; ip < x.size() ; ip++) {
+    for (int ip = 0 ; ip < x.size() ; ip++) {
         if (x[ip] < params.xmin || x[ip] > params.xmax ||
             y[ip] < params.ymin || y[ip] > params.ymax ||
             z[ip] < params.zmin || z[ip] > params.zmax) {
