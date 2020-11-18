@@ -1,4 +1,4 @@
-# Exercice 6 : Création d'une topologie cartésienne
+# Exercice 7 : Création d'une topologie cartésienne
 
 Cet exercice consiste à mettre en place une topologie cartésienne 2D à
 partir des fonctions MPI adéquates.
