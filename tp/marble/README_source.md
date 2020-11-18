@@ -728,5 +728,18 @@ Les autres processus devront envoyer la liste de leurs particules au rang 0.
 Le rang 0 devra donc réceptionner l'ensemble dans un tableau destiné à être ensuite écrit dans un fichier.
 L'écritude devra respecter les formats utilisés pour la compatibilité avec les scripts.
 
-a) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code dont les diagnostiques pour connaître le nombre total de particules dans la simulation.
+a) **Mise à jour de la fonction Particles::writeDiags :** Cette fonctioon appelle deux autres fonctions destinéées à écrire sous forme de fichiers la liste des particules et leurs propriétés :
+- `Particles::writeVTK` : écriture des fichiers vtk pour Paraview
+- `Particles::writeBinary` : écriture des fichiers binaires pour les scrits Python
+Vous allez devoir modifier l'ensemble de ces fonctions.
+Voici quelques étapes pour vous aider :
+- Dans `Particles::writeDiags`, créez un tableau pour contenir la liste des particules dans chaque rang MPI et utilisez la bonne fonction MPI pour mettre à jour les valeurs
+- Calculez le nombre total de particules dans le domaine
+- Allouer des tableaux pour stocker les propriétés de l'ensemble des particules qui seront rappatriées sur le processeur 0
+- Utilisez les bonnes fonctions MPI pour ramener toutes les propriétés sur le processeur 0.
+- Modifiez l'interface des fonctions `Particles::writeVTK` et `Particles::writeBinary` pour passer en argument les propriétés agrégées des particules.
+- Modifiez le coeur de ces fonctions pour écrire les nouveaux tableaux.
+- Faites en sorte que seul le rang 0 ne s'occupe de l'écriture.
+
+b) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code pour connaître le nombre total de particules dans la simulation.
 Modifiez cette fonction pour la rendre compatible avec MPI.
