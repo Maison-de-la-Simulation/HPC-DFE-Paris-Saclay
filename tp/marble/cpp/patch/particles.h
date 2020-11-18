@@ -36,28 +36,28 @@ class Particles
     void walls(struct Parameters params, Walls walls);
     
     // Perform the binary collisions
-    unsigned int collisions(struct Parameters params);
+    int collisions(struct Parameters params);
     
     // Multiple collison iterations
-    void multipleCollisions(unsigned int & collision_counter, struct Parameters params);
+    void multipleCollisions(int & collision_counter, struct Parameters params);
     
     // Exchange particles between patches
     void exchange(struct Parameters params);
     
     // Return the total energy in the domain (all patches)
-    void getTotalEnergy(double & total_energy);
+    void getTotalEnergy(struct Parameters params, double & total_energy);
     
     // Return the maximal particle velocity in the domain (all patches)
-    void getMaxVelocity(double & max_velocity);
+    void getMaxVelocity(struct Parameters params, double & max_velocity);
     
     // Return the total number of particles
-    void getTotalParticleNumber(unsigned int & total);
+    void getTotalParticleNumber(struct Parameters params, int & total);
     
     // Output specifically the vtk files
-    void writeVTK(unsigned int iteration);
+    void writeVTK(struct Parameters params);
     
     // Output specifically the binary files
-    void writeBinary(unsigned int iteration);
+    void writeBinary(struct Parameters params);
     
     // Write all type of diags
     void writeDiags(struct Parameters params);
@@ -68,7 +68,7 @@ class Particles
     std::vector <Patch> patches;
     
     // Total number of patches
-    unsigned int n_patches;
+    int n_patches;
     
 };
 

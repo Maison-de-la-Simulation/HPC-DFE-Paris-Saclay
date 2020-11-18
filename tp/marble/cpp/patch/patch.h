@@ -34,7 +34,7 @@ class Patch
     
     //Particles constructor
     Patch( );
-    Patch( unsigned int number);
+    Patch( int number);
 
     // Particles destructor
     ~Patch();
@@ -43,7 +43,7 @@ class Patch
     // This function initializes the patch topology :
     // - number of patches in each direction
     // - id and coordinates of all patches
-    void initTopology(struct Parameters params, unsigned int id);
+    void initTopology(struct Parameters params, int id);
     
     // Initialization functions
     void initParticles(struct Parameters params);
@@ -56,10 +56,10 @@ class Patch
     void walls(struct Parameters params, Walls walls);
     
     // Perform the binary collisions
-    unsigned int collisions(struct Parameters params);
+    int collisions(struct Parameters params);
     
     // Multiple collison iterations
-    unsigned int multipleCollisions(struct Parameters params);
+    int multipleCollisions(struct Parameters params);
     
     // Determine particles to exchange
     void computeExchangeBuffers(struct Parameters params);
@@ -77,7 +77,7 @@ class Patch
     double getMaxVelocity();
     
     // Return the number of particles
-    unsigned int getParticleNumber();
+    int getParticleNumber();
     
     // Check that all particles are in the domain
     void checkParticlesInDomain(struct Parameters params);
@@ -102,12 +102,12 @@ class Patch
     std::vector <struct ParticleContainer> exchange;
     
     // Patch index
-    unsigned int id;
+    int id;
     
     // Patch index in each direction in the cartesian topology
-    unsigned int id_x;
-    unsigned int id_z;
-    unsigned int id_y;
+    int id_x;
+    int id_z;
+    int id_y;
     
     // Patch length in each direction
     double patch_x_length;
@@ -136,20 +136,20 @@ class Patch
     double radius;    // Particle radius
     
     // Compute the distance between the specified particle and the given wall
-    double distance(unsigned int ip, struct Wall wall);
+    double distance(int ip, struct Wall wall);
     
     // Compute the square of the velocity norm
-    inline double squareVelocity(unsigned int ip) {
+    inline double squareVelocity(int ip) {
         return vx[ip]*vx[ip] + vy[ip]*vy[ip] + vz[ip]*vz[ip];
     };
     
     // Convert the 3D index (x, y, z) of a patch into a global 1D index
-    void patchCoordinatesToIndex(struct Parameters params, unsigned int & id, unsigned int id_x, unsigned int id_y, unsigned int id_z) {
+    void patchCoordinatesToIndex(struct Parameters params, int & id, int id_x, int id_y, int id_z) {
         id = id_z *(params.n_patches_y*params.n_patches_x) + id_y * params.n_patches_y + id_x;
     }
 
     // This fonction gives the coordinates of the patch in the topology from the 1d index
-    void patchIndexToCoordinates(struct Parameters params, unsigned int id, unsigned int & id_x, unsigned int & id_y, unsigned int & id_z) {
+    void patchIndexToCoordinates(struct Parameters params, int id, int & id_x, int & id_y, int & id_z) {
         id_z = (id / (params.n_patches_y*params.n_patches_x) );
         id_y = (id - id_z * (params.n_patches_y*params.n_patches_x)) / params.n_patches_y;
         id_x = (id - id_z * (params.n_patches_y*params.n_patches_x) - id_y * params.n_patches_x);
@@ -163,7 +163,7 @@ class Patch
     // xmin : shift = -1
     // xmax : shift = 1
     // ...
-    void getParticlePatchShift(unsigned int ip, int & x_shift, int & y_shift, int & z_shift);
+    void getParticlePatchShift(int ip, int & x_shift, int & y_shift, int & z_shift);
 
 };
 
