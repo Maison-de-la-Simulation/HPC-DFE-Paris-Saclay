@@ -3,7 +3,7 @@
 // Function to read the external arguments
 void commandLineArguments(int argc, char * argv[], struct Parameters & params) {
     if (argc > 1) {
-        unsigned int iarg = 1;
+        int iarg = 1;
         std::string key;
         while(iarg < argc) {
             key = argv[iarg];

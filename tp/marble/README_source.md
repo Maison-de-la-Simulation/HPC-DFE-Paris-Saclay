@@ -732,14 +732,45 @@ a) **Mise à jour de la fonction Particles::writeDiags :** Cette fonctioon appel
 - `Particles::writeVTK` : écriture des fichiers vtk pour Paraview
 - `Particles::writeBinary` : écriture des fichiers binaires pour les scrits Python
 Vous allez devoir modifier l'ensemble de ces fonctions.
-Voici quelques étapes pour vous aider :
+Cette étape ressemble fortement à ce qui a été fait dans l'exercice 6 sur MPI.
 - Dans `Particles::writeDiags`, créez un tableau pour contenir la liste des particules dans chaque rang MPI et utilisez la bonne fonction MPI pour mettre à jour les valeurs
-- Calculez le nombre total de particules dans le domaine
+- Calculez la somme des particules dans tout le domaine
 - Allouer des tableaux pour stocker les propriétés de l'ensemble des particules qui seront rappatriées sur le processeur 0
 - Utilisez les bonnes fonctions MPI pour ramener toutes les propriétés sur le processeur 0.
-- Modifiez l'interface des fonctions `Particles::writeVTK` et `Particles::writeBinary` pour passer en argument les propriétés agrégées des particules.
-- Modifiez le coeur de ces fonctions pour écrire les nouveaux tableaux.
+- Modifiez l'interface des fonctions `Particles::writeVTK` et `Particles::writeBinary` pour passer en argument les propriétés agrégées des particules. Par exemple :
+```C++
+void Particles::writeVTK(unsigned int iteration, int number_of_particles,
+                        double * x, double * y, double * z,
+                        double * vx, double * vy, double * vz, double * mass)
+```
+- Modifiez le coeur de ces fonctions pour écrire les nouveaux tableaux passés en argument.
+Dans ces fonctions, il n'est plus nécessaire de boucler sur l'ensemble des patchs.
+On boucle maintenant sur la liste des particules contenue dans le rang 0.
+Par exemple pour les positions dans `Particles::writeVTK`, cela devient :
+```C++
+// Particle positions
+vtk_file << std::endl;
+vtk_file << "POINTS "<< number_of_particles << " float" << std::endl;
+for(unsigned int ip = 0 ; ip < number_of_particles ; ip++) {
+  vtk_file << x[ip] << " " << y[ip] << " " << z[ip] << std::endl ;
+}
+```
+De même cela permet de simplifier la fonction `Particles::writeBinary` où l'écriture des `x` se résume à une ligne de code :
+```C++
+binary_file.write((char *) &x[0], sizeof(double)*number_of_particles);
+```
 - Faites en sorte que seul le rang 0 ne s'occupe de l'écriture.
+- N'oubliez pas de supprimer les tableaux alloués dynamiquement pour éviter les fuites mémoires :
+```C++
+delete x,y,z,vx,vy,vz,mass;
+```
 
-b) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code pour connaître le nombre total de particules dans la simulation.
-Modifiez cette fonction pour la rendre compatible avec MPI.
+b) **Mise à jour de la fonction Particles::writeDiags - suite :** décommentez l'appel à la fonction
+`Particles::writeDiags` juste avant le démarrage de la boucle en temps.
+Cette sortie permet d'obtenir l'état de la simulation avant le démarrage de la boucle en temps.
+Compilez et exécutez le code avec plusieurs processus et regardez que le  domaine est bien initialisé.
+
+b) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code pour connaître la somme des particules de tous les rangs dans la simulation.
+Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
+
+c) ****
