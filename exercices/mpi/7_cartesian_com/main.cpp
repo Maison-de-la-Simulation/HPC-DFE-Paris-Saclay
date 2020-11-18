@@ -1,6 +1,6 @@
 // ______________________________________________________________________________
 //
-// Exercice 6 : Création d'une topologie cartésienne
+// Exercice 7 : Création d'une topologie cartésienne
 //
 // Cet exercice consiste à mettre en place une topologie cartésienne 2D à
 // partir des fonctions MPI adéquates.
@@ -11,7 +11,6 @@
 #include <vector>
 #include <cmath>
 #include <ctime>
-#include <iomanip>
 
 // il est important d'inclure la bibliothèque
 // sans quoi aucun de vos appels ne sera reconnu.
@@ -42,28 +41,26 @@ int main( int argc, char *argv[] )
     int periodicity[2] = {1, 1};
     int reorganisation = 1;
     MPI_Comm cartesian_communicator;
-    int topology_map[ranks_per_direction[0]*ranks_per_direction[1]];
     
-
-    MPI_Cart_create(MPI_COMM_WORLD,
-                         2,
-                         ranks_per_direction,
-                         periodicity,
-                         reorganisation,
-                         &cartesian_communicator);
+    MPI_???(???,
+            ???,
+            ???,
+            ???,
+            ???,
+            ???);
     
     // On récupère le rang dans le nouveau communicateur cartésien
     
     int rank;
     
-    MPI_Comm_rank( cartesian_communicator, &rank );
+    MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     
     // On récupère les coordonnées du processus courant dans
     // la topologie cartésienne
     
     int rank_coordinates[2];
     
-    MPI_Cart_coords( cartesian_communicator, rank, 2, rank_coordinates);
+    MPI_???( ???, ???, ???, ???);
 
     // On récupère les rangs voisins
 
@@ -72,14 +69,14 @@ int main( int argc, char *argv[] )
     int rank_neighbors_my;
     int rank_neighbors_py;
     
-    MPI_Cart_shift( cartesian_communicator, 1, 1, &rank_neighbors_my, &rank_neighbors_py);
+    MPI_???( ???, ???, ???, ???, ???);
 
     // En -x (rank_neighbors_mx) et en +x (rank_neighbors_px)
     
     int rank_neighbors_mx;
     int rank_neighbors_px;
     
-    MPI_Cart_shift( cartesian_communicator, 0, 1, &rank_neighbors_mx, &rank_neighbors_px);
+    MPI_???( ???, ???, ???, ???, ???);
     
     // Chaque processus affiche son rang, ses coordonnées et ses voisins
     // à tour de rôle
@@ -96,7 +93,7 @@ int main( int argc, char *argv[] )
 
     // Communication de la topologie totale au rang 0
     
-    MPI_Gather(&rank,1,MPI_INT,&topology_map,1,MPI_INT,0,cartesian_communicator);
+    MPI_???(???);
     
     // Affichage de la topologie
     
@@ -104,7 +101,7 @@ int main( int argc, char *argv[] )
     
         std::cout << std::endl;
         std::cout <<  " Carte de la topologie : "<< std::endl;
-        std::cout <<  " ---------------------------> x"<< std::endl;
+        std::cout <<  " ---------------------------> y"<< std::endl;
     
         for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
             for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {
@@ -116,7 +113,7 @@ int main( int argc, char *argv[] )
         }
     
         std::cout << " v" << std::endl;
-        std::cout << " y" << std::endl;
+        std::cout << " x" << std::endl;
     
     }
     
@@ -125,8 +122,8 @@ int main( int argc, char *argv[] )
     int coordinates[2];
     
     for (int i = 0 ; i < number_of_ranks ; i++) {
-        MPI_Cart_coords( cartesian_communicator, i, 2, coordinates);
-        topology_map[coordinates[0]*ranks_per_direction[1] + coordinates[1]] = i;
+        MPI_Cart_coords(???);
+        topology_map[???] = i;
     }
 
     // Affichage de la topologie
