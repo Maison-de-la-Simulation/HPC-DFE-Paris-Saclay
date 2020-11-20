@@ -276,6 +276,9 @@ Le code peut générer plusieurs types de fichiers :
 Vous avez besoin de python avec la biblithèque `matplotlib` et `h5py`.
 - Fichier VTK : Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
 Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette [page](./paraview.md).
+- Fichiers binaires : ces fichiers sont un enregistrements binaires des propriétés des particules.
+  On peut visualiser ces données avec `matplotlib` en utilisant le script [plot_binary_matplotlib.py](./python/plot_binary_matplotlib.py).
+  On peut aussi générer une image 3D grâce au paquet Python Mayavi en utilisant le script [plot_binary_mayavi.py](./python/plot_binary_mayavi.py).
 
 ## Consignes de TP
 
@@ -805,3 +808,18 @@ i) Décommentez l'appel à `Particles::writeDiags` au sein de la boucle en temps
 **Question 4.8 - la boucle de calcul :** On va maintenant réactiver le contenu de la boucle de calcul que l'on a commenté au début de la modification du programme.
 
 a) La plupart des fonctions de la boucle ne nécessite que très peu de modification car elles sont locales au rang MPI. C'est le cas de `particles::push`, `particles::multipleCollisions`, `particles::walls`. Il faut simplement supprimer la boucle sur les patchs car chaque rang MPI n'a qu'un seul patch.
+
+b) Il va maintenant falloir modifier les procédures d'échange pour les particules.
+Dans la version séquentiel par patch, la procédure est divisée en 3 parties :
+- `Patch::computeExchangeBuffers` : On détermine les particules qui sortent du patch courant et on les copie dans des buffers.
+  Il y a un buffer par direction d'échange.
+  Cette fonction n'a pas besoin d'être modifiée.
+  Elle permet maintenant d'identifier les particules qui sortent du rang MPI pour aller vers un autre.
+- `Patch::deleteLeavingParticles` : On supprime ensuite les particules du tableau principal qui sortent des limites du rang MPI en cours.
+  Comme pour la précédente, cette fonction n'a pas besoin d'être modifiée.
+- `Patch::receivedParticlesFromNeighbors` : Cette dernière étape de la procédure d'échange est la communication des particules stockés dans les buffers vers les rangs destinataires.
+  C'est cette étape qu'il faudra modifier oour y introduire les fonctions MPI permettant l'échange des particules entre rangs voisins.
+  Etant donné que la topologie MPI est proche de la philosophie des pacths, on pourra réutiliser l'idée générale pour la gestion des voisins.
+  Modifiez `Patch::receivedParticlesFromNeighbors` pour mener à bien les échanges MPI de particules.
+ 
+c) **Mise à jour de Particles::exchange :**
