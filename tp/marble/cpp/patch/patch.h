@@ -59,7 +59,7 @@ class Patch
     int collisions(struct Parameters params);
     
     // Multiple collison iterations
-    int multipleCollisions(struct Parameters params);
+    void multipleCollisions(struct Parameters params);
     
     // Determine particles to exchange
     void computeExchangeBuffers(struct Parameters params);
@@ -78,6 +78,9 @@ class Patch
     
     // Return the number of particles
     int getParticleNumber();
+    
+    // Return the number of collision
+    int getCollisionNumber();
     
     // Check that all particles are in the domain
     void checkParticlesInDomain(struct Parameters params);
@@ -134,6 +137,9 @@ class Patch
     double zmax;
     
     double radius;    // Particle radius
+    
+    // counter for the collisions
+    int collision_counter;
     
     // Compute the distance between the specified particle and the given wall
     double distance(int ip, struct Wall wall);

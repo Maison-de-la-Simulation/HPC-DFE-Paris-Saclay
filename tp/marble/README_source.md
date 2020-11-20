@@ -689,6 +689,7 @@ Commencez par mettre à jour la définition des variables suivnate :
 - `this->id` qui représente l'index du patch
 - `id_x`, `id_y`, `id_z` qui représente les coordonnées du patch dans la topologie
 Le calcul de la taille du patch et des bornes maximales et minimales reste inchangé :
+
 ```C++
 this->patch_x_length = (params.xmax - params.xmin) / params.n_patches_x;
 this->patch_y_length = (params.ymax - params.ymin) / params.n_patches_y;
@@ -731,11 +732,24 @@ L'écritude devra respecter les formats utilisés pour la compatibilité avec le
 a) **Mise à jour de la fonction Particles::writeDiags :** Cette fonctioon appelle deux autres fonctions destinéées à écrire sous forme de fichiers la liste des particules et leurs propriétés :
 - `Particles::writeVTK` : écriture des fichiers vtk pour Paraview
 - `Particles::writeBinary` : écriture des fichiers binaires pour les scrits Python
+
 Vous allez devoir modifier l'ensemble de ces fonctions.
 Cette étape ressemble fortement à ce qui a été fait dans l'exercice 6 sur MPI.
-- Dans `Particles::writeDiags`, créez un tableau pour contenir la liste des particules dans chaque rang MPI et utilisez la bonne fonction MPI pour mettre à jour les valeurs
-- Calculez la somme des particules dans tout le domaine
-- Allouer des tableaux pour stocker les propriétés de l'ensemble des particules qui seront rappatriées sur le processeur 0
+Dans `Particles::writeDiags`, créez un tableau pour contenir la liste des particules que contient chaque rang MPI. Utilisez la bonne fonction MPI pour mettre à jour les valeurs sur le rang 0.
+Ce tableau est nécessaire pour les futures communications. Il permet au rang 0 de connaître le nombre de particules à recevoir des autres rangs.
+
+b) **Mise à jour de la fonction Particles::writeDiags - suite :** Créer un entier pour contenir la somme de toutes les particules, par exemple :
+```C++
+int total;
+```
+Calculez la somme des particules dans tout le domaine sur le processeur 0.
+
+c) **Mise à jour de la fonction Particles::writeDiags - suite :** Allouer des tableaux locaux à la fonction pour stocker les propriétés de l'ensemble des particules qui seront rappatriées sur le processeur 0. Les tableaux seront alloués sur tous les rangs mais la taille sera de 0 dans les rangs supérieurs à 0. Par exemple :
+```C++
+double * x = new double[total];
+```
+vous pouvez aussi utiliser la `std::vector` si vous préférez.
+
 - Utilisez les bonnes fonctions MPI pour ramener toutes les propriétés sur le processeur 0.
 - Modifiez l'interface des fonctions `Particles::writeVTK` et `Particles::writeBinary` pour passer en argument les propriétés agrégées des particules. Par exemple :
 ```C++
@@ -760,17 +774,34 @@ De même cela permet de simplifier la fonction `Particles::writeBinary` où l'é
 binary_file.write((char *) &x[0], sizeof(double)*number_of_particles);
 ```
 - Faites en sorte que seul le rang 0 ne s'occupe de l'écriture.
-- N'oubliez pas de supprimer les tableaux alloués dynamiquement pour éviter les fuites mémoires :
+- N'oubliez pas de supprimer les tableaux alloués dynamiquement à la fin de la fonction `Particles::writeDiags` pour éviter les fuites mémoires. Par exemple :
 ```C++
-delete x,y,z,vx,vy,vz,mass;
+delete [] x;
 ```
 
-b) **Mise à jour de la fonction Particles::writeDiags - suite :** décommentez l'appel à la fonction
+d) **Mise à jour de la fonction Particles::writeDiags - suite :** décommentez l'appel à la fonction
 `Particles::writeDiags` juste avant le démarrage de la boucle en temps.
 Cette sortie permet d'obtenir l'état de la simulation avant le démarrage de la boucle en temps.
 Compilez et exécutez le code avec plusieurs processus et regardez que le  domaine est bien initialisé.
 
-b) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code pour connaître la somme des particules de tous les rangs dans la simulation.
+e) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code pour connaître la somme des particules de tous les rangs dans la simulation.
 Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
+Décommentez l'appel à cette fonction dans [main.cpp](./cpp/patch/main.cpp).
 
-c) ****
+f) **Mise à jour de la fonction Particles::getTotalCollisionNumber :** La fonction `Particles::getTotalCollisionNumber` est utilisée pour connaître la somme des collisions survenues dans tous les rangs dans la simulation lors de la dernière itération.
+Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
+Décommentez l'appel à cette fonction dans [main.cpp](./cpp/patch/main.cpp).
+
+g) **Mise à jour de la fonction particles::getTotalEnergy :** Cette fonction calcule l'énergie cinétique totale contenue dans le système.
+Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
+Décommentez l'appel à cette fonction dans [main.cpp](./cpp/patch/main.cpp).
+
+h) **Mise à jour de la fonction particles::getMaxVelocity :** Cette fonction calcule l'énergie cinétique totale contenue dans le système.
+Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
+Décommentez l'appel à cette fonction dans [main.cpp](./cpp/patch/main.cpp).
+
+i) Décommentez l'appel à `Particles::writeDiags` au sein de la boucle en temps. Compilez et exécutez le code avec plusieurs processus pour voir si tout fonctione.
+
+**Question 4.8 - la boucle de calcul :** On va maintenant réactiver le contenu de la boucle de calcul que l'on a commenté au début de la modification du programme.
+
+a) La plupart des fonctions de la boucle ne nécessite que très peu de modification car elles sont locales au rang MPI. C'est le cas de `particles::push`, `particles::multipleCollisions`, `particles::walls`. Il faut simplement supprimer la boucle sur les patchs car chaque rang MPI n'a qu'un seul patch.

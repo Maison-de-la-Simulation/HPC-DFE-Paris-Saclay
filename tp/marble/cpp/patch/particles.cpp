@@ -62,12 +62,11 @@ void Particles::walls(struct Parameters params, Walls walls) {
 }
 
 // Multiple collison iterations
-void Particles::multipleCollisions(int & collision_counter,
-                                           struct Parameters params) {
+void Particles::multipleCollisions(struct Parameters params) {
     if (params.collision) {
         
         for (int i_patch = 0 ; i_patch < params.n_patches; i_patch++) {
-            collision_counter += patches[i_patch].multipleCollisions(params);
+            patches[i_patch].multipleCollisions(params);
         }
         
     }
@@ -138,6 +137,19 @@ void Particles::getTotalParticleNumber(struct Parameters params, int & total) {
     
     for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
        local = patches[i_patch].getParticleNumber();
+       total += local;
+    }
+}
+
+// Return the total number of collisions
+void Particles::getTotalCollisionNumber(struct Parameters params, int & total) {
+    
+    total = 0;
+    
+    int local;
+    
+    for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+       local = patches[i_patch].getCollisionNumber();
        total += local;
     }
 }
