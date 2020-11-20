@@ -534,12 +534,12 @@ void Patch::receivedParticlesFromNeighbors(std::vector<Patch> & patches) {
                 // Neighbor index
                 int k = ix+1 + (iy+1) * 3 + (iz+1) * 9;
                 
-                // Exchange buffer index (we remove the case ix = iy = iz = 0)
-                int l = (-1*ix) + 1 + (-1*iy+1) * 3 + (-1*iz+1) * 9;
-                if (l >= 13) l-= 1;
+                if (k != 13 && neighbor_indexes[k] >= 0) {
                 
+                    // Exchange buffer index (we remove the case ix = iy = iz = 0)
+                    int l = (-1*ix) + 1 + (-1*iy+1) * 3 + (-1*iz+1) * 9;
+                    if (l >= 13) l-= 1;
                 
-                if (neighbor_indexes[k] >= 0 && k != 13) {
                     
                     int exchange_size = patches[neighbor_indexes[k]].exchange[l].x.size();
                     
