@@ -408,9 +408,9 @@ int Patch::collisions(struct Parameters params) {
 }
 
 // Multiple collison iterations
-int Patch::multipleCollisions(struct Parameters params) {
+void Patch::multipleCollisions(struct Parameters params) {
     
-    int collision_counter = 0;
+    collision_counter = 0;
     int subcollision_counter = 0;
     int collision_iteration = 0;
     int max_collision_iteration = 10;
@@ -420,8 +420,6 @@ int Patch::multipleCollisions(struct Parameters params) {
         collision_counter += subcollision_counter;
         collision_iteration++;
     } while (subcollision_counter > 0 && collision_iteration < max_collision_iteration);
-    
-    return collision_counter;
     
 }
 
@@ -627,6 +625,11 @@ double Patch::getMaxVelocity() {
 // Return the number of particles
 int Patch::getParticleNumber() {
     return x.size();
+}
+
+// Return the number of collisions
+int Patch::getCollisionNumber() {
+    return collision_counter;
 }
 
 // Return the index of the requested neighbor

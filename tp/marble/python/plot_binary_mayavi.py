@@ -1,6 +1,9 @@
 # ______________________________________________________________________________
 #
-# Read and plot the particles at a specific iteration
+# Read and plot the particles at a specific iteration using Mayavi
+# you need to use Python 3 to use mayavi
+# With Anaconda, you can easily install it doing `conda install mayavi`
+# You can use pipi as well `pip install mayavi`
 #
 # ______________________________________________________________________________
 
@@ -9,7 +12,7 @@ import struct
 import numpy as np
 from matplotlib import *
 from matplotlib.pyplot import *
-from mpl_toolkits.mplot3d import Axes3D
+from mayavi import mlab
 
 # ______________________________________________________________________________
 # RCParams - personalize the figure output
@@ -47,7 +50,7 @@ else:
 # ______________________________________________________________________________
 # Read the binary file
 
-file = open(file_path, 'r')
+file = open(file_path, 'rb')
 
 content = file.read()
 
@@ -74,19 +77,26 @@ energy = 0.5 * mass * ( vx*vx + vy*vy + vz*vz)
 # ______________________________________________________________________________
 # Figure and plot
 
-fig = figure(figsize=(12, 8))
-ax = fig.gca(projection='3d')
+fig = mlab.figure(size=(600,600))
 
-im = ax.scatter(x, y, z, c=energy, marker='o', alpha = 1) # s = np.sqrt(radius)
-cb = colorbar(im)
-cb.set_label("Energy")
+glyph = mlab.points3d(x, y, z, energy, resolution=16) #scale_factor=radius
 
-ax.set_xlabel("x")
-ax.set_ylabel("y")
-ax.set_zlabel("z")
+mlab.axes()
+mlab.colorbar()
 
-ax.set_title("Particles from {}".format(file_path))
+# fig = figure(figsize=(12, 8))
+# ax = fig.gca(projection='3d')
+#
+# im = ax.scatter(x, y, z, c=energy, marker='o', alpha = 1) # s = np.sqrt(radius)
+# cb = colorbar(im)
+# cb.set_label("Energy")
+#
+# ax.set_xlabel("x")
+# ax.set_ylabel("y")
+# ax.set_zlabel("z")
+#
+# ax.set_title("Particles from {}".format(file_path))
+#
+# fig.tight_layout()
 
-fig.tight_layout()
-
-show()
+mlab.show()

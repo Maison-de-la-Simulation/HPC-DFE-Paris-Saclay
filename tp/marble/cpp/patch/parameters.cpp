@@ -28,7 +28,7 @@ void commandLineArguments(int argc, char * argv[], struct Parameters & params) {
             } else if (key == "-air_damping") {
                 params.air_damping = atof(argv[iarg+1]);
                 iarg++;
-            } else if (key == "-ve") {
+            } else if (key == "-velocities") {
                 params.vmin = atof(argv[iarg+1]);
                 params.vmax = atof(argv[iarg+2]);
                 iarg+=2;
@@ -64,7 +64,7 @@ void commandLineArguments(int argc, char * argv[], struct Parameters & params) {
             } else if (key == "-diags") {
                 params.output_period = atoi(argv[iarg+1]);
                 iarg++;
-            } else if (key == "-co") {
+            } else if (key == "-collision") {
                 int arg = atoi(argv[iarg+1]);
                 params.collision = (arg > 0);
                 iarg++;

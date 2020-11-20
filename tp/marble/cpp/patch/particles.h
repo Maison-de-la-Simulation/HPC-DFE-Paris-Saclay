@@ -39,7 +39,7 @@ class Particles
     int collisions(struct Parameters params);
     
     // Multiple collison iterations
-    void multipleCollisions(int & collision_counter, struct Parameters params);
+    void multipleCollisions(struct Parameters params);
     
     // Exchange particles between patches
     void exchange(struct Parameters params);
@@ -52,6 +52,9 @@ class Particles
     
     // Return the total number of particles
     void getTotalParticleNumber(struct Parameters params, int & total);
+    
+    // Return the total number of collisions
+    void getTotalCollisionNumber(struct Parameters params, int & total);
     
     // Output specifically the vtk files
     void writeVTK(struct Parameters params);

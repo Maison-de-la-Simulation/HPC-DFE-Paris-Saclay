@@ -239,7 +239,7 @@ int main( int argc, char *argv[] )
         timers.start("collisions");
         
         //collision_counter = particles.collisions(params);
-        particles.multipleCollisions(collision_counter, params);
+        particles.multipleCollisions(params);
         
         timers.stop("collisions");
         
@@ -272,6 +272,8 @@ int main( int argc, char *argv[] )
             particles.getMaxVelocity(params, max_velocity);
             
             particles.getTotalParticleNumber(params, particle_number);
+            
+            particles.getTotalCollisionNumber(params, collision_counter);
         
             std::cout << " Iteration: " << std::setw(5) << params.iteration
                       << " - total particles: " << std::setw(10) << particle_number
