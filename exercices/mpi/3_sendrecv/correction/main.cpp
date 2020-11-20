@@ -59,7 +59,7 @@ int main( int argc, char *argv[] )
 
     ierror =  MPI_Barrier(MPI_COMM_WORLD);
 
-    ierror = MPI_Sendrecv(&rank,                       // La partie du tableau à envoyer
+    ierror = MPI_Sendrecv(&rank,              // La partie du tableau à envoyer
                   1,                          // Le nombre d'éléments
                   MPI_INT,                // Le type de donnée utilisé
                   send_rank,                  // Le rang du voisin destinataire

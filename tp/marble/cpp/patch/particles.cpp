@@ -75,18 +75,14 @@ void Particles::multipleCollisions(struct Parameters params) {
 // Exchange particles between patches
 void Particles::exchange(struct Parameters params) {
     
-    // for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
-    //     std::cerr << " i_patch: " << i_patch
-    //               << " id: " << patches[i_patch].id
-    //               << " number of particles: " << patches[i_patch].x.size() << std::endl;
-    // }
-    // std::cerr << std::endl;
-    
-    
+    // step 1 : we identify the particles that leave the current patch to another
+    // We copy these particles in buffers.
+    // There is a buffer per direction, i.e. 26 in 3D.
     for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
         patches[i_patch].computeExchangeBuffers(params);
     }
     
+    // step 2: we delete the particles put in the buffers from the main array
     for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
         patches[i_patch].deleteLeavingParticles();
     }
@@ -94,14 +90,6 @@ void Particles::exchange(struct Parameters params) {
     for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
         patches[i_patch].receivedParticlesFromNeighbors(patches);
     }
-    
-    // for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
-    //     std::cerr << " i_patch: " << i_patch
-    //               << " id: " << patches[i_patch].id
-    //               << " number of particles: " << patches[i_patch].x.size() << std::endl;
-    // }
-    // std::cerr << std::endl;
-    
     
 }
 
