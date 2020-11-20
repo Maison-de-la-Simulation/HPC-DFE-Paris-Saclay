@@ -823,3 +823,8 @@ Dans la version séquentiel par patch, la procédure est divisée en 3 parties :
   Modifiez `Patch::receivedParticlesFromNeighbors` pour mener à bien les échanges MPI de particules.
  
 c) **Mise à jour de Particles::exchange :**
+
+
+A faire :
+- MPI_PROC_NULL
+- MPI_Gatherv dans le cours
