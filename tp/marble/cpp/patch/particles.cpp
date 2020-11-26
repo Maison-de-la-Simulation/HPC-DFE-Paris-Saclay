@@ -29,7 +29,7 @@ void Particles::initTopology(struct Parameters params) {
 // Initialize the particles for each patch
 void Particles::initParticles(struct Parameters params) {
 
-    if (2*params.vmax * params.step > params.radius) {
+    if (2*params.vmax * params.step > params.radius&&(params.collision > 0)) {
         std::cerr << " CONFIGURATION ERROR: a particle cannot cross more than a radius during a time step." << std::endl;
         std::cerr << " Maximal distanced: " << 2*params.vmax * params.step << " / radius: " << params.radius << std::endl;
         exit(0);

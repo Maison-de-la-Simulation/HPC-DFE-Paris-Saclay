@@ -48,7 +48,7 @@ void Patch::initTopology(struct Parameters params,
     this->patch_y_length = (params.ymax - params.ymin) / params.n_patches_y;
     this->patch_z_length = (params.zmax - params.zmin) / params.n_patches_z;
     
-    if (patch_x_length <= 2*radius || patch_y_length <= 2*radius || patch_z_length <= 2*radius) {
+    if ((patch_x_length <= 2*radius || patch_y_length <= 2*radius || patch_z_length <= 2*radius)) {
         std::cerr << " CONFIGURATION ERROR: a patch must be larger than a particle diameter." << std::endl;
         exit(0);
     }
@@ -120,42 +120,50 @@ void Patch::initParticles(struct Parameters params) {
     if (at_py_boundary) offset_py = radius;
     if (at_pz_boundary) offset_pz = radius;
     
-    // Position initialization while checking that 2 particles do not overlap
-    for (int ip = 0 ; ip < local_number ; ip++) {
-        
-        bool position_validated = false;
-        double distance;
-        int ip2;
-        
-        // std::cerr << "ip: " << ip
-        //           << " local_number: " << local_number
-        //           << " radius: " << radius
-        //           << " xmin: " << xmin << " " << xmax << " " << patch_x_length
-        //           << std::endl;
-        
-        // While the position is not validated, we regenerate the coordinates
-        while(!position_validated) {
+    // seed
+    srand48(id);
+    
+    if (params.overlap > 0) {
+        // Position initialization while checking that 2 particles do not overlap
+        for (int ip = 0 ; ip < local_number ; ip++) {
             
             x[ip] = drand48() * ( (xmax - offset_px) - (xmin + offset_mx) ) + (xmin + offset_mx);
             y[ip] = drand48() * ( (ymax - offset_py) - (ymin + offset_my) ) + (ymin + offset_my);
             z[ip] = drand48() * ( (zmax - offset_pz) - (zmin + offset_mz) ) + (zmin + offset_mz);
+
+        }
+    } else {
+        // Position initialization while checking that 2 particles do not overlap
+        for (int ip = 0 ; ip < local_number ; ip++) {
             
-            position_validated = true;
+            bool position_validated = false;
+            double distance;
+            int ip2;
             
-            ip2 = 0;
-            
-            // Here we check that ip and ip2 are not in contact
-            // If it is the case then the position is validated for ip
-            while (position_validated && ip2 < ip) {
+            // While the position is not validated, we regenerate the coordinates
+            while(!position_validated) {
                 
-                distance = std::pow(x[ip] - x[ip2],2) + std::pow(y[ip] - y[ip2],2) + std::pow(z[ip] - z[ip2],2);
+                x[ip] = drand48() * ( (xmax - offset_px) - (xmin + offset_mx) ) + (xmin + offset_mx);
+                y[ip] = drand48() * ( (ymax - offset_py) - (ymin + offset_my) ) + (ymin + offset_my);
+                z[ip] = drand48() * ( (zmax - offset_pz) - (zmin + offset_mz) ) + (zmin + offset_mz);
                 
-                if (distance < 4*radius*radius) {
-                    position_validated = false;
+                position_validated = true;
+                
+                ip2 = 0;
+                
+                // Here we check that ip and ip2 are not in contact
+                // If it is the case then the position is validated for ip
+                while (position_validated && ip2 < ip) {
+                    
+                    distance = std::pow(x[ip] - x[ip2],2) + std::pow(y[ip] - y[ip2],2) + std::pow(z[ip] - z[ip2],2);
+                    
+                    if (distance < 4*radius*radius) {
+                        position_validated = false;
+                    }
+                    
+                    ip2++;
+                    
                 }
-                
-                ip2++;
-                
             }
         }
     }
@@ -234,13 +242,6 @@ void Patch::push(struct Parameters params)  {
         y[ip] += vy[ip] * params.step;
         z[ip] += vz[ip] * params.step;
         
-        // std::cout << " i: " << ip
-        //           << " x: " << x[ip]
-        //           << " y: " << y[ip]
-        //           << " z: " << z[ip]
-        //           << " vx: " << vx[ip]
-        //            << std::endl;
-        
     }
     
     // std::cout << std::endl;
@@ -255,16 +256,6 @@ void Patch::walls(struct Parameters params, Walls walls) {
         for (int ip = 0 ; ip < x.size() ; ip++) {
         
             double d = distance(ip,wall) - radius;
-            
-            // if (id == 18 && ip == 29 ) {
-            //     std::cout << " i: " << ip
-            //               << " x: " << x[ip]
-            //               << " y: " << y[ip]
-            //               << " z: " << z[ip]
-            //               << " vx: " << vx[ip]
-            //               << " distance: " << d
-            //                << std::endl;
-            // }
             
             // Check if the particle has collided with one of the wall
             if ( d < 0 ) {
@@ -413,13 +404,12 @@ void Patch::multipleCollisions(struct Parameters params) {
     collision_counter = 0;
     int subcollision_counter = 0;
     int collision_iteration = 0;
-    int max_collision_iteration = 10;
     
     do {
         subcollision_counter = collisions(params);
         collision_counter += subcollision_counter;
         collision_iteration++;
-    } while (subcollision_counter > 0 && collision_iteration < max_collision_iteration);
+    } while (subcollision_counter > 0 && collision_iteration < params.collision);
     
 }
 
@@ -684,6 +674,18 @@ void Patch::getParticlePatchShift(int ip, int & x_shift, int & y_shift, int & z_
         z_shift = 0;
     }
     
+}
+
+// Convert the 3D index (x, y, z) of a patch into a global 1D index
+void Patch::patchCoordinatesToIndex(struct Parameters params, int & id, int id_x, int id_y, int id_z) {
+    id = id_z *(params.n_patches_y*params.n_patches_x) + id_y * params.n_patches_x + id_x;
+}
+
+// This fonction gives the coordinates of the patch in the topology from the 1d index
+void Patch::patchIndexToCoordinates(struct Parameters params, int id, int & id_x, int & id_y, int & id_z) {
+    id_z = (id / (params.n_patches_y*params.n_patches_x) );
+    id_y = (id - id_z * (params.n_patches_y*params.n_patches_x)) / params.n_patches_y;
+    id_x = (id - id_z * (params.n_patches_y*params.n_patches_x) - id_y * params.n_patches_x);
 }
 
 // Check that all particles are in the domain

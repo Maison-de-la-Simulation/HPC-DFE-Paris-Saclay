@@ -68,7 +68,7 @@ int main( int argc, char *argv[] )
     params.damping   = 0.01;
     params.mass_min  = 0.1;
     params.mass_max  = 0.5;
-    params.collision = true;
+    params.collision = 1;
     
     // diagnostic parameters
     params.output_period = 1;
@@ -170,6 +170,7 @@ int main( int argc, char *argv[] )
     std::cout << "  - particle speed min: " << params.vmin << std::endl;
     std::cout << "  - particle speed max: " << params.vmax << std::endl;
     std::cout << "  - collision: " << params.collision << std::endl;
+    std::cout << "  - overlap: " << params.overlap << std::endl;
     
     std::cout << std::endl;
     std::cout << " Time properties:" << std::endl;
