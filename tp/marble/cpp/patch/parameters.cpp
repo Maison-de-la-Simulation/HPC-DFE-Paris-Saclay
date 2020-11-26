@@ -28,7 +28,7 @@ void commandLineArguments(int argc, char * argv[], struct Parameters & params) {
             } else if (key == "-air_damping") {
                 params.air_damping = atof(argv[iarg+1]);
                 iarg++;
-            } else if (key == "-velocities") {
+            } else if (key == "-velocity") {
                 params.vmin = atof(argv[iarg+1]);
                 params.vmax = atof(argv[iarg+2]);
                 iarg+=2;
@@ -65,8 +65,12 @@ void commandLineArguments(int argc, char * argv[], struct Parameters & params) {
                 params.output_period = atoi(argv[iarg+1]);
                 iarg++;
             } else if (key == "-collision") {
-                int arg = atoi(argv[iarg+1]);
-                params.collision = (arg > 0);
+                params.collision = atoi(argv[iarg+1]);
+                if (params.collision < 0) params.collision = 0;
+                iarg++;
+            } else if (key == "-overlap") {
+                params.overlap = atoi(argv[iarg+1]);
+                if (params.overlap < 0) params.overlap = 0;
                 iarg++;
             } else {
                 iarg++;

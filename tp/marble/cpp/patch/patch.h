@@ -150,16 +150,10 @@ class Patch
     };
     
     // Convert the 3D index (x, y, z) of a patch into a global 1D index
-    void patchCoordinatesToIndex(struct Parameters params, int & id, int id_x, int id_y, int id_z) {
-        id = id_z *(params.n_patches_y*params.n_patches_x) + id_y * params.n_patches_y + id_x;
-    }
+    void patchCoordinatesToIndex(struct Parameters params, int & id, int id_x, int id_y, int id_z);
 
     // This fonction gives the coordinates of the patch in the topology from the 1d index
-    void patchIndexToCoordinates(struct Parameters params, int id, int & id_x, int & id_y, int & id_z) {
-        id_z = (id / (params.n_patches_y*params.n_patches_x) );
-        id_y = (id - id_z * (params.n_patches_y*params.n_patches_x)) / params.n_patches_y;
-        id_x = (id - id_z * (params.n_patches_y*params.n_patches_x) - id_y * params.n_patches_x);
-    }
+    void patchIndexToCoordinates(struct Parameters params, int id, int & id_x, int & id_y, int & id_z);
     
     // Return the index of the requested neighbor
     // If the neighbor does not exist the function returns -1
