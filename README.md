@@ -35,7 +35,8 @@ dans [le dossier exercices](./exercices/).
   - [Utilisation de MPI_SENDRECV](./exercices/mpi/3_sendrecv).
   - [Utilisation des communications non bloquantes MPI_ISEND/MPI_IRECV](./exercices/mpi/4_nonblockling_com).
   - [Utilisation de MPI_REDUCE](./exercices/mpi/5_reduce_com).
-  - [Création d'un communicateur cartésien](./exercices/mpi/6_cartesian_com).
+  - [Utilisation de MPI_GATHER](./exercices/mpi/6_gather_com).
+  - [Création d'un communicateur cartésien](./exercices/mpi/7_cartesian_com).
 
 ## Travaux pratiques
 
