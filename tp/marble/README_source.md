@@ -807,7 +807,8 @@ i) Décommentez l'appel à `Particles::writeDiags` au sein de la boucle en temps
 
 **Question 4.8 - la boucle de calcul :** On va maintenant réactiver le contenu de la boucle de calcul que l'on a commenté au début de la modification du programme.
 
-a) La plupart des fonctions de la boucle ne nécessite que très peu de modification car elles sont locales au rang MPI. C'est le cas de `particles::push`, `particles::multipleCollisions`, `particles::walls`. Il faut simplement supprimer la boucle sur les patchs car chaque rang MPI n'a qu'un seul patch.
+a) La plupart des fonctions de la boucle ne nécessite que très peu de modification car elles sont locales au rang MPI. C'est le cas de `particles::push`, `particles::multipleCollisions`, `particles::walls`.
+Il faut simplement supprimer la boucle sur les patchs car chaque rang MPI n'a qu'un seul patch.
 
 b) Il va maintenant falloir modifier les procédures d'échange pour les particules.
 Dans la version séquentiel par patch, la procédure est divisée en 3 parties :
@@ -819,12 +820,12 @@ Dans la version séquentiel par patch, la procédure est divisée en 3 parties :
   Comme pour la précédente, cette fonction n'a pas besoin d'être modifiée.
 - `Patch::receivedParticlesFromNeighbors` : Cette dernière étape de la procédure d'échange est la communication des particules stockés dans les buffers vers les rangs destinataires.
   C'est cette étape qu'il faudra modifier oour y introduire les fonctions MPI permettant l'échange des particules entre rangs voisins.
-  Etant donné que la topologie MPI est proche de la philosophie des pacths, on pourra réutiliser l'idée générale pour la gestion des voisins.
+  Etant donné que la topologie MPI est proche de la philosophie des *pacths*, on pourra réutiliser l'idée générale pour la gestion des voisins.
   Modifiez `Patch::receivedParticlesFromNeighbors` pour mener à bien les échanges MPI de particules.
+  Expliquez votre démarche en détail et le choix des fonctions MPI.
  
-c) **Mise à jour de Particles::exchange :**
+c) **Mise à jour de Particles::exchange :** Supprimez les boucles sur les *patchs* comme pour les autres fonctions appelées dans la boucle en temps.
 
 
 A faire :
 - MPI_PROC_NULL
-- MPI_Gatherv dans le cours
