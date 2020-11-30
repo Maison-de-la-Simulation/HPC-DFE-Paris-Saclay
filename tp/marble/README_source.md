@@ -365,26 +365,24 @@ On retrouve ensuite la définitions des fonctions qui s'appliquent sur les patch
 void initTopology(struct Parameters params);
 
 // Initialize the particles for each patch
-void initParticles(struct DomainProperties params,
-                    struct TimeProperties params,
-                    struct ParticleProperties params);
+void initParticles(struct Parameters params);
 ```
 Soit dans la boucle en temps :
 ```C++
 // Equation of movement applied to particles
-void push(struct TimeProperties time, struct DomainProperties params);
+void push(struct Parameters params);
 
 // Applied the walls to the particles
-void walls(struct TimeProperties params, struct DomainProperties params, Walls walls);
+void walls(struct Parameters params, Walls walls);
 
 // Perform the binary collisions
-unsigned int collisions(struct TimeProperties time, struct ParticleProperties params);
+unsigned int collisions(struct Parameters params);
 
 // Multiple collison iterations
-void multipleCollisions(unsigned int & collision_counter, struct TimeProperties time, struct DomainProperties params, struct ParticleProperties params);
+void multipleCollisions(unsigned int & collision_counter, struct Parameters params);
 
 // Exchange particles between patches
-void exchange(struct DomainProperties params);
+void exchange(struct Parameters params);
 
 // Return the total energy in the domain (all patches)
 void getTotalEnergy(double & total_energy);
@@ -399,7 +397,7 @@ void getTotalParticleNumber(unsigned int & total);
 void writeVTK(unsigned int iteration);
 
 // Write all type of diags
-void writeDiags(struct TimeProperties params, struct DiagProperties params);
+void writeDiags(struct Parameters params);
 ```
 
 **Fichier patch.cpp / .h :**
@@ -467,31 +465,31 @@ Il y a celle permettant l'initialisation :
 // This function initializes the patch topology :
 // - number of patches in each direction
 // - id and coordinates of all patches
-void initTopology(struct DomainProperties params, unsigned int id);
+void initTopology(struct Parameters params, unsigned int id);
 
 // Initialization functions
-void initParticles(struct DomainProperties params, struct TimeProperties time, struct ParticleProperties params);
+void initParticles(struct Parameters params);
 ```
 
 Puis les fonctions permmettant de pousser les particules, de gérer les conditions limites et les collisions :
 ```C++
 // Equation of movement applied to particles
-void push(struct TimeProperties time, struct DomainProperties params);
+void push(struct Parameters params);
 
 // Applied the walls to the particles
 void walls(struct TimeProperties params, Walls walls);
 
 // Perform the binary collisions
-unsigned int collisions(struct TimeProperties time, struct ParticleProperties params);
+unsigned int collisions(struct Parameters params);
 
 // Multiple collison iterations
-unsigned int multipleCollisions(struct TimeProperties time, struct ParticleProperties params);
+unsigned int multipleCollisions(struct Parameters params);
 ```
 
 On y trouve les fonctions destinées à l'échange de particules :
 ```C++
 // Determine particles to exchange
-void computeExchangeBuffers(struct DomainProperties params);
+void computeExchangeBuffers(struct Parameters params);
 
 // Delete the particles leaving particles marked by the mask vector
 void deleteLeavingParticles();
@@ -510,11 +508,14 @@ double getMaxVelocity();
 
 // Return the number of particles
 unsigned int getParticleNumber();
+
+// Return the number of collision
+int getCollisionNumber();
 ```
 
 Ces fonctions sont appelées dans la classe `Particles` (voir [Particles.cpp](./cpp/patch/Particles.cpp)).
 
-**Question 1.1 - première exécution :** Maintenant que vous avez une vision globale du code séquentiel. Compilez et exécutez-le avec
+**Question 1.1 - première exécution :** Maintenant que vous avez une vision globale du code séquentiel, compilez et exécutez-le avec
 les paramètres par défaut.
 
 **Question 1.2 :** L'exécution a généré des fichiers dans le dossier `diags`. Il y a plusieurs types de fichiers.
@@ -523,7 +524,11 @@ Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Para
 
 - a) Utilisez soit les scripts Python fournis dans le dossier [python](./python) pour visualiser les résultats (utilisez le [README](./python/README.md) pour plus d'information) ou Paraview.
 
-- b) Placez dans le rapport plusieurs images à différentes itérations de simulation.
+**Rapport :** Placez dans le rapport plusieurs images à différentes itérations de simulation.
+
+## II. Découverte de la machine de calcul
+
+### III. OpenMP
 
 ### IV. MPI
 
@@ -712,6 +717,24 @@ Cette fonction renvoie l'index ou le rang du patch de coordonnées relative `id_
 On tourne ainsi autour du patch courant pour déterminiter les rangs voisins.
 La fonction `Patch::getNeighborIndex` utilise la fonction `Patch::patchCoordinatesToIndex` qui à partir des cooordonnées donne le rang du patch dans la topologie.
 Mettez à jour cette fonction pour prendre en compte la topologie `params.topology_map`.
+Dans la fonction `Patch::getNeighborIndex`, faites en sorte que `MPI_PROC_NULL` soit la valeur du rang renvoyé par défaut:
+```C++
+int Patch::getNeighborIndex(struct Parameters params, int x_shift, int y_shift, int z_shift) {
+    
+    int index = MPI_PROC_NULL;
+    
+    if ((id_x + x_shift >= 0) && (id_x + x_shift < params.n_patches_x ) &&
+        (id_y + y_shift >= 0) && (id_y + y_shift < params.n_patches_y ) &&
+        (id_z + z_shift >= 0) && (id_z + z_shift < params.n_patches_z )) {
+            
+        int index_2;
+        patchCoordinatesToIndex(params, index_2, id_x + x_shift, id_y + y_shift, id_z + z_shift);
+        index = index_2;
+    }
+    return index;
+}
+```
+`MPI_PROC_NULL` est compris par MPI comme étant un rang inexistant.
 Pour compiler, vous devrez mettre à jour l'ensemble des appels à `Patch::getNeighborIndex`.
 
 i) Expliquez pourquoi la fonction `Patch::patchIndexToCoordinates` qui renvoyait les coordonnées d'un patch à partir de son index n'a plus lieu d'être ici ?
@@ -822,10 +845,12 @@ Dans la version séquentiel par patch, la procédure est divisée en 3 parties :
   C'est cette étape qu'il faudra modifier oour y introduire les fonctions MPI permettant l'échange des particules entre rangs voisins.
   Etant donné que la topologie MPI est proche de la philosophie des *pacths*, on pourra réutiliser l'idée générale pour la gestion des voisins.
   Modifiez `Patch::receivedParticlesFromNeighbors` pour mener à bien les échanges MPI de particules.
-  Expliquez votre démarche en détail et le choix des fonctions MPI.
+
+**Rapport :** Expliquez votre démarche en détaillant votre stratégie et vos choix des fonctions MPI.
  
 c) **Mise à jour de Particles::exchange :** Supprimez les boucles sur les *patchs* comme pour les autres fonctions appelées dans la boucle en temps.
 
+**Question 4.9 - vérification :** compilez et exécutez le code en utilisant plusieurs configurations et nombres de processeurs.
+Vérifiez que les résultats sont corrects.
 
-A faire :
-- MPI_PROC_NULL
+**Rapport :** Placer dans le rapport des images des résultats.
