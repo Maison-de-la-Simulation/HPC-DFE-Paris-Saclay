@@ -22,11 +22,11 @@ ARCHI_FLAGS=
 # Manage options
 
 # Optimization
-CPPFLAGS += -O3
+CPPFLAGS += -O3 -std=c++11
 
 # HDF5
-INCFLAGS += -I$(HDF5_HOME)/include/
-LDFLAGS += -L$(HDF5_HOME)/lib/ -lhdf5
+# INCFLAGS += -I$(HDF5_HOME)/include/
+# LDFLAGS += -L$(HDF5_HOME)/lib/ -lhdf5
 
 # ______________________________________________________________________________
 # Sources
