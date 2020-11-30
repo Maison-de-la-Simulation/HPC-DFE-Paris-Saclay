@@ -21,7 +21,7 @@ que MPI soit déjà installé et fonctionnel.
 
 Sur les postes de travail de l'université, MPI est déjà installé. En revanche, HDF5 n'est disponible qu'en séquentiel.
 
-Une version a été installé juste pour vous dans l'espace commun : `/public/m2_dfe/hdf5-1.10.4/build`.
+Une version a été installée juste pour vous dans l'espace commun : `/public/m2_dfe/hdf5-1.10.4/build`.
 
 La compilation génère un exécutable `executable`.
 

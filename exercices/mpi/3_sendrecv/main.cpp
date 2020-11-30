@@ -38,38 +38,39 @@ int main( int argc, char *argv[] )
 
     // Tous les processus ont la variable message initialisée à 0
 
-    int tag;
+    int tag = 0;
     int send_rank;
     int recv_rank;
     int recv_message;
+    int ierror;
 
     if (rank == 0) {
         send_rank = ???;
         recv_rank = ???;
     } else if (rank == number_of_ranks - 1) {
         send_rank = ???;
-        recv_rank = ???;    
+        recv_rank = ???;
     } else {
         send_rank = ???;
-        recv_rank = ???  
+        recv_rank = ???
     }
 
     std::cout << "Le rang " << rank << " envoie le message " << rank << " au rang " << send_rank << std::endl;
 
-    Call MPI_Barrier(MPI_COMM_WORLD);
+    ierror = MPI_Barrier(MPI_COMM_WORLD);
 
-    Call MPI_???(???,                       & ! La partie du tableau à envoyer
-                  ???,                          & ! Le nombre d'éléments
-                  ???,                & ! Le type de donnée utilisé
-                  ???,                  & ! Le rang du voisin destinataire
-                  tag,                        & ! tag de la communication
-                  ???,               & ! La partie du tableau qui va recevoir les données
-                  ???,                          & ! Le nombre d'éléments
-                  ???,                & ! Le type de donnée pour les données reçues
-                  ???,                  & ! Le rang du voisin qui va nous envoyer des données
-                  tag,                        & ! tag de la communication
-                  MPI_COMM_WORLD,             & ! Le communicateur
-                  MPI_STATUS_IGNORE,          & ! Stat
+    ierror = MPI_???(???,                       // La partie du tableau à envoyer
+                  ???,                      // Le nombre d'éléments
+                  ???,                      // Le type de donnée utilisé
+                  ???,                      // Le rang du voisin destinataire
+                  tag,                      // tag de la communication
+                  ???,               // La partie du tableau qui va recevoir les données
+                  ???,               // Le nombre d'éléments
+                  ???,               // Le type de donnée pour les données reçues
+                  ???,               // Le rang du voisin qui va nous envoyer des données
+                  tag,                        // tag de la communication
+                  MPI_COMM_WORLD,             // Le communicateur
+                  MPI_STATUS_IGNORE          // Status de la communication
                 );
 
     // On affiche les résultats
@@ -78,6 +79,6 @@ int main( int argc, char *argv[] )
 
     // Finalisation de MPI
 
-    Call MPI_Finalize()
+    MPI_Finalize();
 
 }

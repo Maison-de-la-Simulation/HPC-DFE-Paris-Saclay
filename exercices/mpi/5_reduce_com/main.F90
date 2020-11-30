@@ -94,14 +94,7 @@ program reduce
     ! Réduction de `local_integration ` pour avoir la valeur finale
     ! dans la variable `integration` sur le rang 0
 
-    Call MPI_???(???,                 & ! valeur local à réduire
-                    ???,                 & ! valeur finale
-                    ???,                 & ! Nombre d'éléments
-                    ???,             & ! Type de donnée échangé
-                    ???,             & ! Type de réduction
-                    ???,                   & ! Rang de destination de la réduction
-                    ???,      & ! Communicateur
-                    ierror)                ! Code d'erreur
+    Call MPI_???(???) 
 
     ! Affichage du résultat depuis le rang 0
 

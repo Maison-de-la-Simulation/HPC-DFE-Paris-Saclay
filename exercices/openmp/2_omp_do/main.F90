@@ -14,8 +14,10 @@ program omp_do
     integer                            :: N
     integer                            :: i
     integer                            :: count_1, count_2
+    real(8)                            :: cst
     
     N = 100000000
+    cst = 15.8
     
     allocate(A(N),B(N),C(N),D(N))
     
@@ -23,9 +25,9 @@ program omp_do
     
     ! Initialisation des tableaux
     Do i = 1,N
-        B(i) = cos(2.*i)
-        C(i) = sin(3.*i)
-        D(i) = cos(4.*i)**2
+        B(i) = cst*cos(2.*i)
+        C(i) = cst*sin(3.*i)
+        D(i) = cst*cos(4.*i)**2
     End do
     
     ! Boucle à paralléliser

@@ -62,6 +62,8 @@ program sendrecv
 
     ! On effectue maintenant les communications
 
+    tag = 0;
+
     Call MPI_???(???,                       & ! La partie du tableau à envoyer
                   ???,                          & ! Le nombre d'éléments
                   ???,                & ! Le type de donnée utilisé
@@ -73,7 +75,7 @@ program sendrecv
                   ???,                  & ! Le rang du voisin qui va nous envoyer des données
                   tag,                        & ! tag de la communication
                   MPI_COMM_WORLD,             & ! Le communicateur
-                  MPI_STATUS_IGNORE,          & ! Statut de la communication
+                  MPI_STATUS_IGNORE,          & ! Status de la communication
                   ierror)                       ! Code d'erreur
 
     ! On affiche les résultats
