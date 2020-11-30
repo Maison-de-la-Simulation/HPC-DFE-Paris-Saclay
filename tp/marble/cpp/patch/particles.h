@@ -57,13 +57,13 @@ class Particles
     void getTotalCollisionNumber(struct Parameters params, int & total);
     
     // Output specifically the vtk files
-    void writeVTK(struct Parameters params);
+    void writeVTK(struct Parameters params, int iteration);
     
     // Output specifically the binary files
-    void writeBinary(struct Parameters params);
+    void writeBinary(struct Parameters params, int iteration);
     
     // Write all type of diags
-    void writeDiags(struct Parameters params);
+    void writeDiags(struct Parameters params, int iteration);
     
     private:
     

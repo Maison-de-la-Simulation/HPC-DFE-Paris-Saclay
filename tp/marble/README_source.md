@@ -565,6 +565,24 @@ fonctionnant par directives.
 **Préparation :** Pour cette partie, faites une copie du dossier `patch` contenant le code pour la version séquentielle par patch que vous allez appeler `omp`.
 Dans la partie suivante du TP, il vous sera demandé de modifier les sources dans le dossier `omp`.
 
+**Question 3.1 - modification du makefile :** Ouvrez le makefile et rajouter l'option permettant de compiler les directives OpenMP :
+
+```Makefile
+CPPFLAGS += -O3 -std=c++11 -fopenmp
+```
+
+**Question 3.2 - région parallèle :** La première étape consiste à ouvrir correctement la ou les régions parallèles.
+
+a) En premier lieu placez dans [main.F90](./patch/main.cpp) la directive d'ouverture et de fermeture d'une région
+parallèle en OpenMP (`omp parallel`).
+
+b) Faites en sorte que le passage des paramètres soit partagé par défaut (`shared`) et prenez soin de définir en privé (`private`)
+les quelques paramètres qui en ont besoin.
+
+**Rapport :** Justifiez le choix de l'emplacement de la directive dans le code et le choix des paramètres passés en `private`.
+
+c) Compilez avec OpenMP (sans exécuter) pour vérifier.
+
 ### IV. MPI
 
 Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.
