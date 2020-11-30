@@ -9,14 +9,20 @@ capable de récupérer le nombre total de rangs et d'afficher pour chaque rang l
 
 2. Complétez maintenant la ligne permettant de récupérer le nombre total de processus MPI utilisés pour ce programme : `MPI_COMM_SIZE`. Ajoutez-y les bons arguments.
 
-3. Complètez maintenant la ligne permettant de récupérer le rang de chaque processus : `MPI_COMM_RANK`. Pour rappel, lorsqu'un programme MPI est exécuté, il est dupliqué suivant le nombre de processus demandé. Chaque processus exécute le code indépendamment.
+3. Complètez maintenant la ligne permettant de récupérer le rang de chaque processus : `MPI_COMM_RANK` en Fortan ou `MPI_Comm_rank` en C/C++.
+   Pour rappel, lorsqu'un programme MPI est exécuté, il est dupliqué suivant le nombre de processus demandé.
+   Chaque processus exécute le code indépendamment.
 
-4. Complètez la dernière ligne sur la finalisation de MPI : `MPI_FINALIZE`
+4. Complètez la dernière ligne sur la finalisation de MPI : `MPI_FINALIZE` en Fortran ou `MPI_Finalize` en C.
 
-5. Compilez le code :
-
+5. Compilez le code.
+En Fortran :
 ```bash
 mpif90 main.F90 -o executable
+```
+En C++ :
+```bash
+mpic++ main.cpp -o executable
 ```
 
 6. Exécutez le code en faisant varier le nombre de processus
@@ -36,16 +42,27 @@ mpirun -np 4 ./executable
 
 ```
 
-8. Comme pour le dernier exercice sur OpenMP, vous allez maintenant déclarer 4 tableaux A, B, C et D :
+8. Comme pour le dernier exercice sur OpenMP, vous allez maintenant déclarer et allouer 3 tableaux A, B et C :
 
 ```fortran
-real(8), dimension(:), allocatable :: A, B, C, D
+real(8), dimension(:), allocatable :: A, B, C
+
+allocate(A(local_N),B(local_N),C(local_N),D(local_N))
+```
+
+```C++
+double * A = new double[local_N];
+double * B = new double[local_N];
+double * C = new double[local_N];
 ```
 
 9. Faites en sorte que le nombre d'éléments dans les tableaux diminuent proportionnelement au nombre de rangs :
 ```fortran
 local_N = N / number_of_ranks
-allocate(A(local_N),B(local_N),C(local_N),D(local_N))
+```
+
+```C++
+int local_N = N / number_of_ranks;
 ```
 
 10. Initialisez ces tableaux :
@@ -57,16 +74,31 @@ Do i = 1,local_N
 End do
 ```
 
-11. Implémentez maintenant une boucle de calcul de la complexité de votre choix, par exemple :
-```fortran
-Do i = 1,local_N
-    A(i) = B(i) + C(i)*D(i)
-End do
+```C++
+for(int i = 0 ; i < local_N ; i++) {
+    A[i] = sin(4.0*i);
+    B[i] = pow(sin(10.0*i),2);
+    C[i] = cos(5.0*i);
+}
 ```
 
-12. Implémenter le calcul du temps passé dans la boucle de calcul précédente en utilisant `MPI_WTIME()`. Faites en sorte que chaque processus affiche le temps en même temps que son rang.
+11. Implémentez maintenant une boucle de calcul de la complexité de votre choix, par exemple :
+```fortran
+Do i = 2,local_N-1
+    A(i) = B(i) - C(i) + (B(i-1) + B(i+1) + 4*B(i))
+end do
+```
 
-13. Initilisez N avec une grande valeur et faites varier le nombre de processus MPI à l'execution.
+```C++
+for(int i = 1 ; i < local_N-1 ; i++) {
+    A[i] = B[i] - C[i] + (B[i-1] + B[i+1] + 4*B[i]);
+}
+```
+
+12. Implémenter le calcul du temps passé dans la boucle de calcul précédente en utilisant `MPI_WTIME()` (`MPI_Wtime` en C/C++).
+Faites en sorte que chaque processus affiche le temps en même temps que son rang.
+
+13. Initilisez `N` avec une grande valeur et faites varier le nombre de processus MPI à l'execution.
 Observez l'effet sur le temps de calcul de chaque rang.
 
 ## Compilation
