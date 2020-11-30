@@ -1,4 +1,4 @@
-# Cours de Calcul Haute Performance - Master 2 DFE
+# Cours de Calcul Haute Performance - Master 2 Dynamique des Fluide et Energétique - Paris Saclay
 
 Ce cours de HPC s'articule autour de 3 dossiers :
 - `support`: Les supports de cours (odt et pdf) sont dans cet espace
