@@ -118,7 +118,7 @@ La première partie de ce TP est la découverte du code dans sa version non para
 
 **Fichier main.F90 :**
 
-Ouvrez le fichier [main.F90](./main.F90) et commencez par explorer la structure du code.
+Ouvrez le fichier [main.F90](./sequential/main.F90) et commencez par explorer la structure du code.
 La première partie de l'initialisation est la définition des paramètres de simulation du code :
 
 ```fortran
@@ -136,14 +136,14 @@ diagnostic_period   = 100                 ! Période en nombre d'itération entr
 
 C'est ici que l'on peut jouer avec les paramètres comme la discrétisation de la grille (`Nx` et `Ny`),
 la taille de la grille (`Lx` et `Ly`), le nombre d'itération (`Nt`).
-Les paramètres sont stockés dans le fichier [parameters.F90](./parameters.F90).
+Les paramètres sont stockés dans le fichier [parameters.F90](./sequential/parameters.F90).
 Laissez ce fichier de côté pour le moment.
 
 La fonction `get_arguments` vous permet de passer certains arguments en ligne de commande au moment de l'exécution.
 
-La deuxième partie de l'initialisation va allouer les tableaux et définir des paramètres internes pour la simulation par l'appel à la fonction `initialize_domain` définie dans le fichier [physics.F90](./physics.F90).
+La deuxième partie de l'initialisation va allouer les tableaux et définir des paramètres internes pour la simulation par l'appel à la fonction `initialize_domain` définie dans le fichier [physics.F90](./sequential/physics.F90).
 Nécessairement, cette partie utilise les paramètres fournis plus haut dans `main.F90`.
-Laissez le fichier [physics.F90](./physics.F90) de côté pour le moment.
+Laissez le fichier [physics.F90](./sequential/physics.F90) de côté pour le moment.
 
 Après l'initialisation c'est la boucle en temps. Par étapes sont effectués :
 - la résolution de l'équation d'onde pour le pas de temps suivant par l'appel à la fonction `update_domain`
@@ -156,17 +156,17 @@ Une fois la boucle en temps terminée, les *timers* sont traités et affichés d
 
 **Fichier parameters.F90 :**
 
-Ouvrez le fichier [parameters.F90](./parameters.F90).
+Ouvrez le fichier [parameters.F90](./sequential/parameters.F90).
 Ce fichier contient le module Fortran `parameters` contenant lui l'ensemble des paramètres utilisés dans le code.
 C'est ici que vous trouverez les paramètres physiques, la déclaration des grilles et les paramètres numériques.
 C'est également ici que vous devrez ajouter de nouvelles variables si ces dernières ne sont pas locales aux subroutines.
 
 **Fichier physics.F90 :**
 
-Ouvrez le fichier [physics.F90](./physics.F90).
+Ouvrez le fichier [physics.F90](./sequential/physics.F90).
 Ce fichier contient les subroutines pour la résolution de l'équation d'onde et les choses connexes :
 - `initialize_domain` : Cette subroutine initialise la simulation à partir des paramètres d'entrée données
-  par l'utilisateur dans [main.F90](./main.F90). C'est notamment ici que sont allouées les grilles.
+  par l'utilisateur dans [main.F90](./sequential/main.F90). C'est notamment ici que sont allouées les grilles.
   A la fin de cette fonction, un récapitulatif des principaux paramètres est affiché dans le terminal.
   C'est ici que l'on rajoutera l'initialisation de certains paramètres pour MPI notamment.
   Vous pourrez aussi rajouter des informations à afficher pour la recherche de bug par exemple.
@@ -176,7 +176,7 @@ Ce fichier contient les subroutines pour la résolution de l'équation d'onde et
 
 **Fichier diagnostics.F90 :**
 
-Ouvrez le fichier [diagnostics.F90](./diagnostics.F90).
+Ouvrez le fichier [diagnostics.F90](./sequential/diagnostics.F90).
 Ce fichier contient les fonctions relatives à l'affichage dans le terminal ou la sortie des fichiers de grille :
 - `print_timestep_information` :
 - `compute_grid_integration` :
@@ -237,17 +237,17 @@ On utilisera cette copie comme référence.
 Faites maintenant une deuxième copie pour y placer les directives OpenMP et appelez-la `openmp`.
 Dans la partie suivante du TP, il vous sera demandé de modifier les sources dans le dossier `openmp`.
 
-**Question 3.1 - région parallèle :** En premier lieu placez dans [main.F90](./main.F90) la directive d'ouverture et de fermeture d'une région
+**Question 3.1 - région parallèle :** En premier lieu placez dans [main.F90](./sequential/main.F90) la directive d'ouverture et de fermeture d'une région
 parallèle en OpenMP (`omp parallel`).
 Faites en sorte que le passage des paramètres soit partagé par défaut (`shared`) et prenez soin de définir en privé (`private`)
 les quelques paramètres qui en ont besoin. Justifiez le choix de l'emplacement de la directive dans le code et
 le choix des paramètres passés en `private`. Compilez avec OpenMP (sans exécuter) pour vérifier.
 
 **Question 3.2 - temps :** Pour mesurer le temps, il va être nécessaire de remplacer les fonctions `call cpu_time(time)` par la fonction OpenMP
-spécifique `time = omp_get_wtime()` (https://www.openmp.org/spec-html/5.0/openmpsu160.html) dans [main.F90](./main.F90).
+spécifique `time = omp_get_wtime()` (https://www.openmp.org/spec-html/5.0/openmpsu160.html) dans [main.F90](./sequential/main.F90).
 Le paramètre `time` est un réel dans les deux cas représentant des secondes. Compilez avec OpenMP (sans exécuter) pour vérifier.
 
-**Question 3.3 - parallélisation de la boucle :** Dans [physics.F90](./physics.F90), ajoutez la directive permettant de paralléliser
+**Question 3.3 - parallélisation de la boucle :** Dans [physics.F90](./sequential/physics.F90), ajoutez la directive permettant de paralléliser
 la boucle de résolution de l'équation d'onde. Demandez à ce que le *scheduler* soit décidé au *runtime*. Compilez avec OpenMP (sans exécuter) pour vérifier.
 
 **Astuce** : vous pouvez rendre parallèle des opérations sur des tableaux en utilisant `!$OMP workshare` :
@@ -259,7 +259,7 @@ A(:) = B(:) + C(:)
 Ou tout simplement transformer ces opérations en boucle classique précédée de `!$omp do`.
 `workshare` ne semble cependant pas accepter la clause `schedule(runtime)`.
 
-**Question 3.4 - région séquentielle :** Dans [main.F90](./main.F90) et [physics.F90](./physics.F90), identifiez les régions qui
+**Question 3.4 - région séquentielle :** Dans [main.F90](./sequential/main.F90) et [physics.F90](./sequential/physics.F90), identifiez les régions qui
 nécessitent d'être faites en séquentiel. Ajoutez les directives souhaitées dans chaque cas. Justifiez rapidement votre choix.
 Compilez avec OpenMP (sans exécuter) pour vérifier.
 
@@ -273,13 +273,13 @@ avec la version séquentielle.
 
 Dans cette troisième partie, nous allons paralléliser le programme d'équation d'onde en utilisant la méthode par passage de message et la bibliothèque MPI.
 
-**Préparation :** Faites maintenant une copie du dossier `sequentiel` et appelez-la `mpi`.
+**Préparation :** Faites maintenant une copie du dossier `sequentiel` et appelez-le `mpi`.
 Vous allez modifier les sources pour y introduire la parallélisation MPI dans ce dossier.
 
 **Question 4.1 - makefile :** En premier lieu, il nous faut modifier le makefile pour pouvoir compiler avec MPI.
 Pour cela ouvrez le fichier `makefile` et remplacer `gfortran` par `mpif90` en tant que compilateur fortran (`FC`).
 Supprimez les *flags* faisant référence à OpenMP : `-fopenmp`.
-L'entête du makefle devrait ressembler à ça :
+L'entête du makefile devrait ressembler à ça :
 ```makefile
 # Fortran compiler (MPI wrapper)
 FC = mpif90
@@ -292,27 +292,27 @@ Il est tout à fait possible de compiler un code séquentiel avec le *wrappper* 
 Compilez le code en faisant `make` pour vous assurez qu'il n'y a pas d'erreur.
 
 **Question 4.2 - Initialisation de MPI :** Nous allons commencer par préparer le programme à MPI.
-Pour cela, commencez par inclure le header MPI dans le fichier [main.F90](./main.F90).
+Pour cela, commencez par inclure le header MPI dans le fichier [main.F90](./sequential/main.F90).
 Notez qu'il faudra l'inclure dans chaque fichier où sera appelées des fonctions MPI.
 
 Effectuez l'initialisation de MPI tout en récupérant le nombre de rang et le rang du processus en cours.
-Vous devrez déclarer les nouveaux paramètres dans le fichier [parameters.F90](./parameters.F90).
+Vous devrez déclarer les nouveaux paramètres dans le fichier [parameters.F90](./sequential/parameters.F90).
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
 Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
 N'oubliez pas de finaliser MPI tout de suite à la fin du programme.
 
 **Question 4.3 - Timers :** Avant de rentrer dans le coeur du sujet, nous allons préparer le calcul du temps avec MPI.
 
-a) En premier lieu, nous allons remplacer tous les appels à la fonction `cpu_time` dans le [main.F90](./main.F90) par la fonction MPI `MPI_WTIME()` plus adaptée.
+a) En premier lieu, nous allons remplacer tous les appels à la fonction `cpu_time` dans le [main.F90](./sequential/main.F90) par la fonction MPI `MPI_WTIME()` plus adaptée.
 
 Chaque processus MPI va donc faire un calcul local du temps passé dans chaque partie. Les bilans temporels ne seront affichés que par un seul processus.
-En revanche, nous allons faire quelques statistiques en affichant le temps minimal, moyen et maximal entre tous les processus pour chaque partie du code. Dans [parameters.F90](./parameters.F90), nous avons déjà déclaré les tableaux `minimum_timers`, `average_timers` et `maximum_timers` à cet effet.
+En revanche, nous allons faire quelques statistiques en affichant le temps minimal, moyen et maximal entre tous les processus pour chaque partie du code. Dans [parameters.F90](./sequential/parameters.F90), nous avons déjà déclaré les tableaux `minimum_timers`, `average_timers` et `maximum_timers` à cet effet.
 
 b) Utiliserz les fonctions MPI adéquates pour calculer le temps minimaml, moyen et maximal entre chaque processus.
 Il n'y a pas une solution unique à cet exercice (plusieurs méthodes MPI sont possibles).
-Vous pouvez coder cette partie directement dans [main.F90](./main.F90) avant l'affichage des temps.
+Vous pouvez coder cette partie directement dans [main.F90](./sequential/main.F90) avant l'affichage des temps.
 
-c) Demandez à ce que l'affichage des temps à la fin de [main.F90](./main.F90) ne soit fait que par le rang 0. Dans le cas contraire, votre affichage sera saturé par les sorties terminal de chaque processus.
+c) Demandez à ce que l'affichage des temps à la fin de [main.F90](./sequential/main.F90) ne soit fait que par le rang 0. Dans le cas contraire, votre affichage sera saturé par les sorties terminal de chaque processus.
 
 d) Compilez le code et exécutez le en demandant qu'un processeur.
 ```bash
@@ -325,11 +325,11 @@ dans les deux directions x et y.
 Chaque processus MPI devra s'occuper d'une sous-grille.
 La première chose à faire est donc de créer la topologie cartésienne.
 
-- a) Ajoutez les nouveaux paramètres MPI dans le fichier [parameters.F90](./parameters.F90) permettant de créer la topologie cartésienne.
+- a) Ajoutez les nouveaux paramètres MPI dans le fichier [parameters.F90](./sequential/parameters.F90) permettant de créer la topologie cartésienne.
 
 - b) Faites en sorte que la fonction de lecture des arguments en ligne de commande puisse lire le nombre de rangs dans chaque dimension (lignes commentées)
 
-- c) Ajoutez les fonctions MPI correspondantes permettant de créer la topologie cartésienne dans [main.F90](./main.F90).
+- c) Ajoutez les fonctions MPI correspondantes permettant de créer la topologie cartésienne dans [main.F90](./sequential/main.F90).
 Ces fonctions doivent être placées après la lecture des paramètres mais avant l'initialisation.
 
 - d) Rajoutez une condition qui vérifie que le nombre de processus dans chaque direction est conforme avec le nombre total de processus donné par la commande `mpirun`.
@@ -364,9 +364,9 @@ Pour commencer, vous allez créer les paramètres locaux suivant :
 
 Pour cela :
 
-- a) Déclarez ces paramètres dans [parameters.F90](./parameters.F90).
+- a) Déclarez ces paramètres dans [parameters.F90](./sequential/parameters.F90).
   
-- b) Calculez leurs valeurs dans la fonction `initialize_domain` de [physics.F90](./physics.F90).
+- b) Calculez leurs valeurs dans la fonction `initialize_domain` de [physics.F90](./sequential/physics.F90).
 
 - c) Modifiez ensuite l'allocation des tableaux pour utiliser les paramètres locaux. Vous pouvez également faire afficher à l'écran une partie de ces paramètres pour contrôler leurs valeurs.
 
@@ -377,7 +377,7 @@ d'utiliser la fonction `print` depuis n'importe quel rang).
 
 - e) Compilez et exécutez le code avec un processeur pour contrôler qu'il n'y a pas d'erreur à ce stade.
 
-**Question 4.6 - Calcul du pas de temps suivant :** Nous allons maintenant mettre à jour la subroutine permettant de calculer le pas de temps suivant `update_domain` dans [physics.F90](./physics.F90).
+**Question 4.6 - Calcul du pas de temps suivant :** Nous allons maintenant mettre à jour la subroutine permettant de calculer le pas de temps suivant `update_domain` dans [physics.F90](./sequential/physics.F90).
 
 - a) Mettez à jour les bornes des boucles sur les éléments de grille en utilisant les paramètres locaux.
 
@@ -388,11 +388,11 @@ d'utiliser la fonction `print` depuis n'importe quel rang).
 Pour cela, nous allons travailler directement dans la boucle en temps.
 Vous allez implémenter en utilisant le type de communication MPI adéquate les échanges de données vers les cellules fantômes juste avant de mettre à jour le domaine.
 Faites bien attention à communiquer dans chaque direction de l'espace (`-x`, `+x`, `-y`, `+y`).
-Rajouter de nouveaux *timers* autour de ces communications et faites les apparaître dans les détails de la boucle en temps à la fin de [main.F90](./main.F90).
+Rajouter de nouveaux *timers* autour de ces communications et faites les apparaître dans les détails de la boucle en temps à la fin de [main.F90](./sequential/main.F90).
 
 Compilez et exécutez le code avec un processeur pour contrôler qu'il n'y a pas d'erreur à ce stade.
 
-**Question 4.8 - Affichage des pas de temps :** Dans le fichier [diagnostics.F90](./diagnostics.F90), la fonction `print_timestep_information` permet d'afficher
+**Question 4.8 - Affichage des pas de temps :** Dans le fichier [diagnostics.F90](./sequential/diagnostics.F90), la fonction `print_timestep_information` permet d'afficher
 le pas de temps en cours et l'intégration de la grille à ce pas de temps.
 En parallèle, le calcul de l'intégration de la grille doit d'abord se faire localement puis une communication doit être faite pour sommer les contributions
 de chaque processus.
@@ -406,7 +406,7 @@ de chaque processus.
 Ici, nous allons adopter l'écriture de toute la grille par le seul processus 0. Cela signifie qu'il va falloir que tous les processus communiquent au processeur 0
 leur morceau de la grille globale. Le processus 0 reconstitue l'intégralité de la grille avant de l'écrire sur le disque comme en séquentiel.
 
-- a) Dans [diagnostics.F90](./diagnostics.F90), mettez en place un algorithme dans la fonction `output_grid` pour effectuer le rapatriement des grilles locales des autres processus vers le processus 0 dans une grille globale qui sera écrite sur le disque.
+- a) Dans [diagnostics.F90](./sequential/diagnostics.F90), mettez en place un algorithme dans la fonction `output_grid` pour effectuer le rapatriement des grilles locales des autres processus vers le processus 0 dans une grille globale qui sera écrite sur le disque.
 
 - b) Expliquez maintenant les raisons qui font que cette façon de faire n'est pas très efficace.
 
