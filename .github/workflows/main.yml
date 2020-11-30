@@ -25,5 +25,5 @@ jobs:
       # Runs a single command using the runners shell
       - name: build and test onde
         run: |
-          cd tp/onde/fortran
+          cd tp/onde/fortran/sequential
           make
