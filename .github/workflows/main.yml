@@ -27,3 +27,9 @@ jobs:
         run: |
           cd tp/onde/fortran/sequential
           make
+          
+      # Runs a single command using the runners shell
+      - name: build and test marble
+        run: |
+          cd tp/marble/cpp/patch
+          make
