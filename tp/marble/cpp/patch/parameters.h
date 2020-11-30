@@ -21,8 +21,7 @@ struct Parameters {
     
     double final;                       // Temps total de simulation
     double step;                        // Temps entre chaque itération
-    int final_iteration;       // Final number of iterations
-    int iteration;             // Number of iterations
+    int final_iteration;                // Final number of iterations
     double current;                     // Current time
 
     // ______________________________________

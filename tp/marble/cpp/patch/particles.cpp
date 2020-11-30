@@ -143,25 +143,25 @@ void Particles::getTotalCollisionNumber(struct Parameters params, int & total) {
 }
 
 // Write the particle diagnostics
-void Particles::writeDiags(struct Parameters params) {
-    if (params.iteration%params.output_period == 0) {
+void Particles::writeDiags(struct Parameters params, int iteration) {
+    if (iteration%params.output_period == 0) {
         // if (params.hdf5) {
         //     writeHDF5(params.iteration);
         // }
         if (params.vtk) {
-            writeVTK(params);
+            writeVTK(params, iteration);
         }
         if (params.binary) {
-            writeBinary(params);
+            writeBinary(params, iteration);
         }
     }
 }
 
 
 // Write the particle properties in a vitk file
-void Particles::writeVTK(struct Parameters params) {
+void Particles::writeVTK(struct Parameters params, int iteration) {
     
-    std::string file_name = "diags/particles_" + std::to_string(params.iteration) + ".vtk";
+    std::string file_name = "diags/particles_" + std::to_string(iteration) + ".vtk";
     
     std::ofstream vtk_file(file_name.c_str(), std::ios::out | std::ios::trunc);
     
@@ -241,9 +241,9 @@ void Particles::writeVTK(struct Parameters params) {
 }
 
 // Write the particle properties in a binary file
-void Particles::writeBinary(struct Parameters params) {
+void Particles::writeBinary(struct Parameters params, int iteration) {
     
-    std::string file_name = "diags/particles_" + std::to_string(params.iteration) + ".bin";
+    std::string file_name = "diags/particles_" + std::to_string(iteration) + ".bin";
     
     std::ofstream binary_file(file_name.c_str(), std::ios::out | std::ios::binary);
     

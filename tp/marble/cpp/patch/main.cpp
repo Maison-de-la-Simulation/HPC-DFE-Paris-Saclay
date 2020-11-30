@@ -205,8 +205,7 @@ int main( int argc, char *argv[] )
     
     timers.start("diags");
     
-    params.iteration = 0;
-    particles.writeDiags(params);
+    particles.writeDiags(params, 0);
     
     timers.stop("diags");
     
@@ -218,7 +217,7 @@ int main( int argc, char *argv[] )
     
     timers.start("main loop");
     
-    for (params.iteration = 1 ; params.iteration <= params.final_iteration; params.iteration++) {
+    for (int iteration = 1 ; iteration <= params.final_iteration; iteration++) {
         
         // Global variables initialized ____________
         
@@ -264,9 +263,9 @@ int main( int argc, char *argv[] )
         
         timers.start("diags");
         
-        particles.writeDiags(params);
+        particles.writeDiags(params, iteration);
         
-        if (params.iteration%params.print_period == 0) {
+        if (iteration%params.print_period == 0) {
         
             particles.getTotalEnergy(params, total_energy);
         
@@ -276,7 +275,7 @@ int main( int argc, char *argv[] )
             
             particles.getTotalCollisionNumber(params, collision_counter);
         
-            std::cout << " Iteration: " << std::setw(5) << params.iteration
+            std::cout << " Iteration: " << std::setw(5) << iteration
                       << " - total particles: " << std::setw(10) << particle_number
                       << " - total energy: " << std::setw(10) << total_energy
                       << " - collisions: " << std::setw(3) << collision_counter

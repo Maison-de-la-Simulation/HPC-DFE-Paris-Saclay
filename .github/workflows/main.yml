@@ -33,3 +33,9 @@ jobs:
         run: |
           cd tp/marble/cpp/patch
           make
+          
+      # Runs a single command using the runners shell
+      - name: build and test marble sequential
+        run: |
+          cd tp/marble/cpp/sequential
+          make
