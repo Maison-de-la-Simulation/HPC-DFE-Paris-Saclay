@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include "parameters.h"
-#include "hdf5.h"
+//#include "hdf5.h"
 #include "walls.h"
 
 //! Structure that represents a container of particles
