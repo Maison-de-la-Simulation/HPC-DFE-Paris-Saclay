@@ -4,7 +4,7 @@ Ce cours de HPC s'articule autour de 3 dossiers :
 - `support`: Les supports de cours (odt et pdf) sont dans cet espace
 - `exercices`: Les exercices mentionnés dans le cours sont dans ce dossier.
 - `tp`: Ce dossier contient les TPs.
-- `documentation` : de l'aide à l'installation des bibliothèques
+- `documentation` : de l'aide à l'installation des bibliothèques et autre
 
 ## Supports de cours
 
@@ -49,3 +49,7 @@ dans [le dossier exercices](./exercices/).
 - [MPI](./documentation/mpi.md).
 - [HDF5](./documentation/hdf5.md).
 - [readme2tex](./documentation/readme2tex.md).
+
+## Deepnote
+
+Vous pouvez essayer ce projet en ligne grâce au service [Deepnote](./documentation/deepnote.md).
