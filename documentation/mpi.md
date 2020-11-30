@@ -23,6 +23,7 @@ Désinstallez d'abord une ancienne version avant d'en installer une nouvelle.
 #### MPICH
 
 ```bash
+sudo apt-get update
 sudo apt install mpich
 ```
 
