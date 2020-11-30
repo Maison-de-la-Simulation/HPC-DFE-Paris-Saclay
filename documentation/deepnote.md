@@ -7,6 +7,7 @@ Ce service est à l'origine porté sur l'Utilisation de notebook Jupyter collabo
 Il embarque de nombreux outils permettant le développement en ligne.
 
 Nous avons mis en place un environnement complet pour ce cours.
+Les bibliothèques principales y sont installées.
 Vous trouverez le projet sur ce lien : https://deepnote.com/project/d66cb4f8-7e0d-44bb-bd40-99b22b0cf318.
 
 ## Accéder et dupliquer l'environnement Deepnote
