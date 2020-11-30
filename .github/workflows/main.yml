@@ -21,6 +21,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: paquets
+        run: apt-get install libhdf5-dev
 
       # Runs a single command using the runners shell
       - name: build and test onde

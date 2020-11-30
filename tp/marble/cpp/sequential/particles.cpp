@@ -368,9 +368,9 @@ double Particles::maxVelocity() {
 // Write the particle diagnostics
 void Particles::writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties) {
     if (time_properties.iteration%diag_properties.output_period == 0) {
-        if (diag_properties.hdf5) {
-            writeHDF5(time_properties.iteration);
-        }
+        // if (diag_properties.hdf5) {
+        //     writeHDF5(time_properties.iteration);
+        // }
         if (diag_properties.vtk) {
             writeVTK(time_properties.iteration);
         }
@@ -378,57 +378,57 @@ void Particles::writeDiags(struct TimeProperties time_properties, struct DiagPro
 }
 
 // Write the particle properties in a hdf5 file
-void Particles::writeHDF5(unsigned int iteration) {
-    
-    hid_t       file, space, dset;
-    herr_t      status;
-    
-    std::string data_set;
-    
-    std::string file_name = "diags/particles_" + std::to_string(iteration) + ".h5";
-    
-    // Creation of the file
-    file = H5Fcreate (file_name.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
-
-    // Create dataspace.  Setting maximum size to NULL sets the maximum
-    // size to be the current size.
-    hsize_t     dims[1] = {x.size()};
-    space = H5Screate_simple (1, dims, NULL);
-    
-    // Creation of the datasets
-    data_set = "mass";
-    dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-    status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &mass[0]);
-    
-    data_set = "x";
-    dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-    status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &x[0]);
-    
-    data_set = "y";
-    dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-    status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &y[0]);
-    
-    data_set = "z";
-    dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-    status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &z[0]);
-    
-    data_set = "vx";
-    dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-    status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &vx[0]);
-    
-    data_set = "vy";
-    dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-    status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &vy[0]);
-    
-    data_set = "vz";
-    dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-    status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &vz[0]);
-    
-    status = H5Dclose (dset);
-    status = H5Sclose (space);
-    status = H5Fclose (file);
-        
-}
+// void Particles::writeHDF5(unsigned int iteration) {
+//
+//     hid_t       file, space, dset;
+//     herr_t      status;
+//
+//     std::string data_set;
+//
+//     std::string file_name = "diags/particles_" + std::to_string(iteration) + ".h5";
+//
+//     // Creation of the file
+//     file = H5Fcreate (file_name.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
+//
+//     // Create dataspace.  Setting maximum size to NULL sets the maximum
+//     // size to be the current size.
+//     hsize_t     dims[1] = {x.size()};
+//     space = H5Screate_simple (1, dims, NULL);
+//
+//     // Creation of the datasets
+//     data_set = "mass";
+//     dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+//     status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &mass[0]);
+//
+//     data_set = "x";
+//     dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+//     status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &x[0]);
+//
+//     data_set = "y";
+//     dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+//     status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &y[0]);
+//
+//     data_set = "z";
+//     dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+//     status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &z[0]);
+//
+//     data_set = "vx";
+//     dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+//     status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &vx[0]);
+//
+//     data_set = "vy";
+//     dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+//     status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &vy[0]);
+//
+//     data_set = "vz";
+//     dset = H5Dcreate (file, data_set.c_str(), H5T_IEEE_F64LE, space, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+//     status = H5Dwrite (dset, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, &vz[0]);
+//
+//     status = H5Dclose (dset);
+//     status = H5Sclose (space);
+//     status = H5Fclose (file);
+//
+// }
 
 // Write the particle properties in a vitk file
 void Particles::writeVTK(unsigned int iteration) {
