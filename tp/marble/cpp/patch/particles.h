@@ -7,9 +7,9 @@
 #include <iostream>
 #include <sstream>
 #include "parameters.h"
-#include "hdf5.h"
 #include "walls.h"
 #include "patch.h"
+//#include "hdf5.h"
 
 //! class Particles
 class Particles
