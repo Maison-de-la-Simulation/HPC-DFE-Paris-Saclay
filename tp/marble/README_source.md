@@ -569,6 +569,7 @@ Dans la partie suivante du TP, il vous sera demandé de modifier les sources dan
 
 ```Makefile
 CPPFLAGS += -O3 -std=c++11 -fopenmp
+LDFLAGS += -fopenmp
 ```
 
 **Question 3.2 - région parallèle :** La première étape consiste à ouvrir correctement la ou les régions parallèles.

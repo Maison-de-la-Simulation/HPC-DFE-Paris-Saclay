@@ -7,8 +7,8 @@
 #include <iostream>
 #include <sstream>
 #include "parameters.h"
-#include "hdf5.h"
 #include "walls.h"
+//#include "hdf5.h"
 
 //! class Particles
 class Particles
@@ -42,7 +42,7 @@ class Particles
     void writeDiags(struct TimeProperties time_properties, struct DiagProperties diag_properties);
     
     // Output specifically the hdf5 files
-    void writeHDF5(unsigned int iteration);
+    // void writeHDF5(unsigned int iteration);
     
     // Output specifically the vtk files
     void writeVTK(unsigned int iteration);
