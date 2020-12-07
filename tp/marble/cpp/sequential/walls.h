@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include "parameters.h"
-#include "hdf5.h"
+//#include "hdf5.h"
 
 struct Wall {
     double normal[3];     // Normal vector
