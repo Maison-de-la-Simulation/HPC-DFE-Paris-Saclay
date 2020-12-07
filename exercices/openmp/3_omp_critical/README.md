@@ -1,6 +1,6 @@
 # Exercice 3 : Zone critique
 
-Ce troisième exercice illustre l'utilisté des régions critiques.
+Ce troisième exercice illustre l'utilisation des régions critiques.
 
 ## Consignes
 

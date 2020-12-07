@@ -36,7 +36,7 @@ jobs:
       # Exercises
       - name: build and test openmp exercise
         run: |
-          cd exercises/openmp/1_omp_parallel/correction
+          cd exercices/openmp/1_omp_parallel/correction
           g++ -O3 -fopenmp main.cpp -o c_exe
           gfortran -O3 -fopenmp main.F90 -o f_exe
           
