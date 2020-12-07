@@ -593,9 +593,50 @@ a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque openMP da
 
 b) Modifiez maintenant les fonctions dans la classe `timers` pour utiliser `time = omp_get_wtime()`.
 
+c) Faites-en sorte que seul le thread *master* puisse récupérer le temps afin d'éviter la concurrence mémoire sur les *timers*.
+
 c) Compilez avec OpenMP (sans exécuter) pour vérifier.
 
-**Question 3.4 - **
+**Question 3.4 - parallélisation de la boucle :** On va maintenant paralléliser la boulce en temps.
+Ici, on répartira les *patchs* sur les différents threads.
+
+a) Dans la boucle en temps de [main.cpp](./patch/main.cpp), identifiez les portions de code qui ne peuvent être
+exécutées en parallel et nécessite l'utilisation d'une directive `omp single`.
+
+**Rapport :** Justifiez soigneusement vos choix
+
+b) Les différentes étapes de la boucle en temps sont définies dans [particles.cpp](./patch/particles.cpp).
+Rajoutez la directive permettant de paralléliser les boucles sur les patchs dans les fonctions le permettant.
+Ajoutez également la clause permettant de choisir le scheduler au runtime :
+```
+#pragma omp for schedule(runtime)
+```
+
+**Rapport :** Justifiez soigneusement vos choix
+
+c) Les fonctions permettant de calculer certains paramètres globaux que sont :
+- `particles.getTotalEnergy(params, total_energy);` pour obtenir l'énergie totale
+- `particles.getMaxVelocity(params, max_velocity);` pour obtenir la vitesse de la particule la plus rpaide
+- `particles.getTotalParticleNumber(params, particle_number);` pour obtenir le nombre total de particules
+- `particles.getTotalCollisionNumber(params, collision_counter);` pour obtenir le nombre total de collision
+nécessite également un traitement supplémentaire.
+Ce sont des fonctions de réduction.
+Parallélisez les boucles de ces fonctions tout rajoutant la clause permettant de gérer la réduction.
+
+**Attention :** j'ai remarqué quelques problèmes avec ces réductions soient à la compilation soit à l'exécution.
+Il est possible de les remplacer par un `omp single` ou l'utilisation de région critique en cas de problème.
+
+d) Compilez avec OpenMP (sans exécuter) pour vérifier.
+
+**Questions 3.5 - exécution :** Nous allons maintenant vérifier que le programme OpenMP fonctionne bien.
+
+a) Exportez dans votre environnement les variables pour le nombre de *threads* OpenMP (par exemple `OMP_NUM_THREADS=4`) et
+le type *scheduler* ainsi que le le nombre de *chunks*. Choisissez pour commencer `OMP_SCHEDULE="static"`. Exécutez le code.
+
+b) Comparez les résultats avec le code séquentiel.
+
+**Questions 3.6 - visualisation des résultats :** Visualisez les fichiers de sortie pour vous assurer que les résultats sont identiques
+avec la version séquentielle.
 
 ### IV. MPI
 
