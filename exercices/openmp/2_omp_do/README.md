@@ -7,7 +7,7 @@ tout en gérant les zones séquentielles.
 
 1. Compilez et exécutez ce code séquentiel pour l'instant.
 
-2. Insérer la directive `!$omp parallel` le plus haut possible dans le code ainsi que la directive `!$omp end parallel`.
+2. Placez la région parallèle en la faisant commencer le plus haut possible dans le code.
    
 3. Spécifiez que par défaut les variables sont partagées.
 
