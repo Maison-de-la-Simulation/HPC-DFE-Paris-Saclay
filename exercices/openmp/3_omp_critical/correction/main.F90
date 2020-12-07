@@ -13,7 +13,7 @@ program omp_do
     
     implicit none
     
-    integer  :: N = 100000000
+    integer  :: N
     real(8)  :: sum = 0
     real(8)  :: time_0, time_1
     integer  :: id, i
@@ -26,15 +26,17 @@ program omp_do
     
     ! Chaque thread ajoute à sum sa contribution N fois
     Do i = 1,N
+        !#omp atomic
         sum = sum + cos(2._8*id*i)
     End do
     
     time_1 = omp_get_wtime();
     
+    !#omp critical
     write(*,'(" Thread ",I4," : ",F10.2, " s")') id,real(time_1 - time_0)
     
     !# omp end parallel
     
-    write(*,'(" Sum : ",F15.4)') sum
+    write(*,'(" Sum : ",F10.2)') sum
     
 end program
