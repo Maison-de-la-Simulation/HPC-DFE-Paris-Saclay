@@ -477,7 +477,7 @@ Puis les fonctions permmettant de pousser les particules, de gérer les conditio
 void push(struct Parameters params);
 
 // Applied the walls to the particles
-void walls(struct TimeProperties params, Walls walls);
+void walls(struct Parameters params, Walls walls);
 
 // Perform the binary collisions
 unsigned int collisions(struct Parameters params);
@@ -574,7 +574,7 @@ LDFLAGS += -fopenmp
 
 **Question 3.2 - région parallèle :** La première étape consiste à ouvrir correctement la ou les régions parallèles.
 
-a) En premier lieu placez dans [main.F90](./patch/main.cpp) la directive d'ouverture et de fermeture d'une région
+a) En premier lieu placez dans [main.cpp](./patch/main.cpp) la directive d'ouverture et de fermeture d'une région
 parallèle en OpenMP (`omp parallel`).
 
 b) Faites en sorte que le passage des paramètres soit partagé par défaut (`shared`) et prenez soin de définir en privé (`private`)
@@ -583,6 +583,19 @@ les quelques paramètres qui en ont besoin.
 **Rapport :** Justifiez le choix de l'emplacement de la directive dans le code et le choix des paramètres passés en `private`.
 
 c) Compilez avec OpenMP (sans exécuter) pour vérifier.
+
+**Question 3.3 - temps :** Pour mesurer le temps, il va être nécessaire de remplacer les fonctions `gettimeofday` par la fonction OpenMP
+spécifique `time = omp_get_wtime()` (https://www.openmp.org/spec-html/5.0/openmpsu160.html).
+Le temps est géré par les *timers* dans le fichier [timers.cpp](./patch/timers.cpp).
+N'oubliez pas que la fonction `time = omp_get_wtime()` renvoie des secondes.
+
+a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque openMP dans [timers.h](./patch/timers.h)
+
+b) Modifiez maintenant les fonctions dans la classe `timers` pour utiliser `time = omp_get_wtime()`.
+
+c) Compilez avec OpenMP (sans exécuter) pour vérifier.
+
+**Question 3.4 - **
 
 ### IV. MPI
 
