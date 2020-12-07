@@ -5,7 +5,7 @@
 //
 // Dans cet exercice, nous intégrons la fonction f(x) = sin(x) de
 // manière numérique entre 0 et pi/2 et de manière parallèle
-// On utilis une intégration par la méthode des rectangles.
+// On utilise une intégration par la méthode des rectangles.
 // Le domaine est subdivisé suivant le nombre de processus MPI demandé.
 //
 //
