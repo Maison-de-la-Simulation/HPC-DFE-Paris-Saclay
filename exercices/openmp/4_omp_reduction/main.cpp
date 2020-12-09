@@ -14,10 +14,9 @@
 #include <cmath>
 #include <ctime>
 #include <unistd.h>
+#include <iomanip>
 
-// il est important d'inclure la bibliothèque
-// sans quoi aucun de vos appels ne sera reconnu.
-#include <mpi.h>
+#include "omp.h"
 
 int main( int argc, char *argv[] )
 {
@@ -27,7 +26,7 @@ int main( int argc, char *argv[] )
     // Paramètres globaux
 
     double pi                   = 3.1415926535897932;        // Le nombre pi
-    int discretization          = 1000;                      // Discrétisation par processus
+    int discretization          = 100000;                      // Discrétisation par processus
     double min = 0;
     double max = 0.5*pi;
 
@@ -38,16 +37,20 @@ int main( int argc, char *argv[] )
     double x;                                                     // Variable d'intégration
     double integration = 0;                                           // Valeur finale de l'intégration
     
+    double time_1 = omp_get_wtime();
 
     // Intégration
-
     for (int i = 0 ; i < discretization ; i++) {
-        x = min + (i+1-0.5)*delta ;
+        x = min + (i+0.5)*delta ;
         integration += sin(x)*delta ;
     }
-    
 
-    std::cout << "Intégration: " << integration << std::endl;
+    
+    double time_2 = omp_get_wtime();
+
+    std::cout << std::setprecision(15) << "Intégration: " << integration
+            << " - Temps: " << time_2 - time_1
+           << std::endl;
 
 
 }

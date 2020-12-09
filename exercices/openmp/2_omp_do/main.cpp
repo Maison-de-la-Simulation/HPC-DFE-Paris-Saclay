@@ -15,7 +15,7 @@
 int main( int argc, char *argv[] )
 {
 
-    int N = 100000000;
+    int N = 1000000;
 
     double cst = 15.8;
     
@@ -35,7 +35,7 @@ int main( int argc, char *argv[] )
     
     // Boucle à paralléliser
     for (int i = 0 ; i < N ; i++) {
-        A[i] = B[i]*B[i] + pow(C[i],3) + B[i]*C[i]*D[i];
+        A[i] = B[i]*B[i] + C[i]*C[i]*C[i] + B[i]*C[i]*D[i] + D[i]*D[i]*D[i]*D[i];
     }
     
     time_t time_2 = time(NULL);
