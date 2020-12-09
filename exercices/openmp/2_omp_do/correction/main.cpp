@@ -10,7 +10,6 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <ctime>
 
 // On fait appel à la bibliothèque OpenMP spécifique
 #include <omp.h>
@@ -18,7 +17,7 @@
 int main( int argc, char *argv[] )
 {
 
-    int N = 100000000;
+    int N = 1000000;
 
     double cst = 15.8;
     
