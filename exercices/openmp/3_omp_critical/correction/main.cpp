@@ -14,8 +14,8 @@
 int main( int argc, char *argv[] )
 {
 
-    int N = 100;
-    double sum;
+    int N = 1000;
+    double sum = 0;
     
     #pragma omp parallel default(shared)
     {
@@ -27,8 +27,8 @@ int main( int argc, char *argv[] )
         // Chaque thread traite son tableau
 
         for (int i = 0 ; i < N ; i++) {
-            #pragma omp atomic
-            sum += cos(2*id*i);
+            #pragma omp atomic update
+            sum += (2*(id+1)*i);
         }
 
         double time_1 = omp_get_wtime();
@@ -40,6 +40,6 @@ int main( int argc, char *argv[] )
         
     }
     
-    std::cout << " Sum: " << sum << std::endl;
+    std::cerr << std::setprecision(15) << " Sum: " << sum << std::endl;
     
 }

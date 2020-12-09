@@ -27,7 +27,7 @@ program omp_parallel
     write(*,'("Nombre maximal de thread openmp : ",I5)') nombre_max_de_threads
     write(*,'("Nombre de threads physiques : ",I5)') nombre_de_threads_physiques
     
-    !$omp parallel private(thread_id) default(shared)
+    !$omp parallel private(thread_id,nombre_de_threads) default(shared)
     
     ! Utilisation de la fonction spécifique pour récupérer le nombre actif de threads
     nombre_de_threads = omp_get_num_threads()
