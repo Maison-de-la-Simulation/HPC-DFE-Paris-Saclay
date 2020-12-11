@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <random>
 #include "parameters.h"
 //#include "hdf5.h"
 #include "walls.h"
@@ -47,7 +48,6 @@ class Patch
     
     // Initialization functions
     void initParticles(struct Parameters params);
-    void initParticlesTest(struct Parameters params);
     
     // Equation of movement applied to particles
     void push(struct Parameters params);
@@ -81,6 +81,9 @@ class Patch
     
     // Return the number of collision
     int getCollisionNumber();
+    
+    // Return the number of particles exchanged
+    int getExchangeNumber();
     
     // Check that all particles are in the domain
     void checkParticlesInDomain(struct Parameters params);
@@ -140,6 +143,9 @@ class Patch
     
     // counter for the collisions
     int collision_counter;
+    
+    // counter for the exchange
+    int exchange_counter;
     
     // Compute the distance between the specified particle and the given wall
     double distance(int ip, struct Wall wall);
