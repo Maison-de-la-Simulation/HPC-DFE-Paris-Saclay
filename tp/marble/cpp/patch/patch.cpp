@@ -4,7 +4,7 @@
 Patch::Patch() {
     
     // Prepare the buffers for exchange in each direction
-    exchange.resize(26);
+    exchange.resize(27);
     
 };
 
@@ -21,7 +21,7 @@ Patch::Patch( int number )
     mass.resize(number,0);
     
     // Prepare the buffers for exchange in each direction
-    exchange.resize(26);
+    exchange.resize(27);
     
 };
 
@@ -72,14 +72,10 @@ void Patch::initTopology(struct Parameters params,
                 int k = ix+ 1 + (iy+1) * 3 + (iz+1) * 9;
                 
                 neighbor_indexes[k] = getNeighborIndex(params, ix, iy, iz);
-                // if (neighbor_indexes[k] >= 0) {
-                //     std::cerr << neighbor_indexes[k] << " (" << ix << " " << iy << " " << iz << ")" << ", ";
-                // }
+
             }
         }
     }
-    
-    // std::cerr << std::endl;
     
     // Flag to know if the patch is at the boundary
     this->at_mx_boundary = (id_x == 0);
@@ -120,16 +116,17 @@ void Patch::initParticles(struct Parameters params) {
     if (at_py_boundary) offset_py = radius;
     if (at_pz_boundary) offset_pz = radius;
     
-    // seed
-    srand48(id);
+    std::random_device rd;  //Will be used to obtain a seed for the random number engine
+    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_real_distribution<> dis(0, 1);
     
     if (params.overlap > 0) {
         // Position initialization while checking that 2 particles do not overlap
         for (int ip = 0 ; ip < local_number ; ip++) {
             
-            x[ip] = drand48() * ( (xmax - offset_px) - (xmin + offset_mx) ) + (xmin + offset_mx);
-            y[ip] = drand48() * ( (ymax - offset_py) - (ymin + offset_my) ) + (ymin + offset_my);
-            z[ip] = drand48() * ( (zmax - offset_pz) - (zmin + offset_mz) ) + (zmin + offset_mz);
+            x[ip] = dis(gen) * ( (xmax - offset_px) - (xmin + offset_mx) ) + (xmin + offset_mx);
+            y[ip] = dis(gen) * ( (ymax - offset_py) - (ymin + offset_my) ) + (ymin + offset_my);
+            z[ip] = dis(gen) * ( (zmax - offset_pz) - (zmin + offset_mz) ) + (zmin + offset_mz);
 
         }
     } else {
@@ -143,9 +140,9 @@ void Patch::initParticles(struct Parameters params) {
             // While the position is not validated, we regenerate the coordinates
             while(!position_validated) {
                 
-                x[ip] = drand48() * ( (xmax - offset_px) - (xmin + offset_mx) ) + (xmin + offset_mx);
-                y[ip] = drand48() * ( (ymax - offset_py) - (ymin + offset_my) ) + (ymin + offset_my);
-                z[ip] = drand48() * ( (zmax - offset_pz) - (zmin + offset_mz) ) + (zmin + offset_mz);
+                x[ip] = dis(gen) * ( (xmax - offset_px) - (xmin + offset_mx) ) + (xmin + offset_mx);
+                y[ip] = dis(gen) * ( (ymax - offset_py) - (ymin + offset_my) ) + (ymin + offset_my);
+                z[ip] = dis(gen) * ( (zmax - offset_pz) - (zmin + offset_mz) ) + (zmin + offset_mz);
                 
                 position_validated = true;
                 
@@ -171,46 +168,23 @@ void Patch::initParticles(struct Parameters params) {
     // Mass and velocity initilization
     for (int ip = 0 ; ip < local_number ; ip++) {
     
-        mass[ip] = drand48() * (params.mass_max - params.mass_min) + params.mass_min;
+        mass[ip] = dis(gen) * (params.mass_max - params.mass_min) + params.mass_min;
     
-        double v     = drand48() * (params.vmax - params.vmin) + params.vmin;
-        double theta = drand48() * 2 * M_PI;
-        double phi   = drand48() * M_PI;
-    
-        vx[ip] = v * std::cos(theta)*std::cos(phi);
-        vy[ip] = v * std::sin(theta)*std::cos(phi);
-        vz[ip] = v * std::sin(phi);
+        double v     = dis(gen) * (params.vmax - params.vmin) + params.vmin;
+        
+        vx[ip] =  dis(gen)-0.5;
+        vy[ip] =  dis(gen)-0.5;
+        vz[ip] =  dis(gen)-0.5;
+        
+        v = v/std::sqrt(vx[ip]*vx[ip] + vy[ip]*vy[ip] + vz[ip]*vz[ip]);
+        
+        vx[ip] *= v;
+        vy[ip] *= v;
+        vz[ip] *= v;
     
     }
     
 };
-
-// Initilization for tests
-void Patch::initParticlesTest(struct Parameters params) {
-    radius = params.radius;
-    x.resize(2,0);
-    y.resize(2,0);
-    z.resize(2,0);
-    vx.resize(2,0);
-    vy.resize(2,0);
-    vz.resize(2,0);
-    mass.resize(2,0);
-    
-    x[0] = 0.1;
-    y[0] = 0.505;
-    z[0] = 0.5;
-    x[1] = 0.9;
-    y[1] = 0.5;
-    z[1] = 0.5;
-    vx[0] = 0.07;
-    vy[0] = 0;
-    vz[0] = 0;
-    vx[1] = -0.02;
-    vy[1] = 0;
-    vz[1] = 0;
-    mass[0] = 0.1;
-    mass[1] = 0.2;
-}
 
 // Push the particles using the velocity during the given time step
 // This function solves the equations of movements
@@ -423,7 +397,7 @@ void Patch::computeExchangeBuffers(struct Parameters params) {
     int neighbor_index ;
     
     // We reitnitialize the buffers
-    for (ibuffer = 0 ; ibuffer < 26 ; ibuffer++) {
+    for (ibuffer = 0 ; ibuffer < 27 ; ibuffer++) {
         exchange[ibuffer].x.resize(0);
         exchange[ibuffer].y.resize(0);
         exchange[ibuffer].z.resize(0);
@@ -436,6 +410,8 @@ void Patch::computeExchangeBuffers(struct Parameters params) {
     // We resize the mask to mark the particles that go away from this patch
     mask.resize(x.size());
     
+    exchange_counter = 0;
+    
     for (int ip = 0 ; ip < x.size() ; ip++) {
     
         mask[ip] = true;
@@ -447,13 +423,10 @@ void Patch::computeExchangeBuffers(struct Parameters params) {
         neighbor_index = getNeighborIndex(params, x_shift, y_shift, z_shift);
     
         // If the particle ip leave the patch...
-        if (!(x_shift == 0 && y_shift == 0 && z_shift == 0) && neighbor_index > 0) {
+        if (!(x_shift == 0 && y_shift == 0 && z_shift == 0) && neighbor_index >= 0) {
     
             // First we determine the buffer where to store this particle
             ibuffer = (z_shift+1) * 9 + (y_shift+1)*3 + (x_shift+1);
-    
-            // We remove the case zshift = yshift = xshift = 0
-            if (ibuffer >= 13) ibuffer -= 1;
     
             // We put the leaving particle in the correct buffer
             exchange[ibuffer].x.push_back(x[ip]);
@@ -464,13 +437,7 @@ void Patch::computeExchangeBuffers(struct Parameters params) {
             exchange[ibuffer].vz.push_back(vz[ip]);
             exchange[ibuffer].mass.push_back(mass[ip]);
             
-            // std::cerr << " id: " << id
-            //           << " ip: " << ip
-            //           << " ibuffer: " << ibuffer
-            //           << " xshift: " << x_shift
-            //           << " yshift: " << y_shift
-            //           << " zshift: " << z_shift
-            //           << std::endl;
+            exchange_counter++;
             
             mask[ip] = false;
     
@@ -494,10 +461,7 @@ void Patch::deleteLeavingParticles() {
             mass[ip] = mass[last_ip];
             mask[ip] = mask[last_ip];
             last_ip--;
-            
-            // std::cerr << " id: " << id
-            //           << " ip: " << ip
-            //           << std::endl;
+        
             
         } else {
             ip++;
@@ -528,17 +492,9 @@ void Patch::receivedParticlesFromNeighbors(std::vector<Patch> & patches) {
                 
                     // Exchange buffer index (we remove the case ix = iy = iz = 0)
                     int l = (-1*ix) + 1 + (-1*iy+1) * 3 + (-1*iz+1) * 9;
-                    if (l >= 13) l-= 1;
                 
                     
                     int exchange_size = patches[neighbor_indexes[k]].exchange[l].x.size();
-                    
-                    // if (id == 4) {
-                    //     std::cerr << " ix: " << ix << " iy: " << iy << " iz: " << iz
-                    //               << " neighbor_indexes[k]: " << neighbor_indexes[k]
-                    //               << " exchange_size: " << exchange_size
-                    //               << std::endl;
-                    // }
                     
                     if (exchange_size > 0) {
                         
@@ -622,6 +578,11 @@ int Patch::getCollisionNumber() {
     return collision_counter;
 }
 
+// Return the number of collisions
+int Patch::getExchangeNumber() {
+    return exchange_counter;
+}
+
 // Return the index of the requested neighbor
 // If the neighbor does not exist the function returns -1
 // x_shift : relative displacement regarding the current patch coordinates in the x direction
@@ -630,16 +591,29 @@ int Patch::getCollisionNumber() {
 int Patch::getNeighborIndex(struct Parameters params, int x_shift, int y_shift, int z_shift) {
     
     int index = -1;
+    int new_id_x = id_x + x_shift;
+    int new_id_y = id_y + y_shift;
+    int new_id_z = id_z + z_shift;
     
-    if ((id_x + x_shift >= 0) && (id_x + x_shift < params.n_patches_x ) &&
-        (id_y + y_shift >= 0) && (id_y + y_shift < params.n_patches_y ) &&
-        (id_z + z_shift >= 0) && (id_z + z_shift < params.n_patches_z )) {
-        int index_2;
-        
-        patchCoordinatesToIndex(params, index_2, id_x + x_shift, id_y + y_shift, id_z + z_shift);
-        
-        index = index_2;
+    if (new_id_x < 0) {
+        new_id_x = params.n_patches_x - 1;
+    } else if (new_id_x >= params.n_patches_x) {
+        new_id_x = 0;
     }
+    
+    if (new_id_y < 0) {
+        new_id_y = params.n_patches_y - 1;
+    } else if (new_id_y >= params.n_patches_y) {
+        new_id_y = 0;
+    }
+    
+    if (new_id_z < 0) {
+        new_id_z = params.n_patches_z - 1;
+    } else if (new_id_z >= params.n_patches_z) {
+        new_id_z = 0;
+    }
+    
+    patchCoordinatesToIndex(params, index, new_id_x, new_id_y, new_id_z);
     
     return index;
     

@@ -51,10 +51,13 @@ class Particles
     void getMaxVelocity(struct Parameters params, double & max_velocity);
     
     // Return the total number of particles
-    void getTotalParticleNumber(struct Parameters params, int & total);
+    void getTotalParticleNumber(struct Parameters params, int & total, int & imbalance);
     
     // Return the total number of collisions
     void getTotalCollisionNumber(struct Parameters params, int & total);
+    
+    // Return the total number of exchange
+    void getTotalExchangeNumber(struct Parameters params, int & total);
     
     // Output specifically the vtk files
     void writeVTK(struct Parameters params, int iteration);

@@ -74,8 +74,10 @@ struct Parameters {
     double vmax;            // Maximal velocity for init
     int number;    // Initial number of particles
     double damping;         // damping coefficient for inelastic collisions
-    int collision;         // Flag to activate the collisions
-    int overlap;         // Flag to determine if the particles can overlapo at initialization
+    int collision;          // Flag to activate the collisions
+    int overlap;            // Flag to determine if the particles can overlapo at initialization
+    int periodicity;        // Periodicity at the boundaries
+    
 };
 
 /* _______________________________________________ */

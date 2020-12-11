@@ -30,9 +30,11 @@ int main( int argc, char *argv[] )
     // Parameters ____________________________________________________________________________________
     
     int particle_number = 0;   // Number of particles in the simulation
+    int imbalance = 0;         // Particle imbalance
     double       total_energy;          // Total energy at each timestep
     double       max_velocity;          // Maximal velocity at each timestep
     int collision_counter;     // Counter for collisions per timestep
+    int exchange_counter;     // Number of exchanged particles per timestep
     
     struct Parameters    params;   // Global properties
     
@@ -69,6 +71,8 @@ int main( int argc, char *argv[] )
     params.mass_min  = 0.1;
     params.mass_max  = 0.5;
     params.collision = 1;
+    params.overlap   = 0;
+    params.periodicity = 0;
     
     // diagnostic parameters
     params.output_period = 1;
@@ -115,39 +119,42 @@ int main( int argc, char *argv[] )
     double point[3] = {0, 0, 0};
     double normal[3] = {0, 0, 0};
     
-    // xmin
-    point[0] = params.xmin;
-    normal[0] = 1;
-    walls.add(point, normal, params.wall_damping);
+    if (params.periodicity == 0) {
+        // xmin
+        point[0] = params.xmin;
+        normal[0] = 1;
+        walls.add(point, normal, params.wall_damping);
+        
+        // xmax
+        point[0] = params.xmax;
+        normal[0] = -1;
+        walls.add(point, normal, params.wall_damping);
+        
+        // ymin
+        point[0] = 0;
+        point[1] = params.ymin;
+        normal[0] = 0;
+        normal[1] = 1;
+        walls.add(point, normal, params.wall_damping);
+        
+        // ymax
+        point[1] = params.ymax;
+        normal[1] = -1;
+        walls.add(point, normal, params.wall_damping);
+        
+        // zmin
+        point[1] = 0;
+        point[2] = params.zmin;
+        normal[1] = 0;
+        normal[2] = 1;
+        walls.add(point, normal, params.wall_damping);
+        
+        // ymax
+        point[2] = params.zmax;
+        normal[2] = -1;
+        walls.add(point, normal, params.wall_damping);
+    }
     
-    // xmax
-    point[0] = params.xmax;
-    normal[0] = -1;
-    walls.add(point, normal, params.wall_damping);
-    
-    // ymin
-    point[0] = 0;
-    point[1] = params.ymin;
-    normal[0] = 0;
-    normal[1] = 1;
-    walls.add(point, normal, params.wall_damping);
-    
-    // ymax
-    point[1] = params.ymax;
-    normal[1] = -1;
-    walls.add(point, normal, params.wall_damping);
-    
-    // zmin
-    point[1] = 0;
-    point[2] = params.zmin;
-    normal[1] = 0;
-    normal[2] = 1;
-    walls.add(point, normal, params.wall_damping);
-    
-    // ymax
-    point[2] = params.zmax;
-    normal[2] = -1;
-    walls.add(point, normal, params.wall_damping);
     
     // Terminal output summary ________________________________________________________________
     std::cout << " ------------------------------------ "<< std::endl;
@@ -160,7 +167,7 @@ int main( int argc, char *argv[] )
     
     std::cout << std::endl;
     std::cout << " Particles properties:" << std::endl;
-    particles.getTotalParticleNumber(params, particle_number);
+    particles.getTotalParticleNumber(params, particle_number,imbalance);
     std::cout << "  - requested number of particles: " << params.number << std::endl;
     std::cout << "  - real number of particles: " << particle_number << std::endl;
     std::cout << "  - particle radius: " << params.radius << std::endl;
@@ -171,6 +178,7 @@ int main( int argc, char *argv[] )
     std::cout << "  - particle speed max: " << params.vmax << std::endl;
     std::cout << "  - collision: " << params.collision << std::endl;
     std::cout << "  - overlap: " << params.overlap << std::endl;
+    std::cout << "  - periodicity: " << params.periodicity << std::endl;
     
     std::cout << std::endl;
     std::cout << " Time properties:" << std::endl;
@@ -225,6 +233,7 @@ int main( int argc, char *argv[] )
         total_energy = 0;
         max_velocity = 0;
         particle_number = 0;
+        exchange_counter = 0;
         
         // Particle movements __________________
         
@@ -271,15 +280,19 @@ int main( int argc, char *argv[] )
         
             particles.getMaxVelocity(params, max_velocity);
             
-            particles.getTotalParticleNumber(params, particle_number);
+            particles.getTotalParticleNumber(params, particle_number, imbalance);
             
             particles.getTotalCollisionNumber(params, collision_counter);
+            
+            particles.getTotalExchangeNumber(params, exchange_counter);
         
             std::cout << " Iteration: " << std::setw(5) << iteration
                       << " - total particles: " << std::setw(10) << particle_number
                       << " - total energy: " << std::setw(10) << total_energy
                       << " - collisions: " << std::setw(3) << collision_counter
+                      << " - exchange: " << std::setw(3) << exchange_counter
                       << " - max v: " << std::setw(3) << max_velocity
+                      << " - imbalance: " << std::setw(3) << imbalance
                       << std::endl;
         }
         
