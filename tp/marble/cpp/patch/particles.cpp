@@ -117,16 +117,22 @@ void Particles::getMaxVelocity(struct Parameters params, double & max_velocity) 
 }
 
 // Return the total number of particles
-void Particles::getTotalParticleNumber(struct Parameters params, int & total) {
+void Particles::getTotalParticleNumber(struct Parameters params, int & total_particles, int & imbalance) {
     
-    total = 0;
+    total_particles = 0;
     
     int local;
+    int min = patches[0].getParticleNumber();
+    int max = min;
     
     for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
        local = patches[i_patch].getParticleNumber();
-       total += local;
+       min = std::min(min, local);
+       max = std::max(max, local);
+       total_particles += local;
     }
+    
+    imbalance = max - min;
 }
 
 // Return the total number of collisions
@@ -138,6 +144,19 @@ void Particles::getTotalCollisionNumber(struct Parameters params, int & total) {
     
     for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
        local = patches[i_patch].getCollisionNumber();
+       total += local;
+    }
+}
+
+// Return the total number of exchanged particles
+void Particles::getTotalExchangeNumber(struct Parameters params, int & total) {
+    
+    total = 0;
+    
+    int local;
+    
+    for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+       local = patches[i_patch].getExchangeNumber();
        total += local;
     }
 }
@@ -173,7 +192,8 @@ void Particles::writeVTK(struct Parameters params, int iteration) {
         vtk_file << "DATASET POLYDATA" << std::endl;
         
         int number = 0;
-        getTotalParticleNumber(params, number);
+        int imbalance;
+        getTotalParticleNumber(params, number, imbalance);
         
         // Particle positions
         vtk_file << std::endl;
@@ -252,7 +272,8 @@ void Particles::writeBinary(struct Parameters params, int iteration) {
     }
     
     int number;
-    getTotalParticleNumber(params,number);
+    int imbalance;
+    getTotalParticleNumber(params,number,imbalance);
     
     binary_file.write((char *) &number, sizeof(number));
     binary_file.write((char *) &patches[0].radius, sizeof(double));

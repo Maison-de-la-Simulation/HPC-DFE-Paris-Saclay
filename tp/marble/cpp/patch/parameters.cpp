@@ -72,6 +72,10 @@ void commandLineArguments(int argc, char * argv[], struct Parameters & params) {
                 params.overlap = atoi(argv[iarg+1]);
                 if (params.overlap < 0) params.overlap = 0;
                 iarg++;
+            } else if (key == "-periodicity") {
+                params.periodicity = atoi(argv[iarg+1]);
+                if (params.periodicity < 0) params.periodicity = 0;
+                iarg++;
             } else {
                 iarg++;
             }
