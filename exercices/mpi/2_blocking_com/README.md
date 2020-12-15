@@ -46,6 +46,10 @@ Call MPI_???(???,                  & ! La variable qui récupère le message
 mpif90 main.F90 -o executable
 ```
 
+```bash
+mpic++ main.cpp -o executable
+```
+
 5. Exécuter le code avec au moins 3 processus :
 
 ```bash

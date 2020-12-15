@@ -70,7 +70,7 @@ int main( int argc, char *argv[] )
                   recv_rank,                  // Le rang du voisin qui va nous envoyer des données
                   tag,                        // tag de la communication
                   MPI_COMM_WORLD,             // Le communicateur
-                  MPI_STATUS_IGNORE          // Stat
+                  MPI_STATUS_IGNORE          // Status
                 );
 
     // On affiche les résultats

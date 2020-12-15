@@ -40,7 +40,7 @@ int main( int argc, char *argv[] )
     // Tous les processus ont la variable message initialisée à 0
 
     int message = 0;
-    int tag;
+    int tag = 0;
 
     // Envoi du message du rang 1 vers le rang 2
 
