@@ -15,19 +15,19 @@ from matplotlib.pyplot import *
 times = {}
 
 # Nombre de processus
-times["cores"]       = np.array([8,16,24,32,64])
+times["cores"]       = np.array([1, 2, 4, 8,16,24,32,64])
 # Temps dans la boucle en temps
-times["loop"] = np.array([0.86520, 0.935701, 1.020537, 1.06815, 1.219218])
+times["loop"] = np.array([0.616910, 0.642110, 0.785144, 0.86520, 0.935701, 1.020537, 1.06815, 1.219218])
 # Temps pour les collisions
-times["collision"] = np.array([0.564491, 0.565023, 0.565586, 0.567919, 0.567763])
+times["collision"] = np.array([0.562996, 0.566060, 0.563235, 0.564491, 0.565023, 0.565586, 0.567919, 0.567763])
 # Temps dans les echanges de particules
-times["exchange"] = np.array([0.265890,0.274040,0.364613,0.312903,0.364556])
+times["exchange"] = np.array([0.031663, 0.051521, 0.195062, 0.265890, 0.274040, 0.364613, 0.312903, 0.364556])
 # Temps dans les communications globales
-times["exchange"] = np.array([0.265890,0.274040,0.364613,0.312903,0.364556])
+times["global"] = np.array([0.001389, 0.003636, 0.005965, 0.013941, 0.075780, 0.069431, 0.166404, 0.265865])
+
 
 # Calcul de l'efficacite pour une scalabilite faible
-efficiency = times["loop"][:] / times["loop"][0]
-
+times["efficiency"] = times["loop"][0] / times["loop"][:]
 
 # ______________________________________________________________________________
 # RCParams - pour ameliorer le rendu de la figure
@@ -62,13 +62,15 @@ ax = subplot(gs[:,:])
 
 ax.plot(times["cores"],times["loop"],lw=2,label="Boucle de calcul")
 ax.plot(times["cores"],times["collision"],lw=2,label="Collision")
-ax.plot(times["cores"],times["exchange"],lw=2,label="Temps echange particules")
-ax.plot(times["cores"],times["global"],lw=2,label="Temps echange particules")
+ax.plot(times["cores"],times["exchange"],lw=2,label="Echange particules")
+ax.plot(times["cores"],times["global"],lw=2,label="Communications globales")
 
 ax.set_xlabel("Nombre de processus")
 ax.set_ylabel("Temps (s)")
 
-ax.legend(loc="best")
+#ax.set_yscale("log")
+
+ax.legend(loc="best",ncol=2)
 
 fig.tight_layout()
 
@@ -79,7 +81,7 @@ fig = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-#ax.plot(processus,efficiency,lw=2,label="Simulation")
+ax.plot(times["cores"],times["efficiency"],lw=2,label="Simulation")
 
 ax.plot([times["cores"].min(), times["cores"].max()],[1,1],lw=2,label="Scalabilite parfaite")
 
@@ -99,8 +101,9 @@ fig = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-# ax.plot(times["cores"],computation_times/simulation_times*100.,lw=2,color='C1',label='part equation onde')
-# ax.plot(times["cores"],mpi_times/simulation_times*100.,lw=2,color='C2',label='part MPI')
+ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,color='C1',label='part collision')
+ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,color='C2',label='part echange particules')
+ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,color='C3',label='part communications globales')
 
 ax.set_xlabel("Nombre de processus")
 ax.set_ylabel("Part (%)")
