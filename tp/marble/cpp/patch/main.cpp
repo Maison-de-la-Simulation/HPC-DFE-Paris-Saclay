@@ -95,11 +95,12 @@ int main( int argc, char *argv[] )
     // Timers initialization ___________________________________________________________________________
     
     Timers timers;
-    timers.add("diags");
     timers.add("collisions");
     timers.add("pusher");
     timers.add("wall");
     timers.add("exchange");
+    timers.add("global");
+    timers.add("diags");
     
     // Particle initilization _________________________________________________________________________
     
@@ -268,6 +269,22 @@ int main( int argc, char *argv[] )
         
         timers.stop("exchange");
         
+        // Global parameters ______________________
+        
+        timers.start("global");
+        
+        particles.getTotalEnergy(params, total_energy);
+    
+        particles.getMaxVelocity(params, max_velocity);
+        
+        particles.getTotalParticleNumber(params, particle_number, imbalance);
+        
+        particles.getTotalCollisionNumber(params, collision_counter);
+        
+        particles.getTotalExchangeNumber(params, exchange_counter);
+        
+        timers.stop("global");
+        
         // Diagnostics __________________
         
         timers.start("diags");
@@ -275,16 +292,6 @@ int main( int argc, char *argv[] )
         particles.writeDiags(params, iteration);
         
         if (iteration%params.print_period == 0) {
-        
-            particles.getTotalEnergy(params, total_energy);
-        
-            particles.getMaxVelocity(params, max_velocity);
-            
-            particles.getTotalParticleNumber(params, particle_number, imbalance);
-            
-            particles.getTotalCollisionNumber(params, collision_counter);
-            
-            particles.getTotalExchangeNumber(params, exchange_counter);
         
             std::cout << " Iteration: " << std::setw(5) << iteration
                       << " - total particles: " << std::setw(10) << particle_number
