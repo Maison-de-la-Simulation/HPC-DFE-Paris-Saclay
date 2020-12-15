@@ -7,6 +7,8 @@ Chaque processus envoie un message à son voisin de rang supérieur
 et reçoit de son voisin de rang inférieur.
 On effectue un anneau périodique.
 
+On fait en sorte que chaque rang envoie au rang supérieur la valeur de son propre rang.
+
 ## Consignes
 
 1. Prenez le temps de regarder le code dans son intégralité.
