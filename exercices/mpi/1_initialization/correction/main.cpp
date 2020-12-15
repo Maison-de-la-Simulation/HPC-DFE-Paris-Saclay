@@ -61,10 +61,6 @@ int main( int argc, char *argv[] )
         C[i] = cos(5.0*i);
     }
 
-    while(1) {
-        
-    }
-
     // Boucle de calcul
     
     time = MPI_Wtime();
