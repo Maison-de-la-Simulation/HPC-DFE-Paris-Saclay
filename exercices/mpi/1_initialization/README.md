@@ -5,7 +5,7 @@ capable de récupérer le nombre total de rangs et d'afficher pour chaque rang l
 
 ## Consignes
 
-1. Complétez la ligne permettant d'initaliser MPI avec la fonction correspondante dans le cours : MPI_INIT
+1. Complétez la ligne permettant d'initaliser MPI avec la fonction correspondante dans le cours : `MPI_INIT` en fortran ou `MPI_Init` en C/C++.
 
 2. Complétez maintenant la ligne permettant de récupérer le nombre total de processus MPI utilisés pour ce programme : `MPI_COMM_SIZE`. Ajoutez-y les bons arguments.
 
@@ -47,7 +47,7 @@ mpirun -np 4 ./executable
 ```fortran
 real(8), dimension(:), allocatable :: A, B, C
 
-allocate(A(local_N),B(local_N),C(local_N),D(local_N))
+allocate(A(local_N),B(local_N),C(local_N))
 ```
 
 ```C++
@@ -68,9 +68,9 @@ int local_N = N / number_of_ranks;
 10. Initialisez ces tableaux :
 ```fortran
 Do i = 1,local_N
-    B(i) = cos(i*2.0)
-    C(i) = sin(i*4.0)
-    D(i) = cos(i*1.0)**2
+    A(i) = sin(i*4.0)
+    B(i) = sin(i*4.0)
+    C(i) = cos(i*1.0)**2
 End do
 ```
 
