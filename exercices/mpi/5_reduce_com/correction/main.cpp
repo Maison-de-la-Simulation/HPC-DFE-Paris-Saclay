@@ -55,7 +55,7 @@ int main( int argc, char *argv[] )
     // Paramètres globaux
 
     double pi                   = 3.1415926535897932;        // Le nombre pi
-    int discretization_per_rank = 1000;                      // Discrétisation par processus
+    int discretization_per_rank = 100000;                      // Discrétisation par processus
     double rank_length          = 0.5*pi / number_of_ranks;  // Taille d'un rang
 
     // Paramètres locaux
