@@ -55,6 +55,9 @@ int main( int argc, char *argv[] )
 
     MPI_Irecv(&recv_message, 1, MPI_INT, recv_rank, tag, MPI_COMM_WORLD, &request[0]);
     MPI_Isend(&rank, 1, MPI_INT, send_rank, tag, MPI_COMM_WORLD, &request[1]);
+    
+    // ici je suis non bloquant
+    
     MPI_Waitall(2,request,MPI_STATUS_IGNORE);
 
     // On affiche les résultats
