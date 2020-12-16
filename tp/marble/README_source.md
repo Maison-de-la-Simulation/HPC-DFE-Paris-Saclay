@@ -962,3 +962,9 @@ c) **Mise à jour de Particles::exchange :** Supprimez les boucles sur les *patc
 Vérifiez que les résultats sont corrects.
 
 **Rapport :** Placer dans le rapport des images des résultats.
+
+### V. Etude de performance
+
+<img src="../../support/materiel/marble_weak_scaling_ppp500_time.png" height="200">
+<img src="../../support/materiel/marble_weak_scaling_ppp500_efficiency.png" height="200">
+<img src="../../support/materiel/marble_weak_scaling_ppp500_part.png" height="200">

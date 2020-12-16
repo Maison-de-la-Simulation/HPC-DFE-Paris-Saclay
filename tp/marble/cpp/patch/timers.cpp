@@ -85,7 +85,7 @@ void Timers::print() {
 
     std::cout << " " << std::setw(20) << names[0] ;
     std::cout << " | " << std::fixed << std::setprecision(6) << std::setw(10) << accumulated_times[0] ;
-    std::cout << " | " << std::fixed << std::setprecision(2) << std::setw(8) << percentage << " %";
+    std::cout << " |        - %";
     std::cout << " | " ;
     std::cout << std::endl;
 
