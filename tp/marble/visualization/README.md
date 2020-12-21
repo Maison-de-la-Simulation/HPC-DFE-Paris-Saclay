@@ -5,6 +5,7 @@ qui sera créé au début de chaque *run* :
 - fichiers hdf5 (`.h5`)
 - fichiers bianire (`.bin`)
 - fichiers vtk pour Paraview (`.vtk`)
+
 Les fichiers de sortie portent le nom suivant `particles_<numéro d'itération>.bin`.
 Ce dossier contient des scripts Python dédiés à l'analyse des résultats.
 Ils permettent d'ouvrir les fichiers de sortie pour visualiser les résultats :
