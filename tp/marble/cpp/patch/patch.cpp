@@ -11,7 +11,7 @@ Patch::Patch() {
 
 Patch::Patch( int number )
 {
-    radius = 0.02;
+
     x.resize(number,0);
     y.resize(number,0);
     z.resize(number,0);
@@ -48,7 +48,7 @@ void Patch::initTopology(struct Parameters params,
     this->patch_y_length = (params.ymax - params.ymin) / params.n_patches_y;
     this->patch_z_length = (params.zmax - params.zmin) / params.n_patches_z;
     
-    if ((patch_x_length <= 2*radius || patch_y_length <= 2*radius || patch_z_length <= 2*radius)) {
+    if ((patch_x_length <= 2*params.radius || patch_y_length <= 2*params.radius || patch_z_length <= 2*params.radius)) {
         std::cerr << " CONFIGURATION ERROR: a patch must be larger than a particle diameter." << std::endl;
         exit(0);
     }
@@ -92,7 +92,6 @@ void Patch::initParticles(struct Parameters params) {
     
     int local_number = params.number / params.n_patches;
     
-    radius = params.radius;
     x.resize(local_number,0);
     y.resize(local_number,0);
     z.resize(local_number,0);
@@ -109,12 +108,12 @@ void Patch::initParticles(struct Parameters params) {
     double offset_py = 0;
     double offset_pz = 0;
     
-    if (at_mx_boundary) offset_mx = radius;
-    if (at_my_boundary) offset_my = radius;
-    if (at_mz_boundary) offset_mz = radius;
-    if (at_px_boundary) offset_px = radius;
-    if (at_py_boundary) offset_py = radius;
-    if (at_pz_boundary) offset_pz = radius;
+    if (at_mx_boundary) offset_mx = params.radius;
+    if (at_my_boundary) offset_my = params.radius;
+    if (at_mz_boundary) offset_mz = params.radius;
+    if (at_px_boundary) offset_px = params.radius;
+    if (at_py_boundary) offset_py = params.radius;
+    if (at_pz_boundary) offset_pz = params.radius;
     
     std::random_device rd;  //Will be used to obtain a seed for the random number engine
     std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
@@ -154,7 +153,7 @@ void Patch::initParticles(struct Parameters params) {
                     
                     distance = std::pow(x[ip] - x[ip2],2) + std::pow(y[ip] - y[ip2],2) + std::pow(z[ip] - z[ip2],2);
                     
-                    if (distance < 4*radius*radius) {
+                    if (distance < 4*params.radius*params.radius) {
                         position_validated = false;
                     }
                     
@@ -229,7 +228,7 @@ void Patch::walls(struct Parameters params, Walls walls) {
         
         for (int ip = 0 ; ip < x.size() ; ip++) {
         
-            double d = distance(ip,wall) - radius;
+            double d = distance(ip,wall) - params.radius;
             
             // Check if the particle has collided with one of the wall
             if ( d < 0 ) {
@@ -311,8 +310,8 @@ int Patch::collisions(struct Parameters params) {
                     double projected_v      = (xr*vxr + yr*vyr + zr*vzr) * inverse_distance;
                     
                     // We consider that the particles have collided only if the distance
-                    // is below their radius and they are getting closer
-                    if (distance < 4*radius*radius && projected_v > 0) {
+                    // is below their params.radius and they are getting closer
+                    if (distance < 4*params.radius*params.radius && projected_v > 0) {
                         
                         not_collided[i1] = false;
                         not_collided[i2] = false;
@@ -320,7 +319,7 @@ int Patch::collisions(struct Parameters params) {
                         
                         // Computation of the exact collision time
                         double b            = -2*(vxr*xr + vyr*yr + vzr*zr);
-                        double c            = distance - 4*radius*radius;
+                        double c            = distance - 4*params.radius*params.radius;
                         double delta        = b*b - 4*v*c;
                         double dt_collision = (-b + std::sqrt(delta)) / (2*v);
                         
