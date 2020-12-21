@@ -29,12 +29,12 @@ int main( int argc, char *argv[] )
     
     // Parameters ____________________________________________________________________________________
     
-    int particle_number = 0;   // Number of particles in the simulation
-    int imbalance = 0;         // Particle imbalance
+    int particle_number = 0;            // Number of particles in the simulation
+    int imbalance = 0;                  // Particle imbalance
     double       total_energy;          // Total energy at each timestep
     double       max_velocity;          // Maximal velocity at each timestep
-    int collision_counter;     // Counter for collisions per timestep
-    int exchange_counter;     // Number of exchanged particles per timestep
+    int collision_counter = 0;          // Counter for collisions per timestep
+    int exchange_counter;               // Number of exchanged particles per timestep
     
     struct Parameters    params;   // Global properties
     

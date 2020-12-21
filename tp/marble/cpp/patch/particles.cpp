@@ -237,7 +237,7 @@ void Particles::writeVTK(struct Parameters params, int iteration) {
         vtk_file << "LOOKUP_TABLE default" << std::endl;
         for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
             for(int ip = 0 ; ip < patches[i_patch].getParticleNumber() ; ip++) {
-              vtk_file << patches[i_patch].radius << " " ;
+              vtk_file << params.radius << " " ;
             }
         }
         vtk_file << std::endl;
@@ -276,7 +276,7 @@ void Particles::writeBinary(struct Parameters params, int iteration) {
     getTotalParticleNumber(params,number,imbalance);
     
     binary_file.write((char *) &number, sizeof(number));
-    binary_file.write((char *) &patches[0].radius, sizeof(double));
+    binary_file.write((char *) &params.radius, sizeof(double));
     
     // Particle positions
     for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
