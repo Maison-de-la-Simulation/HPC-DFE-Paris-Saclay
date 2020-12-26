@@ -58,7 +58,7 @@ rcParams['axes.grid'] = True
 # ______________________________________________________________________________
 # Figure temps de simulation
 
-fig = figure(figsize=(12, 6))
+fig0 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
@@ -72,16 +72,20 @@ ax.set_title("Fig. 4.1 - Weak scaling MPI, 500 particules par patch")
 ax.set_xlabel("Nombre de processus")
 ax.set_ylabel("Temps (s)")
 
+
+
 #ax.set_yscale("log")
 
 ax.legend(loc="best",ncol=2)
 
-fig.tight_layout()
+fig0.tight_layout()
+
+fig0.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp500_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
 
-fig = figure(figsize=(12, 6))
+fig1 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
@@ -98,12 +102,14 @@ ax.set_ylabel("Efficacite")
 
 ax.legend(loc="best")
 
-fig.tight_layout()
+fig1.tight_layout()
+
+fig1.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp500_efficiency.png")
 
 # ______________________________________________________________________________
 # Figure Part MPI
 
-fig = figure(figsize=(12, 6))
+fig2 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
@@ -118,7 +124,9 @@ ax.set_ylabel("Part (%)")
 
 ax.legend(loc="best")
 
-fig.tight_layout()
+fig2.tight_layout()
+
+fig2.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp500_part.png")
 
 # _____________________________________________________________________________
 
