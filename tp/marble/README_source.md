@@ -1011,22 +1011,22 @@ xxx
 ```
 
 <img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_time.png" height="400">
-<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_efficiency.png" height="400">
-<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_part.png" height="400">
+<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_efficiency.png" height="300">
+<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_part.png" height="300">
 
 **Deuxième étude de strong scaling pour le code OpenMP**
 
 **Première étude de weak scaling pour le code MPI**
 
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_time.png" height="400">
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_efficiency.png" height="400">
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_part.png" height="400">
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_time.png" height="300">
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_efficiency.png" height="300">
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_part.png" height="300">
 
 **Deuxième étude de weak scaling pour le code MPI**
 
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png" height="400">
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png" height="400">
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_part.png" height="400">
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png" height="300">
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png" height="300">
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_part.png" height="300">
 
 **Etude de strong scaling pour le code MPI**
 
