@@ -135,7 +135,7 @@ ax.legend(loc="best")
 
 fig2.tight_layout()
 
-fig2.savefig("../../../support/materiel/marble_mpi_strong_scaling_ppp1000_time.png")
+fig2.savefig("../../../support/materiel/marble_mpi_strong_scaling_ppp1000_part.png")
 
 # _____________________________________________________________________________
 
