@@ -983,7 +983,7 @@ Pour chaque figure, on s'intéresse à la fois à la boucle en temps total mais 
 - Echange des particules
 - Calcul des grandeurs globales
 
-**Weak scaling pour le code OpenMP**
+**Etude de weak scaling pour le code OpenMP**
 
 On rappelle que pour une étude de *weak scaling*, la taille du domaine varie avec le nombre de processus mais la charge par processus reste constante.
 Pour cette étude, chaque processus ne s'occupe que d'un seul patch.
@@ -994,16 +994,46 @@ A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la 
 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 16000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0.01 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -mass 0.5 0.5 -overlap 0
 ```
 
+<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_time.png" height="400">
+<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_efficiency.png" height="400">
+<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_part.png" height="400">
+
+**Première étude de strong scaling pour le code OpenMP**
+
+On rappelle que pour une étude de *strong scaling*, La charge totale reste constante de telle sorte que la charge par processus varie.
+Ici, le domaine total garde donc la même taille avec le même nombre total de particules.
+Pour cette étude, chaque processus ne s'occupe que d'un seul patch.
+Le domaine a pour taille $[xxx, xxx, xxx]$ avec un nombre total de xxx particules.
+On utilise un *SCHEDULER* OpenMP `STATIC`: `OMP_SCHEDULE=STATIC`.
+A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
+```bash
+xxx
+```
+
 <img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_time.png" height="400">
 <img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_efficiency.png" height="400">
 <img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_part.png" height="400">
 
-**Strong scaling pour le code OpenMP**
+**Deuxième étude de strong scaling pour le code OpenMP**
+
+**Première étude de weak scaling pour le code MPI**
 
 <img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_time.png" height="400">
 <img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_efficiency.png" height="400">
 <img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_part.png" height="400">
 
-**Question 5.1 - Etude de scalabilité faible pour OpenMP :**
+**Deuxième étude de weak scaling pour le code MPI**
 
-a) Justifiez pourquoi le SCHEDULER `STATIC` est le plus adéquate ici ?
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png" height="400">
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png" height="400">
+<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_part.png" height="400">
+
+**Etude de strong scaling pour le code MPI**
+
+<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_time.png" height="400">
+<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_efficiency.png" height="400">
+<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_part.png" height="400">
+
+**Question 5.1 - OpenMP :**
+
+a) Justifiez pourquoi le SCHEDULER `STATIC` est le plus adéquate pour les études OpenMP ?
