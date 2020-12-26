@@ -80,7 +80,7 @@ ax0.set_ylabel("Temps (s)")
 ax1.set_xlabel("Nombre de processus")
 ax1.set_ylabel("Temps (s)")
 
-ax0.set_title("Fig. 5.1 - Strong scaling MPI, 1000 particules par patch")
+ax0.set_title("Fig. 6.1 - Strong scaling MPI, 1000 particules par patch")
 
 #ax.set_yscale("log")
 
@@ -102,7 +102,7 @@ ax.plot(times["cores"],times["efficiency"],lw=2,label="Simulation")
 
 ax.plot([times["cores"].min(), times["cores"].max()],[1,1],lw=2,label="Scalabilite parfaite")
 
-ax.set_title("Fig. 5.2 - Strong scaling MPI, 1000 particules par patch")
+ax.set_title("Fig. 6.2 - Strong scaling MPI, 1000 particules par patch")
 
 # ax.set_ylim([0.,1.1])
 
@@ -126,7 +126,7 @@ ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,color='C1',lab
 ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,color='C2',label='Echange particules')
 ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,color='C3',label='Communications globales')
 
-ax.set_title("Fig. 5.3 - Strong scaling MPI, 1000 particules par patch")
+ax.set_title("Fig. 6.3 - Strong scaling MPI, 1000 particules par patch")
 
 ax.set_xlabel("Nombre de processus")
 ax.set_ylabel("Part (%)")
