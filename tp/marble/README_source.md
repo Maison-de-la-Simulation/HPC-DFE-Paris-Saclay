@@ -991,6 +991,7 @@ Chaque patch possède 2000 particules et a pour taille adimensionnelle $[1, 1, 1
 On utilise un *SCHEDULER* OpenMP `STATIC`: `OMP_SCHEDULE=STATIC`.
 A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
 ```bash
+export OMP_NUM_THREADS=8
 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 16000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0.01 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -mass 0.5 0.5 -overlap 0
 ```
 
@@ -1003,10 +1004,11 @@ A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la 
 On rappelle que pour une étude de *strong scaling*, La charge totale reste constante de telle sorte que la charge par processus varie.
 Ici, le domaine total garde donc la même taille avec le même nombre total de particules.
 Pour cette étude, chaque processus ne s'occupe que d'un seul patch.
-Le domaine a pour taille $[xxx, xxx, xxx]$ avec un nombre total de xxx particules.
+Le domaine a pour taille adimentionnelle $[4, 4, 4]$ avec un nombre total de xxx particules.
 On utilise un *SCHEDULER* OpenMP `STATIC`: `OMP_SCHEDULE=STATIC`.
 A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
 ```bash
+export OMP_NUM_THREADS=8
 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -mass 0.5 0.5 -overlap 0
 ```
 
@@ -1016,7 +1018,11 @@ A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la 
 
 **Deuxième étude de strong scaling pour le code OpenMP**
 
+Cette deuxième étude de *strong scaling* pour le code OpenMP diffère du premier dans la mesure où ici le nombre de patch est gardé constant pour tout nombre de processus de telle sorte que le nombre de patchs à traiter pour chaque processus varie.
+On utilise 32 patchs contenant chacun 1000 particules.
+A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
 ```bash
+export OMP_NUM_THREADS=8
 ./executable -patch 4 4 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -mass 0.5 0.5 -overlap 0
 ```
 
@@ -1026,11 +1032,25 @@ A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la 
 
 **Première étude de weak scaling pour le code MPI**
 
+Cette étude de *weak scaling* concerne maintenant le code MPI.
+Chaque processus MPI ne traite qu'un patch et un patch possède 500 particules.
+Chaque patch a une taille de $[1, 1, 1]$.
+A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
+```bash
+mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 4000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
+```
+
 <img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_time.png" height="300">
 <img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_efficiency.png" height="300">
 <img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_part.png" height="300">
 
 **Deuxième étude de weak scaling pour le code MPI**
+
+Dans cette deuxième étude, le nombre de particules par patch est monté à 2000.
+A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
+```bash
+mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 16000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
+```
 
 <img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png" height="300">
 <img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png" height="300">
@@ -1038,7 +1058,14 @@ A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la 
 
 **Etude de strong scaling pour le code MPI**
 
-<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_time.png" height="300">
+Cette dernière étude concerne le *strong scaling* de la version MPI.
+Un rang ne peut traiter qu'un patch.
+Le nombre de particules par patch dépend du nombre de rangs MPI.
+```bash
+mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
+```
+
+<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_time.png" height="400">
 <img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_efficiency.png" height="300">
 <img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_part.png" height="300">
 
