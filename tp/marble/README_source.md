@@ -1007,7 +1007,7 @@ Le domaine a pour taille $[xxx, xxx, xxx]$ avec un nombre total de xxx particule
 On utilise un *SCHEDULER* OpenMP `STATIC`: `OMP_SCHEDULE=STATIC`.
 A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
 ```bash
-xxx
+./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -mass 0.5 0.5 -overlap 0
 ```
 
 <img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_time.png" height="400">
@@ -1015,6 +1015,14 @@ xxx
 <img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_part.png" height="300">
 
 **Deuxième étude de strong scaling pour le code OpenMP**
+
+```bash
+./executable -patch 4 4 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -mass 0.5 0.5 -overlap 0
+```
+
+<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_time.png" height="400">
+<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_efficiency.png" height="300">
+<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_part.png" height="300">
 
 **Première étude de weak scaling pour le code MPI**
 
