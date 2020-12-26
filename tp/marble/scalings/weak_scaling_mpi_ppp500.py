@@ -53,6 +53,8 @@ rcParams['ytick.major.width'] = 2
 rcParams['xtick.minor.width'] = 1.5
 rcParams['ytick.minor.width'] = 1.5
 
+rcParams['axes.grid'] = True
+
 # ______________________________________________________________________________
 # Figure temps de simulation
 
@@ -64,6 +66,8 @@ ax.plot(times["cores"],times["loop"],lw=2,label="Boucle de calcul")
 ax.plot(times["cores"],times["collision"],lw=2,label="Collision")
 ax.plot(times["cores"],times["exchange"],lw=2,label="Echange particules")
 ax.plot(times["cores"],times["global"],lw=2,label="Communications globales")
+
+ax.set_title("Fig. 4.1 - Weak scaling MPI, 500 particules par patch")
 
 ax.set_xlabel("Nombre de processus")
 ax.set_ylabel("Temps (s)")
@@ -85,6 +89,8 @@ ax.plot(times["cores"],times["efficiency"],lw=2,label="Simulation")
 
 ax.plot([times["cores"].min(), times["cores"].max()],[1,1],lw=2,label="Scalabilite parfaite")
 
+ax.set_title("Fig. 4.2 - Weak scaling MPI, 500 particules par patch")
+
 ax.set_ylim([0.,1.1])
 
 ax.set_xlabel("Nombre de processus")
@@ -104,6 +110,8 @@ ax = subplot(gs[:,:])
 ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,color='C1',label='Collision')
 ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,color='C2',label='Echange particules')
 ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,color='C3',label='Communications globales')
+
+ax.set_title("Fig. 4.3 - Weak scaling MPI, 500 particules par patch")
 
 ax.set_xlabel("Nombre de processus")
 ax.set_ylabel("Part (%)")
