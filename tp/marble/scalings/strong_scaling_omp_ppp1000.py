@@ -81,6 +81,8 @@ ax1.set_ylabel("Temps (s)")
 
 #ax.set_yscale("log")
 
+ax0.set_title("Fig. 2.1 - Strong scaling OpenMP, 1000 particules par patch")
+
 ax0.legend(loc="best",ncol=2)
 ax1.legend(loc="best",ncol=2)
 
@@ -99,6 +101,8 @@ ax.plot([times["cores"].min(), times["cores"].max()],[1,1],lw=2,label="Scalabili
 
 # ax.set_ylim([0.,1.1])
 
+ax.set_title("Fig. 2.2 - Strong scaling OpenMP, 1000 particules par patch")
+
 ax.set_xlabel("Nombre de processus")
 ax.set_ylabel("Efficacite")
 
@@ -116,6 +120,8 @@ ax = subplot(gs[:,:])
 ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,color='C1',label='Collision',marker='o')
 ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,color='C2',label='Echange particules',marker='o')
 ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,color='C3',label='Communications globales',marker='o')
+
+ax.set_title("Fig. 2.3 - Strong scaling OpenMP, 1000 particules par patch")
 
 ax.set_xlabel("Nombre de processus")
 ax.set_ylabel("Part (%)")
