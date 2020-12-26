@@ -995,8 +995,8 @@ A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la 
 ```
 
 <img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_time.png" height="400">
-<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_efficiency.png" height="400">
-<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_part.png" height="400">
+<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_efficiency.png" height="300">
+<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_part.png" height="300">
 
 **Première étude de strong scaling pour le code OpenMP**
 
@@ -1030,9 +1030,9 @@ xxx
 
 **Etude de strong scaling pour le code MPI**
 
-<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_time.png" height="400">
-<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_efficiency.png" height="400">
-<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_part.png" height="400">
+<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_time.png" height="300">
+<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_efficiency.png" height="300">
+<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_part.png" height="300">
 
 **Question 5.1 - OpenMP :**
 
