@@ -535,7 +535,7 @@ Ces fonctions sont appelées dans la classe `Particles` (voir [Particles.cpp](./
 **Question 1.2 :** L'exécution a généré des fichiers dans le dossier `diags`.
 Il y a plusieurs types de fichiers.
 Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Paraview` ou `VisIt`.
-[Une petit documentation sur Paraview](./paraview.md) vous aidera à visualiser les résultats.
+[Cette page dans le dossier visulization](./visualization/README.md) vous aidera à visualiser les résultats.
 
 - a) Utilisez soit les scripts Python fournis dans le dossier [python](./python) pour visualiser les résultats (utilisez le [README](./python/README.md) pour plus d'information) ou Paraview.
 
