@@ -63,6 +63,7 @@ On utilise $i$ pour désigner la i-ème particule dans notre domaine.
 On appelle $t$ le temps courant et $\Delta t$ le pas en temps.
 La discrétisation des équations du mouvement se fait par une méthode explicite classique du type *leap-frog*.
 On décompose le vecteur vitesse suivant ses 3 composantes $\vec{v} = \left\{v_x, v_y, v_z\right\}$.
+L'équation du mouvement discrétisée devient :
 
 $$
 \overrightarrow{v_{i}^{t + 0.5 \Delta t}} = \vec{v}_{i}^{t - 0.5 \Delta t} + \Delta t  \cdot \left( m \vec{g} + \alpha \frac{\vec{v}_i^{t - 0.5 \Delta t}}{\| \vec{v}_i^{t - 0.5 \Delta t} \|} \right)
@@ -137,18 +138,18 @@ $$
 4 R^2 = v_{r,x}^2 + v_{r,y}^2 + v_{r,z}^2 -2 \left( x_r v_{r,x} + y_r v_{r,y} + z_r v_{r,z} \right) \Delta t_c + \left( v_{r,x}^2  + v_{r,y}^2 + v_{r,z}^2 \right) \Delta t_c^2
 $$
 
-La solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positivie.
+La solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positive.
 
 On calcule donc la position au moment de la collision en faisant simplement : $\overrightarrow{x_c} = \overrightarrow{x} - \Delta t_c \cdot \overrightarrow{v}$.
 Il s'agit d'une approximation car on ne prend pas en compte la gravité et les frottements.
 Une fois la position $\overrightarrow{x_c}$ connue, on calcule la position post-collision $\overrightarrow{x_n}$ grâce à la vitesse post-collision :
 
 $$
-\overrightarrow{x_n} = \overrightarrow{x_c} + \Delta t_c * \overrightarrow{v_n}
+\overrightarrow{x_n} = \overrightarrow{x_c} + \Delta t_c \cdot \overrightarrow{v_n}
 $$
 
 L'opérateur suppose que chaque particule ne collisionne qu'une fois avec une autre particule.
-Pour cela, on utilise une algorithme à double boucles imbriquées où la seconde boucle démarre à partir de la particule $i+1$.
+Pour cela, on utilise un algorithme à double boucles imbriquées où la seconde boucle démarre à partir de la particule $i+1$.
 Soit $N$ le nombre total de particules.
 ```
 Pour chaque particle i de 1 jusqu'à N :
@@ -172,9 +173,9 @@ Il est possible de simuler des collisions inélastiques (perte d'énergie induit
 
 ### Conditions aux bords
 
-Les bords sont des murs réflécissants avec possibilité d'amortissement.
+Les bords sont des murs réfléchissants avec possibilité d'amortissement.
 On définit une collision avec un mur au moment où la distance entre le mur et le centre de la particule est inférieur à $2R$.
-Un mur est défini par une normal \overrightarrow{n} et un point \overrightarrow{p}. Par convention, la normale est orientée vers l'intéreur du domaine pour le calcul de la réflexion.
+Un mur est défini par une normal $\overrightarrow{n}$ et un point $\overrightarrow{p}$. Par convention, la normale est orientée vers l'intérieur du domaine pour le calcul de la réflexion.
 Comme pour les collisions entre particules, on calcule le temps au moment exact de la collision, c'est à dire quand la distance entre le mur et la particule vaut exactement $2R$.
 Cela permet de calculer la position de la particule au moment de la collision avant d'actualiser sa vitesse et de calculer la position post-réflexion.
 
@@ -189,7 +190,8 @@ $$
 Ce TP se compose de plusieurs répertoires :
 - [cpp/sequential](./cpp/sequential) : ce dossier contient l'ensemble des sources du code séquentiel.
 - [cpp/patch](./cpp/patch) : ce dossier contient l'ensemble des sources du code séquentiel avec décomposition en sous-domaine (*patch*).
-- [python](./python) : ce dossier contient des scripts dédiés à la visualization et à la comparaison des résultats (fichiers de sortie)
+- [scalings](./python) : ce dossier contient des scripts permettant d'afficher les courbes de scalabilité présentées à la fin de ce document.
+- [visualization](./python) : ce dossier contient des scripts dédiés à la visualisation.
 - [.extra](./.extra) : ce dossier sert uniquement pour GitHub
 
 ## Le code séquentiel
@@ -238,7 +240,7 @@ Dans le tableau principal des particules (celles du *patch*), les particules son
 La méthode consiste à remplir les cases mémoires vides des particules ayant quittée le *patch* par les particules de la fin du tableau.
 3. Dans la troisème étape, chaque *patch* va chercher dans les *buffers* de ses voisins les particules qu'ils doivent recevoir.
 
-### Les dépendences
+### Les dépendances
 
 Ce programme nécessite l'installation d'un compilateur C++.
 
@@ -249,11 +251,6 @@ C'est le cas sur les postes de travail de l'université.
 Vous aurez aussi besoin d'installer MPI.
 Sur les postes de travail de l'université, MPI est déjà installé.
 Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier [./documentation](../../documentation/mpi.md).
-
-Pour les sorties, vous aurez besoin d'HDF5.
-Sur les ordinateurs de l'université, une version parallèle est installée dans l'espace commun : `/public/m2_dfe/hdf5-1.10.4/build`.
-Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier [./documentation](../../documentation/hdf5.md).
-Si vraiment HDF5 vous pose problème il est possible de désactiver cette sortie dans le code.
 
 ### Compilation et exécution
 
@@ -272,13 +269,13 @@ La compilation génère un fichier exécutable du nom de `executable`. Vous pouv
 ### Visualisation
 
 Le code peut générer plusieurs types de fichiers :
-- Fichier HDF5 visualisable via `Python` : pour cela, utilisez les scripts disponible dans le dossier [python](./python).
-Vous avez besoin de python avec la biblithèque `matplotlib` et `h5py`.
-- Fichier VTK : Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
+- Fichier VTK : Les fichiers sont créés indépendamment de la bibliothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
 Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette [page](./paraview.md).
-- Fichiers binaires : ces fichiers sont un enregistrements binaires des propriétés des particules.
+- Fichiers binaires : ces fichiers sont un enregistrement binaire des propriétés des particules.
   On peut visualiser ces données avec `matplotlib` en utilisant le script [plot_binary_matplotlib.py](./python/plot_binary_matplotlib.py).
   On peut aussi générer une image 3D grâce au paquet Python Mayavi en utilisant le script [plot_binary_mayavi.py](./python/plot_binary_mayavi.py).
+- Fichier HDF5 visualisable via `Python` : pour cela, utilisez les scripts disponible dans le dossier [python](./python).
+  Vous avez besoin de python avec la bibliothèque `matplotlib` et `h5py`. Cette sortie est néanmoins désactivée par défaut car elle nécessite l'installation de HDF5.
 
 ## Consignes de TP
 
@@ -286,10 +283,10 @@ Dans ce TP, vous aurez à modifier un programme séquentiel afin de le rendre pa
 Vous serez ensuite amené à étudier les performances des versions parallèles.
 Le TP se compose de 5 sous-sections :
 - Sous-section I : il s'agit de la découverte du code séquentiel
-- Sous-section II :
-- Sous-section III :
-- Sous-section IV :
-- Sous-section V :
+- Sous-section II : cette partie concerne la découverte de la machine parallèle
+- Sous-section III : cette partie est l'implémentation de la version OpenMP
+- Sous-section IV : cette partie est l'implémentation de la version MPI
+- Sous-section V : cette partie est l'étude de la performance des codes parallèles
 
 En plus de travailler dans un code de calcul, il vous est demandé d'écrire un rapport détaillant votre démarche.
 Le TP est divisé en questions successives vous invitant soit à modifier le code soit à compléter votre rapport, parfois les deux.
@@ -305,22 +302,22 @@ Ouvrez le fichier [parameters.h](./patch/parameters.h) et regarder la structure 
 Ce header contient la définition d'une structure de données pour des paramètres globaux du nom de `Parameters`.
 Les paramètres globaux du code permettent de décrire les propriétés de la simulation.
 On trouve les sections suivantes :
-- `Time properties` : tout ce qui se réfère au temps comme l'itération courante ou le temps final
+- `Time properties` : tout ce qui se réfère au temps de calcul
 - `Domain properties` : propriété spatiale et physique du domaine comme sa taille par exemple ou le niveau de gravité.
   Dans la verison par *patch*, on y trouve aussi la façon de décomposer le domaine.
 - `Particle properties` : propriété générale des particules
 - `Diag properties` : paramètres pour les diagnostiques diverses
 
-Cette structur est régulièrement passée en argument des fonctions ayant besoin des données globales.
+Cette structure est régulièrement passée en argument des fonctions ayant besoin des données globales.
 
 **Fichier main.cpp :**
 
 Ouvrez le fichier [main.cpp](./patch/main.cpp) et explorez la structure du code.
 La première partie concerne l'initialisation de la simulation :
 1. déclaration des variables
-2. initialisation des proriétés de la simulation
+2. initialisation des propriétés de la simulation
 3. initialisation des *timers*
-4. initialisation de la topologie (décomposition du domaine) et des particules présentent dans chaque *patch*
+4. initialisation de la topologie (décomposition du domaine) et des particules présentes dans chaque *patch*
 5. création des conditions aux bords (murs)
 6. affichage des informations principales dans le terminal pour récapituler la simulation
 7. sortie de fichier avant le démarrage de la boucle en temps
@@ -329,25 +326,37 @@ La deuxième partie est la boucle en temps elle-même.
 Elle se compose des étapes suivantes pour chaque itération en temps :
 1. déplacement des particules suivant les équations du mouvement
 ```C++
-particles.push(parameters);
+particles.push(params);
 ```
 2. application de l'opérateur de collision
 ```C++
-particles.multipleCollisions(collision_counter, parameters);
+particles.multipleCollisions(params);
 ```
 3. application des conditions limites
 ```C++
-particles.walls(parameters, walls);
+particles.walls(params, walls);
 ```
 4. échange des particules entre *patch*
 ```C++
-particles.exchange(parameters);
+particles.exchange(params);
 ```
 5. écriture sur le disque des fichiers de diagnostique (en fonction de la période demandée)
 ```C++
-particles.writeDiags(parameters);
+particles.writeDiags(params);
 ```
-6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.
+6. calcul des grandeurs globales (réduction)
+```C++
+particles.getTotalEnergy(params, total_energy);
+
+particles.getMaxVelocity(params, max_velocity);
+
+particles.getTotalParticleNumber(params, particle_number, imbalance);
+
+particles.getTotalCollisionNumber(params, collision_counter);
+
+particles.getTotalExchangeNumber(params, exchange_counter);
+```
+7. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.
 
 
 **Fichier particles.cpp / .h:**
@@ -359,7 +368,7 @@ Le header montre que la classe `Particles` contient un tableau d'objet `Patch`:
 ```C++
 std::vector <Patch> patches;
 ```
-On retrouve ensuite la définitions des fonctions qui s'appliquent sur les patchs et qui sont appelelées soient pour l'initilisation :
+On retrouve ensuite la définition des fonctions qui s'appliquent sur les patchs et qui sont appelées soient pour l'initialisation :
 ```C++
 // Initialize the topology for each patch
 void initTopology(struct Parameters params);
@@ -379,25 +388,31 @@ void walls(struct Parameters params, Walls walls);
 unsigned int collisions(struct Parameters params);
 
 // Multiple collison iterations
-void multipleCollisions(unsigned int & collision_counter, struct Parameters params);
+void multipleCollisions(struct Parameters params);
 
 // Exchange particles between patches
 void exchange(struct Parameters params);
 
 // Return the total energy in the domain (all patches)
-void getTotalEnergy(double & total_energy);
+void getTotalEnergy(struct Parameters params, double & total_energy);
 
 // Return the maximal particle velocity in the domain (all patches)
-void getMaxVelocity(double & max_velocity);
+void getMaxVelocity(struct Parameters params, double & max_velocity);
 
 // Return the total number of particles
-void getTotalParticleNumber(unsigned int & total);
+void getTotalParticleNumber(struct Parameters params, int & total, int & imbalance);
+
+// Return the total number of collisions
+void getTotalCollisionNumber(struct Parameters params, int & total);
+
+// Return the total number of exchange
+void getTotalExchangeNumber(struct Parameters params, int & total);
 
 // Output specifically the vtk files
-void writeVTK(unsigned int iteration);
+void writeVTK(struct Parameters params, unsigned int iteration);
 
 // Write all type of diags
-void writeDiags(struct Parameters params);
+void writeDiags(struct Parameters params, unsigned int iteration);
 ```
 
 **Fichier patch.cpp / .h :**
@@ -471,7 +486,7 @@ void initTopology(struct Parameters params, unsigned int id);
 void initParticles(struct Parameters params);
 ```
 
-Puis les fonctions permmettant de pousser les particules, de gérer les conditions limites et les collisions :
+Puis les fonctions permettant de pousser les particules, de gérer les conditions limites et les collisions :
 ```C++
 // Equation of movement applied to particles
 void push(struct Parameters params);
@@ -515,10 +530,10 @@ int getCollisionNumber();
 
 Ces fonctions sont appelées dans la classe `Particles` (voir [Particles.cpp](./cpp/patch/Particles.cpp)).
 
-**Question 1.1 - première exécution :** Maintenant que vous avez une vision globale du code séquentiel, compilez et exécutez-le avec
-les paramètres par défaut.
+**Question 1.1 - première exécution :** Maintenant que vous avez une vision globale du code séquentiel, compilez et exécutez-le avec les paramètres par défaut.
 
-**Question 1.2 :** L'exécution a généré des fichiers dans le dossier `diags`. Il y a plusieurs types de fichiers.
+**Question 1.2 :** L'exécution a généré des fichiers dans le dossier `diags`.
+Il y a plusieurs types de fichiers.
 Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Paraview` ou `VisIt`.
 [Une petit documentation sur Paraview](./paraview.md) vous aidera à visualiser les résultats.
 

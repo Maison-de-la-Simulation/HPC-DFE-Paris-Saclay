@@ -1,5 +1,7 @@
 # Analyse des fichiers de sortie
 
+## Scripts Python
+
 L'éxecution du code genère plusieurs type de fichiers dans un dossier `diags`
 qui sera créé au début de chaque *run* :
 - fichiers hdf5 (`.h5`)
@@ -30,3 +32,34 @@ python ../python/plot_binary_mayavi.py diags/particles_100.bin
 # les particules à l'itération 100 si le fichier binaire existe.
 python ../python/plot_hdf5.py diags/particles_100.h5
 ```
+
+## Paraview
+
+Les fichiers VTK (avec l'extension `.vtk`) peuvent être ouverts avec le logiciel Paraview.
+
+Commencez par ouvrir Paraview, vous obtenez l'interface suivante :
+
+<img src="../../support/materiel/paraview_interface.png" height="300">
+
+Cliquez sur l'icone d'ouverture de fichier et ouvrez les fichiers VTK en groupe (Paraview détecte les fichiers ayant le même nom avec un numéro d'itération).
+Dans le panneau de gauche `builtin` apparaît alors les données sélectionnées.
+Cliquez ensuite sur le bouton `Apply` dans la boîte à gauche en bas nommée `properties` comme ci-dessous :
+
+<img src="../../support/materiel/paraview_interface_2.png" height="300">
+
+En faisant cela vous confirmez vouloir utiliser ces données dans Paraview.
+
+Nous allons maintenant sélectionner une manière de visualiser ces données.
+Nous souhaitons visualiser chaque particule sous la forme d'une petite sphère.
+Pour cela, nous allons sélectionner le mode `Glyph` en haut à gauche.
+
+Dans le panneau `properties` :
+- Sélectionner `sphere` dans `Glyph Type`
+- Dans `Scalar`, vous pouvez choisir au choix l'énergie ou la masse des particules pour la couleur de ces dernières.
+- Diminuez le `Scale factor` pour réduire la taille des sphères, par exemple `0.1`
+- Dans `Glyph mode`, choisissez `All points` afin d'afficher toutes les particules et non juste une sélection.
+- Activer le `Data Axe Grid` pour afficher les axes
+
+Vous devriez obtenir quelque chose proche de la capture ci-dessous :
+
+<img src="../../support/materiel/paraview_interface_3.png" height="300">
