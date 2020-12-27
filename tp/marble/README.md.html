@@ -38,7 +38,8 @@ De fait, le changement de direction s'opère suivant la direction :</p>
 <p>On utilise <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663295000000005pt height=21.683310000000006pt/> pour désigner la i-ème particule dans notre domaine.
 On appelle <img src=".extra//4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode" align=middle width=5.936155500000004pt height=20.222069999999988pt/> le temps courant et <img src=".extra//5a63739e01952f6a63389340c037ae29.svg?invert_in_darkmode" align=middle width=19.634835000000002pt height=22.46574pt/> le pas en temps.
 La discrétisation des équations du mouvement se fait par une méthode explicite classique du type <em>leap-frog</em>.
-On décompose le vecteur vitesse suivant ses 3 composantes <img src=".extra//7b9f8a1d71e9ae383f2545e50c5370fc.svg?invert_in_darkmode" align=middle width=109.82020499999999pt height=24.65759999999998pt/>.</p>
+On décompose le vecteur vitesse suivant ses 3 composantes <img src=".extra//7b9f8a1d71e9ae383f2545e50c5370fc.svg?invert_in_darkmode" align=middle width=109.82020499999999pt height=24.65759999999998pt/>.
+L'équation du mouvement discrétisée devient :</p>
 <p align="center"><img src=".extra//86f029d2718d94d075ea4f3e5474d555.svg?invert_in_darkmode" align=middle width=345.45554999999996pt height=49.31553pt/></p>
 
 <p>De même, on décompose le vecteur position suivant ses 3 composantes <img src=".extra//fcf03b16104b392a5151096287fad486.svg?invert_in_darkmode" align=middle width=88.99440000000001pt height=24.65759999999998pt/>.</p>
@@ -82,14 +83,14 @@ Le moment de la collision est le moment où les particles rentrent en contact so
 <p>On obtient une équation de second ordre :</p>
 <p align="center"><img src=".extra//495e5a4490379876d84f859a26fdce14.svg?invert_in_darkmode" align=middle width=584.4498pt height=20.504055pt/></p>
 
-<p>La solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positivie.</p>
+<p>La solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positive.</p>
 <p>On calcule donc la position au moment de la collision en faisant simplement : <img src=".extra//a4e6865eacec45964af67e5cbc7f6a4b.svg?invert_in_darkmode" align=middle width=129.528465pt height=33.33363000000001pt/>.
 Il s'agit d'une approximation car on ne prend pas en compte la gravité et les frottements.
 Une fois la position <img src=".extra//3076985df29f467ae93a0bfbd9d228d3.svg?invert_in_darkmode" align=middle width=16.438785000000003pt height=33.33363000000001pt/> connue, on calcule la position post-collision <img src=".extra//dc2c0845e656d7462673ea305cb1db4e.svg?invert_in_darkmode" align=middle width=18.34305pt height=33.33363000000001pt/> grâce à la vitesse post-collision :</p>
-<p align="center"><img src=".extra//d67f59ff13efb97bc38bf17fc2a5e515.svg?invert_in_darkmode" align=middle width=135.56284499999998pt height=19.13241pt/></p>
+<p align="center"><img src=".extra//90f38fa4891dcd5cd6b9f165ac005301.svg?invert_in_darkmode" align=middle width=131.909745pt height=19.13241pt/></p>
 
 <p>L'opérateur suppose que chaque particule ne collisionne qu'une fois avec une autre particule.
-Pour cela, on utilise une algorithme à double boucles imbriquées où la seconde boucle démarre à partir de la particule <img src=".extra//48a0115fc523b1aae58ade9e16001f59.svg?invert_in_darkmode" align=middle width=33.973665000000004pt height=21.683310000000006pt/>.
+Pour cela, on utilise un algorithme à double boucles imbriquées où la seconde boucle démarre à partir de la particule <img src=".extra//48a0115fc523b1aae58ade9e16001f59.svg?invert_in_darkmode" align=middle width=33.973665000000004pt height=21.683310000000006pt/>.
 Soit <img src=".extra//f9c4988898e7f532b9f826a75014ed3c.svg?invert_in_darkmode" align=middle width=14.999985000000004pt height=22.46574pt/> le nombre total de particules.
 ```
 Pour chaque particle i de 1 jusqu'à N :</p>
@@ -109,9 +110,9 @@ Pour chaque particle i de 1 jusqu'à N :</p>
 <p>On applique ensuite ce même opérateur plusieurs fois pour simuler les collisions multiples.</p>
 <p>Il est possible de simuler des collisions inélastiques (perte d'énergie induite lors de la collision) en multipliant la nouvelle vitesse par un coefficient d'amortissement <img src=".extra//c745b9b57c145ec5577b82542b2df546.svg?invert_in_darkmode" align=middle width=10.576500000000003pt height=14.155350000000013pt/> de telle sorte que la nouvelle énergie de la particule vaut <img src=".extra//d4810e5f7cbd7b818527291de114afa3.svg?invert_in_darkmode" align=middle width=107.69979000000001pt height=26.76201000000001pt/>.</p>
 <h3>Conditions aux bords</h3>
-<p>Les bords sont des murs réflécissants avec possibilité d'amortissement.
+<p>Les bords sont des murs réfléchissants avec possibilité d'amortissement.
 On définit une collision avec un mur au moment où la distance entre le mur et le centre de la particule est inférieur à <img src=".extra//aadb079978519a78a2e0a1254286d2e7.svg?invert_in_darkmode" align=middle width=20.827785000000002pt height=22.46574pt/>.
-Un mur est défini par une normal \overrightarrow{n} et un point \overrightarrow{p}. Par convention, la normale est orientée vers l'intéreur du domaine pour le calcul de la réflexion.
+Un mur est défini par une normal <img src=".extra//21ee6f41257125c58e594746c899b70f.svg?invert_in_darkmode" align=middle width=16.438785000000003pt height=33.33363000000001pt/> et un point <img src=".extra//6820b22b2324e311a04b3d81c2737d02.svg?invert_in_darkmode" align=middle width=16.438785000000003pt height=33.33363000000001pt/>. Par convention, la normale est orientée vers l'intérieur du domaine pour le calcul de la réflexion.
 Comme pour les collisions entre particules, on calcule le temps au moment exact de la collision, c'est à dire quand la distance entre le mur et la particule vaut exactement <img src=".extra//aadb079978519a78a2e0a1254286d2e7.svg?invert_in_darkmode" align=middle width=20.827785000000002pt height=22.46574pt/>.
 Cela permet de calculer la position de la particule au moment de la collision avant d'actualiser sa vitesse et de calculer la position post-réflexion.</p>
 <p>La vitesse post-réflexion <img src=".extra//0f0648ccd31339db8e20252b9e384e34.svg?invert_in_darkmode" align=middle width=16.916130000000003pt height=33.33363000000001pt/> se calcule facilement par réflexion spéculaire :</p>
@@ -121,7 +122,8 @@ Cela permet de calculer la position de la particule au moment de la collision av
 <p>Ce TP se compose de plusieurs répertoires :
 - <a href="./cpp/sequential">cpp/sequential</a> : ce dossier contient l'ensemble des sources du code séquentiel.
 - <a href="./cpp/patch">cpp/patch</a> : ce dossier contient l'ensemble des sources du code séquentiel avec décomposition en sous-domaine (<em>patch</em>).
-- <a href="./python">python</a> : ce dossier contient des scripts dédiés à la visualization et à la comparaison des résultats (fichiers de sortie)
+- <a href="./python">scalings</a> : ce dossier contient des scripts permettant d'afficher les courbes de scalabilité présentées à la fin de ce document.
+- <a href="./python">visualization</a> : ce dossier contient des scripts dédiés à la visualisation.
 - <a href="./.extra">.extra</a> : ce dossier sert uniquement pour GitHub</p>
 <h2>Le code séquentiel</h2>
 <h3>Description</h3>
@@ -160,7 +162,7 @@ Dans le tableau principal des particules (celles du <em>patch</em>), les particu
 La méthode consiste à remplir les cases mémoires vides des particules ayant quittée le <em>patch</em> par les particules de la fin du tableau.</li>
 <li>Dans la troisème étape, chaque <em>patch</em> va chercher dans les <em>buffers</em> de ses voisins les particules qu'ils doivent recevoir.</li>
 </ol>
-<h3>Les dépendences</h3>
+<h3>Les dépendances</h3>
 <p>Ce programme nécessite l'installation d'un compilateur C++.</p>
 <p>Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
 C'est normalement le cas de la plupart des compilateurs récents.
@@ -168,10 +170,6 @@ C'est le cas sur les postes de travail de l'université.</p>
 <p>Vous aurez aussi besoin d'installer MPI.
 Sur les postes de travail de l'université, MPI est déjà installé.
 Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier <a href="../../documentation/mpi.md">./documentation</a>.</p>
-<p>Pour les sorties, vous aurez besoin d'HDF5.
-Sur les ordinateurs de l'université, une version parallèle est installée dans l'espace commun : <code>/public/m2_dfe/hdf5-1.10.4/build</code>.
-Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier <a href="../../documentation/hdf5.md">./documentation</a>.
-Si vraiment HDF5 vous pose problème il est possible de désactiver cette sortie dans le code.</p>
 <h3>Compilation et exécution</h3>
 <p>Pour compiler ce programme, vous pouvez tout simplement utiliser le makefile dans le dossier des sources en tapant dans votre terminal :
 <code>bash
@@ -182,22 +180,22 @@ make</code></p>
 <h3>Argument en ligne de commande</h3>
 <h3>Visualisation</h3>
 <p>Le code peut générer plusieurs types de fichiers :
-- Fichier HDF5 visualisable via <code>Python</code> : pour cela, utilisez les scripts disponible dans le dossier <a href="./python">python</a>.
-Vous avez besoin de python avec la biblithèque <code>matplotlib</code> et <code>h5py</code>.
-- Fichier VTK : Les fichiers sont créés indépendament de la bilbiothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
+- Fichier VTK : Les fichiers sont créés indépendamment de la bibliothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
 Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette <a href="./paraview.md">page</a>.
-- Fichiers binaires : ces fichiers sont un enregistrements binaires des propriétés des particules.
+- Fichiers binaires : ces fichiers sont un enregistrement binaire des propriétés des particules.
   On peut visualiser ces données avec <code>matplotlib</code> en utilisant le script <a href="./python/plot_binary_matplotlib.py">plot_binary_matplotlib.py</a>.
-  On peut aussi générer une image 3D grâce au paquet Python Mayavi en utilisant le script <a href="./python/plot_binary_mayavi.py">plot_binary_mayavi.py</a>.</p>
+  On peut aussi générer une image 3D grâce au paquet Python Mayavi en utilisant le script <a href="./python/plot_binary_mayavi.py">plot_binary_mayavi.py</a>.
+- Fichier HDF5 visualisable via <code>Python</code> : pour cela, utilisez les scripts disponible dans le dossier <a href="./python">python</a>.
+  Vous avez besoin de python avec la bibliothèque <code>matplotlib</code> et <code>h5py</code>. Cette sortie est néanmoins désactivée par défaut car elle nécessite l'installation de HDF5.</p>
 <h2>Consignes de TP</h2>
 <p>Dans ce TP, vous aurez à modifier un programme séquentiel afin de le rendre parallèle avec OpenMP puis MPI.
 Vous serez ensuite amené à étudier les performances des versions parallèles.
 Le TP se compose de 5 sous-sections :
 - Sous-section I : il s'agit de la découverte du code séquentiel
-- Sous-section II :
-- Sous-section III :
-- Sous-section IV :
-- Sous-section V :</p>
+- Sous-section II : cette partie concerne la découverte de la machine parallèle
+- Sous-section III : cette partie est l'implémentation de la version OpenMP
+- Sous-section IV : cette partie est l'implémentation de la version MPI
+- Sous-section V : cette partie est l'étude de la performance des codes parallèles</p>
 <p>En plus de travailler dans un code de calcul, il vous est demandé d'écrire un rapport détaillant votre démarche.
 Le TP est divisé en questions successives vous invitant soit à modifier le code soit à compléter votre rapport, parfois les deux.
 Pour le rapport, vous êtes libre de choisir le format et le logiciel qui vous convient (LateX, Word, LibreOffice...).</p>
@@ -208,19 +206,19 @@ Pour le rapport, vous êtes libre de choisir le format et le logiciel qui vous c
 Ce header contient la définition d'une structure de données pour des paramètres globaux du nom de <code>Parameters</code>.
 Les paramètres globaux du code permettent de décrire les propriétés de la simulation.
 On trouve les sections suivantes :
-- <code>Time properties</code> : tout ce qui se réfère au temps comme l'itération courante ou le temps final
+- <code>Time properties</code> : tout ce qui se réfère au temps de calcul
 - <code>Domain properties</code> : propriété spatiale et physique du domaine comme sa taille par exemple ou le niveau de gravité.
   Dans la verison par <em>patch</em>, on y trouve aussi la façon de décomposer le domaine.
 - <code>Particle properties</code> : propriété générale des particules
 - <code>Diag properties</code> : paramètres pour les diagnostiques diverses</p>
-<p>Cette structur est régulièrement passée en argument des fonctions ayant besoin des données globales.</p>
+<p>Cette structure est régulièrement passée en argument des fonctions ayant besoin des données globales.</p>
 <p><strong>Fichier main.cpp :</strong></p>
 <p>Ouvrez le fichier <a href="./patch/main.cpp">main.cpp</a> et explorez la structure du code.
 La première partie concerne l'initialisation de la simulation :
 1. déclaration des variables
-2. initialisation des proriétés de la simulation
+2. initialisation des propriétés de la simulation
 3. initialisation des <em>timers</em>
-4. initialisation de la topologie (décomposition du domaine) et des particules présentent dans chaque <em>patch</em>
+4. initialisation de la topologie (décomposition du domaine) et des particules présentes dans chaque <em>patch</em>
 5. création des conditions aux bords (murs)
 6. affichage des informations principales dans le terminal pour récapituler la simulation
 7. sortie de fichier avant le démarrage de la boucle en temps</p>
@@ -228,20 +226,28 @@ La première partie concerne l'initialisation de la simulation :
 Elle se compose des étapes suivantes pour chaque itération en temps :
 1. déplacement des particules suivant les équations du mouvement
 <code>C++
-particles.push(parameters);</code>
+particles.push(params);</code>
 2. application de l'opérateur de collision
 <code>C++
-particles.multipleCollisions(collision_counter, parameters);</code>
+particles.multipleCollisions(params);</code>
 3. application des conditions limites
 <code>C++
-particles.walls(parameters, walls);</code>
+particles.walls(params, walls);</code>
 4. échange des particules entre <em>patch</em>
 <code>C++
-particles.exchange(parameters);</code>
+particles.exchange(params);</code>
 5. écriture sur le disque des fichiers de diagnostique (en fonction de la période demandée)
 <code>C++
-particles.writeDiags(parameters);</code>
-6. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.</p>
+particles.writeDiags(params);</code>
+6. calcul des grandeurs globales (réduction)
+```C++
+particles.getTotalEnergy(params, total_energy);</p>
+<p>particles.getMaxVelocity(params, max_velocity);</p>
+<p>particles.getTotalParticleNumber(params, particle_number, imbalance);</p>
+<p>particles.getTotalCollisionNumber(params, collision_counter);</p>
+<p>particles.getTotalExchangeNumber(params, exchange_counter);
+```
+7. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.</p>
 <p><strong>Fichier particles.cpp / .h:</strong></p>
 <p>Ouvrez les fichiers <a href="./patch/particles.h">particles.h</a> et <a href="./patch/particles.cpp">particles.cpp</a> pour explorer la structure du code.
 Ce fichier contient la description de la classe <code>Particles</code>.
@@ -249,7 +255,7 @@ Cette classe représente l'ensemble des particules du domaine et contient donc l
 Le header montre que la classe <code>Particles</code> contient un tableau d'objet <code>Patch</code>:
 <code>C++
 std::vector &lt;Patch&gt; patches;</code>
-On retrouve ensuite la définitions des fonctions qui s'appliquent sur les patchs et qui sont appelelées soient pour l'initilisation :
+On retrouve ensuite la définition des fonctions qui s'appliquent sur les patchs et qui sont appelées soient pour l'initialisation :
 ```C++
 // Initialize the topology for each patch
 void initTopology(struct Parameters params);</p>
@@ -263,19 +269,23 @@ void walls(struct Parameters params, Walls walls);</p>
 <p>// Perform the binary collisions
 unsigned int collisions(struct Parameters params);</p>
 <p>// Multiple collison iterations
-void multipleCollisions(unsigned int &amp; collision_counter, struct Parameters params);</p>
+void multipleCollisions(struct Parameters params);</p>
 <p>// Exchange particles between patches
 void exchange(struct Parameters params);</p>
 <p>// Return the total energy in the domain (all patches)
-void getTotalEnergy(double &amp; total_energy);</p>
+void getTotalEnergy(struct Parameters params, double &amp; total_energy);</p>
 <p>// Return the maximal particle velocity in the domain (all patches)
-void getMaxVelocity(double &amp; max_velocity);</p>
+void getMaxVelocity(struct Parameters params, double &amp; max_velocity);</p>
 <p>// Return the total number of particles
-void getTotalParticleNumber(unsigned int &amp; total);</p>
+void getTotalParticleNumber(struct Parameters params, int &amp; total, int &amp; imbalance);</p>
+<p>// Return the total number of collisions
+void getTotalCollisionNumber(struct Parameters params, int &amp; total);</p>
+<p>// Return the total number of exchange
+void getTotalExchangeNumber(struct Parameters params, int &amp; total);</p>
 <p>// Output specifically the vtk files
-void writeVTK(unsigned int iteration);</p>
+void writeVTK(struct Parameters params, unsigned int iteration);</p>
 <p>// Write all type of diags
-void writeDiags(struct Parameters params);
+void writeDiags(struct Parameters params, unsigned int iteration);
 ```</p>
 <p><strong>Fichier patch.cpp / .h :</strong></p>
 <p>Ouvrez les fichiers <a href="./patch/patch.h">patch.h</a> et <a href="./patch/patch.cpp">particles.cpp</a> pour explorer la structure du code.
@@ -335,7 +345,7 @@ void initTopology(struct Parameters params, unsigned int id);</p>
 <p>// Initialization functions
 void initParticles(struct Parameters params);
 ```</p>
-<p>Puis les fonctions permmettant de pousser les particules, de gérer les conditions limites et les collisions :
+<p>Puis les fonctions permettant de pousser les particules, de gérer les conditions limites et les collisions :
 ```C++
 // Equation of movement applied to particles
 void push(struct Parameters params);</p>
@@ -367,19 +377,18 @@ unsigned int getParticleNumber();</p>
 int getCollisionNumber();
 ```</p>
 <p>Ces fonctions sont appelées dans la classe <code>Particles</code> (voir <a href="./cpp/patch/Particles.cpp">Particles.cpp</a>).</p>
-<p><strong>Question 1.1 - première exécution :</strong> Maintenant que vous avez une vision globale du code séquentiel, compilez et exécutez-le avec
-les paramètres par défaut.</p>
-<p><strong>Question 1.2 :</strong> L'exécution a généré des fichiers dans le dossier <code>diags</code>. Il y a plusieurs types de fichiers.
+<p><strong>Question 1.1 - première exécution :</strong> Maintenant que vous avez une vision globale du code séquentiel, compilez et exécutez-le avec les paramètres par défaut.</p>
+<p><strong>Question 1.2 :</strong> L'exécution a généré des fichiers dans le dossier <code>diags</code>.
+Il y a plusieurs types de fichiers.
 Les fichiers avec l'extension <code>.vtk</code> doivent être ouvert avec le logiciel <code>Paraview</code> ou <code>VisIt</code>.
-<a href="./paraview.md">Une petit documentation sur Paraview</a> vous aidera à visualiser les résultats.</p>
+<a href="./visualization/README.md">Cette page dans le dossier visulization</a> vous aidera à visualiser les résultats.</p>
 <ul>
 <li>a) Utilisez soit les scripts Python fournis dans le dossier <a href="./python">python</a> pour visualiser les résultats (utilisez le <a href="./python/README.md">README</a> pour plus d'information) ou Paraview.</li>
 </ul>
 <p><strong>Rapport :</strong> Placez dans le rapport plusieurs images à différentes itérations de simulation.</p>
 <h2>II. Découverte de la machine de calcul</h2>
 <p><strong>Question 2.1 - Architecture de la machine parallèle:</strong> Avant de travailler sur la parallélisation du code, il est important de regarder
-les propriétés de la machine parallèle que vous allez utiliser.
-Dans notre cas, nous utiliserons des ordinateurs de bureau équipé d'un seul processeur mais de plusieurs coeurs de calcul.</p>
+les propriétés de la machine parallèle que vous allez utiliser.</p>
 <ul>
 <li>a) La première chose à faire est de récupérer ces informations.
   Pour cela, vous pouvez utiliser la commande suivante :</li>
@@ -410,9 +419,9 @@ Prenez une capture d'écran et mettez la dans votre rapport.</p>
 </li>
 </ul>
 <h3>III. OpenMP</h3>
-<p>Dans cette nouvelle partie, nous allons paralléliser le programme d'équation d'onde en utilisant la bibliothèque OpenMP
+<p>Dans cette nouvelle partie, nous allons paralléliser le programme en utilisant la bibliothèque OpenMP
 fonctionnant par directives.</p>
-<p><strong>Préparation :</strong> Pour cette partie, faites une copie du dossier <code>patch</code> contenant le code pour la version séquentielle par patch que vous allez appeler <code>omp</code>.
+<p><strong>Préparation :</strong> Pour cette partie, faites une copie du dossier <code>patch</code> contenant le code pour la version séquentielle par <em>patch</em> que vous allez appeler <code>omp</code>.
 Dans la partie suivante du TP, il vous sera demandé de modifier les sources dans le dossier <code>omp</code>.</p>
 <p><strong>Question 3.1 - modification du makefile :</strong> Ouvrez le makefile et rajouter l'option permettant de compiler les directives OpenMP :</p>
 <p><code>Makefile
@@ -429,43 +438,42 @@ les quelques paramètres qui en ont besoin.</p>
 spécifique <code>time = omp_get_wtime()</code> (https://www.openmp.org/spec-html/5.0/openmpsu160.html).
 Le temps est géré par les <em>timers</em> dans le fichier <a href="./patch/timers.cpp">timers.cpp</a>.
 N'oubliez pas que la fonction <code>time = omp_get_wtime()</code> renvoie des secondes.</p>
-<p>a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque openMP dans <a href="./patch/timers.h">timers.h</a></p>
+<p>a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque OpenMP dans <a href="./patch/timers.h">timers.h</a></p>
 <p>b) Modifiez maintenant les fonctions dans la classe <code>timers</code> pour utiliser <code>time = omp_get_wtime()</code>.</p>
 <p>c) Faites-en sorte que seul le thread <em>master</em> puisse récupérer le temps afin d'éviter la concurrence mémoire sur les <em>timers</em>.</p>
 <p>c) Compilez avec OpenMP (sans exécuter) pour vérifier.</p>
-<p><strong>Question 3.4 - parallélisation de la boucle :</strong> On va maintenant paralléliser la boulce en temps.
+<p><strong>Question 3.4 - parallélisation de la boucle :</strong> On va maintenant paralléliser la boucle en temps.
 Ici, on répartira les <em>patchs</em> sur les différents threads.</p>
 <p>a) Dans la boucle en temps de <a href="./patch/main.cpp">main.cpp</a>, identifiez les portions de code qui ne peuvent être
-exécutées en parallel et nécessite l'utilisation d'une directive <code>omp single</code>.</p>
+exécutées en parallèle et nécessitent l'utilisation d'une directive <code>omp single</code> ou <code>omp master</code>.</p>
 <p><strong>Rapport :</strong> Justifiez soigneusement vos choix</p>
 <p>b) Les différentes étapes de la boucle en temps sont définies dans <a href="./patch/particles.cpp">particles.cpp</a>.
 Rajoutez la directive permettant de paralléliser les boucles sur les patchs dans les fonctions le permettant.
-Ajoutez également la clause permettant de choisir le scheduler au runtime :
+Ajoutez également la clause permettant de choisir le <em>scheduler</em> au runtime :
 ```</p>
 <h1>pragma omp for schedule(runtime)</h1>
 <p>```</p>
 <p><strong>Rapport :</strong> Justifiez soigneusement vos choix</p>
 <p>c) Les fonctions permettant de calculer certains paramètres globaux que sont :
 - <code>particles.getTotalEnergy(params, total_energy);</code> pour obtenir l'énergie totale
-- <code>particles.getMaxVelocity(params, max_velocity);</code> pour obtenir la vitesse de la particule la plus rpaide
-- <code>particles.getTotalParticleNumber(params, particle_number);</code> pour obtenir le nombre total de particules
-- <code>particles.getTotalCollisionNumber(params, collision_counter);</code> pour obtenir le nombre total de collision
-nécessite également un traitement supplémentaire.
+- <code>particles.getMaxVelocity(params, max_velocity);</code> pour obtenir la vitesse de la particule la plus rapide
+- <code>particles.getTotalParticleNumber(params, particle_number, imbalance);</code> pour obtenir le nombre total de particules
+- <code>particles.getTotalCollisionNumber(params, collision_counter);</code> pour obtenir le nombre total de collisions nécessite également un traitement supplémentaire.
 Ce sont des fonctions de réduction.
 Parallélisez les boucles de ces fonctions tout rajoutant la clause permettant de gérer la réduction.</p>
 <p><strong>Attention :</strong> j'ai remarqué quelques problèmes avec ces réductions soient à la compilation soit à l'exécution.
-Il est possible de les remplacer par un <code>omp single</code> ou l'utilisation de région critique en cas de problème.</p>
-<p>d) Compilez avec OpenMP (sans exécuter) pour vérifier.</p>
+Il est possible de les remplacer par un <code>omp master</code> ou l'utilisation de région critique en cas de problème.</p>
+<p>d) Compilez avec OpenMP (sans exécuter) pour vérifier que vous n'avez pas d'erreur.</p>
 <p><strong>Questions 3.5 - exécution :</strong> Nous allons maintenant vérifier que le programme OpenMP fonctionne bien.</p>
 <p>a) Exportez dans votre environnement les variables pour le nombre de <em>threads</em> OpenMP (par exemple <code>OMP_NUM_THREADS=4</code>) et
-le type <em>scheduler</em> ainsi que le le nombre de <em>chunks</em>. Choisissez pour commencer <code>OMP_SCHEDULE="static"</code>. Exécutez le code.</p>
+le type <em>scheduler</em> ainsi que le nombre de <em>chunks</em>. Choisissez pour commencer <code>OMP_SCHEDULE="static"</code>. Exécutez le code.</p>
 <p>b) Comparez les résultats avec le code séquentiel.</p>
 <p><strong>Questions 3.6 - visualisation des résultats :</strong> Visualisez les fichiers de sortie pour vous assurer que les résultats sont identiques
 avec la version séquentielle.</p>
 <h3>IV. MPI</h3>
 <p>Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.
-Pour cela, nous ferons en sorte que chaque patch soit traité par un processus MPI.
-Un patch sera donc associé à un rang MPI systématiquement.</p>
+Pour cela, nous ferons en sorte que chaque <em>patch</em> soit traité par un processus MPI.
+Un <em>patch</em> sera donc associé à un rang MPI systématiquement.</p>
 <p><strong>Préparation :</strong> Faites maintenant une copie du dossier <code>patch</code> et appelez-le <code>mpi</code>.
 On modifiera les sources de ce dossier pour y introduire la parallélisation MPI.</p>
 <p><strong>Question 4.1 - makefile :</strong> En premier lieu, il nous faut modifier le makefile pour pouvoir compiler avec MPI.
@@ -494,14 +502,14 @@ Notez qu'il faudra l'inclure dans chaque fichier où sera appelées des fonction
 <p>c) Toujours au début de <a href="./cpp/patch/main.cpp">main.cpp</a>, ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
 Aidez-vous du premier exercice sur MPI si besoin <code>1_initialization</code>.</p>
-<p>d) Ensuite, rajoutez la fonction permettant definaliser MPI tout de suite à la fin du programme.</p>
+<p>d) Ensuite, rajoutez la fonction permettant de finaliser MPI tout de suite à la fin du programme.</p>
 <p>e) Pour tester notre programme au fur et à mesure de l'implémentation, nous allons commenter les appels aux fonctions non parallélisées avec MPI dans <a href="./cpp/patch/main.cpp">main.cpp</a>.
 Identifiez les fonctions à commenter dans l'initialisation et la boucle en temps.
 <strong>Rapport :</strong> Justifiez votre choix dans votre rapport.</p>
 <p>f) Compilez et exécutez votre programme avec un seul rang pour tester son fonctionnement.</p>
 <p><strong>Question 4.4 - Action réservée au rang 0 :</strong> Il est important de se rappeler que dans un programme MPI, le code que vous écrivez après l'initialisation de MPI est exécuté par tous les rangs. Cela diffère d'OpenMP pour lequel le code exécuté en parallèle dépend de l'emplacement des directives.
-Néanmoins, la similitude peut être faite avec l'ouverture d'une région parallèle en OpenMP à partir de laquelle le code est exécuté par tous les threads.
-A partir de là, il est important d'identifier les zones que l'on souhaite être exécuté que par un seul rang.</p>
+Néanmoins, la similitude peut être faite avec l'ouverture d'une région parallèle en OpenMP à partir de laquelle le code est exécuté par tous les <em>threads</em>.
+A partir de là, il est important d'identifier les zones que l'on souhaite être exécutées que par un seul rang.</p>
 <p>a) Dans le fichier <a href="./cpp/patch/main.cpp">main.cpp</a> c'est le cas des parties suivantes :
 - la création du dossier <code>diags</code> :
 <code>C++
@@ -512,12 +520,12 @@ Pour éviter que tous les rangs n'effectuent ces actions, ajoutez une condition 
 <code>C++
 std::cout &lt;&lt; " Topology:" &lt;&lt; std::endl;
 std::cout &lt;&lt; "  - number of ranks: " &lt;&lt; params.number_of_ranks &lt;&lt; std::endl;</code></p>
-<p>c) Comilez le code pour vérifier que vous n'avez pas fait d'erreur.
+<p>c) Compilez le code pour vérifier que vous n'avez pas fait d'erreur.
 Vous pouvez également l'exécuter avec un seul rang.</p>
 <p><strong>Question 4.5 - Timers :</strong> Avant de rentrer dans le coeur du sujet, nous allons préparer le calcul du temps avec MPI.
-La définition des timers change de fait de l'utilisation de MPI.
+La définition des <em>timers</em> change du fait de l'utilisation de MPI.
 Ici le temps enregistré sera le temps propre à chaque rang.
-Etant donné que ce temps n'est pas forcément le même pour tous en fonction du la charge de travail à traiter, il est intéressant d'afficher le temps maximal, minimal et la moyenne sur l'ensemble des rangs.</p>
+Etant donné que ce temps n'est pas forcément le même pour tous en fonction de la charge de travail à traiter, il est intéressant d'afficher le temps maximal, minimal et la moyenne sur l'ensemble des rangs.</p>
 <p>a) Ouvrez le fichier <a href="./cpp/patch/timers.cpp">timers.cpp</a>.</p>
 <p>b) En premier lieu, nous allons remplacer tous les appels à la fonction <code>gettimeofday</code> par la fonction MPI <code>MPI_WTIME()</code> plus adaptée.</p>
 <p>Chaque processus MPI va donc faire un calcul local du temps passé dans chaque partie.
@@ -525,7 +533,7 @@ Les bilans temporels ne seront affichés que par un seul processus.
 En revanche, nous allons faire quelques statistiques en affichant le temps minimal, moyen et maximal entre tous les processus pour chaque partie du code.</p>
 <p>c) Au début de la fonction <code>Timers::print</code> de <a href="./cpp/patch/timers.cpp">timers.cpp</a>, déclarez les tableaux <code>minimum_times</code>, <code>average_times</code> et <code>maximum_times</code>.</p>
 <p>d) Ajoutez les fonctions MPI permettant de calculer la valeur maximale, minimale et la moyenne des valeurs accumulées dans le tableau <code>accumulated_times</code>.</p>
-<p>e) Améliorez l'affichage des timers en y ajoutant ces temps là au lieu du temps accumulé :
+<p>e) Améliorez l'affichage des <em>timers</em> en y ajoutant ces temps là au lieu du temps accumulé :
 <code>C++
 std::cout &lt;&lt; " ------------------------------------ "&lt;&lt; std::endl;
 std::cout &lt;&lt; " TIMERS"&lt;&lt; std::endl;
@@ -533,7 +541,7 @@ std::cout &lt;&lt; " ------------------------------------ "&lt;&lt; std::endl;
 std::cout &lt;&lt; "            code part |   min (s)  | averag (s) |   max (s)  | percentage |"&lt;&lt; std::endl;
 std::cout &lt;&lt; " ---------------------|------------|------------|------------|------------|"&lt;&lt; std::endl;</code></p>
 <p>N'oubliez pas que seul le rang 0 s'occupe de l'affichage.</p>
-<p>f) Décommentez l'appel aux timers pour l'initialisation et l'affichage final. Compilez le code et exécutez le en demandant qu'un processeur.
+<p>f) Décommentez l'appel aux <em>timers</em> pour l'initialisation et l'affichage final. Compilez le code et exécutez le en demandant qu'un processeur.
 <code>bash
 mpirun -np 1 ./executable</code></p>
 <p><strong>Question 4.6 - Topologie :</strong> Pour simplifier le développement, l'idée est de faire en sorte que chaque rang MPI ne possède qu'un patch.
@@ -547,21 +555,21 @@ Il est même possible en fonction des choix de chacun de faire disparaitre la cl
 <code>C++
 void Patch::initTopology(struct Parameters params);
 void Particles::initTopology(struct Parameters &amp; params);</code>
-On passe la structure par référence car on modifiera données dans ces fonctions.</p>
-<p>c) Ajoutez une condition afin de vérifier que le nombre de patchs est égal au nombre de rangs MPI spécifiés.</p>
-<p>d) Ajoutez dans <code>Particles::initTopology</code> les fonctions permettant de créer une topolgie cartésienne 3D (<code>MPI_Cart_create</code>, <code>MPI_Comm_rank</code> et <code>MPI_Cart_coords</code>).
+On passe la structure par référence car on modifiera certaines données dans ces fonctions.</p>
+<p>c) Ajoutez une condition afin de vérifier que le nombre de <em>patchs</em> est égal au nombre de rangs MPI spécifiés.</p>
+<p>d) Ajoutez dans <code>Particles::initTopology</code> les fonctions permettant de créer une topologie cartésienne 3D (<code>MPI_Cart_create</code>, <code>MPI_Comm_rank</code> et <code>MPI_Cart_coords</code>).
 Pour le moment on ne s'occupe pas des voisins.
 Vous ajouterez les paramètres adéquates dans la structure de donnée <code>Parameters</code>.
-Le nombre de processus MPI dans chaque direction w, y et z est donné par les paramètres <code>params.n_patches_x</code>, <code>params.n_patches_y</code> et <code>params.n_patches_z</code>
+Le nombre de processus MPI dans chaque direction <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.395100000000005pt height=14.155350000000013pt/>, <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649300000000004pt height=14.155350000000013pt/> et <img src=".extra//f93ce33e511096ed626b4719d50f17d2.svg?invert_in_darkmode" align=middle width=8.367645000000003pt height=14.155350000000013pt/> est donné par les paramètres <code>params.n_patches_x</code>, <code>params.n_patches_y</code> et <code>params.n_patches_z</code>
 car chaque processus MPI ne possède qu'un patch.
 Vous pouvez vous aider de l'exercice 6.</p>
 <p>e) Ici nous n'utiliserons pas <code>MPI_Cart_shift</code> pour déterminer les voisins car nous avons besoin des voisins en diagonal que nous ne donne pas cette fonction.
 Pour ce faire, nous allons simplement générer une carte de la topologie sur l'ensemble des processeurs comme dans l'exercice 6 en utilisant <code>MPI_Cart_coords</code>.
 Ajoutez la carte de la topologie dans la structure <code>Parameters</code>.</p>
-<p><strong>Important :</strong> Je vous rappelle que la convention choisie par les dévelopeurs de MPI fait que la coordonnée continue est la dernière dimension.
-Dans ce TP, l'axe continu (indice continu dans le déroulement des boucles) est l'axe des <code>x</code>.</p>
-<p>f) Affichez dans le fichier <a href="./cpp/patch/main.cpp">main.cpp</a> la topologie à la fin du résumé des paramètres nuémriques (comme pour l'exercice 6 sur MPI).
-Vous pouvez vous inspirr du code suivant :
+<p><strong>Important :</strong> Je vous rappelle que la convention choisie par les développeurs de MPI fait que la coordonnée continue est la dernière dimension.
+Dans ce TP, l'axe continu (indice continu dans le déroulement des boucles) est l'axe des <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.395100000000005pt height=14.155350000000013pt/>.</p>
+<p>f) Affichez dans le fichier <a href="./cpp/patch/main.cpp">main.cpp</a> la topologie à la fin du résumé des paramètres numériques (comme pour l'exercice 6 sur MPI).
+Vous pouvez vous inspirer du code suivant :
 ```C++
 std::cout &lt;&lt;  " Topology map: "&lt;&lt; std::endl;</p>
 <p>for(int iz = 0; iz &lt; params.ranks_per_direction[0] ; iz++) {
@@ -582,11 +590,11 @@ std::cout &lt;&lt; " y" &lt;&lt; std::endl;
 <p>}
 std::cout &lt;&lt; std::endl;
 ```</p>
-<p>g) Nous allons maintenant modifier la fonction <code>Patch::initTopology</code> (<a href="./cpp/patch/patch.cpp">patch.cpp</a>) pour prendre en compte les coordonnées MPI dans la configuration de chaque patch.
-Commencez par mettre à jour la définition des variables suivnate :
+<p>g) Nous allons maintenant modifier la fonction <code>Patch::initTopology</code> (<a href="./cpp/patch/patch.cpp">patch.cpp</a>) pour prendre en compte les coordonnées MPI dans la configuration de chaque <em>patch</em>.
+Commencez par mettre à jour la définition des variables suivante :
 - <code>this-&gt;id</code> qui représente l'index du patch
 - <code>id_x</code>, <code>id_y</code>, <code>id_z</code> qui représente les coordonnées du patch dans la topologie
-Le calcul de la taille du patch et des bornes maximales et minimales reste inchangé :</p>
+Le calcul de la taille du <em>patch</em> et des bornes maximales et minimales reste inchangé :</p>
 <p>```C++
 this-&gt;patch_x_length = (params.xmax - params.xmin) / params.n_patches_x;
 this-&gt;patch_y_length = (params.ymax - params.ymin) / params.n_patches_y;
@@ -598,11 +606,11 @@ ymax = (id_y+1) * patch_y_length;
 zmin = id_z * patch_z_length;
 zmax = (id_z+1) * patch_z_length;
 ```</p>
-<p>h) Il faut maintenant mettre la jour le calcul des voisins dans le tableau <code>neighbor_indexes[k]</code>.
+<p>h) Il faut maintenant mettre à jour le calcul des voisins dans le tableau <code>neighbor_indexes[k]</code>.
 On peut voir que cette partie du code utilise la fonction <code>Patch::getNeighborIndex</code>.
-Cette fonction renvoie l'index ou le rang du patch de coordonnées relative <code>id_x + x_shift</code>, <code>id_y + y_shift</code> et <code>id_z + z_shift</code>.
-On tourne ainsi autour du patch courant pour déterminiter les rangs voisins.
-La fonction <code>Patch::getNeighborIndex</code> utilise la fonction <code>Patch::patchCoordinatesToIndex</code> qui à partir des cooordonnées donne le rang du patch dans la topologie.
+Cette fonction renvoie l'index ou le rang du <em>patch</em> de coordonnées relatives <code>id_x + x_shift</code>, <code>id_y + y_shift</code> et <code>id_z + z_shift</code>.
+On tourne ainsi autour du <em>patch</em> courant pour déterminer les rangs voisins.
+La fonction <code>Patch::getNeighborIndex</code> utilise la fonction <code>Patch::patchCoordinatesToIndex</code> qui à partir des coordonnées donne le rang du patch dans la topologie.
 Mettez à jour cette fonction pour prendre en compte la topologie <code>params.topology_map</code>.
 Dans la fonction <code>Patch::getNeighborIndex</code>, faites en sorte que <code>MPI_PROC_NULL</code> soit la valeur du rang renvoyé par défaut:
 ```C++
@@ -623,10 +631,10 @@ return index;
 <code>``</code>MPI_PROC_NULL<code>est compris par MPI comme étant un rang inexistant.
 Pour compiler, vous devrez mettre à jour l'ensemble des appels à</code>Patch::getNeighborIndex`.</p>
 <p>i) Expliquez pourquoi la fonction <code>Patch::patchIndexToCoordinates</code> qui renvoyait les coordonnées d'un patch à partir de son index n'a plus lieu d'être ici ?</p>
-<p>La dernière partie de la fonction <code>Patch::initTopology</code> pour établir si le patch se trouve au bord ne requiert pas de modification.</p>
+<p>La dernière partie de la fonction <code>Patch::initTopology</code> pour établir si le <em>patch</em> se trouve au bord ne requiert pas de modification.</p>
 <p>j) Décommentez l'appel à la fonction <code>Particles::initTopology</code> dans <a href="./cpp/patch/main.cpp">main.cpp</a>.
 Compilez et exécutez le code avec plusieurs processus MPI cette fois.
-N'oubliez pas de spécifier un nombre de patchs cohérent avec le nombre total de processus MPI demandé.</p>
+N'oubliez pas de spécifier un nombre de <em>patchs</em> cohérent avec le nombre total de processus MPI demandé.</p>
 <p><strong>A ce stade, vous avez maintenant correctement initialisé la topologie avec MPI.</strong></p>
 <p><strong>Question 4.7 - diagnostiques :</strong>
 Avant de rendre parallèle la gestion des particules, nous allons nous occuper des diagnostiques.
