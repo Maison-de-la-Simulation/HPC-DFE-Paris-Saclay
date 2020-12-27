@@ -545,7 +545,6 @@ Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Para
 
 **Question 2.1 - Architecture de la machine parallèle:** Avant de travailler sur la parallélisation du code, il est important de regarder
 les propriétés de la machine parallèle que vous allez utiliser.
-Dans notre cas, nous utiliserons des ordinateurs de bureau équipé d'un seul processeur mais de plusieurs coeurs de calcul.
 
 - a) La première chose à faire est de récupérer ces informations.
   Pour cela, vous pouvez utiliser la commande suivante :
@@ -574,10 +573,10 @@ Prenez une capture d'écran et mettez la dans votre rapport.
 
 ### III. OpenMP
 
-Dans cette nouvelle partie, nous allons paralléliser le programme d'équation d'onde en utilisant la bibliothèque OpenMP
+Dans cette nouvelle partie, nous allons paralléliser le programme en utilisant la bibliothèque OpenMP
 fonctionnant par directives.
 
-**Préparation :** Pour cette partie, faites une copie du dossier `patch` contenant le code pour la version séquentielle par patch que vous allez appeler `omp`.
+**Préparation :** Pour cette partie, faites une copie du dossier `patch` contenant le code pour la version séquentielle par *patch* que vous allez appeler `omp`.
 Dans la partie suivante du TP, il vous sera demandé de modifier les sources dans le dossier `omp`.
 
 **Question 3.1 - modification du makefile :** Ouvrez le makefile et rajouter l'option permettant de compiler les directives OpenMP :
@@ -604,7 +603,7 @@ spécifique `time = omp_get_wtime()` (https://www.openmp.org/spec-html/5.0/openm
 Le temps est géré par les *timers* dans le fichier [timers.cpp](./patch/timers.cpp).
 N'oubliez pas que la fonction `time = omp_get_wtime()` renvoie des secondes.
 
-a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque openMP dans [timers.h](./patch/timers.h)
+a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque OpenMP dans [timers.h](./patch/timers.h)
 
 b) Modifiez maintenant les fonctions dans la classe `timers` pour utiliser `time = omp_get_wtime()`.
 
@@ -612,17 +611,17 @@ c) Faites-en sorte que seul le thread *master* puisse récupérer le temps afin 
 
 c) Compilez avec OpenMP (sans exécuter) pour vérifier.
 
-**Question 3.4 - parallélisation de la boucle :** On va maintenant paralléliser la boulce en temps.
+**Question 3.4 - parallélisation de la boucle :** On va maintenant paralléliser la boucle en temps.
 Ici, on répartira les *patchs* sur les différents threads.
 
 a) Dans la boucle en temps de [main.cpp](./patch/main.cpp), identifiez les portions de code qui ne peuvent être
-exécutées en parallel et nécessite l'utilisation d'une directive `omp single`.
+exécutées en parallèle et nécessitent l'utilisation d'une directive `omp single` ou `omp master`.
 
 **Rapport :** Justifiez soigneusement vos choix
 
 b) Les différentes étapes de la boucle en temps sont définies dans [particles.cpp](./patch/particles.cpp).
 Rajoutez la directive permettant de paralléliser les boucles sur les patchs dans les fonctions le permettant.
-Ajoutez également la clause permettant de choisir le scheduler au runtime :
+Ajoutez également la clause permettant de choisir le *scheduler* au runtime :
 ```
 #pragma omp for schedule(runtime)
 ```
@@ -631,22 +630,21 @@ Ajoutez également la clause permettant de choisir le scheduler au runtime :
 
 c) Les fonctions permettant de calculer certains paramètres globaux que sont :
 - `particles.getTotalEnergy(params, total_energy);` pour obtenir l'énergie totale
-- `particles.getMaxVelocity(params, max_velocity);` pour obtenir la vitesse de la particule la plus rpaide
-- `particles.getTotalParticleNumber(params, particle_number);` pour obtenir le nombre total de particules
-- `particles.getTotalCollisionNumber(params, collision_counter);` pour obtenir le nombre total de collision
-nécessite également un traitement supplémentaire.
+- `particles.getMaxVelocity(params, max_velocity);` pour obtenir la vitesse de la particule la plus rapide
+- `particles.getTotalParticleNumber(params, particle_number, imbalance);` pour obtenir le nombre total de particules
+- `particles.getTotalCollisionNumber(params, collision_counter);` pour obtenir le nombre total de collisions nécessite également un traitement supplémentaire.
 Ce sont des fonctions de réduction.
 Parallélisez les boucles de ces fonctions tout rajoutant la clause permettant de gérer la réduction.
 
 **Attention :** j'ai remarqué quelques problèmes avec ces réductions soient à la compilation soit à l'exécution.
-Il est possible de les remplacer par un `omp single` ou l'utilisation de région critique en cas de problème.
+Il est possible de les remplacer par un `omp master` ou l'utilisation de région critique en cas de problème.
 
-d) Compilez avec OpenMP (sans exécuter) pour vérifier.
+d) Compilez avec OpenMP (sans exécuter) pour vérifier que vous n'avez pas d'erreur.
 
 **Questions 3.5 - exécution :** Nous allons maintenant vérifier que le programme OpenMP fonctionne bien.
 
 a) Exportez dans votre environnement les variables pour le nombre de *threads* OpenMP (par exemple `OMP_NUM_THREADS=4`) et
-le type *scheduler* ainsi que le le nombre de *chunks*. Choisissez pour commencer `OMP_SCHEDULE="static"`. Exécutez le code.
+le type *scheduler* ainsi que le nombre de *chunks*. Choisissez pour commencer `OMP_SCHEDULE="static"`. Exécutez le code.
 
 b) Comparez les résultats avec le code séquentiel.
 
@@ -656,8 +654,8 @@ avec la version séquentielle.
 ### IV. MPI
 
 Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.
-Pour cela, nous ferons en sorte que chaque patch soit traité par un processus MPI.
-Un patch sera donc associé à un rang MPI systématiquement.
+Pour cela, nous ferons en sorte que chaque *patch* soit traité par un processus MPI.
+Un *patch* sera donc associé à un rang MPI systématiquement.
 
 **Préparation :** Faites maintenant une copie du dossier `patch` et appelez-le `mpi`.
 On modifiera les sources de ce dossier pour y introduire la parallélisation MPI.
@@ -696,7 +694,7 @@ c) Toujours au début de [main.cpp](./cpp/patch/main.cpp), ajoutez les fonctions
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
 Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
 
-d) Ensuite, rajoutez la fonction permettant definaliser MPI tout de suite à la fin du programme.
+d) Ensuite, rajoutez la fonction permettant de finaliser MPI tout de suite à la fin du programme.
 
 e) Pour tester notre programme au fur et à mesure de l'implémentation, nous allons commenter les appels aux fonctions non parallélisées avec MPI dans [main.cpp](./cpp/patch/main.cpp).
 Identifiez les fonctions à commenter dans l'initialisation et la boucle en temps.
@@ -705,8 +703,8 @@ Identifiez les fonctions à commenter dans l'initialisation et la boucle en temp
 f) Compilez et exécutez votre programme avec un seul rang pour tester son fonctionnement.
 
 **Question 4.4 - Action réservée au rang 0 :** Il est important de se rappeler que dans un programme MPI, le code que vous écrivez après l'initialisation de MPI est exécuté par tous les rangs. Cela diffère d'OpenMP pour lequel le code exécuté en parallèle dépend de l'emplacement des directives.
-Néanmoins, la similitude peut être faite avec l'ouverture d'une région parallèle en OpenMP à partir de laquelle le code est exécuté par tous les threads.
-A partir de là, il est important d'identifier les zones que l'on souhaite être exécuté que par un seul rang.
+Néanmoins, la similitude peut être faite avec l'ouverture d'une région parallèle en OpenMP à partir de laquelle le code est exécuté par tous les *threads*.
+A partir de là, il est important d'identifier les zones que l'on souhaite être exécutées que par un seul rang.
 
 a) Dans le fichier [main.cpp](./cpp/patch/main.cpp) c'est le cas des parties suivantes :
 - la création du dossier `diags` :
@@ -722,13 +720,13 @@ std::cout << " Topology:" << std::endl;
 std::cout << "  - number of ranks: " << params.number_of_ranks << std::endl;
 ```
 
-c) Comilez le code pour vérifier que vous n'avez pas fait d'erreur.
+c) Compilez le code pour vérifier que vous n'avez pas fait d'erreur.
 Vous pouvez également l'exécuter avec un seul rang.
 
 **Question 4.5 - Timers :** Avant de rentrer dans le coeur du sujet, nous allons préparer le calcul du temps avec MPI.
-La définition des timers change de fait de l'utilisation de MPI.
+La définition des *timers* change du fait de l'utilisation de MPI.
 Ici le temps enregistré sera le temps propre à chaque rang.
-Etant donné que ce temps n'est pas forcément le même pour tous en fonction du la charge de travail à traiter, il est intéressant d'afficher le temps maximal, minimal et la moyenne sur l'ensemble des rangs.
+Etant donné que ce temps n'est pas forcément le même pour tous en fonction de la charge de travail à traiter, il est intéressant d'afficher le temps maximal, minimal et la moyenne sur l'ensemble des rangs.
 
 a) Ouvrez le fichier [timers.cpp](./cpp/patch/timers.cpp).
 
@@ -742,7 +740,7 @@ c) Au début de la fonction `Timers::print` de [timers.cpp](./cpp/patch/timers.c
 
 d) Ajoutez les fonctions MPI permettant de calculer la valeur maximale, minimale et la moyenne des valeurs accumulées dans le tableau `accumulated_times`.
 
-e) Améliorez l'affichage des timers en y ajoutant ces temps là au lieu du temps accumulé :
+e) Améliorez l'affichage des *timers* en y ajoutant ces temps là au lieu du temps accumulé :
 ```C++
 std::cout << " ------------------------------------ "<< std::endl;
 std::cout << " TIMERS"<< std::endl;
@@ -753,7 +751,7 @@ std::cout << " ---------------------|------------|------------|------------|----
 
 N'oubliez pas que seul le rang 0 s'occupe de l'affichage.
 
-f) Décommentez l'appel aux timers pour l'initialisation et l'affichage final. Compilez le code et exécutez le en demandant qu'un processeur.
+f) Décommentez l'appel aux *timers* pour l'initialisation et l'affichage final. Compilez le code et exécutez le en demandant qu'un processeur.
 ```bash
 mpirun -np 1 ./executable
 ```
@@ -773,14 +771,14 @@ b) Commencez par modifier les arguments de ces fonctions pour que la structure d
 void Patch::initTopology(struct Parameters params);
 void Particles::initTopology(struct Parameters & params);
 ```
-On passe la structure par référence car on modifiera données dans ces fonctions.
+On passe la structure par référence car on modifiera certaines données dans ces fonctions.
 
-c) Ajoutez une condition afin de vérifier que le nombre de patchs est égal au nombre de rangs MPI spécifiés.
+c) Ajoutez une condition afin de vérifier que le nombre de *patchs* est égal au nombre de rangs MPI spécifiés.
 
-d) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topolgie cartésienne 3D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
+d) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topologie cartésienne 3D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
 Pour le moment on ne s'occupe pas des voisins.
 Vous ajouterez les paramètres adéquates dans la structure de donnée `Parameters`.
-Le nombre de processus MPI dans chaque direction w, y et z est donné par les paramètres `params.n_patches_x`, `params.n_patches_y` et `params.n_patches_z`
+Le nombre de processus MPI dans chaque direction $x$, $y$ et $z$ est donné par les paramètres `params.n_patches_x`, `params.n_patches_y` et `params.n_patches_z`
 car chaque processus MPI ne possède qu'un patch.
 Vous pouvez vous aider de l'exercice 6.
 
@@ -788,11 +786,11 @@ e) Ici nous n'utiliserons pas `MPI_Cart_shift` pour déterminer les voisins car 
 Pour ce faire, nous allons simplement générer une carte de la topologie sur l'ensemble des processeurs comme dans l'exercice 6 en utilisant `MPI_Cart_coords`.
 Ajoutez la carte de la topologie dans la structure `Parameters`.
 
-**Important :** Je vous rappelle que la convention choisie par les dévelopeurs de MPI fait que la coordonnée continue est la dernière dimension.
-Dans ce TP, l'axe continu (indice continu dans le déroulement des boucles) est l'axe des `x`.
+**Important :** Je vous rappelle que la convention choisie par les développeurs de MPI fait que la coordonnée continue est la dernière dimension.
+Dans ce TP, l'axe continu (indice continu dans le déroulement des boucles) est l'axe des $x$.
 
-f) Affichez dans le fichier [main.cpp](./cpp/patch/main.cpp) la topologie à la fin du résumé des paramètres nuémriques (comme pour l'exercice 6 sur MPI).
-Vous pouvez vous inspirr du code suivant :
+f) Affichez dans le fichier [main.cpp](./cpp/patch/main.cpp) la topologie à la fin du résumé des paramètres numériques (comme pour l'exercice 6 sur MPI).
+Vous pouvez vous inspirer du code suivant :
 ```C++
 std::cout <<  " Topology map: "<< std::endl;
 
@@ -815,11 +813,11 @@ for(int iz = 0; iz < params.ranks_per_direction[0] ; iz++) {
 std::cout << std::endl;
 ```
 
-g) Nous allons maintenant modifier la fonction `Patch::initTopology` ([patch.cpp](./cpp/patch/patch.cpp)) pour prendre en compte les coordonnées MPI dans la configuration de chaque patch.
-Commencez par mettre à jour la définition des variables suivnate :
+g) Nous allons maintenant modifier la fonction `Patch::initTopology` ([patch.cpp](./cpp/patch/patch.cpp)) pour prendre en compte les coordonnées MPI dans la configuration de chaque *patch*.
+Commencez par mettre à jour la définition des variables suivante :
 - `this->id` qui représente l'index du patch
 - `id_x`, `id_y`, `id_z` qui représente les coordonnées du patch dans la topologie
-Le calcul de la taille du patch et des bornes maximales et minimales reste inchangé :
+Le calcul de la taille du *patch* et des bornes maximales et minimales reste inchangé :
 
 ```C++
 this->patch_x_length = (params.xmax - params.xmin) / params.n_patches_x;
@@ -834,11 +832,11 @@ zmin = id_z * patch_z_length;
 zmax = (id_z+1) * patch_z_length;
 ```
 
-h) Il faut maintenant mettre la jour le calcul des voisins dans le tableau `neighbor_indexes[k]`.
+h) Il faut maintenant mettre à jour le calcul des voisins dans le tableau `neighbor_indexes[k]`.
 On peut voir que cette partie du code utilise la fonction `Patch::getNeighborIndex`.
-Cette fonction renvoie l'index ou le rang du patch de coordonnées relative `id_x + x_shift`, `id_y + y_shift` et `id_z + z_shift`.
-On tourne ainsi autour du patch courant pour déterminiter les rangs voisins.
-La fonction `Patch::getNeighborIndex` utilise la fonction `Patch::patchCoordinatesToIndex` qui à partir des cooordonnées donne le rang du patch dans la topologie.
+Cette fonction renvoie l'index ou le rang du *patch* de coordonnées relatives `id_x + x_shift`, `id_y + y_shift` et `id_z + z_shift`.
+On tourne ainsi autour du *patch* courant pour déterminer les rangs voisins.
+La fonction `Patch::getNeighborIndex` utilise la fonction `Patch::patchCoordinatesToIndex` qui à partir des coordonnées donne le rang du patch dans la topologie.
 Mettez à jour cette fonction pour prendre en compte la topologie `params.topology_map`.
 Dans la fonction `Patch::getNeighborIndex`, faites en sorte que `MPI_PROC_NULL` soit la valeur du rang renvoyé par défaut:
 ```C++
@@ -862,11 +860,11 @@ Pour compiler, vous devrez mettre à jour l'ensemble des appels à `Patch::getNe
 
 i) Expliquez pourquoi la fonction `Patch::patchIndexToCoordinates` qui renvoyait les coordonnées d'un patch à partir de son index n'a plus lieu d'être ici ?
 
-La dernière partie de la fonction `Patch::initTopology` pour établir si le patch se trouve au bord ne requiert pas de modification.
+La dernière partie de la fonction `Patch::initTopology` pour établir si le *patch* se trouve au bord ne requiert pas de modification.
 
 j) Décommentez l'appel à la fonction `Particles::initTopology` dans [main.cpp](./cpp/patch/main.cpp).
 Compilez et exécutez le code avec plusieurs processus MPI cette fois.
-N'oubliez pas de spécifier un nombre de patchs cohérent avec le nombre total de processus MPI demandé.
+N'oubliez pas de spécifier un nombre de *patchs* cohérent avec le nombre total de processus MPI demandé.
 
 **A ce stade, vous avez maintenant correctement initialisé la topologie avec MPI.**
 
