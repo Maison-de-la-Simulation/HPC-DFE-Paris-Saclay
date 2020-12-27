@@ -983,6 +983,8 @@ Pour chaque figure, on s'intéresse à la fois à la boucle en temps total mais 
 - Echange des particules
 - Calcul des grandeurs globales
 
+Pour la version OpenMP, les opérations de réductions (grandeurs globales) sont placées dans des régions *single*.
+
 **Etude de weak scaling pour le code OpenMP**
 
 On rappelle que pour une étude de *weak scaling*, la taille du domaine varie avec le nombre de processus mais la charge par processus reste constante.
@@ -1018,8 +1020,9 @@ export OMP_NUM_THREADS=8
 
 **Deuxième étude de strong scaling pour le code OpenMP**
 
-Cette deuxième étude de *strong scaling* pour le code OpenMP diffère du premier dans la mesure où ici le nombre de patch est gardé constant pour tout nombre de processus de telle sorte que le nombre de patchs à traiter pour chaque processus varie.
-On utilise 32 patchs contenant chacun 1000 particules.
+Cette deuxième étude de *strong scaling* pour le code OpenMP diffère du premier dans la mesure où ici le nombre de patch total est gardé constant pour tout nombre de processus de telle sorte que le nombre de patchs à traiter pour chaque processus varie.
+Le nombre total de particules reste lui constant comme pour l'étude précédente.
+On utilise un nombre fixe de 32 *patchs* contenant chacun 1000 particules.
 A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
 ```bash
 export OMP_NUM_THREADS=8
@@ -1069,6 +1072,43 @@ mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 
 <img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_efficiency.png" height="300">
 <img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_part.png" height="300">
 
-**Question 5.1 - OpenMP :**
+**Question 5.1 - Weak Scaling OpenMP :**
 
 a) Justifiez pourquoi le SCHEDULER `STATIC` est le plus adéquate pour les études OpenMP ?
+
+b) Quels sont les composantes dominantes des parties parallèles et non-parallèles (suivant la définition d'Amdhal) dans cette étude ?
+
+c) Quel est le comportement du temps passé dans les collisions et le pousseur ? Ce comportement vous paraît-il cohérent avec un *weak scaling* ? Expliquez.
+
+d) Quel est le comportement du temps passé dans les échanges de particules et les communications globales ? Ce comportement vous paraît-il cohérent avec un *weak scaling* ? Expliquez.
+
+e) Que peut-on dire du passage à l'échelle du programme OpenMP en observant notamment l'efficacité (Fig 1.2) ?
+
+f) Intuitez quel pourrait être le comportement de l'étude (de l'efficacité notamment) pour un nombre de processus supérieur à 40 et pourquoi ?
+
+**Question 5.2 - Strong Scaling OpenMP :** L'étude de *Strong scaling* se décompose en 2 parties, une première étude avec un *patch* par processus (le nombre de *patch* varie mais le nombre de particules restent constant) et une seconde avec un nombre total de *patchs* fixe. Dans la seconde étude, les processus sont donc amenés à traités plusieurs *patchs*. Pour 32 coeurs, les deux études sont similaires.
+
+a) Comparez le temps passé dans chacune des études et expliquez la différence notamment lorsque le nombre de processus est inférieur à 32 coeurs.
+
+b) Comment peut-on qualifier le comportement de la première étude de *Strong Scaling* (voir Fig. 2.2). Expliquez ce comportement.
+
+c) Expliquez le comportement linéaire de la deuxième étude de *Strong scaling* (Fig. 3.2).
+
+**Question 5.3 - Weak Scaling MPI :** On s'intéresse maintenant au code MPI.
+Le *weak scaling* se compose de 2 études. La différence entre les deux est simplement le nombre de particules par patch : 500 pour la première, 2000 pour la seconde.
+
+a) Quelles différences majeures peut-on observer sur les temps entre les deux études (Figs. 4.1 et 5.1) ?
+
+b) Expliquez les conséquences et la différence sur l'efficacité (Figs. 4.2 et 5.2).
+
+c) Que peut-on dire de la relation entre nombre de particules par *patch* et capacité du code à passer à l'échelle ?
+
+**Question 5.4 - Strong Scaling MPI :**
+
+a) Comment peut-on qualifier le comportement de l'étude de *Strong Scaling* (voir Fig. 6.2). Expliquez ce comportement.
+
+**Question 5.5 - Comparaison :**
+
+a) Donnez quelles études de *strong scaling* et *weak scaling* sont comparables entre le modèle OpenMP et le modèle MPI.
+
+b) Comparez le temps et l'efficacité entre les études comparables.

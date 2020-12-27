@@ -62,15 +62,15 @@ rcParams['axes.grid'] = True
 # ______________________________________________________________________________
 # Figure temps de simulation
 
-fig = figure(figsize=(12, 6))
+fig0 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["loop"],lw=2,label="Boucle de calcul")
-ax.plot(times["cores"],times["collision"],lw=2,label="Collision")
-ax.plot(times["cores"],times["exchange"],lw=2,label="Echange particules")
-ax.plot(times["cores"],times["global"],lw=2,label="Communications globales")
-ax.plot(times["cores"],times["pusher"],lw=2,label="Equation du mouvement")
+ax.plot(times["cores"],times["loop"],lw=2,label="Boucle de calcul",marker='o')
+ax.plot(times["cores"],times["collision"],lw=2,label="Collision",marker='o')
+ax.plot(times["cores"],times["exchange"],lw=2,label="Echange particules",marker='o')
+ax.plot(times["cores"],times["global"],lw=2,label="Communications globales",marker='o')
+ax.plot(times["cores"],times["pusher"],lw=2,label="Equation du mouvement",marker='o')
 
 ax.set_title("Fig. 5.1 - Weak scaling MPI, 2000 particules par patch")
 
@@ -82,16 +82,17 @@ ax.set_ylabel("Temps (s)")
 
 ax.legend(loc="best",ncol=2)
 
-fig.tight_layout()
+fig0.tight_layout()
+fig0.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
 
-fig = figure(figsize=(12, 6))
+fig1 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["efficiency"],lw=2,label="Simulation")
+ax.plot(times["cores"],times["efficiency"],lw=2,label="Simulation",marker='o')
 
 ax.plot([times["cores"].min(), times["cores"].max()],[1,1],lw=2,label="Scalabilite parfaite")
 
@@ -104,18 +105,18 @@ ax.set_ylabel("Efficacite")
 
 ax.legend(loc="best")
 
-fig.tight_layout()
-
+fig1.tight_layout()
+fig1.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png")
 # ______________________________________________________________________________
 # Figure Part MPI
 
-fig = figure(figsize=(12, 6))
+fig2 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,color='C1',label='part collision')
-ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,color='C2',label='part echange particules')
-ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,color='C3',label='part communications globales')
+ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,marker='o',color='C1',label='part collision')
+ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,marker='o',color='C2',label='part echange particules')
+ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,marker='o',color='C3',label='part communications globales')
 
 ax.set_title("Fig. 5.3 - Weak scaling MPI, 2000 particules par patch")
 
@@ -124,7 +125,8 @@ ax.set_ylabel("Part (%)")
 
 ax.legend(loc="best")
 
-fig.tight_layout()
+fig2.tight_layout()
+fig2.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp2000_part.png")
 
 # _____________________________________________________________________________
 
