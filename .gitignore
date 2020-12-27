@@ -12,5 +12,10 @@ executable
 */*/*/executable
 */*/*/*/executable
 
+
+*/*/a.out
+*/*/*/a.out
+*/*/*/*/a.out
+
 */*/*/*.h5
 */*/*/*/*.h5
