@@ -62,10 +62,10 @@ fig0 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["loop"],lw=2,label="Boucle de calcul")
-ax.plot(times["cores"],times["collision"],lw=2,label="Collision")
-ax.plot(times["cores"],times["exchange"],lw=2,label="Echange particules")
-ax.plot(times["cores"],times["global"],lw=2,label="Communications globales")
+ax.plot(times["cores"],times["loop"],lw=2,label="Boucle de calcul",marker='o')
+ax.plot(times["cores"],times["collision"],lw=2,label="Collision",marker='o')
+ax.plot(times["cores"],times["exchange"],lw=2,label="Echange particules",marker='o')
+ax.plot(times["cores"],times["global"],lw=2,label="Communications globales",marker='o')
 
 ax.set_title("Fig. 4.1 - Weak scaling MPI, 500 particules par patch")
 
@@ -89,7 +89,7 @@ fig1 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["efficiency"],lw=2,label="Simulation")
+ax.plot(times["cores"],times["efficiency"],lw=2,label="Simulation",marker='o')
 
 ax.plot([times["cores"].min(), times["cores"].max()],[1,1],lw=2,label="Scalabilite parfaite")
 
@@ -113,9 +113,9 @@ fig2 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,color='C1',label='Collision')
-ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,color='C2',label='Echange particules')
-ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,color='C3',label='Communications globales')
+ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,color='C1',label='Collision',marker='o')
+ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,color='C2',label='Echange particules',marker='o')
+ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,color='C3',label='Communications globales',marker='o')
 
 ax.set_title("Fig. 4.3 - Weak scaling MPI, 500 particules par patch")
 

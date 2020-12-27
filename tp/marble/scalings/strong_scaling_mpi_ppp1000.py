@@ -68,11 +68,11 @@ gs = GridSpec(2, 2)
 ax0 = subplot(gs[0,:])
 ax1 = subplot(gs[1,:])
 
-ax0.plot(times["cores"],times["loop"],lw=2,label="Boucle de calcul")
-ax0.plot(times["cores"],times["collision"],lw=2,label="Collision")
-ax1.plot(times["cores"],times["exchange"],lw=2,label="Echange particules")
-ax1.plot(times["cores"],times["global"],lw=2,label="Communications globales")
-ax1.plot(times["cores"],times["pusher"],lw=2,label="Equation du mouvement")
+ax0.plot(times["cores"],times["loop"],lw=2,label="Boucle de calcul",marker='o')
+ax0.plot(times["cores"],times["collision"],lw=2,label="Collision",marker='o')
+ax1.plot(times["cores"],times["exchange"],lw=2,label="Echange particules",marker='o')
+ax1.plot(times["cores"],times["global"],lw=2,label="Communications globales",marker='o')
+ax1.plot(times["cores"],times["pusher"],lw=2,label="Equation du mouvement",marker='o')
 
 ax0.set_xlabel("Nombre de processus")
 ax0.set_ylabel("Temps (s)")
@@ -98,7 +98,7 @@ fig1 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["efficiency"],lw=2,label="Simulation")
+ax.plot(times["cores"],times["efficiency"],lw=2,marker='o',label="Simulation")
 
 ax.plot([times["cores"].min(), times["cores"].max()],[1,1],lw=2,label="Scalabilite parfaite")
 
@@ -122,9 +122,9 @@ fig2 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,color='C1',label='Collision')
-ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,color='C2',label='Echange particules')
-ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,color='C3',label='Communications globales')
+ax.plot(times["cores"],times["collision"]/times["loop"]*100.,lw=2,marker='o',color='C1',label='Collision')
+ax.plot(times["cores"],times["exchange"]/times["loop"]*100.,lw=2,marker='o',color='C2',label='Echange particules')
+ax.plot(times["cores"],times["global"]/times["loop"]*100.,lw=2,marker='o',color='C3',label='Communications globales')
 
 ax.set_title("Fig. 6.3 - Strong scaling MPI, 1000 particules par patch")
 
