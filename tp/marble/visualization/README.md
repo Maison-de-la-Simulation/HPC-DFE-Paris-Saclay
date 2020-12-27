@@ -39,13 +39,13 @@ Les fichiers VTK (avec l'extension `.vtk`) peuvent être ouverts avec le logicie
 
 Commencez par ouvrir Paraview, vous obtenez l'interface suivante :
 
-<img src="../../../support/materiel/paraview_interface.png" height="300">
+<img src="../../../support/materiel/paraview_interface.png" height="400">
 
 Cliquez sur l'icone d'ouverture de fichier et ouvrez les fichiers VTK en groupe (Paraview détecte les fichiers ayant le même nom avec un numéro d'itération).
 Dans le panneau de gauche `builtin` apparaît alors les données sélectionnées.
 Cliquez ensuite sur le bouton `Apply` dans la boîte à gauche en bas nommée `properties` comme ci-dessous :
 
-<img src="../../../support/materiel/paraview_interface_2.png" height="300">
+<img src="../../../support/materiel/paraview_interface_2.png" height="400">
 
 En faisant cela vous confirmez vouloir utiliser ces données dans Paraview.
 
@@ -62,4 +62,4 @@ Dans le panneau `properties` :
 
 Vous devriez obtenir quelque chose proche de la capture ci-dessous :
 
-<img src="../../../support/materiel/paraview_interface_3.png" height="300">
+<img src="../../../support/materiel/paraview_interface_3.png" height="400">
