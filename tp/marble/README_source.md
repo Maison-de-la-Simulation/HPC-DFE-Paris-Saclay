@@ -101,7 +101,7 @@ $$
 D = \| \overrightarrow{x_r} \|
 $$
 
-On dit qu'il y a collision entre deux particules lorsque la distance entre les deux centres de masse est inférieur à deux rayons $D \leq 2R$
+On dit qu'il y a collision entre deux particules lorsque la distance entre les deux centres de masse est inférieure à deux rayons $D \leq 2R$
 et lorsque les deux centres continuent de se rapprocher.
 Cela revient à dire que dans la direction relative des centres de masse, la vitesse projetée est positive :
 
@@ -115,16 +115,16 @@ Dans le cas contraire certaines particules se traversent sans se collisionner.
 
 <img src="../../support/materiel/collision.png" height="200">
 
-Lorsqu'il y a collision, la vitesse des particules est actualisé suivant la méthode mathématique présentée au dessus.
-On appelle la vitesse post-collsion $v_n$.
+Lorsqu'il y a collision, la vitesse des particules est actualisée suivant la méthode mathématique présentée au-dessus.
+On appelle la vitesse post-collision $v_n$.
 Il faut ensuite actualiser les positions.
 Etant donné que les particules se chevauchent au moment de la détection de la collision, il faut d'abord revenir en
 arrière au moment où les particules rentrent en contact.
 
 Pour cela, on utilise la vitesse avant collision pour déterminer le temps au moment de la collision $t_c$.
 Soit $\Delta t_c$ le laps de temps entre le moment de la collision et le temps de simulation alors $t_c = t - \Delta t_c$.
-Le but est de déterminer ce famueux $\Delta t_c$ afin de connaître les positions au moment de la collision.
-Le moment de la collision est le moment où les particles rentrent en contact soit $D = 2R$.
+Le but est de déterminer ce fameux $\Delta t_c$ afin de connaître les positions au moment de la collision.
+Le moment de la collision est le moment où les particules rentrent en contact soit $D = 2R$.
 
 Cela revient à résoudre le système suivant :
 
@@ -138,7 +138,7 @@ $$
 4 R^2 = v_{r,x}^2 + v_{r,y}^2 + v_{r,z}^2 -2 \left( x_r v_{r,x} + y_r v_{r,y} + z_r v_{r,z} \right) \Delta t_c + \left( v_{r,x}^2  + v_{r,y}^2 + v_{r,z}^2 \right) \Delta t_c^2
 $$
 
-La solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positive.
+Les solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positive.
 
 On calcule donc la position au moment de la collision en faisant simplement : $\overrightarrow{x_c} = \overrightarrow{x} - \Delta t_c \cdot \overrightarrow{v}$.
 Il s'agit d'une approximation car on ne prend pas en compte la gravité et les frottements.
@@ -152,7 +152,7 @@ L'opérateur suppose que chaque particule ne collisionne qu'une fois avec une au
 Pour cela, on utilise un algorithme à double boucles imbriquées où la seconde boucle démarre à partir de la particule $i+1$.
 Soit $N$ le nombre total de particules.
 ```
-Pour chaque particle i de 1 jusqu'à N :
+Pour chaque particule i de 1 jusqu'à N :
 
     Si la particule i n'a pas déjà fait l'objet d'une collision :
 
@@ -202,7 +202,7 @@ Le code est écrit en C++.
 C'est un C++ simple n'utilisant pas de capacité avancée du C++.
 Néanmoins, il est nécessaire d'être familier avec la notion de classe et de méthode.
 
-Afin de préparer le terrain de la parallélisation, le code séquentiel a été développé en utilisant un modèle de décomposition de domaine.
+Afin de préparer le terrain du parallélisme, le code séquentiel a été développé en utilisant un modèle de décomposition de domaine.
 Le domaine de simulation est découpé en sous-domaine que l'on appelle *patch* comme le montre la figure ci-dessous.
 Chaque *patch* possède ses particules. Lorsque les particules changent de *patch*, il est nécessaire de les communiquer aux *patches* qui les reçoivent.
 Dans une version séquentielle normale, la décomposition en sous-domaine est inutile.
@@ -221,7 +221,7 @@ La version séquentielle avec *patch* se compose des fichiers et headers suivant
 
 Dans la version par *patch*, on fait l'approximation que les collisions ne s'appliquent qu'au sein des *patches*.
 Cela signifie que l'on néglige les collisions qui devraient avoir lieu entre particules de *patches* différents proches des frontières respectives.
-La prise en compte de ce faible nombre de collisions nécessiteraient une complexication du code et des processus d'échange entrainant alors une complexification inutile de ce TP.
+La prise en compte de ce faible nombre de collisions nécessiteraient une complexification du code et des processus d'échange entrainant alors une complexification inutile de ce TP.
 
 ### Les processus d'échange entre *patch*
 
@@ -238,7 +238,7 @@ Dans le tableau principal des particules (celles du *patch*), les particules son
 
 2. La deuxième étape est la suppression des particules ayant quittée le *patch* du tableau principale. Il est préférable d'effectuer cette opération pour toutes les particules en une fois car l'algorithme utilisé est plus efficace.
 La méthode consiste à remplir les cases mémoires vides des particules ayant quittée le *patch* par les particules de la fin du tableau.
-3. Dans la troisème étape, chaque *patch* va chercher dans les *buffers* de ses voisins les particules qu'ils doivent recevoir.
+3. Dans la troisième étape, chaque *patch* va chercher dans les *buffers* de ses voisins les particules qu'ils doivent recevoir.
 
 ### Les dépendances
 
@@ -543,7 +543,7 @@ Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Para
 
 ## II. Découverte de la machine de calcul
 
-**Question 2.1 - Architecture de la machine parallèle:** Avant de travailler sur la parallélisation du code, il est important de regarder
+**Question 2.1 - Architecture de la machine parallèle :** Avant de travailler sur la parallélisation du code, il est important de regarder
 les propriétés de la machine parallèle que vous allez utiliser.
 
 - a) La première chose à faire est de récupérer ces informations.
@@ -676,7 +676,7 @@ CPPFLAGS += -O3
 ```
 
 Il est tout à fait possible de compiler un code séquentiel avec le *wrappper* MPI puisqu'il s'agit simplement d'un *wrapper* faisant appel au compilateur standard (`g++` ici).
-Compilez le code en faisant `make` pour vous assurez qu'il n'y a pas d'erreur dans le makefile.
+Compilez le code en faisant `make` pour vous assurer qu'il n'y a pas d'erreur dans le makefile.
 
 **Question 4.2 - Amélioration de la structure `Parameters` :** Avant d'initialiser MPI, nous allons rajouter les variables pour le parallélisme MPI
 dans la structure `Parameters` décrite dans [parameters.h](./cpp/patch/parameters.h).
@@ -929,7 +929,7 @@ delete [] x;
 d) **Mise à jour de la fonction Particles::writeDiags - suite :** décommentez l'appel à la fonction
 `Particles::writeDiags` juste avant le démarrage de la boucle en temps.
 Cette sortie permet d'obtenir l'état de la simulation avant le démarrage de la boucle en temps.
-Compilez et exécutez le code avec plusieurs processus et regardez que le  domaine est bien initialisé.
+Compilez et exécutez le code avec plusieurs processus et regardez que le domaine est bien initialisé.
 
 e) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code pour connaître la somme des particules de tous les rangs dans la simulation ainsi que la différence de charge entre le rang MPI possédant le plus de particules et celui en possédant le moins.
 Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
@@ -1090,7 +1090,7 @@ mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 
 
 a) Justifiez pourquoi le SCHEDULER `STATIC` est le plus adéquate pour les études OpenMP ?
 
-b) Quels sont les composantes dominantes des parties parallèles et non-parallèles (suivant la définition d'Amdhal) dans cette étude ?
+b) Quels sont les composantes dominantes des parties parallèles et non-parallèles (suivant la définition d'Amdahl) dans cette étude ?
 
 c) Quel est le comportement du temps passé dans les collisions et le pousseur ? Ce comportement vous paraît-il cohérent avec un *weak scaling* ? Expliquez.
 
