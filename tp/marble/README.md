@@ -79,7 +79,7 @@ La distance entre 2 particules est donnée par :
 
 <p align="center"><img src=".extra//450d94234a101515c0408cb11a885f03.svg?invert_in_darkmode" align=middle width=69.096555pt height=20.776304999999997pt/></p>
 
-On dit qu'il y a collision entre deux particules lorsque la distance entre les deux centres de masse est inférieur à deux rayons <img src=".extra//52ed010363e449a7d1baf96c0141200f.svg?invert_in_darkmode" align=middle width=56.811645pt height=22.46574pt/>
+On dit qu'il y a collision entre deux particules lorsque la distance entre les deux centres de masse est inférieure à deux rayons <img src=".extra//52ed010363e449a7d1baf96c0141200f.svg?invert_in_darkmode" align=middle width=56.811645pt height=22.46574pt/>
 et lorsque les deux centres continuent de se rapprocher.
 Cela revient à dire que dans la direction relative des centres de masse, la vitesse projetée est positive :
 
@@ -91,16 +91,16 @@ Dans le cas contraire certaines particules se traversent sans se collisionner.
 
 <img src="../../support/materiel/collision.png" height="200">
 
-Lorsqu'il y a collision, la vitesse des particules est actualisé suivant la méthode mathématique présentée au dessus.
-On appelle la vitesse post-collsion <img src=".extra//eb37fabb7c9f7599d9ef7e121c60b5f5.svg?invert_in_darkmode" align=middle width=16.094100000000005pt height=14.155350000000013pt/>.
+Lorsqu'il y a collision, la vitesse des particules est actualisée suivant la méthode mathématique présentée au-dessus.
+On appelle la vitesse post-collision <img src=".extra//eb37fabb7c9f7599d9ef7e121c60b5f5.svg?invert_in_darkmode" align=middle width=16.094100000000005pt height=14.155350000000013pt/>.
 Il faut ensuite actualiser les positions.
 Etant donné que les particules se chevauchent au moment de la détection de la collision, il faut d'abord revenir en
 arrière au moment où les particules rentrent en contact.
 
 Pour cela, on utilise la vitesse avant collision pour déterminer le temps au moment de la collision <img src=".extra//23eda6b0b8aec6ac41ed8b7cb41c0942.svg?invert_in_darkmode" align=middle width=11.810865000000003pt height=20.222069999999988pt/>.
 Soit <img src=".extra//88748b5756467c6c663a0d87d2b05caa.svg?invert_in_darkmode" align=middle width=25.509495000000005pt height=22.46574pt/> le laps de temps entre le moment de la collision et le temps de simulation alors <img src=".extra//80ef692b454d0ca3ecad78b37fe23add.svg?invert_in_darkmode" align=middle width=86.08709999999999pt height=22.46574pt/>.
-Le but est de déterminer ce famueux <img src=".extra//88748b5756467c6c663a0d87d2b05caa.svg?invert_in_darkmode" align=middle width=25.509495000000005pt height=22.46574pt/> afin de connaître les positions au moment de la collision.
-Le moment de la collision est le moment où les particles rentrent en contact soit <img src=".extra//4c49c301c940274cf91c288e6f07968f.svg?invert_in_darkmode" align=middle width=56.811645pt height=22.46574pt/>.
+Le but est de déterminer ce fameux <img src=".extra//88748b5756467c6c663a0d87d2b05caa.svg?invert_in_darkmode" align=middle width=25.509495000000005pt height=22.46574pt/> afin de connaître les positions au moment de la collision.
+Le moment de la collision est le moment où les particules rentrent en contact soit <img src=".extra//4c49c301c940274cf91c288e6f07968f.svg?invert_in_darkmode" align=middle width=56.811645pt height=22.46574pt/>.
 
 Cela revient à résoudre le système suivant :
 
@@ -110,7 +110,7 @@ On obtient une équation de second ordre :
 
 <p align="center"><img src=".extra//495e5a4490379876d84f859a26fdce14.svg?invert_in_darkmode" align=middle width=584.4498pt height=20.504055pt/></p>
 
-La solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positive.
+Les solutions sont nécessairement réelles si les particules se rapprochent. La bonne solution est celle qui est positive.
 
 On calcule donc la position au moment de la collision en faisant simplement : <img src=".extra//a4e6865eacec45964af67e5cbc7f6a4b.svg?invert_in_darkmode" align=middle width=129.528465pt height=33.33363000000001pt/>.
 Il s'agit d'une approximation car on ne prend pas en compte la gravité et les frottements.
@@ -122,7 +122,7 @@ L'opérateur suppose que chaque particule ne collisionne qu'une fois avec une au
 Pour cela, on utilise un algorithme à double boucles imbriquées où la seconde boucle démarre à partir de la particule <img src=".extra//48a0115fc523b1aae58ade9e16001f59.svg?invert_in_darkmode" align=middle width=33.973665000000004pt height=21.683310000000006pt/>.
 Soit <img src=".extra//f9c4988898e7f532b9f826a75014ed3c.svg?invert_in_darkmode" align=middle width=14.999985000000004pt height=22.46574pt/> le nombre total de particules.
 ```
-Pour chaque particle i de 1 jusqu'à N :
+Pour chaque particule i de 1 jusqu'à N :
 
     Si la particule i n'a pas déjà fait l'objet d'une collision :
 
@@ -170,7 +170,7 @@ Le code est écrit en C++.
 C'est un C++ simple n'utilisant pas de capacité avancée du C++.
 Néanmoins, il est nécessaire d'être familier avec la notion de classe et de méthode.
 
-Afin de préparer le terrain de la parallélisation, le code séquentiel a été développé en utilisant un modèle de décomposition de domaine.
+Afin de préparer le terrain du parallélisme, le code séquentiel a été développé en utilisant un modèle de décomposition de domaine.
 Le domaine de simulation est découpé en sous-domaine que l'on appelle *patch* comme le montre la figure ci-dessous.
 Chaque *patch* possède ses particules. Lorsque les particules changent de *patch*, il est nécessaire de les communiquer aux *patches* qui les reçoivent.
 Dans une version séquentielle normale, la décomposition en sous-domaine est inutile.
@@ -189,7 +189,7 @@ La version séquentielle avec *patch* se compose des fichiers et headers suivant
 
 Dans la version par *patch*, on fait l'approximation que les collisions ne s'appliquent qu'au sein des *patches*.
 Cela signifie que l'on néglige les collisions qui devraient avoir lieu entre particules de *patches* différents proches des frontières respectives.
-La prise en compte de ce faible nombre de collisions nécessiteraient une complexication du code et des processus d'échange entrainant alors une complexification inutile de ce TP.
+La prise en compte de ce faible nombre de collisions nécessiteraient une complexification du code et des processus d'échange entrainant alors une complexification inutile de ce TP.
 
 ### Les processus d'échange entre *patch*
 
@@ -206,7 +206,7 @@ Dans le tableau principal des particules (celles du *patch*), les particules son
 
 2. La deuxième étape est la suppression des particules ayant quittée le *patch* du tableau principale. Il est préférable d'effectuer cette opération pour toutes les particules en une fois car l'algorithme utilisé est plus efficace.
 La méthode consiste à remplir les cases mémoires vides des particules ayant quittée le *patch* par les particules de la fin du tableau.
-3. Dans la troisème étape, chaque *patch* va chercher dans les *buffers* de ses voisins les particules qu'ils doivent recevoir.
+3. Dans la troisième étape, chaque *patch* va chercher dans les *buffers* de ses voisins les particules qu'ils doivent recevoir.
 
 ### Les dépendances
 
@@ -511,7 +511,7 @@ Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Para
 
 ## II. Découverte de la machine de calcul
 
-**Question 2.1 - Architecture de la machine parallèle:** Avant de travailler sur la parallélisation du code, il est important de regarder
+**Question 2.1 - Architecture de la machine parallèle :** Avant de travailler sur la parallélisation du code, il est important de regarder
 les propriétés de la machine parallèle que vous allez utiliser.
 
 - a) La première chose à faire est de récupérer ces informations.
@@ -644,9 +644,9 @@ CPPFLAGS += -O3
 ```
 
 Il est tout à fait possible de compiler un code séquentiel avec le *wrappper* MPI puisqu'il s'agit simplement d'un *wrapper* faisant appel au compilateur standard (`g++` ici).
-Compilez le code en faisant `make` pour vous assurez qu'il n'y a pas d'erreur dans le makefile.
+Compilez le code en faisant `make` pour vous assurer qu'il n'y a pas d'erreur dans le makefile.
 
-**Question 4.2 - Amélioration de la structure `Parameters` :** Avant d'initiliser MPI, nous allons rajoutez les variables MPI
+**Question 4.2 - Amélioration de la structure `Parameters` :** Avant d'initialiser MPI, nous allons rajouter les variables pour le parallélisme MPI
 dans la structure `Parameters` décrite dans [parameters.h](./cpp/patch/parameters.h).
 Rajoutez-y une variable pour stocker le nombre total de rangs MPI (par exemple `number_of_ranks`) et une variable pour le rang en cours (`ranks`).
 Notez que vous aurez à rajouter de nouvelles variables au dur et à mesure du développement.
@@ -826,7 +826,7 @@ int Patch::getNeighborIndex(struct Parameters params, int x_shift, int y_shift, 
 `MPI_PROC_NULL` est compris par MPI comme étant un rang inexistant.
 Pour compiler, vous devrez mettre à jour l'ensemble des appels à `Patch::getNeighborIndex`.
 
-i) Expliquez pourquoi la fonction `Patch::patchIndexToCoordinates` qui renvoyait les coordonnées d'un patch à partir de son index n'a plus lieu d'être ici ?
+i) Expliquez pourquoi la fonction `Patch::patchIndexToCoordinates` qui renvoyait les coordonnées d'un *patch* à partir de son index n'a plus lieu d'être ici ?
 
 La dernière partie de la fonction `Patch::initTopology` pour établir si le *patch* se trouve au bord ne requiert pas de modification.
 
@@ -842,24 +842,24 @@ L'écriture parallèle étant hors programme, nous adoptons ici une méthode peu
 L'écriture des particules dans un fichier se fera par le processus 0.
 Les autres processus devront envoyer la liste de leurs particules au rang 0.
 Le rang 0 devra donc réceptionner l'ensemble dans un tableau destiné à être ensuite écrit dans un fichier.
-L'écritude devra respecter les formats utilisés pour la compatibilité avec les scripts.
+L'écriture devra respecter les formats utilisés pour la compatibilité avec les scripts.
 
-a) **Mise à jour de la fonction Particles::writeDiags :** Cette fonctioon appelle deux autres fonctions destinéées à écrire sous forme de fichiers la liste des particules et leurs propriétés :
-- `Particles::writeVTK` : écriture des fichiers vtk pour Paraview
-- `Particles::writeBinary` : écriture des fichiers binaires pour les scrits Python
+a) **Mise à jour de la fonction Particles::writeDiags :** Cette fonction appelle deux autres fonctions destinées à écrire sous forme de fichiers la liste des particules et leurs propriétés :
+- `Particles::writeVTK` : écriture des fichiers VTK pour Paraview
+- `Particles::writeBinary` : écriture des fichiers binaires pour les scripts Python
 
 Vous allez devoir modifier l'ensemble de ces fonctions.
 Cette étape ressemble fortement à ce qui a été fait dans l'exercice 6 sur MPI.
 Dans `Particles::writeDiags`, créez un tableau pour contenir la liste des particules que contient chaque rang MPI. Utilisez la bonne fonction MPI pour mettre à jour les valeurs sur le rang 0.
 Ce tableau est nécessaire pour les futures communications. Il permet au rang 0 de connaître le nombre de particules à recevoir des autres rangs.
 
-b) **Mise à jour de la fonction Particles::writeDiags - suite :** Créer un entier pour contenir la somme de toutes les particules, par exemple :
+b) **Mise à jour de la fonction Particles::writeDiags - suite :** Créez un entier pour contenir la somme de toutes les particules, par exemple :
 ```C++
 int total;
 ```
 Calculez la somme des particules dans tout le domaine sur le processeur 0.
 
-c) **Mise à jour de la fonction Particles::writeDiags - suite :** Allouer des tableaux locaux à la fonction pour stocker les propriétés de l'ensemble des particules qui seront rappatriées sur le processeur 0. Les tableaux seront alloués sur tous les rangs mais la taille sera de 0 dans les rangs supérieurs à 0. Par exemple :
+c) **Mise à jour de la fonction Particles::writeDiags - suite :** Allouer des tableaux locaux à la fonction pour stocker les propriétés de l'ensemble des particules qui seront rapatriées sur le processeur 0. Les tableaux seront alloués sur tous les rangs mais la taille sera de 0 dans les rangs supérieurs à 0. Par exemple :
 ```C++
 double * x = new double[total];
 ```
@@ -873,7 +873,7 @@ void Particles::writeVTK(unsigned int iteration, int number_of_particles,
                         double * vx, double * vy, double * vz, double * mass)
 ```
 - Modifiez le coeur de ces fonctions pour écrire les nouveaux tableaux passés en argument.
-Dans ces fonctions, il n'est plus nécessaire de boucler sur l'ensemble des patchs.
+Dans ces fonctions, il n'est plus nécessaire de boucler sur l'ensemble des *patchs*.
 On boucle maintenant sur la liste des particules contenue dans le rang 0.
 Par exemple pour les positions dans `Particles::writeVTK`, cela devient :
 ```C++
@@ -897,13 +897,13 @@ delete [] x;
 d) **Mise à jour de la fonction Particles::writeDiags - suite :** décommentez l'appel à la fonction
 `Particles::writeDiags` juste avant le démarrage de la boucle en temps.
 Cette sortie permet d'obtenir l'état de la simulation avant le démarrage de la boucle en temps.
-Compilez et exécutez le code avec plusieurs processus et regardez que le  domaine est bien initialisé.
+Compilez et exécutez le code avec plusieurs processus et regardez que le domaine est bien initialisé.
 
-e) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code pour connaître la somme des particules de tous les rangs dans la simulation.
+e) **Mise à jour de la fonction Particles::getTotalParticleNumber :** La fonction `Particles::getTotalParticleNumber` est utilisée à plusieurs endroits dans le code pour connaître la somme des particules de tous les rangs dans la simulation ainsi que la différence de charge entre le rang MPI possédant le plus de particules et celui en possédant le moins.
 Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
 Décommentez l'appel à cette fonction dans [main.cpp](./cpp/patch/main.cpp).
 
-f) **Mise à jour de la fonction Particles::getTotalCollisionNumber :** La fonction `Particles::getTotalCollisionNumber` est utilisée pour connaître la somme des collisions survenues dans tous les rangs dans la simulation lors de la dernière itération.
+f) **Mise à jour de la fonction Particles::getTotalCollisionNumber :** La fonction `Particles::getTotalCollisionNumber` est utilisée pour connaître la somme des collisions survenues dans tous les rangs de la simulation lors de la dernière itération.
 Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
 Décommentez l'appel à cette fonction dans [main.cpp](./cpp/patch/main.cpp).
 
@@ -915,25 +915,26 @@ h) **Mise à jour de la fonction particles::getMaxVelocity :** Cette fonction ca
 Modifiez cette fonction pour la rendre compatible avec MPI en utilisant la fonction MPI adéquate.
 Décommentez l'appel à cette fonction dans [main.cpp](./cpp/patch/main.cpp).
 
-i) Décommentez l'appel à `Particles::writeDiags` au sein de la boucle en temps. Compilez et exécutez le code avec plusieurs processus pour voir si tout fonctione.
+i) Décommentez l'appel à `Particles::writeDiags` au sein de la boucle en temps. Compilez et exécutez le code avec plusieurs processus pour voir si tout fonctionne.
 
 **Question 4.8 - la boucle de calcul :** On va maintenant réactiver le contenu de la boucle de calcul que l'on a commenté au début de la modification du programme.
 
-a) La plupart des fonctions de la boucle ne nécessite que très peu de modification car elles sont locales au rang MPI. C'est le cas de `particles::push`, `particles::multipleCollisions`, `particles::walls`.
-Il faut simplement supprimer la boucle sur les patchs car chaque rang MPI n'a qu'un seul patch.
+a) La plupart des fonctions de la boucle ne nécessite que très peu de modifications car elles sont locales au rang MPI. C'est le cas de `particles::push`, `particles::multipleCollisions`, `particles::walls`.
+Il faut simplement supprimer la boucle sur les *patchs* car chaque rang MPI n'a qu'un seul *patch*.
 
 b) Il va maintenant falloir modifier les procédures d'échange pour les particules.
-Dans la version séquentiel par patch, la procédure est divisée en 3 parties :
+Dans la version séquentielle par *patch*, la procédure est divisée en 3 parties :
 - `Patch::computeExchangeBuffers` : On détermine les particules qui sortent du patch courant et on les copie dans des buffers.
   Il y a un buffer par direction d'échange.
   Cette fonction n'a pas besoin d'être modifiée.
   Elle permet maintenant d'identifier les particules qui sortent du rang MPI pour aller vers un autre.
 - `Patch::deleteLeavingParticles` : On supprime ensuite les particules du tableau principal qui sortent des limites du rang MPI en cours.
   Comme pour la précédente, cette fonction n'a pas besoin d'être modifiée.
-- `Patch::receivedParticlesFromNeighbors` : Cette dernière étape de la procédure d'échange est la communication des particules stockés dans les buffers vers les rangs destinataires.
-  C'est cette étape qu'il faudra modifier oour y introduire les fonctions MPI permettant l'échange des particules entre rangs voisins.
+- `Patch::receivedParticlesFromNeighbors` : Cette dernière étape de la procédure d'échange est la communication des particules stockées dans les buffers vers les rangs destinataires.
+  C'est cette étape qu'il faudra modifier pour y introduire les fonctions MPI permettant l'échange des particules entre rangs voisins.
   Etant donné que la topologie MPI est proche de la philosophie des *patchs*, on pourra réutiliser l'idée générale pour la gestion des voisins.
   Modifiez `Patch::receivedParticlesFromNeighbors` pour mener à bien les échanges MPI de particules.
+  Notez qu'ici il existe plusieurs méthodes possibles plus ou moins efficaces, vous êtes libre de choisir la méthode et les fonctions MPI que vous souhaitez utiliser.
 
 **Rapport :** Expliquez votre démarche en détaillant votre stratégie et vos choix des fonctions MPI.
 
@@ -942,7 +943,7 @@ c) **Mise à jour de Particles::exchange :** Supprimez les boucles sur les *patc
 **Question 4.9 - vérification :** compilez et exécutez le code en utilisant plusieurs configurations et nombres de processeurs.
 Vérifiez que les résultats sont corrects.
 
-**Rapport :** Placer dans le rapport des images des résultats.
+**Rapport :** Placer dans le rapport un exemple de simulations en utilisant tous les coeurs de votre ordinateur. Placez des images des résultats en choisissant la méthode de visualisation de votre choix.
 
 ### V. Etude de performance
 
@@ -950,7 +951,7 @@ Vérifiez que les résultats sont corrects.
 
 Les études de passage à l'échelle ont été menées pour vous sur le super-calculateur
 RUCHE du [mésocentre du Moulon](http://mesocentre.centralesupelec.fr/) du Plateau de Saclay en utilisant les codes parallélisés avec OpenMP et MPI.
-Chaque noeuds de ce super-calculateur est un bi-socket.
+Chaque noeud de ce super-calculateur est un bi-socket.
 Chaque socket est équipé d'un processeur Intel Xeon Gold 6230 (génération Cascade Lake) de 20 coeurs.
 
 Pour chaque étude, trois grandeurs en fonction du nombre de processus vous sont présentées :
@@ -958,21 +959,21 @@ Pour chaque étude, trois grandeurs en fonction du nombre de processus vous sont
 - l'efficacité
 - la part en pourcentage sur le temps total passé dans la boucle en temps.
 
-Pour chaque figure, on s'intéresse à la fois à la boucle en temps total mais aussi aux différents opérateurs qui la compose :
+Pour chaque figure, on s'intéresse à la fois à la boucle en temps total mais aussi aux différents opérateurs qui la composent :
 - collisions
 - Equation du mouvement
 - Echange des particules
-- Calcul des grandeurs globales
+- Calcul des grandeurs globales (opérations de réduction)
 
 Pour la version OpenMP, les opérations de réductions (grandeurs globales) sont placées dans des régions *single*.
 
 **Etude de weak scaling pour le code OpenMP**
 
-On rappelle que pour une étude de *weak scaling*, la taille du domaine varie avec le nombre de processus mais la charge par processus reste constante.
+On rappelle que pour une étude de *weak scaling*, la taille du domaine (et donc la charge totale) varie avec le nombre de processus mais la charge par processus reste constante.
 Pour cette étude, chaque processus ne s'occupe que d'un seul patch.
 Chaque patch possède 2000 particules et a pour taille adimensionnelle <img src=".extra//02e293bb6744e52d4da8b778d29c20f7.svg?invert_in_darkmode" align=middle width=48.401925000000006pt height=24.65759999999998pt/>.
 On utilise un *SCHEDULER* OpenMP `STATIC`: `OMP_SCHEDULE=STATIC`.
-A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
+A titre d'exemple, la commande utilisée pour lancer le code sur 8 coeurs est la suivante :
 ```bash
 export OMP_NUM_THREADS=8
 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 16000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0.01 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -mass 0.5 0.5 -overlap 0
@@ -987,9 +988,9 @@ export OMP_NUM_THREADS=8
 On rappelle que pour une étude de *strong scaling*, La charge totale reste constante de telle sorte que la charge par processus varie.
 Ici, le domaine total garde donc la même taille avec le même nombre total de particules.
 Pour cette étude, chaque processus ne s'occupe que d'un seul patch.
-Le domaine a pour taille adimentionnelle <img src=".extra//b04c850fac5c310edd4334742920b08a.svg?invert_in_darkmode" align=middle width=48.401925000000006pt height=24.65759999999998pt/> avec un nombre total de xxx particules.
+Le domaine a pour taille adimensionnelle <img src=".extra//b04c850fac5c310edd4334742920b08a.svg?invert_in_darkmode" align=middle width=48.401925000000006pt height=24.65759999999998pt/> avec un nombre total de 32000 particules.
 On utilise un *SCHEDULER* OpenMP `STATIC`: `OMP_SCHEDULE=STATIC`.
-A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
+A titre d'exemple, la commande utilisée pour lancer le code sur 8 coeurs est la suivante :
 ```bash
 export OMP_NUM_THREADS=8
 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -mass 0.5 0.5 -overlap 0
@@ -1001,10 +1002,10 @@ export OMP_NUM_THREADS=8
 
 **Deuxième étude de strong scaling pour le code OpenMP**
 
-Cette deuxième étude de *strong scaling* pour le code OpenMP diffère du premier dans la mesure où ici le nombre de patch total est gardé constant pour tout nombre de processus de telle sorte que le nombre de patchs à traiter pour chaque processus varie.
+Cette deuxième étude de *strong scaling* pour le code OpenMP diffère du premier dans la mesure où ici le nombre de *patchs* total est gardé constant pour tout nombre de processus de telle sorte que le nombre de *patchs* à traiter pour chaque processus varie.
 Le nombre total de particules reste lui constant comme pour l'étude précédente.
 On utilise un nombre fixe de 32 *patchs* contenant chacun 1000 particules.
-A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
+A titre d'exemple, la commande utilisée pour lancer le code sur 8 coeurs est la suivante :
 ```bash
 export OMP_NUM_THREADS=8
 ./executable -patch 4 4 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -mass 0.5 0.5 -overlap 0
@@ -1019,7 +1020,7 @@ export OMP_NUM_THREADS=8
 Cette étude de *weak scaling* concerne maintenant le code MPI.
 Chaque processus MPI ne traite qu'un patch et un patch possède 500 particules.
 Chaque patch a une taille de <img src=".extra//02e293bb6744e52d4da8b778d29c20f7.svg?invert_in_darkmode" align=middle width=48.401925000000006pt height=24.65759999999998pt/>.
-A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
+A titre d'exemple, la commande utilisée pour lancer le code sur 8 coeurs est la suivante :
 ```bash
 mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 4000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
 ```
@@ -1030,8 +1031,8 @@ mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 
 
 **Deuxième étude de weak scaling pour le code MPI**
 
-Dans cette deuxième étude, le nombre de particules par patch est monté à 2000.
-A titre d'exemple, la commande utilisé pour lancer le code sur 8 coeurs est la suivante :
+Dans cette deuxième étude, le nombre de particules par *patch* est monté à 2000.
+A titre d'exemple, la commande utilisée pour lancer le code sur 8 coeurs est la suivante :
 ```bash
 mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 16000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
 ```
@@ -1044,7 +1045,7 @@ mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 
 
 Cette dernière étude concerne le *strong scaling* de la version MPI.
 Un rang ne peut traiter qu'un patch.
-Le nombre de particules par patch dépend du nombre de rangs MPI.
+Le nombre de particules par *patch* dépend du nombre de rangs MPI.
 ```bash
 mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
 ```
@@ -1057,7 +1058,7 @@ mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 
 
 a) Justifiez pourquoi le SCHEDULER `STATIC` est le plus adéquate pour les études OpenMP ?
 
-b) Quels sont les composantes dominantes des parties parallèles et non-parallèles (suivant la définition d'Amdhal) dans cette étude ?
+b) Quels sont les composantes dominantes des parties parallèles et non-parallèles (suivant la définition d'Amdahl) dans cette étude ?
 
 c) Quel est le comportement du temps passé dans les collisions et le pousseur ? Ce comportement vous paraît-il cohérent avec un *weak scaling* ? Expliquez.
 
