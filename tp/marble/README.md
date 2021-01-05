@@ -234,11 +234,36 @@ La compilation génère un fichier exécutable du nom de `executable`. Vous pouv
 
 ### Argument en ligne de commande
 
+Il est possible de changer les paramètres numériques directement en ligne de commande :
+
+```bash
+./executable -patch 3 3 3 -t 20 -it 500 -print 100 -diags 500 -np 5000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -periodicity 1 -collision 1 -velocity 1E-5 0.1 -x 0 4 -y 0 4 -z 0 4 -r 0.01
+```
+
+- `-patch`: nombre de patchs dans chaque direction
+- `-t`: temps total
+- `-it`: nombre d'itérations
+- `-np`: nombre de particules dans le domaine
+- `-r`: rayon d'une particule
+- `-collision_damping`: friction (perte d'énergie) due aux collisions (par défaut 0)
+- `-wall_damping`: friction lors de la collision avec les murs (par défaut 0)
+- `-air_damping`: coefficient de frottement de l'air
+- `-velocity`: vitesse min et max pour l'initialisation
+- `-mass`: masse de chaque particule
+- `-x`: bornes du domaine en x
+- `-y`: bornes du domaine en y
+- `-z`: borne du domaine en z
+- `-gravity`: vecteur gravité
+- `-print`: période d'affichage dans le terminal en nombre d'itérations
+- `-diags`: période de sortie des fichiers en nombre d'itérations
+- `-collision`: nombre de collisions par particule à chaque pas de temps
+
+
 ### Visualisation
 
 Le code peut générer plusieurs types de fichiers :
 - Fichier VTK : Les fichiers sont créés indépendamment de la bibliothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
-Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette [page](./paraview.md).
+Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette [page](./visualization/README.md).
 - Fichiers binaires : ces fichiers sont un enregistrement binaire des propriétés des particules.
   On peut visualiser ces données avec `matplotlib` en utilisant le script [plot_binary_matplotlib.py](./python/plot_binary_matplotlib.py).
   On peut aussi générer une image 3D grâce au paquet Python Mayavi en utilisant le script [plot_binary_mayavi.py](./python/plot_binary_mayavi.py).
