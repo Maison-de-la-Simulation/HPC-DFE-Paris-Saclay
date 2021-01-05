@@ -42,7 +42,6 @@ int main( int argc, char *argv[] )
     int periodicity[2] = {1, 1};
     int reorganisation = 1;
     MPI_Comm cartesian_communicator;
-    int topology_map[ranks_per_direction[0]*ranks_per_direction[1]];
     
 
     MPI_Cart_create(MPI_COMM_WORLD,
@@ -63,7 +62,7 @@ int main( int argc, char *argv[] )
     
     int rank_coordinates[2];
     
-    MPI_Cart_coords( cartesian_communicator, rank, 2, rank_coordinates);
+    MPI_Cart_coords( cartesian_communicator, rank, 2, &rank_coordinates[0]);
 
     // On récupère les rangs voisins
 
@@ -93,6 +92,8 @@ int main( int argc, char *argv[] )
         }
         MPI_Barrier(cartesian_communicator);
     }
+
+    int topology_map[ranks_per_direction[0]*ranks_per_direction[1]];
 
     // Communication de la topologie totale au rang 0
     

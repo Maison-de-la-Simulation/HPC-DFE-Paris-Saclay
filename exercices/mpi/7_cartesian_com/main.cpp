@@ -27,7 +27,7 @@ int main( int argc, char *argv[] )
     // Cette subroutine permet de récupérer le nombre total de rangs dans
     // le communicateur par défaut MPI_COMM_WORLD.
     
-    int number_of_ranks;
+    int number_of_ranks
     
     MPI_Comm_size( MPI_COMM_WORLD, &number_of_ranks );
     
@@ -90,6 +90,10 @@ int main( int argc, char *argv[] )
         }
         MPI_Barrier(cartesian_communicator);
     }
+
+    // Création de la carte
+
+    int * topology_map = new int[ranks_per_direction[1]*ranks_per_direction[0]];
 
     // Communication de la topologie totale au rang 0
     
