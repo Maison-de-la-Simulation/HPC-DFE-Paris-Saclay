@@ -178,10 +178,32 @@ make</code></p>
 <code>bash
 ./executable</code></p>
 <h3>Argument en ligne de commande</h3>
+<p>Il est possible de changer les paramètres numériques directement en ligne de commande :</p>
+<p><code>bash
+./executable -patch 3 3 3 -t 20 -it 500 -print 100 -diags 500 -np 5000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -periodicity 1 -collision 1 -velocity 1E-5 0.1 -x 0 4 -y 0 4 -z 0 4 -r 0.01</code></p>
+<ul>
+<li><code>-patch</code>: nombre de patchs dans chaque direction</li>
+<li><code>-t</code>: temps total</li>
+<li><code>-it</code>: nombre d'itérations</li>
+<li><code>-np</code>: nombre de particules dans le domaine</li>
+<li><code>-r</code>: rayon d'une particule</li>
+<li><code>-collision_damping</code>: friction (perte d'énergie) due aux collisions (par défaut 0)</li>
+<li><code>-wall_damping</code>: friction lors de la collision avec les murs (par défaut 0)</li>
+<li><code>-air_damping</code>: coefficient de frottement de l'air</li>
+<li><code>-velocity</code>: vitesse min et max pour l'initialisation</li>
+<li><code>-mass</code>: masse de chaque particule</li>
+<li><code>-x</code>: bornes du domaine en x</li>
+<li><code>-y</code>: bornes du domaine en y</li>
+<li><code>-z</code>: borne du domaine en z</li>
+<li><code>-gravity</code>: vecteur gravité</li>
+<li><code>-print</code>: période d'affichage dans le terminal en nombre d'itérations</li>
+<li><code>-diags</code>: période de sortie des fichiers en nombre d'itérations</li>
+<li><code>-collision</code>: nombre de collisions par particule à chaque pas de temps</li>
+</ul>
 <h3>Visualisation</h3>
 <p>Le code peut générer plusieurs types de fichiers :
 - Fichier VTK : Les fichiers sont créés indépendamment de la bibliothèque VTK à la main pour ne pas imposer de nouvelle dépendance.
-Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette <a href="./paraview.md">page</a>.
+Ces fichiers peuvent être visualisés à l'aide des logiciels VisIt ou Paraview. Pour en apprendre plus sur l'utilisation de Paraview, rendez-vous sur cette <a href="./visualization/README.md">page</a>.
 - Fichiers binaires : ces fichiers sont un enregistrement binaire des propriétés des particules.
   On peut visualiser ces données avec <code>matplotlib</code> en utilisant le script <a href="./python/plot_binary_matplotlib.py">plot_binary_matplotlib.py</a>.
   On peut aussi générer une image 3D grâce au paquet Python Mayavi en utilisant le script <a href="./python/plot_binary_mayavi.py">plot_binary_mayavi.py</a>.
