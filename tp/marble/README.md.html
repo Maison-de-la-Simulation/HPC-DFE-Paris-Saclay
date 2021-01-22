@@ -862,3 +862,52 @@ for (int i_patch = 0 ; i_patch &lt; n_patches ; i_patch++) {
 <p>}
 ```</p>
 <p>A vous de trouver comment rendre cette fonction compatible avec OpenMP. Vous vous doutez qu'on peut la rendre parallèle en utilisant la clause <code>reduction</code>. Cependant comme je le note dans la question j'ai observé des erreurs avec l'opération de réduction avec certains compilateurs. De fait, je vous autorise à rendre cette partie séquentielle si nécessaire.</p>
+<p><strong>Précisions question 4.5 :</strong></p>
+<ol>
+<li>Faut-il modifier <code>timers.h</code> ?</li>
+</ol>
+<p>Il n'est pas nécessaire de modifier timers.h mais vous pouvez pour y ajouter les tableaux pour les temps min, max et moyens. Les appels aux fonctions MPI pour la gestion des timers doivent se faire dans timers.cpp par contre. Aussi, elles doivent figurer dans la fonction timers::print car c'est à ce moment là qu'on fait le bilan. Dans le tableau  accumulated_times, chaque index représente le temps cumulé pour une partie spécifique du code. Le premier index est pour l'initialisation, le deuxième pour la boucle ne temps et ainsi de suite en fonction de comment vous créer les timers dans <code>main.cpp</code>. il faut donc appliquer les fonctions MPI pour chaque index.</p>
+<p>Je vous mets un squelette pour la fonction <code>timers::print</code> qui pourra vous aider :</p>
+<p>```C++
+void Timers::print(struct Parameters params) {</p>
+<pre><code>double percentage;
+
+std::vector &lt;double&gt; maximum_times(names.size());
+std::vector &lt;double&gt; minimum_times(names.size());
+std::vector &lt;double&gt; average_times(names.size());
+
+// Fonctions MPI et autres à compléter
+// ...
+// ...
+
+if (params.rank == 0) {
+    std::cout &lt;&lt; " ------------------------------------ "&lt;&lt; std::endl;
+    std::cout &lt;&lt; " TIMERS"&lt;&lt; std::endl;
+    std::cout &lt;&lt; " ------------------------------------ "&lt;&lt; std::endl;
+    std::cout &lt;&lt; "            code part |   min (s)  | averag (s) |   max (s)  | percentage |"&lt;&lt; std::endl;
+    std::cout &lt;&lt; " ---------------------|------------|------------|------------|------------|"&lt;&lt; std::endl;
+
+    std::cout &lt;&lt; " " &lt;&lt; std::setw(20) &lt;&lt; names[0] ;
+    std::cout &lt;&lt; " | " &lt;&lt; std::fixed &lt;&lt; std::setprecision(6) &lt;&lt; std::setw(10) &lt;&lt; minimum_times[0];
+    std::cout &lt;&lt; " | " &lt;&lt; std::fixed &lt;&lt; std::setprecision(6) &lt;&lt; std::setw(10) &lt;&lt; average_times[0] ;
+    std::cout &lt;&lt; " | " &lt;&lt; std::fixed &lt;&lt; std::setprecision(6) &lt;&lt; std::setw(10) &lt;&lt; maximum_times[0] ;
+    std::cout &lt;&lt; " | " &lt;&lt; std::fixed &lt;&lt; std::setprecision(2) &lt;&lt; std::setw(8)  &lt;&lt; "       - %";
+    std::cout &lt;&lt; " | " ;
+    std::cout &lt;&lt; std::endl;
+
+    for (int i = 1 ; i &lt; names.size() ; i++) {
+
+        percentage = average_times[i] / (average_times[1]) * 100;
+
+        std::cout &lt;&lt; " " &lt;&lt; std::setw(20) &lt;&lt; names[i] ;
+        std::cout &lt;&lt; " | " &lt;&lt; std::fixed &lt;&lt; std::setprecision(6) &lt;&lt; std::setw(10) &lt;&lt; minimum_times[i];
+        std::cout &lt;&lt; " | " &lt;&lt; std::fixed &lt;&lt; std::setprecision(6) &lt;&lt; std::setw(10) &lt;&lt; average_times[i] ;
+        std::cout &lt;&lt; " | " &lt;&lt; std::fixed &lt;&lt; std::setprecision(6) &lt;&lt; std::setw(10) &lt;&lt; maximum_times[i] ;
+        std::cout &lt;&lt; " | " &lt;&lt; std::fixed &lt;&lt; std::setprecision(2) &lt;&lt; std::setw(8)  &lt;&lt; percentage &lt;&lt; " %";
+        std::cout &lt;&lt; " | " ;
+        std::cout &lt;&lt; std::endl;
+    }
+}
+</code></pre>
+<p>}
+```</p>
