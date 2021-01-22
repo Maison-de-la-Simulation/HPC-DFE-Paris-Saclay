@@ -224,7 +224,7 @@ Pour le rapport, vous êtes libre de choisir le format et le logiciel qui vous c
 <h3>I. Découverte du code séquentiel</h3>
 <p>La première partie de ce TP est la découverte du code dans sa version non parallèle.</p>
 <p><strong>Fichier parameters.cpp / .h :</strong></p>
-<p>Ouvrez le fichier <a href="./patch/parameters.h">parameters.h</a> et regarder la structure du code.
+<p>Ouvrez le fichier <a href="./cpp/patch/parameters.h">parameters.h</a> et regarder la structure du code.
 Ce header contient la définition d'une structure de données pour des paramètres globaux du nom de <code>Parameters</code>.
 Les paramètres globaux du code permettent de décrire les propriétés de la simulation.
 On trouve les sections suivantes :
@@ -235,7 +235,7 @@ On trouve les sections suivantes :
 - <code>Diag properties</code> : paramètres pour les diagnostiques diverses</p>
 <p>Cette structure est régulièrement passée en argument des fonctions ayant besoin des données globales.</p>
 <p><strong>Fichier main.cpp :</strong></p>
-<p>Ouvrez le fichier <a href="./patch/main.cpp">main.cpp</a> et explorez la structure du code.
+<p>Ouvrez le fichier <a href="./cpp/patch/main.cpp">main.cpp</a> et explorez la structure du code.
 La première partie concerne l'initialisation de la simulation :
 1. déclaration des variables
 2. initialisation des propriétés de la simulation
@@ -271,7 +271,7 @@ particles.getTotalEnergy(params, total_energy);</p>
 ```
 7. Affichage d'informations dans le terminal (en fonction de la période demandée) incluant l'énergie cinétique totale des particules, le nombre total de particules, la vitesse maximale des particules et le nombre de collisions.</p>
 <p><strong>Fichier particles.cpp / .h:</strong></p>
-<p>Ouvrez les fichiers <a href="./patch/particles.h">particles.h</a> et <a href="./patch/particles.cpp">particles.cpp</a> pour explorer la structure du code.
+<p>Ouvrez les fichiers <a href="./cpp/patch/particles.h">particles.h</a> et <a href="./cpp/patch/particles.cpp">particles.cpp</a> pour explorer la structure du code.
 Ce fichier contient la description de la classe <code>Particles</code>.
 Cette classe représente l'ensemble des particules du domaine et contient donc l'ensemble des <em>patchs</em>.
 Le header montre que la classe <code>Particles</code> contient un tableau d'objet <code>Patch</code>:
@@ -310,7 +310,7 @@ void writeVTK(struct Parameters params, unsigned int iteration);</p>
 void writeDiags(struct Parameters params, unsigned int iteration);
 ```</p>
 <p><strong>Fichier patch.cpp / .h :</strong></p>
-<p>Ouvrez les fichiers <a href="./patch/patch.h">patch.h</a> et <a href="./patch/patch.cpp">particles.cpp</a> pour explorer la structure du code.
+<p>Ouvrez les fichiers <a href="./cpp/patch/patch.h">patch.h</a> et <a href="./cpp/patch/patch.cpp">particles.cpp</a> pour explorer la structure du code.
 Ces fichiers décrivent la classe <code>Patch</code>, c'est à dire une portion du domaine global.
 Chaque patch contient des tableaux pour décrire les propriétés des particules :
 ```C++
@@ -450,7 +450,7 @@ Dans la partie suivante du TP, il vous sera demandé de modifier les sources dan
 CPPFLAGS += -O3 -std=c++11 -fopenmp
 LDFLAGS += -fopenmp</code></p>
 <p><strong>Question 3.2 - région parallèle :</strong> La première étape consiste à ouvrir correctement la ou les régions parallèles.</p>
-<p>a) En premier lieu placez dans <a href="./patch/main.cpp">main.cpp</a> la directive d'ouverture et de fermeture d'une région
+<p>a) En premier lieu placez dans <a href="./cpp/patch/main.cpp">main.cpp</a> la directive d'ouverture et de fermeture d'une région
 parallèle en OpenMP (<code>omp parallel</code>).</p>
 <p>b) Faites en sorte que le passage des paramètres soit partagé par défaut (<code>shared</code>) et prenez soin de définir en privé (<code>private</code>)
 les quelques paramètres qui en ont besoin.</p>
@@ -458,18 +458,18 @@ les quelques paramètres qui en ont besoin.</p>
 <p>c) Compilez avec OpenMP (sans exécuter) pour vérifier.</p>
 <p><strong>Question 3.3 - temps :</strong> Pour mesurer le temps, il va être nécessaire de remplacer les fonctions <code>gettimeofday</code> par la fonction OpenMP
 spécifique <code>time = omp_get_wtime()</code> (https://www.openmp.org/spec-html/5.0/openmpsu160.html).
-Le temps est géré par les <em>timers</em> dans le fichier <a href="./patch/timers.cpp">timers.cpp</a>.
+Le temps est géré par les <em>timers</em> dans le fichier <a href="./cpp/patch/timers.cpp">timers.cpp</a>.
 N'oubliez pas que la fonction <code>time = omp_get_wtime()</code> renvoie des secondes.</p>
-<p>a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque OpenMP dans <a href="./patch/timers.h">timers.h</a></p>
+<p>a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque OpenMP dans <a href="./cpp/patch/timers.h">timers.h</a></p>
 <p>b) Modifiez maintenant les fonctions dans la classe <code>timers</code> pour utiliser <code>time = omp_get_wtime()</code>.</p>
 <p>c) Faites-en sorte que seul le thread <em>master</em> puisse récupérer le temps afin d'éviter la concurrence mémoire sur les <em>timers</em>.</p>
 <p>c) Compilez avec OpenMP (sans exécuter) pour vérifier.</p>
 <p><strong>Question 3.4 - parallélisation de la boucle :</strong> On va maintenant paralléliser la boucle en temps.
 Ici, on répartira les <em>patchs</em> sur les différents threads.</p>
-<p>a) Dans la boucle en temps de <a href="./patch/main.cpp">main.cpp</a>, identifiez les portions de code qui ne peuvent être
+<p>a) Dans la boucle en temps de <a href="./cpp/patch/main.cpp">main.cpp</a>, identifiez les portions de code qui ne peuvent être
 exécutées en parallèle et nécessitent l'utilisation d'une directive <code>omp single</code> ou <code>omp master</code>.</p>
 <p><strong>Rapport :</strong> Justifiez soigneusement vos choix</p>
-<p>b) Les différentes étapes de la boucle en temps sont définies dans <a href="./patch/particles.cpp">particles.cpp</a>.
+<p>b) Les différentes étapes de la boucle en temps sont définies dans <a href="./cpp/patch/particles.cpp">particles.cpp</a>.
 Rajoutez la directive permettant de paralléliser les boucles sur les patchs dans les fonctions le permettant.
 Ajoutez également la clause permettant de choisir le <em>scheduler</em> au runtime :
 ```</p>
@@ -844,3 +844,21 @@ Le <em>weak scaling</em> se compose de 2 études. La différence entre les deux 
 <p><strong>Question 5.5 - Comparaison :</strong></p>
 <p>a) Donnez quelles études de <em>strong scaling</em> et <em>weak scaling</em> sont comparables entre le modèle OpenMP et le modèle MPI.</p>
 <p>b) Comparez le temps et l'efficacité entre les études comparables.</p>
+<h2>Aide et astuces</h2>
+<p><strong>Précisions sur le question 3.4c :</strong></p>
+<p>Ici je vous demande de rendre parallèle des fonctions qui renvoient un scalaire à partir d'une réduction d'un ensemble de données localisées sur chaque processus. Dans l'exemple de code ci-dessous qui correspond à la fonction <code>Particles::getTotalCollisionNumber</code> renvoyant le nombre de collision total pour l'itération en cours, on a une boucle sur les patchs. Chaque patch renvoie le nombre de collisions propre à son domaine (dans la variable <code>local</code>) via la fonction <code>patches::getCollisionNumber</code>. Il faut ensuite sommer la contribution de chaque patch pour obtenir le nombre de collisions total (dans la variable <code>total</code>).</p>
+<p>```C++
+// Return the total number of collisions
+void Particles::getTotalCollisionNumber(struct Parameters params, int &amp; total) {</p>
+<pre><code>total = 0;
+
+int local;
+
+for (int i_patch = 0 ; i_patch &lt; n_patches ; i_patch++) {
+   local = patches[i_patch].getCollisionNumber();
+   total += local;
+}
+</code></pre>
+<p>}
+```</p>
+<p>A vous de trouver comment rendre cette fonction compatible avec OpenMP. Vous vous doutez qu'on peut la rendre parallèle en utilisant la clause <code>reduction</code>. Cependant comme je le note dans la question j'ai observé des erreurs avec l'opération de réduction avec certains compilateurs. De fait, je vous autorise à rendre cette partie séquentielle si nécessaire.</p>
