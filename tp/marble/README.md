@@ -291,7 +291,7 @@ La première partie de ce TP est la découverte du code dans sa version non para
 
 **Fichier parameters.cpp / .h :**
 
-Ouvrez le fichier [parameters.h](./patch/parameters.h) et regarder la structure du code.
+Ouvrez le fichier [parameters.h](./cpp/patch/parameters.h) et regarder la structure du code.
 Ce header contient la définition d'une structure de données pour des paramètres globaux du nom de `Parameters`.
 Les paramètres globaux du code permettent de décrire les propriétés de la simulation.
 On trouve les sections suivantes :
@@ -305,7 +305,7 @@ Cette structure est régulièrement passée en argument des fonctions ayant beso
 
 **Fichier main.cpp :**
 
-Ouvrez le fichier [main.cpp](./patch/main.cpp) et explorez la structure du code.
+Ouvrez le fichier [main.cpp](./cpp/patch/main.cpp) et explorez la structure du code.
 La première partie concerne l'initialisation de la simulation :
 1. déclaration des variables
 2. initialisation des propriétés de la simulation
@@ -354,7 +354,7 @@ particles.getTotalExchangeNumber(params, exchange_counter);
 
 **Fichier particles.cpp / .h:**
 
-Ouvrez les fichiers [particles.h](./patch/particles.h) et [particles.cpp](./patch/particles.cpp) pour explorer la structure du code.
+Ouvrez les fichiers [particles.h](./cpp/patch/particles.h) et [particles.cpp](./cpp/patch/particles.cpp) pour explorer la structure du code.
 Ce fichier contient la description de la classe `Particles`.
 Cette classe représente l'ensemble des particules du domaine et contient donc l'ensemble des *patchs*.
 Le header montre que la classe `Particles` contient un tableau d'objet `Patch`:
@@ -410,7 +410,7 @@ void writeDiags(struct Parameters params, unsigned int iteration);
 
 **Fichier patch.cpp / .h :**
 
-Ouvrez les fichiers [patch.h](./patch/patch.h) et [particles.cpp](./patch/patch.cpp) pour explorer la structure du code.
+Ouvrez les fichiers [patch.h](./cpp/patch/patch.h) et [particles.cpp](./cpp/patch/patch.cpp) pour explorer la structure du code.
 Ces fichiers décrivent la classe `Patch`, c'est à dire une portion du domaine global.
 Chaque patch contient des tableaux pour décrire les propriétés des particules :
 ```C++
@@ -581,7 +581,7 @@ LDFLAGS += -fopenmp
 
 **Question 3.2 - région parallèle :** La première étape consiste à ouvrir correctement la ou les régions parallèles.
 
-a) En premier lieu placez dans [main.cpp](./patch/main.cpp) la directive d'ouverture et de fermeture d'une région
+a) En premier lieu placez dans [main.cpp](./cpp/patch/main.cpp) la directive d'ouverture et de fermeture d'une région
 parallèle en OpenMP (`omp parallel`).
 
 b) Faites en sorte que le passage des paramètres soit partagé par défaut (`shared`) et prenez soin de définir en privé (`private`)
@@ -593,10 +593,10 @@ c) Compilez avec OpenMP (sans exécuter) pour vérifier.
 
 **Question 3.3 - temps :** Pour mesurer le temps, il va être nécessaire de remplacer les fonctions `gettimeofday` par la fonction OpenMP
 spécifique `time = omp_get_wtime()` (https://www.openmp.org/spec-html/5.0/openmpsu160.html).
-Le temps est géré par les *timers* dans le fichier [timers.cpp](./patch/timers.cpp).
+Le temps est géré par les *timers* dans le fichier [timers.cpp](./cpp/patch/timers.cpp).
 N'oubliez pas que la fonction `time = omp_get_wtime()` renvoie des secondes.
 
-a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque OpenMP dans [timers.h](./patch/timers.h)
+a) Avant tout, rajouter la ligne permettant d'inclure la bibliothèque OpenMP dans [timers.h](./cpp/patch/timers.h)
 
 b) Modifiez maintenant les fonctions dans la classe `timers` pour utiliser `time = omp_get_wtime()`.
 
@@ -607,12 +607,12 @@ c) Compilez avec OpenMP (sans exécuter) pour vérifier.
 **Question 3.4 - parallélisation de la boucle :** On va maintenant paralléliser la boucle en temps.
 Ici, on répartira les *patchs* sur les différents threads.
 
-a) Dans la boucle en temps de [main.cpp](./patch/main.cpp), identifiez les portions de code qui ne peuvent être
+a) Dans la boucle en temps de [main.cpp](./cpp/patch/main.cpp), identifiez les portions de code qui ne peuvent être
 exécutées en parallèle et nécessitent l'utilisation d'une directive `omp single` ou `omp master`.
 
 **Rapport :** Justifiez soigneusement vos choix
 
-b) Les différentes étapes de la boucle en temps sont définies dans [particles.cpp](./patch/particles.cpp).
+b) Les différentes étapes de la boucle en temps sont définies dans [particles.cpp](./cpp/patch/particles.cpp).
 Rajoutez la directive permettant de paralléliser les boucles sur les patchs dans les fonctions le permettant.
 Ajoutez également la clause permettant de choisir le *scheduler* au runtime :
 ```
@@ -1119,3 +1119,26 @@ a) Comment peut-on qualifier le comportement de l'étude de *Strong Scaling* (vo
 a) Donnez quelles études de *strong scaling* et *weak scaling* sont comparables entre le modèle OpenMP et le modèle MPI.
 
 b) Comparez le temps et l'efficacité entre les études comparables.
+
+## Aide et astuces
+
+**Précisions sur le question 3.4c :**
+
+Ici je vous demande de rendre parallèle des fonctions qui renvoient un scalaire à partir d'une réduction d'un ensemble de données localisées sur chaque processus. Dans l'exemple de code ci-dessous qui correspond à la fonction `Particles::getTotalCollisionNumber` renvoyant le nombre de collision total pour l'itération en cours, on a une boucle sur les patchs. Chaque patch renvoie le nombre de collisions propre à son domaine (dans la variable `local`) via la fonction `patches::getCollisionNumber`. Il faut ensuite sommer la contribution de chaque patch pour obtenir le nombre de collisions total (dans la variable `total`).
+
+```C++
+// Return the total number of collisions
+void Particles::getTotalCollisionNumber(struct Parameters params, int & total) {
+    
+    total = 0;
+    
+    int local;
+    
+    for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+       local = patches[i_patch].getCollisionNumber();
+       total += local;
+    }
+}
+```
+
+A vous de trouver comment rendre cette fonction compatible avec OpenMP. Vous vous doutez qu'on peut la rendre parallèle en utilisant la clause `reduction`. Cependant comme je le note dans la question j'ai observé des erreurs avec l'opération de réduction avec certains compilateurs. De fait, je vous autorise à rendre cette partie séquentielle si nécessaire.
