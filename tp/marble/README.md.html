@@ -862,6 +862,10 @@ for (int i_patch = 0 ; i_patch &lt; n_patches ; i_patch++) {
 <p>}
 ```</p>
 <p>A vous de trouver comment rendre cette fonction compatible avec OpenMP. Vous vous doutez qu'on peut la rendre parallèle en utilisant la clause <code>reduction</code>. Cependant comme je le note dans la question j'ai observé des erreurs avec l'opération de réduction avec certains compilateurs. De fait, je vous autorise à rendre cette partie séquentielle si nécessaire.</p>
+<p><strong>Précisions question 4.3.e :</strong></p>
+<p>L'idée est ici de commenter les fonctions qui ne sont pas encore parallélisées pour pouvoir compiler le code dans la question 4.3.f et ensuite. L'idée est de rendre parallèle l'ensemble du code au fur et à mesure et du coup de décommenter les parties parallélisées étape par étape tout en compilant et exécutant pour vérifier que ça marche. En adoptant cette démarche vous évitez les bugs dans les parties que vous n'avez pas encore modifiées.</p>
+<p>En vous demandant ça je vous oblige aussi à réfléchir en amont aux fonctions qui seront impactées par MPI. C'est à la fois pour la démarche de parallélisation et pour vous obliger à prendre du recul.</p>
+<p>Libre à vous d'ignorer cette question car normalement si vous arrivez à la fin de la partie MPI toutes les fonctions devront marcher avec MPI et être par conséquent décommentées.</p>
 <p><strong>Précisions question 4.5 :</strong></p>
 <ol>
 <li>Faut-il modifier <code>timers.h</code> ?</li>

@@ -1175,6 +1175,14 @@ void Particles::getTotalCollisionNumber(struct Parameters params, int & total) {
 
 A vous de trouver comment rendre cette fonction compatible avec OpenMP. Vous vous doutez qu'on peut la rendre parallèle en utilisant la clause `reduction`. Cependant comme je le note dans la question j'ai observé des erreurs avec l'opération de réduction avec certains compilateurs. De fait, je vous autorise à rendre cette partie séquentielle si nécessaire.
 
+**Précisions question 4.3.e :**
+
+L'idée est ici de commenter les fonctions qui ne sont pas encore parallélisées pour pouvoir compiler le code dans la question 4.3.f et ensuite. L'idée est de rendre parallèle l'ensemble du code au fur et à mesure et du coup de décommenter les parties parallélisées étape par étape tout en compilant et exécutant pour vérifier que ça marche. En adoptant cette démarche vous évitez les bugs dans les parties que vous n'avez pas encore modifiées.
+
+En vous demandant ça je vous oblige aussi à réfléchir en amont aux fonctions qui seront impactées par MPI. C'est à la fois pour la démarche de parallélisation et pour vous obliger à prendre du recul.
+
+Libre à vous d'ignorer cette question car normalement si vous arrivez à la fin de la partie MPI toutes les fonctions devront marcher avec MPI et être par conséquent décommentées.
+
 **Précisions question 4.5 :**
 
 1. Faut-il modifier `timers.h` ?
