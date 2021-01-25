@@ -259,6 +259,15 @@ Pour compiler ce programme, vous pouvez tout simplement utiliser le makefile dan
 make
 ```
 
+ Le makefile est là pour vous simplifier la vie.
+ Il est possible aussi de compiler à la main mais il faut savoir le faire.
+ Étant donné que le projet se compose de plusieurs fichiers il faut compiler chaque fichier séparément et ensuite faire ce qu'on appelle une étape de linking c'est à dire qu'on rassemble tous les fichiers temporaires compilés pour construire le binaire.
+
+Si jamais vous avez des problèmes de compilation, vous pouvez faire `make clean` avant de faire `make`, cela permet de nettoyer le dossier des anciens fichiers temporaires.
+```bash
+make clean
+```
+
 La compilation génère un fichier exécutable du nom de `executable`. Vous pouvez lancer le programme en faisant :
 ```bash
 ./executable
