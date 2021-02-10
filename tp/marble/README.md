@@ -1131,6 +1131,10 @@ b) Comparez le temps et l'efficacité entre les études comparables.
 
 ## Aide et astuces
 
+**Aide et Précisions sur le question 3.4a :**
+
+Une fonction qui ne peut être menée en parallèle dans son état est la fonction de diagnostique `particles.writeDiags(params, iteration);`. Je vous laisse cependant réfléchir à la raison pour votre rapport. De fait, cette fonction en contiendra pas d'appel à openMP et doit être géré par une zone séquetielle `omp master` ou `omp single`. A vous de voir ce qui vous parait le mieux dans cette situation.
+
 **Précisions sur le question 3.4c :**
 
 Ici je vous demande de rendre parallèle des fonctions qui renvoient un scalaire à partir d'une réduction d'un ensemble de données localisées sur chaque processus. Dans l'exemple de code ci-dessous qui correspond à la fonction `Particles::getTotalCollisionNumber` renvoyant le nombre de collision total pour l'itération en cours, on a une boucle sur les patchs. Chaque patch renvoie le nombre de collisions propre à son domaine (dans la variable `local`) via la fonction `patches::getCollisionNumber`. Il faut ensuite sommer la contribution de chaque patch pour obtenir le nombre de collisions total (dans la variable `total`).
