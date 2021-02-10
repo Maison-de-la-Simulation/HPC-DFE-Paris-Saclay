@@ -851,6 +851,8 @@ Le <em>weak scaling</em> se compose de 2 études. La différence entre les deux 
 <p>a) Donnez quelles études de <em>strong scaling</em> et <em>weak scaling</em> sont comparables entre le modèle OpenMP et le modèle MPI.</p>
 <p>b) Comparez le temps et l'efficacité entre les études comparables.</p>
 <h2>Aide et astuces</h2>
+<p><strong>Aide et Précisions sur le question 3.4a :</strong></p>
+<p>Une fonction qui ne peut être menée en parallèle dans son état est la fonction de diagnostique <code>particles.writeDiags(params, iteration);</code>. Je vous laisse cependant réfléchir à la raison pour votre rapport. De fait, cette fonction en contiendra pas d'appel à openMP et doit être géré par une zone séquetielle <code>omp master</code> ou <code>omp single</code>. A vous de voir ce qui vous parait le mieux dans cette situation.</p>
 <p><strong>Précisions sur le question 3.4c :</strong></p>
 <p>Ici je vous demande de rendre parallèle des fonctions qui renvoient un scalaire à partir d'une réduction d'un ensemble de données localisées sur chaque processus. Dans l'exemple de code ci-dessous qui correspond à la fonction <code>Particles::getTotalCollisionNumber</code> renvoyant le nombre de collision total pour l'itération en cours, on a une boucle sur les patchs. Chaque patch renvoie le nombre de collisions propre à son domaine (dans la variable <code>local</code>) via la fonction <code>patches::getCollisionNumber</code>. Il faut ensuite sommer la contribution de chaque patch pour obtenir le nombre de collisions total (dans la variable <code>total</code>).</p>
 <p>```C++
