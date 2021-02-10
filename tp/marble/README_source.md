@@ -1165,7 +1165,7 @@ b) Comparez le temps et l'efficacité entre les études comparables.
 
 **Aide et Précisions sur le question 3.4a :**
 
-Une fonction qui ne peut être menée en parallèle dans son état est la fonction de diagnostique `particles.writeDiags(params, iteration);`. Je vous laisse cependant réfléchir à la raison pour votre rapport. De fait, cette fonction en contiendra pas d'appel à openMP et doit être géré par une zone séquetielle `omp master` ou `omp single`. A vous de voir ce qui vous parait le mieux dans cette situation.
+Une fonction qui ne peut être menée en parallèle dans son état est la fonction de diagnostique `particles.writeDiags(params, iteration);`. Je vous laisse cependant réfléchir à la raison pour votre rapport. De fait, cette fonction ne contiendra pas d'appel à openMP et doit être géré par une zone séquentielle `omp master` ou `omp single`. A vous de voir ce qui vous parait le mieux dans cette situation.
 
 **Précisions sur le question 3.4c :**
 
