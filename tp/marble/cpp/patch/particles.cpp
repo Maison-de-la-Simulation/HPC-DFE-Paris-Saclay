@@ -191,13 +191,14 @@ void Particles::writeVTK(struct Parameters params, int iteration) {
         vtk_file << "ASCII" << std::endl;
         vtk_file << "DATASET POLYDATA" << std::endl;
         
-        int number = 0;
-        int imbalance;
-        getTotalParticleNumber(params, number, imbalance);
+        int particle_number = 0;
+        for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+            particle_number += patches[i_patch].getParticleNumber();
+        }
         
         // Particle positions
         vtk_file << std::endl;
-        vtk_file << "POINTS "<< number << " float" << std::endl;
+        vtk_file << "POINTS "<< particle_number << " float" << std::endl;
         for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
             for(int ip = 0 ; ip < patches[i_patch].getParticleNumber() ; ip++) {
               vtk_file << patches[i_patch].x[ip] << " ";
@@ -208,7 +209,7 @@ void Particles::writeVTK(struct Parameters params, int iteration) {
         
         // Construction of the mass
         vtk_file << std::endl;
-        vtk_file << "POINT_DATA " << number  << std::endl;
+        vtk_file << "POINT_DATA " << particle_number  << std::endl;
         vtk_file << "SCALARS mass float" << std::endl;
         vtk_file << "LOOKUP_TABLE default" << std::endl;
         for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
@@ -271,11 +272,12 @@ void Particles::writeBinary(struct Parameters params, int iteration) {
         std::cerr << " Error while creating the file :" << file_name << std::endl;
     }
     
-    int number;
-    int imbalance;
-    getTotalParticleNumber(params,number,imbalance);
+    int particle_number = 0;
+    for (int i_patch = 0 ; i_patch < n_patches ; i_patch++) {
+        particle_number += patches[i_patch].getParticleNumber();
+    }
     
-    binary_file.write((char *) &number, sizeof(number));
+    binary_file.write((char *) &particle_number, sizeof(particle_number));
     binary_file.write((char *) &params.radius, sizeof(double));
     
     // Particle positions
