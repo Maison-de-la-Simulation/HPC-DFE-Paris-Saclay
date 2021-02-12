@@ -455,12 +455,13 @@ Dans la partie suivante du TP, il vous sera demandé de modifier les sources dan
 <p><code>Makefile
 CPPFLAGS += -O3 -std=c++11 -fopenmp
 LDFLAGS += -fopenmp</code></p>
-<p><strong>Question 3.2 - région parallèle :</strong> La première étape consiste à ouvrir correctement la ou les régions parallèles.</p>
+<p><strong>Question 3.2 - région parallèle :</strong> La première étape consiste à ouvrir correctement la région parallèle.</p>
 <p>a) En premier lieu placez dans <a href="./cpp/patch/main.cpp">main.cpp</a> la directive d'ouverture et de fermeture d'une région
-parallèle en OpenMP (<code>omp parallel</code>).</p>
+parallèle en OpenMP (<code>omp parallel</code>) pour qu'elle englobe la boucle en temps.</p>
+<p><strong>Rapport :</strong> Justifiez le choix de l'emplacement de la directive et pourquoi il n'est pas forcément nécessaire d'inclure la phase d'initilisation des particules et de la topologie (<code>particles.initTopology(params)</code> et <code>particles.initParticles(params)</code>).</p>
 <p>b) Faites en sorte que le passage des paramètres soit partagé par défaut (<code>shared</code>) et prenez soin de définir en privé (<code>private</code>)
 les quelques paramètres qui en ont besoin.</p>
-<p><strong>Rapport :</strong> Justifiez le choix de l'emplacement de la directive dans le code et le choix des paramètres passés en <code>private</code>.</p>
+<p><strong>Rapport :</strong> Justifiez le choix des paramètres passés en <code>private</code>.</p>
 <p>c) Compilez avec OpenMP (sans exécuter) pour vérifier.</p>
 <p><strong>Question 3.3 - temps :</strong> Pour mesurer le temps, il va être nécessaire de remplacer les fonctions <code>gettimeofday</code> par la fonction OpenMP
 spécifique <code>time = omp_get_wtime()</code> (https://www.openmp.org/spec-html/5.0/openmpsu160.html).
