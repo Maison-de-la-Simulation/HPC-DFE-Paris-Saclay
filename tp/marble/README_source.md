@@ -623,7 +623,12 @@ LDFLAGS += -fopenmp
 **Question 3.2 - région parallèle :** La première étape consiste à ouvrir correctement la région parallèle.
 
 a) En premier lieu placez dans [main.cpp](./cpp/patch/main.cpp) la directive d'ouverture et de fermeture d'une région
-parallèle en OpenMP (`omp parallel`) pour qu'elle englobe la boucle en temps.
+parallèle en OpenMP (`omp parallel`) pour qu'elle englobe la boucle en temps :
+```C++
+for (int iteration = 1 ; iteration <= params.final_iteration; iteration++) {
+    ...
+}
+```
 
 **Rapport :** Justifiez le choix de l'emplacement de la directive et pourquoi il n'est pas forcément nécessaire d'inclure la phase d'initilisation des particules et de la topologie (`particles.initTopology(params)` et `particles.initParticles(params)`).
 
