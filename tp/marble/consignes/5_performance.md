@@ -91,7 +91,7 @@ mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 
 ```
 
 <img src="../../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png" height="300">
-<img src=".../../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png" height="300">
+<img src="../../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png" height="300">
 <img src="../../../support/materiel/marble_mpi_weak_scaling_ppp2000_part.png" height="300">
 
 **Etude de strong scaling pour le code MPI**
