@@ -35,11 +35,28 @@ En vous demandant ça je vous oblige aussi à réfléchir en amont aux fonctions
 
 Libre à vous d'ignorer cette question car normalement si vous arrivez à la fin de la partie MPI toutes les fonctions devront marcher avec MPI et être par conséquent décommentées.
 
+**Aide question 4.5.b :** On utilise tout simplement la fonction `MPI_Wtime()` comme dans les exercices. Par exemple :
+```C++
+// Start the specified timer
+void Timers::start(std::string name) {
+    
+    int id = index(name);
+    
+    temporary_times[id] = MPI_Wtime();
+    
+}
+```
+
 **Précisions question 4.5 :**
 
 1. Faut-il modifier `timers.h` ?
 
-Il n'est pas nécessaire de modifier timers.h mais vous pouvez pour y ajouter les tableaux pour les temps min, max et moyens. Les appels aux fonctions MPI pour la gestion des timers doivent se faire dans timers.cpp par contre. Aussi, elles doivent figurer dans la fonction timers::print car c'est à ce moment là qu'on fait le bilan. Dans le tableau  accumulated_times, chaque index représente le temps cumulé pour une partie spécifique du code. Le premier index est pour l'initialisation, le deuxième pour la boucle ne temps et ainsi de suite en fonction de comment vous créer les timers dans `main.cpp`. il faut donc appliquer les fonctions MPI pour chaque index.
+Il n'est pas nécessaire de modifier `timers.h` mais vous pouvez pour y ajouter les tableaux pour les temps min, max et moyens.
+Les appels aux fonctions MPI pour la gestion des timers doivent se faire dans `timers.cpp` par contre.
+Aussi, elles doivent figurer dans la fonction `timers::print` car c'est à ce moment là qu'on fait le bilan.
+Dans le tableau  accumulated_times, chaque index représente le temps cumulé pour une partie spécifique du code.
+Le premier index est pour l'initialisation, le deuxième pour la boucle ne temps et ainsi de suite en fonction de comment vous créer les timers dans `main.cpp`.
+Il faut donc appliquer les fonctions MPI pour chaque index.
 
 Je vous mets un squelette pour la fonction `timers::print` qui pourra vous aider :
 
