@@ -32,9 +32,9 @@ export OMP_NUM_THREADS=8
 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 16000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0.01 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -mass 0.5 0.5 -overlap 0
 ```
 
-<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_time.png" height="400">
-<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_efficiency.png" height="300">
-<img src="../../support/materiel/marble_omp_weak_scaling_ppp2000_part.png" height="300">
+<img src="../../../support/materiel/marble_omp_weak_scaling_ppp2000_time.png" height="400">
+<img src="../../../support/materiel/marble_omp_weak_scaling_ppp2000_efficiency.png" height="300">
+<img src="../../../support/materiel/marble_omp_weak_scaling_ppp2000_part.png" height="300">
 
 **Première étude de strong scaling pour le code OpenMP**
 
@@ -49,9 +49,9 @@ export OMP_NUM_THREADS=8
 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -mass 0.5 0.5 -overlap 0
 ```
 
-<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_time.png" height="400">
-<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_efficiency.png" height="300">
-<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_part.png" height="300">
+<img src="../../../support/materiel/marble_omp_strong_scaling_ppp1000_time.png" height="400">
+<img src="../../../support/materiel/marble_omp_strong_scaling_ppp1000_efficiency.png" height="300">
+<img src="../../../support/materiel/marble_omp_strong_scaling_ppp1000_part.png" height="300">
 
 **Deuxième étude de strong scaling pour le code OpenMP**
 
@@ -64,9 +64,9 @@ export OMP_NUM_THREADS=8
 ./executable -patch 4 4 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -mass 0.5 0.5 -overlap 0
 ```
 
-<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_time.png" height="400">
-<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_efficiency.png" height="300">
-<img src="../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_part.png" height="300">
+<img src="../../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_time.png" height="400">
+<img src="../../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_efficiency.png" height="300">
+<img src="../../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_part.png" height="300">
 
 **Première étude de weak scaling pour le code MPI**
 
@@ -78,9 +78,9 @@ A titre d'exemple, la commande utilisée pour lancer le code sur 8 coeurs est la
 mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 4000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
 ```
 
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_time.png" height="300">
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_efficiency.png" height="300">
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp500_part.png" height="300">
+<img src="../../../support/materiel/marble_mpi_weak_scaling_ppp500_time.png" height="300">
+<img src="../../../support/materiel/marble_mpi_weak_scaling_ppp500_efficiency.png" height="300">
+<img src="../../../support/materiel/marble_mpi_weak_scaling_ppp500_part.png" height="300">
 
 **Deuxième étude de weak scaling pour le code MPI**
 
@@ -90,9 +90,9 @@ A titre d'exemple, la commande utilisée pour lancer le code sur 8 coeurs est la
 mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 16000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 2 -y 0 2 -z 0 2 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
 ```
 
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png" height="300">
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png" height="300">
-<img src="../../support/materiel/marble_mpi_weak_scaling_ppp2000_part.png" height="300">
+<img src="../../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png" height="300">
+<img src=".../../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png" height="300">
+<img src="../../../support/materiel/marble_mpi_weak_scaling_ppp2000_part.png" height="300">
 
 **Etude de strong scaling pour le code MPI**
 
@@ -103,9 +103,9 @@ Le nombre de particules par *patch* dépend du nombre de rangs MPI.
 mpirun -np 8 ./executable -patch 2 2 2 -t 10 -it 500 -diags 1000 -print 100 -np 32000 -air_damping 0 -gravity 0 0 0 -wall_damping 0 -collision_damping 0 -collision 1 -velocity 0.5 0.5 -x 0 4 -y 0 4 -z 0 4 -r 0.01 -exchange 1 -mass 0.5 0.5 -overlap 0
 ```
 
-<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_time.png" height="400">
-<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_efficiency.png" height="300">
-<img src="../../support/materiel/marble_mpi_strong_scaling_ppp1000_part.png" height="300">
+<img src="../../../support/materiel/marble_mpi_strong_scaling_ppp1000_time.png" height="400">
+<img src="../../../support/materiel/marble_mpi_strong_scaling_ppp1000_efficiency.png" height="300">
+<img src="../../../support/materiel/marble_mpi_strong_scaling_ppp1000_part.png" height="300">
 
 **Question 5.1 - Weak Scaling OpenMP :**
 
