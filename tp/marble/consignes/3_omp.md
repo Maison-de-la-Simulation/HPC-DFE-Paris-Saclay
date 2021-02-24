@@ -43,7 +43,7 @@ b) Modifiez maintenant les fonctions dans la classe `timers` pour utiliser `time
 
 c) Faites-en sorte que seul le thread *master* puisse récupérer le temps afin d'éviter la concurrence mémoire sur les *timers*.
 
-c) Compilez avec OpenMP (sans exécuter) pour vérifier.
+d) Compilez avec OpenMP (sans exécuter) pour vérifier.
 
 **Question 3.4 - parallélisation de la boucle :** On va maintenant paralléliser la boucle en temps.
 Ici, on répartira les *patchs* sur les différents threads.
