@@ -2,7 +2,32 @@
 
 Cette partie contient de l'aide sur les différentes questions du projet
 
-**Aide sur le question 3.4a :**
+**Aide sur la question 3.3.C:**
+
+Concernant les timers et la question 3, vous devez modifier directement les fonctions `start` et `stop` dans le fichier `timers.cpp`. Dans la version sans OpenMP, on utilise gettimeofday pour récupérer le temps. Vous devez remplacer cet appel par la fonction OpenMP `omp_get_wtime`. Par exemple :
+
+```C++
+// Start the specified timer
+void Timers::start(std::string name) {
+    
+    #pragma omp master
+    {
+    
+    int id = index(name);
+    
+    double time = omp_get_wtime();
+    
+    temporary_times[id] = time;
+    
+    }
+    
+}
+```
+
+Ici la variable `temporary_times[id]` stocke temporairement le temps pour l'utiliser dans la fonction `timers::stop`.
+Vous devez aussi vous assurer que les timers **ne seront appelés que** par le thread `master` en utilisant la directive corresponante. 
+
+**Aide sur la question 3.4a :**
 
 Une fonction qui ne peut être menée en parallèle dans son état est la fonction de diagnostique `particles.writeDiags(params, iteration);`. Je vous laisse cependant réfléchir à la raison pour votre rapport. De fait, cette fonction ne contiendra pas d'appel à openMP et doit être géré par une zone séquentielle `omp master` ou `omp single`. A vous de voir ce qui vous parait le mieux dans cette situation.
 
