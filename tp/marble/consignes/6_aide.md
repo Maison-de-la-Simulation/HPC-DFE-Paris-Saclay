@@ -166,7 +166,13 @@ int rank_coordinates[3];
 int * topology_map;
 int exchange;
 ```
-Pour les utiliser dans les fonctions de création de la topologie cartésienne.
+
+Vous devez allouer le tableau `topology_map` correctement dans la fonction `Particles::initTopology`
+```
+params.topology_map = new int[params.number_of_ranks];
+```
+C'est à la suite qu'il faudra créer la topologie.
+Les paramètres déclarés seront utilisés dans les fonctions de création de la topologie cartésienne.
 Par exemple :
 ``` C++
 MPI_Cart_create(MPI_COMM_WORLD,
