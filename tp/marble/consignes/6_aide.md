@@ -183,3 +183,61 @@ MPI_Cart_create(MPI_COMM_WORLD,
                      &params.cartesian_communicator);
 ```
 C'est d'ailleur spour cela qu'on fait un passage par référence ici (question 4.6.b).
+
+**Aide question 4.7a :**
+
+Dans cette question, il s'agit de préparer l'adaptation des fonctions de sortie à MPI.
+Le squelette de la nouvelle fonction `Particles::writeDiags` est le suivant :
+
+```C++
+// Write the particle diagnostics
+// Ineficcient method: all particles are communicated to the rank 0 that writes all diags.
+// However, very pedagogic to learn global communication
+void Particles::writeDiags(struct Parameters params) {
+    if (params.iteration%params.output_period == 0) {
+        
+        
+        int total = 0;
+                
+        // Ici se place du code et des fonctions MPI pour récupérer le nombre total de particules
+        // ...
+        
+        // tableau pour stocker toutes les particules sur le rang 0 :
+        
+        double * x = new double[total];
+        double * y = new double[total];
+        double * z = new double[total];
+        
+        double * vx = new double[total];
+        double * vy = new double[total];
+        double * vz = new double[total];
+        
+        double * mass = new double[total];
+        
+        // Fonctions MPI pour ramener les particules sur le rang 0
+        // ...
+        // ...
+        
+        // Ecriture des fichiers de sorties :
+        
+        if (params.vtk && params.rank==0) {
+        
+            writeVTK(params.iteration, total, x, y, z, vx, vy, vz, mass);
+        }
+        if (params.binary) {
+            writeBinary(params.iteration, total, x, y, z, vx, vy, vz, mass);
+        }
+
+        // Supression des tableaux alloués :
+
+        delete [] x;
+        delete [] y,z,vx,vy,vz,mass, local_particle_numbers, displacement;
+        
+    }
+}
+```
+
+Vous pouvez accéder aux particules d'un patch de cette façon :
+```C++
+patches[0].x[0]
+```
