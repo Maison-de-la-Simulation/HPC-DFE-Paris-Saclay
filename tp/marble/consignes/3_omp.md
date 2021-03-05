@@ -68,6 +68,7 @@ c) Les fonctions permettant de calculer certains paramètres globaux que sont :
 - `particles.getTotalParticleNumber(params, particle_number, imbalance);` pour obtenir le nombre total de particules
 - `particles.getTotalCollisionNumber(params, collision_counter);` pour obtenir le nombre total de collisions nécessite également un traitement supplémentaire.
 Ce sont des fonctions de réduction.
+
 Parallélisez les boucles de ces fonctions tout rajoutant la clause permettant de gérer la réduction.
 
 **Attention :** j'ai remarqué quelques problèmes avec ces réductions soient à la compilation soit à l'exécution.
