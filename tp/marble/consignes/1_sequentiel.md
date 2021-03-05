@@ -238,7 +238,7 @@ Ces fonctions sont appelées dans la classe `Particles` (voir [Particles.cpp](./
 
 **Question 1.1 - première exécution :** Maintenant que vous avez une vision globale du code séquentiel, compilez et exécutez-le avec les paramètres par défaut.
 
-**Question 1.2 :** L'exécution a généré des fichiers dans le dossier `diags`.
+**Question 1.2 - visualisation :** L'exécution a généré des fichiers dans le dossier `diags`.
 Il y a plusieurs types de fichiers.
 Les fichiers avec l'extension `.vtk` doivent être ouvert avec le logiciel `Paraview` ou `VisIt`.
 [Cette page dans le dossier visulization](./visualization/README.md) vous aidera à visualiser les résultats.
