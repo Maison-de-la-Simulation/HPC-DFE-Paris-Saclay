@@ -109,7 +109,7 @@ Avec le paradigme MPI, `Particles` représente maintenant les particules du rang
 que la classe est dupliquée sur chaque rang (mémoire distribuée).
 Il est même possible en fonction des choix de chacun de faire disparaitre la classe `Particles`.
 
-a) Dans [Particles.cpp](../cpp/patch/particles.cpp), modifiez le constructeur pour ne laisser qu'un seul patch dans la clasee `Particles`.
+a) Dans [Particles.cpp](../cpp/patch/particles.cpp), modifiez le constructeur pour ne laisser qu'un seul patch dans la classe `Particles`.
 
 Nous allons maintenant récrire la fonction `Particles::initTopology` dans [particles.cpp](../cpp/patch/particles.cpp) et `Patch::initTopology` dans [patch.cpp](../cpp/patch/patch.cpp) pour créer une topologie MPI à partir des fonctions dédiées.
 
