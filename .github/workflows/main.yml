@@ -6,9 +6,9 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master, year-2020-2021 ]
+    branches: [ master, year-2021-2022 ]
   pull_request:
-    branches: [ master, year-2020-2021 ]
+    branches: [ master, year-2021-2022 ]
     
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -39,7 +39,17 @@ jobs:
           cd exercices/openmp/1_omp_parallel/correction
           g++ -O3 -fopenmp main.cpp -o c_exe
           gfortran -O3 -fopenmp main.F90 -o f_exe
+          cd ../../2_omp_do/correction
+          g++ -O3 -fopenmp main.cpp -o c_exe
+          gfortran -O3 -fopenmp main.F90 -o f_exe
           
+     # ________________________________________________________
+      # Application - Diffusion
+      - name: build and test diffusion
+        run: |
+          cd tp/diffusion/fortran/sequentiel
+          make
+ 
       # ________________________________________________________
       # Application - Onde
       - name: build and test onde
