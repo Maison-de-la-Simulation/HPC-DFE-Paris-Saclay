@@ -39,7 +39,7 @@ jobs:
           cd exercices/openmp/1_omp_parallel/correction
           g++ -O3 -fopenmp main.cpp -o c_exe
           gfortran -O3 -fopenmp main.F90 -o f_exe
-          cd ../1_omp_do/correction
+          cd ../2_omp_do/correction
           g++ -O3 -fopenmp main.cpp -o c_exe
           gfortran -O3 -fopenmp main.F90 -o f_exe
           
