@@ -1,0 +1,4 @@
+make
+rm -r build
+rm -r diags
+./executable -nx 128 -ny 128
