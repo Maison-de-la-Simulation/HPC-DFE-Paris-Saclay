@@ -38,7 +38,7 @@ Les individus ne peuvent se déplacer que d'une cellule à une autre.
 
 Les végétaux obéissent aux comportements décrits dans le diagramme suivant.
 
-<img src="../../support/materiel/life_plants_behavior.png" height="400">
+<img src="../../support/materiel/life_plants_behavior.svg" height="400">
 
 ### Fonctionnement des lapins
 
