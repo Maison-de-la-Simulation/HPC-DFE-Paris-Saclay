@@ -43,12 +43,12 @@ jobs:
           g++ -O3 -fopenmp main.cpp -o c_exe
           gfortran -O3 -fopenmp main.F90 -o f_exe
           
-     # ________________________________________________________
+      # ________________________________________________________
       # Application - Diffusion
-      - name: build and test diffusion
-        run: |
-          cd tp/diffusion/fortran/sequentiel
-          make
+      #- name: build and test diffusion
+      #  run: |
+      #    cd tp/diffusion/fortran/sequentiel
+      #    make
  
       # ________________________________________________________
       # Application - Onde
