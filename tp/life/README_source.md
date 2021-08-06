@@ -20,6 +20,7 @@ Les 3 espèces sont les suivantes:
 - la végétation
 - les lapins
 - les renards
+
 L'idée principale est d'avoir 3 types d'espèce classique que sont les végétaux,
 les proies herbivores et les prédateurs carnivores.
 
@@ -53,3 +54,17 @@ Les lapins obéissent aux comportements décrits dans le diagramme suivant.
 Les renards obéissent aux comportements décrits dans le diagramme suivant.
 
 <img src="../../support/materiel/life_foxes_behavior.svg" height="400">
+
+### Conditions aux bords
+
+Le domaine est fermé ce qui fait que les individus ne peuvent ni entrer ni sortir de ce dernier.
+On fonctionne en vase clos.
+
+## Description du répertoire
+
+Ce TP se compose de plusieurs répertoires :
+- [cpp/sequential](./cpp/sequential) : ce dossier contient le fichier source du code séquentiel et le makefile pour le compiler.
+- [scalings](./python) : ce dossier contient des scripts permettant d'afficher les courbes de scalabilité présentées à la fin de ce document.
+- [visualization](./python) : ce dossier contient des scripts dédiés à la visualisation des résultats.
+- [consignes](./consignes) : ce dossier contient les consignes du TP
+- [.extra](./.extra) : ce dossier sert uniquement pour GitHub

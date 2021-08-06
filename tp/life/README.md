@@ -1,5 +1,7 @@
 # Jeu de la vie avancé
 
+<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fkeyassets.timeincuk.net%2Finspirewp%2Flive%2Fwp-content%2Fuploads%2Fsites%2F6%2F2016%2F11%2FFox-Pg-82.jpg&f=1&nofb=1" height="400">
+
 ## Présentation du concept
 
 [Le jeu de la vie](https://fr.wikipedia.org/wiki/Jeu_de_la_vie) est un simulateur
@@ -18,6 +20,7 @@ Les 3 espèces sont les suivantes:
 - la végétation
 - les lapins
 - les renards
+
 L'idée principale est d'avoir 3 types d'espèce classique que sont les végétaux,
 les proies herbivores et les prédateurs carnivores.
 
@@ -42,4 +45,26 @@ Les végétaux obéissent aux comportements décrits dans le diagramme suivant.
 
 ### Fonctionnement des lapins
 
-### Fonctionnement des loups
+Les lapins obéissent aux comportements décrits dans le diagramme suivant.
+
+<img src="../../support/materiel/life_rabbits_behavior.svg" height="400">
+
+### Fonctionnement des renards
+
+Les renards obéissent aux comportements décrits dans le diagramme suivant.
+
+<img src="../../support/materiel/life_foxes_behavior.svg" height="400">
+
+### Conditions aux bords
+
+Le domaine est fermé ce qui fait que les individus ne peuvent ni entrer ni sortir de ce dernier.
+On fonctionne en vase clos.
+
+## Description du répertoire
+
+Ce TP se compose de plusieurs répertoires :
+- [cpp/sequential](./cpp/sequential) : ce dossier contient le fichier source du code séquentiel et le makefile pour le compiler.
+- [scalings](./python) : ce dossier contient des scripts permettant d'afficher les courbes de scalabilité présentées à la fin de ce document.
+- [visualization](./python) : ce dossier contient des scripts dédiés à la visualisation des résultats.
+- [consignes](./consignes) : ce dossier contient les consignes du TP
+- [.extra](./.extra) : ce dossier sert uniquement pour GitHub
