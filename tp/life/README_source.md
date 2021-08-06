@@ -175,6 +175,6 @@ python -i animate.py <chemin vers un fichier scalars.bin>
 
 Voici un exemple d'image produite par la lecture du fichier `diag_100.bin` via le script `plot_binary.py`.
 
-<img src="../../support/materiel/life_visu_example.svg" height="400">
+<img src="../../support/materiel/life_visu_example.png" height="400">
 
 ## Consignes de TP
