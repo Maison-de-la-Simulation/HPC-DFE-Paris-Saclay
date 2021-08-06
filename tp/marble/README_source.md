@@ -276,7 +276,7 @@ La compilation génère un fichier exécutable du nom de `executable`. Vous pouv
 ./executable
 ```
 
-### Argument en ligne de commande
+### Arguments en ligne de commande
 
 Il est possible de changer les paramètres numériques directement en ligne de commande :
 
