@@ -178,3 +178,12 @@ Voici un exemple d'image produite par la lecture du fichier `diag_100.bin` via l
 <img src="../../support/materiel/life_visu_example.png" height="400">
 
 ## Consignes de TP
+
+Dans ce TP, vous aurez à modifier un programme séquentiel afin de le rendre parallèle avec le standard MPI.
+Vous serez ensuite amené à étudier les performances de la version parallèle.
+
+Le TP se compose de 4 sous-sections :
+- [Sous-section I](./consignes/1_sequentiel.md) : il s'agit de la découverte du code séquentiel
+- [Sous-section II](./consignes/2_machine.md) : cette partie concerne la découverte de la machine parallèle
+- [Sous-section III](./consignes/3_mpi.md) : cette partie est l'implémentation de la version MPI
+- [Sous-section IV](./consignes/4_performance.md) : cette partie est l'étude de la performance des codes parallèles
