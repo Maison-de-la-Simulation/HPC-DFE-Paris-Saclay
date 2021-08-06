@@ -1,6 +1,6 @@
 ### IV. MPI
 
-Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.
+Dans cette quatrième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement la bibliothèque MPI.
 Pour cela, nous ferons en sorte que chaque *patch* soit traité par un processus MPI.
 Un *patch* sera donc associé à un rang MPI systématiquement.
 
@@ -26,24 +26,24 @@ Il est tout à fait possible de compiler un code séquentiel avec le *wrappper* 
 Compilez le code en faisant `make` pour vous assurer qu'il n'y a pas d'erreur dans le makefile.
 
 **Question 4.2 - Amélioration de la structure `Parameters` :** Avant d'initialiser MPI, nous allons rajouter les variables pour le parallélisme MPI
-dans la structure `Parameters` décrite dans [parameters.h](./cpp/patch/parameters.h).
+dans la structure `Parameters` décrite dans [parameters.h](../cpp/patch/parameters.h).
 Rajoutez-y une variable pour stocker le nombre total de rangs MPI (par exemple `number_of_ranks`) et une variable pour le rang en cours (`ranks`).
 Notez que vous aurez à rajouter de nouvelles variables au dur et à mesure du développement.
 
-**Question 4.3 - Initialisation de MPI :** Nous allons commencer par préparer le programme à MPI.
+**Question 4.3 - Initialisation de MPI :** Nous allons commencer par préparer le programme pour MPI.
 
-a) Commencez par inclure le header MPI dans le fichier [main.cpp](./cpp/patch/main.cpp).
+a) Commencez par inclure le header MPI dans le fichier [main.cpp](../cpp/patch/main.cpp).
 Notez qu'il faudra l'inclure dans chaque fichier où sera appelées des fonctions MPI.
 
-b) Effectuez l'initialisation de MPI au début du fichier [main.cpp](./cpp/patch/main.cpp).
+b) Effectuez l'initialisation de MPI au début du fichier [main.cpp](../cpp/patch/main.cpp).
 
-c) Toujours au début de [main.cpp](./cpp/patch/main.cpp), ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
+c) Toujours au début de [main.cpp](../cpp/patch/main.cpp), ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
 Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
 
 d) Ensuite, rajoutez la fonction permettant de finaliser MPI tout de suite à la fin du programme.
 
-e) Pour tester notre programme au fur et à mesure de l'implémentation, nous allons commenter les appels aux fonctions non parallélisées avec MPI dans [main.cpp](./cpp/patch/main.cpp).
+e) Pour tester notre programme au fur et à mesure de l'implémentation, nous allons commenter les appels aux fonctions non parallélisées avec MPI dans [main.cpp](../cpp/patch/main.cpp).
 Identifiez les fonctions à commenter dans l'initialisation et la boucle en temps.
 **Rapport :** Justifiez votre choix dans votre rapport.
 
