@@ -76,7 +76,7 @@ y = np.arange(ny)
 # ______________________________________________________________________________
 # Figure and plot
 
-fig = figure(figsize=(12, 6))
+fig = figure(figsize=(14, 5))
 
 gs = GridSpec(4, 3)
 ax0 = subplot(gs[:,0])
@@ -96,11 +96,13 @@ im2 = ax2.pcolormesh(x,y,foxes_map,shading='auto',cmap=get_cmap('Oranges'))
 cb2 = colorbar(im2, ax=ax2)
 
 ax0.set_xlabel("x")
+ax1.set_xlabel("x")
+ax2.set_xlabel("x")
 ax0.set_ylabel("y")
 
-ax0.set_title("Plants {}".format(iteration))
-ax1.set_title("Rabbits {}".format(iteration))
-ax2.set_title("foxes {}".format(iteration))
+ax0.set_title("Plants - it: {}".format(iteration))
+ax1.set_title("Rabbit".format(iteration))
+ax2.set_title("foxes".format(iteration))
 
 fig.tight_layout()
 

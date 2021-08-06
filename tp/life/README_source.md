@@ -82,6 +82,11 @@ Ce TP se compose de plusieurs répertoires :
 
 ### Description
 
+Le code est écrit en C++.
+Le programme est écrit dans une philosophie C et le C++ n'est là que pour simplifier certains aspects via la bibliothèque standard.
+Il ne se compose que d'un unique fichier `main.cpp`.
+La découverte de ce sujet constitue la première partie du TP.
+
 ### Les dépendances
 
 Ce programme nécessite l'installation d'un compilateur C++.
@@ -97,7 +102,35 @@ dans le dossier [./documentation](../../documentation/mpi.md).
 
 ### Compilation et exécution
 
+Pour compiler ce programme, vous pouvez tout simplement utiliser le makefile dans le dossier des sources en tapant dans votre terminal :
+```bash
+make
+```
+
+ Le makefile est là pour vous simplifier la vie.
+ Il est possible aussi de compiler à la main.
+
+Si jamais vous avez des problèmes de compilation, vous pouvez faire `make clean` avant de faire `make`, cela permet de nettoyer le dossier des anciens fichiers temporaires.
+```bash
+make clean
+```
+
+La compilation génère un fichier exécutable du nom de `executable`. Vous pouvez lancer le programme en faisant :
+```bash
+./executable
+```
+
 ### Arguments en ligne de commande
+
+Il est possible de changer certains paramètres numériques directement en ligne de commande :
+
+```bash
+./executable -nx 128 -ny 256 -it 1000
+```
+
+- `-nx`: nombre de cellules dans la direction x
+- `-ny`: nombre de cellules dans la direction y
+- `-it`: nombre d'itérations
 
 ### Visualisation
 
@@ -139,5 +172,9 @@ python -i animate.py <chemin vers un dossier diags>
 ```bash
 python -i animate.py <chemin vers un fichier scalars.bin>
 ```
+
+Voici un exemple d'image produite par la lecture du fichier `diag_100.bin` via le script `plot_binary.py`.
+
+<img src="../../support/materiel/life_visu_example.svg" height="400">
 
 ## Consignes de TP
