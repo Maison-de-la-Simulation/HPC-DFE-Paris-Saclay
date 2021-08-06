@@ -37,6 +37,15 @@ Il n'y a pas de suivi individuel au cours de toute la simulation.
 Il s'agit avant tout d'une approche statistique.
 Les individus ne peuvent se déplacer que d'une cellule à une autre.
 
+### Notion d'itérations
+
+Le temps s'écoule de manière discrète sous forme d'itération.
+A chaque itération, les individus ne peuvent exécuter qu'une série d'action dépendante de leur espèce.
+Ces actions sont décrites dans les sous-sections suivantes.
+Chaque espèce possède donc 2 grilles, une grille pour représenter le moment
+présent et une autre pour représenter l'état du domaine à l'itération précédente.
+Les individus ne peuvent utiliser que la grille au temps précédent pour décider d'une actions.
+
 ### Fonctionnement des végétaux
 
 Les végétaux obéissent aux comportements décrits dans le diagramme suivant.
@@ -68,3 +77,67 @@ Ce TP se compose de plusieurs répertoires :
 - [visualization](./python) : ce dossier contient des scripts dédiés à la visualisation des résultats.
 - [consignes](./consignes) : ce dossier contient les consignes du TP
 - [.extra](./.extra) : ce dossier sert uniquement pour GitHub
+
+## Le code séquentiel
+
+### Description
+
+### Les dépendances
+
+Ce programme nécessite l'installation d'un compilateur C++.
+
+Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
+C'est normalement le cas de la plupart des compilateurs récents.
+C'est le cas sur les postes de travail de l'université.
+
+Vous aurez aussi besoin d'installer une bibliothèque MPI.
+Sur les postes de travail de l'université, OpenMPI est déjà installé.
+Pour l'installer sur vos ordinateurs personnels, utilisez les instructions
+dans le dossier [./documentation](../../documentation/mpi.md).
+
+### Compilation et exécution
+
+### Arguments en ligne de commande
+
+### Visualisation
+
+Le code génère plusieurs type de sorties (fichier sur le disque dur):
+- fichier binaire représentant le contenu des grilles à une itération donnée (`diag_*.bin`).
+- fichier ascii représentant le contenu des grilles à une itération donnée (`diag_*.dat`).
+- fichier binaire contenant l'évolution en temps de certaines grandeurs réduites (du nom de `scalars.bin`)
+
+Les fichiers sont toujours écrits dans un dossier `diags`.
+Il est toujours préférable d'utiliser des fichiers binaires plutôt que des fichiers ascii car:
+- ces derniers sont beaucoup moins lourds sur le disque
+- sont plus rapides à écrire
+- plus rapides à relire
+- représentent la donnée brute sans transformation ou troncature
+
+Des scripts Python vous sont fournis pour vous aider à visualiser ces données.
+Vous pouvez aussi utiliser vos propres scripts dans le langage de votre choix.
+Les scripts sont dans le dossier [visualization](./visualization):
+- [plot_binary.py](./visualization/plot_binary.py)
+
+```bash
+python -i plot_binary.py <chemin vers un fichier diag_*.bin>
+```
+
+- [plot_ascii.py](./visualization/plot_ascii.py)
+
+```bash
+python -i plot_ascii.py <chemin vers un fichier diag_*.dat>
+```
+
+- [animate.py](./visualization/animate.py)
+
+```bash
+python -i animate.py <chemin vers un dossier diags>
+```
+
+- [plot_scalar.py](./visualization/plot_scalar.py)
+
+```bash
+python -i animate.py <chemin vers un fichier scalars.bin>
+```
+
+## Consignes de TP
