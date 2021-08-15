@@ -6,10 +6,10 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master, year-2020-2021 ]
+    branches: [ master, year-2021-2022 ]
   pull_request:
-    branches: [ master, year-2020-2021 ]
-    
+    branches: [ master, year-2021-2022 ]
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -21,7 +21,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       - name: hdf5 packet
         run: |
           sudo apt-get install libhdf5-dev
@@ -39,21 +39,31 @@ jobs:
           cd exercices/openmp/1_omp_parallel/correction
           g++ -O3 -fopenmp main.cpp -o c_exe
           gfortran -O3 -fopenmp main.F90 -o f_exe
-          
+          cd ../../2_omp_do/correction
+          g++ -O3 -fopenmp main.cpp -o c_exe
+          gfortran -O3 -fopenmp main.F90 -o f_exe
+
+      # ________________________________________________________
+      # Application - Diffusion
+      #- name: build and test diffusion
+      #  run: |
+      #    cd tp/diffusion/fortran/sequentiel
+      #    make
+
       # ________________________________________________________
       # Application - Onde
       - name: build and test onde
         run: |
           cd tp/onde/fortran/sequential
           make
-          
+
       # ________________________________________________________
       # Application Marble
       - name: build and test marble
         run: |
           cd tp/marble/cpp/patch
           make
-          
+
       # Runs a single command using the runners shell
       - name: build and test marble sequential
         run: |

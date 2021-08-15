@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="202.82286mm"
+   height="119.23641mm"
+   viewBox="0 0 202.82286 119.23641"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   sodipodi:docname="life_plants_behavior.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.67081229"
+     inkscape:cx="708.09675"
+     inkscape:cy="265.34994"
+     inkscape:window-width="1613"
+     inkscape:window-height="995"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="2"
+     fit-margin-left="2"
+     fit-margin-right="2"
+     fit-margin-bottom="2" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11122" />
+    </marker>
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="252.52168"
+       height="76.786331"
+       id="rect2565" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="39.383842"
+       height="22.533049"
+       id="rect2565-3" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="39.383842"
+       height="22.533049"
+       id="rect2565-3-7" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="191.31786"
+       height="65.631516"
+       id="rect2565-5" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="191.31786"
+       height="65.631516"
+       id="rect16634" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="188.53041"
+       height="68.951546"
+       id="rect2565-5-9" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="191.31786"
+       height="65.631516"
+       id="rect23841" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="188.53041"
+       height="68.951546"
+       id="rect2565-5-9-2" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="39.383842"
+       height="22.533049"
+       id="rect2565-3-7-9" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="39.383842"
+       height="22.533049"
+       id="rect2565-3-6" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="188.53041"
+       height="68.951546"
+       id="rect28696" />
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-6.4623947,-8.313304)">
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.205742;stroke-opacity:1"
+       id="rect16630"
+       width="57.883068"
+       height="20.366695"
+       x="149.29932"
+       y="103.38096"
+       rx="5"
+       ry="5" />
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.212059;stroke-opacity:1"
+       id="rect31"
+       width="74.648705"
+       height="16.777103"
+       x="70.154594"
+       y="10.419333"
+       rx="5"
+       ry="5" />
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.205742;stroke-opacity:1"
+       id="rect31-3"
+       width="57.883068"
+       height="20.366695"
+       x="8.5652657"
+       y="56.452759"
+       rx="5"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-1.790801,-1.553748)"
+       id="text2563"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29698">Est-ce que la cellule contient déjà </tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan29700">des végétaux ? </tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-65.836975,43.82974)"
+       id="text2563-62"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-5);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29702">Les plantes grandissent, ce </tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan29704">qui signifie que la densité </tspan><tspan
+         x="294.66797"
+         y="106.60275"
+         id="tspan29706">augmente.</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,75.165507,88.898408)"
+       id="text2563-62-1"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-5-9);fill:#000000;fill-opacity:1;stroke:none"
+       x="0"
+       y="0"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29710"><tspan
+           dx="0 0 0 0 0 0 0 20.356228 0 0 20.356228 0 0 0 0 20.356228"
+           style="text-align:justify"
+           id="tspan29708">Tirage au sort pour </tspan></tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan29714"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 7.8041792 0 0 7.8041792 0 0 0 7.8041792"
+           style="text-align:justify"
+           id="tspan29712">déterminer si une graine </tspan></tspan><tspan
+         x="294.66797"
+         y="106.60275"
+         id="tspan29718"><tspan
+           dx="0 0 0 0 0 0 0 0.045855522 0 0 0.045855522 0 0 0 0 0.045855522 0 0 0 0.045855522"
+           style="text-align:justify"
+           id="tspan29716">pousse et crée une nouvelle </tspan></tspan><tspan
+         x="294.66797"
+         y="123.26938"
+         id="tspan29722"><tspan
+           style="text-align:justify"
+           id="tspan29720">plante</tspan></tspan></text>
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.205742;stroke-opacity:1"
+       id="rect16630-7"
+       width="57.883068"
+       height="20.366695"
+       x="112.75153"
+       y="55.364712"
+       rx="5"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,43.380214,44.057158)"
+       id="text2563-62-1-0"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-5-9-2);fill:#000000;fill-opacity:1;stroke:none"
+       x="0"
+       y="0"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29724">Une cellule adjacente </tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan29726">contient des végétaux ?</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-20.300891,18.840683)"
+       id="text2563-6"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-3);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29728">Oui</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,23.936685,68.586093)"
+       id="text2563-6-0"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-3-6);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29730">Oui</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,57.749641,20.850815)"
+       id="text2563-6-5"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-3-7);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29732">Non</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,83.50419,68.596139)"
+       id="text2563-6-5-3"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-3-7-9);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29734">Non</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="M 103.06382,27.737567 C 102.86971,42.129572 38.683164,41.827976 38.735874,56.227073"
+       id="path6980"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 103.06382,27.737567 c -0.19411,14.392005 37.91464,11.965923 37.96735,26.36502"
+       id="path16529"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,38.079293,42.714902)"
+       id="text16632"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect16634);fill:#000000;fill-opacity:1;stroke:none" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="M 139.27702,75.857528 C 139.08291,90.249533 74.896363,89.947937 74.949073,104.34703"
+       id="path28622"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 139.27702,75.857528 c -0.19411,14.392005 37.91464,11.965923 37.96735,26.365022"
+       id="path28624"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.205742;stroke-opacity:1"
+       id="rect28690"
+       width="57.883068"
+       height="20.366695"
+       x="43.405388"
+       y="105.08015"
+       rx="5"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-30.728422,90.597597)"
+       id="text28694"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect28696);fill:#000000;fill-opacity:1;stroke:none"
+       x="0"
+       y="0"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan29738"><tspan
+           dx="0 0 0 12.307204 0 0 0 0 0 0 12.307208 0 0 0 0 0 0 0 0 0 12.3072"
+           style="text-align:justify"
+           id="tspan29736">La plante adjacente se </tspan></tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan29742"><tspan
+           dx="0 0 0 0 0 0 0 0 8.4682379 0 0 8.4682341 0 0 0 8.4682417"
+           style="text-align:justify"
+           id="tspan29740">propage et une nouvelle </tspan></tspan><tspan
+         x="294.66797"
+         y="106.60275"
+         id="tspan29746"><tspan
+           dx="0 0 0 0 0 0 0 11.27856 0 0 0 0 0 0 0 0 11.278552 0 0 0 0 11.27856"
+           style="text-align:justify"
+           id="tspan29744">plante apparaît dans la </tspan></tspan><tspan
+         x="294.66797"
+         y="123.26938"
+         id="tspan29750"><tspan
+           style="text-align:justify"
+           id="tspan29748">cellule</tspan></tspan></text>
+  </g>
+</svg>
