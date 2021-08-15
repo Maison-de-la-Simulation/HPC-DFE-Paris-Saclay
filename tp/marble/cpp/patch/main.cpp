@@ -3,11 +3,11 @@
   3D spherical particle collision simulator
 
   Méthode :
-  
+
   This code simulates the movement of particles including gravity, friction and collisions.
-  
+
   Conditions limites :
-  
+
   This code uses reflective walls with possible damping.
 
  - https://www.plasmaphysics.org.uk/collision3d.htm
@@ -26,42 +26,42 @@
 
 int main( int argc, char *argv[] )
 {
-    
+
     // Parameters ____________________________________________________________________________________
-    
+
     int particle_number = 0;            // Number of particles in the simulation
     int imbalance = 0;                  // Particle imbalance
     double       total_energy;          // Total energy at each timestep
     double       max_velocity;          // Maximal velocity at each timestep
     int collision_counter = 0;          // Counter for collisions per timestep
     int exchange_counter;               // Number of exchanged particles per timestep
-    
+
     struct Parameters    params;   // Global properties
-    
+
     // Default configuration __________________________________________________________________________
-    
+
     params.n_patches_x = 3;
     params.n_patches_y = 3;
     params.n_patches_z = 3;
-    
+
     params.xmin = 0;
     params.ymin = 0;
     params.zmin = 0;
-    
+
     params.xmax = 1;
     params.ymax = 1;
     params.zmax = 1;
-    
+
     params.gravity_x = 0;
     params.gravity_y = 0;
     params.gravity_z = -0.05;
-    
+
     params.air_damping = 0.01;
     params.wall_damping = 0.01;
-    
+
     params.final           = 1;
     params.final_iteration = 100;
-    
+
     // Particle properties for init
     params.vmin      = 1E-5;
     params.vmax      = 0.1;
@@ -73,27 +73,27 @@ int main( int argc, char *argv[] )
     params.collision = 1;
     params.overlap   = 0;
     params.periodicity = 0;
-    
+
     // diagnostic parameters
     params.output_period = 1;
     params.print_period  = 20;
     params.hdf5          = false;
     params.vtk           = true;
     params.binary        = true;
-    
+
     // Creation of the diag folder
     system("mkdir -p diags");
-    
+
     // Command line arguments _________________________________________________________________________
-    
+
     commandLineArguments(argc, argv, params);
-    
+
     params.n_patches   = params.n_patches_x*params.n_patches_y*params.n_patches_z;
-    
+
     params.step = params.final / params.final_iteration;
-    
+
     // Timers initialization ___________________________________________________________________________
-    
+
     Timers timers;
     timers.add("collisions");
     timers.add("pusher");
@@ -101,62 +101,62 @@ int main( int argc, char *argv[] )
     timers.add("exchange");
     timers.add("global");
     timers.add("diags");
-    
+
     // Particle initilization _________________________________________________________________________
-    
+
     timers.start("initialization");
 
     Particles particles( params );
-    
+
     particles.initTopology(params);
     particles.initParticles(params);
-    
+
     timers.stop("initialization");
-    
+
     // Wall initialization ____________________________________________________________________________
-    
+
     Walls walls;
-    
+
     double point[3] = {0, 0, 0};
     double normal[3] = {0, 0, 0};
-    
+
     if (params.periodicity == 0) {
         // xmin
         point[0] = params.xmin;
         normal[0] = 1;
         walls.add(point, normal, params.wall_damping);
-        
+
         // xmax
         point[0] = params.xmax;
         normal[0] = -1;
         walls.add(point, normal, params.wall_damping);
-        
+
         // ymin
         point[0] = 0;
         point[1] = params.ymin;
         normal[0] = 0;
         normal[1] = 1;
         walls.add(point, normal, params.wall_damping);
-        
+
         // ymax
         point[1] = params.ymax;
         normal[1] = -1;
         walls.add(point, normal, params.wall_damping);
-        
+
         // zmin
         point[1] = 0;
         point[2] = params.zmin;
         normal[1] = 0;
         normal[2] = 1;
         walls.add(point, normal, params.wall_damping);
-        
+
         // ymax
         point[2] = params.zmax;
         normal[2] = -1;
         walls.add(point, normal, params.wall_damping);
     }
-    
-    
+
+
     // Terminal output summary ________________________________________________________________
     std::cout << " ------------------------------------ "<< std::endl;
     std::cout << " PARTICLE SIMULATION"<< std::endl;
@@ -165,7 +165,7 @@ int main( int argc, char *argv[] )
     std::cout << " Topology:" << std::endl;
     std::cout << "  - number of patches: " << params.n_patches << std::endl;
 
-    
+
     std::cout << std::endl;
     std::cout << " Particles properties:" << std::endl;
     particles.getTotalParticleNumber(params, particle_number,imbalance);
@@ -180,14 +180,14 @@ int main( int argc, char *argv[] )
     std::cout << "  - collision: " << params.collision << std::endl;
     std::cout << "  - overlap: " << params.overlap << std::endl;
     std::cout << "  - periodicity: " << params.periodicity << std::endl;
-    
+
     std::cout << std::endl;
     std::cout << " Time properties:" << std::endl;
     std::cout << "  - simulation time: " << params.final << std::endl;
     std::cout << "  - time step: " << params.step << std::endl;
     std::cout << "  - number of iterations: " << params.final_iteration << std::endl;
     std::cout << "  - maximal time step: " <<  params.radius / (2 * params.vmax ) << std::endl;
-    
+
     std::cout << std::endl;
     std::cout << " Domain properties:" << std::endl;
     std::cout << "  - domain x size: " << params.xmin << " " << params.xmax << std::endl;
@@ -196,12 +196,12 @@ int main( int argc, char *argv[] )
     std::cout << "  - gravity: " << params.gravity_x << " " << params.gravity_y << " " << params.gravity_z << std::endl;
     std::cout << "  - air friction damping: " << params.air_damping << std::endl;
     std::cout << "  - wall friction damping: " << params.wall_damping << std::endl;
-    
+
     std::cout << std::endl;
     std::cout << " Diag properties:" << std::endl;
     std::cout << "  - output period: " << params.output_period << std::endl;
     std::cout << "  - print period: " << params.print_period << std::endl;
-    
+
     std::cout << std::endl;
     std::cout << " List of walls: " << std::endl;
     for(int iw = 0 ; iw < walls.size() ; iw++) {
@@ -211,88 +211,88 @@ int main( int argc, char *argv[] )
         std::cout << "   * damping coefficient: " << walls(iw)->damping << std::endl;
     }
     std::cout << std::endl;
-    
+
     timers.start("diags");
-    
+
     particles.writeDiags(params, 0);
-    
+
     timers.stop("diags");
-    
+
     // Time loop _____________________________________________________________
-    
+
     std::cout << " ------------------------------------ "<< std::endl;
     std::cout << " MAIN LOOP"<< std::endl;
     std::cout << " ------------------------------------ "<< std::endl;
-    
+
     timers.start("main loop");
-    
+
     for (int iteration = 1 ; iteration <= params.final_iteration; iteration++) {
-        
+
         // Global variables initialized ____________
-        
+
         collision_counter = 0;
         total_energy = 0;
         max_velocity = 0;
         particle_number = 0;
         exchange_counter = 0;
-        
+
         // Particle movements __________________
-        
+
         timers.start("pusher");
-        
+
         particles.push(params);
-        
+
         timers.stop("pusher");
-        
+
         // Collisions between particles __________________
-        
+
         timers.start("collisions");
-        
+
         //collision_counter = particles.collisions(params);
         particles.multipleCollisions(params);
-        
+
         timers.stop("collisions");
-        
+
         // Collision with the walls __________________
-        
+
         timers.start("wall");
-        
+
         particles.walls(params, walls);
-        
+
         timers.stop("wall");
-        
+
         // Exchange __________________
-        
+
         timers.start("exchange");
-        
+
         particles.exchange(params);
-        
+
         timers.stop("exchange");
-        
+
         // Global parameters ______________________
-        
+
         timers.start("global");
-        
+
         particles.getTotalEnergy(params, total_energy);
-    
+
         particles.getMaxVelocity(params, max_velocity);
-        
+
         particles.getTotalParticleNumber(params, particle_number, imbalance);
-        
+
         particles.getTotalCollisionNumber(params, collision_counter);
-        
+
         particles.getTotalExchangeNumber(params, exchange_counter);
-        
+
         timers.stop("global");
-        
+
         // Diagnostics __________________
-        
+
         timers.start("diags");
-        
+
         particles.writeDiags(params, iteration);
-        
+
         if (iteration%params.print_period == 0) {
-        
+
             std::cout << " Iteration: " << std::setw(5) << iteration
                       << " - total particles: " << std::setw(10) << particle_number
                       << " - total energy: " << std::setw(10) << total_energy
@@ -302,17 +302,17 @@ int main( int argc, char *argv[] )
                       << " - imbalance: " << std::setw(3) << imbalance
                       << std::endl;
         }
-        
+
         timers.stop("diags");
-        
+
     }
-    
+
     timers.stop("main loop");
-    
+
     // Timers summary ____________________________________________________________
-    
+
     std::cout << std::endl;
-    
+
     timers.print();
-    
+
 }
