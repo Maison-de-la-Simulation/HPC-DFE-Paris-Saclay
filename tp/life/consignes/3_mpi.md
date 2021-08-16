@@ -105,7 +105,7 @@ Pour cette question, aidez vous de l'exercice MPI 7 sur la construction d'une to
 
 Le modèle de décomposition utilisé ici est décrit dans la figure ci-dessous :
 
-<img src="../../support/materiel/life_grid_decomposition.svg height="400">
+<img src="../../support/materiel/life_grid_decomposition.svg" height="400">
 
 a) Ajoutez la déclaration des paramètres permettant de construire la topologie cartésienne au début de [main.cpp](../cpp/main.cpp).
 
