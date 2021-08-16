@@ -97,7 +97,7 @@ Par exemple:
 mpirun -np 2 ./executable
 ```
 
-**Question 4.6 - Topologie :** Nous allons découpé notre domaine global en sous-domaine.
+**Question 3.4 - Topologie :** Nous allons découpé notre domaine global en sous-domaine.
 Chaque sous-domaine sera géré par un rang MPI unique.
 Il y aura donc autant de sous-domaines que rangs.
 Pour cela, nous allons utiliser la notion de topologie cartésienne vue dans le cours.
@@ -105,7 +105,7 @@ Pour cette question, aidez vous de l'exercice MPI 7 sur la construction d'une to
 
 Le modèle de décomposition utilisé ici est décrit dans la figure ci-dessous :
 
-<img src="../../../support/materiel/life_grid_decomposition.svg" height="400">
+<img src="../../../support/materiel/life_grid_decomposition.svg" height="800">
 
 a) Ajoutez la déclaration des paramètres permettant de construire la topologie cartésienne au début de [main.cpp](../cpp/main.cpp).
 
@@ -130,4 +130,11 @@ e) Utilisez `MPI_Cart_shift` pour déterminer les voisins dans les directions `x
 **Important :** Je vous rappelle que la convention choisie par les développeurs de MPI fait que la coordonnée continue est la dernière dimension.
 Dans ce TP, l'axe continu (indice continu dans le déroulement des boucles) est l'axe des `x`.
 
-f) Déclarez les nouveaux paramètres représentant le nombre de cellules (`nx_loc`, `ny_loc`) ainsi que l'origine de chaque sous-domaine.
+f) Déclarez les nouveaux paramètres représentant le nombre de cellules (`nx_loc`, `ny_loc`) ainsi que l'origine de chaque sous-domaine (`origin_x` et `origin_y`).
+Initialisez ces paramètres pour chaque processus.
+
+g) Modifiez l'allocation des tableaux pour qu'ils dépendent des paramètres locaux `nx_loc` et `ny_loc` et non des paramètres globaux.
+
+h) Modifiez la phase d'initialisation en conséquence
+
+**Question 3.5 - Parallélisation de la gestion des plantes :**
