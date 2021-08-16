@@ -581,7 +581,7 @@ int main( int argc, char *argv[] )
 
 	binary_file.close();
 
-	// Timers __________________________________________________________________
+	// Summary of the timers ___________________________________________________
 
 	double percentage;
 
