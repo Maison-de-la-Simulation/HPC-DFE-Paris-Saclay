@@ -103,9 +103,7 @@ Il y aura donc autant de sous-domaines que rangs.
 Pour cela, nous allons utiliser la notion de topologie cartésienne vue dans le cours.
 Pour cette question, aidez vous de l'exercice MPI 7 sur la construction d'une topologie cartésienne.
 
-Le modèle de décomposition utilisé ici est décrit dans la figure ci-dessous :
-
-<img src="../../../support/materiel/life_grid_decomposition.svg" height="1200">
+Pour rappel, le modèle de décomposition utilisé ici est décrit [dans la présentation du TP](../README.md).
 
 a) Ajoutez la déclaration des paramètres permettant de construire la topologie cartésienne au début de [main.cpp](../cpp/main.cpp).
 
@@ -137,4 +135,13 @@ g) Modifiez l'allocation des tableaux pour qu'ils dépendent des paramètres loc
 
 h) Modifiez la phase d'initialisation en conséquence
 
-**Question 3.5 - Parallélisation de la gestion des plantes :**
+**Question 3.5 - Parallélisation de la gestion des plantes :** Nous allons dans un premier temps ne nous intéresser qu'aux plantes et laisser les autres espèces commentées.
+
+a) Commencez par mettre à jour les boucles avec les paramètres `nx_loc` et `ny_loc`. Ici, il faut comprendre que chaque processus va traiter sa zone de la même manière que le code séquentiel.
+
+Une fois les plantes calculées et le tableau `plants` actualisé à partir de `new_plants`, il faut faire les communications nécessaires afin de mettre à jour les ghost cells.
+Pour cela, nous utiliserons le principe des types dérivés afin de sélectionner une ligne ou une colonne spécifique dans le tableau du rang.
+
+b) Définissez un type dérivé `column` et `row` à partir des fonctions MPI adéquates.
+
+c) Ajoutez ensuite après la mise à jour de `plants` mais avant la réduction les processus d'échange nécessaires à cette mise à jour en bloquant ou non-bloquant selon votre préférence.

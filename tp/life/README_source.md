@@ -177,6 +177,20 @@ Voici un exemple d'image produite par la lecture du fichier `diag_100.bin` via l
 
 <img src="../../support/materiel/life_visu_example.png" height="400">
 
+## Décomposition du domaine pour la parallélisation
+
+Dans le modèle séquentiel, la grille peut être schématisée par la figure ci-dessous :
+
+<img src="../../support/materiel/life_sequential_grid.svg" height="400">
+
+Lorsque l'utilisateur spécifie la taille de grille, celle grille se voit rajouter des cellules supplémentaires tout autour du domaine pour représenter les conditions limites (on ajoute donc 2 cellules dans chaque direction).
+Chaque cellule est traitée une par une et nécessite de l'information sur les cellules voisines comme représenté sur la figure par la cellule rouge et les cellules orangées.
+
+Dans un modèle parallèle, il est courant de décomposer le domaine en sous-domaine de taille égale.
+Ici, on utilise des grilles cartésiennes donc on appliquera également une décomposition cartésienne.
+Cette dernière est représentée par la figure ci-dessous :
+
+
 ## Consignes de TP
 
 Dans ce TP, vous aurez à modifier un programme séquentiel afin de le rendre parallèle avec le standard MPI.
