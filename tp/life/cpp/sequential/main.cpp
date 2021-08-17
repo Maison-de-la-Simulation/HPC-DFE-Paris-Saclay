@@ -278,9 +278,10 @@ int main( int argc, char *argv[] )
 
 		// Reduction
 		sum_plants_before_rabbits[iteration] = 0.;
-		for (i = 0 ; i < ny*nx ; i++) {
-			sum_plants_before_rabbits[iteration] += new_plants[i];
-
+		for (iy = 1 ; iy < ny-1 ; iy++) {
+			for (ix = 1 ; ix < nx-1 ; ix++) {
+				sum_plants_before_rabbits[iteration] += new_plants[iy*nx+ix];
+			}
 		}
 
 		// Step 2 - Rabbits
