@@ -142,7 +142,7 @@ a) Commencez par mettre à jour les boucles avec les paramètres `nx_loc` et `ny
 Une fois les plantes calculées et le tableau `plants` actualisé à partir de `new_plants`, il faut faire les communications nécessaires afin de mettre à jour les ghost cells.
 Pour cela, nous utiliserons le principe des types dérivés afin de sélectionner une ligne ou une colonne spécifique dans le tableau du rang.
 
-b) Définissez un type dérivé `column` et `row` à partir des fonctions MPI adéquates.
+b) Définissez un type dérivé `double_column` et `double_row` représentant respectivement une colonne et une ligne d'un tableau 2D à partir des fonctions MPI adéquates.
 
 c) Ajoutez ensuite après la mise à jour du tableau `plants` mais avant la phase de réduction les processus d'échange nécessaires à la mise à jour des cellules fantômes en utilisant des communications bloquantes ou non-bloquantes selon votre préférence.
 
@@ -156,4 +156,21 @@ f) Compilez et exécutez le code pour vérifier que tout fonctionne
 
 a) Commencez par modifier la fonction `bool ouside_domaine` afin de la rendre compatible avec notre décomposition de domaine. Vous devez utiliser les variables `origin_x` et `origin_y` afin de convertir un indice local en indice global.
 
-b) 
+b) Définissez un type dérivé `int_column` et `int_row` à partir des fonctions MPI adéquates pour les tableaux d'entiers des lapins et des loups.
+
+c) Ajoutez ensuite après la mise à jour du tableau `rabbits`, mais avant la phase de réduction, les processus d'échange nécessaires à la mise à jour des cellules fantômes en utilisant des communications bloquantes ou non-bloquantes selon votre préférence.
+
+d) Mettez à jour la phase de réduction pour la rendre compatible avec une parallélisation MPI.
+
+e) Appliquez les nouveaux *timers* définis plus haut afin de calculer le temps passé dans les phases de communication point à point et les phases de communication globale.
+
+f) Compilez et exécutez le code pour vérifier que tout fonctionne
+
+**Question 3.7 - Parallélisation de la gestion des loups :** nous allons maintenant décommenter la partie qui concerne les loups afin de la rendre parallèle.
+
+a) Effectuez les mêmes actions que pour les lapins
+
+b) Compilez et exécutez le code pour vérifier que tout fonctionne
+
+**Question 3.8 - Sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostiques.
+L'écriture parallèle de fichier n'étant pas au programme de ce cours, nous allons utiliser une méthode alternative consistant à 
