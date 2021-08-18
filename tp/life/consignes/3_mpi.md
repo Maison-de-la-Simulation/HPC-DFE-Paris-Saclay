@@ -144,4 +144,16 @@ Pour cela, nous utiliserons le principe des types dérivés afin de sélectionne
 
 b) Définissez un type dérivé `column` et `row` à partir des fonctions MPI adéquates.
 
-c) Ajoutez ensuite après la mise à jour de `plants` mais avant la réduction les processus d'échange nécessaires à cette mise à jour en bloquant ou non-bloquant selon votre préférence.
+c) Ajoutez ensuite après la mise à jour du tableau `plants` mais avant la phase de réduction les processus d'échange nécessaires à la mise à jour des cellules fantômes en utilisant des communications bloquantes ou non-bloquantes selon votre préférence.
+
+d) Mettez à jour la phase de réduction (calcul de `sum_plants_before_rabbits[iteration]`) pour la rendre compatible avec une parallélisation MPI.
+
+e) Ajoutez des nouveaux *timers* afin de calculer le temps passé dans les phases de communication point à point et les phases de communication globale.
+
+f) Compilez et exécutez le code pour vérifier que tout fonctionne
+
+**Question 3.6 - Parallélisation de la gestion des lapins :** nous allons maintenant décommenter la partie qui concerne les lapins afin de la rendre parallèle.
+
+a) Commencez par modifier la fonction `bool ouside_domaine` afin de la rendre compatible avec notre décomposition de domaine. Vous devez utiliser les variables `origin_x` et `origin_y` afin de convertir un indice local en indice global.
+
+b) 
