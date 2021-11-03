@@ -5,7 +5,7 @@ partir des fonctions MPI adéquates.
 
 ## Consignes
 
-1. Commencez par regarder les variables déclarées et les variables inialisées :
+1. Commencez par regarder les variables déclarées et les variables initialisées :
 
 ```fortran
 ranks_per_dimension = (/4,3/)
