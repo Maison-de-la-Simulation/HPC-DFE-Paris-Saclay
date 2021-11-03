@@ -62,8 +62,8 @@ int main( int argc, char *argv[] )
 
     // Creation du type dérivé
     MPI_Datatype column;
-    MPI_Type_vector(ny, 1, nx, MPI_INT, &column);
-    MPI_Type_commit(&column);
+    MPI_Type_vector(????);
+    MPI_Type_commit(????);
 
     // Gestion des destinataires (anneau)
 
@@ -85,10 +85,11 @@ int main( int argc, char *argv[] )
 
     MPI_Request request[2];
 
-    MPI_Irecv(&array[0][0], 1, column, recv_rank, tag, MPI_COMM_WORLD, &request[0]);
-    MPI_Isend(&array[0][nx-1], 1, column, send_rank, tag, MPI_COMM_WORLD, &request[1]);
+    MPI_Irecv(???, ???, ???, ???, tag, MPI_COMM_WORLD, ???);
 
-    MPI_Waitall(2,request,MPI_STATUS_IGNORE);
+    MPI_Isend(???, ???, ???, ???, tag, MPI_COMM_WORLD, ???);
+
+    MPI_Waitall(???,???,MPI_STATUS_IGNORE);
 
     // Affichage des colonnes reçues
 
