@@ -614,4 +614,13 @@ int main( int argc, char *argv[] )
 	std::cout << " | " ;
 	std::cout << std::endl;
 
+	delete [] plants;
+	delete [] new_plants;
+
+	delete [] rabbits;
+	delete [] new_rabbits;
+
+	delete [] foxes;
+	delete [] new_foxes;
+
 } // end main
