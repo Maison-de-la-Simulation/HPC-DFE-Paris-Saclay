@@ -43,13 +43,12 @@ int main( int argc, char *argv[] )
     int reorganisation = 1;
     MPI_Comm cartesian_communicator;
 
-
-    MPI_Cart_create(MPI_COMM_WORLD,
-                         2,
-                         ranks_per_direction,
-                         periodicity,
-                         reorganisation,
-                         &cartesian_communicator);
+    MPI_Cart_create(???,
+                    ???,
+                    ???,
+                    ???,
+                    ???,
+                    ???);
 
     // On récupère le rang dans le nouveau communicateur cartésien
 
@@ -62,7 +61,7 @@ int main( int argc, char *argv[] )
 
     int rank_coordinates[2];
 
-    MPI_Cart_coords( cartesian_communicator, rank, 2, &rank_coordinates[0]);
+    MPI_Cart_coords( ???, ???, ???, ???);
 
 
 	// Initialisation des blocs
@@ -88,16 +87,9 @@ int main( int argc, char *argv[] )
 	double * all_blocs = new double[nglobal[0]*nglobal[1]];
 	double * matrix = new double[nglobal[0]*nglobal[1]];
 
-
-	// Creation des types dérivés
-
-	// MPI_Datatype bloc_vector;
-	// MPI_Type_vector(nloc[1], nloc[0], nglobal[0], MPI_DOUBLE, &bloc_vector);
-	// MPI_Type_commit(&bloc_vector);
-
     // Communication des blocs au rang 0
 
-    MPI_Gather(&bloc[0],nloc[1]*nloc[0],MPI_DOUBLE,&all_blocs[0],nloc[1]*nloc[0],MPI_DOUBLE,0,cartesian_communicator);
+    MPI_Gather(???, ???, ???, ???, ???, ???, ???, ???);
 
     // Affichage des blocs
 
@@ -122,14 +114,11 @@ int main( int argc, char *argv[] )
 		int start_index;
 
 		for (int irank=0 ; irank < number_of_ranks ; irank++) {
-			MPI_Cart_coords( cartesian_communicator, irank, 2, &rank_coordinates[0]);
 
-			for (int iy = 0 ; iy < nloc[1] ; iy++) {
-				start_index = ((rank_coordinates[1] * nloc[1])+iy) * nglobal[0] + rank_coordinates[0] * nloc[0];
-				for (int ix = 0 ; ix < nloc[0] ; ix++) {
-					matrix[start_index + ix] = all_blocs[irank*nloc[1]*nloc[0] + iy * nloc[0] + ix];
-				}
-			}
+			MPI_Cart_coords( ???, ???, ???, ???);
+
+			// Rassemblez les blocs dans la matrice finale
+			// ....
 
 		}
 
