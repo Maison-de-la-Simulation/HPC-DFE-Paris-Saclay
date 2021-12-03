@@ -37,18 +37,21 @@ int main( int argc, char *argv[] )
 
 	int print_period; // print period
 
-	double rabbit_migration_success;  // probability for a rabbit to change cell
-	double fox_migration_success;     // probability for a fox to change cell
+	double plant_growing_velocity;    // How much a plant grows per iteration
 	double seed_success;              // probability to have a new plant on a cell
-	double hunting_success;           // probability for a fox to catch a rabbit
-	int max_babies_per_rabbits;       // Maximul number of babies a rabbit can have
-	int max_babies_per_fox;
-	int max_foxes_per_cell;
-	double max_plants_per_cell;
+	double max_plants_per_cell;       // Maximal number of plants per cell per iteration
+
+	int max_babies_per_rabbits;       // Maximum number of babies a rabbit can have per iteration
+	double rabbit_migration_success;  // probability for a rabbit to change cell
 	double rabbits_hunger;            // How much plant eat a rabbit per iteration
-	double fox_sens_of_smell;
-	double fox_non_sociability;
-	double plant_growing_velocity;
+
+	double fox_migration_success;     // probability for a fox to change cell
+	double hunting_success;           // probability for a fox to catch a rabbit
+	int max_babies_per_fox;           // Maximum number of babies a fox can have per iteration
+	int max_foxes_per_cell;           // Maximum number of foxes per cell
+	double fox_sens_of_smell;         // Capability to track rabbits in neighboring cells
+	double fox_non_sociability;       // How strong the fox needs their own territory
+
 
 	// Default configuration __________________________________________________________________________
 
@@ -170,6 +173,11 @@ int main( int argc, char *argv[] )
 	std::cout << "  - ny: " << ny-2 << std::endl;
 	std::cout << "  - iterations: " << iterations << std::endl;
 	std::cout << std::endl;
+	std::cout << "  Plants properties: " << std::endl;
+	std::cout << "  - plant growth velocity: " << plant_growing_velocity << std::endl;
+	std::cout << "  - probability to have a seed growing: " << seed_success << std::endl;
+	std::cout << "  - max plants per cell: " << max_plants_per_cell << std::endl;
+	std::cout << std::endl;
 	std::cout << "  Rabbits properties: " << std::endl;
 	std::cout << "  - rabbits hunger: " << rabbits_hunger << std::endl;
 	std::cout << std::endl;
@@ -278,9 +286,10 @@ int main( int argc, char *argv[] )
 
 		// Reduction
 		sum_plants_before_rabbits[iteration] = 0.;
-		for (i = 0 ; i < ny*nx ; i++) {
-			sum_plants_before_rabbits[iteration] += new_plants[i];
-
+		for (iy = 1 ; iy < ny-1 ; iy++) {
+			for (ix = 1 ; ix < nx-1 ; ix++) {
+				sum_plants_before_rabbits[iteration] += new_plants[iy*nx+ix];
+			}
 		}
 
 		// Step 2 - Rabbits
@@ -581,7 +590,7 @@ int main( int argc, char *argv[] )
 
 	binary_file.close();
 
-	// Timers __________________________________________________________________
+	// Summary of the timers ___________________________________________________
 
 	double percentage;
 
@@ -604,5 +613,14 @@ int main( int argc, char *argv[] )
 	std::cout << " | " << std::fixed << std::setprecision(2) << std::setw(8) << percentage << " %";
 	std::cout << " | " ;
 	std::cout << std::endl;
+
+	delete [] plants;
+	delete [] new_plants;
+
+	delete [] rabbits;
+	delete [] new_rabbits;
+
+	delete [] foxes;
+	delete [] new_foxes;
 
 } // end main
