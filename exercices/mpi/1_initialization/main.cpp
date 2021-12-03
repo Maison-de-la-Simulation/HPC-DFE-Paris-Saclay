@@ -24,7 +24,7 @@ int main( int argc, char *argv[] )
     // Cette première fonction permet d'initialiser MPI,
     // elle est à appeler avant tout autre action avec MPI.
     
-    MPI_???( &argc, &argv );
+    MPI_???( ??? );
     
     // Cette subroutine permet de récupérer le nombre total de rangs dans
     // le communicateur par défaut MPI_COMM_WORLD.
