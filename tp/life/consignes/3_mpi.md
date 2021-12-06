@@ -154,7 +154,7 @@ f) Compilez et exécutez le code pour vérifier que tout fonctionne
 
 **Question 3.6 - Parallélisation de la gestion des lapins :** nous allons maintenant décommenter la partie qui concerne les lapins afin de la rendre parallèle.
 
-a) Commencez par modifier la fonction `bool ouside_domaine` afin de la rendre compatible avec notre décomposition de domaine. Vous devez utiliser les variables `origin_x` et `origin_y` afin de convertir un indice local en indice global.
+a) Commencez par modifier la fonction `bool outside_domaine` afin de la rendre compatible avec notre décomposition de domaine. Vous devez utiliser les variables `origin_x` et `origin_y` afin de convertir un indice local en indice global.
 
 b) Définissez un type dérivé `int_column` et `int_row` à partir des fonctions MPI adéquates pour les tableaux d'entiers des lapins et des loups.
 
@@ -172,5 +172,14 @@ a) Effectuez les mêmes actions que pour les lapins
 
 b) Compilez et exécutez le code pour vérifier que tout fonctionne
 
-**Question 3.8 - Sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostiques.
-L'écriture parallèle de fichier n'étant pas au programme de ce cours, nous allons utiliser une méthode alternative consistant à 
+**Question 3.8 - Sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostique.
+L'écriture parallèle de fichier n'étant pas au programme de ce cours, nous allons utiliser une méthode alternative consistant à rapatrier chaque portion de la grille globale située sur des rangs distincts vers le rang 0. Voici quelques recommandations :
+
+- Pour cette dernière partie, vous devez prendre soin de créer un tableau sur le rang 0 représentant toutes les portions de grilles de tous les rangs. En plus de cela, des tableaux spécifiques représentant le domaine global avant son écriture sur disque sont nécessaires.
+- Utilisez la fonction globale MPI adéquate afin que chaque processus puisse envoyer leur portion de grille sur le rang 0.
+- Reconstituez la grille globale à partir des différentes portions reçues précédemment.
+- Modifiez le processus d'écriture existant pour le rendre compatible avec la version MPI et les tableaux nouvellement créés.
+
+a) Cette méthode a l'avantage d'être très pédagogique mais présente de nombreux défauts qui font qu'elle ne doit pas être utilisée dans une application scientifique. D'après vous, quels sont les défauts de cette méthode ?
+
+
