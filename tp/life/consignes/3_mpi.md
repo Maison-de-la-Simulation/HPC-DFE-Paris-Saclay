@@ -1,4 +1,4 @@
-### III. MPI
+## III. MPI
 
 Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement le standard MPI.
 
