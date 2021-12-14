@@ -20,32 +20,32 @@
 
 int main( int argc, char *argv[] )
 {
-    
+
     // Initialisation de MPI
-    
+
     MPI_Init( &argc, &argv );
-    
+
     // Nombre total de rangs
-    
+
     int number_of_ranks;
-    
+
     MPI_Comm_size( MPI_COMM_WORLD, &number_of_ranks );
-    
+
     // Rang du processus MPI
-    
+
     int rank;
-    
+
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 
     // Tous les processus ont la variable message initialisée à 0
 
     int message = 0;
-    int tag;
+    int tag = 0;
 
     // Envoi du message du rang 1 vers le rang 2
 
     if (rank == 1) {
-        
+
         message = 42;
 
         std::cout << "Le rang " << rank << " envoie le message " << message << " au rang 2 / " << number_of_ranks << "." << std::endl;
@@ -56,13 +56,13 @@ int main( int argc, char *argv[] )
                     ???,                         // Le rang du destinataire
                     ???,                       // tag de la communication
                     ???);            // Le communicateur
-        
+
     }
-    
+
     // Reception du message du rang 2 venant du rang 1
-    
+
     if (rank == 2) {
-        
+
         MPI_Recv(&???,                   // La partie du tableau à envoyer
                 ???,                         // Le nombre d'élèments
                 ???,               // Le type de donnée utilisé
@@ -70,11 +70,11 @@ int main( int argc, char *argv[] )
                 ???,                       // tag de la communication
                 ???,                      // Le communicateur
                 ???);            // Le status de la communication
-        
-                      
+
+
         std::cout << "Le rang " << rank << " a reçu le message " << message << " du rang 1 / " << number_of_ranks << "." << std::endl;
-        
+
     }
-    
+
     MPI_Finalize();
 }

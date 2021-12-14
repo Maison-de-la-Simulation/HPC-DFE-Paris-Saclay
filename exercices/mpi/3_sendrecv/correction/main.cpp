@@ -21,19 +21,19 @@
 int main( int argc, char *argv[] )
 {
     // Initialisation de MPI
-    
+
     MPI_Init( &argc, &argv );
-    
+
     // Nombre total de rangs
-    
+
     int number_of_ranks;
-    
+
     MPI_Comm_size( MPI_COMM_WORLD, &number_of_ranks );
-    
+
     // Rang du processus MPI
-    
+
     int rank;
-    
+
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 
     // Tous les processus ont la variable message initialisée à 0
@@ -59,12 +59,12 @@ int main( int argc, char *argv[] )
 
     ierror =  MPI_Barrier(MPI_COMM_WORLD);
 
-    ierror = MPI_Sendrecv(&rank,              // La partie du tableau à envoyer
+    ierror = MPI_Sendrecv(&rank,              // Le rang à envoyer
                   1,                          // Le nombre d'éléments
                   MPI_INT,                // Le type de donnée utilisé
                   send_rank,                  // Le rang du voisin destinataire
                   tag,                        // tag de la communication
-                  &recv_message,               // La partie du tableau qui va recevoir les données
+                  &recv_message,               // La donnée à recevoir
                   1,                          // Le nombre d'éléments
                   MPI_INT,                // Le type de donnée pour les données reçues
                   recv_rank,                  // Le rang du voisin qui va nous envoyer des données
