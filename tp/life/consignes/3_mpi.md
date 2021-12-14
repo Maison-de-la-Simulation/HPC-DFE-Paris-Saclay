@@ -172,7 +172,16 @@ a) Effectuez les mêmes actions que pour les lapins
 
 b) Compilez et exécutez le code pour vérifier que tout fonctionne
 
-**Question 3.8 - Sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostique.
+**Question 3.8 - timers spécifique:** nous allons rajouter des *timers* afin de calculer le temps passé dans:
+- les communications globales et les phases de réductions
+- les communications point à point
+- les calculs.
+
+a) Créez les variables et rajoutez le calcul des *timers* dans le code autour des zones souhaitées
+
+b) Mettez à jour l'affichage des *timers* à la fin du programme
+
+**Question 3.9 - Sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostique.
 L'écriture parallèle de fichier n'étant pas au programme de ce cours, nous allons utiliser une méthode alternative consistant à rapatrier chaque portion de la grille globale située sur des rangs distincts vers le rang 0. Voici quelques recommandations :
 
 - Pour cette dernière partie, vous devez prendre soin de créer un tableau sur le rang 0 représentant toutes les portions de grilles de tous les rangs. En plus de cela, des tableaux spécifiques représentant le domaine global avant son écriture sur disque sont nécessaires.
@@ -181,5 +190,3 @@ L'écriture parallèle de fichier n'étant pas au programme de ce cours, nous al
 - Modifiez le processus d'écriture existant pour le rendre compatible avec la version MPI et les tableaux nouvellement créés.
 
 a) Cette méthode a l'avantage d'être très pédagogique mais présente de nombreux défauts qui font qu'elle ne doit pas être utilisée dans une application scientifique. D'après vous, quels sont les défauts de cette méthode ?
-
-
