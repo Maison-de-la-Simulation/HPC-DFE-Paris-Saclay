@@ -1,4 +1,4 @@
-# ______________________________________________________________________________
+²# ______________________________________________________________________________
 #
 # Script d'aide au trace du temps pour les etudes de scalabilite faible
 # pour le programme MPI
@@ -17,6 +17,8 @@ times = {}
 # Nombre de processus
 times["cores"]       = np.array([1, 2, 4, 8,16,32,48,64,96])
 # Temps dans la boucle en temps
+times["total"] = np.array([7.723384, 8.126372, 8.549324, 9.095991, 9.765752, 11.095566, 12.306443, 13.321309, 15.470952])
+# Temps dans la boucle en temps
 times["calcul"] = np.array([7.723384, 8.126372, 8.549324, 9.095991, 9.765752, 11.095566, 12.306443, 13.321309, 15.470952])
 # Temps pour les collisions
 times["point"] = np.array([0.103110, 0.459180, 0.859833, 1.337354, 1.832974, 1.969981, 4.264167, 5.369361, 7.530788])
@@ -25,7 +27,7 @@ times["global"] = np.array([0.001656, 0.024779, 0.020225, 0.097196, 0.240307, 1.
 
 
 # Calcul de l'efficacite pour une scalabilite faible
-times["efficiency"] = times["calcul"][0] / times["calcul"][:]
+times["efficiency"] = times["total"][0] / times["total"][:]
 
 # ______________________________________________________________________________
 # RCParams - pour ameliorer le rendu de la figure
@@ -60,9 +62,10 @@ fig0 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["calcul"],lw=2,label="Boucle de calcul",marker='o')
-ax.plot(times["cores"],times["point"],lw=2,label="Com point a point",marker='o')
-ax.plot(times["cores"],times["global"],lw=2,label="Communications globales",marker='o')
+ax.plot(times["cores"],times["total"],lw=2,label="Boucle en temps",marker='o')
+ax.plot(times["cores"],times["calcul"],lw=2,label="Calcul",marker='o')
+ax.plot(times["cores"],times["point"],lw=2,label="Com. point a point",marker='o')
+ax.plot(times["cores"],times["global"],lw=2,label="Com. globales",marker='o')
 
 ax.set_title("Fig. 4.1 - temps pour l'étude de weak scaling")
 
