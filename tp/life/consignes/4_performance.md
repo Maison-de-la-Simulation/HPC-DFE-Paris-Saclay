@@ -37,3 +37,7 @@ Regardons maintenant le passage à l'échelle fort ou *strong scaling*.
 Pour rappel, ce type d'étude consiste à regarder comment évolue l'efficacité du
 code lorsque l'on augmente le nombre de processus tout en gardant la
 charge globale constante.
+
+<img src="../../../support/materiel/life_mpi_strong_scaling_time.png" height="400">
+<img src="../../../support/materiel/life_mpi_strong_scaling_efficiency.png" height="400">
+<img src="../../../support/materiel/life_mpi_strong_scaling_part.png" height="400">
