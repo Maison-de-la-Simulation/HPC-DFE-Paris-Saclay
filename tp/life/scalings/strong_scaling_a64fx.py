@@ -15,15 +15,16 @@ from matplotlib.pyplot import *
 times = {}
 
 # Nombre de processus
-times["cores"]       = np.array([4,8,16,32,64])
+times["cores"]       = np.array([1,2,4,8,16,32,48,64,96,128])
 # Temps dans la boucle en temps
-times["total"] = np.array([148.410497,37.865224,10.297101,3.131366,1.035853])
+times["total"] = np.array([1481.007591,817.275929, 483.945553, 323.134755,240.653431,196.507436,178.393044,169.432511,162.187075, 157.878737 ])
 # Temps dans la boucle en temps
-times["calcul"] = np.array([148.410497,37.865224,10.297101,3.131366,1.035853])
+times["calcul"] = np.array([1342.429612,678.976874, 347.362091, 186.846782,104.280626,60.183146,41.867788,32.976004,26.679670,22.462243])
 # Temps pour les collisions
-times["point"] = np.array([144.869179,36.129406,9.030512,2.272468,0.567437])
+times["point"] = np.array([3.521534,70.906168,102.840178, 102.347629,94.118631,110.748023,113.655305,115.124483,117.117469,116.335050])
 # Temps dans le pousseur
-times["global"] = np.array([0.067916,0.034055,0.017134,0.008759,0.004411])
+times["global"] = np.array([0.004365,0.011119, 0.011932,16.900119,33.669451,21.153652,19.821558,19.113659,16.903380,17.950769])
+
 
 # Calcul de l'efficacite pour une scalabilite faible
 times["efficiency"] = times["total"][0] * times["cores"][0] / (times["total"][:] * times["cores"][:])
@@ -62,26 +63,25 @@ rcParams['axes.grid'] = True
 
 fig0 = figure(figsize=(12, 8))
 gs = GridSpec(2, 2)
-ax0 = subplot(gs[0,:])
-ax1 = subplot(gs[1,:])
+ax0 = subplot(gs[:,:])
 
-ax0.plot(times["cores"],times["total"],lw=2,label="Boucle de calcul",marker='o')
+ax0.plot(times["cores"],times["total"],lw=2,label="Total",marker='o')
 ax0.plot(times["cores"],times["calcul"],lw=2,label="Calcul",marker='o')
-ax1.plot(times["cores"],times["point"],lw=2,label="Com. point a point",marker='o')
-ax1.plot(times["cores"],times["global"],lw=2,label="Com. globales",marker='o')
+ax0.plot(times["cores"],times["point"],lw=2,label="Com. point a point",marker='o')
+ax0.plot(times["cores"],times["global"],lw=2,label="Com. globales",marker='o')
 
 ax0.set_xlabel("Nombre de processus")
 ax0.set_ylabel("Temps (s)")
 
-ax1.set_xlabel("Nombre de processus")
-ax1.set_ylabel("Temps (s)")
+# ax1.set_xlabel("Nombre de processus")
+# ax1.set_ylabel("Temps (s)")
 
 ax0.set_title("Fig. 4.4 - Strong scaling MPI")
 
-#ax.set_yscale("log")
+# ax0.set_yscale("log")
 
 ax0.legend(loc="best",ncol=2)
-ax1.legend(loc="best",ncol=2)
+
 
 fig0.tight_layout()
 
@@ -118,8 +118,8 @@ fig2 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["calcul"]/times["total"]*100.,lw=2,marker='o',color='C1',label='Collision')
-ax.plot(times["cores"],times["point"]/times["total"]*100.,lw=2,marker='o',color='C2',label='Echange particules')
+ax.plot(times["cores"],times["calcul"]/times["total"]*100.,lw=2,marker='o',color='C1',label='Calcul')
+ax.plot(times["cores"],times["point"]/times["total"]*100.,lw=2,marker='o',color='C2',label='Com point a point')
 ax.plot(times["cores"],times["global"]/times["total"]*100.,lw=2,marker='o',color='C3',label='Communications globales')
 
 ax.set_title("Fig. 4.6 - Strong scaling MPI")
