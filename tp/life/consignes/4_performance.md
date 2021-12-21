@@ -16,20 +16,18 @@ a) Effectuez un test de weak scaling en choisissant les paramètres de votre cho
 b) Affichez la courbe en temps et d'efficacité correspondante en y faisant apparaître le temps dans chaque partie:
 - calcul
 - communications point à point
-- communications globales et réduction
+- communications globales 
 
-Nous allons maintenant étudier une étude réalisée sur quelques nœuds du calculateur Fugaku équippé des processeurs ARM A64FX.
-Chaque domaine MPI a une dimension de 128 x 128 cellules pour chaque espèce.
+Nous allons maintenant étudier une étude réalisée sur quelques nœuds du de la partition ARM du calculateur TGCC équipé des processeurs Fujitsu A64FX.
+Chaque domaine MPI a une dimension de 512 x 512 cellules pour chaque espèce.
 
 <img src="../../../support/materiel/life_mpi_weak_scaling_time.png" height="400">
 <img src="../../../support/materiel/life_mpi_weak_scaling_efficiency.png" height="400">
 <img src="../../../support/materiel/life_mpi_weak_scaling_part.png" height="400">
 
-a) Calculez quel est le coût mémoire théorique d'un domaine MPI en ne considérant que le poids des grilles (et pas toutes les petites variables)
+c) Calculez quel est le coût mémoire théorique d'un domaine MPI en ne considérant que le poids des grilles (et pas toutes les petites variables)
 
-b) Commentez ce weak scaling en vous aidant de toutes les courbes
-
-
+d) Commentez ce *weak scaling* en vous aidant de toutes les courbes
 
 ### 4.2. Strong scaling
 
@@ -38,6 +36,19 @@ Pour rappel, ce type d'étude consiste à regarder comment évolue l'efficacité
 code lorsque l'on augmente le nombre de processus tout en gardant la
 charge globale constante.
 
-<img src="../../../support/materiel/life_mpi_strong_scaling_time.png" height="400">
+a) Effectuez un test de *strong scaling* en choisissant les paramètres de votre choix (taille de grille, nombre de processus MPI...) et en les justifiant.
+
+b) Affichez la courbe en temps et d'efficacité correspondante en y faisant apparaître le temps dans chaque partie:
+- calcul
+- communications point à point
+- communications globales
+
+Nous allons maintenant regarder l'étude de *strong scaling* réalisée sur le calculateur TGCC.
+On utilise un domaine de taille 6144 x 6144 cellules pour chaque espèce.
+
+<img src="../../../support/materiel/life_mpi_strong_scaling_time.png" height="450">
 <img src="../../../support/materiel/life_mpi_strong_scaling_efficiency.png" height="400">
 <img src="../../../support/materiel/life_mpi_strong_scaling_part.png" height="400">
+
+c) Commentez ce *weak scaling* en vous aidant de toutes les courbes
+

@@ -173,7 +173,7 @@ a) Effectuez les mêmes actions que pour les lapins
 b) Compilez et exécutez le code pour vérifier que tout fonctionne
 
 **Question 3.8 - timers spécifique:** nous allons rajouter des *timers* afin de calculer le temps passé dans:
-- les communications globales et les phases de réductions
+- les communications globales
 - les communications point à point
 - les calculs.
 

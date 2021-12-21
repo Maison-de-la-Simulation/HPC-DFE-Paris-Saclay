@@ -1,4 +1,4 @@
-²# ______________________________________________________________________________
+# ______________________________________________________________________________
 #
 # Script d'aide au trace du temps pour les etudes de scalabilite faible
 # pour le programme MPI
@@ -15,16 +15,15 @@ from matplotlib.pyplot import *
 times = {}
 
 # Nombre de processus
-times["cores"]       = np.array([1, 2, 4, 8,16,32,48,64,96])
+times["cores"]       = np.array([1,2,4,8,16,32,48,64,96,128])
 # Temps dans la boucle en temps
-times["total"] = np.array([7.723384, 8.126372, 8.549324, 9.095991, 9.765752, 11.095566, 12.306443, 13.321309, 15.470952])
+times["total"] = np.array([21.054114, 22.373042, 24.414580, 28.318417, 36.059944, 51.141858, 66.077504, 80.922336, 111.541942,141.087689])
 # Temps dans la boucle en temps
-times["calcul"] = np.array([7.723384, 8.126372, 8.549324, 9.095991, 9.765752, 11.095566, 12.306443, 13.321309, 15.470952])
+times["calcul"] = np.array([20.049472, 20.278478, 20.374131, 20.491379, 20.609092, 20.612347, 20.663061, 20.628556, 20.643920, 20.620366])
 # Temps pour les collisions
-times["point"] = np.array([0.103110, 0.459180, 0.859833, 1.337354, 1.832974, 1.969981, 4.264167, 5.369361, 7.530788])
+times["point"] = np.array([0.082543, 1.125131, 3.090843, 5.926572, 10.721430, 24.811900, 37.798206, 50.876670, 90.971015, 103.496266])
 # Temps dans les echanges de particules
-times["global"] = np.array([0.001656, 0.024779, 0.020225, 0.097196, 0.240307, 1.432899, 0.324243, 0.411199, 0.559528])
-
+times["global"] = np.array([0.000995, 0.004705, 0.005079, 0.945502, 3.756427, 4.706900, 6.571810, 8.435850, 11.330393, 15.965484])
 
 # Calcul de l'efficacite pour une scalabilite faible
 times["efficiency"] = times["total"][0] / times["total"][:]
@@ -113,8 +112,9 @@ fig2 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["point"]/times["calcul"]*100.,lw=2,color='C2',label='Echange particules',marker='o')
-ax.plot(times["cores"],times["global"]/times["calcul"]*100.,lw=2,color='C3',label='Communications globales',marker='o')
+ax.plot(times["cores"],times["calcul"]/times["total"]*100.,lw=2,color='C1',label='Calcul',marker='o')
+ax.plot(times["cores"],times["point"]/times["total"]*100.,lw=2,color='C2',label='Echange particules',marker='o')
+ax.plot(times["cores"],times["global"]/times["total"]*100.,lw=2,color='C3',label='Communications globales',marker='o')
 
 ax.set_title("Fig. 4.3 - part relative des coms pour l'étude de weak scaling")
 
