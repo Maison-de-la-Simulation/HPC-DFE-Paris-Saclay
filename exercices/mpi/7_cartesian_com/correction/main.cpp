@@ -136,7 +136,7 @@ int main( int argc, char *argv[] )
     
         std::cout << std::endl;
         std::cout <<  " Carte de la topologie : "<< std::endl;
-        std::cout <<  " ---------------------------> y"<< std::endl;
+        std::cout <<  " ---------------------------> x"<< std::endl;
     
         for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
             for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {
@@ -148,7 +148,7 @@ int main( int argc, char *argv[] )
         }
     
         std::cout << " v" << std::endl;
-        std::cout << " x" << std::endl;
+        std::cout << " y" << std::endl;
     
     }
     
