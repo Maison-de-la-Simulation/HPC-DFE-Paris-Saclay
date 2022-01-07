@@ -41,7 +41,9 @@ int main( int argc, char *argv[] )
     // _______________________________________________________
     // Paramètres
     
-    srand (rank);
+    double t = MPI_Wtime();
+    
+    srand(int(t)*(rank+1));
     
     // The size is drawn between 1 and 100
     int size = rand() % 99 + 1;
