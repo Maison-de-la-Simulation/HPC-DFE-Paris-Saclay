@@ -99,14 +99,24 @@ mpirun -np 2 ./executable
 
 Le but va maintenant être de décomposer le domaine en sous-domaine. 
 La figure ci-dessous illustre les différentes étapes et la création des cellules fantômes.
+Chaque cellule a besoin du contenu des voisines au temps précédent pour savoir comment évoluer.
 
-<img src="../../../support/materiel/life_grid_decomposition.svg" height="1200">
+<img src="../../../support/materiel/life_grid_decomposition_0.svg" height="500">
 
-Comme illustré sur la première grille, chaque cellule a besoin du contenu des voisines au temps précédent pour savoir comment évoluer.
-Après la décomposition du domaine montrée par les grilles suivantes, certaines cellules à la frontière avec les autres rangs MPI n'ont plus directement accès au contenu de leurs voisines.
+La figure suivant illustre la décomposition de la grille avec une topologie cartésienne.
+Il y a dans cet exemple 4 rangs et donc 4 sous-domaines avec chacun leur grille indépendante.
+Après la décomposition du domaine, certaines cellules à la frontière avec les autres rangs MPI n'ont plus directement accès au contenu de leurs voisines.
+
+<img src="../../../support/materiel/life_grid_decomposition_1.svg" height="500">
+
 On fabrique donc une nouvelle rangée de cellule tout autour des frontières entre sous-domaine MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
+Ces rangées se nomment cellules fantômes.
+
+<img src="../../../support/materiel/life_grid_decomposition_2.svg" height="1100">
+
 Il faudra à chaque itération utiliser les communications MPI pour remplir ces cellules fantômes à partir des autres rangs.
-Les communications doivent se faire par étape, d'abord une direction (x par exemple) puis une autre (y). De la sorte, les voisins aux coins sont transférés au bon rang en 2 fois.
+Les communications doivent se faire par étape, d'abord une direction (x par exemple) puis une autre (y).
+De la sorte, les voisins aux coins sont transférés au bon rang en 2 fois comme l'illustre la figure ci-dessus.
 
 **Question 3.4 - Topologie :** Nous allons découpé notre domaine global en sous-domaine.
 Chaque sous-domaine sera géré par un rang MPI unique.
