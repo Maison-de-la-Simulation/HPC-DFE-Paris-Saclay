@@ -190,8 +190,11 @@ $$
 Ce TP se compose de plusieurs répertoires :
 - [cpp/sequential](./cpp/sequential) : ce dossier contient l'ensemble des sources du code séquentiel.
 - [cpp/patch](./cpp/patch) : ce dossier contient l'ensemble des sources du code séquentiel avec décomposition en sous-domaine (*patch*).
+- [cpp/mpi](./cpp/mpi) : ce dossier contient la version mpi du code.
+- [cpp/mpi](./cpp/omp) : ce dossier contient la version OpenMP du code.
 - [scalings](./python) : ce dossier contient des scripts permettant d'afficher les courbes de scalabilité présentées à la fin de ce document.
 - [visualization](./python) : ce dossier contient des scripts dédiés à la visualisation.
+- [consignes](./consignes) : ce dossier contient les consignes du TP
 - [.extra](./.extra) : ce dossier sert uniquement pour GitHub
 
 ## Le code séquentiel
@@ -273,7 +276,7 @@ La compilation génère un fichier exécutable du nom de `executable`. Vous pouv
 ./executable
 ```
 
-### Argument en ligne de commande
+### Arguments en ligne de commande
 
 Il est possible de changer les paramètres numériques directement en ligne de commande :
 
