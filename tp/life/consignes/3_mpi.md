@@ -97,6 +97,10 @@ Par exemple:
 mpirun -np 2 ./executable
 ```
 
+Le but va maintenant être de décomposer le domaine en sous-domaine. 
+
+<img src="../../support/materiel/life_grid_decomposition.svg" height="400">
+
 **Question 3.4 - Topologie :** Nous allons découpé notre domaine global en sous-domaine.
 Chaque sous-domaine sera géré par un rang MPI unique.
 Il y aura donc autant de sous-domaines que rangs.
@@ -134,6 +138,7 @@ Initialisez ces paramètres pour chaque processus.
 g) Modifiez l'allocation des tableaux pour qu'ils dépendent des paramètres locaux `nx_loc` et `ny_loc` et non des paramètres globaux.
 
 h) Modifiez la phase d'initialisation en conséquence
+
 
 **Question 3.5 - Parallélisation de la gestion des plantes :** Nous allons dans un premier temps ne nous intéresser qu'aux plantes et laisser les autres espèces commentées.
 
