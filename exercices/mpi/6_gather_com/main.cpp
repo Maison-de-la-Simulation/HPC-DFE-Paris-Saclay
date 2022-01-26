@@ -61,7 +61,7 @@ int main( int argc, char *argv[] )
     int * local_size = new int[number_of_ranks];
 
     // Le rang 0 récupère d'abord combien il y a d'éléments dans chaque tableau de chaque rang
-    MPI_???
+    MPI_???()
 
     // On calcule le nombre total d'éléments sur le rang 0
 
@@ -113,4 +113,8 @@ int main( int argc, char *argv[] )
     // Finalisation de MPI
 
     MPI_Finalize();
+
+    delete [] global_array;
+    delete [] displacement;
+
 }
