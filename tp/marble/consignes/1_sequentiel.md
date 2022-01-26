@@ -1,4 +1,4 @@
-### Découverte du code séquentiel
+## I. Découverte du code séquentiel
 
 La première partie de ce TP est la découverte du code dans sa version non parallèle.
 

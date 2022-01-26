@@ -14,19 +14,19 @@
 int main( int argc, char *argv[] )
 {
     // Initialisation de MPI
-    
+
     MPI_Init( &argc, &argv );
-    
+
     // Nombre total de rangs
-    
+
     int number_of_ranks;
-    
+
     MPI_Comm_size( MPI_COMM_WORLD, &number_of_ranks );
-    
+
     // Rang du processus MPI
-    
+
     int rank;
-    
+
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 
     // Tous les processus ont la variable message initialisée à 0
@@ -53,6 +53,8 @@ int main( int argc, char *argv[] )
     ierror =  MPI_Barrier(MPI_COMM_WORLD);
 
     // Communications
+
+    // >>> les appels à MPI
 
     // On affiche les résultats
 

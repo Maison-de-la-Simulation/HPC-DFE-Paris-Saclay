@@ -2,7 +2,7 @@
 
 ## Scripts Python
 
-L'éxecution du code genère plusieurs type de fichiers dans un dossier `diags`
+L’exécution du code génère plusieurs type de fichiers dans un dossier `diags`
 qui sera créé au début de chaque *run* :
 - fichiers hdf5 (`.h5`)
 - fichiers bianire (`.bin`)

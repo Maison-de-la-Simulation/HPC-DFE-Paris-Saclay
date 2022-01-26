@@ -11,6 +11,7 @@
 #include <vector>
 #include <cmath>
 #include <ctime>
+#include <iomanip>
 
 // il est important d'inclure la bibliothèque
 // sans quoi aucun de vos appels ne sera reconnu.
@@ -27,7 +28,7 @@ int main( int argc, char *argv[] )
     // Cette subroutine permet de récupérer le nombre total de rangs dans
     // le communicateur par défaut MPI_COMM_WORLD.
     
-    int number_of_ranks
+    int number_of_ranks;
     
     MPI_Comm_size( MPI_COMM_WORLD, &number_of_ranks );
     
@@ -53,7 +54,7 @@ int main( int argc, char *argv[] )
     
     int rank;
     
-    MPI_Comm_rank( MPI_COMM_WORLD, &rank );
+    MPI_Comm_rank( ???, &rank );
     
     // On récupère les coordonnées du processus courant dans
     // la topologie cartésienne

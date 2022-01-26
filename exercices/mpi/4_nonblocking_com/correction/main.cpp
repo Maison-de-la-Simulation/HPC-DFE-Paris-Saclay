@@ -14,19 +14,19 @@
 int main( int argc, char *argv[] )
 {
     // Initialisation de MPI
-    
+
     MPI_Init( &argc, &argv );
-    
+
     // Nombre total de rangs
-    
+
     int number_of_ranks;
-    
+
     MPI_Comm_size( MPI_COMM_WORLD, &number_of_ranks );
-    
+
     // Rang du processus MPI
-    
+
     int rank;
-    
+
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 
     // Tous les processus ont la variable message initialisée à 0
@@ -37,6 +37,9 @@ int main( int argc, char *argv[] )
     int recv_message;
     int ierror;
     MPI_Request request[2];
+
+    //MPI_Request * request = new MPI_Request[2];
+    //delete [] request;
 
     if (rank == 0) {
         send_rank = 1;
@@ -55,9 +58,9 @@ int main( int argc, char *argv[] )
 
     MPI_Irecv(&recv_message, 1, MPI_INT, recv_rank, tag, MPI_COMM_WORLD, &request[0]);
     MPI_Isend(&rank, 1, MPI_INT, send_rank, tag, MPI_COMM_WORLD, &request[1]);
-    
+
     // ici je suis non bloquant
-    
+
     MPI_Waitall(2,request,MPI_STATUS_IGNORE);
 
     // On affiche les résultats

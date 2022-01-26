@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="190.42046mm"
+   height="119.61262mm"
+   viewBox="0 0 190.42045 119.61261"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   sodipodi:docname="life_rabbits_behavior.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.67081229"
+     inkscape:cx="708.09675"
+     inkscape:cy="265.34994"
+     inkscape:window-width="1613"
+     inkscape:window-height="995"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="2"
+     fit-margin-left="2"
+     fit-margin-right="2"
+     fit-margin-bottom="2" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11122" />
+    </marker>
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="252.52168"
+       height="76.786331"
+       id="rect2565" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="39.383842"
+       height="22.533049"
+       id="rect2565-3" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="39.383842"
+       height="22.533049"
+       id="rect2565-3-7" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="191.31786"
+       height="65.631516"
+       id="rect2565-5" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="191.31786"
+       height="65.631516"
+       id="rect16634" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="188.53041"
+       height="68.951546"
+       id="rect2565-5-9" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="191.31786"
+       height="65.631516"
+       id="rect23841" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="295.24979"
+       height="105.30838"
+       id="rect2565-5-9-2" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="39.383842"
+       height="22.533049"
+       id="rect2565-3-7-9" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="39.383842"
+       height="22.533049"
+       id="rect2565-3-6" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="188.53041"
+       height="68.951546"
+       id="rect28696" />
+    <rect
+       x="294.66711"
+       y="61.473595"
+       width="295.24979"
+       height="105.30838"
+       id="rect52197" />
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-6.4623947,-8.313304)">
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.212059;stroke-opacity:1"
+       id="rect31"
+       width="74.648705"
+       height="16.777103"
+       x="70.154594"
+       y="10.419333"
+       rx="5"
+       ry="5" />
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.205742;stroke-opacity:1"
+       id="rect31-3"
+       width="57.883068"
+       height="20.366695"
+       x="8.5652657"
+       y="56.452759"
+       rx="5"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-1.790801,-1.553748)"
+       id="text2563"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan30419">Pour chaque lapin, est-ce qu'il reste à </tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan30421">manger dans la cellule ?</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-65.836975,43.82974)"
+       id="text2563-62"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-5);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan30423">Le lapin reste dans la cellule </tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan30425">et mange.</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.205742;stroke-opacity:1"
+       id="rect16630-7"
+       width="82.028259"
+       height="30.9491"
+       x="112.75153"
+       y="55.364712"
+       rx="5"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,38.697605,42.186083)"
+       id="text2563-62-1-0"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-5-9-2);fill:#000000;fill-opacity:1;stroke:none"
+       x="0"
+       y="0"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan30427">Le lapin cherche à se déplacer sur une </tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan30429">cellule adjacente. Il évalue la meilleure </tspan><tspan
+         x="294.66797"
+         y="106.60275"
+         id="tspan30431">cellule en se basant sur la quantité de </tspan><tspan
+         x="294.66797"
+         y="123.26938"
+         id="tspan30433">nourriture, le nombre de prédateurs et de </tspan><tspan
+         x="294.66797"
+         y="139.93601"
+         id="tspan30435">ses congénères à l'instant d'avant. Le choix </tspan><tspan
+         x="294.66797"
+         y="156.60263"
+         id="tspan30437">est probabiliste. </tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-20.300891,18.840683)"
+       id="text2563-6"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-3);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan30439">Oui</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,57.749641,20.850815)"
+       id="text2563-6-5"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect2565-3-7);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan30441">Non</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="M 103.06382,27.737567 C 102.86971,42.129572 38.683164,41.827976 38.735874,56.227073"
+       id="path6980"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 103.06382,27.737567 c -0.19411,14.392005 37.91464,11.965923 37.96735,26.36502"
+       id="path16529"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,38.079293,42.714902)"
+       id="text16632"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect16634);fill:#000000;fill-opacity:1;stroke:none" />
+    <rect
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:0.176862;stroke-opacity:1"
+       id="rect52193"
+       width="82.057327"
+       height="22.862183"
+       x="112.73709"
+       y="102.97531"
+       rx="5"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,38.697605,89.811113)"
+       id="text52195"
+       style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect52197);fill:#000000;fill-opacity:1;stroke:none"
+       x="0"
+       y="0"><tspan
+         x="294.66797"
+         y="73.269501"
+         id="tspan30443">Migrer est une action périlleuse. On fait </tspan><tspan
+         x="294.66797"
+         y="89.936127"
+         id="tspan30445">donc un tirage au sort pour déterminer les </tspan><tspan
+         x="294.66797"
+         y="106.60275"
+         id="tspan30447">chances de succès. En cas d'échec, le </tspan><tspan
+         x="294.66797"
+         y="123.26938"
+         id="tspan30449">renard meurt.</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 153.34854,86.21686 v 16.74932"
+       id="path54763" />
+    <image
+       width="23.06918"
+       height="23.388948"
+       preserveAspectRatio="none"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfkAAAIACAYAAACBwxWoAAAABHNCSVQICAgIfAhkiAAAC1ZJREFU eJzt3T9yXFkdhmE3pUCBF0BIzAZEwgKoIlDSHTgwzBqcsIRJvAX+OFDQN1FA1SyABG2AkCJkARMo oEqsgHHhX6uO7tvPk1/d425Zb53oO7zjqh2Px5fVZ1hp27bD6jNM+P72/f3Ba/vZ6gMAAK9D5AEg SuQBIErkASBK5AEgSuQBIErkASBK5AEgSuQBIErkASBK5AEgSuQBIErkASBK5AEgSuQBIOpm9QGY me6Jf/nw6VJH2avR5zfdM/f9jS39/uCtc5MHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4Ao kQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAKHvyLPWfv/9j6fsvsMc+2jNfbfr53/zqlxc6CfAa 3OQBIErkASBK5AEgSuQBIErkASBK5AEgSuQBIErkASBK5AEgSuQBIErkASBK5AEgSuQBIErkASBK 5AEgyp48V226pz7do//48Hn0/Oo9+NXvn37+7969e5k8vG3bYXoAeE1u8gAQJfIAECXyABAl8gAQ JfIAECXyABAl8gAQJfIAECXyABAl8gAQJfIAECXyABAl8gAQJfIAECXyABBlTx4G9r5H/8fR0/vf o4c6N3kAiBJ5AIgSeQCIEnkAiBJ5AIgSeQCIEnkAiBJ5AIgSeQCIEnkAiBJ5AIgSeQCIEnkAiBJ5 AIgSeQCIsie/c9u2HYY/4mXy8HQPffUe+Wr26K/7+4fX5iYPAFEiDwBRIg8AUSIPAFEiDwBRIg8A USIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUfbk2TV75Gut/vyn73/3zx9mz8Mb 5yYPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBR Ig8AUfbkr9y2bYfhj3iZPPzlw6fh62dW76Hv3ceHz2sPYA8efpKbPABEiTwARIk8AESJPABEiTwA RIk8AESJPABEiTwARIk8AESJPABEiTwARIk8AESJPABEiTwARIk8AERNt8Rh5Hg87nqPnuv28eHz 0vdv2+ZvOD/JTR4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCi RB4AokQeAKJEHgCibBGza9M9+il79tft9v5u6ftPp9PoeXv0fW7yABAl8gAQJfIAECXyABAl8gAQ JfIAECXyABAl8gAQJfIAECXyABAl8gAQJfIAECXyABAl8gAQJfIAEGVLmKs23aO3J8+EPXpem5s8 AESJPABEiTwARIk8AESJPABEiTwARIk8AESJPABEiTwARIk8AESJPABEiTwARIk8AESJPABEiTwA RN2sPsC1m+6ZM2MPnpWeH59Gz6/eo+ftc5MHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4Ao kQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAqKvfk1+95756z3z1HvXpdFr6frhm5/N59PzpdBr9 /dy27TA6AF/lJg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBR Ig8AUSIPAFEiDwBRu9+Tn+7Br95zZ8b3t9bt/d3qI4w8Pz6tPsLI9Px7//74Ojd5AIgSeQCIEnkA iBJ5AIgSeQCIEnkAiBJ5AIgSeQCIEnkAiBJ5AIgSeQCIEnkAiBJ5AIgSeQCIEnkAiFq+J28PHq7X 4XBY+v6Xl9Gfn93v0dPnJg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIP AFEiDwBRIg8AUSIPAFEiDwBR4z15e/AA1+l8Po+eP51Oo35s23YYHeAKuMkDQJTIA0CUyANAlMgD QJTIA0CUyANAlMgDQJTIA0CUyANAlMgDQJTIA0CUyANAlMgDQJTIA0CUyANA1HhPHrhez49Po+df XkZz4mPT8692e3+3+gi8cW7yABAl8gAQJfIAECXyABAl8gAQJfIAECXyABAl8gAQJfIAECXyABAl 8gAQJfIAECXyABAl8gAQJfIAEHVzPB5Hg85fPny61Fm4QufzefT86XQaPe/3d62977lPTffgf/zD ny50km/z/vvvlr6fr3OTB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeA KJEHgCiRB4AokQeAKJEHgKib1Qdgreme93QPe8oePROrf3/3bvr/Z9u2w4WOwv/gJg8AUSIPAFEi DwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBR9uS5aqv3 6Kfv57q9//670fP24Pvc5AEgSuQBIErkASBK5AEgSuQBIErkASBK5AEgSuQBIErkASBK5AEgSuQB IErkASBK5AEgSuQBIErkASDKnjwjz49Po+dv7+8udJI1Vu/RT9mzX2v190+fmzwARIk8AESJPABE iTwARIk8AESJPABEiTwARIk8AESJPABEiTwARIk8AESJPABEiTwARIk8AESJPABE2ZOHhVbvudsz X+vPd/9a+v7fP/1i9PzxeHyZPL9t22F0AL7KTR4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQe AKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCi7Mmz1PPj0+j52/u7C53kOq3es1/tdDqtPsJS 0z376R49r89NHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAKJE HgCiRB4AokQeAKLsybNr9uj3bfWe+/l8Xvr+6b9/ugdPn5s8AESJPABEiTwARIk8AESJPABEiTwA RIk8AESJPABEiTwARIk8AESJPABEiTwARIk8AESJPABEiTwARB2mP+B4PL5Mnv/y4dP0CHC1bu/v Vh+Bgeme/Go//u7fo+ff/+XnS9//w2//Nm7gW+cmDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBR Ig8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFE3qw8AfLvnx6el71+9Z7/3PfZt23a9Z358 d3yZPG8P/vW5yQNAlMgDQJTIA0CUyANAlMgDQJTIA0CUyANAlMgDQJTIA0CUyANAlMgDQJTIA0CU yANAlMgDQJTIA0DU8i3e43G2R/zlw6dLHQV25+PD59VH2LW977mv9pu//nr093u6B7/6/XvgJg8A USIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBRIg8AUSIPAFEiDwBR u9/StUfPnk334M/n84VOssbz49PS908/f3v0vHVu8gAQJfIAECXyABAl8gAQJfIAECXyABAl8gAQ JfIAECXyABAl8gAQJfIAECXyABAl8gAQJfIAECXyABB1s/oAUxfYcx7t0U/Zs9+32/u70fPn+9ke /Ol0Gj0PtLnJA0CUyANAlMgDQJTIA0CUyANAlMgDQJTIA0CUyANAlMgDQJTIA0CUyANAlMgDQJTI A0CUyANAlMgDQNTu9+RXswe/1nTPfe/O59ke/WrPj09L3//x4fPS98Nrc5MHgCiRB4AokQeAKJEH gCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAKJEHgCiRB4AokQeAqKvfk9+27TD8ES8X OQjf5mH1AQDeLjd5AIgSeQCIEnkAiBJ5AIgSeQCIEnkAiBJ5AIgSeQCIEnkAiBJ5AIgSeQCIEnkA iBJ5AIgSeQCIEnkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAID/w38B5q03Z0MiqxgA AAAASUVORK5CYII= "
+       id="image265"
+       x="168.89117"
+       y="13.279282" />
+  </g>
+</svg>
