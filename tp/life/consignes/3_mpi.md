@@ -98,8 +98,15 @@ mpirun -np 2 ./executable
 ```
 
 Le but va maintenant être de décomposer le domaine en sous-domaine. 
+La figure ci-dessous illustre les différentes étapes et la création des cellules fantômes.
 
-<img src="../../../support/materiel/life_grid_decomposition.svg" height="400">
+<img src="../../../support/materiel/life_grid_decomposition.svg" height="1200">
+
+Comme illustré sur la première grille, chaque cellule a besoin du contenu des voisines au temps précédent pour savoir comment évoluer.
+Après la décomposition du domaine montrée par les grilles suivantes, certaines cellules à la frontière avec les autres rangs MPI n'ont plus directement accès au contenu de leurs voisines.
+On fabrique donc une nouvelle rangée de cellule tout autour des frontières entre sous-domaine MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
+Il faudra à chaque itération utiliser les communications MPI pour remplir ces cellules fantômes à partir des autres rangs.
+Les communications doivent se faire par étape, d'abord une direction (x par exemple) puis une autre (y). De la sorte, les voisins aux coins sont transférés au bon rang en 2 fois.
 
 **Question 3.4 - Topologie :** Nous allons découpé notre domaine global en sous-domaine.
 Chaque sous-domaine sera géré par un rang MPI unique.
