@@ -201,3 +201,4 @@ Le TP se compose de 4 sous-sections :
 - [Sous-section II](./consignes/2_machine.md) : cette partie concerne la découverte de la machine parallèle
 - [Sous-section III](./consignes/3_mpi.md) : cette partie est l'implémentation de la version MPI
 - [Sous-section IV](./consignes/4_performance.md) : cette partie est l'étude de la performance des codes parallèles
+- [Sous-section V](./consignes/5_aide.md) : aide et conseils pour le projet
