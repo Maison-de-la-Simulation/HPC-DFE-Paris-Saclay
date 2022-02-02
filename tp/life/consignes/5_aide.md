@@ -5,6 +5,11 @@ Conseil :
 - Prenez le temps de dessiner les matrices et les blocs avec les cellules fantômes. 
 - Réfléchissez au sens des différents Paramètres comme les indices `nx`, `ny`, `origin_x`, `nx_loc`... Et comment ils sont reliés entre eux.
 - Gardez à l'esprit l'idée que la mémoire est toujours unidirectionnelle. Il y a donc une direction contiguë et une autre ave un *stride*. Reprenez les exercices si besoin.
+- Faites vos développements par étape, une fonction après l'autre en commentant les parties du code restantes.
+- compilez et exécutez après chaque étape pour voir
+- Faites des tests sur des petites matrices pour commencer
+- Utiliser les `cout` pour afficher des informations temporairement
+- si ça ne marche pas, testez rapidement la fonction dans un petit programme externe tout simple.
 
 
 ### 1. Arguments en ligne de commande
