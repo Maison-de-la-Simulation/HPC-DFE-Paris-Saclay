@@ -1,6 +1,6 @@
 # Aide et conseils
 
-Conseil :
+## Conseils :
 - je n'ai insisté là dessus en classe mais un code commence toujours par une feuille de papier et un crayon.
 - Prenez le temps de dessiner les matrices et les blocs avec les cellules fantômes. 
 - Réfléchissez au sens des différents Paramètres comme les indices `nx`, `ny`, `origin_x`, `nx_loc`... Et comment ils sont reliés entre eux.
@@ -11,6 +11,7 @@ Conseil :
 - Utiliser les `cout` pour afficher des informations temporairement
 - si ça ne marche pas, testez rapidement la fonction dans un petit programme externe tout simple.
 
+## Aide pour le projet
 
 ### 1. Arguments en ligne de commande
 
