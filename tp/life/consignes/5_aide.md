@@ -23,12 +23,13 @@ dans la lecture des arguments en ligne de commande.
     ranks_per_direction[0]= atoi(argv[iarg+1]);
     ranks_per_direction[1]= atoi(argv[iarg+2]);
     iarg+=2;
-} else {
+} else 
+...
 ```
 
 ### 2. Dimensionnement des blocs.
 
-Voici la manière de dimensionner les blosc. 
+Voici la manière de dimensionner les blocs. 
 Sans les cellules fantômes, les blocs ont une taille facile à calculer :
 
 ```C++
@@ -53,12 +54,26 @@ nx_loc += 2;
 ny_loc += 2;
 ```
 
+Attention, il ne faut pas garder du coup le code suivant venant du mode séquentiel.
+
+```C++
+// We add the boundaries and the ghost cells
+nx += 2;
+ny += 2;
+```
+
 
 ### 3. Création des types
 
 Le type `MPI_Type_vector` est nécessaire pour décrire une colonne 
 à cause du stride mais un type `MPI_Type_contiguous` est suffisant pour 
 décrire une ligne bien qu'un `MPI_Type_vector` fonctionne aussi.
+
+Le schéma suivant vous aidera à dimensionner vos types dérivés.
+
+<img src="../../../support/materiel/life_subdomain.svg" height="800">
+
+Attention ensuite à bien calculer l'indice de départ dans les fonctions d'échange.
 
 ### 4. Echange des cellules fantômes
 
