@@ -489,7 +489,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -5789,20 +5789,20 @@
     <rect
        style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.999998;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect8660-6"
-       width="115.25134"
+       width="127.38538"
        height="14.42098"
-       x="27.067379"
+       x="14.933338"
        y="264.66684"
-       rx="5"
+       rx="5.5264163"
        ry="5" />
     <rect
        style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect8670-6"
-       width="110.77845"
+       width="124.52439"
        height="14.130352"
-       x="28.137846"
+       x="14.391909"
        y="315.1886"
-       rx="5"
+       rx="5.6204252"
        ry="5" />
     <path
        style="fill:none;stroke:#ff0000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker2786-3)"
