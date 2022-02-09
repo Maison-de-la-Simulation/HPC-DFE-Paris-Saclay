@@ -142,7 +142,7 @@ Dans la lecture des arguments en ligne de commande, rajoutez un argument `-r` po
 
 c) Ajoutez une condition afin de vérifier que le nombre total de rangs est cohérent avec le nombre de rangs par direction spécifié par l'utilisateur. C'est à dire que le nombre de rangs dans la direction x multiplié par le nombre de rangs dans la direction y doit être égal au nombre total de rangs.
 
-d) Ajoutez dans `Particles::initTopology` les fonctions permettant de créer une topologie cartésienne 2D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
+d) Ajoutez les fonctions permettant de créer une topologie cartésienne 2D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
 
 e) Utilisez `MPI_Cart_shift` pour déterminer les voisins dans les directions `x` et `y`.
 
