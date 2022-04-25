@@ -130,9 +130,7 @@ int main( int argc, char *argv[] )
 					matrix[start_index + ix] = all_blocs[irank*nloc[1]*nloc[0] + iy * nloc[0] + ix];
 				}
 			}
-
 		}
-
 	}
 
     // Affichage de la matrice
