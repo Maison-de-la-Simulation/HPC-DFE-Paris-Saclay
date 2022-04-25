@@ -148,6 +148,7 @@ int main( int argc, char *argv[] )
 
 	struct timeval current_time;
 	double temporary_time;
+	
 	int shiftx_list[9];
 	int shifty_list[9];
 
@@ -174,7 +175,33 @@ int main( int argc, char *argv[] )
 	std::cout << "  - iterations: " << iterations << std::endl;
 	std::cout << std::endl;
 	std::cout << "  Plants properties: " << std::endl;
+	std::cout << 
+	std::cout << " ------------------------------------ "<< std::endl;
+	std::cout << " GAME OF LIFE"<< std::endl;
+	std::cout << " ------------------------------------ "<< std::endl;
+
+	std::cout << "  - nx: " << nx-2 << std::endl;
+	std::cout << "  - ny: " << ny-2 << std::endl;
+	std::cout << "  - iterations: " << iterations << std::endl;
+	std::cout << std::endl;
+	std::cout << "  Plants properties: " << std::endl;
 	std::cout << "  - plant growth velocity: " << plant_growing_velocity << std::endl;
+	std::cout << "  - probability to have a seed growing: " << seed_success << std::endl;
+	std::cout << "  - max plants per cell: " << max_plants_per_cell << std::endl;
+	std::cout << std::endl;
+	std::cout << "  Rabbits properties: " << std::endl;
+	std::cout << "  - rabbits hunger: " << rabbits_hunger << std::endl;
+	std::cout << "  - Max babies per rabbit: " << max_babies_per_rabbits << std::endl;
+	std::cout << "  - probability to move from a cell to another (migration success): " << rabbit_migration_success << std::endl;
+	std::cout << std::endl;
+	std::cout << "  Fox properties: " << std::endl;
+	std::cout << "  - hunting success: " << hunting_success << std::endl;
+	std::cout << "  - fox sens of smell: " << rabbits_hunger << std::endl;
+	std::cout << "  - max number of foxes per cell: " << max_foxes_per_cell << std::endl;
+	std::cout << "  - probability to move from a cell to another (migration success): " << fox_migration_success << std::endl;
+	std::cout << "  - how non-sociable are the foxes (territorial): " << fox_non_sociability << std::endl;
+	std::cout << "  - Maximum number of babier per fox: " << max_babies_per_fox << std::endl;
+	"  - plant growth velocity: " << plant_growing_velocity << std::endl;
 	std::cout << "  - probability to have a seed growing: " << seed_success << std::endl;
 	std::cout << "  - max plants per cell: " << max_plants_per_cell << std::endl;
 	std::cout << std::endl;
