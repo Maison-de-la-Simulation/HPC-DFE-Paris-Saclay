@@ -69,3 +69,11 @@ jobs:
         run: |
           cd tp/marble/cpp/sequential
           make
+      # ________________________________________________________
+      # Application Marble
+
+      # Runs a single command using the runners shell
+      - name: build and test maxwell sequential
+        run: |
+          cd tp/maxwell/cpp/sequential
+          make
