@@ -12,3 +12,22 @@ $$
 \frac{1}{c^2} \frac{\partial E}{\partial t}  = - \mu_0 vec{J} + \nabla \times vec{B}
 $$
 
+Maxwell Faraday :
+
+$$
+\frac{\partial B}{\partial t} = - \nabla \times vec{E}
+$$
+
+Maxwell Gauss :
+
+$$
+\nabla \cdot vec{E} = 0
+$$
+
+Maxwell Flux :
+
+$$
+\nabla \cdot vec{B} = 0
+$$
+
+Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell Ampere et Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
