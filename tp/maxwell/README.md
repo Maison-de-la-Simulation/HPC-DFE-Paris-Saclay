@@ -8,23 +8,23 @@ On rappelle les équations de Maxwell dans le vide :
 
 Maxwell Ampere :
 
-<p align="center"><img src=".extra//fa5e3c8fcfe56486fcae2ea29d7aa026.svg?invert_in_darkmode" align=middle width=219.63344204999999pt height=33.81208709999999pt/></p>
+<p align="center"><img src=".extra//2ba4806c4179b91768ae5de6aa4f95f1.svg?invert_in_darkmode" align=middle width=173.07893955pt height=33.81208709999999pt/></p>
 
 Maxwell Faraday :
 
-<p align="center"><img src=".extra//9a5b774e6c94001adb04d0cea594a90e.svg?invert_in_darkmode" align=middle width=129.8072886pt height=33.81208709999999pt/></p>
+<p align="center"><img src=".extra//6d5dd1abd04119bbe000966bdb8b84f3.svg?invert_in_darkmode" align=middle width=106.68419024999999pt height=33.81208709999999pt/></p>
 
 Maxwell Gauss :
 
-<p align="center"><img src=".extra//df6d5ac4681bb3f1c44ce35bec7c04d5.svg?invert_in_darkmode" align=middle width=92.1154542pt height=11.232861749999998pt/></p>
+<p align="center"><img src=".extra//ac35e7e2e9828c6c627824cedac3fda7.svg?invert_in_darkmode" align=middle width=68.7896517pt height=15.89952705pt/></p>
 
 Maxwell Flux :
 
-<p align="center"><img src=".extra//6e6f7a4af1ce686a5b47cd64829575d7.svg?invert_in_darkmode" align=middle width=92.3266806pt height=11.232861749999998pt/></p>
+<p align="center"><img src=".extra//9f912dfbf42cb7130565c37d471ce31d.svg?invert_in_darkmode" align=middle width=69.00087479999999pt height=15.89952705pt/></p>
 
 Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell Ampere et Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
 
-<p align="center"><img src=".extra//a148d71e00f346bb4c6c1914b6f18470.svg?invert_in_darkmode" align=middle width=315.70048455pt height=33.81208709999999pt/></p>
+<p align="center"><img src=".extra//41cccb13579195958c31b4b2e6314e52.svg?invert_in_darkmode" align=middle width=292.37469525pt height=33.81208709999999pt/></p>
 
 En 2D, la discrétisation donne les équations suivantes :
 
