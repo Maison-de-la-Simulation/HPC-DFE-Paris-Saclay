@@ -39,6 +39,8 @@ dans [le dossier exercices](./exercices/).
   - [Utilisation de MPI_REDUCE](./exercices/mpi/5_reduce_com).
   - [Utilisation de MPI_GATHER](./exercices/mpi/6_gather_com).
   - [Création d'un communicateur cartésien](./exercices/mpi/7_cartesian_com).
+  - [Utilisation du type vector](./exercices/mpi/8_type_vector).
+  - [Exercice d'échange de cellules fantômes](./exercices/mpi/9_gather_matrix).
 
 ## Travaux pratiques
 
@@ -53,6 +55,7 @@ dans [le dossier exercices](./exercices/).
 - [MPI](./documentation/mpi.md).
 - [HDF5](./documentation/hdf5.md).
 - [readme2tex](./documentation/readme2tex.md).
+- [Utilisation de Ruche](./documentation/ruche.md).
 
 ## Deepnote
 

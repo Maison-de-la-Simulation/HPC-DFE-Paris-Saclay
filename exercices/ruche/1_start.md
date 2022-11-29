@@ -123,3 +123,5 @@ srun ./executable
 ```
 sbatch ./executable
 ```
+
+15) Testez les autres exercices
