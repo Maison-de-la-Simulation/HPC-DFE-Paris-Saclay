@@ -39,13 +39,6 @@ $$
 
 En 2D, la discrétisation donne les équations suivantes :
         
-        // Ez (primal, primal)
-        for (int iy = 0 ; iy < nyp ; iy++) {
-            for (int ix = 0 ; ix < nxp ; ix++) {
-                Ez[iy*nxp+ix] +=
-                                + dtdx * (By[iy*nxd+ix+1] - By[iy*nxd+ix])
-                                - dtdy * (Bx[(iy+1)*nxp+ix] - Bx[iy*nxp+ix]);
-
 $$
 Ex_{i,j}^{n} = Ex_{i,j}^{n-1} + \frac{\Delta t}{\Delta y} \left( Bz_{i,j+1}^{n-1/2}  - Bz_{i,j}^{n-1/2}\right)
 $$
