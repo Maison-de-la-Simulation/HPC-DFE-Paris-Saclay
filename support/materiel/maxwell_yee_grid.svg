@@ -8,7 +8,10 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
-   sodipodi:docname="dessin.svg"
+   sodipodi:docname="maxwell_yee_grid.svg"
+   inkscape:export-filename="maxwell_yee_grid.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.0041055"
-     inkscape:cx="365.9974"
-     inkscape:cy="293.79383"
+     inkscape:zoom="0.9983453"
+     inkscape:cx="321.53204"
+     inkscape:cy="293.48563"
      inkscape:window-width="1463"
      inkscape:window-height="824"
      inkscape:window-x="49"
@@ -137,6 +140,42 @@
        width="122.53352"
        height="43.661369"
        id="rect25833" />
+    <rect
+       x="230.98273"
+       y="81.689011"
+       width="122.53352"
+       height="43.661369"
+       id="rect8183" />
+    <rect
+       x="230.98273"
+       y="81.689011"
+       width="122.53352"
+       height="43.661369"
+       id="rect8424" />
+    <rect
+       x="230.98273"
+       y="81.689011"
+       width="122.53352"
+       height="43.661369"
+       id="rect8915" />
+    <rect
+       x="230.98273"
+       y="81.689011"
+       width="180.86259"
+       height="60.179341"
+       id="rect9674" />
+    <rect
+       x="230.98273"
+       y="81.689011"
+       width="180.86259"
+       height="60.179341"
+       id="rect9949" />
+    <rect
+       x="230.98273"
+       y="81.689011"
+       width="180.86259"
+       height="60.179341"
+       id="rect10240" />
   </defs>
   <g
      inkscape:label="Calque 1"
@@ -151,12 +190,12 @@
        d="M 20.249658,21.629288 V 139.66351"
        id="path46973" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.499999;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="M 19.750313,40.249999 H 160.23839"
+       style="fill:none;stroke:#000000;stroke-width:0.4624;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="M 19.714128,40.249999 H 139.86789"
        id="path3808" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.499999;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="M 19.750313,80.249999 H 160.23839"
+       style="fill:none;stroke:#000000;stroke-width:0.461892;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="M 19.713658,80.249999 H 139.60334"
        id="path3810" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.51607;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
@@ -197,15 +236,15 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect5396);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan25959"><tspan
+         id="tspan10692"><tspan
            style="stroke:none"
-           id="tspan25957">Ex(i,j+1)
+           id="tspan10690">Ex(i,j+1)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan25963"><tspan
+         id="tspan10696"><tspan
            style="stroke:none"
-           id="tspan25961">By(i,j+1)</tspan></tspan></text>
+           id="tspan10694">By(i,j+1)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,0.11259941,60.632636)"
@@ -213,18 +252,18 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect5396-5);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan25967"><tspan
+         id="tspan10700"><tspan
            style="stroke:none"
-           id="tspan25965">Ex(i,j)
+           id="tspan10698">Ex(i,j)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan25971"><tspan
+         id="tspan10704"><tspan
            style="stroke:none"
-           id="tspan25969">By(i,j)</tspan></tspan></text>
+           id="tspan10702">By(i,j)</tspan></tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.499999;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="M 19.750313,120.25 H 160.23839"
+       style="fill:none;stroke:#000000;stroke-width:0.4624;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="M 19.714128,120.25 H 139.86789"
        id="path60637" />
     <ellipse
        style="fill:#00891d;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
@@ -240,15 +279,15 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect5396-5-9);display:inline;fill:#00891d;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan25975"><tspan
+         id="tspan10708"><tspan
            style="stroke:none"
-           id="tspan25973">Ex(i+1,j)
+           id="tspan10706">Ex(i+1,j)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan25979"><tspan
+         id="tspan10712"><tspan
            style="stroke:none"
-           id="tspan25977">By(i+1,j)</tspan></tspan></text>
+           id="tspan10710">By(i+1,j)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-1.8018677,41.347554)"
@@ -256,9 +295,9 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect5396-4);display:inline;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan25983"><tspan
+         id="tspan10716"><tspan
            style="stroke:none"
-           id="tspan25981">Bz(i+1,j+2)</tspan></tspan></text>
+           id="tspan10714">Bz(i+1,j+2)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-18.871136,59.804195)"
@@ -266,9 +305,9 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect5396-4-9);display:inline;fill:#ff7700;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan25987"><tspan
+         id="tspan10720"><tspan
            style="stroke:none"
-           id="tspan25985">Ez(i,j+1)</tspan></tspan></text>
+           id="tspan10718">Ez(i,j+1)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-18.356904,41.506237)"
@@ -276,15 +315,15 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect5396-4-0);display:inline;fill:#3d00ff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan25991"><tspan
+         id="tspan10724"><tspan
            style="stroke:none"
-           id="tspan25989">Ey(i,j+2)
+           id="tspan10722">Ey(i,j+2)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan25995"><tspan
+         id="tspan10728"><tspan
            style="stroke:none"
-           id="tspan25993">Bx(i,j+2)</tspan></tspan></text>
+           id="tspan10726">Bx(i,j+2)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,21.625399,42.034195)"
@@ -292,15 +331,15 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect5396-4-0-7);display:inline;fill:#3d00ff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan25999"><tspan
+         id="tspan10732"><tspan
            style="stroke:none"
-           id="tspan25997">Ey(i+1,j)
+           id="tspan10730">Ey(i+1,j+2)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan26003"><tspan
+         id="tspan10736"><tspan
            style="stroke:none"
-           id="tspan26001">Bx(i+1,j)</tspan></tspan></text>
+           id="tspan10734">Bx(i+1,j+2)</tspan></tspan></text>
     <ellipse
        style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        id="ellipse5450"
@@ -347,9 +386,9 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect44241);display:inline;fill:#ff7700;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26007"><tspan
+         id="tspan10740"><tspan
            style="stroke:none"
-           id="tspan26005">Ez(i,j)</tspan></tspan></text>
+           id="tspan10738">Ez(i,j)</tspan></tspan></text>
     <ellipse
        style="fill:#ff7700;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        id="ellipse44243"
@@ -393,8 +432,8 @@
        rx="2.3219037"
        ry="2.3219039" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-dasharray:none"
-       d="M 19.750313,20.249999 H 160.23839"
+       style="fill:none;stroke:#000000;stroke-width:1.85125;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="M 19.607096,20.249999 H 139.97492"
        id="path46975" />
     <ellipse
        style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
@@ -425,8 +464,8 @@
        rx="2.3219037"
        ry="2.3219039" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="M 19.750313,140.25 H 160.23839"
+       style="fill:none;stroke:#000000;stroke-width:1.85125;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="M 19.607096,140.25 H 139.97492"
        id="path60639" />
     <ellipse
        style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
@@ -470,15 +509,15 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect4059);display:inline;fill:#00891d;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26011"><tspan
+         id="tspan10744"><tspan
            style="stroke:none"
-           id="tspan26009">Ex(i,j)
+           id="tspan10742">Ex(i,j)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan26015"><tspan
+         id="tspan10748"><tspan
            style="stroke:none"
-           id="tspan26013">By(i,j)</tspan></tspan></text>
+           id="tspan10746">By(i,j)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-38.422089,121.01374)"
@@ -486,9 +525,9 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect4361);display:inline;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26019"><tspan
+         id="tspan10752"><tspan
            style="stroke:none"
-           id="tspan26017">Bz(i,j)</tspan></tspan></text>
+           id="tspan10750">Bz(i,j)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-1.7953766,81.486344)"
@@ -496,9 +535,9 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect4524);display:inline;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26023"><tspan
+         id="tspan10756"><tspan
            style="stroke:none"
-           id="tspan26021">Bz(i+1,j+1)</tspan></tspan></text>
+           id="tspan10754">Bz(i+1,j+1)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-18.356904,120.8814)"
@@ -506,15 +545,15 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect4699);display:inline;fill:#3d00ff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26027"><tspan
+         id="tspan10760"><tspan
            style="stroke:none"
-           id="tspan26025">Ey(i,j)
+           id="tspan10758">Ey(i,j)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan26031"><tspan
+         id="tspan10764"><tspan
            style="stroke:none"
-           id="tspan26029">Bx(i,j)</tspan></tspan></text>
+           id="tspan10762">Bx(i,j)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,0.20709591,121.01374)"
@@ -522,9 +561,9 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect4884);display:inline;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26035"><tspan
+         id="tspan10768"><tspan
            style="stroke:none"
-           id="tspan26033">Bz(i+1,j)</tspan></tspan></text>
+           id="tspan10766">Bz(i+1,j)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-18.886071,80.135424)"
@@ -532,15 +571,15 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect8896);display:inline;fill:#3d00ff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26039"><tspan
+         id="tspan10772"><tspan
            style="stroke:none"
-           id="tspan26037">Ey(i,j+1)
+           id="tspan10770">Ey(i,j+1)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan26043"><tspan
+         id="tspan10776"><tspan
            style="stroke:none"
-           id="tspan26041">Bx(i,j+1)</tspan></tspan></text>
+           id="tspan10774">Bx(i,j+1)</tspan></tspan></text>
     <ellipse
        style="fill:#3d00ff;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        id="ellipse17083"
@@ -555,15 +594,15 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect17495);display:inline;fill:#3d00ff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26047"><tspan
+         id="tspan10780"><tspan
            style="stroke:none"
-           id="tspan26045">Ey(i,j+3)
+           id="tspan10778">Ey(i,j+3)
 </tspan></tspan><tspan
          x="230.98242"
          y="115.89139"
-         id="tspan26051"><tspan
+         id="tspan10784"><tspan
            style="stroke:none"
-           id="tspan26049">Bx(i,j+3)</tspan></tspan></text>
+           id="tspan10782">Bx(i,j+3)</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-18.871136,20.645837)"
@@ -571,8 +610,111 @@
        style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect25833);display:inline;fill:#ff7700;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
          x="230.98242"
          y="95.891387"
-         id="tspan26055"><tspan
+         id="tspan10788"><tspan
            style="stroke:none"
-           id="tspan26053">Ez(i,j+2)</tspan></tspan></text>
+           id="tspan10786">Ez(i,j+2)</tspan></tspan></text>
+    <ellipse
+       style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="ellipse8175"
+       cx="99.577904"
+       cy="140.5399"
+       rx="2.3219037"
+       ry="2.3219039" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,40.206622,121.01374)"
+       id="text8181"
+       style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect8183);display:inline;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
+         x="230.98242"
+         y="95.891387"
+         id="tspan10792"><tspan
+           style="stroke:none"
+           id="tspan10790">Bz(i+2,j)</tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.29735;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="M 140.24967,21.629288 V 139.66351"
+       id="path8666" />
+    <ellipse
+       style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="ellipse8416"
+       cx="139.5779"
+       cy="140.5399"
+       rx="2.3219037"
+       ry="2.3219039" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,80.206622,121.01374)"
+       id="text8422"
+       style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect8424);display:inline;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
+         x="230.98242"
+         y="95.891387"
+         id="tspan10796"><tspan
+           style="stroke:none"
+           id="tspan10794">Bz(i+3,j)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-1.8018677,1.3471601)"
+       id="text8913"
+       style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect8915);display:inline;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
+         x="230.98242"
+         y="95.891387"
+         id="tspan10800"><tspan
+           style="stroke:none"
+           id="tspan10798">Bz(i+1,j+3)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,21.113622,80.135424)"
+       id="text9672"
+       style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect9674);display:inline;fill:#3d00ff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
+         x="230.98242"
+         y="95.891387"
+         id="tspan10804"><tspan
+           style="stroke:none"
+           id="tspan10802">Ey(i+1,j+1)
+</tspan></tspan><tspan
+         x="230.98242"
+         y="115.89139"
+         id="tspan10808"><tspan
+           style="stroke:none"
+           id="tspan10806">Bx(i+1,j+1)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,21.642622,120.8814)"
+       id="text9947"
+       style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect9949);display:inline;fill:#3d00ff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
+         x="230.98242"
+         y="95.891387"
+         id="tspan10812"><tspan
+           style="stroke:none"
+           id="tspan10810">Ey(i+1,j)
+</tspan></tspan><tspan
+         x="230.98242"
+         y="115.89139"
+         id="tspan10816"><tspan
+           style="stroke:none"
+           id="tspan10814">Bx(i+1,j)</tspan></tspan></text>
+    <ellipse
+       style="fill:#3d00ff;fill-opacity:1;stroke:none;stroke-width:0.356192;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="ellipse10228"
+       cx="120.3829"
+       cy="140.47841"
+       rx="2.3219037"
+       ry="2.3219039" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,61.64282,120.8814)"
+       id="text10238"
+       style="font-size:16px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect10240);display:inline;fill:#3d00ff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"><tspan
+         x="230.98242"
+         y="95.891387"
+         id="tspan10820"><tspan
+           style="stroke:none"
+           id="tspan10818">Ey(i+2,j)
+</tspan></tspan><tspan
+         x="230.98242"
+         y="115.89139"
+         id="tspan10824"><tspan
+           style="stroke:none"
+           id="tspan10822">Bx(i+2,j)</tspan></tspan></text>
   </g>
 </svg>
