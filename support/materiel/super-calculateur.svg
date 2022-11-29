@@ -9,6 +9,9 @@
    id="svg5"
    inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
    sodipodi:docname="super-calculateur.svg"
+   inkscape:export-filename="super-calculateur.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -35,6 +38,25 @@
      inkscape:current-layer="layer1" />
   <defs
      id="defs2">
+    <marker
+       style="overflow:visible"
+       id="marker7560"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow2"
+       markerWidth="7.6999998"
+       markerHeight="5.5999999"
+       viewBox="0 0 7.7 5.6"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path7558" />
+    </marker>
     <marker
        style="overflow:visible"
        id="Arrow2"
@@ -81,9 +103,34 @@
     <rect
        x="76.556557"
        y="241.63162"
-       width="163.87888"
-       height="98.088089"
+       width="185.41041"
+       height="88.51852"
        id="rect2564-61" />
+    <marker
+       style="overflow:visible"
+       id="Arrow2-6"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow2"
+       markerWidth="7.6999998"
+       markerHeight="5.5999999"
+       viewBox="0 0 7.7 5.6"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="arrow2L-8" />
+    </marker>
+    <rect
+       x="76.556557"
+       y="241.63162"
+       width="287.08707"
+       height="131.58157"
+       id="rect2564-6-0-7" />
   </defs>
   <g
      inkscape:label="Calque 1"
@@ -108,35 +155,35 @@
        y="0"><tspan
          x="116.08329"
          y="265.30078"
-         id="tspan7466"><tspan
+         id="tspan7906"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#ffffff"
-           id="tspan7464">Votre </tspan></tspan><tspan
+           id="tspan7904">Votre </tspan></tspan><tspan
          x="86.193933"
          y="299.5827"
-         id="tspan7470"><tspan
+         id="tspan7910"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#ffffff"
-           id="tspan7468">ordinateur</tspan></tspan></text>
+           id="tspan7908">ordinateur</tspan></tspan></text>
     <rect
-       style="fill:#4e4e4e;fill-opacity:1;stroke:none;stroke-width:2.21456;stroke-linecap:round;stroke-linejoin:round"
+       style="fill:#4e4e4e;fill-opacity:1;stroke:none;stroke-width:2.30264;stroke-linecap:round;stroke-linejoin:round"
        id="rect234-2"
-       width="42.912338"
+       width="46.393768"
        height="35"
-       x="149.29211"
+       x="145.81068"
        y="53.18692"
-       rx="4"
+       rx="4.3245153"
        ry="4" />
     <text
        xml:space="preserve"
-       transform="matrix(0.26458333,0,0,0.26458333,130.28236,2.3302428)"
+       transform="matrix(0.26458333,0,0,0.26458333,127.10734,2.8594095)"
        id="text2562-0"
        style="font-size:26.6667px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect2564-61);display:inline;fill:#4e4e4e;fill-opacity:1;stroke:none;stroke-width:7.55906;stroke-linecap:round;stroke-linejoin:round"
        x="0"
        y="0"><tspan
          x="76.556641"
          y="265.30078"
-         id="tspan7474"><tspan
+         id="tspan7914"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';fill:#ffffff"
-           id="tspan7472">ordonenceur</tspan></tspan></text>
+           id="tspan7912">ordonnanceur</tspan></tspan></text>
     <rect
        style="fill:#ffde88;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect4222"
@@ -155,14 +202,14 @@
        y="0"><tspan
          x="115.54846"
          y="282.04883"
-         id="tspan7478"><tspan
+         id="tspan7918"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#000000"
-           id="tspan7476">Login </tspan></tspan><tspan
+           id="tspan7916">Login </tspan></tspan><tspan
          x="112.22815"
          y="316.33075"
-         id="tspan7482"><tspan
+         id="tspan7922"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#000000"
-           id="tspan7480">nodes</tspan></tspan></text>
+           id="tspan7920">nodes</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,24.818645,-9.0883396)"
@@ -172,13 +219,30 @@
        y="0"><tspan
          x="93.302734"
          y="282.04883"
-         id="tspan7486"><tspan
+         id="tspan7926"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, '"
-           id="tspan7484">Connexion ssh</tspan></tspan></text>
+           id="tspan7924">Connexion ssh</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,117.92886,36.551173)"
+       id="text2562-2-8-1"
+       style="font-size:26.6667px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:justify;white-space:pre;shape-inside:url(#rect2564-6-0-7);shape-padding:16.7467;display:inline;fill:#4e4e4e;fill-opacity:1;stroke:none;stroke-width:7.55906;stroke-linecap:round;stroke-linejoin:round"
+       x="0"
+       y="0"><tspan
+         x="93.302734"
+         y="282.04883"
+         id="tspan7930"><tspan
+           style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, '"
+           id="tspan7928">Gestion des jobs</tspan></tspan></text>
     <path
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2)"
        d="M 45.995385,70.894558 H 95.05189"
        id="path4481"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.936487;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker7560);marker-end:url(#Arrow2-6)"
+       d="m 147.7671,100.14495 h 43.02294"
+       id="path4481-6"
        sodipodi:nodetypes="cc" />
     <rect
        style="fill:#efefef;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
@@ -198,8 +262,8 @@
        y="0"><tspan
          x="114.0715"
          y="282.04883"
-         id="tspan7490"><tspan
+         id="tspan7934"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#000000"
-           id="tspan7488">Compute nodes</tspan></tspan></text>
+           id="tspan7932">Compute nodes</tspan></tspan></text>
   </g>
 </svg>
