@@ -76,4 +76,5 @@ jobs:
       - name: build and test maxwell sequential
         run: |
           cd tp/maxwell/cpp/sequential
-          make
+          g++ -O3 main.cpp -o executable
+          
