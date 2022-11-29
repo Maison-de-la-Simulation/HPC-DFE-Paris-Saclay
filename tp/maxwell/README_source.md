@@ -38,11 +38,26 @@ $$
 $$
 
 En 2D, la discrétisation donne les équations suivantes :
+        
+        // Ez (primal, primal)
+        for (int iy = 0 ; iy < nyp ; iy++) {
+            for (int ix = 0 ; ix < nxp ; ix++) {
+                Ez[iy*nxp+ix] +=
+                                + dtdx * (By[iy*nxd+ix+1] - By[iy*nxd+ix])
+                                - dtdy * (Bx[(iy+1)*nxp+ix] - Bx[iy*nxp+ix]);
 
 $$
-Ex_{i,j}^{n+1} = Ex_{i,j}^{n} + \frac{\Delta t}{\Delta x} \left( Bz_{i,j+1}^{n+1/2}  - Bz_{i,j}^{n+1/2}\right)
+Ex_{i,j}^{n} = Ex_{i,j}^{n-1} + \frac{\Delta t}{\Delta y} \left( Bz_{i,j+1}^{n-1/2}  - Bz_{i,j}^{n-1/2}\right)
+$$
+
+$$
+Ey_{i,j}^{n} = Ey_{i,j}^{n-1} + \frac{\Delta t}{\Delta x} \left( Bz_{i+1,j}^{n-1/2}  - Bz_{i,j}^{n-1/2}\right)
+$$
+
+$$
+Ez_{i,j}^{n} = Ez_{i,j}^{n-1} + \frac{\Delta t}{\Delta x} \left( By_{i+1,j}^{n-1/2}  - By_{i,j}^{n-1/2}\right) - \frac{\Delta t}{\Delta y} \left( Bx_{i,j+1}^{n-1/2}  - Bx_{i,j}^{n-1/2}\right) 
 $$
 
 Où $n = t / \Delta t $ est l'iteration en temps, $i$ et $j$ respectivement la discrétisation en espace suivant les directions x et y.
 
-<img src="../../support/materiel/marble.png" height="400">
+<img src="../../support/materiel/maxwell_yee_grid.png" height="400">

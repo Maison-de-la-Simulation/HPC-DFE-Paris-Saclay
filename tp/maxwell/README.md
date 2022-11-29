@@ -27,8 +27,20 @@ Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell Amp
 <p align="center"><img src=".extra//41cccb13579195958c31b4b2e6314e52.svg?invert_in_darkmode" align=middle width=292.37469525pt height=33.81208709999999pt/></p>
 
 En 2D, la discrétisation donne les équations suivantes :
+        
+        // Ez (primal, primal)
+        for (int iy = 0 ; iy < nyp ; iy++) {
+            for (int ix = 0 ; ix < nxp ; ix++) {
+                Ez[iy*nxp+ix] +=
+                                + dtdx * (By[iy*nxd+ix+1] - By[iy*nxd+ix])
+                                - dtdy * (Bx[(iy+1)*nxp+ix] - Bx[iy*nxp+ix]);
 
-                Ex[iy*nxd+ix] +=
-                              + dtdy * (Bz[(iy+1)*nxd + ix] - Bz[iy*nxd+ix]);
+<p align="center"><img src=".extra//ad7015d0a9a6cf54e178878906df03c7.svg?invert_in_darkmode" align=middle width=318.42411315pt height=36.82577085pt/></p>
 
-<p align="center"><img src=".extra//307263e7baf74cca182e0e5afe981b6d.svg?invert_in_darkmode" align=middle width=339.65512019999994pt height=33.62942055pt/></p>
+<p align="center"><img src=".extra//c8e58c2c82b57b667d40e0b52121fa3b.svg?invert_in_darkmode" align=middle width=317.08854045pt height=33.62942055pt/></p>
+
+<p align="center"><img src=".extra//11eb95a1f61dfd6015539c701060ebef.svg?invert_in_darkmode" align=middle width=529.30628685pt height=36.82577085pt/></p>
+
+Où <img src=".extra//c461456e376ee5b83866a0c882334b0f.svg?invert_in_darkmode" align=middle width=65.57458379999998pt height=24.65753399999998pt/> est l'iteration en temps, <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663225699999989pt height=21.68300969999999pt/> et <img src=".extra//36b5afebdba34564d884d347484ac0c7.svg?invert_in_darkmode" align=middle width=7.710416999999989pt height=21.68300969999999pt/> respectivement la discrétisation en espace suivant les directions x et y.
+
+<img src="../../support/materiel/maxwell_yee_grid.png" height="400">
