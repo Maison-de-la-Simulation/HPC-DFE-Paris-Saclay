@@ -31,3 +31,17 @@ $$
 $$
 
 Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell Ampere et Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
+
+$$
+\frac{\partial E}{\partial t} = - vec{J} + \nabla \times vec{B}
+\frac{\partial B}{\partial t} = - \nabla \times vec{E}
+$$
+
+En 2D, la discrétisation donne les équations suivantes :
+
+                Ex[iy*nxd+ix] +=
+                              + dtdy * (Bz[(iy+1)*nxd + ix] - Bz[iy*nxd+ix]);
+
+$$
+Ex_{i,j}^{t + \Delta t} = Ex_{i,j}^{t} + \frac{\Delta t}{\Delta x} \left( Bz_{i,j+1}^{t + 0.5 \Delta t}  - Bz_{i,j}^{t + 0.5 \Delta t}\right)
+$$
