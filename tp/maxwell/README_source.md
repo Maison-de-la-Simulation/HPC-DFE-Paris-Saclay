@@ -39,9 +39,10 @@ $$
 
 En 2D, la discrétisation donne les équations suivantes :
 
-                Ex[iy*nxd+ix] +=
-                              + dtdy * (Bz[(iy+1)*nxd + ix] - Bz[iy*nxd+ix]);
+$$
+Ex_{i,j}^{n+1} = Ex_{i,j}^{n} + \frac{\Delta t}{\Delta x} \left( Bz_{i,j+1}^{n+1/2}  - Bz_{i,j}^{n+1/2}\right)
+$$
 
-$$
-Ex_{i,j}^{t + \Delta t} = Ex_{i,j}^{t} + \frac{\Delta t}{\Delta x} \left( Bz_{i,j+1}^{t + 0.5 \Delta t}  - Bz_{i,j}^{t + 0.5 \Delta t}\right)
-$$
+Où $n = t / \Delta t $ est l'iteration en temps, $i$ et $j$ respectivement la discrétisation en espace suivant les directions x et y.
+
+<img src="../../support/materiel/marble.png" height="400">
