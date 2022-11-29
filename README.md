@@ -46,6 +46,7 @@ dans [le dossier exercices](./exercices/).
 - [Equation d'onde (différences finies)](./tp/onde/).
 - [Simulation de particules avec collisions](./tp/marble/).
 - [Simulation de vie](./tp/life/).
+- [Discrétisation des équations de Maxwell par un schéma de Yee](./tp/maxwell/).
 
 ## Installation des dépendances
 
