@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="131.20802mm"
+   height="123.27544mm"
+   viewBox="0 0 131.20802 123.27544"
+   version="1.1"
+   id="svg9934"
+   inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
+   sodipodi:docname="maxwell_primal_dual.svg"
+   inkscape:export-filename="maxwell_primal_dual.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview9936"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.0041055"
+     inkscape:cx="89.13406"
+     inkscape:cy="276.36538"
+     inkscape:window-width="1463"
+     inkscape:window-height="947"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs9931">
+    <marker
+       style="overflow:visible"
+       id="marker13142"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow1L"
+       markerWidth="8.75"
+       markerHeight="5"
+       viewBox="0 0 8.75 5"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13140"
+         transform="scale(-0.5)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1L"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow1L"
+       markerWidth="8.75"
+       markerHeight="5"
+       viewBox="0 0 8.75 5"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="arrow1L"
+         transform="scale(-0.5)" />
+    </marker>
+    <rect
+       x="236.61646"
+       y="29.577057"
+       width="125.35038"
+       height="36.619213"
+       id="rect18350" />
+    <rect
+       x="236.61646"
+       y="29.577057"
+       width="125.35038"
+       height="36.619213"
+       id="rect18907" />
+    <rect
+       x="236.61646"
+       y="29.577057"
+       width="242.25017"
+       height="78.872147"
+       id="rect18350-3" />
+    <rect
+       x="236.61646"
+       y="29.577057"
+       width="242.25017"
+       height="78.872147"
+       id="rect18350-3-3" />
+    <rect
+       x="236.61646"
+       y="29.577057"
+       width="125.35038"
+       height="36.619213"
+       id="rect18907-6" />
+    <rect
+       x="236.61646"
+       y="29.577057"
+       width="242.25017"
+       height="78.872147"
+       id="rect18350-3-1" />
+    <rect
+       x="236.61646"
+       y="29.577057"
+       width="242.25017"
+       height="78.872147"
+       id="rect18350-3-1-3" />
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-47.567845,-7.6091393)">
+    <rect
+       style="fill:none;stroke:#ff0000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="rect11196"
+       width="99.468872"
+       height="99.468872"
+       x="62.992565"
+       y="21.256468" />
+    <rect
+       style="fill:none;stroke:#d26400;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect13760"
+       width="74.601654"
+       height="74.601654"
+       x="75.596184"
+       y="32.742146" />
+    <rect
+       style="fill:none;stroke:#3d00ff;stroke-width:1.15107;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect13768"
+       width="74.450577"
+       height="99.045311"
+       x="75.671722"
+       y="21.638258" />
+    <rect
+       style="fill:none;stroke:#00692a;stroke-width:1.15035;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect18286"
+       width="99.418678"
+       height="74.078651"
+       x="63.374001"
+       y="33.189968" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-7.0803011,6.3350063)"
+       id="text18348"
+       style="font-size:16px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;white-space:pre;shape-inside:url(#rect18350);display:inline;fill:none;stroke:#00692a;stroke-width:15.1181;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="259.32715"
+         y="43.208984"
+         id="tspan1066"><tspan
+           style="fill:#ff0000;stroke:none"
+           id="tspan1064">Grille duale </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,23.018896,6.2546322)"
+       id="text18348-1"
+       style="font-size:16px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;white-space:pre;shape-inside:url(#rect18350-3);display:inline;fill:none;stroke:#00692a;stroke-width:15.1181;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="255.99219"
+         y="43.208984"
+         id="tspan1070"><tspan
+           style="fill:#08005e;stroke:none"
+           id="tspan1068">Grille primale en x duale en y </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-45.622939,-1.6548946)"
+       id="text18348-1-4"
+       style="font-size:16px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;white-space:pre;shape-inside:url(#rect18350-3-1);display:inline;fill:none;stroke:none;stroke-width:15.1181;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="353.76562"
+         y="43.208984"
+         id="tspan1076"><tspan
+           style="fill:#000000"
+           id="tspan1072">y</tspan><tspan
+           style="fill:#08005e"
+           id="tspan1074"> </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,83.125897,119.26639)"
+       id="text18348-1-4-1"
+       style="font-size:16px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;white-space:pre;shape-inside:url(#rect18350-3-1-3);display:inline;fill:none;stroke:none;stroke-width:15.1181;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="353.97266"
+         y="43.208984"
+         id="tspan1080"><tspan
+           style="fill:#08005e"
+           id="tspan1078">x </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,17.988076,102.76676)"
+       id="text18348-1-8"
+       style="font-size:16px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;white-space:pre;shape-inside:url(#rect18350-3-3);display:inline;fill:none;stroke:#00692a;stroke-width:15.1181;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="255.99219"
+         y="43.208984"
+         id="tspan1084"><tspan
+           style="fill:#007528;stroke:none"
+           id="tspan1082">Grille duale en x primale en y </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,12.550796,29.066499)"
+       id="text18905"
+       style="font-size:16px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;white-space:pre;shape-inside:url(#rect18907);display:inline;fill:none;stroke:#00692a;stroke-width:15.1181;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="252.19043"
+         y="43.208984"
+         id="tspan1088"><tspan
+           style="fill:#cd4e00;stroke:none"
+           id="tspan1086">Grille primale </tspan></tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.600001;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;marker-start:url(#Arrow1L);marker-end:url(#marker13142)"
+       d="M 49.067847,17.217693 V 129.38457 H 171.66885"
+       id="path12659" />
+  </g>
+</svg>
