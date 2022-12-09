@@ -155,14 +155,14 @@
        y="0"><tspan
          x="116.08329"
          y="265.30078"
-         id="tspan7906"><tspan
+         id="tspan21721"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#ffffff"
-           id="tspan7904">Votre </tspan></tspan><tspan
+           id="tspan21719">Votre </tspan></tspan><tspan
          x="86.193933"
          y="299.5827"
-         id="tspan7910"><tspan
+         id="tspan21725"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#ffffff"
-           id="tspan7908">ordinateur</tspan></tspan></text>
+           id="tspan21723">ordinateur</tspan></tspan></text>
     <rect
        style="fill:#4e4e4e;fill-opacity:1;stroke:none;stroke-width:2.30264;stroke-linecap:round;stroke-linejoin:round"
        id="rect234-2"
@@ -181,9 +181,9 @@
        y="0"><tspan
          x="76.556641"
          y="265.30078"
-         id="tspan7914"><tspan
+         id="tspan21729"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';fill:#ffffff"
-           id="tspan7912">ordonnanceur</tspan></tspan></text>
+           id="tspan21727">ordonnanceur</tspan></tspan></text>
     <rect
        style="fill:#ffde88;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect4222"
@@ -202,14 +202,14 @@
        y="0"><tspan
          x="115.54846"
          y="282.04883"
-         id="tspan7918"><tspan
+         id="tspan21733"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#000000"
-           id="tspan7916">Login </tspan></tspan><tspan
+           id="tspan21731">Login </tspan></tspan><tspan
          x="112.22815"
          y="316.33075"
-         id="tspan7922"><tspan
+         id="tspan21737"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#000000"
-           id="tspan7920">nodes</tspan></tspan></text>
+           id="tspan21735">nodes</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,24.818645,-9.0883396)"
@@ -219,9 +219,9 @@
        y="0"><tspan
          x="93.302734"
          y="282.04883"
-         id="tspan7926"><tspan
+         id="tspan21741"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, '"
-           id="tspan7924">Connexion ssh</tspan></tspan></text>
+           id="tspan21739">Connexion ssh</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,117.92886,36.551173)"
@@ -231,9 +231,9 @@
        y="0"><tspan
          x="93.302734"
          y="282.04883"
-         id="tspan7930"><tspan
+         id="tspan21745"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, '"
-           id="tspan7928">Gestion des jobs</tspan></tspan></text>
+           id="tspan21743">Gestion des jobs</tspan></tspan></text>
     <path
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2)"
        d="M 45.995385,70.894558 H 95.05189"
@@ -262,8 +262,8 @@
        y="0"><tspan
          x="114.0715"
          y="282.04883"
-         id="tspan7934"><tspan
+         id="tspan21749"><tspan
            style="font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';text-align:center;text-anchor:middle;fill:#000000"
-           id="tspan7932">Compute nodes</tspan></tspan></text>
+           id="tspan21747">Compute nodes</tspan></tspan></text>
   </g>
 </svg>
