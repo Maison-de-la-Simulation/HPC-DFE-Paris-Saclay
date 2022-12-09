@@ -7,7 +7,7 @@ capable de récupérer le nombre total de rangs et d'afficher pour chaque rang l
 
 1. Complétez la ligne permettant d'initaliser MPI avec la fonction correspondante dans le cours : `MPI_INIT` en fortran ou `MPI_Init` en C/C++.
 
-2. Complétez maintenant la ligne permettant de récupérer le nombre total de processus MPI utilisés pour ce programme : `MPI_COMM_SIZE`. Ajoutez-y les bons arguments.
+2. Complétez maintenant la ligne permettant de récupérer le nombre total de processus MPI utilisés pour ce programme : `MPI_Comm_size`. Ajoutez-y les bons arguments.
 
 3. Complètez maintenant la ligne permettant de récupérer le rang de chaque processus : `MPI_COMM_RANK` en Fortan ou `MPI_Comm_rank` en C/C++.
    Pour rappel, lorsqu'un programme MPI est exécuté, il est dupliqué suivant le nombre de processus demandé.
