@@ -198,7 +198,8 @@ int main( int argc, char *argv[] )
     for (iteration = 1 ; iteration <= iterations ; iteration++) {
 
         // Solve Maxwell Ampere
-        
+        // ------------------------------------- 
+
         // Ex (dual, primal)
         for (int iy = 0 ; iy < nyp ; iy++) {
             for (int ix = 0 ; ix < nxd ; ix++) {
@@ -224,9 +225,8 @@ int main( int argc, char *argv[] )
             }
         }
 
-        // Add antena
-
-        // Antenna
+        // Add antenas
+        // -------------------------------------
 
         const double antenna_velocity = antenna_max_velocity*std::sin(2.0 * M_PI * iteration * dt * antenna_inverse_period);
 
@@ -260,9 +260,10 @@ int main( int argc, char *argv[] )
 
         // Ey[iyantenna] = -dt*J;
         Ez[izantenna] = -dt*antenna_charge*antenna_velocity;
-        
+
         // Solve Maxwell Faraday
-        
+        // -------------------------------------
+
         // Bx (primal, dual)
         for (int iy = 1 ; iy < nyd-1 ; iy++) {
             for (int ix = 0 ; ix < nxp ; ix++) {
@@ -288,6 +289,8 @@ int main( int argc, char *argv[] )
         }
 
         // Apply boundary conditions (Reflective)
+        // -------------------------------------
+
         // Bord -X (ix = 0)
         for (int iy = 0 ; iy < nyp ; iy++) {
             By[iy*nxd] = By[iy*nxd + 1];
@@ -318,6 +321,8 @@ int main( int argc, char *argv[] )
         }
         
         // Diagnostics output
+        // -------------------------------------
+
         if (iteration%diag_period == 0) {
             char file_name[128];
             snprintf (file_name, 128, "diags/diag_%05d.bin", iteration);
@@ -347,6 +352,8 @@ int main( int argc, char *argv[] )
         }
         
         // Print
+        // -------------------------------------
+        
         if (iteration%print_period == 0) {
                 std::cout << " - iteration: " << iteration
                     << " t: " << iteration*dt
