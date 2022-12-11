@@ -40,7 +40,7 @@ int main( int argc, char *argv[] )
     // Tous les processus ont la variable message initialisée à 0
 
     int message = 0;
-    int tag;
+    int tag = 0;
 
     // Envoi du message du rang 1 vers le rang 2
 
@@ -72,7 +72,9 @@ int main( int argc, char *argv[] )
                 ???);            // Le status de la communication
         
                       
-        std::cout << "Le rang " << rank << " a reçu le message " << message << " du rang 1 / " << number_of_ranks << "." << std::endl;
+        std::cout << "Le rang " << rank 
+                  << " a reçu le message " << message 
+                  << " du rang 1 / " << number_of_ranks << "." << std::endl;
         
     }
     
