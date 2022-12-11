@@ -19,3 +19,5 @@ executable
 
 */*/*/*.h5
 */*/*/*/*.h5
+
+*.DS_Store

@@ -41,7 +41,7 @@ int main( int argc, char *argv[] )
     
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     
-    int N = 4000000;
+    int N = 40000000;
     int local_N = N / number_of_ranks;
     double time;
     
@@ -73,7 +73,9 @@ int main( int argc, char *argv[] )
     
     // Chaque rang affiche son numéro/identifiant (variable rank)
 
-    std::cout << "Je suis le rang " << rank << " / " << number_of_ranks-1 << " avec un temps de " << time << " s" << std::endl;
+    std::cout << "Je suis le rang " 
+            << rank << " / " << number_of_ranks-1 
+            << " avec un temps de " << time << " s" << std::endl;
     
     delete [] A;
     delete [] B;
