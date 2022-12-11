@@ -39,7 +39,7 @@ int main( int argc, char *argv[] )
 
     // Tous les processus ont la variable message initialisée à 0
 
-    int message = 0;
+    int message;
     int tag = 0;
 
     // Envoi du message du rang 1 vers le rang 2
@@ -48,7 +48,10 @@ int main( int argc, char *argv[] )
         
         message = 42;
 
-        std::cout << "Le rang " << rank << " envoie le message " << message << " au rang 2 / " << number_of_ranks << "." << std::endl;
+        std::cout << "Le rang " << rank 
+                  << " envoie le message " << message 
+                  << " au rang 2 / " << number_of_ranks << "." 
+                  << std::endl;
 
         MPI_Send(&message,                   // La partie du tableau à envoyer
                       1,                         // Le nombre d'élèments
@@ -71,7 +74,10 @@ int main( int argc, char *argv[] )
                       MPI_COMM_WORLD, MPI_STATUS_IGNORE);            // Le communicateur
         
                       
-        std::cout << "Le rang " << rank << " a reçu le message " << message << " du rang 1 / " << number_of_ranks << "." << std::endl;
+        std::cout << "Le rang " << rank 
+                  << " a reçu le message " << message 
+                  << " du rang 1 / " << number_of_ranks << "." 
+                  << std::endl;
         
     }
     

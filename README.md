@@ -1,5 +1,7 @@
 # Cours de Calcul Haute Performance - Master 2 Dynamique des Fluide et Energétique - Paris Saclay
 
+![CI](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/actions/workflows/main.yml/badge.svg)
+
 Ce cours de HPC s'articule autour de 3 dossiers :
 - `support`: Les supports de cours (odt et pdf) sont dans cet espace
 - `exercices`: Les exercices mentionnés dans le cours sont dans ce dossier.
@@ -37,6 +39,8 @@ dans [le dossier exercices](./exercices/).
   - [Utilisation de MPI_REDUCE](./exercices/mpi/5_reduce_com).
   - [Utilisation de MPI_GATHER](./exercices/mpi/6_gather_com).
   - [Création d'un communicateur cartésien](./exercices/mpi/7_cartesian_com).
+  - [Utilisation du type vector](./exercices/mpi/8_type_vector).
+  - [Exercice d'échange de cellules fantômes](./exercices/mpi/9_gather_matrix).
 
 ## Travaux pratiques
 
@@ -44,12 +48,14 @@ dans [le dossier exercices](./exercices/).
 - [Equation d'onde (différences finies)](./tp/onde/).
 - [Simulation de particules avec collisions](./tp/marble/).
 - [Simulation de vie](./tp/life/).
+- [Discrétisation des équations de Maxwell par un schéma de Yee](./tp/maxwell/).
 
 ## Installation des dépendances
 
 - [MPI](./documentation/mpi.md).
 - [HDF5](./documentation/hdf5.md).
 - [readme2tex](./documentation/readme2tex.md).
+- [Utilisation de Ruche](./documentation/ruche.md).
 
 ## Deepnote
 

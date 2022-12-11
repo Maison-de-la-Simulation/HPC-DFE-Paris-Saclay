@@ -6,9 +6,9 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master, year-2021-2022 ]
+    branches: [ master, year-2022-2023 ]
   pull_request:
-    branches: [ master, year-2021-2022 ]
+    branches: [ master, year-2022-2023 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -69,3 +69,12 @@ jobs:
         run: |
           cd tp/marble/cpp/sequential
           make
+      # ________________________________________________________
+      # Application Marble
+
+      # Runs a single command using the runners shell
+      - name: build and test maxwell sequential
+        run: |
+          cd tp/maxwell/cpp/sequential
+          g++ -O3 main.cpp -o executable
+          
