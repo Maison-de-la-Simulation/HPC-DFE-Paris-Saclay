@@ -1,5 +1,16 @@
 # Simulation des équations de Maxwell via la méthode aux différences finis explicite centrée de Yee
 
+Ce TP s'intéresse à la modélisation des équations de Maxwell par la méthode aux différences finies de Yee.
+
+## Description du répertoire
+
+Ce TP se compose de plusieurs répertoires :
+- [consignes](./consignes) : ce dossier contient les consignes du TP
+- [cpp/sequential](./cpp/sequential) : ce dossier contient le fichier source du code séquentiel et le makefile pour le compiler.
+- [visualization](./python) : ce dossier contient des scripts dédiés à la visualisation des résultats.
+- [scalings](./python) : ce dossier contient des scripts permettant d'afficher les courbes de scalabilité
+- [.extra](./.extra) : ce dossier sert uniquement pour GitHub
+
 ## Présentation du modèle
 
 Nous nous intéressons dans ce projet à la simulation des équations Maxwell par l'utilisation d'une méthode aux différences finies très connue du nom de FDTD pour Finite-Difference Time-Domain publié par K. Yee dans les années 60 et toujours utilisée aujourd'hui dans les codes de calcul pour sa rapidité et sa simplicité.
@@ -76,7 +87,32 @@ La figure ci-dssous résume la notion de grille primale et duale :
 
 <img src="../../support/materiel/maxwell_primal_dual.png" height="400">
 
-Il faut maintenant se pencher sur les conditions limites d'une telle discrétisation. 
+## Conditions limites
 
+Il faut maintenant se pencher sur les conditions limites.
+Les composantes de champs qui nécessitent d'être traitées sont aux bords sont situées sur la ligne violette de la figure ci-dessous :
 
 <img src="../../support/materiel/maxwell_yee_grid_2.png" height="400">
+
+De plus, les équations nous disent que les inconnus aux bords sont toutes des composantes du champ magnétique.
+En effet les champs électriques aux bords se calculent à partir des champs magnétiques connus.
+
+## Notion d'antenne
+
+Une façon de générer un champ électromagnétiest est d'émuler le comportement d'une antenne.
+Une antenne peut être modélisée par une charge qui se déplace en oscillant le long d'un segment.
+Il faut alors calculer le courant généré par cette antenne et l'ajouter aux équations de Maxell-Ampère.
+
+Soit <img src=".extra//2c09d6fe231fc69cfcee32fa0b3785df.svg?invert_in_darkmode" align=middle width=39.04402919999999pt height=24.65753399999998pt/> l'évolution dans l'espace d'une charge <img src=".extra//46d29bba147ab86127a70278268c42d9.svg?invert_in_darkmode" align=middle width=17.224222949999987pt height=14.15524440000002pt/> et donc <img src=".extra//e48500a898443f79affbb15aa1ea1eb7.svg?invert_in_darkmode" align=middle width=38.03569605pt height=24.65753399999998pt/> sa vitesse.
+Le courant est donné par :
+
+<p align="center"><img src=".extra//34f0431fabc6542e6237b3d2d33f1d61.svg?invert_in_darkmode" align=middle width=97.1842344pt height=20.00911605pt/></p>
+
+Pour une antenne, on utilise :
+
+<p align="center"><img src=".extra//7f9736b9470faf8a38e964e9a11db998.svg?invert_in_darkmode" align=middle width=207.70829475pt height=17.031940199999998pt/></p>
+
+Avec <img src=".extra//71d5328dcc516b999b4b4630d795dc3f.svg?invert_in_darkmode" align=middle width=21.07315319999999pt height=22.465723500000017pt/> la longueur de l'antenne et <img src=".extra//a68349737baf72a520a69e2b4aac8d32.svg?invert_in_darkmode" align=middle width=19.49209844999999pt height=22.465723500000017pt/> sa période.
+
+
+
