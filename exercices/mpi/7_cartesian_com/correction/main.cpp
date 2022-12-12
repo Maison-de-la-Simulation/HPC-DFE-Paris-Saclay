@@ -68,17 +68,18 @@ int main( int argc, char *argv[] )
 
     // en -y (rank_neighbors_my), en +y (rank_neighbors_py)
     
-    int rank_neighbors_my;
-    int rank_neighbors_py;
-    
-    MPI_Cart_shift( cartesian_communicator, 1, 1, &rank_neighbors_my, &rank_neighbors_py);
 
-    // En -x (rank_neighbors_mx) et en +x (rank_neighbors_px)
-    
     int rank_neighbors_mx;
     int rank_neighbors_px;
     
-    MPI_Cart_shift( cartesian_communicator, 0, 1, &rank_neighbors_mx, &rank_neighbors_px);
+    MPI_Cart_shift( cartesian_communicator, 1, 1, &rank_neighbors_mx, &rank_neighbors_px);
+
+    // En -x (rank_neighbors_mx) et en +x (rank_neighbors_px)
+    
+    int rank_neighbors_my;
+    int rank_neighbors_py;
+    
+    MPI_Cart_shift( cartesian_communicator, 0, 1, &rank_neighbors_my, &rank_neighbors_py);
     
     // Chaque processus affiche son rang, ses coordonnées et ses voisins
     // à tour de rôle
@@ -99,6 +100,7 @@ int main( int argc, char *argv[] )
     
     MPI_Gather(&rank,1,MPI_INT,&topology_map,1,MPI_INT,0,cartesian_communicator);
     
+    // -------------------------------------------------------------------------
     // Affichage de la topologie
     
     if (rank == 0) {
@@ -121,6 +123,7 @@ int main( int argc, char *argv[] )
     
     }
     
+    // -------------------------------------------------------------------------
     // Construction de la carte de la topologie  à partir de MPI_Cart_coords :
     
     int coordinates[2];
@@ -135,7 +138,7 @@ int main( int argc, char *argv[] )
     if (rank == 0) {
     
         std::cout << std::endl;
-        std::cout <<  " Carte de la topologie : "<< std::endl;
+        std::cout <<  " Carte de la topologie à partir de MPI_Cart_coords : "<< std::endl;
         std::cout <<  " ---------------------------> x"<< std::endl;
     
         for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
