@@ -100,6 +100,7 @@ int main( int argc, char *argv[] )
     
     MPI_???(???);
     
+    // -------------------------------------------------------------------------
     // Affichage de la topologie
     
     if (rank == 0) {
@@ -121,7 +122,8 @@ int main( int argc, char *argv[] )
         std::cout << " x" << std::endl;
     
     }
-    
+
+    // -------------------------------------------------------------------------
     // Construction de la carte de la topologie  à partir de MPI_Cart_coords :
     
     int coordinates[2];
@@ -136,7 +138,7 @@ int main( int argc, char *argv[] )
     if (rank == 0) {
     
         std::cout << std::endl;
-        std::cout <<  " Carte de la topologie : "<< std::endl;
+        std::cout <<  " Carte de la topologie à partir de MPI_Cart_coords : "<< std::endl;
         std::cout <<  " ---------------------------> y"<< std::endl;
     
         for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {

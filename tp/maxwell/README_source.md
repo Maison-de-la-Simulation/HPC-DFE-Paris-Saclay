@@ -7,7 +7,7 @@ Ce TP s'intéresse à la modélisation des équations de Maxwell par la méthode
 1. [Description du répertoire](#description) 
 2. [Présentation du modèle](#modele)
 3. [Le code séquentiel](#code_sequentiel)
-3. [Consignes](#consignes)
+4. [Consignes](#consignes)
 
 ## Description du répertoire <a id="description"></a>
 
