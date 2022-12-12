@@ -6,6 +6,8 @@ Ce TP s'intéresse à la modélisation des équations de Maxwell par la méthode
 
 1. [Description du répertoire](#description) 
 2. [Présentation du modèle](#modele)
+3. [Le code séquentiel](#code_sequentiel)
+3. [Consignes](#consignes)
 
 ## Description du répertoire <a id="description"></a>
 
@@ -17,6 +19,8 @@ Ce TP se compose de plusieurs répertoires :
 - [.extra](./.extra) : ce dossier sert uniquement pour GitHub
 
 ## Présentation du modèle <a id="modele"></a>
+
+### Schéma de Yee
 
 Nous nous intéressons dans ce projet à la simulation des équations Maxwell par l'utilisation d'une méthode aux différences finies très connue du nom de FDTD pour Finite-Difference Time-Domain publié par K. Yee dans les années 60 et toujours utilisée aujourd'hui dans les codes de calcul pour sa rapidité et sa simplicité.
 
@@ -116,7 +120,7 @@ La figure ci-dssous résume la notion de grille primale et duale :
 
 <img src="../../support/materiel/maxwell_primal_dual.png" height="400">
 
-## Conditions limites
+### Conditions limites
 
 Il faut maintenant se pencher sur les conditions limites.
 Les composantes de champs qui nécessitent d'être traitées sont aux bords sont situées sur la ligne violette de la figure ci-dessous :
@@ -128,7 +132,7 @@ En effet les champs électriques aux bords se calculent à partir des champs mag
 
 Dans le code, on utilise des conditions réfléchissantes (ou conditions de Neumann).
 
-## Notion d'antenne
+### Notion d'antenne
 
 Une façon de générer un champ électromagnétiest est d'émuler le comportement d'une antenne.
 Une antenne peut être modélisée par une charge qui se déplace en oscillant le long d'un segment.
@@ -150,7 +154,7 @@ $$
 Avec $L_A$ la longueur de l'antenne et $T_A$ sa période.
 
 
-## Le code séquentiel
+## Le code séquentiel <a id="code_sequentiel"></a>
 
 Le code est écrit en langage C++ mais n'utilise pas de foctionnalité avancée.
 Il ne se compose que d'un unique fichier `main.cpp`.
@@ -221,3 +225,45 @@ Il est possible de changer certains paramètres numériques directement en ligne
 - `-it`: nombre d'itérations
 - `-d` : fréquence des sorties de fichier en nombre d'itérations
 - `-p` : fréquence des affichages dans le terminal en nombre d'itérations
+
+### Visualisation
+
+Le code génère des sorties (fichier sur le disque dur) au format binaire contenant les grilles de champs à un temps donné.
+Les fichiers sont toujours écrits dans un dossier `diags`.
+
+Des scripts Python vous sont fournis pour vous aider à visualiser ces données.
+Vous pouvez aussi utiliser vos propres scripts dans le langage de votre choix.
+Les scripts sont dans le dossier [visualization](./visualization):
+- [plot_binary.py](./visualization/plot_binary.py)
+
+```bash
+python -i plot_binary.py <chemin vers un fichier diag_*.bin>
+```
+
+- [animate.py](./visualization/animate.py)
+
+```bash
+python -i animate.py <chemin vers un dossier diags>
+```
+
+- [plot_scalar.py](./visualization/plot_scalar.py)
+
+```bash
+python -i animate.py <chemin vers un fichier scalars.bin>
+```
+
+Voici un exemple d'image produite par la lecture d'un fichier via le script `plot_binary.py`.
+
+<img src="../../support/materiel/maxwell_image.png" height="400">
+
+## Consignes de TP <a id="consignes"></a>
+
+Dans ce TP, vous aurez à modifier un programme séquentiel afin de le rendre parallèle avec le standard MPI.
+Vous serez ensuite amené à étudier les performances de la version parallèle.
+
+Le TP se compose de 4 sous-sections :
+- [Sous-section I](./consignes/1_sequentiel.md) : il s'agit de la découverte du code séquentiel
+- [Sous-section II](./consignes/2_machine.md) : cette partie concerne la découverte de la machine parallèle
+- [Sous-section III](./consignes/3_mpi.md) : cette partie est l'implémentation de la version MPI
+- [Sous-section IV](./consignes/4_performance.md) : cette partie est l'étude de la performance des codes parallèles
+- [Sous-section V](./consignes/5_aide.md) : aide et conseils pour le projet
