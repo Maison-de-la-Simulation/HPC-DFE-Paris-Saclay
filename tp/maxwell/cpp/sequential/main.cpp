@@ -2,6 +2,10 @@
 
   Maxwell solver (Yee FDTD)
 
+  Sequential code
+  Master DFE PARIS SACLAY
+  Module HPC
+
 ! ______________________________________________________________________________ */
 
 #include <cmath>
@@ -13,6 +17,11 @@
 
 int main( int argc, char *argv[] )
 {
+
+    // --------------------------------------------------------------------------
+    // Main parameters
+    // --------------------------------------------------------------------------
+
     int nx;           // number of cells in the x direction without boundaries
     int ny;           // number of cells in the y direction without boundaries
     int iterations;   // number of iterations
@@ -69,16 +78,16 @@ int main( int argc, char *argv[] )
 	}
 
     // --------------------------------------------------------------------------
-    // Initilization
+    // Initilization of arrays and internal parameters
     // --------------------------------------------------------------------------
 
     // Primal
-    int nxp = nx;
-    int nyp = ny;
+    const int nxp = nx;
+    const int nyp = ny;
     
     // Dual
-    int nxd = nx + 1;
-    int nyd = ny + 1;
+    const int nxd = nx + 1;
+    const int nyd = ny + 1;
 
     // Electric field
     double * Ex = new double[nxd * nyp];
@@ -154,10 +163,12 @@ int main( int argc, char *argv[] )
     struct timeval current_time;
     
     // Shortcuts
-    double dtdx = dt / dx;
-    double dtdy = dt / dy;
+    const double dtdx = dt / dx;
+    const double dtdy = dt / dy;
 
+    // --------------------------------------------------------------------------
     // Initial diagnostics output
+    // --------------------------------------------------------------------------
 
     int iteration = 0;
 

@@ -2,7 +2,12 @@
 
 Ce TP s'intéresse à la modélisation des équations de Maxwell par la méthode aux différences finies de Yee.
 
-## Description du répertoire
+## Table des matières
+
+1. [Description du répertoire](#description) 
+2. [Présentation du modèle](#modele)
+
+## Description du répertoire <a id="description"></a>
 
 Ce TP se compose de plusieurs répertoires :
 - [consignes](./consignes) : ce dossier contient les consignes du TP
@@ -11,7 +16,7 @@ Ce TP se compose de plusieurs répertoires :
 - [scalings](./python) : ce dossier contient des scripts permettant d'afficher les courbes de scalabilité
 - [.extra](./.extra) : ce dossier sert uniquement pour GitHub
 
-## Présentation du modèle
+## Présentation du modèle <a id="modele"></a>
 
 Nous nous intéressons dans ce projet à la simulation des équations Maxwell par l'utilisation d'une méthode aux différences finies très connue du nom de FDTD pour Finite-Difference Time-Domain publié par K. Yee dans les années 60 et toujours utilisée aujourd'hui dans les codes de calcul pour sa rapidité et sa simplicité.
 
@@ -97,6 +102,8 @@ Les composantes de champs qui nécessitent d'être traitées sont aux bords sont
 De plus, les équations nous disent que les inconnus aux bords sont toutes des composantes du champ magnétique.
 En effet les champs électriques aux bords se calculent à partir des champs magnétiques connus.
 
+Dans le code, on utilise des conditions réfléchissantes (ou conditions de Neumann).
+
 ## Notion d'antenne
 
 Une façon de générer un champ électromagnétiest est d'émuler le comportement d'une antenne.
@@ -115,4 +122,74 @@ Pour une antenne, on utilise :
 Avec <img src=".extra//71d5328dcc516b999b4b4630d795dc3f.svg?invert_in_darkmode" align=middle width=21.07315319999999pt height=22.465723500000017pt/> la longueur de l'antenne et <img src=".extra//a68349737baf72a520a69e2b4aac8d32.svg?invert_in_darkmode" align=middle width=19.49209844999999pt height=22.465723500000017pt/> sa période.
 
 
+## Le code séquentiel
 
+Le code est écrit en langage C++ mais n'utilise pas de foctionnalité avancée.
+Il ne se compose que d'un unique fichier `main.cpp`.
+
+### Description du code
+
+Le code se compose d'une phase d'initialisation puis d'une boucle ne temps (*main loop*) :
+
+```c++
+for (iteration = 1 ; iteration <= iterations ; iteration++) {
+    //...
+}
+```
+
+Dans la partie d'initialisation, on fait dans l'ordre :
+- la déclaration des paramètres
+- l'initialisation par défaut
+- la lecture des arguments en ligne de commande
+- l'initialisation des tableaux et des variables internes
+- sortie des grilles dans des fichiers au temps 0
+
+Puis dans la boucle en temps :
+- résolution des équations de Maxwell-Ampère
+- ajout des courants géénrés par les antennes
+- résolution des équantions de Maxwell-Faraday
+- conditions aux bords
+- sortie des fichiers de diagntostique (pour chaque grille)
+- affichage dans le terminal de l'état de la simulation
+
+### Les dépendances
+
+Ce programme nécessite l'installation d'un compilateur C++.
+
+Vous n'avez besoin que d'une bibliothèque MPI.
+Sur les postes de travail de l'université, OpenMPI est déjà installé.
+Pour l'installer sur vos ordinateurs personnels, utilisez les instructions
+dans le dossier [./documentation](../../documentation/mpi.md).
+
+### Compilation et exécution
+
+Pour compiler ce programme, vous pouvez utiliser les commandes suivantes en fonction de vos compilateurs :
+
+Pour g++:
+```bash
+g++ -O3 main.cpp -o exe
+```
+
+Pour Intel (sur Ruche par exemple):
+```bash
+icpc -O3 main.cpp -o exe
+```
+
+La compilation génère un fichier exécutable du nom de `exe`. Vous pouvez lancer le programme en faisant :
+```bash
+./exe
+```
+
+### Arguments en ligne de commande
+
+Il est possible de changer certains paramètres numériques directement en ligne de commande :
+
+```bash
+./executable -nx 128 -ny 256 -it 1000
+```
+
+- `-nx`: nombre de cellules dans la direction x
+- `-ny`: nombre de cellules dans la direction y
+- `-it`: nombre d'itérations
+- `-d` : fréquence des sorties de fichier en nombre d'itérations
+- `-p` : fréquence des affichages dans le terminal en nombre d'itérations
