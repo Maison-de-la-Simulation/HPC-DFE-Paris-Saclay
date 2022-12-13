@@ -15,6 +15,16 @@
 #include <iomanip>
 #include <fstream>
 
+// Headers
+
+void output_grids(int iteration,
+                  int nxp, int nyp,
+                  int nxd, int nyd,
+                  double * Ex, double * Ey, double * Ez,
+                  double * Bx, double * By, double * Bz);
+
+// Main
+
 int main( int argc, char *argv[] )
 {
 
@@ -30,11 +40,6 @@ int main( int argc, char *argv[] )
     double Lx;        // domain length
     double Ly;        // domain length
 
-    // Antenna properties
-    double antenna_period = 0.6*Lx;
-    const double antenna_length = antenna_period;
-    const double antenna_charge = 0.01;
-
     // --------------------------------------------------------------------------
     // Default parameter initilization
     // --------------------------------------------------------------------------
@@ -47,6 +52,11 @@ int main( int argc, char *argv[] )
     diag_period  = 1;
     print_period = 1;
     
+    // Antenna properties
+    double antenna_period = 0.6*Lx;
+    const double antenna_length = antenna_period;
+    const double antenna_charge = 0.01;
+
     // --------------------------------------------------------------------------
     // Command line arguments
     // --------------------------------------------------------------------------
@@ -105,6 +115,9 @@ int main( int argc, char *argv[] )
     
     // Time step (from the CFL)
     const double dt = 0.9/std::sqrt(1/(dx*dx) + 1/(dy*dy));
+
+    // Iteration or timestep
+    int iteration = 0;
     
     // Antenna
     int ixantenna = int(0.5*nyp) * nxd + int(0.5*nxd);
@@ -113,6 +126,13 @@ int main( int argc, char *argv[] )
 
     const double antenna_max_velocity = 0.2*antenna_length*2*M_PI/ antenna_period;
     const double antenna_inverse_period = 1./antenna_period;
+
+    // Time management
+    struct timeval current_time;
+    
+    // Shortcuts
+    const double dtdx = dt / dx;
+    const double dtdy = dt / dy;
 
     // Initial field values
     for (int i = 0 ; i < nxp*nyp ; i++) {
@@ -143,6 +163,10 @@ int main( int argc, char *argv[] )
     // Creation of the diag folder
     system("mkdir -p diags");
     
+    // --------------------------------------------------------------------------
+    // Summary in the terminal
+    // --------------------------------------------------------------------------
+
     std::cout << " ------------------------------------ "<< std::endl;
     std::cout << " MAXWELL SOLVER" << std::endl;
     std::cout << " ------------------------------------ "<< std::endl;
@@ -158,42 +182,16 @@ int main( int argc, char *argv[] )
     std::cout << "  - antenna max velocity: " << antenna_max_velocity << std::endl;
     std::cout << "  - print period: " << print_period << std::endl;
     std::cout << std::endl;
-    
-    // Time management
-    struct timeval current_time;
-    
-    // Shortcuts
-    const double dtdx = dt / dx;
-    const double dtdy = dt / dy;
 
     // --------------------------------------------------------------------------
     // Initial diagnostics output
     // --------------------------------------------------------------------------
 
-    int iteration = 0;
-
-    char file_name[128];
-    snprintf (file_name, 128, "diags/diag_%05d.bin", iteration);
-
-    std::ofstream binary_file(file_name, std::ios::out | std::ios::binary);
-
-    if(!binary_file) {
-        std::cerr << " Error while creating the file :" << file_name << std::endl;
-    }
-
-    binary_file.write((char *) &iteration, sizeof(int));
-    binary_file.write((char *) &nx, sizeof(int));
-    binary_file.write((char *) &ny, sizeof(int));
-    
-    binary_file.write((char *) &Ex[0], sizeof(double)*nxd*nyp);
-    binary_file.write((char *) &Ey[0], sizeof(double)*nxp*nyd);
-    binary_file.write((char *) &Ez[0], sizeof(double)*nxp*nyp);
-
-    binary_file.write((char *) &Bx[0], sizeof(double)*nxp*nyd);
-    binary_file.write((char *) &By[0], sizeof(double)*nxd*nyp);
-    binary_file.write((char *) &Bz[0], sizeof(double)*nxd*nyd);
-
-    binary_file.close();
+    output_grids(iteration,
+            nxp, nyp,
+            nxd, nyd,
+            Ex, Ey, Ez,
+            Bx, By, Bz);
 
     // --------------------------------------------------------------------------
     // Main loop
@@ -335,31 +333,11 @@ int main( int argc, char *argv[] )
         // -------------------------------------
 
         if (iteration%diag_period == 0) {
-            char file_name[128];
-            snprintf (file_name, 128, "diags/diag_%05d.bin", iteration);
-
-            //
-            // std::string file_name = "diags/diags_" + std::to_string(iteration) + ".bin";
-            //
-            std::ofstream binary_file(file_name, std::ios::out | std::ios::binary);
-
-            if(!binary_file) {
-                std::cerr << " Error while creating the file :" << file_name << std::endl;
-            }
-
-            binary_file.write((char *) &iteration, sizeof(int));
-            binary_file.write((char *) &nx, sizeof(int));
-            binary_file.write((char *) &ny, sizeof(int));
-            
-            binary_file.write((char *) &Ex[0], sizeof(double)*nxd*nyp);
-            binary_file.write((char *) &Ey[0], sizeof(double)*nxp*nyd);
-            binary_file.write((char *) &Ez[0], sizeof(double)*nxp*nyp);
-
-            binary_file.write((char *) &Bx[0], sizeof(double)*nxp*nyd);
-            binary_file.write((char *) &By[0], sizeof(double)*nxd*nyp);
-            binary_file.write((char *) &Bz[0], sizeof(double)*nxd*nyd);
-
-            binary_file.close();
+            output_grids(iteration,
+                  nxp, nyp,
+                  nxd, nyd,
+                  Ex, Ey, Ez,
+                  Bx, By, Bz);
         }
         
         // Print
@@ -377,7 +355,9 @@ int main( int argc, char *argv[] )
     gettimeofday(&current_time, NULL);
     double timer_end = current_time.tv_sec + current_time.tv_usec*1e-6;
 
-    // Timers __________________________________________________________________
+    // --------------------------------------------------------
+    // Timers 
+    // --------------------------------------------------------
 
     double timer_main_loop = timer_end - timer_begin;
 
@@ -396,4 +376,48 @@ int main( int argc, char *argv[] )
     std::cout << " | " ;
     std::cout << std::endl;
 
+    // --------------------------------------------------------
+    // Cleaning 
+    // --------------------------------------------------------
+
+    delete [] Ex;
+    delete [] Ey;
+    delete [] Ez;
+    
+    delete [] Bx;
+    delete [] By;
+    delete [] Bz;
+
+}
+
+
+// Function that write the grids on disk
+void output_grids(int iteration,
+                  int nxp, int nyp,
+                  int nxd, int nyd,
+                  double * Ex, double * Ey, double * Ez,
+                  double * Bx, double * By, double * Bz) {
+
+    char file_name[128];
+    snprintf (file_name, 128, "diags/diag_%05d.bin", iteration);
+
+    std::ofstream binary_file(file_name, std::ios::out | std::ios::binary);
+
+    if(!binary_file) {
+        std::cerr << " Error while creating the file :" << file_name << std::endl;
+    }
+
+    binary_file.write((char *) &iteration, sizeof(int));
+    binary_file.write((char *) &nxp, sizeof(int));
+    binary_file.write((char *) &nyp, sizeof(int));
+    
+    binary_file.write((char *) &Ex[0], sizeof(double)*nxd*nyp);
+    binary_file.write((char *) &Ey[0], sizeof(double)*nxp*nyd);
+    binary_file.write((char *) &Ez[0], sizeof(double)*nxp*nyp);
+
+    binary_file.write((char *) &Bx[0], sizeof(double)*nxp*nyd);
+    binary_file.write((char *) &By[0], sizeof(double)*nxd*nyp);
+    binary_file.write((char *) &Bz[0], sizeof(double)*nxd*nyd);
+
+    binary_file.close();
 }

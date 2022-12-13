@@ -7,7 +7,7 @@ Ce TP s'intéresse à la modélisation des équations de Maxwell par la méthode
 1. [Description du répertoire](#description) 
 2. [Présentation du modèle](#modele)
 3. [Le code séquentiel](#code_sequentiel)
-3. [Consignes](#consignes)
+4. [Consignes](#consignes)
 
 ## Description du répertoire <a id="description"></a>
 
@@ -155,6 +155,10 @@ Puis dans la boucle en temps :
 - conditions aux bords
 - sortie des fichiers de diagntostique (pour chaque grille)
 - affichage dans le terminal de l'état de la simulation
+
+Puis après la boucle en temps :
+- l'affichage des *timers*, c'est à dire le temps passé dans le divers parties du code
+- destruction des tableaux
 
 ### Les dépendances
 
