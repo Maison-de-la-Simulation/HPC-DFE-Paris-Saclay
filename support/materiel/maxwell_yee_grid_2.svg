@@ -27,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.1476306"
-     inkscape:cx="267.50768"
-     inkscape:cy="228.29646"
+     inkscape:zoom="0.81149738"
+     inkscape:cx="195.31794"
+     inkscape:cy="264.94232"
      inkscape:window-width="1463"
      inkscape:window-height="824"
      inkscape:window-x="124"
@@ -38,6 +38,12 @@
      inkscape:current-layer="layer1" />
   <defs
      id="defs2">
+    <rect
+       x="-68.837481"
+       y="158.58762"
+       width="117.75752"
+       height="133.30314"
+       id="rect498" />
     <rect
        x="230.98273"
        y="81.689011"
@@ -242,6 +248,24 @@
        width="122.53352"
        height="43.661369"
        id="rect2381" />
+    <rect
+       x="-68.837479"
+       y="158.58762"
+       width="117.75752"
+       height="133.30315"
+       id="rect498-8" />
+    <rect
+       x="-68.837479"
+       y="158.58762"
+       width="117.75752"
+       height="133.30315"
+       id="rect498-8-7" />
+    <rect
+       x="-68.837479"
+       y="158.58762"
+       width="117.75752"
+       height="133.30315"
+       id="rect498-8-7-5" />
   </defs>
   <g
      inkscape:label="Calque 1"
@@ -607,5 +631,69 @@
        cy="120.11955"
        rx="2.3219037"
        ry="2.3219039" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,8.5632681,26.001958)"
+       id="text496"
+       style="font-size:26.6667px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';white-space:pre;shape-inside:url(#rect498);display:inline;fill:#000000;stroke-width:2.26772;stroke-linecap:round;stroke-linejoin:round"><tspan
+         x="-68.837891"
+         y="181.30927"
+         id="tspan2323">Bord -x :
+</tspan><tspan
+         x="-68.837891"
+         y="214.64265"
+         id="tspan2325">- Bz
+</tspan><tspan
+         x="-68.837891"
+         y="247.97602"
+         id="tspan2327">- By</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,163.61318,25.043803)"
+       id="text496-0"
+       style="font-size:26.6667px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';white-space:pre;shape-inside:url(#rect498-8);display:inline;fill:#000000;stroke-width:2.26772;stroke-linecap:round;stroke-linejoin:round"><tspan
+         x="-68.837891"
+         y="181.30927"
+         id="tspan2329">Bord +x :
+</tspan><tspan
+         x="-68.837891"
+         y="214.64265"
+         id="tspan2331">- Bz
+</tspan><tspan
+         x="-68.837891"
+         y="247.97602"
+         id="tspan2333">- By</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,88.603988,-53.206603)"
+       id="text496-0-8"
+       style="font-size:26.6667px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';white-space:pre;shape-inside:url(#rect498-8-7);display:inline;fill:#000000;stroke-width:2.26772;stroke-linecap:round;stroke-linejoin:round"><tspan
+         x="-68.837891"
+         y="181.30927"
+         id="tspan2335">Bord +y :
+</tspan><tspan
+         x="-68.837891"
+         y="214.64265"
+         id="tspan2337">- Bz
+</tspan><tspan
+         x="-68.837891"
+         y="247.97602"
+         id="tspan2339">- Bx</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,87.208515,103.97462)"
+       id="text496-0-8-4"
+       style="font-size:26.6667px;font-family:'Clear Sans Light';-inkscape-font-specification:'Clear Sans Light, ';white-space:pre;shape-inside:url(#rect498-8-7-5);display:inline;fill:#000000;stroke-width:2.26772;stroke-linecap:round;stroke-linejoin:round"><tspan
+         x="-68.837891"
+         y="181.30927"
+         id="tspan2341">Bord -y :
+</tspan><tspan
+         x="-68.837891"
+         y="214.64265"
+         id="tspan2343">- Bz
+</tspan><tspan
+         x="-68.837891"
+         y="247.97602"
+         id="tspan2345">- Bx</tspan></text>
   </g>
 </svg>
