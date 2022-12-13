@@ -184,6 +184,10 @@ Puis dans la boucle en temps :
 - sortie des fichiers de diagntostique (pour chaque grille)
 - affichage dans le terminal de l'état de la simulation
 
+Puis après la boucle en temps :
+- l'affichage des *timers*, c'est à dire le temps passé dans le divers parties du code
+- destruction des tableaux
+
 ### Les dépendances
 
 Ce programme nécessite l'installation d'un compilateur C++.

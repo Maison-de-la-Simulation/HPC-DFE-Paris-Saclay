@@ -26,7 +26,7 @@ Compilez le code en faisant `make` pour vous assurer qu'il n'y a pas d'erreur da
 **Question 3.2 - Initialisation de MPI :** Nous allons commencer par préparer le programme pour MPI.
 
 a) Commencez par inclure le header MPI dans le fichier [main.cpp](../cpp/main.cpp).
-Notez que dans un programme composé de plusieurs sources, il faudrait l'inclure dans chaque fichier où serait appelées des fonctions MPI.
+Notez que dans un programme composé de plusieurs sources, il faudrait l'inclure dans chaque fichier où seraient appelées des fonctions MPI.
 
 b) Effectuez l'initialisation de MPI au début du fichier [main.cpp](../cpp/main.cpp).
 Rajoutez la déclaration des nouveaux paramètres nécessaires à MPI là où tous les paramètres sont déclarés.
@@ -109,7 +109,7 @@ Après la décomposition du domaine, certaines cellules à la frontière avec le
 
 <img src="../../../support/materiel/life_grid_decomposition_1.svg" height="500">
 
-On fabrique donc une nouvelle rangée de cellule tout autour des frontières entre sous-domaine MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
+On fabrique donc une nouvelle rangée de cellule tout autour des frontières entre sous-domaines MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
 Ces rangées se nomment cellules fantômes.
 
 <img src="../../../support/materiel/life_grid_decomposition_2.svg" height="1100">
