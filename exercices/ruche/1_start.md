@@ -91,7 +91,13 @@ squeue -u <login>
 11) Nous allons maintenant lancer un premier programme MPI sur un noeud. Nous allons utiliser le premier exercice sur MPI. Nous devons dans un premier temps télécharger le repository du cours en faisant :
 
 ```bash
-git clone https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay.git
+wget https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/archive/refs/heads/master.zip
+```
+
+Puis :
+
+```bash
+unzip <nom de l'archive>
 ```
 
 12) Dans le dossier du premier exercice, nous allons compiler le code avec la commande :
