@@ -91,10 +91,6 @@ La découverte de ce sujet constitue la première partie du TP.
 
 Ce programme nécessite l'installation d'un compilateur C++.
 
-Pour le TP, vous aurez besoin d'installer un compilateur équipé d'OpenMP.
-C'est normalement le cas de la plupart des compilateurs récents.
-C'est le cas sur les postes de travail de l'université.
-
 Vous aurez aussi besoin d'installer une bibliothèque MPI.
 Sur les postes de travail de l'université, OpenMPI est déjà installé.
 Pour l'installer sur vos ordinateurs personnels, utilisez les instructions
@@ -107,8 +103,8 @@ Pour compiler ce programme, vous pouvez tout simplement utiliser le makefile dan
 make
 ```
 
- Le makefile est là pour vous simplifier la vie.
- Il est possible aussi de compiler à la main.
+Le makefile est là pour vous simplifier la vie.
+Il est possible aussi de compiler à la main.
 
 Si jamais vous avez des problèmes de compilation, vous pouvez faire `make clean` avant de faire `make`, cela permet de nettoyer le dossier des anciens fichiers temporaires.
 ```bash
