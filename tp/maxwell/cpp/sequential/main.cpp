@@ -197,9 +197,9 @@ int main( int argc, char *argv[] )
     // Main loop
     // --------------------------------------------------------------------------
 
-    std::cout << " ------------------------------------ "<< std::endl;
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
     std::cout << " MAIN LOOP" << std::endl;
-    std::cout << " ------------------------------------ "<< std::endl;
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
 
     gettimeofday(&current_time, NULL);
     double timer_begin = current_time.tv_sec + current_time.tv_usec*1e-6;
@@ -363,9 +363,9 @@ int main( int argc, char *argv[] )
 
     double percentage;
 
-    std::cout << " ------------------------------------ "<< std::endl;
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
     std::cout << " TIMERS"<< std::endl;
-    std::cout << " ------------------------------------ "<< std::endl;
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
     std::cout << "            code part |  time (s)  | percentage |"<< std::endl;
     std::cout << " ---------------------|------------|----------- |"<< std::endl;
 

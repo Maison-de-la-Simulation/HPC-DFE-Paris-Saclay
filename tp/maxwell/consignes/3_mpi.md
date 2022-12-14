@@ -109,3 +109,13 @@ Après la décomposition du domaine, certaines cellules à la frontière avec le
 
 On fabrique donc une nouvelle rangée de cellule tout autour des frontières entre sous-domaines MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
 Ces rangées se nomment cellules fantômes.
+
+<img src="../../../support/materiel/life_grid_decomposition_2.svg" height="1100">
+
+Il faudra à chaque itération utiliser les communications MPI pour remplir ces cellules fantômes à partir des autres rangs.
+Les communications doivent se faire par étape, d'abord une direction (x par exemple) puis une autre (y).
+De la sorte, les voisins aux coins sont transférés au bon rang en 2 fois comme l'illustre la figure ci-dessus.
+
+Dans le cas du schéma de Yee et ses grilles *stagered*, le problème est schématisé par la figure ci-dessous
+
+<img src="../../../support/materiel/maxwell_mpi_com.svg" height="500">
