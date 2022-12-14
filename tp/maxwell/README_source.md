@@ -134,7 +134,7 @@ Dans le code, on utilise des conditions réfléchissantes (ou conditions de Neum
 
 ### Notion d'antenne
 
-Une façon de générer un champ électromagnétiest est d'émuler le comportement d'une antenne.
+Une façon de générer un champ électromagnétique est d'émuler le comportement d'une antenne.
 Une antenne peut être modélisée par une charge qui se déplace en oscillant le long d'un segment.
 Il faut alors calculer le courant généré par cette antenne et l'ajouter aux équations de Maxell-Ampère.
 
