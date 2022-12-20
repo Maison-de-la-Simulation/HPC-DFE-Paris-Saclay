@@ -72,7 +72,7 @@ int main( int argc, char *argv[] )
 
     std::cout << " Le rang " << rank << " s'occupe de la portion comprise entre " << min << " et " << max << std::endl;
 
-    sleep(0.1);
+    usleep(100);
 
     MPI_Barrier(MPI_COMM_WORLD);
 
@@ -87,7 +87,7 @@ int main( int argc, char *argv[] )
 
     std::cout << " Le rang " << rank << " a pour intégration locale " << local_integration << std::endl;
     
-    sleep(0.1);
+    usleep(100);
     
     // Réduction de `local_integration ` pour avoir la valeur finale
     // dans la variable `integration` sur le rang 0
