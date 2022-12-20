@@ -118,4 +118,4 @@ De la sorte, les voisins aux coins sont transférés au bon rang en 2 fois comme
 
 Dans le cas du schéma de Yee et ses grilles *stagered*, le problème est schématisé par la figure ci-dessous
 
-<img src="../../../support/materiel/maxwell_mpi_com.svg" height="500">
+<img src="../../../support/materiel/maxwell_mpi_com.png" height="1000">
