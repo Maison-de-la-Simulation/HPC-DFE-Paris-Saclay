@@ -44,6 +44,7 @@ int main( int argc, char *argv[] )
     int recv_message;
     int ierror;
 
+    // On détermine les rangs à qui on envoie et de qui on reçoit
     if (rank == 0) {
         send_rank = ???;
         recv_rank = ???;

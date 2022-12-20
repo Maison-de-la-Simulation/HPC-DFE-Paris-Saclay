@@ -113,28 +113,39 @@ ax12 = subplot(gs[2:4,4:6])
 
 colormap_name = "RdBu"
 
+def symetric(im):
+    clim = np.array(im.get_clim())
+    max = 0.8*np.max(np.absolute(clim))
+    im.set_clim([-max,max])
+
 im00 = ax00.pcolormesh(xd,yp,Ex_map,shading='auto',cmap=colormaps[colormap_name])
+symetric(im00)
 cb00 = colorbar(im00, ax=ax00)
 ax00.set_title("Ex (it: {})".format(iteration))
 #im00.set_clim([-1e-6,1e-6])
 
 im01 = ax01.pcolormesh(xp,yd,Ey_map,shading='auto',cmap=colormaps[colormap_name])
+symetric(im01)
 cb01 = colorbar(im01, ax=ax01)
 ax01.set_title("Ey")
 
 im02 = ax02.pcolormesh(xp,yp,Ez_map,shading='auto',cmap=colormaps[colormap_name])
+symetric(im02)
 cb02 = colorbar(im02, ax=ax02)
 ax02.set_title("Ez")
 
 im10 = ax10.pcolormesh(xp,yd,Bx_map,shading='auto',cmap=colormaps[colormap_name])
+symetric(im10)
 cb10 = colorbar(im10, ax=ax10)
 ax10.set_title("Bx")
 
 im11 = ax11.pcolormesh(xd,yp,By_map,shading='auto',cmap=colormaps[colormap_name])
+symetric(im11)
 cb11 = colorbar(im11, ax=ax11)
 ax11.set_title("By")
 
 im12 = ax12.pcolormesh(xd,yd,Bz_map,shading='auto',cmap=colormaps[colormap_name])
+symetric(im12)
 cb12 = colorbar(im12, ax=ax12)
 ax12.set_title("Bz")
 

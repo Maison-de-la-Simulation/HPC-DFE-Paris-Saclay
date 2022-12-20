@@ -22,21 +22,17 @@ C'est à dire que le rang 0 à pour voisin le rang 1 à droite et le rang N à g
 De même, le rang N a pour voisin le rang 0 à droite et N-1 à gauche.
 A partir de là, complétez dans le code les lignes suivantes :
 
-```fortran
-! Calcul des rangs voisins
-! Rang au bord inférieur
-if (rank.eq.0) then
-    send_rank = ???
-    recv_rank = ???
-! Rang au bord supérieur
-else if (rank.eq.number_of_ranks-1) then
-    send_rank = ???
-    recv_rank = ???
-! Rang intérieur
-else
-    send_rank = ???
-    recv_rank = ???
-end if
+```C++
+    if (rank == 0) {
+        send_rank = ???;
+        recv_rank = ???;
+    } else if (rank == number_of_ranks - 1) {
+        send_rank = ???;
+        recv_rank = ???;
+    } else {
+        send_rank = ???;
+        recv_rank = ???
+    }
 ```
 
 ## Compilation

@@ -44,18 +44,19 @@ int main( int argc, char *argv[] )
     // Default parameter initilization
     // --------------------------------------------------------------------------
 
-    nx           = 64;
-    ny           = 128;
+    nx           = 128;
+    ny           = 256;
     Lx           = 1;
     Ly           = 1;
-    iterations   = 10;
-    diag_period  = 1;
-    print_period = 1;
+    iterations   = 2000;
+    diag_period  = 100;
+    print_period = 100;
     
     // Antenna properties
-    double antenna_period = 0.6*Lx;
-    const double antenna_length = antenna_period;
+    const double antenna_period = 1.2*Lx;
+    const double antenna_length = 0.2*Lx;
     const double antenna_charge = 0.01;
+    const double antenna_radius = 0.05*Lx;
 
     // --------------------------------------------------------------------------
     // Command line arguments
@@ -124,8 +125,8 @@ int main( int argc, char *argv[] )
     int iyantenna = int(0.5*nyd) * nxp + int(0.5*nxp);
     int izantenna = int(0.5*nyp) * nxp + int(0.5*nxp);
 
-    const double antenna_max_velocity = 0.2*antenna_length*2*M_PI/ antenna_period;
     const double antenna_inverse_period = 1./antenna_period;
+    const double antenna_max_velocity = 0.5*antenna_length*2*M_PI*antenna_inverse_period;
 
     // Time management
     struct timeval current_time;
@@ -244,10 +245,10 @@ int main( int argc, char *argv[] )
             for (int ix = 0 ; ix < nxd ; ix++) {
                 const double x = ix * dx - 0.5*dx;
                 const double y = iy * dy;
-                double xa = 0.5*Lx - 0.2*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
+                double xa = 0.5*Lx - 0.5*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
                 double ya = 0.5*Ly;
                 double va = antenna_max_velocity*std::sin(2.0 * M_PI * iteration * dt * antenna_inverse_period);
-                if ((x >= xa-2*dx and x <= xa + 2*dx) and (y >= ya-2*dy and y <= ya + 2*dy)) {
+                if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
                     Ex[iy*nxd+ix] += dt*antenna_charge*va;
                 }
             }
@@ -259,9 +260,9 @@ int main( int argc, char *argv[] )
                 const double x = ix * dx;
                 const double y = iy * dy - 0.5*dy;
                 double xa = 0.5*Lx;
-                double ya = 0.5*Ly - 0.2*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
+                double ya = 0.5*Ly - 0.5*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
                 double va = antenna_max_velocity*std::sin(2.0 * M_PI * iteration * dt * antenna_inverse_period);
-                if ((x >= xa-2*dx and x <= xa + 2*dx) and (y >= ya-2*dy and y <= ya + 2*dy)) {
+                if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
                     Ey[iy*nxp+ix] += dt*antenna_charge*va;
                 }
             }
