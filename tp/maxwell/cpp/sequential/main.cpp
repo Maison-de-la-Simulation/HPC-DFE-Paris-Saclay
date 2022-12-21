@@ -18,10 +18,9 @@
 // Headers
 
 void output_grids(int iteration,
-                  int nxp, int nyp,
-                  int nxd, int nyd,
-                  double * Ex, double * Ey, double * Ez,
-                  double * Bx, double * By, double * Bz);
+                  int nx, int ny,
+                  double * array,
+                  std::string  field_name);
 
 // Main
 
@@ -121,9 +120,7 @@ int main( int argc, char *argv[] )
     int iteration = 0;
     
     // Antenna
-    int ixantenna = int(0.5*nyp) * nxd + int(0.5*nxd);
-    int iyantenna = int(0.5*nyd) * nxp + int(0.5*nxp);
-    int izantenna = int(0.5*nyp) * nxp + int(0.5*nxp);
+    int izantenna = int(0.5*nyp) + int(0.5*nxp)*nyp;
 
     const double antenna_inverse_period = 1./antenna_period;
     const double antenna_max_velocity = 0.5*antenna_length*2*M_PI*antenna_inverse_period;
@@ -168,9 +165,9 @@ int main( int argc, char *argv[] )
     // Summary in the terminal
     // --------------------------------------------------------------------------
 
-    std::cout << " ------------------------------------ "<< std::endl;
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
     std::cout << " MAXWELL SOLVER" << std::endl;
-    std::cout << " ------------------------------------ "<< std::endl;
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
 
     std::cout << "  - nx (primal): " << nx << std::endl;
     std::cout << "  - ny (primal): " << ny << std::endl;
@@ -188,11 +185,13 @@ int main( int argc, char *argv[] )
     // Initial diagnostics output
     // --------------------------------------------------------------------------
 
-    output_grids(iteration,
-            nxp, nyp,
-            nxd, nyd,
-            Ex, Ey, Ez,
-            Bx, By, Bz);
+    output_grids(iteration,nxd,nyp,Ex,"Ex");
+    output_grids(iteration,nxp,nyd,Ey,"Ey");
+    output_grids(iteration,nxp,nyp,Ez,"Ez");
+
+    output_grids(iteration,nxp,nyd,Bx,"Bx");
+    output_grids(iteration,nxd,nyp,By,"By");
+    output_grids(iteration,nxd,nyd,Bz,"Bz");
 
     // --------------------------------------------------------------------------
     // Main loop
@@ -201,6 +200,8 @@ int main( int argc, char *argv[] )
     std::cout << " ------------------------------------------------------------------------- "<< std::endl;
     std::cout << " MAIN LOOP" << std::endl;
     std::cout << " ------------------------------------------------------------------------- "<< std::endl;
+    std::cout << " Iteration |  time  | Ex energ |"<< std::endl;
+    std::cout << " ----------|--------|----------|"<< std::endl;
 
     gettimeofday(&current_time, NULL);
     double timer_begin = current_time.tv_sec + current_time.tv_usec*1e-6;
@@ -211,27 +212,27 @@ int main( int argc, char *argv[] )
         // ------------------------------------- 
 
         // Ex (dual, primal)
-        for (int iy = 0 ; iy < nyp ; iy++) {
-            for (int ix = 0 ; ix < nxd ; ix++) {
-                Ex[iy*nxd+ix] +=
-                              + dtdy * (Bz[(iy+1)*nxd + ix] - Bz[iy*nxd+ix]);
+        for (int ix = 0 ; ix < nxd ; ix++) {
+            for (int iy = 0 ; iy < nyp ; iy++) {
+                Ex[ix*nyp+iy] +=
+                              + dtdy * (Bz[ix*nyd + iy + 1] - Bz[ix*nyd+iy]);
             }
         }
-        
+
         // Ey (primal, dual)
-        for (int iy = 0 ; iy < nyd ; iy++) {
-            for (int ix = 0 ; ix < nxp ; ix++) {
-                Ey[iy*nxp+ix] +=
-                              - dtdx * (Bz[iy*nxd+ix+1] - Bz[iy*nxd+ix]);
+        for (int ix = 0 ; ix < nxp ; ix++) {
+            for (int iy = 0 ; iy < nyd ; iy++) {
+                Ey[ix*nyd+iy] +=
+                              - dtdx * (Bz[(ix+1)*nyd + iy] - Bz[ix*nyd + iy]);
             }
         }
         
         // Ez (primal, primal)
-        for (int iy = 0 ; iy < nyp ; iy++) {
-            for (int ix = 0 ; ix < nxp ; ix++) {
-                Ez[iy*nxp+ix] +=
-                                + dtdx * (By[iy*nxd+ix+1] - By[iy*nxd+ix])
-                                - dtdy * (Bx[(iy+1)*nxp+ix] - Bx[iy*nxp+ix]);
+        for (int ix = 0 ; ix < nxp ; ix++) {
+            for (int iy = 0 ; iy < nyp ; iy++) {
+                Ez[ix*nyp+iy] +=
+                                + dtdx * (By[(ix+1)*nyp + iy] - By[ix*nyp + iy])
+                                - dtdy * (Bx[ix*nyd+iy+1] - Bx[ix*nyd+iy]);
             }
         }
 
@@ -241,29 +242,29 @@ int main( int argc, char *argv[] )
         const double antenna_velocity = antenna_max_velocity*std::sin(2.0 * M_PI * iteration * dt * antenna_inverse_period);
 
         // Ex
-        for (int iy = 0 ; iy < nyp ; iy++) {
-            for (int ix = 0 ; ix < nxd ; ix++) {
+        for (int ix = 0 ; ix < nxd ; ix++) {
+            for (int iy = 0 ; iy < nyp ; iy++) {
                 const double x = ix * dx - 0.5*dx;
                 const double y = iy * dy;
                 double xa = 0.5*Lx - 0.5*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
                 double ya = 0.5*Ly;
                 double va = antenna_max_velocity*std::sin(2.0 * M_PI * iteration * dt * antenna_inverse_period);
                 if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
-                    Ex[iy*nxd+ix] += dt*antenna_charge*va;
+                    Ex[ix*nyp+iy] += dt*antenna_charge*va;
                 }
             }
         }
 
         //Ey
-        for (int iy = 0 ; iy < nyd ; iy++) {
-            for (int ix = 0 ; ix < nxp ; ix++) {
+        for (int ix = 0 ; ix < nxp ; ix++) {
+            for (int iy = 0 ; iy < nyd ; iy++) {
                 const double x = ix * dx;
                 const double y = iy * dy - 0.5*dy;
                 double xa = 0.5*Lx;
                 double ya = 0.5*Ly - 0.5*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
                 double va = antenna_max_velocity*std::sin(2.0 * M_PI * iteration * dt * antenna_inverse_period);
                 if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
-                    Ey[iy*nxp+ix] += dt*antenna_charge*va;
+                    Ey[ix*nyd+iy] += dt*antenna_charge*va;
                 }
             }
         }
@@ -275,26 +276,26 @@ int main( int argc, char *argv[] )
         // -------------------------------------
 
         // Bx (primal, dual)
-        for (int iy = 1 ; iy < nyd-1 ; iy++) {
-            for (int ix = 0 ; ix < nxp ; ix++) {
-                Bx[iy*nxp+ix] +=
-                              - dtdy * (Ez[iy*nxp + ix] - Ez[(iy-1)*nxp + ix]);
+        for (int ix = 0 ; ix < nxp ; ix++) {
+            for (int iy = 1 ; iy < nyd-1 ; iy++) {
+                Bx[ix*nyd+iy] +=
+                              - dtdy * (Ez[ix*nyp + iy] - Ez[ix*nyp + iy - 1]);
             }
         }
         // By (dual, primal)
-        for (int iy = 0 ; iy < nyp ; iy++) {
-            for (int ix = 1 ; ix < nxd-1 ; ix++) {
-                By[iy*nxd + ix] +=
-                                + dtdx * (Ez[iy * nxp + ix] - Ez[iy * nxp + ix - 1]);
+        for (int ix = 1 ; ix < nxd-1 ; ix++) {
+            for (int iy = 0 ; iy < nyp ; iy++) {
+                By[ix*nyp + iy] +=
+                                + dtdx * (Ez[ix * nyp + iy] - Ez[(ix-1) * nyp + iy]);
             }
         }
         
         // Bz (dual, dual)
-        for (int iy = 1 ; iy < nyd-1 ; iy++) {
-            for (int ix = 1 ; ix < nxd-1 ; ix++) {
-                Bz[iy*nxd+ix] +=
-                              + dtdy * ( Ex[iy*nxd+ix] - Ex[(iy-1)*nxd+ix])
-                              - dtdx * ( Ey[iy*nxp+ix] - Ey[iy*nxp+ix-1] );
+        for (int ix = 1 ; ix < nxd-1 ; ix++) {
+            for (int iy = 1 ; iy < nyd-1 ; iy++) {
+                Bz[ix*nyd+iy] +=
+                              + dtdy * ( Ex[ix*nyp+iy] - Ex[ix*nyp+iy-1])
+                              - dtdx * ( Ey[ix*nyd+iy] - Ey[(ix-1)*nyd+iy] );
             }
         }
 
@@ -303,52 +304,64 @@ int main( int argc, char *argv[] )
 
         // Bord -X (ix = 0)
         for (int iy = 0 ; iy < nyp ; iy++) {
-            By[iy*nxd] = By[iy*nxd + 1];
+            By[iy] = By[iy + nyp];
         }
         for (int iy = 1 ; iy < nyd-1 ; iy++) {
-            Bz[iy*nxd] = Bz[iy*nxd + 1];
+            Bz[iy] = Bz[iy + nyd];
         }
         // Bord +X (ix = nxd - 1)
         for (int iy = 0 ; iy < nyp ; iy++) {
-            By[iy*nxd+nxd-1] = By[iy*nxd + nxd-2];
+            By[iy + (nxd-1)*nyp] = By[iy + (nxd-2)*nyp];
         }
         for (int iy = 1 ; iy < nyd-1 ; iy++) {
-            Bz[iy*nxd+nxd-1] = Bz[iy*nxd + nxd-2];
+            Bz[iy+ (nxd-1)*nyd] = Bz[iy + (nxd-2)*nyd];
         }
         // Bord -Y (iy = 0)
         for (int ix = 0 ; ix < nxp ; ix++) {
-            Bx[ix] = Bx[nxp+ix];
+            Bx[ix*nyd] = Bx[1+ix*nyd];
         }
         for (int ix = 0 ; ix < nxd ; ix++) {
-            Bz[ix] = Bz[nxd+ix];
+            Bz[ix*nyd] = Bz[1+ix*nyd];
         }
         // Bord +Y (iy = nyd-1)
         for (int ix = 0 ; ix < nxp ; ix++) {
-            Bx[(nyd-1)*nxp + ix] = Bx[(nyd-2)*nxp + ix];
+            Bx[nyd-1 + ix*nyd] = Bx[nyd-2 + ix*nyd];
         }
         for (int ix = 0 ; ix < nxd ; ix++) {
-            Bz[(nyd-1)*nxd + ix] = Bz[(nyd-2)*nxd + ix];
+            Bz[nyd-1 + ix*nyd] = Bz[nyd-2 + ix*nyd];
         }
         
+        // Compute Energy
+        // -------------------------------------
+        double Ex_energy = 0;
+        for (int ix = 0 ; ix < nxd ; ix++) {
+            for (int iy = 0 ; iy < nyp ; iy++) {
+                Ex_energy += Ex[ix*nyp + iy]*Ex[ix*nyp + iy];
+            }
+        }
+
+
         // Diagnostics output
         // -------------------------------------
 
         if (iteration%diag_period == 0) {
-            output_grids(iteration,
-                  nxp, nyp,
-                  nxd, nyd,
-                  Ex, Ey, Ez,
-                  Bx, By, Bz);
+            output_grids(iteration,nxd,nyp,Ex,"Ex");
+            output_grids(iteration,nxp,nyd,Ey,"Ey");
+            output_grids(iteration,nxp,nyp,Ez,"Ez");
+
+            output_grids(iteration,nxp,nyd,Bx,"Bx");
+            output_grids(iteration,nxd,nyp,By,"By");
+            output_grids(iteration,nxd,nyd,Bz,"Bz");
         }
         
         // Print
         // -------------------------------------
         
         if (iteration%print_period == 0) {
-                std::cout << " - iteration: " << iteration
-                    << " t: " << iteration*dt
-                    << " - antenna velocity: " << antenna_velocity
-                    << std::endl;
+            std::cout << " " << std::setw(9) << iteration ;
+            std::cout << " | " << std::fixed << std::setprecision(4) << std::setw(6) << iteration*dt ;
+            std::cout << " | " << std::scientific << std::setprecision(2) << std::setw(8) << Ex_energy ;
+            std::cout << " | " << std::endl;
         }
         
     }
@@ -394,13 +407,12 @@ int main( int argc, char *argv[] )
 
 // Function that write the grids on disk
 void output_grids(int iteration,
-                  int nxp, int nyp,
-                  int nxd, int nyd,
-                  double * Ex, double * Ey, double * Ez,
-                  double * Bx, double * By, double * Bz) {
+                  int nx, int ny,
+                  double * array,
+                  std::string field_name) {
 
     char file_name[128];
-    snprintf (file_name, 128, "diags/diag_%05d.bin", iteration);
+    snprintf (file_name, 128, "diags/diag_%2s_%05d.bin", field_name.c_str(), iteration);
 
     std::ofstream binary_file(file_name, std::ios::out | std::ios::binary);
 
@@ -409,16 +421,8 @@ void output_grids(int iteration,
     }
 
     binary_file.write((char *) &iteration, sizeof(int));
-    binary_file.write((char *) &nxp, sizeof(int));
-    binary_file.write((char *) &nyp, sizeof(int));
-    
-    binary_file.write((char *) &Ex[0], sizeof(double)*nxd*nyp);
-    binary_file.write((char *) &Ey[0], sizeof(double)*nxp*nyd);
-    binary_file.write((char *) &Ez[0], sizeof(double)*nxp*nyp);
-
-    binary_file.write((char *) &Bx[0], sizeof(double)*nxp*nyd);
-    binary_file.write((char *) &By[0], sizeof(double)*nxd*nyp);
-    binary_file.write((char *) &Bz[0], sizeof(double)*nxd*nyd);
-
+    binary_file.write((char *) &nx, sizeof(int));
+    binary_file.write((char *) &ny, sizeof(int));
+    binary_file.write((char *) &array[0], sizeof(double)*nx*ny);
     binary_file.close();
 }
