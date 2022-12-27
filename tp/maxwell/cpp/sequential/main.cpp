@@ -43,7 +43,7 @@ int main( int argc, char *argv[] )
     // Default parameter initilization
     // --------------------------------------------------------------------------
 
-    nx           = 128;
+    nx           = 127;
     ny           = 256;
     Lx           = 1;
     Ly           = 1;
@@ -55,7 +55,7 @@ int main( int argc, char *argv[] )
     const double antenna_period = 1.2*Lx;
     const double antenna_length = 0.2*Lx;
     const double antenna_charge = 0.01;
-    const double antenna_radius = 0.05*Lx;
+    const double antenna_radius = 0.02*Lx;
 
     // --------------------------------------------------------------------------
     // Command line arguments
@@ -270,7 +270,17 @@ int main( int argc, char *argv[] )
         }
 
         // Ey[iyantenna] = -dt*J;
-        Ez[izantenna] = -dt*antenna_charge*antenna_velocity;
+        for (int ix = 0 ; ix < nxp ; ix++) {
+            for (int iy = 0 ; iy < nyp ; iy++) {
+                const double x = ix * dx;
+                const double y = iy * dy - 0.5*dy;
+                double xa = 0.5*Lx;
+                double ya = 0.5*Ly;
+                if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
+                    Ez[ix*nyp+iy] = -dt*antenna_charge*antenna_velocity;
+                }
+            }
+        }
 
         // Solve Maxwell Faraday
         // -------------------------------------
