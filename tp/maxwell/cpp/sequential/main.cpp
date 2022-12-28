@@ -43,7 +43,7 @@ int main( int argc, char *argv[] )
     // Default parameter initilization
     // --------------------------------------------------------------------------
 
-    nx           = 127;
+    nx           = 128;
     ny           = 256;
     Lx           = 1;
     Ly           = 1;
@@ -92,12 +92,12 @@ int main( int argc, char *argv[] )
     // --------------------------------------------------------------------------
 
     // Primal
-    const int nxp = nx;
-    const int nyp = ny;
+    const int nxp = nx - 1;
+    const int nyp = ny - 1;
     
     // Dual
-    const int nxd = nx + 1;
-    const int nyd = ny + 1;
+    const int nxd = nx;
+    const int nyd = ny;
 
     // Electric field
     double * Ex = new double[nxd * nyp];
@@ -131,6 +131,10 @@ int main( int argc, char *argv[] )
     // Shortcuts
     const double dtdx = dt / dx;
     const double dtdy = dt / dy;
+
+    // min value for x (primal and dual)
+    const double xminp = 0.5*dx;
+    const double xmind = 0;
 
     // Initial field values
     for (int i = 0 ; i < nxp*nyp ; i++) {
@@ -169,8 +173,10 @@ int main( int argc, char *argv[] )
     std::cout << " MAXWELL SOLVER" << std::endl;
     std::cout << " ------------------------------------------------------------------------- "<< std::endl;
 
-    std::cout << "  - nx (primal): " << nx << std::endl;
-    std::cout << "  - ny (primal): " << ny << std::endl;
+    std::cout << "  - nx (primal): " << nxp << std::endl;
+    std::cout << "  - ny (primal): " << nyp << std::endl;
+    std::cout << "  - nx (dual): " << nxd << std::endl;
+    std::cout << "  - ny (dual): " << nyd << std::endl;
     std::cout << "  - dx: " << dx << std::endl;
     std::cout << "  - dy: " << dy << std::endl;
     std::cout << "  - iterations: " << iterations << std::endl;
@@ -244,7 +250,7 @@ int main( int argc, char *argv[] )
         // Ex
         for (int ix = 0 ; ix < nxd ; ix++) {
             for (int iy = 0 ; iy < nyp ; iy++) {
-                const double x = ix * dx - 0.5*dx;
+                const double x = xmind + ix * dx;
                 const double y = iy * dy;
                 double xa = 0.5*Lx - 0.5*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
                 double ya = 0.5*Ly;
@@ -258,7 +264,7 @@ int main( int argc, char *argv[] )
         //Ey
         for (int ix = 0 ; ix < nxp ; ix++) {
             for (int iy = 0 ; iy < nyd ; iy++) {
-                const double x = ix * dx;
+                const double x = xminp + ix * dx;
                 const double y = iy * dy - 0.5*dy;
                 double xa = 0.5*Lx;
                 double ya = 0.5*Ly - 0.5*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
@@ -269,10 +275,10 @@ int main( int argc, char *argv[] )
             }
         }
 
-        // Ey[iyantenna] = -dt*J;
+        // Ez
         for (int ix = 0 ; ix < nxp ; ix++) {
             for (int iy = 0 ; iy < nyp ; iy++) {
-                const double x = ix * dx;
+                const double x = xminp + ix * dx;
                 const double y = iy * dy - 0.5*dy;
                 double xa = 0.5*Lx;
                 double ya = 0.5*Ly;
