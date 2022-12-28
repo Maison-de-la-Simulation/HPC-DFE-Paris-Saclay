@@ -131,11 +131,11 @@ symetric(im12)
 cb12 = colorbar(im12, ax=ax12)
 ax12.set_title("Bz")
 
-# ax10.set_xlabel("x")
-# ax11.set_xlabel("x")
+ax10.set_xlabel("x")
+ax11.set_xlabel("x")
 
-# ax00.set_ylabel("y")
-# ax10.set_ylabel("y")
+ax00.set_ylabel("y")
+ax10.set_ylabel("y")
 
 fig.tight_layout()
 
