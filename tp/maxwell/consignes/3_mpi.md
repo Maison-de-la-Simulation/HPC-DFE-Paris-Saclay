@@ -102,12 +102,12 @@ La figure ci-dessous illustre l'état d'un domaine utilisant la notion de *stenc
 <img src="../../../support/materiel/life_grid_decomposition_0.svg" height="500">
 
 La figure suivant illustre la décomposition de la grille avec une topologie cartésienne.
-Il y a dans cet exemple 4 rangs et donc 4 sous-domaines avec chacun leur grille indépendante.
+Il y a dans cet exemple 4 rangs et donc 4 sous-domaines avec chacun leurs grilles indépendantes.
 Après la décomposition du domaine, certaines cellules à la frontière avec les autres rangs MPI n'ont plus directement accès au contenu de leurs voisines.
 
 <img src="../../../support/materiel/life_grid_decomposition_1.svg" height="500">
 
-On fabrique donc une nouvelle rangée de cellule tout autour des frontières entre sous-domaines MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
+On fabrique donc une nouvelle rangée de cellules tout autour des frontières entre sous-domaines MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
 Ces rangées se nomment cellules fantômes.
 
 <img src="../../../support/materiel/life_grid_decomposition_2.svg" height="1100">
@@ -119,3 +119,45 @@ De la sorte, les voisins aux coins sont transférés au bon rang en 2 fois comme
 Dans le cas du schéma de Yee et ses grilles *stagered*, le problème est schématisé par la figure ci-dessous
 
 <img src="../../../support/materiel/maxwell_mpi_com.png" height="1000">
+
+On commence par diviser la grille duale en sous-grille dans la direction x.
+Il y a donc le même nombre de points dans chaque grille duale.
+La grille primale n'est pas divisible au premier abord (les frontières passent par les points de cette dernière).
+On va donc dupliquer la frontière primale.
+On a donc les mêmes colonnes qui existent de part et d'autre des frontières.
+Enfin on ajoute pour la grille duale les cellules fantômes. 
+Concernant les communications MPI, il ne faudra communiquer que les composantes présentes sur la grille duales.
+Une fois ces composantes échangées, le schéma de Yee permet de mettre à jour les composantes primales sans difficulté.
+
+Nous allons appliquer une décomposition de domaine dans la direction x uniquement (décomposition 1D)
+Pour cela, nous allons utiliser la notion de topologie cartésienne vue dans le cours.
+Pour cette question, aidez vous de l'exercice MPI 7 sur la construction d'une topologie cartésienne.
+
+a) Ajoutez la déclaration des paramètres permettant de construire la topologie cartésienne
+
+b) Ajoutez les fonctions permettant de créer une topologie cartésienne 1D (`MPI_Cart_create`, `MPI_Comm_rank` et `MPI_Cart_coords`).
+
+c) Utilisez `MPI_Cart_shift` pour déterminer les voisins dans la direction `x`.
+
+e) Déclarer et calculer les valeurs locales de `nxp` et `nxd` ainsi que `xminp` et `xmind`.
+
+f) Affichez pour chaque processus les informations concernant ses propriétés MPI 
+
+g) Mettez à jour le calcul des conditions limites réfléchissantes pour que seul les processus MPI aux bords du domaine les effectuent.
+
+h) Décommentez les boucles pour les calculs de Maxwell Ampère et Maxwell Faraday et testez la compilation.
+
+i) Faire un premier run pour que la topologie est correcte sans s'occuper des diagnostiques
+
+**Question 3.6 - Communication des cellules fantômes :**
+
+a) Ajoutez après Maxwell-Faraday les fonctions MPI de type point à point permettant d'effectuer les échanges des cellules fantômes.
+Ici on n'échnage que By et Bz.
+
+**Question 3.7 - Communication des cellules fantômes :**
+
+**Question 3.8 - Mise à jour du calcul de l'énergie :**
+
+**Question 3.9 - Parallélisation des diagnostiques :**
+
+**Question 3.10 - *Timers* spécifiques :**
