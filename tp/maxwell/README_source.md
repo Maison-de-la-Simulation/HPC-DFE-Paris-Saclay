@@ -114,7 +114,8 @@ Le grille primale est celle qui contient le moins de noeuds.
 Par définition, si la grille primale a une taille de $n_{xp} \times n_{yp}$ alors la grille duale a une taille de $n_{xd} = n_{xp} + 1 \times n_{yd} = n_{yp} + 1$.
 
 Toutes les autres composantes sont une combinaison dual / primal.
-Par exemple, la grille définie par les noeuds bleus (composantes $Ey$ et $Bx$) est primale dans la direction $x$ mais duale dans la direction $y$. elle a donc une taille $n_{xp} \times n_{yd}$.
+Par exemple, la grille définie par les noeuds bleus (composantes $Ey$ et $Bx$) est primale dans la direction $x$ mais duale dans la direction $y$.
+Elle a donc une taille $n_{xp} \times n_{yd}$.
 De la même manière, la grille définie par les noeuds verts (composante $Ex$ et $By$) est au contraire duale dans la direction $x$ et primale dans la direction $y$.
 La figure ci-dssous résume la notion de grille primale et duale :
 
@@ -224,8 +225,8 @@ Il est possible de changer certains paramètres numériques directement en ligne
 ./executable -nx 128 -ny 256 -it 1000
 ```
 
-- `-nx`: nombre de cellules dans la direction x
-- `-ny`: nombre de cellules dans la direction y
+- `-nx`: nombre de points pour la grille duale dans la direction x
+- `-ny`: nombre de points pour la grille duale dans la direction y
 - `-it`: nombre d'itérations
 - `-d` : fréquence des sorties de fichier en nombre d'itérations
 - `-p` : fréquence des affichages dans le terminal en nombre d'itérations

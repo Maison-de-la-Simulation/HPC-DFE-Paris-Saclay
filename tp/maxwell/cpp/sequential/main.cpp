@@ -26,6 +26,11 @@ void output_grids(int iteration,
 
 int main( int argc, char *argv[] )
 {
+    // --------------------------------------------------------------------------
+    // MPI initilization 
+    // --------------------------------------------------------------------------
+
+    // ---> Placez ici l'initialisation de MPI
 
     // --------------------------------------------------------------------------
     // Main parameters
@@ -86,6 +91,12 @@ int main( int argc, char *argv[] )
 			}
 		}
 	}
+
+    // --------------------------------------------------------------------------
+	// Creation of the cartesian topology
+    // --------------------------------------------------------------------------
+
+    // ---> Construisez ici la topologie cartésienne
 
     // --------------------------------------------------------------------------
     // Initilization of arrays and internal parameters
@@ -206,8 +217,8 @@ int main( int argc, char *argv[] )
     std::cout << " ------------------------------------------------------------------------- "<< std::endl;
     std::cout << " MAIN LOOP" << std::endl;
     std::cout << " ------------------------------------------------------------------------- "<< std::endl;
-    std::cout << " Iteration |  time  | Ex energ |"<< std::endl;
-    std::cout << " ----------|--------|----------|"<< std::endl;
+    std::cout << " Iteration |  time  | Ex energ | Ey energ | Ez energ |"<< std::endl;
+    std::cout << " ----------|--------|----------|----------|----------|"<< std::endl;
 
     gettimeofday(&current_time, NULL);
     double timer_begin = current_time.tv_sec + current_time.tv_usec*1e-6;
@@ -315,6 +326,12 @@ int main( int argc, char *argv[] )
             }
         }
 
+
+        // Communications
+        // -------------------------------------
+
+        // ---> Ajoutez ici les communications des cellules fantômes
+
         // Apply boundary conditions (Reflective)
         // -------------------------------------
 
@@ -350,12 +367,23 @@ int main( int argc, char *argv[] )
         // Compute Energy
         // -------------------------------------
         double Ex_energy = 0;
+        double Ey_energy = 0;
+        double Ez_energy = 0;
         for (int ix = 0 ; ix < nxd ; ix++) {
             for (int iy = 0 ; iy < nyp ; iy++) {
                 Ex_energy += Ex[ix*nyp + iy]*Ex[ix*nyp + iy];
             }
         }
-
+        for (int ix = 0 ; ix < nxp ; ix++) {
+            for (int iy = 0 ; iy < nyd ; iy++) {
+                Ey_energy += Ey[ix*nyd + iy]*Ey[ix*nyd + iy];
+            }
+        }
+        for (int ix = 0 ; ix < nxp ; ix++) {
+            for (int iy = 0 ; iy < nyp ; iy++) {
+                Ez_energy += Ez[ix*nyp + iy]*Ez[ix*nyp + iy];
+            }
+        }
 
         // Diagnostics output
         // -------------------------------------
@@ -377,6 +405,8 @@ int main( int argc, char *argv[] )
             std::cout << " " << std::setw(9) << iteration ;
             std::cout << " | " << std::fixed << std::setprecision(4) << std::setw(6) << iteration*dt ;
             std::cout << " | " << std::scientific << std::setprecision(2) << std::setw(8) << Ex_energy ;
+            std::cout << " | " << std::scientific << std::setprecision(2) << std::setw(8) << Ey_energy ;
+            std::cout << " | " << std::scientific << std::setprecision(2) << std::setw(8) << Ez_energy ;
             std::cout << " | " << std::endl;
         }
         
