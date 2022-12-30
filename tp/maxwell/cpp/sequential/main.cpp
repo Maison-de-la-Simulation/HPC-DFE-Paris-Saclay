@@ -385,6 +385,10 @@ int main( int argc, char *argv[] )
             }
         }
 
+        Ex_energy *= dx*dy;
+        Ey_energy *= dx*dy;
+        Ez_energy *= dx*dy;
+
         // Diagnostics output
         // -------------------------------------
 
