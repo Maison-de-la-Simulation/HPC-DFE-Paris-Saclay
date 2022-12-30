@@ -10,3 +10,47 @@ Regardons dans un premier temps le passage à l'échelle faible ou *weak scaling
 Pour rappel, ce type d'étude consiste à regarder comment évolue l'efficacité du
 code lorsque l'on augmente le nombre de processus tout en gardant la
 charge constante par unité de calcul.
+
+a) Effectuez un test de weak scaling en choisissant les paramètres suivant pour le cas utilisant 1 processus :
+- `nx = ny = `
+- 2000 itérations
+
+b) Calculez quel est le coût mémoire théorique d'un domaine MPI en ne considérant que le poids des grilles (et pas toutes les petites variables)
+
+c) Affichez la courbe en temps et d'efficacité correspondante en y faisant apparaître le temps dans chaque partie:
+- calcul
+- communications point à point
+- communications globales 
+
+Vous devriez obtenir un résultat proche de l'étude suivante :
+
+<img src="../../../support/materiel/life_mpi_weak_scaling_time.png" height="400">
+<img src="../../../support/materiel/life_mpi_weak_scaling_efficiency.png" height="400">
+<img src="../../../support/materiel/life_mpi_weak_scaling_part.png" height="400">
+
+
+d) Commentez ce *weak scaling* en vous aidant de toutes les courbes
+
+### 4.2. Strong scaling
+
+Regardons maintenant le passage à l'échelle fort ou *strong scaling*.
+Pour rappel, ce type d'étude consiste à regarder comment évolue l'efficacité du
+code lorsque l'on augmente le nombre de processus tout en gardant la
+charge globale constante.
+
+a) Effectuez un test de *strong scaling* en choisissant les paramètres suivant :
+- `nx = ny = `
+- 2000 itérations
+
+b) Affichez la courbe en temps et d'efficacité correspondante en y faisant apparaître le temps dans chaque partie :
+- calcul
+- communications point à point
+- communications globales
+
+Vous devriez obtenir un résultat proche de ce qui suit :
+
+<img src="../../../support/materiel/life_mpi_strong_scaling_time.png" height="450">
+<img src="../../../support/materiel/life_mpi_strong_scaling_efficiency.png" height="400">
+<img src="../../../support/materiel/life_mpi_strong_scaling_part.png" height="400">
+
+c) Commentez ce *strong scaling* en vous aidant de toutes les courbes
