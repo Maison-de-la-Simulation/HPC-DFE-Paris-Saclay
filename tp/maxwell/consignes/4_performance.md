@@ -11,7 +11,7 @@ Pour rappel, ce type d'étude consiste à regarder comment évolue l'efficacité
 code lorsque l'on augmente le nombre de processus tout en gardant la
 charge constante par unité de calcul.
 
-a) Effectuez un test de weak scaling en choisissant les paramètres suivant pour le cas utilisant 1 processus :
+a) Effectuez un test de weak scaling jusqu'à 80 coeurs (2 noeuds) en choisissant les paramètres suivant pour le cas utilisant 1 processus :
 - `nx = ny = `
 - 2000 itérations
 
@@ -22,7 +22,7 @@ c) Affichez la courbe en temps et d'efficacité correspondante en y faisant appa
 - communications point à point
 - communications globales 
 
-Vous devriez obtenir un résultat proche de l'étude suivante :
+Nous avons de notre côté également effectuer ce test :
 
 <img src="../../../support/materiel/life_mpi_weak_scaling_time.png" height="400">
 <img src="../../../support/materiel/life_mpi_weak_scaling_efficiency.png" height="400">
@@ -38,7 +38,7 @@ Pour rappel, ce type d'étude consiste à regarder comment évolue l'efficacité
 code lorsque l'on augmente le nombre de processus tout en gardant la
 charge globale constante.
 
-a) Effectuez un test de *strong scaling* en choisissant les paramètres suivant :
+a) Effectuez un test de *strong scaling* jusqu'à 80 coeurs (2 noeuds) en choisissant les paramètres suivant :
 - `nx = ny = `
 - 2000 itérations
 
@@ -47,7 +47,7 @@ b) Affichez la courbe en temps et d'efficacité correspondante en y faisant appa
 - communications point à point
 - communications globales
 
-Vous devriez obtenir un résultat proche de ce qui suit :
+Nous avons de notre côté également effectuer ce test :
 
 <img src="../../../support/materiel/life_mpi_strong_scaling_time.png" height="450">
 <img src="../../../support/materiel/life_mpi_strong_scaling_efficiency.png" height="400">
