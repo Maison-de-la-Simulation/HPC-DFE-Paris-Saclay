@@ -50,5 +50,5 @@ On utilise un domaine de taille 6144 x 6144 cellules pour chaque espèce.
 <img src="../../../support/materiel/life_mpi_strong_scaling_efficiency.png" height="400">
 <img src="../../../support/materiel/life_mpi_strong_scaling_part.png" height="400">
 
-c) Commentez ce *weak scaling* en vous aidant de toutes les courbes
+c) Commentez ce *strong scaling* en vous aidant de toutes les courbes
 
