@@ -129,7 +129,7 @@ Enfin on ajoute pour la grille duale les cellules fantômes.
 Concernant les communications MPI, il ne faudra communiquer que les composantes présentes sur la grille duales.
 Une fois ces composantes échangées, le schéma de Yee permet de mettre à jour les composantes primales sans difficulté.
 
-Nous allons appliquer une décomposition de domaine dans la direction x uniquement (décomposition 1D)
+Nous allons appliquer une décomposition de domaine dans la direction `x` uniquement (décomposition 1D)
 Pour cela, nous allons utiliser la notion de topologie cartésienne vue dans le cours.
 Pour cette question, aidez vous de l'exercice MPI 7 sur la construction d'une topologie cartésienne.
 
@@ -151,13 +151,48 @@ i) Faire un premier run pour que la topologie est correcte sans s'occuper des di
 
 **Question 3.6 - Communication des cellules fantômes :**
 
-a) Ajoutez après Maxwell-Faraday les fonctions MPI de type point à point permettant d'effectuer les échanges des cellules fantômes.
-Ici on n'échnage que By et Bz.
+a) Ajoutez après Maxwell-Faraday les communications MPI de type point à point permettant d'effectuer les échanges des cellules fantômes.
+Ici on n'échnage que les composantes By et Bz.
+Pour rappel, l'axe des `y` est l'axe contigu.
 
-**Question 3.7 - Communication des cellules fantômes :**
+b) Ajoutez un *timer* afin de connaître le temps passé strictement dans les communications des cellules fantômes.
+Affichez le résultat lors de l'affichage des temps à la fin du code.
 
-**Question 3.8 - Mise à jour du calcul de l'énergie :**
+**Question 3.7 - Mise à jour du calcul de l'énergie :**
 
-**Question 3.9 - Parallélisation des diagnostiques :**
+Le calcul de l'énergie s'effectue en sommant le carré de toutes les composantes.
+Dans le code, on ne calcule que les composantes `Ex`, `Ey` et `Ez`.
+En parallèle, on doit maintenant effectuer le calcul de chaque sous-domaine puis faire une réduction pour obtenir l'énergie totale.
 
-**Question 3.10 - *Timers* spécifiques :**
+a) Modifiez le calcul de l'énergie afin de calculer les valeurs locales en prenant soin de ne pas compter les cellules fantômes et les colonnes dupliquées.
+
+b) Ajoutez la fonction MPI permettant d'obtenir la valeur globale à partir d'une réduction.
+
+c) Mettez à jour l'affichage dans le terminal
+
+d) Ajoutez un *timer* spécifique pour cette partie.
+
+e) Compilez et testez le code
+
+**Question 3.8 - Parallélisation des diagnostiques :**
+
+Dans le but de pouvoir vérifier nos résultats, nous devons produire des diagnostiques parallèles.
+La création de fichier en parallèle n'est pas au programme de ce cours.
+Nous allons utiliser ce que nous avons appris pour mettre à jour les sorties de fichiers.
+Pour cela, nous allons ramener sur le processus 0 tous les morceaux de grilles nécessaires à la reconstitution d'une grille globale.
+La grille globale une fois reconstituée sera écrite sur le disque en exploitant la même fonction que celle utilisée dans le code séquentiel.
+Lors de la reconsitution de la grille globale, il est important de ne pas ramener les cellules fantômes et de bien gérer les colonnes dupliquées.
+Les étapes suivantes sont là pour vous guider mais c'est à vous d'adapter votre code et de décider quelles variables déclarer et fonctions MPI appeler.
+
+a) Nous n'allons pas traiter toutes les composantes mais appliquez la méthode sur l'une d'elles. Choisissez donc une des composantes de champs. 
+
+b) Pour celle composante, déterminez les limites de la grille locale à ramener sur le processus 0 pour reconstituer la grille globale. 
+Ces limites dépendent du processus, notamment s'il est au bord du domaine.
+
+c) Déclarez une grille globale pour accueillir les morceaux de grille venant de chaque processus.
+
+d) Ramenez sur le processus 0 la taille de chaque morceau de grille.
+
+e) Utilisez une fonction collective afin de ramener chaque morceau dans la grille globale à la bonne place.
+
+f) Ajoutez un *timer* spécifique pour cette partie.
