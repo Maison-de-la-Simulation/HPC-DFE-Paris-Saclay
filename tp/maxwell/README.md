@@ -26,7 +26,7 @@ Nous nous intéressons dans ce projet à la simulation des équations Maxwell pa
 
 On rappelle les équations de Maxwell dans le vide :
 
-Maxwell Ampere :
+Maxwell-Ampère  :
 
 <p align="center"><img src=".extra//2ba4806c4179b91768ae5de6aa4f95f1.svg?invert_in_darkmode" align=middle width=173.07893955pt height=33.81208709999999pt/></p>
 
@@ -42,7 +42,7 @@ Maxwell Flux :
 
 <p align="center"><img src=".extra//9f912dfbf42cb7130565c37d471ce31d.svg?invert_in_darkmode" align=middle width=69.00087479999999pt height=15.89952705pt/></p>
 
-Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell Ampere et Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
+Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell-Ampère  et Maxwell-Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
 
 <p align="center"><img src=".extra//41cccb13579195958c31b4b2e6314e52.svg?invert_in_darkmode" align=middle width=292.37469525pt height=33.81208709999999pt/></p>
 
@@ -54,7 +54,7 @@ En 2D, la discrétisation donne les équations suivantes pour Maxwell Ampère :
 
 <p align="center"><img src=".extra//11eb95a1f61dfd6015539c701060ebef.svg?invert_in_darkmode" align=middle width=529.30628685pt height=36.82577085pt/></p>
 
-Où <img src=".extra//c461456e376ee5b83866a0c882334b0f.svg?invert_in_darkmode" align=middle width=65.57458379999998pt height=24.65753399999998pt/> est l'iteration en temps, <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663225699999989pt height=21.68300969999999pt/> et <img src=".extra//36b5afebdba34564d884d347484ac0c7.svg?invert_in_darkmode" align=middle width=7.710416999999989pt height=21.68300969999999pt/> respectivement la discrétisation en espace suivant les directions <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> et <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>.
+Où <img src=".extra//c461456e376ee5b83866a0c882334b0f.svg?invert_in_darkmode" align=middle width=65.57458379999998pt height=24.65753399999998pt/> est l'itération  en temps, <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663225699999989pt height=21.68300969999999pt/> et <img src=".extra//36b5afebdba34564d884d347484ac0c7.svg?invert_in_darkmode" align=middle width=7.710416999999989pt height=21.68300969999999pt/> respectivement la discrétisation en espace suivant les directions <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> et <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>.
 
 Puis pour Maxwell Faraday :
 
@@ -82,17 +82,18 @@ La grille représentée par les noeuds rouge du champ <img src=".extra//e52d2c1e
 C'est la grille la plus large.
 
 Dans la figure ci-dessous, nous avons représenté la grille définie par les noeuds oranges du champ <img src=".extra//b2100207f858f063bea374511472fccd.svg?invert_in_darkmode" align=middle width=18.88707644999999pt height=22.465723500000017pt/>.
-il s'agit de la grille primale.
+Il s'agit de la grille primale.
 
 <img src="../../support/materiel/maxwell_yee_grid_3.png" height="400">
 
 Le grille primale est celle qui contient le moins de noeuds.
 Par définition, si la grille primale a une taille de <img src=".extra//272af74b9dbbb880bbf4e3ffa9fc64ad.svg?invert_in_darkmode" align=middle width=68.73375134999998pt height=19.1781018pt/> alors la grille duale a une taille de <img src=".extra//102564694b48b1e313920ae04093e294.svg?invert_in_darkmode" align=middle width=219.60936855pt height=21.18721440000001pt/>.
 
-Toutes les autres composantes sont une combinaison dual / primal.
-Par exemple, la grille définie par les noeuds bleus (composantes <img src=".extra//a896e653d3de6b3985bf932a92e194b7.svg?invert_in_darkmode" align=middle width=21.73140254999999pt height=22.465723500000017pt/> et <img src=".extra//13119eef6557213b4399d373183db140.svg?invert_in_darkmode" align=middle width=22.68839099999999pt height=22.465723500000017pt/>) est primale dans la direction <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> mais duale dans la direction <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>. elle a donc une taille <img src=".extra//1eca62f8948ef6841d35298541aa46e5.svg?invert_in_darkmode" align=middle width=68.80035194999999pt height=19.1781018pt/>.
+Toutes les autres composantes sont une combinaison duale / primale.
+Par exemple, la grille définie par les noeuds bleus (composantes <img src=".extra//a896e653d3de6b3985bf932a92e194b7.svg?invert_in_darkmode" align=middle width=21.73140254999999pt height=22.465723500000017pt/> et <img src=".extra//13119eef6557213b4399d373183db140.svg?invert_in_darkmode" align=middle width=22.68839099999999pt height=22.465723500000017pt/>) est primale dans la direction <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> mais duale dans la direction <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>.
+Elle a donc une taille <img src=".extra//1eca62f8948ef6841d35298541aa46e5.svg?invert_in_darkmode" align=middle width=68.80035194999999pt height=19.1781018pt/>.
 De la même manière, la grille définie par les noeuds verts (composante <img src=".extra//b7a981c903e3370fc32d1c5ee077472f.svg?invert_in_darkmode" align=middle width=22.47716459999999pt height=22.465723500000017pt/> et <img src=".extra//fcda124f6906a9960dc2e7b5b3c05029.svg?invert_in_darkmode" align=middle width=21.94262894999999pt height=22.465723500000017pt/>) est au contraire duale dans la direction <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> et primale dans la direction <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>.
-La figure ci-dssous résume la notion de grille primale et duale :
+La figure ci-dessous résume la notion de grille primale et duale :
 
 <img src="../../support/materiel/maxwell_primal_dual.png" height="400">
 
@@ -110,9 +111,9 @@ Dans le code, on utilise des conditions réfléchissantes (ou conditions de Neum
 
 ### Notion d'antenne
 
-Une façon de générer un champ électromagnétiest est d'émuler le comportement d'une antenne.
+Une façon de générer un champ électromagnétique est d'émuler le comportement d'une antenne.
 Une antenne peut être modélisée par une charge qui se déplace en oscillant le long d'un segment.
-Il faut alors calculer le courant généré par cette antenne et l'ajouter aux équations de Maxell-Ampère.
+Il faut alors calculer le courant généré par cette antenne et l'ajouter aux équations de Maxwell-Ampère.
 
 Soit <img src=".extra//2c09d6fe231fc69cfcee32fa0b3785df.svg?invert_in_darkmode" align=middle width=39.04402919999999pt height=24.65753399999998pt/> l'évolution dans l'espace d'une charge <img src=".extra//46d29bba147ab86127a70278268c42d9.svg?invert_in_darkmode" align=middle width=17.224222949999987pt height=14.15524440000002pt/> et donc <img src=".extra//e48500a898443f79affbb15aa1ea1eb7.svg?invert_in_darkmode" align=middle width=38.03569605pt height=24.65753399999998pt/> sa vitesse.
 Le courant est donné par :
@@ -128,7 +129,7 @@ Avec <img src=".extra//71d5328dcc516b999b4b4630d795dc3f.svg?invert_in_darkmode" 
 
 ## Le code séquentiel <a id="code_sequentiel"></a>
 
-Le code est écrit en langage C++ mais n'utilise pas de foctionnalité avancée.
+Le code est écrit en langage C++ mais n'utilise pas de fonctionnalité avancée.
 Il ne se compose que d'un unique fichier `main.cpp`.
 
 ### Description du code
@@ -150,14 +151,14 @@ Dans la partie d'initialisation, on fait dans l'ordre :
 
 Puis dans la boucle en temps :
 - résolution des équations de Maxwell-Ampère
-- ajout des courants géénrés par les antennes
-- résolution des équantions de Maxwell-Faraday
+- ajout des courants générés  par les antennes
+- résolution des équations  de Maxwell-Faraday
 - conditions aux bords
-- sortie des fichiers de diagntostique (pour chaque grille)
+- sortie des fichiers de diagnostique  (pour chaque grille)
 - affichage dans le terminal de l'état de la simulation
 
 Puis après la boucle en temps :
-- l'affichage des *timers*, c'est à dire le temps passé dans le divers parties du code
+- l'affichage des *timers*, c'est à dire le temps passé dans les diverses parties du code
 - destruction des tableaux
 
 ### Les dépendances
@@ -178,12 +179,13 @@ Pour g++:
 g++ -O3 main.cpp -o exe
 ```
 
-Pour Intel (sur Ruche par exemple):
+Pour Intel (sur Ruche par exemple) :
 ```bash
 icpc -O3 main.cpp -o exe
 ```
 
-La compilation génère un fichier exécutable du nom de `exe`. Vous pouvez lancer le programme en faisant :
+La compilation génère un fichier exécutable du nom de `exe`.
+Vous pouvez lancer le programme en faisant :
 ```bash
 ./exe
 ```
@@ -196,8 +198,8 @@ Il est possible de changer certains paramètres numériques directement en ligne
 ./executable -nx 128 -ny 256 -it 1000
 ```
 
-- `-nx`: nombre de cellules dans la direction x
-- `-ny`: nombre de cellules dans la direction y
+- `-nx`: nombre de points pour la grille duale dans la direction x
+- `-ny`: nombre de points pour la grille duale dans la direction y
 - `-it`: nombre d'itérations
 - `-d` : fréquence des sorties de fichier en nombre d'itérations
 - `-p` : fréquence des affichages dans le terminal en nombre d'itérations
@@ -210,25 +212,19 @@ Les fichiers sont toujours écrits dans un dossier `diags`.
 Des scripts Python vous sont fournis pour vous aider à visualiser ces données.
 Vous pouvez aussi utiliser vos propres scripts dans le langage de votre choix.
 Les scripts sont dans le dossier [visualization](./visualization):
+- [plot_all_fields.py](./visualization/plot_all_fields.py)
+
+```bash
+python -i plot_all_fields.py <chemin vers le dossier des diags> <it>
+```
+
 - [plot_binary.py](./visualization/plot_binary.py)
 
 ```bash
-python -i plot_binary.py <chemin vers un fichier diag_*.bin>
+python -i plot_binary.py <chemin vers un fichier diag*.bin>
 ```
 
-- [animate.py](./visualization/animate.py)
-
-```bash
-python -i animate.py <chemin vers un dossier diags>
-```
-
-- [plot_scalar.py](./visualization/plot_scalar.py)
-
-```bash
-python -i animate.py <chemin vers un fichier scalars.bin>
-```
-
-Voici un exemple d'image produite par la lecture d'un fichier via le script `plot_binary.py`.
+Voici un exemple d'image produite par la lecture d'un fichier via le script `plot_all_fields.py`.
 
 <img src="../../support/materiel/maxwell_image.png" height="400">
 

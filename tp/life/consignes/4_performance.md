@@ -1,7 +1,7 @@
 ## IV. Etude de performance
 
-Dans cette dernière partie, nous allons maintenant étudié la performance du code parallèle.
-Pour cela nous allons regardé les deux types de passage à l'échelle que sont le *weak* ou *strong scaling*.
+Dans cette dernière partie, nous allons maintenant étudier la performance du code parallèle.
+Pour cela nous allons regarder les deux types de passage à l'échelle que sont le *weak* ou *strong scaling*.
 Dans chaque cas, vous serez amené à faire d'abord votre propre étude puis à étudier une étude faite sur un super-calculateur.
 
 ### 4.1. Weak scaling
