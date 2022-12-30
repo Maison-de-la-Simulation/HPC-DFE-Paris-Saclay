@@ -239,25 +239,19 @@ Les fichiers sont toujours écrits dans un dossier `diags`.
 Des scripts Python vous sont fournis pour vous aider à visualiser ces données.
 Vous pouvez aussi utiliser vos propres scripts dans le langage de votre choix.
 Les scripts sont dans le dossier [visualization](./visualization):
-- [plot_binary.py](./visualization/plot_binary.py)
+- [plot_all_fields.py](./visualization/plot_all_fields.py)
 
 ```bash
-python -i plot_binary.py <chemin vers un fichier diag_*.bin>
+python -i plot_all_fields.py <chemin vers le dossier des diags> <it>
 ```
 
-- [animate.py](./visualization/animate.py)
+- [animate.py](./visualization/plot_binary.py)
 
 ```bash
-python -i animate.py <chemin vers un dossier diags>
+python -i plot_binary.py <chemin vers un fichier scalars.bin>
 ```
 
-- [plot_scalar.py](./visualization/plot_scalar.py)
-
-```bash
-python -i animate.py <chemin vers un fichier scalars.bin>
-```
-
-Voici un exemple d'image produite par la lecture d'un fichier via le script `plot_binary.py`.
+Voici un exemple d'image produite par la lecture d'un fichier via le script `plot_all_fields.py`.
 
 <img src="../../support/materiel/maxwell_image.png" height="400">
 
