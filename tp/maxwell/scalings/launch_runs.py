@@ -11,6 +11,8 @@ for cores in number_of_cores:
 
     os.makedirs(folder)
 
+    os.chdir(folder)
+
     script = "#!/bin/bash \n"
     script += "#SBATCH --job-name=master_dfe \n"
     script += "#SBATCH --output=output \n"
@@ -29,3 +31,5 @@ for cores in number_of_cores:
     fp.close()
 
     os.system("sbatch {}/launch.sh".format(folder))
+
+    os.chdir("../")
