@@ -5,6 +5,9 @@ number_of_cores = [1,2,4,8,16,32,40,64,80]
 for cores in number_of_cores:
 
     folder = "cores_{:02d}".format(cores)
+    nodes = 1 + int((cores - 1) / 40)
+
+    print("Case: {} {}".format(cores, nodes))
 
     os.makedirs(folder)
 
@@ -13,7 +16,7 @@ for cores in number_of_cores:
     script += "#SBATCH --output=output \n"
     script += "#SBATCH --error=error \n"
     script += "#SBATCH --ntasks={}                # Nombre d'unité de calcul ou de processus MPI \n".format(cores)
-    script += "#SBATCH --nodes={}                # Nombre d'unité de calcul ou de processus MPI \n".format(cores % 40)
+    script += "#SBATCH --nodes={}                # Nombre d'unité de calcul ou de processus MPI \n".format(nodes)
     script += "#SBATCH --time=00:10:00           # Temps souhaité pour la réservation \n"
     script += "#SBATCH --partition=cpu_short     # Partition des jobs rapides \n"
     script += "source ~/env_dfe_hpc.sh \n"
