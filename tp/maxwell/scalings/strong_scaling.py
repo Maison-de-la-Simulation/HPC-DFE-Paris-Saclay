@@ -18,12 +18,12 @@ times = {}
 times["cores"]       = np.array([])
 # Temps dans la boucle en temps
 times["total"] = np.array([])
-# Temps dans la boucle en temps
-times["calcul"] = np.array([])
-# Temps pour les collisions
-times["point"] = np.array([])
-# Temps dans le pousseur
-times["global"] = np.array([])
+# Temps dans les communications point à point
+times["com"] = np.array([])
+# Temps pour les réductions de l'énergie
+times["energy"] = np.array([])
+# Temps dans les diags
+times["diags"] = np.array([])
 
 
 # Calcul de l'efficacite pour une scalabilite faible
@@ -82,10 +82,8 @@ ax0.set_title("Fig. 4.4 - Strong scaling MPI")
 
 ax0.legend(loc="best",ncol=2)
 
-
 fig0.tight_layout()
 
-fig0.savefig("../../../support/materiel/life_mpi_strong_scaling_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
@@ -109,8 +107,6 @@ ax.legend(loc="best")
 
 fig1.tight_layout()
 
-fig1.savefig("../../../support/materiel/life_mpi_strong_scaling_efficiency.png")
-
 # ______________________________________________________________________________
 # Figure Part MPI
 
@@ -130,8 +126,6 @@ ax.set_ylabel("Part (%)")
 ax.legend(loc="best")
 
 fig2.tight_layout()
-
-fig2.savefig("../../../support/materiel/life_mpi_strong_scaling_part.png")
 
 # _____________________________________________________________________________
 

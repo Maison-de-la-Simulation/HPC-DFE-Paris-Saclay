@@ -14,6 +14,7 @@
 #include <sys/time.h>
 #include <iomanip>
 #include <fstream>
+#include <stdlib.h> // atoi, system
 
 // Headers
 
