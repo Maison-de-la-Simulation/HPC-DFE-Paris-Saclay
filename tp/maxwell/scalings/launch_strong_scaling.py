@@ -19,7 +19,7 @@ for cores in number_of_cores:
     script += "#SBATCH --error=error \n"
     script += "#SBATCH --ntasks={}                # Nombre d'unité de calcul ou de processus MPI \n".format(cores)
     script += "#SBATCH --nodes={}                # Nombre d'unité de calcul ou de processus MPI \n".format(nodes)
-    script += "#SBATCH --time=00:05:00           # Temps souhaité pour la réservation \n"
+    script += "#SBATCH --time=00:02:00           # Temps souhaité pour la réservation \n"
     script += "#SBATCH --partition=cpu_short     # Partition des jobs rapides \n"
     script += "source ~/env_dfe_hpc.sh \n"
     script += "et -x \n"

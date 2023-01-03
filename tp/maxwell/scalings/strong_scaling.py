@@ -15,16 +15,15 @@ from matplotlib.pyplot import *
 times = {}
 
 # Nombre de processus
-times["cores"]       = np.array([])
+times['cores'] = np.array([])
 # Temps dans la boucle en temps
-times["total"] = np.array([])
+times['total'] = np.array([])
 # Temps dans les communications point à point
-times["com"] = np.array([])
+times['com'] = np.array([])
 # Temps pour les réductions de l'énergie
-times["energy"] = np.array([])
+times['energy'] = np.array([])
 # Temps dans les diags
-times["diags"] = np.array([])
-
+times['diags'] = np.array([])
 
 # Calcul de l'efficacite pour une scalabilite faible
 times["efficiency"] = times["total"][0] * times["cores"][0] / (times["total"][:] * times["cores"][:])
@@ -65,10 +64,10 @@ fig0 = figure(figsize=(12, 8))
 gs = GridSpec(2, 2)
 ax0 = subplot(gs[:,:])
 
-ax0.plot(times["cores"],times["total"],lw=2,label="Total",marker='o')
-ax0.plot(times["cores"],times["calcul"],lw=2,label="Calcul",marker='o')
-ax0.plot(times["cores"],times["point"],lw=2,label="Com. point a point",marker='o')
-ax0.plot(times["cores"],times["global"],lw=2,label="Com. globales",marker='o')
+ax0.plot(times["cores"],times["total"],lw=2,label="total",marker='o')
+ax0.plot(times["cores"],times["com"],lw=2,label="com point a point",marker='o')
+ax0.plot(times["cores"],times["energy"],lw=2,label="reduction energy",marker='o')
+ax0.plot(times["cores"],times["diags"],lw=2,label="diags",marker='o')
 
 ax0.set_xlabel("Nombre de processus")
 ax0.set_ylabel("Temps (s)")
@@ -82,8 +81,10 @@ ax0.set_title("Fig. 4.4 - Strong scaling MPI")
 
 ax0.legend(loc="best",ncol=2)
 
+
 fig0.tight_layout()
 
+fig0.savefig("../../../support/materiel/maxwell_mpi_strong_scaling_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
@@ -107,6 +108,8 @@ ax.legend(loc="best")
 
 fig1.tight_layout()
 
+fig1.savefig("../../../support/materiel/maxwell_mpi_strong_scaling_efficiency.png")
+
 # ______________________________________________________________________________
 # Figure Part MPI
 
@@ -114,9 +117,9 @@ fig2 = figure(figsize=(12, 6))
 gs = GridSpec(2, 2)
 ax = subplot(gs[:,:])
 
-ax.plot(times["cores"],times["calcul"]/times["total"]*100.,lw=2,marker='o',color='C1',label='Calcul')
-ax.plot(times["cores"],times["point"]/times["total"]*100.,lw=2,marker='o',color='C2',label='Com point a point')
-ax.plot(times["cores"],times["global"]/times["total"]*100.,lw=2,marker='o',color='C3',label='Communications globales')
+ax.plot(times["cores"],times["com"]/times["total"]*100.,lw=2,marker='o',color='C1',label='com point a point')
+ax.plot(times["cores"],times["energy"]/times["total"]*100.,lw=2,marker='o',color='C2',label='reduction energy')
+ax.plot(times["cores"],times["diags"]/times["total"]*100.,lw=2,marker='o',color='C3',label='diags')
 
 ax.set_title("Fig. 4.6 - Strong scaling MPI")
 
@@ -126,6 +129,8 @@ ax.set_ylabel("Part (%)")
 ax.legend(loc="best")
 
 fig2.tight_layout()
+
+fig2.savefig("../../../support/materiel/maxwell_mpi_strong_scaling_part.png")
 
 # _____________________________________________________________________________
 
