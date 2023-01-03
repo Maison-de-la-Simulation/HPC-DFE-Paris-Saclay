@@ -24,7 +24,8 @@ code lorsque l'on augmente le nombre de processus tout en gardant la
 charge constante par unité de calcul.
 
 a) Effectuez un test de weak scaling jusqu'à 80 coeurs (2 noeuds) en choisissant les paramètres suivant pour le cas utilisant 1 processus :
-- `nx = ny = `
+- `nx = 5120`
+- `ny = 128`
 - 2000 itérations
 
 b) Calculez quel est le coût mémoire théorique d'un domaine MPI en ne considérant que le poids des grilles (et pas toutes les petites variables)
@@ -36,9 +37,9 @@ c) Affichez la courbe en temps et d'efficacité correspondante en y faisant appa
 
 Nous avons de notre côté également effectuer ce test :
 
-<img src="../../../support/materiel/life_mpi_weak_scaling_time.png" height="400">
-<img src="../../../support/materiel/life_mpi_weak_scaling_efficiency.png" height="400">
-<img src="../../../support/materiel/life_mpi_weak_scaling_part.png" height="400">
+<img src="../../../support/materiel/maxwell_mpi_weak_scaling_time.png" height="400">
+<img src="../../../support/materiel/maxwell_mpi_weak_scaling_efficiency.png" height="400">
+<img src="../../../support/materiel/maxwell_mpi_weak_scaling_part.png" height="400">
 
 
 d) Commentez ce *weak scaling* en vous aidant de toutes les courbes
