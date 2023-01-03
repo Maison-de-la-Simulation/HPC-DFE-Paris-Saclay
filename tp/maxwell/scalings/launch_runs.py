@@ -26,10 +26,10 @@ for cores in number_of_cores:
     script += "cd ${SLURM_SUBMIT_DIR} \n"
     script += "srun ../exe -it 2000 -nx 5120 -ny 256 -p 100 -d 100 \n"
 
-    fp = open("{}/launch.sh".format(folder), 'w')
+    fp = open("launch.sh".format(folder), 'w')
     fp.write(script)
     fp.close()
 
-    os.system("sbatch {}/launch.sh".format(folder))
+    os.system("sbatch launch.sh".format(folder))
 
     os.chdir("../")
