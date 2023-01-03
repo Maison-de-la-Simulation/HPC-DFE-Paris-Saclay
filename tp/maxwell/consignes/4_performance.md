@@ -4,6 +4,18 @@ Dans cette dernière partie, nous allons maintenant étudier la performance du c
 Pour cela nous allons regarder les deux types de passage à l'échelle que sont le *weak* ou *strong scaling*.
 Dans chaque cas, vous serez amené à faire d'abord votre propre étude puis à étudier une étude faite sur le super-calculateur Ruche.
 
+Pour rappel, sur Ruche, vous devez charger l'environnement suivant :
+```bash
+```
+
+Vous pouvez comlpiler le code avec la commande suivante : 
+```bash
+mpiicpc -O3 -g main.cpp -o exe
+```
+
+Le wrapper `mpiicpc` est celui utilisé par Intel.
+Attention à ne pas utiliser `mpicxx` qui utiliser `g++`.
+
 ### 4.1. Weak scaling
 
 Regardons dans un premier temps le passage à l'échelle faible ou *weak scaling*.
