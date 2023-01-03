@@ -19,12 +19,12 @@ for cores in number_of_cores:
     script += "#SBATCH --error=error \n"
     script += "#SBATCH --ntasks={}                # Nombre d'unité de calcul ou de processus MPI \n".format(cores)
     script += "#SBATCH --nodes={}                # Nombre d'unité de calcul ou de processus MPI \n".format(nodes)
-    script += "#SBATCH --time=00:05:00           # Temps souhaité pour la réservation \n"
+    script += "#SBATCH --time=00:01:00           # Temps souhaité pour la réservation \n"
     script += "#SBATCH --partition=cpu_short     # Partition des jobs rapides \n"
     script += "source ~/env_dfe_hpc.sh \n"
     script += "et -x \n"
     script += "cd ${SLURM_SUBMIT_DIR} \n"
-    script += "srun ../exe -it 2000 -nx {} -ny 256 -p 100 -d 100 \n".format(64*cores)
+    script += "srun ../exe -it 2000 -nx {} -ny 512 -p 100 -d 100 \n".format(512*cores)
 
     fp = open("launch.sh".format(folder), 'w')
     fp.write(script)
