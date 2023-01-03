@@ -62,8 +62,8 @@ b) Affichez la courbe en temps et d'efficacité correspondante en y faisant appa
 
 Nous avons de notre côté également effectuer ce test :
 
-<img src="../../../support/materiel/life_mpi_strong_scaling_time.png" height="450">
-<img src="../../../support/materiel/life_mpi_strong_scaling_efficiency.png" height="400">
-<img src="../../../support/materiel/life_mpi_strong_scaling_part.png" height="400">
+<img src="../../../support/materiel/maxwell_mpi_strong_scaling_time.png" height="450">
+<img src="../../../support/materiel/maxwell_mpi_strong_scaling_efficiency.png" height="400">
+<img src="../../../support/materiel/maxwell_mpi_strong_scaling_part.png" height="400">
 
 c) Commentez ce *strong scaling* en vous aidant de toutes les courbes
