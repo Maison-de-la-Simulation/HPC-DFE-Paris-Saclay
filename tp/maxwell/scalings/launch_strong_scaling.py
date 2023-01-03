@@ -14,7 +14,7 @@ for cores in number_of_cores:
     os.chdir(folder)
 
     script = "#!/bin/bash \n"
-    script += "#SBATCH --job-name=master_dfe \n"
+    script += "#SBATCH --job-name=strong_{} \n".format(cores)
     script += "#SBATCH --output=output \n"
     script += "#SBATCH --error=error \n"
     script += "#SBATCH --ntasks={}                # Nombre d'unité de calcul ou de processus MPI \n".format(cores)
