@@ -39,14 +39,25 @@ Vérifiez que tous les modules souhaités sont chargés.
 
 7) Nous allons créer un script qui contiendra tous nos modules pour tous les charger en une seule commande :
 
-Dans un script `~/env_dfe_hpc.sh` :
+Dans un script `~/env_dfe_hpc.sh`, vous pouvez y mettre l'environnement Intel :
 
 ```bash
 module purge
 module load anaconda3/2020.02/gcc-9.2.0
 module load intel/20.0.2/gcc-4.8.5
 module load intel-mpi/2019.8.254/intel-20.0.2
+export I_MPI_CXX=icpc
 ```
+
+Ou GNU :
+
+```bash
+module purge
+module load anaconda3/2022.10/gcc-11.2.0
+module load gcc/11.2.0/gcc-4.8.5
+module load openmpi/4.1.1/gcc-11.2.0
+```
+
 
 Ici `module purge` permet de décharger tous les modules.
 
