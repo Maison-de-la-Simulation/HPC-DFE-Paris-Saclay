@@ -34,9 +34,14 @@ for run in runs:
         energy_times.append(float(lines[-2].split("|")[2]))
         diag_times.append(float(lines[-1].split("|")[2]))
 
+print("# Nombre de processus")
 print("times['cores'] = np.array({})".format(cores))
+print("# Temps dans la boucle en temps")
 print("times['total'] = np.array({})".format(total_times))
+print("# Temps dans les communications point à point")
 print("times['com'] = np.array({})".format(com_times))
+print("# Temps pour les réductions de l'énergie")
 print("times['energy'] = np.array({})".format(energy_times))
+print("# Temps dans les diags")
 print("times['diags'] = np.array({})".format(diag_times))
 
