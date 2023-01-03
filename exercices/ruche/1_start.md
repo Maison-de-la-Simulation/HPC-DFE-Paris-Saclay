@@ -64,9 +64,10 @@ Dans le répertoire de votre choix, créez le fichier : `launch.sh`
 #!/bin/bash
 #SBATCH --job-name=master_dfe
 #SBATCH --output=output
-#SBATCH --output=error            # fichier qui réceptionne la sortie standard
+#SBATCH --error=error            # fichier qui réceptionne la sortie standard
 #SBATCH --ntasks=1                # Nombre d'unité de calcul ou de processus MPI
-#SBATCH --time=01:00:00           # Temps souhaité pour la réservation
+#SBATCH --nodes=2                 # Nombre de noeuds à exploiter
+#SBATCH --time=00:10:00           # Temps souhaité pour la réservation
 #SBATCH --partition=cpu_short     # Partition des jobs rapides
 
 # on charge les modules en un coup
@@ -112,9 +113,10 @@ mpic++ -O3 main.cpp -o executable
 #!/bin/bash
 #SBATCH --job-name=master_dfe
 #SBATCH --output=output
-#SBATCH --output=error            # fichier qui réceptionne la sortie standard
+#SBATCH --error=error            # fichier qui réceptionne la sortie standard
 #SBATCH --ntasks=4                # Nombre d'unité de calcul ou de processus MPI
-#SBATCH --time=01:00:00           # Temps souhaité pour la réservation
+#SBATCH --nodes=2                 # Nombre de noeuds à exploiter
+#SBATCH --time=00:10:00           # Temps souhaité pour la réservation
 #SBATCH --partition=cpu_short     # Partition des jobs rapides
 
 # on charge les modules en un coup
