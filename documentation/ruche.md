@@ -131,3 +131,24 @@ scancel <job id>
 ```
 
 Toutes les commandes de gestion des jobs sont ici : https://mesocentre.pages.centralesupelec.fr/user_doc/ruche/06_slurm_jobs_management/
+
+## Les environnements possibles pour les exercices
+
+### GNU 11
+
+```bash
+module purge
+module load anaconda3/2022.10/gcc-11.2.0
+module load gcc/11.2.0/gcc-4.8.5
+module load openmpi/4.1.1/gcc-11.2.0
+```
+
+### Intel 20
+
+```bash
+module purge
+module load anaconda3/2022.10/gcc-11.2.0
+module load intel/20.0.4/gcc-4.8.5
+module load intel-mkl/2020.4.304/intel-20.0.4.304
+export I_MPI_CXX=icpc
+```
