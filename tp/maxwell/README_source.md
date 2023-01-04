@@ -135,11 +135,11 @@ En effet les champs électriques aux bords se calculent à partir des champs mag
 
 Dans le code, on utilise des conditions réfléchissantes (ou conditions de Neumann).
 
-### Notion d'antenne
+### Charge oscillante
 
-Une façon de générer un champ électromagnétique est d'émuler le comportement d'une antenne.
-Une antenne peut être modélisée par une charge qui se déplace en oscillant le long d'un segment.
-Il faut alors calculer le courant généré par cette antenne et l'ajouter aux équations de Maxwell-Ampère.
+Une façon de générer un champ électromagnétique est de mouvoir une charge dans l'espace
+On choisit ici de faire osciller une bille le long d'un segment.
+Il faut alors calculer le courant généré par cette bille et l'ajouter aux équations de Maxwell-Ampère.
 
 Soit $\vec{x}_A(t)$ l'évolution dans l'espace d'une charge $q_A$ et donc $\vec{v}_A(t)$ sa vitesse.
 Le courant est donné par :
@@ -148,13 +148,13 @@ $$
 \vec{J}_A = q_A \vec{v}_A(t)
 $$
 
-Pour une antenne, on utilise :
+Pour le mouvement oscillatoire le long d'une segment, on utilise :
 
 $$
 \vec{x}_A = \vec{x}_{A,0} + L_{A} \cos{ \left( 2 \pi t / T_{A} \right) }
 $$
 
-Avec $L_A$ la longueur de l'antenne et $T_A$ sa période.
+Avec $L_A$ la longueur du segment et $T_A$ la période d'oscillation.
 
 
 ## Le code séquentiel <a id="code_sequentiel"></a>
