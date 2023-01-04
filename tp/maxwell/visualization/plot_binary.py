@@ -56,93 +56,59 @@ iteration = struct.unpack('i',content[k:k+4])[0] ; k+= 4
 
 print(" Iteration: {}".format(iteration))
 
-nxp = struct.unpack('i',content[k:k+4])[0] ; k+= 4
-nyp = struct.unpack('i',content[k:k+4])[0] ; k+= 4
+nx = struct.unpack('i',content[k:k+4])[0] ; k+= 4
+ny = struct.unpack('i',content[k:k+4])[0] ; k+= 4
 
-nxd = nxp + 1
-nyd = nyp + 1
+print(" nx : {}".format(nx))
+print(" ny : {}".format(ny))
 
-print(" nx (primal): {}".format(nxp))
-print(" ny (primal): {}".format(nyp))
+size = nx*ny
+Field = np.array(struct.unpack('{}d'.format(size),content[k:k + 8*size])) ; k+= 8*size
 
-size = nxd*nyp
-Ex = np.array(struct.unpack('{}d'.format(size),content[k:k + 8*size])) ; k+= 8*size
-size = nxp*nyd
-Ey = np.array(struct.unpack('{}d'.format(size),content[k:k + 8*size])) ; k+= 8*size
-size = nxp*nyp
-Ez = np.array(struct.unpack('{}d'.format(size),content[k:k + 8*size])) ; k+= 8*size
-
-size = nxp*nyd
-Bx = np.array(struct.unpack('{}d'.format(size),content[k:k + 8*size])) ; k+= 8*size
-size = nxd*nyp
-By = np.array(struct.unpack('{}d'.format(size),content[k:k + 8*size])) ; k+= 8*size
-size = nxd*nyd
-Bz = np.array(struct.unpack('{}d'.format(size),content[k:k + 8*size])) ; k+= 8*size
-
-Ex_map = np.reshape(Ex, (nyp,nxd))
-Ey_map = np.reshape(Ey, (nyd,nxp))
 
 # Ez_map = np.zeros([nyp, nxp])
 # for iy in range(nyp):
 #     for ix in range(nxp):
 #         Ez_map[iy,ix] = Ez[iy*nxp+ix]
-Ez_map = np.reshape(Ez, (nyp,nxp))
 
-Bx_map = np.reshape(Bx, (nyd,nxp))
-By_map = np.reshape(By, (nyp,nxd))
-Bz_map = np.reshape(Bz, (nyd,nxd))
+# Ex_map = np.reshape(Ex, (nyp,nxd))
+# Ey_map = np.reshape(Ey, (nyd,nxp))
+# Ez_map = np.reshape(Ez, (nyp,nxp))
 
-xp = np.arange(nxp)
-yp = np.arange(nyp)
+# Bx_map = np.reshape(Bx, (nyd,nxp))
+# By_map = np.reshape(By, (nyp,nxd))
+# Bz_map = np.reshape(Bz, (nyd,nxd))
 
-xd = np.arange(nxd)
-yd = np.arange(nyd)
+Field_map = np.reshape(Field, (nx,ny))
+
+x = np.arange(nx)
+y = np.arange(ny)
+
 
 # ______________________________________________________________________________
 # Figure and plot
 
-fig = figure(figsize=(12, 6))
+fig = figure(figsize=(8, 6))
 
 gs = GridSpec(4, 6)
-ax00 = subplot(gs[0:2,0:2])
-ax01 = subplot(gs[0:2,2:4])
-ax02 = subplot(gs[0:2,4:6])
-ax10 = subplot(gs[2:4,0:2])
-ax11 = subplot(gs[2:4,2:4])
-ax12 = subplot(gs[2:4,4:6])
+ax00 = subplot(gs[:,:])
+
 
 colormap_name = "RdBu"
 
-im00 = ax00.pcolormesh(xd,yp,Ex_map,shading='auto',cmap=colormaps[colormap_name])
+def symetric(im):
+    clim = np.array(im.get_clim())
+    max = 0.8*np.max(np.absolute(clim))
+    im.set_clim([-max,max])
+
+im00 = ax00.pcolormesh(x,y,Field_map.T,shading='auto',cmap=colormaps[colormap_name])
+symetric(im00)
 cb00 = colorbar(im00, ax=ax00)
-ax00.set_title("Ex (it: {})".format(iteration))
+ax00.set_title("{}".format(file_path))
 #im00.set_clim([-1e-6,1e-6])
 
-im01 = ax01.pcolormesh(xp,yd,Ey_map,shading='auto',cmap=colormaps[colormap_name])
-cb01 = colorbar(im01, ax=ax01)
-ax01.set_title("Ey")
-
-im02 = ax02.pcolormesh(xp,yp,Ez_map,shading='auto',cmap=colormaps[colormap_name])
-cb02 = colorbar(im02, ax=ax02)
-ax02.set_title("Ez")
-
-im10 = ax10.pcolormesh(xp,yd,Bx_map,shading='auto',cmap=colormaps[colormap_name])
-cb10 = colorbar(im10, ax=ax10)
-ax10.set_title("Bx")
-
-im11 = ax11.pcolormesh(xd,yp,By_map,shading='auto',cmap=colormaps[colormap_name])
-cb11 = colorbar(im11, ax=ax11)
-ax11.set_title("By")
-
-im12 = ax12.pcolormesh(xd,yd,Bz_map,shading='auto',cmap=colormaps[colormap_name])
-cb12 = colorbar(im12, ax=ax12)
-ax12.set_title("Bz")
-
-ax10.set_xlabel("x")
-ax11.set_xlabel("x")
-
+ax00.set_xlabel("x")
 ax00.set_ylabel("y")
-ax10.set_ylabel("y")
 
 fig.tight_layout()
 
