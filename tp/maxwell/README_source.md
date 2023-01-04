@@ -53,8 +53,10 @@ $$
 Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell-Ampère  et Maxwell-Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
 
 $$
-\frac{\partial E}{\partial t} = - \vec{J} + \nabla \times vec{B}
-\frac{\partial B}{\partial t} = - \nabla \times vec{E}
+\frac{\partial E}{\partial t} = - \vec{J} + \nabla \times \vec{B}
+$$
+$$
+\frac{\partial B}{\partial t} = - \nabla \times \vec{E}
 $$
 
 En 2D, la discrétisation donne les équations suivantes pour Maxwell Ampère :
