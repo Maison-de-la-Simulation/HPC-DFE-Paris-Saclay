@@ -4,11 +4,11 @@
 
 ### Prérequis
 
-Assurez-vous d'avoir un compilateur Fortran et C de disponible comme `gfortran` et `gcc`.
+Assurez-vous d'avoir un compilateur Fortran, C et C++ de disponible comme `gfortran`, `gcc`, `g++`.
 Dans le cas contraire installez le grâce au gestionnaire de paquets.
 
 ```bash
-sudo apt install gfortran gcc
+sudo apt install gfortran gcc g++
 
 ```
 

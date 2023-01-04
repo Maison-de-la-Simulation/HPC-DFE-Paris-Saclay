@@ -26,7 +26,7 @@ Nous nous intéressons dans ce projet à la simulation des équations Maxwell pa
 
 On rappelle les équations de Maxwell dans le vide :
 
-Maxwell Ampere :
+Maxwell-Ampère  :
 
 $$
 \frac{1}{c^2} \frac{\partial E}{\partial t}  = - \mu_0 \vec{J} + \nabla \times \vec{B}
@@ -50,7 +50,7 @@ $$
 \nabla \cdot \vec{B} = 0
 $$
 
-Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell Ampere et Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
+Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell-Ampère  et Maxwell-Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
 
 $$
 \frac{\partial E}{\partial t} = - \vec{J} + \nabla \times vec{B}
@@ -71,7 +71,7 @@ $$
 Ez_{i,j}^{n} = Ez_{i,j}^{n-1} + \frac{\Delta t}{\Delta x} \left( By_{i+1,j}^{n-1/2}  - By_{i,j}^{n-1/2}\right) - \frac{\Delta t}{\Delta y} \left( Bx_{i,j+1}^{n-1/2}  - Bx_{i,j}^{n-1/2}\right) 
 $$
 
-Où $n = t / \Delta t $ est l'iteration en temps, $i$ et $j$ respectivement la discrétisation en espace suivant les directions $x$ et $y$.
+Où $n = t / \Delta t $ est l'itération  en temps, $i$ et $j$ respectivement la discrétisation en espace suivant les directions $x$ et $y$.
 
 Puis pour Maxwell Faraday :
 
@@ -106,17 +106,18 @@ La grille représentée par les noeuds rouge du champ $Bz$ est appelée grille d
 C'est la grille la plus large.
 
 Dans la figure ci-dessous, nous avons représenté la grille définie par les noeuds oranges du champ $E_z$.
-il s'agit de la grille primale.
+Il s'agit de la grille primale.
 
 <img src="../../support/materiel/maxwell_yee_grid_3.png" height="400">
 
 Le grille primale est celle qui contient le moins de noeuds.
 Par définition, si la grille primale a une taille de $n_{xp} \times n_{yp}$ alors la grille duale a une taille de $n_{xd} = n_{xp} + 1 \times n_{yd} = n_{yp} + 1$.
 
-Toutes les autres composantes sont une combinaison dual / primal.
-Par exemple, la grille définie par les noeuds bleus (composantes $Ey$ et $Bx$) est primale dans la direction $x$ mais duale dans la direction $y$. elle a donc une taille $n_{xp} \times n_{yd}$.
+Toutes les autres composantes sont une combinaison duale / primale.
+Par exemple, la grille définie par les noeuds bleus (composantes $Ey$ et $Bx$) est primale dans la direction $x$ mais duale dans la direction $y$.
+Elle a donc une taille $n_{xp} \times n_{yd}$.
 De la même manière, la grille définie par les noeuds verts (composante $Ex$ et $By$) est au contraire duale dans la direction $x$ et primale dans la direction $y$.
-La figure ci-dssous résume la notion de grille primale et duale :
+La figure ci-dessous résume la notion de grille primale et duale :
 
 <img src="../../support/materiel/maxwell_primal_dual.png" height="400">
 
@@ -134,9 +135,9 @@ Dans le code, on utilise des conditions réfléchissantes (ou conditions de Neum
 
 ### Notion d'antenne
 
-Une façon de générer un champ électromagnétiest est d'émuler le comportement d'une antenne.
+Une façon de générer un champ électromagnétique est d'émuler le comportement d'une antenne.
 Une antenne peut être modélisée par une charge qui se déplace en oscillant le long d'un segment.
-Il faut alors calculer le courant généré par cette antenne et l'ajouter aux équations de Maxell-Ampère.
+Il faut alors calculer le courant généré par cette antenne et l'ajouter aux équations de Maxwell-Ampère.
 
 Soit $\vec{x}_A(t)$ l'évolution dans l'espace d'une charge $q_A$ et donc $\vec{v}_A(t)$ sa vitesse.
 Le courant est donné par :
@@ -156,7 +157,7 @@ Avec $L_A$ la longueur de l'antenne et $T_A$ sa période.
 
 ## Le code séquentiel <a id="code_sequentiel"></a>
 
-Le code est écrit en langage C++ mais n'utilise pas de foctionnalité avancée.
+Le code est écrit en langage C++ mais n'utilise pas de fonctionnalité avancée.
 Il ne se compose que d'un unique fichier `main.cpp`.
 
 ### Description du code
@@ -178,14 +179,14 @@ Dans la partie d'initialisation, on fait dans l'ordre :
 
 Puis dans la boucle en temps :
 - résolution des équations de Maxwell-Ampère
-- ajout des courants géénrés par les antennes
-- résolution des équantions de Maxwell-Faraday
+- ajout des courants générés  par les antennes
+- résolution des équations  de Maxwell-Faraday
 - conditions aux bords
-- sortie des fichiers de diagntostique (pour chaque grille)
+- sortie des fichiers de diagnostique  (pour chaque grille)
 - affichage dans le terminal de l'état de la simulation
 
 Puis après la boucle en temps :
-- l'affichage des *timers*, c'est à dire le temps passé dans le divers parties du code
+- l'affichage des *timers*, c'est à dire le temps passé dans les diverses parties du code
 - destruction des tableaux
 
 ### Les dépendances
@@ -206,12 +207,13 @@ Pour g++:
 g++ -O3 main.cpp -o exe
 ```
 
-Pour Intel (sur Ruche par exemple):
+Pour Intel (sur Ruche par exemple) :
 ```bash
 icpc -O3 main.cpp -o exe
 ```
 
-La compilation génère un fichier exécutable du nom de `exe`. Vous pouvez lancer le programme en faisant :
+La compilation génère un fichier exécutable du nom de `exe`.
+Vous pouvez lancer le programme en faisant :
 ```bash
 ./exe
 ```
@@ -224,8 +226,8 @@ Il est possible de changer certains paramètres numériques directement en ligne
 ./executable -nx 128 -ny 256 -it 1000
 ```
 
-- `-nx`: nombre de cellules dans la direction x
-- `-ny`: nombre de cellules dans la direction y
+- `-nx`: nombre de points pour la grille duale dans la direction x
+- `-ny`: nombre de points pour la grille duale dans la direction y
 - `-it`: nombre d'itérations
 - `-d` : fréquence des sorties de fichier en nombre d'itérations
 - `-p` : fréquence des affichages dans le terminal en nombre d'itérations
@@ -238,25 +240,19 @@ Les fichiers sont toujours écrits dans un dossier `diags`.
 Des scripts Python vous sont fournis pour vous aider à visualiser ces données.
 Vous pouvez aussi utiliser vos propres scripts dans le langage de votre choix.
 Les scripts sont dans le dossier [visualization](./visualization):
+- [plot_all_fields.py](./visualization/plot_all_fields.py)
+
+```bash
+python -i plot_all_fields.py <chemin vers le dossier des diags> <it>
+```
+
 - [plot_binary.py](./visualization/plot_binary.py)
 
 ```bash
-python -i plot_binary.py <chemin vers un fichier diag_*.bin>
+python -i plot_binary.py <chemin vers un fichier diag*.bin>
 ```
 
-- [animate.py](./visualization/animate.py)
-
-```bash
-python -i animate.py <chemin vers un dossier diags>
-```
-
-- [plot_scalar.py](./visualization/plot_scalar.py)
-
-```bash
-python -i animate.py <chemin vers un fichier scalars.bin>
-```
-
-Voici un exemple d'image produite par la lecture d'un fichier via le script `plot_binary.py`.
+Voici un exemple d'image produite par la lecture d'un fichier via le script `plot_all_fields.py`.
 
 <img src="../../support/materiel/maxwell_image.png" height="400">
 
