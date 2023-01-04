@@ -43,11 +43,11 @@ int main( int argc, char *argv[] )
     
     double t = MPI_Wtime();
     
-    srand(int(t)*(rank+1));
+    srand(rank);
     
     // The size is drawn between 1 and 100
     int size = rand() % 99 + 1;
-    
+
     double * array = new double [size];
     
     // _______________________________________________________
@@ -96,7 +96,14 @@ int main( int argc, char *argv[] )
     
     double * global_array = new double [total_size];
     
-    MPI_Gatherv(&array[0],size,MPI_DOUBLE, &global_array[0],local_size, displacement, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Gatherv(&array[0],
+                size,
+                MPI_DOUBLE,
+                &global_array[0],
+                &local_size[0],
+                &displacement[0],
+                MPI_DOUBLE,
+                0, MPI_COMM_WORLD);
     
     // On somme tous les éléments sur 0 et on affiche le résultat
     

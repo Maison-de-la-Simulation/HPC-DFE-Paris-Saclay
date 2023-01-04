@@ -1,6 +1,6 @@
 # Utilisation du super-calculateur Ruche
 
-Ruche est un super-calculateur installé au [Mésocentre du Moulon](http://mesocentre.centralesupelec.fr/) sur le Campus de l'université Paris-Saclay. La partition CPU est composé de 216 noeuds bisocket Intel Cascadelake 6230 piur une puissance total de 0.5 petaflops.
+Ruche est un super-calculateur installé au [Mésocentre du Moulon](http://mesocentre.centralesupelec.fr/) sur le Campus de l'université Paris-Saclay. La partition CPU est composé de 216 noeuds bisocket Intel Cascadelake 6230 pour une puissance totale de 0.5 petaflops.
 
 La documentation du calculateur est disponible en ligne : https://mesocentre.pages.centralesupelec.fr/user_doc/
 
@@ -84,8 +84,9 @@ Par exemple, voici le contenu d'un script `launch.sh`.
 #!/bin/bash
 #SBATCH --job-name=master_dfe
 #SBATCH --output=output
-#SBATCH --output=error            # fichier qui réceptionne la sortie standard
+#SBATCH --error=error            # fichier qui réceptionne la sortie standard
 #SBATCH --ntasks=1                # Nombre d'unité de calcul ou de processus MPI
+#SBATCH --nodes=2                 # Nombre de noeuds à exploiter
 #SBATCH --time=01:00:00           # Temps souhaité pour la réservation
 #SBATCH --partition=cpu_short     # Partition des jobs rapides
 
@@ -130,3 +131,24 @@ scancel <job id>
 ```
 
 Toutes les commandes de gestion des jobs sont ici : https://mesocentre.pages.centralesupelec.fr/user_doc/ruche/06_slurm_jobs_management/
+
+## Les environnements possibles pour les exercices
+
+### GNU 11
+
+```bash
+module purge
+module load anaconda3/2022.10/gcc-11.2.0
+module load gcc/11.2.0/gcc-4.8.5
+module load openmpi/4.1.1/gcc-11.2.0
+```
+
+### Intel 20
+
+```bash
+module purge
+module load anaconda3/2022.10/gcc-11.2.0
+module load intel/20.0.4/gcc-4.8.5
+module load intel-mkl/2020.4.304/intel-20.0.4.304
+export I_MPI_CXX=icpc
+```
