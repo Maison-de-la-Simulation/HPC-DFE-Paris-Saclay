@@ -44,7 +44,8 @@ Maxwell Flux :
 
 Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell-Ampère  et Maxwell-Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
 
-<p align="center"><img src=".extra//41cccb13579195958c31b4b2e6314e52.svg?invert_in_darkmode" align=middle width=292.37469525pt height=33.81208709999999pt/></p>
+<p align="center"><img src=".extra//4603a45c5d22c4c4ec2fca4207a07bf1.svg?invert_in_darkmode" align=middle width=137.36610195pt height=33.81208709999999pt/></p>
+<p align="center"><img src=".extra//6d5dd1abd04119bbe000966bdb8b84f3.svg?invert_in_darkmode" align=middle width=106.68419024999999pt height=33.81208709999999pt/></p>
 
 En 2D, la discrétisation donne les équations suivantes pour Maxwell Ampère :
         
