@@ -110,22 +110,22 @@ En effet les champs électriques aux bords se calculent à partir des champs mag
 
 Dans le code, on utilise des conditions réfléchissantes (ou conditions de Neumann).
 
-### Notion d'antenne
+### Charge oscillante
 
-Une façon de générer un champ électromagnétique est d'émuler le comportement d'une antenne.
-Une antenne peut être modélisée par une charge qui se déplace en oscillant le long d'un segment.
-Il faut alors calculer le courant généré par cette antenne et l'ajouter aux équations de Maxwell-Ampère.
+Une façon de générer un champ électromagnétique est de mouvoir une charge dans l'espace
+On choisit ici de faire osciller une bille le long d'un segment.
+Il faut alors calculer le courant généré par cette bille et l'ajouter aux équations de Maxwell-Ampère.
 
 Soit <img src=".extra//2c09d6fe231fc69cfcee32fa0b3785df.svg?invert_in_darkmode" align=middle width=39.04402919999999pt height=24.65753399999998pt/> l'évolution dans l'espace d'une charge <img src=".extra//46d29bba147ab86127a70278268c42d9.svg?invert_in_darkmode" align=middle width=17.224222949999987pt height=14.15524440000002pt/> et donc <img src=".extra//e48500a898443f79affbb15aa1ea1eb7.svg?invert_in_darkmode" align=middle width=38.03569605pt height=24.65753399999998pt/> sa vitesse.
 Le courant est donné par :
 
 <p align="center"><img src=".extra//34f0431fabc6542e6237b3d2d33f1d61.svg?invert_in_darkmode" align=middle width=97.1842344pt height=20.00911605pt/></p>
 
-Pour une antenne, on utilise :
+Pour le mouvement oscillatoire le long d'une segment, on utilise :
 
 <p align="center"><img src=".extra//7f9736b9470faf8a38e964e9a11db998.svg?invert_in_darkmode" align=middle width=207.70829475pt height=17.031940199999998pt/></p>
 
-Avec <img src=".extra//71d5328dcc516b999b4b4630d795dc3f.svg?invert_in_darkmode" align=middle width=21.07315319999999pt height=22.465723500000017pt/> la longueur de l'antenne et <img src=".extra//a68349737baf72a520a69e2b4aac8d32.svg?invert_in_darkmode" align=middle width=19.49209844999999pt height=22.465723500000017pt/> sa période.
+Avec <img src=".extra//71d5328dcc516b999b4b4630d795dc3f.svg?invert_in_darkmode" align=middle width=21.07315319999999pt height=22.465723500000017pt/> la longueur du segment et <img src=".extra//a68349737baf72a520a69e2b4aac8d32.svg?invert_in_darkmode" align=middle width=19.49209844999999pt height=22.465723500000017pt/> la période d'oscillation.
 
 
 ## Le code séquentiel <a id="code_sequentiel"></a>
