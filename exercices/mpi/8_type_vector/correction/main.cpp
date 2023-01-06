@@ -52,11 +52,11 @@ int main( int argc, char *argv[] )
     int nx = 10;
     int ny = 16;
 
-    int array[ny][nx];
+    int * array = new int [ny*nx];
 
     for (int iy = 0 ; iy < ny ; iy++) {
         for (int ix = 0 ; ix < nx ; ix++) {
-             array[iy][ix] = rank;
+             array[iy*nx + ix] = rank;
         }
     }
 
@@ -85,8 +85,8 @@ int main( int argc, char *argv[] )
 
     MPI_Request request[2];
 
-    MPI_Irecv(&array[0][0], 1, column, recv_rank, tag, MPI_COMM_WORLD, &request[0]);
-    MPI_Isend(&array[0][nx-1], 1, column, send_rank, tag, MPI_COMM_WORLD, &request[1]);
+    MPI_Irecv(&array[0], 1, column, recv_rank, tag, MPI_COMM_WORLD, &request[0]);
+    MPI_Isend(&array[nx-1], 1, column, send_rank, tag, MPI_COMM_WORLD, &request[1]);
 
     MPI_Waitall(2,request,MPI_STATUS_IGNORE);
 
@@ -96,12 +96,14 @@ int main( int argc, char *argv[] )
         if (rank == irank) {
             std::cout << " Rank: " << irank << " - " ;
             for (int iy = 0 ; iy < ny ; iy++) {
-                std::cout << array[iy][0] << " ";
+                std::cout << array[iy*nx] << " ";
             }
             std::cout << std::endl;
         }
         MPI_Barrier(MPI_COMM_WORLD);
     }
+
+    delete [] array;
 
 	MPI_Type_free(&column);
 
