@@ -16,16 +16,28 @@ Nous allons maintenant préparer notre environnement.
 
 2) Utilisez la commande `module avail` pour afficher tous les modules disponibles.
 
-3) Il nous faut maintenant choisir un compilateur. Nous allons utiliser le compilateur Intel. Nous allons charger pour cela le module `intel/20.0.2/gcc-4.8.5` :
+3) Il nous faut maintenant choisir un compilateur. Vous pouvez utiliser le compilateur Intel ou GNU. Nous allons charger pour cela les modules correspondants :
+
+Soit pour Intel
 
 ```bash
 module load intel/20.0.2/gcc-4.8.5
 ```
 
-4) Puis charger une version de MPI, pour cela nous allons utiliser le MPI d'Intel :
+```bash
+module load gcc/11.2.0/gcc-4.8.5
+```
 
+4) Puis charger une version de MPI :
+
+Pour Intel MPI :
 ```bash
 module load intel-mpi/2019.8.254/intel-20.0.2
+```
+
+Pour OpenMPI :
+```bash
+module load openmpi/4.1.1/gcc-11.2.0
 ```
 
 5) Enfin nous allons charger un module Python :
