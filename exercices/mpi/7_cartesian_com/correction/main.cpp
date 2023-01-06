@@ -98,6 +98,8 @@ int main( int argc, char *argv[] )
 
     // Communication de la topologie totale au rang 0
     
+    //int k = rank_coordinates[0]*ranks_per_direction[1] + rank_coordinates[1];
+
     MPI_Gather(&rank,1,MPI_INT,&topology_map,1,MPI_INT,0,cartesian_communicator);
     
     // -------------------------------------------------------------------------
