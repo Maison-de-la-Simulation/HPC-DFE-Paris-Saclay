@@ -24,6 +24,8 @@ Soit pour Intel
 module load intel/20.0.2/gcc-4.8.5
 ```
 
+Soit pour GNU :
+
 ```bash
 module load gcc/11.2.0/gcc-4.8.5
 ```
