@@ -93,50 +93,25 @@ int main( int argc, char *argv[] )
         }
         MPI_Barrier(cartesian_communicator);
     }
-
-    int topology_map[ranks_per_direction[0]*ranks_per_direction[1]];
-
-    // Communication de la topologie totale au rang 0
-    
-    MPI_Gather(&rank,1,MPI_INT,&topology_map,1,MPI_INT,0,cartesian_communicator);
     
     // -------------------------------------------------------------------------
-    // Affichage de la topologie
-    
-    if (rank == 0) {
-    
-        std::cout << std::endl;
-        std::cout <<  " Carte de la topologie : "<< std::endl;
-        std::cout <<  " ---------------------------> x"<< std::endl;
-    
-        for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
-            for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {
-                
-                std::cout << " | " << std::setw(3) << topology_map[iy*ranks_per_direction[1] + ix] ;
-                
-            }
-            std::cout << std::endl;
-        }
-    
-        std::cout << " v" << std::endl;
-        std::cout << " y" << std::endl;
-    
-    }
-    
-    // -------------------------------------------------------------------------
+    // Affichage de la topologie sur le rang 0
     // Construction de la carte de la topologie  à partir de MPI_Cart_coords :
     
-    int coordinates[2];
-    
-    for (int i = 0 ; i < number_of_ranks ; i++) {
-        MPI_Cart_coords( cartesian_communicator, i, 2, coordinates);
-        topology_map[coordinates[0]*ranks_per_direction[1] + coordinates[1]] = i;
-    }
-
-    // Affichage de la topologie
-    
     if (rank == 0) {
     
+    
+        int * topology_map = new int [ranks_per_direction[0]*ranks_per_direction[1]];
+
+        int coordinates[2];
+        
+        for (int i = 0 ; i < number_of_ranks ; i++) {
+            MPI_Cart_coords( cartesian_communicator, i, 2, coordinates);
+            topology_map[coordinates[0]*ranks_per_direction[1] + coordinates[1]] = i;
+        }
+
+        // Affichage de la topologie
+
         std::cout << std::endl;
         std::cout <<  " Carte de la topologie à partir de MPI_Cart_coords : "<< std::endl;
         std::cout <<  " ---------------------------> x"<< std::endl;
@@ -153,6 +128,8 @@ int main( int argc, char *argv[] )
         std::cout << " v" << std::endl;
         std::cout << " y" << std::endl;
     
+        delete [] topology_map;
+
     }
     
     MPI_Finalize();
