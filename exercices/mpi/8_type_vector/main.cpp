@@ -53,6 +53,7 @@ int main( int argc, char *argv[] )
     int ny = 16;
 
     int array[ny][nx];
+    //int * array = new int [ny*nx];
 
     for (int iy = 0 ; iy < ny ; iy++) {
         for (int ix = 0 ; ix < nx ; ix++) {
