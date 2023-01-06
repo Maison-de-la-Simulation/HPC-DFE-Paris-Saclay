@@ -19,7 +19,7 @@ Le rang qui réceptionne place la colonne reçue dans sa colonne la plus à gauc
 int nx = 10;
 int ny = 16;
 
-int array[ny][nx];
+int * array = new int [ny*nx];
 ```
 
 2. Compléter les lignes permettant de déclarer le type vector du nom de `column`.
