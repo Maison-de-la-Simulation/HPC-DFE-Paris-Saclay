@@ -92,13 +92,21 @@ int main( int argc, char *argv[] )
         MPI_Barrier(cartesian_communicator);
     }
 
-    // Création de la carte
+    // Création de la carte (Matrice 2D) via un tableau 1D
 
     int * topology_map = new int[ranks_per_direction[1]*ranks_per_direction[0]];
 
     // Communication de la topologie totale au rang 0
     
-    MPI_???(???);
+    // On récupère les coordonnées du rang
+    // MPI_????
+
+    // On linéarise ces coordonnées dans un espace 1D 
+    // pour trouver la position du rang dans le tableau topology_map
+    // ...
+
+    // On reconstitue la topologie sur le rang 0
+    //MPI_???(???);
     
     // -------------------------------------------------------------------------
     // Affichage de la topologie
@@ -107,7 +115,7 @@ int main( int argc, char *argv[] )
     
         std::cout << std::endl;
         std::cout <<  " Carte de la topologie : "<< std::endl;
-        std::cout <<  " ---------------------------> y"<< std::endl;
+        std::cout <<  " ---------------------------> x"<< std::endl;
     
         for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
             for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {
@@ -129,8 +137,8 @@ int main( int argc, char *argv[] )
     int coordinates[2];
     
     for (int i = 0 ; i < number_of_ranks ; i++) {
-        MPI_Cart_coords(???);
-        topology_map[???] = i;
+        //MPI_Cart_coords(???);
+        //topology_map[???] = i;
     }
 
     // Affichage de la topologie
@@ -139,7 +147,7 @@ int main( int argc, char *argv[] )
     
         std::cout << std::endl;
         std::cout <<  " Carte de la topologie à partir de MPI_Cart_coords : "<< std::endl;
-        std::cout <<  " ---------------------------> y"<< std::endl;
+        std::cout <<  " ---------------------------> x"<< std::endl;
     
         for(int iy = 0; iy < ranks_per_direction[0] ; iy++) {
             for(int ix = 0; ix < ranks_per_direction[1] ; ix++) {

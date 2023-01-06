@@ -94,28 +94,33 @@ MPI_???(???, // Communicateur cartésien (MPI_Comm)
              ierror)
 ```
 
-
-5. Créez un tableau `topology_map` de la taille du nombre totalde processus/rangs.
-
-6. Rapatriez sur le rang 0 l'ensemble des rangs de tous les processus.
-Utilisez pour cela la bonne communication collective.
-Afficher à l'écran la matrice de la topologie cartésienne.
-
-7. Construisez maintenant la carte de la topologie sur tous les processurs en utilisant la fonction `MPI_Cart_coords`.
-Afficher à l'écran la matrice de la topologie cartésienne.
-Comparez les résultats avec la carte précédente.
-
-8. Compilez le code :
-
-```bash
-mpif90 main.F90 -o executable
-```
+5. Compilez et exécutez-le avec 12 processeurs pour vérifier que le programme fonctionne jusque là. 
 
 ```bash
 mpic++ main.cpp -o executable
 ```
 
-9. Exécutez le code avec 12 processus :
+```bash
+mpirun -np 12 ./executable
+```
+
+6. Créez un tableau `topology_map` de la taille du nombre totalde processus/rangs.
+
+7. Rapatriez sur le rang 0 l'ensemble des rangs de tous les processus.
+Utilisez pour cela la bonne communication collective.
+Afficher à l'écran la matrice de la topologie cartésienne.
+
+8. Construisez maintenant la carte de la topologie sur tous les processurs en utilisant la fonction `MPI_Cart_coords`.
+Afficher à l'écran la matrice de la topologie cartésienne.
+Comparez les résultats avec la carte précédente.
+
+9. Compilez le code :
+
+```bash
+mpic++ main.cpp -o executable
+```
+
+10. Exécutez le code avec 12 processus :
 
 ```bash
 mpirun -np 12 ./executable
