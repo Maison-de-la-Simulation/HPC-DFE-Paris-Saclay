@@ -100,7 +100,7 @@ int main( int argc, char *argv[] )
     
     //int k = rank_coordinates[0]*ranks_per_direction[1] + rank_coordinates[1];
 
-    MPI_Gather(&rank,1,MPI_INT,&topology_map,1,MPI_INT,0,cartesian_communicator);
+    MPI_Gather(&rank,1,MPI_INT,&topology_map[0],1,MPI_INT,0,cartesian_communicator);
     
     // -------------------------------------------------------------------------
     // Affichage de la topologie
