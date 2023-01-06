@@ -7,6 +7,11 @@ ssh -XY <login>@ruche.mesocentre.universite-paris-saclay.fr
 ```
 
 Vous êtes maintenant connecté.e à la frontale (*login nodes*) dans l'espace `$HOME`.
+Si c'est votre porelmière connexion avec le mot de passe par défaut, vous devez le chnager en utilisant la commande :
+```
+passwd
+```
+
 Nous allons maintenant préparer notre environnement. 
 
 2) Utilisez la commande `module avail` pour afficher tous les modules disponibles.
