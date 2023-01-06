@@ -7,20 +7,39 @@ ssh -XY <login>@ruche.mesocentre.universite-paris-saclay.fr
 ```
 
 Vous êtes maintenant connecté.e à la frontale (*login nodes*) dans l'espace `$HOME`.
+Si c'est votre porelmière connexion avec le mot de passe par défaut, vous devez le chnager en utilisant la commande :
+```
+passwd
+```
+
 Nous allons maintenant préparer notre environnement. 
 
 2) Utilisez la commande `module avail` pour afficher tous les modules disponibles.
 
-3) Il nous faut maintenant choisir un compilateur. Nous allons utiliser le compilateur Intel. Nous allons charger pour cela le module `intel/20.0.2/gcc-4.8.5` :
+3) Il nous faut maintenant choisir un compilateur. Vous pouvez utiliser le compilateur Intel ou GNU. Nous allons charger pour cela les modules correspondants :
+
+Soit pour Intel
 
 ```bash
 module load intel/20.0.2/gcc-4.8.5
 ```
 
-4) Puis charger une version de MPI, pour cela nous allons utiliser le MPI d'Intel :
+Soit pour GNU :
 
 ```bash
+module load gcc/11.2.0/gcc-4.8.5
+```
+
+4) Puis charger une version de MPI :
+
+Pour Intel MPI :
+```bash
 module load intel-mpi/2019.8.254/intel-20.0.2
+```
+
+Pour OpenMPI :
+```bash
+module load openmpi/4.1.1/gcc-11.2.0
 ```
 
 5) Enfin nous allons charger un module Python :
@@ -77,7 +96,7 @@ Dans le répertoire de votre choix, créez le fichier : `launch.sh`
 #SBATCH --output=output
 #SBATCH --error=error            # fichier qui réceptionne la sortie standard
 #SBATCH --ntasks=1                # Nombre d'unité de calcul ou de processus MPI
-#SBATCH --nodes=2                 # Nombre de noeuds à exploiter
+#SBATCH --nodes=1                 # Nombre de noeuds à exploiter
 #SBATCH --time=00:10:00           # Temps souhaité pour la réservation
 #SBATCH --partition=cpu_short     # Partition des jobs rapides
 
