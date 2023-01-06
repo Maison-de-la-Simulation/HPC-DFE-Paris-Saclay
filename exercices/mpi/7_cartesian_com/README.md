@@ -70,19 +70,9 @@ MPI_???(???, // Communicateur cartésien (MPI_Comm)
 Utilisez pour cela les variables déclarées plus haut.
 
 4. Complètez maintenant les fonctions permettant de récupérer les voisins
-de chaque rang via `MPI_CART_SHIFT`. Utilisez pour cela les variables déclarées
+de chaque rang via `MPI_Cart_shift`. Utilisez pour cela les variables déclarées
 plus haut. Récupérer les voisins directs en utilisant un pas positif.
 La direction 0 est pour x, la direction 1 pour y.
-
-```fortran
-! en -y (rank_neighbors_my), en +y (rank_neighbors_py)
-CALL MPI_???(???, &     ! Communicateur cartésien
-             ???,                      &     ! Direction
-             ???,                      &     ! Déplacement (un pas positif)
-             rank_neighbors_my,        &     ! Voisin en -y
-             rank_neighbors_py,        &     ! Voisin en +y
-             ierror)
-```
 
 ```C++
 // en -y (rank_neighbors_my), en +y (rank_neighbors_py)
@@ -94,48 +84,29 @@ MPI_???(???, // Communicateur cartésien (MPI_Comm)
              ierror)
 ```
 
-
-5. Créez un tableau `topology_map` de la taille du nombre totalde processus/rangs.
-
-6. Rapatriez sur le rang 0 l'ensemble des rangs de tous les processus.
-Utilisez pour cela la bonne communication collective.
-Afficher à l'écran la matrice de la topologie cartésienne.
-
-7. Construisez maintenant la carte de la topologie sur tous les processurs en utilisant la fonction `MPI_Cart_coords`.
-Afficher à l'écran la matrice de la topologie cartésienne.
-Comparez les résultats avec la carte précédente.
-
-8. Compilez le code :
-
-```bash
-mpif90 main.F90 -o executable
-```
+5. Compilez et exécutez-le avec 12 processeurs pour vérifier que le programme fonctionne jusque là. 
 
 ```bash
 mpic++ main.cpp -o executable
 ```
 
-9. Exécutez le code avec 12 processus :
+```bash
+mpirun -np 12 ./executable
+```
+
+6. Nous allons maintenant afficher la topologie dans le terminal. Pour cela, on fabrique d'abord  un tableau `topology_map` de la taille du nombre total de processus/rangs.
+Construisez maintenant la carte de la topologie sur tous les processus en utilisant la fonction `MPI_Cart_coords`.
+
+7. Compilez le code et exécutez de nouveau le code avec 12 processus pour afficher la carte :
+
+```bash
+mpic++ main.cpp -o executable
+```
 
 ```bash
 mpirun -np 12 ./executable
 ```
 
-10. Changez le nombre de processus en prenant soin de changer aussi
+8. Changez le nombre de processus en prenant soin de changer aussi
 le nombre de rangs dans chaque direction `ranks_per_dimension`.
 
-## Compilation
-
-```bash
-mpif90 main.F90 -o executable
-```
-
-```bash
-mpic++ main.cpp -o executable
-```
-
-## Execution
-
-```bash
-mpirun -np 12 ./executable
-```
