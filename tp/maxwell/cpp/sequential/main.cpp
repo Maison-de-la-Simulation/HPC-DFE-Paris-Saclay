@@ -58,8 +58,8 @@ int main( int argc, char *argv[] )
     print_period = 100;
     
     // Antenna properties
-    const double antenna_period = 1.2*Lx;
-    const double antenna_length = 0.2*Lx;
+    const double antenna_period = 2*Lx;
+    const double antenna_length = 0.5*Lx;
     const double antenna_charge = 0.01;
     const double antenna_radius = 0.02*Lx;
 
@@ -273,32 +273,32 @@ int main( int argc, char *argv[] )
             }
         }
 
-        //Ey
-        for (int ix = 0 ; ix < nxp ; ix++) {
-            for (int iy = 0 ; iy < nyd ; iy++) {
-                const double x = xminp + ix * dx;
-                const double y = iy * dy - 0.5*dy;
-                double xa = 0.5*Lx;
-                double ya = 0.5*Ly - 0.5*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
-                double va = antenna_max_velocity*std::sin(2.0 * M_PI * iteration * dt * antenna_inverse_period);
-                if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
-                    Ey[ix*nyd+iy] += dt*antenna_charge*va;
-                }
-            }
-        }
+        // //Ey
+        // for (int ix = 0 ; ix < nxp ; ix++) {
+        //     for (int iy = 0 ; iy < nyd ; iy++) {
+        //         const double x = xminp + ix * dx;
+        //         const double y = iy * dy - 0.5*dy;
+        //         double xa = 0.5*Lx;
+        //         double ya = 0.5*Ly - 0.5*antenna_length*std::cos(2.0 * M_PI * iteration * dt * antenna_inverse_period);
+        //         double va = antenna_max_velocity*std::sin(2.0 * M_PI * iteration * dt * antenna_inverse_period);
+        //         if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
+        //             Ey[ix*nyd+iy] += dt*antenna_charge*va;
+        //         }
+        //     }
+        // }
 
-        // Ez
-        for (int ix = 0 ; ix < nxp ; ix++) {
-            for (int iy = 0 ; iy < nyp ; iy++) {
-                const double x = xminp + ix * dx;
-                const double y = iy * dy - 0.5*dy;
-                double xa = 0.5*Lx;
-                double ya = 0.5*Ly;
-                if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
-                    Ez[ix*nyp+iy] = -dt*antenna_charge*antenna_velocity;
-                }
-            }
-        }
+        // // Ez
+        // for (int ix = 0 ; ix < nxp ; ix++) {
+        //     for (int iy = 0 ; iy < nyp ; iy++) {
+        //         const double x = xminp + ix * dx;
+        //         const double y = iy * dy - 0.5*dy;
+        //         double xa = 0.5*Lx;
+        //         double ya = 0.5*Ly;
+        //         if ( ((x-xa)*(x-xa) + (y-ya)*(y-ya)) <= antenna_radius*antenna_radius) {
+        //             Ez[ix*nyp+iy] = -dt*antenna_charge*antenna_velocity;
+        //         }
+        //     }
+        // }
 
         // Solve Maxwell Faraday
         // -------------------------------------
