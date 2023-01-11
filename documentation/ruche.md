@@ -152,3 +152,44 @@ module load intel/20.0.4/gcc-4.8.5
 module load intel-mkl/2020.4.304/intel-20.0.4.304
 export I_MPI_CXX=icpc
 ```
+
+## Transfère de données avec Ruche
+
+Il existe différentes méthodes pour transférer des fichiers depuis son ordinateur vers Ruche ou inversement.
+
+### SCP
+
+La commande `scp` utilise le protocole ssh (celui que vous utilisez en ligne de commande pour vous connectez à Ruche) pour transférer des données.
+
+De nombreux sites en ligne vous expliquerons comment cette commande fonctionne.
+
+### RSYNC
+
+La commande `rsync` est utilisée pour faire de la synchronisation de données et peut se connecter à des serveurs distants via le protocole ssh. `rsync` est à prévilégier pour le transfert de masse (gros fichiers ou nombreux petits fichiers) car en cas de coupure, `rsync` est capable de reprendre là vous en étiez.
+
+### Utilisation de FileZilla
+
+FileZilla est un logiciel de transfert de donnée utilisant les protocoles FTP et SFTP pour accéder à des espaces distants.
+Il est possible de se connnecter à Ruche via FileZilla en SFTP afin d'y transférer des données ainsi que pour éditer des fichiers par exemple.
+
+Vous trouverez facilement sur le site officiel comment installer FileZilla.
+En fonction de votre OS, vous pouvez aussi passer par un magasin d'applicaiton ou un gestionnaire de paquet.
+
+Une fois FileZilla démarré, vous obtenez l'interface suivante :
+
+<img src="../support/materiel/filezilla_interface.png" height="300">
+
+On va d'abord configurer la connexion. 
+Pour cela cliquez sur l'icône pointé par la flèche rouge. 
+
+Vous ouvez alors la page suivante :
+
+<img src="../support/materiel/filezilla_interface_2.png" height="300">
+
+Ici ajoutez un nouveau site :
+- choisissez la connexion de type SFTP
+- ajoutez le nom de domaine de ruche
+- ajoutez votre login
+- choisissez si vous souhaitez enregistrer le mot de passer ou le retaper à chaque connexion
+
+Une fois les paramètres rentrées, il suffit de cliquer sur connexion pour accéder au serveur distant.
