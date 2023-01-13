@@ -22,15 +22,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: hdf5 packet
-        run: |
-          sudo apt-get install libhdf5-dev
-          h5c++ -show
+      - name: update
+        run: sudo apt-get --allow-releaseinfo-change update -y
 
       - name: mpi packet
         run: |
-          sudo apt-get install mpich
+          sudo apt-get install -y openmpi-bin openmpi-doc libopenmpi-dev
           mpic++ -show
+
+      - name: hdf5 packet
+        run: |
+          sudo apt-get install libhdf5-dev libhdf5-openmpi-dev
+          h5c++ -show
 
       # ________________________________________________________
       # Exercises
@@ -69,8 +72,9 @@ jobs:
         run: |
           cd tp/marble/cpp/sequential
           make
+          
       # ________________________________________________________
-      # Application Marble
+      # Application Maxwell
 
       # Runs a single command using the runners shell
       - name: build and test maxwell sequential
