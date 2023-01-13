@@ -137,7 +137,7 @@ unzip <nom de l'archive>
 mpic++ -O3 main.cpp -o executable
 ```
 
-13) une fois le code compilé et l'exécutable disponible, nous allons fabriquer un deuxième script de lancement en utilisant 4 unités de calcul: 
+13) une fois le code compilé et l'exécutable disponible, nous allons fabriquer un deuxième script `launch.sh` de lancement en utilisant 4 unités de calcul: 
 
 ```bash
 #!/bin/bash
@@ -145,7 +145,7 @@ mpic++ -O3 main.cpp -o executable
 #SBATCH --output=output
 #SBATCH --error=error            # fichier qui réceptionne la sortie standard
 #SBATCH --ntasks=4                # Nombre d'unité de calcul ou de processus MPI
-#SBATCH --nodes=2                 # Nombre de noeuds à exploiter
+#SBATCH --nodes=1                 # Nombre de noeuds à exploiter
 #SBATCH --time=00:10:00           # Temps souhaité pour la réservation
 #SBATCH --partition=cpu_short     # Partition des jobs rapides
 
@@ -156,10 +156,10 @@ source ~/env_dfe_hpc.sh
 srun ./executable
 ```
 
-14) Lancez ce code en faisant :
+14) Lancez le code à partir du script de lancement `launch.sh` :
 
 ```
-sbatch ./executable
+sbatch launch.sh
 ```
 
 15) Testez les autres exercices
