@@ -13,8 +13,8 @@ Cela permet d'avoir dea valeurs locales à chaque sous-domaine.
 
 Voici un exemple de ce que j'ai fait pour la grille duale :
 
-C++
-```
+
+```C++
 
     int nxd_global = nx;
     int nxp_global = nx-1;
@@ -41,12 +41,11 @@ Oui car ces fonctions ne sont pas encore prêtes pour MPI. Dans le pire des cas 
 
 3) Les conditions limites réfléchissantes aux bord du domaine à mettre à jour (3.5.g) correspondent elles bien au bords - X, +X, -Y, +Y ? Si c'est le cas, elles ne sont pas déjà mises à jour dans la boucle en temps (dans la section "Apply boundary conditions (Reflective)" ?
 
-C'est exact mais il ne faut les appliquer que pour les sous-domaines MPI qui sont aux bords. Si vous ne changez rien, chaque sous-domaine applique les conditions limites comme s'il était sans voisin.
+C'est exact mais il ne faut les appliquer que pour les sous-domaines MPI qui sont aux bords. Si vous ne changez rien, chaque sous-domaine applique les conditions limites comme s'il était sans voisin. Ici on ne doit faire une modification que pour -X et +X car on ne divise le domaine que dans cette direction.
 
-Voici un exemple de comment les gérer :
+Voici un exemple de comment les gérer pour -X:
 
-C++
-```
+```C++
         // Apply boundary conditions (Reflective)
         // -------------------------------------
 
