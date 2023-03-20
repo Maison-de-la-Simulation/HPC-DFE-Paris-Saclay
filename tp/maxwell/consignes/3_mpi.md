@@ -85,7 +85,7 @@ Par ailleurs, pour le calcul du pourcentage, utilisez le temps moyen.
 Pour le moment, seul l'initialisation et la boucle itératives complète sont comptabilisées.
 Plus tard, nous ajouterons des *timers* plus précis.
 
-f) Compilez le code et exécutez-le en demandant un et plusieurs processeurs pour vérifier que tout fonctionne.
+c) Compilez le code et exécutez-le en demandant un et plusieurs processeurs pour vérifier que tout fonctionne.
 Par exemple :
 ```bash
 mpirun -np 2 ./executable
