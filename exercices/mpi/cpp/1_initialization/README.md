@@ -42,7 +42,7 @@ mpirun -np 4 ./executable
 
 ```
 
-8. Comme pour le dernier exercice sur OpenMP, vous allez maintenant déclarer et allouer 3 tableaux A, B et C :
+8. Vous allez maintenant déclarer et allouer 3 tableaux A, B et C :
 
 ```fortran
 real(8), dimension(:), allocatable :: A, B, C
