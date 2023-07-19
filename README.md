@@ -30,9 +30,20 @@ dans [le dossier exercices](./exercices/).
   - [Boucle parallèle](./exercices/openmp/2_omp_do)
   - [Région critical et atomics](./exercices/openmp/3_omp_critical)
 
+- Exercices MPI Python
+  - [Initialisation de MPI](./exercices/mpi/python/1_initialization).
+  - [Parallélisme parfait](./exercices/mpi/python/1_embarrassingly_parallel).
+  - [Initiation aux communications bloquantes](./exercices/mpi/2_blocking_com).
+  - [Utilisation de MPI_SENDRECV](./exercices/mpi/3_sendrecv).
+  - [Utilisation des communications non bloquantes MPI_ISEND/MPI_IRECV](./exercices/mpi/4_nonblockling_com).
+  - [Utilisation de MPI_REDUCE](./exercices/mpi/5_reduce_com).
+  - [Utilisation de MPI_GATHER](./exercices/mpi/6_gather_com).
+  - [Création d'un communicateur cartésien](./exercices/mpi/7_cartesian_com).
+  - [Utilisation du type vector](./exercices/mpi/8_type_vector).
+  - [Exercice d'échange de cellules fantômes](./exercices/mpi/9_gather_matrix).
 
-- Exercices MPI
-  - [Initialisation de MPI](./exercices/mpi/1_initialization).
+- Exercices MPI C++
+  - [Initialisation de MPI](./exercices/mpi/cpp/1_initialization).
   - [Initiation aux communications bloquantes](./exercices/mpi/2_blocking_com).
   - [Utilisation de MPI_SENDRECV](./exercices/mpi/3_sendrecv).
   - [Utilisation des communications non bloquantes MPI_ISEND/MPI_IRECV](./exercices/mpi/4_nonblockling_com).
