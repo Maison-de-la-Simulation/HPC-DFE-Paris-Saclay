@@ -1,18 +1,10 @@
 # ______________________________________________________________________________
 #
-# Exercice 4 : communication en anneau
+# Exercice 5 : Communications non bloquantes point à point
 #
-# Ce quatrième programme présente le fonctionnement des communications
-# bloquantes sendrecv.
-# On illustre ici son fonctionnement par une communication en anneau.
-# Chaque processus envoie un message à son voisin de rang supérieur.
-# et reçoit un message de son voisin de rang inférieur.
-# On effectue un anneau périodique.
-#
-#      0 ----> 1 ----> 2 ----> ..... ----> N
-#      ^                                   |
-#      |___________________________________|
-#
+# Cet exercice reprend le concept d'anneau utilisé dans l'exercice 4 
+# mais au lieu d'utiliser la fonction sendrecv, nous allons utiliser 
+# les communications non bloquantes isedn et irecv
 # ______________________________________________________________________________
 
 import mpi4py
@@ -44,19 +36,25 @@ recv_rank = 0
 recv_message = 0
 
 if rank == 0:
-    send_rank = ???
-    recv_rank = ???
+    send_rank = 1
+    recv_rank = number_of_ranks - 1
 elif rank == number_of_ranks - 1:
-    send_rank = ???
-    recv_rank = ???
+    send_rank = 0
+    recv_rank = rank - 1
 else:
-    send_rank = ???
-    recv_rank = ???
+    send_rank = rank + 1
+    recv_rank = rank - 1
 
 print("Le rang {} envoie le message {} au rang {}.".format(rank, rank, send_rank))
 
-# On effectue l'envoi et la réception en une fois
-recv_message = comm.sendrecv(???)
+# On effectue l'envoi et la réception avec des communications non bloquantes
+
+req_send = comm.isend(???)
+req_recv = comm.irecv(???)
+
+# On effectue le `wait` pour finaliser les communications et obtenir le résultat
+
+???
 
 # On affiche les résultats
 print("Le rang {} a reçu le message {} du rang {}.".format(rank, recv_message, recv_rank))
