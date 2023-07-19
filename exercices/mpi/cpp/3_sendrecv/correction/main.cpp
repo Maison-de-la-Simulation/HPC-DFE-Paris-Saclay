@@ -9,6 +9,7 @@
 // et reçoit de son voisin de rang inférieur.
 // On effectue un anneau périodique.
 // ______________________________________________________________________________
+
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -35,8 +36,6 @@ int main( int argc, char *argv[] )
     int rank;
 
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
-
-    // Tous les processus ont la variable message initialisée à 0
 
     int tag = 0;
     int send_rank;
