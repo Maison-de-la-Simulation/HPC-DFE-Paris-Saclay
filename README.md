@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/actions/workflows/main.yml/badge.svg)
 
-Ce cours de HPC s'articule autour de 3 dossiers :
+Ce cours de HPC s'articule autour de 4 dossiers :
 - `support`: Les supports de cours (odt et pdf) sont dans cet espace
 - `exercices`: Les exercices mentionnés dans le cours sont dans ce dossier.
 - `tp`: Ce dossier contient les TPs.

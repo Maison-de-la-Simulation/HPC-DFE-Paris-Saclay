@@ -9,6 +9,7 @@
 // et reçoit de son voisin de rang inférieur.
 // On effectue un anneau périodique.
 // ______________________________________________________________________________
+
 #include <iostream>
 #include <vector>
 #include <cmath>
