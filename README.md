@@ -32,8 +32,8 @@ dans [le dossier exercices](./exercices/).
 
 - Exercices MPI Python
   - [Initialisation de MPI](./exercices/mpi/python/1_initialization).
-  - [Parallélisme parfait](./exercices/mpi/python/1_embarrassingly_parallel).
-  - [Initiation aux communications bloquantes](./exercices/mpi/2_blocking_com).
+  - [Parallélisme parfait](./exercices/mpi/python/2_embarrassingly_parallel).
+  - [Initiation aux communications bloquantes](./exercices/mpi/python/3_blocking_com).
   - [Utilisation de MPI_SENDRECV](./exercices/mpi/3_sendrecv).
   - [Utilisation des communications non bloquantes MPI_ISEND/MPI_IRECV](./exercices/mpi/4_nonblockling_com).
   - [Utilisation de MPI_REDUCE](./exercices/mpi/5_reduce_com).
