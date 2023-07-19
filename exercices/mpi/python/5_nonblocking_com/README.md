@@ -1,4 +1,4 @@
-# Exercice 5 : communication point à point non bloquante
+# Exercice 5 : communications point à point non bloquantes
 
 Cet exercice met en pratique l'utilisation des communications non-bloquantes `isend` et `irecv`.
 Pour cela, l'exercice reprend le principe de l'anneau de communication implémenté  dans l'exercice précédent.
