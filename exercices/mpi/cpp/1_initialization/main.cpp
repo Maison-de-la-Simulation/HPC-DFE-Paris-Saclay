@@ -45,5 +45,7 @@ int main( int argc, char *argv[] )
 
     std::cout << "Je suis le rang " << rank << " / " << number_of_ranks-1 << std::endl;
     
+    // On finalise MPI
+
     MPI_???();
 }
