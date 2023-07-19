@@ -26,13 +26,13 @@ MPI.Init()
 comm = MPI.COMM_WORLD
 
 # On récupère le nombre total de rang dans le communicateur par défaut
-number_of_rank = comm.Get_size()
+number_of_ranks = comm.Get_size()
 
 # Chaque process récupère son numéro de rang dans le communicateur par défaut
 rank = comm.Get_rank()
 
 # Chaque processus affiche ses informations :
-print("Je suis le rang  {} sur {}".format(rank, number_of_rank))
+print("Je suis le rang  {} sur {}".format(rank, number_of_ranks))
 
 # On finalise MPI
 MPI.Finalize()

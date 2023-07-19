@@ -25,19 +25,19 @@ MPI.Init()
 comm = MPI.COMM_WORLD
 
 # On récupère le nombre total de rang dans le communicateur par défaut
-number_of_rank = comm.Get_size()
+number_of_ranks = comm.Get_size()
 
 # Chaque process récupère son numéro de rang dans le communicateur par défaut
 rank = comm.Get_rank()
 
 # Chaque processus affiche ses informations :
-print("Je suis le rang  {} sur {}".format(rank, number_of_rank))
+print("Je suis le rang  {} sur {}".format(rank, number_of_ranks))
 
 # Nombre d'éléments :
 N = 100000000
 
 # Distribution de la charge (des éléments) entre les rangs
-local_N = int(N / number_of_rank)
+local_N = int(N / number_of_ranks)
 
 # On va maintenant intialiser 3 tableaux numpy sur chaque rang de taille `local_N` de manière aléatoire
 # Ici, il faut bien comprendre que chaque processus possède sa version de A, B et C
