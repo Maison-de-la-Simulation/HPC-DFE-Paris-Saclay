@@ -26,7 +26,7 @@ Call MPI_???(???,                  & ! La partie du tableau à envoyer
               ierror)                     ! Code d'erreur
 ```
 
-3. Complèter maintenant la fonction qui permet de réceptionner le
+3. Complétez maintenant la fonction qui permet de réceptionner le
 message venant du rang 1.
 
 ```fortran
@@ -56,16 +56,3 @@ mpic++ main.cpp -o executable
 mpirun -np 4 ./executable
 ```
 
-## Compilation
-
-```bash
-mpif90 main.F90 -o executable
-```
-
-## Execution
-
-Il faut au moins 3 processus pour que le programme fonctionne.
-
-```bash
-mpirun -np 4 ./executable
-```
