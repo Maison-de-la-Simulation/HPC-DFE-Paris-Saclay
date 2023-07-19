@@ -186,7 +186,7 @@ Les étapes suivantes sont là pour vous guider mais c'est à vous d'adapter vot
 
 a) Nous n'allons pas traiter toutes les composantes mais appliquez la méthode sur l'une d'elles. Choisissez donc une des composantes de champs. 
 
-b) Pour celle composante, déterminez les limites de la grille locale à ramener sur le processus 0 pour reconstituer la grille globale. 
+b) Pour cette composante, déterminez les limites de la grille locale à ramener sur le processus 0 pour reconstituer la grille globale. 
 Ces limites dépendent du processus, notamment s'il est au bord du domaine.
 
 c) Déclarez une grille globale pour accueillir les morceaux de grille venant de chaque processus.

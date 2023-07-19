@@ -44,7 +44,7 @@ else:
     sys.exit("Please, specify a valid path to a binary file as a first command line argument.")
 
 # ______________________________________________________________________________
-# Read the binary file
+# Read the ascii file
 
 file = open(file_path, 'r')
 
