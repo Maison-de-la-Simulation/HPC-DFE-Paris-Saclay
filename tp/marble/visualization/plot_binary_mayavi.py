@@ -3,7 +3,7 @@
 # Read and plot the particles at a specific iteration using Mayavi
 # you need to use Python 3 to use mayavi
 # With Anaconda, you can easily install it doing `conda install mayavi`
-# You can use pipi as well `pip install mayavi`
+# You can use pip as well `pip install mayavi`
 #
 # ______________________________________________________________________________
 
