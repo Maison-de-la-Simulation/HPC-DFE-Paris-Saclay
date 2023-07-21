@@ -158,6 +158,9 @@ int main() {
     std::cout << " Iteration | max h    | mean h   | water    |"<< std::endl;
     std::cout << " ----------| ---------|----------|----------|"<< std::endl;
 
+    Kokkos::Timer timer;
+    const double start = timer.seconds();
+
     for (auto it = 0 ; it < iterations ; ++it) {
 
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
@@ -218,9 +221,9 @@ int main() {
             }, sum_height);
 #endif
             // Average height
-            double average_height = sum_height / (size-1);
+            const double average_height = sum_height / (size-1);
             // Water quantity
-            double water_quantity = sum_height  * dx ;
+            const double water_quantity = sum_height  * dx ;
 
             std::cout << " " << std::setw(9) << it ;
             std::cout << " | " << std::scientific << std::setprecision(2) << std::setw(8) << max_height ;
@@ -256,8 +259,27 @@ int main() {
         }
     }
 
+    const double end = timer.seconds();
+
+    double timer_main_loop = end - start;
+    double percentage;
+
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
+    std::cout << " TIMERS"<< std::endl;
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
+    std::cout << "            code part |  time (s)  | percentage |"<< std::endl;
+    std::cout << " ---------------------|------------|----------- |"<< std::endl;
+
+    percentage = timer_main_loop / (timer_main_loop) * 100;
+    std::cout << " " << std::setw(20) << "Main loop" ;
+    std::cout << " | " << std::fixed << std::setprecision(6) << std::setw(10) << timer_main_loop ;
+    std::cout << " | " << std::fixed << std::setprecision(2) << std::setw(8) << percentage << " %";
+    std::cout << " | " ;
+    std::cout << std::endl;
+
     } // scope necessary to remove deallocation warnings
 
     Kokkos::finalize();
+
 }
 
