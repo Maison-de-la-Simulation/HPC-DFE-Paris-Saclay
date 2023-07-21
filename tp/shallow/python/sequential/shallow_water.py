@@ -23,6 +23,8 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import struct
+import os
 
 # _____________________________________
 # Input parameters
@@ -45,7 +47,7 @@ output_period = 100
 
 # Matplotlib display period
 # if 0, the matplotlib figure display is disabled
-matplotlib_period = 100
+matplotlib_period = 0
 # Display time for each figure (carreful, it stops the computation)             
 matplotlib_pause_duration = 0.1
 
@@ -93,6 +95,10 @@ height[0] = height[1]
 height[size-1] = height[size-2]
 # height[0] = height[size-2]
 # height[size-1] = height[1]
+
+if (output_period > 0):
+  if not os.path.exists("diags"):
+    os.mkdir("diags")
 
 # _____________________________________
 # Matplotlib init
@@ -153,6 +159,22 @@ for it in range (iterations):
     print(" - iteration {:5d} - max height: {:2.3f} - mean height: {:2.3f} - water quantity: {:2.3f}".format(it, max_height, average_height, water_quantity))
 
   # Output 
+
+  if (output_period > 0 and it%output_period == 0):
+
+    f = open('diags/diag_{:5d}.bin'.format(it), 'wb')
+    f.write(struct.pack('i',it))
+    f.write(struct.pack('d',length))
+    f.write(struct.pack('i',size))
+    data_h = struct.pack('d', height[0])
+    data_uh = struct.pack('d', uh[0])
+    for h in height[1:size]:
+      data_h += (struct.pack('d', h))
+    for uh_value in uh[1:size]:
+      data_uh += (struct.pack('d', uh_value))
+    f.write(data_h)
+    f.write(data_uh)
+    f.close()
 
   # Matplotlib
 
