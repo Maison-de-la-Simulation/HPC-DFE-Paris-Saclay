@@ -88,7 +88,7 @@ int main() {
         } else {
             h_host[i] = 1 + 0.5*(1. + std::cos(  M_PI * (x_host[i] - 0.4 * length) / (0.2*length)));
         }
-        uh[i] = 0;
+        uh_host[i] = 0;
     }
 
     // Boundary conditions
@@ -101,7 +101,7 @@ int main() {
     Kokkos::deep_copy(uh, uh_host);
 
     // Maximal and sum height
-    double max_height = h[0];
+    double max_height = h_host[0];
     double sum_height = 0;
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
         Kokkos::parallel_reduce(size, KOKKOS_LAMBDA(const int i, double& local_max) { 
