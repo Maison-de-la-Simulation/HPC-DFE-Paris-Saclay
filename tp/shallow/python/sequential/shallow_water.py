@@ -41,11 +41,11 @@ g = 9.8
 print_period = 1000
 
 # Disk output period
-output_period = 10
+output_period = 100
 
 # Matplotlib display period
 # if 0, the matplotlib figure display is disabled
-matplotlib_period = 1000
+matplotlib_period = 100
 # Display time for each figure (carreful, it stops the computation)             
 matplotlib_pause_duration = 0.1
 
@@ -99,7 +99,7 @@ height[size-1] = height[size-2]
 
 if (matplotlib_period > 0):
 
-  fig = plt.figure(figsize=(12, 6))
+  fig = plt.figure(figsize=(12, 8))
 
   gs = plt.GridSpec(2, 2)
   ax0 = plt.subplot(gs[0,:])
