@@ -43,7 +43,7 @@ file_path = ""
 if len(sys.argv) > 1:
     file_path = sys.argv[1]
 else:
-    sys.exit("Please, specify a valid path to a charge hdf5 file as a first command line argument.")
+    sys.exit("Please, specify a valid path to diags folder")
 
 # ______________________________________________________________________________
 # Get the list of files
