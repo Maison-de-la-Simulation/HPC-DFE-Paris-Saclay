@@ -30,6 +30,8 @@
 int main() {
     Kokkos::initialize();
 
+    { // scope necessary to remove deallocation warnings
+
     // ________________________________________________________________
     // Input parameters
 
@@ -47,7 +49,7 @@ int main() {
     int print_period = 1000;
 
     // Disk output period
-    int output_period = 10;
+    int output_period = 100;
 
     // ________________________________________________________________
     // Initilisation
@@ -246,13 +248,15 @@ int main() {
             }
 
             binary_file.write((char *) &it, sizeof(int));
-            binary_file.write((char *) &length, sizeof(int));
+            binary_file.write((char *) &length, sizeof(double));
             binary_file.write((char *) &size, sizeof(int));
             binary_file.write((char *) &h_host[0], sizeof(double)*size);
             binary_file.write((char *) &uh_host[0], sizeof(double)*size);
             binary_file.close();
         }
     }
+
+    } // scope necessary to remove deallocation warnings
 
     Kokkos::finalize();
 }
