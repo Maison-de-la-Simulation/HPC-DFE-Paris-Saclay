@@ -113,6 +113,8 @@ int main() {
         Kokkos::parallel_reduce(size-1, KOKKOS_LAMBDA(const int i, double& local_sum) { 
             local_sum += 0.5 * (h[i] + h[i+1]);
         }, sum_height);
+
+        Kokkos::fence();
 #endif
 
     // On host
@@ -168,13 +170,15 @@ int main() {
           
         // Compute height and uh at midpoint
 
-        hm[i] = 0.5 * ( h[i] + h[i+1] ) - ( 0.5 * dt ) * ( uh[i+1] - uh[i] ) * invdx;
+        hm(i) = 0.5 * ( h(i) + h(i+1) ) - ( 0.5 * dt ) * ( uh[i+1] - uh[i] ) * invdx;
 
         uhm[i] = 0.5 * ( uh[i] + uh[i+1] )  
             - 0.5 * dt * ( uh[i+1] * uh[i+1] / h[i+1] + 0.5 * g * h[i+1] * h[i+1]
             - uh[i] * uh[i]  / h[i] - 0.5 * g * h[i] * h[i] ) * invdx;
 
         });
+
+        Kokkos::fence();
 #endif
 
         // Advance the height and uh to the next time step
@@ -187,6 +191,8 @@ int main() {
         uh[i] = uh[i] - dt * ( uhm[i] * uhm[i]  / hm[i] + 0.5 * g * hm[i] * hm[i] - uhm[i-1] * uhm[i-1] / hm[i-1] - 0.5 * g * hm[i-1] * hm[i-1] ) * invdx;
 
         });
+
+        Kokkos::fence();
 #endif
 
 
@@ -195,12 +201,14 @@ int main() {
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
         Kokkos::parallel_for(1, KOKKOS_LAMBDA(const int i) {
 
-            h[0] = h[1];
+            h(0) = h(1);
             h[size-1] = h[size-2];
             uh[0] = - uh[1];
             uh[size-1] = - uh[size-2];
 
         });
+
+        Kokkos::fence();
 #endif
 
         // Terminal information
@@ -219,6 +227,8 @@ int main() {
             Kokkos::parallel_reduce(size-1, KOKKOS_LAMBDA(const int i, double& local_sum) { 
                 local_sum += 0.5 * (h[i] + h[i+1]);
             }, sum_height);
+
+            Kokkos::fence();
 #endif
             // Average height
             const double average_height = sum_height / (size-1);
@@ -234,8 +244,6 @@ int main() {
 
         // File output
         if (it%output_period == 0) {
-
-            Kokkos::fence();
 
             // bring back data on host
             Kokkos::deep_copy(h_host, h);
