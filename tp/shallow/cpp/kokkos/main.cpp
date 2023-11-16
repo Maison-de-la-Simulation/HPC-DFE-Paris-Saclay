@@ -30,6 +30,8 @@
 int main() {
     Kokkos::initialize();
 
+    { // scope necessary to remove deallocation warnings
+
     // ________________________________________________________________
     // Input parameters
 
@@ -47,7 +49,7 @@ int main() {
     int print_period = 1000;
 
     // Disk output period
-    int output_period = 10;
+    int output_period = 100;
 
     // ________________________________________________________________
     // Initilisation
@@ -111,6 +113,8 @@ int main() {
         Kokkos::parallel_reduce(size-1, KOKKOS_LAMBDA(const int i, double& local_sum) { 
             local_sum += 0.5 * (h[i] + h[i+1]);
         }, sum_height);
+
+        Kokkos::fence();
 #endif
 
     // On host
@@ -156,6 +160,9 @@ int main() {
     std::cout << " Iteration | max h    | mean h   | water    |"<< std::endl;
     std::cout << " ----------| ---------|----------|----------|"<< std::endl;
 
+    Kokkos::Timer timer;
+    const double start = timer.seconds();
+
     for (auto it = 0 ; it < iterations ; ++it) {
 
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
@@ -163,13 +170,15 @@ int main() {
           
         // Compute height and uh at midpoint
 
-        hm[i] = 0.5 * ( h[i] + h[i+1] ) - ( 0.5 * dt ) * ( uh[i+1] - uh[i] ) * invdx;
+        hm(i) = 0.5 * ( h(i) + h(i+1) ) - ( 0.5 * dt ) * ( uh[i+1] - uh[i] ) * invdx;
 
         uhm[i] = 0.5 * ( uh[i] + uh[i+1] )  
             - 0.5 * dt * ( uh[i+1] * uh[i+1] / h[i+1] + 0.5 * g * h[i+1] * h[i+1]
             - uh[i] * uh[i]  / h[i] - 0.5 * g * h[i] * h[i] ) * invdx;
 
         });
+
+        Kokkos::fence();
 #endif
 
         // Advance the height and uh to the next time step
@@ -182,6 +191,8 @@ int main() {
         uh[i] = uh[i] - dt * ( uhm[i] * uhm[i]  / hm[i] + 0.5 * g * hm[i] * hm[i] - uhm[i-1] * uhm[i-1] / hm[i-1] - 0.5 * g * hm[i-1] * hm[i-1] ) * invdx;
 
         });
+
+        Kokkos::fence();
 #endif
 
 
@@ -190,12 +201,14 @@ int main() {
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
         Kokkos::parallel_for(1, KOKKOS_LAMBDA(const int i) {
 
-            h[0] = h[1];
+            h(0) = h(1);
             h[size-1] = h[size-2];
             uh[0] = - uh[1];
             uh[size-1] = - uh[size-2];
 
         });
+
+        Kokkos::fence();
 #endif
 
         // Terminal information
@@ -214,11 +227,13 @@ int main() {
             Kokkos::parallel_reduce(size-1, KOKKOS_LAMBDA(const int i, double& local_sum) { 
                 local_sum += 0.5 * (h[i] + h[i+1]);
             }, sum_height);
+
+            Kokkos::fence();
 #endif
             // Average height
-            double average_height = sum_height / (size-1);
+            const double average_height = sum_height / (size-1);
             // Water quantity
-            double water_quantity = sum_height  * dx ;
+            const double water_quantity = sum_height  * dx ;
 
             std::cout << " " << std::setw(9) << it ;
             std::cout << " | " << std::scientific << std::setprecision(2) << std::setw(8) << max_height ;
@@ -229,8 +244,6 @@ int main() {
 
         // File output
         if (it%output_period == 0) {
-
-            Kokkos::fence();
 
             // bring back data on host
             Kokkos::deep_copy(h_host, h);
@@ -246,7 +259,7 @@ int main() {
             }
 
             binary_file.write((char *) &it, sizeof(int));
-            binary_file.write((char *) &length, sizeof(int));
+            binary_file.write((char *) &length, sizeof(double));
             binary_file.write((char *) &size, sizeof(int));
             binary_file.write((char *) &h_host[0], sizeof(double)*size);
             binary_file.write((char *) &uh_host[0], sizeof(double)*size);
@@ -254,6 +267,27 @@ int main() {
         }
     }
 
+    const double end = timer.seconds();
+
+    double timer_main_loop = end - start;
+    double percentage;
+
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
+    std::cout << " TIMERS"<< std::endl;
+    std::cout << " ------------------------------------------------------------------------- "<< std::endl;
+    std::cout << "            code part |  time (s)  | percentage |"<< std::endl;
+    std::cout << " ---------------------|------------|----------- |"<< std::endl;
+
+    percentage = timer_main_loop / (timer_main_loop) * 100;
+    std::cout << " " << std::setw(20) << "Main loop" ;
+    std::cout << " | " << std::fixed << std::setprecision(6) << std::setw(10) << timer_main_loop ;
+    std::cout << " | " << std::fixed << std::setprecision(2) << std::setw(8) << percentage << " %";
+    std::cout << " | " ;
+    std::cout << std::endl;
+
+    } // scope necessary to remove deallocation warnings
+
     Kokkos::finalize();
+
 }
 
