@@ -1,24 +1,17 @@
-*.mod
-*/*.mod
-*/*/*.mod
-*/*/*/*.mod
+**/*.mod
 
-*/*/*/*.o
-*/*/*/*/*.o
+**/*.o
 
-executable
-*/executable
-*/*/executable
-*/*/*/executable
-*/*/*/*/executable
+**/cmake_install.cmake
 
+**/executable
 
-*/*/a.out
-*/*/*/a.out
-*/*/*/*/a.out
+**/a.out
 
-*/*/*/*.h5
 **/*.h5
 
 *.DS_Store
 **/exe
+
+**/CMakeCache.txt
+**/CMakeFiles
