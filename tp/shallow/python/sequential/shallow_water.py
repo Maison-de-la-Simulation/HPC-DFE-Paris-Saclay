@@ -23,6 +23,9 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import struct
+import os
+import time
 
 # _____________________________________
 # Input parameters
@@ -32,7 +35,7 @@ length = 5.
 size = 10000
 
 # time
-iterations = 20000
+iterations = 10000
 
 # gravity
 g = 9.8
@@ -41,11 +44,11 @@ g = 9.8
 print_period = 1000
 
 # Disk output period
-output_period = 10
+output_period = 100
 
 # Matplotlib display period
 # if 0, the matplotlib figure display is disabled
-matplotlib_period = 1000
+matplotlib_period = 0
 # Display time for each figure (carreful, it stops the computation)             
 matplotlib_pause_duration = 0.1
 
@@ -94,12 +97,43 @@ height[size-1] = height[size-2]
 # height[0] = height[size-2]
 # height[size-1] = height[1]
 
+# Maximal height
+max_height = np.max(height)
+# Sum height
+sum_height = np.sum(height[1:size] + height[0:size-1]) * 0.5
+# Average height
+average_height = sum_height / (size-1)
+# Water quantity
+water_quantity = sum_height * dx
+
+if (output_period > 0):
+  if not os.path.exists("diags"):
+    os.mkdir("diags")
+
+# _____________________________________
+# Terminal summary
+
+print(" ------------------------------------------------------------------------- ")
+print(" SHALLOW WATER 1D" )
+print(" ------------------------------------------------------------------------- ")
+print("")
+print("  - length: {}".format(length))
+print("  - size: {}".format(size))
+print("  - dx: {}".format(dx))
+print("  - duration: {}".format(duration))
+print("  - iterations: {}".format(iterations))
+print("  - dt: {}".format(dt))
+print("  - print period: {}".format(print_period))
+print("  - max height: {}".format(max_height) )
+print("  - mean height: {}".format(average_height) )
+print("")
+
 # _____________________________________
 # Matplotlib init
 
 if (matplotlib_period > 0):
 
-  fig = plt.figure(figsize=(12, 6))
+  fig = plt.figure(figsize=(12, 8))
 
   gs = plt.GridSpec(2, 2)
   ax0 = plt.subplot(gs[0,:])
@@ -107,6 +141,15 @@ if (matplotlib_period > 0):
 
 # _____________________________________
 # Time loop
+
+# get the time at the beginning of the main loop
+start = time.time()
+
+print(" --------------------------------------------- ")
+print(" MAIN LOOP")
+print(" -------------------------------------------- ")
+print(" Iteration | max h    | mean h   | water    |")
+print(" ----------| ---------|----------|----------|")
 
 for it in range (iterations):
 
@@ -150,9 +193,25 @@ for it in range (iterations):
     # Water quantity
     water_quantity = sum_height * dx
 
-    print(" - iteration {:5d} - max height: {:2.3f} - mean height: {:2.3f} - water quantity: {:2.3f}".format(it, max_height, average_height, water_quantity))
+    print(" {:9d} |   {:2.3f}  |   {:2.3f}  |   {:2.3f}  |".format(it, max_height, average_height, water_quantity))
 
   # Output 
+
+  if (output_period > 0 and it%output_period == 0):
+
+    f = open('diags/diag_{:5d}.bin'.format(it), 'wb')
+    f.write(struct.pack('i',it))
+    f.write(struct.pack('d',length))
+    f.write(struct.pack('i',size))
+    data_h = struct.pack('d', height[0])
+    data_uh = struct.pack('d', uh[0])
+    for h in height[1:size]:
+      data_h += (struct.pack('d', h))
+    for uh_value in uh[1:size]:
+      data_uh += (struct.pack('d', uh_value))
+    f.write(data_h)
+    f.write(data_uh)
+    f.close()
 
   # Matplotlib
 
@@ -178,5 +237,24 @@ for it in range (iterations):
     plt.pause(matplotlib_pause_duration)
     plt.draw()
 
-  # plt.show()
+end = time.time()
+
+# ____________________________________________
+# Timers
+
+timer_main_loop = end - start
+
+print("")
+print(" ------------------------------------------------ ")
+print(" TIMERS")
+print(" ------------------------------------------------ ")
+print("            code part |  time (s)  | percentage |")
+print(" ---------------------|------------|----------- |")
+
+percentage = timer_main_loop / (timer_main_loop) * 100
+print(" {:>20} | {:>10.3f} | {:>9.1f}% |".format("Main loop", timer_main_loop, percentage))
+
+if (matplotlib_period > 0):
+  plt.show()  
+
 
