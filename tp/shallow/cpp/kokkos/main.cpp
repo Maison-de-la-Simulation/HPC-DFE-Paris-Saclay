@@ -79,18 +79,18 @@ int main() {
     host_array uh_host = Kokkos::create_mirror_view(uh);
 
     for (auto i = 0 ; i < size ; ++i) {
-        x_host[i] = i * dx;
+        x_host(i) = i * dx;
     }
 
     for (auto i = 0 ; i < size ; ++i) {
-        if (x_host[i] < 0.4 * length) {
-            h_host[i] = 2.;
-        } else if (x_host[i]> 0.6 * length) {
-            h_host[i] = 1.;
+        if (x_host(i) < 0.4 * length) {
+            h_host(i) = 2.;
+        } else if (x_host(i)> 0.6 * length) {
+            h_host(i) = 1.;
         } else {
-            h_host[i] = 1 + 0.5*(1. + std::cos(  M_PI * (x_host[i] - 0.4 * length) / (0.2*length)));
+            h_host(i) = 1 + 0.5*(1. + std::cos(  M_PI * (x_host(i) - 0.4 * length) / (0.2*length)));
         }
-        uh_host[i] = 0;
+        uh_host(i) = 0;
     }
 
     // Boundary conditions
@@ -107,11 +107,11 @@ int main() {
     double sum_height = 0;
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
         Kokkos::parallel_reduce(size, KOKKOS_LAMBDA(const int i, double& local_max) { 
-            local_max = h[i] > local_max ? h[i] : local_max; 
+            local_max = h(i) > local_max ? h(i) : local_max; 
         }, Kokkos::Max<double>(max_height));
 
         Kokkos::parallel_reduce(size-1, KOKKOS_LAMBDA(const int i, double& local_sum) { 
-            local_sum += 0.5 * (h[i] + h[i+1]);
+            local_sum += 0.5 * (h(i) + h(i+1));
         }, sum_height);
 
         Kokkos::fence();
@@ -119,8 +119,8 @@ int main() {
 
     // On host
     // for (auto i = 1 ; i < size ; ++i) {
-    //     max_height = h[i] > max_height ? h[i] : max_height; 
-    //     sum_height += 0.5 * (h[i] + h[i-1]);
+    //     max_height = h(i) > max_height ? h(i) : max_height; 
+    //     sum_height += 0.5 * (h(i) + h(i-1));
     // }
 
     // Average height
@@ -170,11 +170,11 @@ int main() {
           
         // Compute height and uh at midpoint
 
-        hm(i) = 0.5 * ( h(i) + h(i+1) ) - ( 0.5 * dt ) * ( uh[i+1] - uh[i] ) * invdx;
+        hm(i) = 0.5 * ( h(i) + h(i+1) ) - ( 0.5 * dt ) * ( uh(i+1) - uh(i) ) * invdx;
 
-        uhm[i] = 0.5 * ( uh[i] + uh[i+1] )  
-            - 0.5 * dt * ( uh[i+1] * uh[i+1] / h[i+1] + 0.5 * g * h[i+1] * h[i+1]
-            - uh[i] * uh[i]  / h[i] - 0.5 * g * h[i] * h[i] ) * invdx;
+        uhm(i) = 0.5 * ( uh(i) + uh(i+1) )  
+            - 0.5 * dt * ( uh(i+1) * uh(i+1) / h(i+1) + 0.5 * g * h(i+1) * h(i+1)
+            - uh(i) * uh(i)  / h(i) - 0.5 * g * h(i) * h(i) ) * invdx;
 
         });
 
@@ -186,9 +186,9 @@ int main() {
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
         Kokkos::parallel_for(Kokkos::RangePolicy<>(1, size-1), KOKKOS_LAMBDA(const int i) {
 
-        h[i] = h[i] - dt * ( uhm[i] - uhm[i-1] ) * invdx;
+        h(i) = h(i) - dt * ( uhm(i) - uhm(i-1) ) * invdx;
 
-        uh[i] = uh[i] - dt * ( uhm[i] * uhm[i]  / hm[i] + 0.5 * g * hm[i] * hm[i] - uhm[i-1] * uhm[i-1] / hm[i-1] - 0.5 * g * hm[i-1] * hm[i-1] ) * invdx;
+        uh(i) = uh(i) - dt * ( uhm(i) * uhm(i)  / hm(i) + 0.5 * g * hm(i) * hm(i) - uhm(i-1) * uhm(i-1) / hm(i-1) - 0.5 * g * hm(i-1) * hm(i-1) ) * invdx;
 
         });
 
@@ -221,11 +221,11 @@ int main() {
             double sum_height = 0;
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
             Kokkos::parallel_reduce(size, KOKKOS_LAMBDA(const int i, double& local_max) { 
-                local_max = h[i] > local_max ? h[i] : local_max; 
+                local_max = h(i) > local_max ? h(i) : local_max; 
             }, Kokkos::Max<double>(max_height));
 
             Kokkos::parallel_reduce(size-1, KOKKOS_LAMBDA(const int i, double& local_sum) { 
-                local_sum += 0.5 * (h[i] + h[i+1]);
+                local_sum += 0.5 * (h(i) + h(i+1));
             }, sum_height);
 
             Kokkos::fence();
