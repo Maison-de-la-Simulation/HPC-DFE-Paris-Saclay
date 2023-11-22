@@ -3,7 +3,7 @@
 # Exercice 1 : Les tout premiers pas avec MPI
 #
 # Dans cet exercice, vous apprendrez :
-# - à initaliser un programme MPI
+# - à initialiser un programme MPI
 # - à récupérer le nombre total de rangs
 # - à récupérer le rang pour chaque processus
 #
