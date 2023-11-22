@@ -74,5 +74,6 @@ elif rank == recv_rank:
     recv_buffer = recv_req.wait()
     print("Le rang {} a reçu le message {} du rang {}".format(rank, recv_buffer, send_rank))
 
+
 # On finalise MPI
 MPI.Finalize()

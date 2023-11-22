@@ -5,7 +5,7 @@
 #
 # Dans cet exercice, chaque rang MPI alloue et initialise un tableau d'une taille
 # déterminée de manière aléatoire.
-# Le but est de rappatrier chaque morceau de tableau vers le rang 0.
+# Le but est de rapatrier chaque morceau de tableau vers le rang 0.
 #
 # ______________________________________________________________________________
 
