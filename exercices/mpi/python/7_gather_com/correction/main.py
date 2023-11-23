@@ -1,6 +1,6 @@
 # ______________________________________________________________________________
 #
-# Exercice 8 : Utilisation des communications collectives MPI_Gather
+# Exercice : Utilisation des communications collectives MPI_Gather
 #
 #
 # Dans cet exercice, chaque rang MPI alloue et initialise un tableau d'une taille
@@ -35,7 +35,7 @@ rank = comm.Get_rank()
 # On définit la taille des tableaux à envoyer
 size = 100
 
-# On alloue de taille size
+# On alloue un tableau de taille size
 tab = np.zeros(size, dtype=np.float64)
 
 # On initialise le tableau avec le numéro de rang

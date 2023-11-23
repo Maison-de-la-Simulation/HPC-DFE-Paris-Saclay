@@ -1,6 +1,6 @@
 # ______________________________________________________________________________
 #
-# Exercice 9 : Création d'une 
+# Exercice : Création d'une topologie cartésienne 2D
 #
 # Dans cet exercice, nous allons créer une topologie cartésienne 2D
 # 
@@ -34,7 +34,7 @@ rank = comm.Get_rank()
 ndims = 2
 
 # On définit le nombre de processus par dimension
-dims = [2, 2]
+dims = [4, 5]
 
 # On définit si les dimensions sont périodiques ou non
 periods = [False, False]
@@ -63,7 +63,7 @@ print("Je suis le rang {} dans le communicateur global et le rang {} dans le com
 
 # Le rang 0 print la matrice des rangs en utilisant les coordonnées des rangs
 
-# On récupère le rang 0 dans le communicateur cartésie
+# On récupère le rang 0 dans le communicateur cartésien
 if cart_rank == 0:
 
     # On crée une matrice de taille dims
