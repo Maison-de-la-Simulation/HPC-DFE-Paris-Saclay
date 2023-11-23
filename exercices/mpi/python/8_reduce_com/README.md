@@ -1,4 +1,4 @@
-# Exercice 7 : Utilisation des communications collectives MPI_REDUCE
+# Exercice : Utilisation des communications collectives MPI_REDUCE
 
 Dans cet exercice, nous intégrons la fonction `f(x) = sin(x)` de
 manière numérique entre 0 et pi en utilisant la méthode des rectangles
