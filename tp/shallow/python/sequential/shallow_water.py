@@ -30,11 +30,13 @@ import time
 # _____________________________________
 # Input parameters
 
-# space
+# Space (L)
 length = 5.
+
+# Number of points (N)
 size = 10000
 
-# time
+# Number of iterations
 iterations = 10000
 
 # gravity
@@ -53,7 +55,7 @@ matplotlib_period = 0
 matplotlib_pause_duration = 0.1
 
 # _____________________________________
-# Initilisation
+# Initialization
 
 dx = length / (size-1)
 invdx = 1 / dx
@@ -82,14 +84,14 @@ for ix, x_value in enumerate(x):
 #   else:
 #     height[ix] = 1. + np.exp( - (x_value - 0.5*length)**2 / (0.1 * length)**2)
 
-# mass velocity = ordinary velocity times water heigth
+# water flow = ordinary velocity u(x,t) times water heigth h(x,t)
 uh = np.zeros(size)
 
 # height at mid-point and half time steps
 hm = np.zeros ( size-1 )
 
-# mass velocity at mid-point and half time steps
-uhm = np.zeros (size-1 )
+# water flow at mid-point and half time steps
+uhm = np.zeros ( size-1 )
 
 # Adjust the boundary conditions for init
 height[0] = height[1]
@@ -97,15 +99,16 @@ height[size-1] = height[size-2]
 # height[0] = height[size-2]
 # height[size-1] = height[1]
 
-# Maximal height
+# Maximal height value
 max_height = np.max(height)
-# Sum height
+# Sum height value
 sum_height = np.sum(height[1:size] + height[0:size-1]) * 0.5
-# Average height
+# Average height value
 average_height = sum_height / (size-1)
-# Water quantity
+# Water quantity value
 water_quantity = sum_height * dx
 
+# Output directory management
 if (output_period > 0):
   if not os.path.exists("diags"):
     os.mkdir("diags")
@@ -153,7 +156,7 @@ print(" ----------| ---------|----------|----------|")
 
 for it in range (iterations):
 
-  # Compute height and uh at midpoint
+  # Compute height and uh at midpoint in time and space
 
   hm[0:size-1] = 0.5 * ( height[0:size-1] + height[1:size] ) - ( 0.5 * dt ) * ( uh[1:size] - uh[0:size-1] ) * invdx
 
@@ -199,7 +202,7 @@ for it in range (iterations):
 
   if (output_period > 0 and it%output_period == 0):
 
-    f = open('diags/diag_{:5d}.bin'.format(it), 'wb')
+    f = open('diags/diag_{:05d}.bin'.format(it), 'wb')
     f.write(struct.pack('i',it))
     f.write(struct.pack('d',length))
     f.write(struct.pack('i',size))

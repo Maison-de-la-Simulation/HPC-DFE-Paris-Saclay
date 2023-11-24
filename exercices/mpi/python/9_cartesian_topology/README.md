@@ -17,3 +17,10 @@ Au début du programme, les variables suivantes sont définies :
 
 4. Complétez les lignes permettant de récupérer pour chaque rand le rang du voisin à gauche, droite en haut et en bas
 
+5. Fabriquez une matrice 2D pour contenir les valeurs de chaque rang MPI en fonction de leurs coordonnées dans la topologie cartésienne 2D et affichez cette matrice sur le rang 0.
+
+6. Exécutez le code en choisissant un nombre cohérent de processus MPI  par rapport aux dimensions de la topologie cartésienne 2D :
+
+```bash
+mpirun -np N python main.py
+```
