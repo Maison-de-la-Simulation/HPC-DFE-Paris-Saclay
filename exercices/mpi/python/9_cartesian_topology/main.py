@@ -66,17 +66,10 @@ print("Je suis le rang {} dans le communicateur global et le rang {} dans le com
 # On récupère le rang 0 dans le communicateur cartésien
 if cart_rank == 0:
 
-    # On crée une matrice de taille dims
-    ranks_matrix = np.zeros(dims, dtype=np.int32)
+    # On fabrique maintenant une matrice `ranks_matrix` qui de la topologie cartésienne 2d 
+    # et on l'affiche à l'écran
 
-    # Pour chaque rang, on récupère ses coordonnées et on les place dans la matrice
-    for rank in range(number_of_ranks):
-
-        # On récupère les coordonnées du rang
-        coords = cart_comm.Get_coords(rank)
-
-        # On place le rang dans la matrice
-        ranks_matrix[coords[0], coords[1]] = rank
+    ???
 
     # On affiche la matrice finale
     print("Matrice des rangs : \n{}".format(ranks_matrix))
