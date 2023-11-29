@@ -1,0 +1,84 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master, year-2022-2023 ]
+  pull_request:
+    branches: [ master, year-2022-2023 ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: update
+        run: sudo apt-get --allow-releaseinfo-change update -y
+
+      - name: mpi packet
+        run: |
+          sudo apt-get install -y openmpi-bin openmpi-doc libopenmpi-dev
+          mpic++ -show
+
+      - name: hdf5 packet
+        run: |
+          sudo apt-get install libhdf5-dev libhdf5-openmpi-dev
+          h5c++ -show
+
+      # ________________________________________________________
+      # Exercises
+      - name: build and test openmp exercise
+        run: |
+          cd exercices/openmp/1_omp_parallel/correction
+          g++ -O3 -fopenmp main.cpp -o c_exe
+          gfortran -O3 -fopenmp main.F90 -o f_exe
+          cd ../../2_omp_do/correction
+          g++ -O3 -fopenmp main.cpp -o c_exe
+          gfortran -O3 -fopenmp main.F90 -o f_exe
+
+      # ________________________________________________________
+      # Application - Diffusion
+      #- name: build and test diffusion
+      #  run: |
+      #    cd tp/diffusion/fortran/sequentiel
+      #    make
+
+      # ________________________________________________________
+      # Application - Onde
+      - name: build and test onde
+        run: |
+          cd tp/onde/fortran/sequential
+          make
+
+      # ________________________________________________________
+      # Application Marble
+      - name: build and test marble
+        run: |
+          cd tp/marble/cpp/patch
+          make
+
+      # Runs a single command using the runners shell
+      - name: build and test marble sequential
+        run: |
+          cd tp/marble/cpp/sequential
+          make
+          
+      # ________________________________________________________
+      # Application Maxwell
+
+      # Runs a single command using the runners shell
+      - name: build and test maxwell sequential
+        run: |
+          cd tp/maxwell/cpp/sequential
+          g++ -O3 main.cpp -o executable
+          

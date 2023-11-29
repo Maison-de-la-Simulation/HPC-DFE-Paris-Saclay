@@ -1,0 +1,60 @@
+\documentclass{article}
+\begin{document}
+
+\huge{
+\begin{eqnarray}
+E_{faible}(N) = \frac{ t(1) }{ t(N) }
+\end{eqnarray}
+
+\begin{eqnarray}
+E_{forte}(N) = \frac{ t(1) }{ t(N) \times N }
+\end{eqnarray}
+
+\begin{eqnarray}
+t(N) = t_s(N) + t_p(N) / N
+\end{eqnarray}
+
+\begin{eqnarray}
+t(1) = \left( \alpha_s + \alpha_p \right) t(1)
+\end{eqnarray}
+\begin{eqnarray}
+t(N) = \left( \alpha_s + \alpha_p/N \right) t(1)
+\end{eqnarray}
+
+\begin{eqnarray}
+A(N) = \frac{1}{\alpha_s + \left(1 - \alpha_s \right) / N}
+\end{eqnarray}
+
+\begin{eqnarray}
+\frac{\partial U(\mathbf{x},t)}{\partial t} = D \cdot \left[ \frac{\partial^2 U(\mathbf{x},t)}{\partial x^2}  + \frac{\partial^2 U(\mathbf{x},t)}{\partial y^2}\right] \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+U^{t+\Delta t}_{i,j} & = & U^{t}_{i,j}                                        \nonumber \\
+& & + C_x  \cdot \left( U^{t}_{i+1,j} - 2 U^{t}_{i,j} + U^{t}_{i-1,j} \right) \nonumber \\
+& & + C_y  \cdot \left( U^{t}_{i,j+1} - 2 U^{t}_{i,j} + U^{t}_{i,j-1} \right) \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+C_x =\frac{D \Delta t }{\Delta x^2}
+\end{eqnarray}
+
+\begin{eqnarray}
+C_y =\frac{D \Delta t }{\Delta y^2}
+\end{eqnarray}
+
+\begin{eqnarray}
+\Delta t
+\end{eqnarray}
+
+\begin{eqnarray}
+\Delta x
+\end{eqnarray}
+
+\begin{eqnarray}
+U(t) = 0
+\end{eqnarray}
+
+
+}
+\end{document}
