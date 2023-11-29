@@ -15,7 +15,8 @@ bases de la programmation parallèle par passage de message via le standard MPI.
 
 Le cours se divise en plusieurs parties :
 - [Cours d'introduction au calcul haute-performance](./support/Introduction_HPC.pdf)
-- [Cours sur MPI](./support/MPI.pdf)
+- [Cours sur MPI en Python](./support/MPI_python.pdf)
+- [Cours sur MPI en C++](./support/MPI_python.pdf)
 - [Cours sur OpenMP](./support/OpenMP.pdf)
 - [Cours sur la mesure de la performance](./support/mesure_performance.pdf)
 - [Bonnes pratiques](./support/bonnes_pratiques.pdf)
@@ -34,24 +35,23 @@ dans [le dossier exercices](./exercices/).
   - [Initialisation de MPI](./exercices/mpi/python/1_initialization).
   - [Parallélisme parfait](./exercices/mpi/python/2_embarrassingly_parallel).
   - [Initiation aux communications bloquantes](./exercices/mpi/python/3_blocking_com).
-  - [Utilisation de MPI_SENDRECV](./exercices/mpi/3_sendrecv).
-  - [Utilisation des communications non bloquantes MPI_ISEND/MPI_IRECV](./exercices/mpi/4_nonblockling_com).
-  - [Utilisation de MPI_REDUCE](./exercices/mpi/5_reduce_com).
-  - [Utilisation de MPI_GATHER](./exercices/mpi/6_gather_com).
-  - [Création d'un communicateur cartésien](./exercices/mpi/7_cartesian_com).
-  - [Utilisation du type vector](./exercices/mpi/8_type_vector).
-  - [Exercice d'échange de cellules fantômes](./exercices/mpi/9_gather_matrix).
+  - [Utilisation de MPI_SENDRECV](./exercices/mpi/python/4_sendrecv).
+  - [Utilisation des communications non bloquantes MPI_ISEND/MPI_IRECV](./exercices/mpi/python/5_nonblockling_com).
+  - [Utilisation de MPI_REDUCE](./exercices/mpi/python/6_array_com).
+  - [Utilisation de MPI_GATHER](./exercices/mpi/python/7_gather_com).
+  - [Réduction MPI.Reduce](./exercices/mpi/python/8_reduce_com).
+  - [Exercice de construction d'une topologie cartésienne](./exercices/mpi/python/9_cartesian_topology).
 
 - Exercices MPI C++
   - [Initialisation de MPI](./exercices/mpi/cpp/1_initialization).
-  - [Initiation aux communications bloquantes](./exercices/mpi/2_blocking_com).
-  - [Utilisation de MPI_SENDRECV](./exercices/mpi/3_sendrecv).
-  - [Utilisation des communications non bloquantes MPI_ISEND/MPI_IRECV](./exercices/mpi/4_nonblockling_com).
-  - [Utilisation de MPI_REDUCE](./exercices/mpi/5_reduce_com).
-  - [Utilisation de MPI_GATHER](./exercices/mpi/6_gather_com).
-  - [Création d'un communicateur cartésien](./exercices/mpi/7_cartesian_com).
-  - [Utilisation du type vector](./exercices/mpi/8_type_vector).
-  - [Exercice d'échange de cellules fantômes](./exercices/mpi/9_gather_matrix).
+  - [Initiation aux communications bloquantes](./exercices/mpi/cpp/2_blocking_com).
+  - [Utilisation de MPI_SENDRECV](./exercices/mpi/cpp/3_sendrecv).
+  - [Utilisation des communications non bloquantes MPI_ISEND/MPI_IRECV](./exercices/mpi/cpp/4_nonblockling_com).
+  - [Utilisation de MPI_REDUCE](./exercices/mpi/cpp/5_reduce_com).
+  - [Utilisation de MPI_GATHER](./exercices/mpi/cpp/6_gather_com).
+  - [Création d'un communicateur cartésien](./exercices/mpi/cpp/7_cartesian_com).
+  - [Utilisation du type vector](./exercices/mpi/cpp/8_type_vector).
+  - [Exercice d'échange de cellules fantômes](./exercices/mpi/cpp/9_gather_matrix).
 
 ## Travaux pratiques
 
@@ -60,6 +60,7 @@ dans [le dossier exercices](./exercices/).
 - [Simulation de particules avec collisions](./tp/marble/).
 - [Simulation de vie](./tp/life/).
 - [Discrétisation des équations de Maxwell par un schéma de Yee](./tp/maxwell/).
+- [Equation en eau peu profonde](./tp/shallow/).
 
 ## Installation des dépendances
 
