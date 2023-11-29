@@ -95,7 +95,6 @@ if rank == 0:
     print()
     print(" Le rang {} a pour résultat final {}".format(rank,integration))
 
-
 # On finalise MPI
 MPI.Finalize()
 
