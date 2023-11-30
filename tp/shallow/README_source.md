@@ -57,6 +57,12 @@ On note $t_n$ l'instant $n$ et $x_i$ la position $i$.
 On résout alors les équations en eau peu profonde en 1D en utilisant un schéma de type Leap-Frog.
 Ce schéma n'est pas le meilleur mais il a l'avantage d'être simple à implémenter.
 
+On a alors :
+
+$$
+h_i^{n+1} = h_i^{n} - \frac{\Delta t}{\Delta x} \left( q_{i+1/2}^{n+1/2} - q_{i-1/2}^{n+1/2} \right)
+$$
+
 ## Description du projet
 
 Le projet est composé de plusieurs dossiers :

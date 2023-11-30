@@ -51,7 +51,7 @@ output_period = 100
 # Matplotlib display period
 # if 0, the matplotlib figure display is disabled
 matplotlib_period = 0
-# Display time for each figure (carreful, it stops the computation)             
+# Display time for each figure (careful, it stops the computation)             
 matplotlib_pause_duration = 0.1
 
 # _____________________________________
@@ -74,7 +74,7 @@ for ix, x_value in enumerate(x):
   else:
     height[ix] = 1 + 0.5*(1. + np.cos(  np.pi * (x_value - 0.4 * length) / (0.2*length)))
 
-# initial heigh of the water: gaussian
+# initial heigh of the water: Gaussian
 # height  = np.zeros(size)
 # for ix, x_value in enumerate(x):
 #   if (x_value < 0.4 * length):
@@ -158,19 +158,19 @@ for it in range (iterations):
 
   # Compute height and uh at midpoint in time and space
 
-  hm[0:size-1] = 0.5 * ( height[0:size-1] + height[1:size] ) - ( 0.5 * dt ) * ( uh[1:size] - uh[0:size-1] ) * invdx
+  hm[0:size-1] = 0.5 * ( height[0:size-1] + height[1:size] ) - 0.5 * dt * invdx  * ( uh[1:size] - uh[0:size-1] )
 
   uhm[0:size-1] = 0.5 * ( uh[0:size-1] + uh[1:size] )  \
-    - 0.5 * dt * ( uh[1:size] ** 2    / height[1:size]   + 0.5 * g * height[1:size] ** 2 \
-    - uh[0:size-1] ** 2  / height[0:size-1] - 0.5 * g * height[0:size-1] ** 2 ) * invdx
+    - 0.5 * dt * invdx * ( uh[1:size] ** 2    / height[1:size]   + 0.5 * g * height[1:size] ** 2 \
+    - uh[0:size-1] ** 2  / height[0:size-1] - 0.5 * g * height[0:size-1] ** 2 ) 
 
   # Advance the height and uh to the next time step
 
-  height[1:size-1] = height[1:size-1] - dt * ( uhm[1:size-1] - uhm[0:size-2] ) * invdx
+  height[1:size-1] = height[1:size-1] - dt * invdx * ( uhm[1:size-1] - uhm[0:size-2] ) 
 
   uh[1:size-1] = uh[1:size-1] \
-    - dt * ( uhm[1:size-1] ** 2  / hm[1:size-1] + 0.5 * g * hm[1:size-1] ** 2 \
-    - uhm[0:size-2] ** 2  / hm[0:size-2] - 0.5 * g * hm[0:size-2] ** 2 ) * invdx
+    - dt * invdx * ( uhm[1:size-1] ** 2  / hm[1:size-1] + 0.5 * g * hm[1:size-1] ** 2 \
+    - uhm[0:size-2] ** 2  / hm[0:size-2] - 0.5 * g * hm[0:size-2] ** 2 ) 
 
   #  Reflective boundary conditions
   height[0] = height[1]

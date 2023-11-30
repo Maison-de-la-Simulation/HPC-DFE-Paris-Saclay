@@ -23,7 +23,6 @@ cd test_slurm_python
 #SBATCH --output=output           # fichier qui réceptionne la sortie standard
 #SBATCH --error=error             # fichier qui réceptionne la sortie d'erreur
 #SBATCH --ntasks=1                # Nombre d'unité de calcul ou de processus MPI
-#SBATCH --nodes=1                 # Nombre de noeuds à exploiter
 #SBATCH --time=00:05:00           # Temps souhaité pour la réservation
 #SBATCH --partition=cpu_short     # Partition des jobs rapides
 
