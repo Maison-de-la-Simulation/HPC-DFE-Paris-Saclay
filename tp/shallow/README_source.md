@@ -54,21 +54,17 @@ On note $u_i^n$ la vitesse de l'eau au point $i$ à l'instant $n$.
 
 On note $t_n$ l'instant $n$ et $x_i$ la position $i$.
 
-On résout alors les équations en eau peu profonde en 1D en utilisant un schéma de type Leap-Frog :
-
-$$
-\frac{h_i^{n+1} - h_i^{n-1}}{2 \Delta t} + \frac{q_{i+1}^n - q_{i-1}^n}{2 \Delta x} = 0
-$$
-
-$$
-\frac{q_i^{n+1} - q_i^{n-1}}{2 \Delta t} + \frac{1}{2 \Delta x} \left( \frac{q_{i+1}^n q_{i+1}^n}{h_{i+1}^n} + \frac{1}{2} g h_{i+1}^n - \frac{q_{i-1}^n q_{i-1}^n}{h_{i-1}^n} - \frac{1}{2} g h_{i-1}^n \right) = 0
-$$
+On résout alors les équations en eau peu profonde en 1D en utilisant un schéma de type Leap-Frog.
+Ce schéma n'est pas le meilleur mais il a l'avantage d'être simple à implémenter.
 
 ## Description du projet
 
 Le projet est composé de plusieurs dossiers :
 
-- `consignes` : 
+- `consignes` :  contient les consignes du projet. Elles sont organisées en plusieurs parties chacune dans un fichier `md` différent.
+- `python/sequential` : contient une implémentation séquentielle de l'équation en eau peu profonde en 1D en Python.
+- `cpp/kokkos` : contient une implémentation C++ kokkos de l'équation en eau peu profonde en 1D. Cette implémentation ne sera pas utilisée pour ce projet.
+- `visualization` : contient des scripts Python pour visualiser les résultats de l'équation en eau peu profonde en 1D.
 
 ## Description du code séquentiel
 
