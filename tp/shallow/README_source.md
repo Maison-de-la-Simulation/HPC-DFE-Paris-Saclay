@@ -54,21 +54,42 @@ On note $u_i^n$ la vitesse de l'eau au point $i$ à l'instant $n$.
 
 On note $t_n$ l'instant $n$ et $x_i$ la position $i$.
 
-On résout alors les équations en eau peu profonde en 1D en utilisant un schéma de type Leap-Frog :
+On résout alors les équations en eau peu profonde en 1D en utilisant un schéma de type Leap-Frog.
+Ce schéma n'est pas le meilleur mais il a l'avantage d'être simple à implémenter.
+
+On a alors :
 
 $$
-\frac{h_i^{n+1} - h_i^{n-1}}{2 \Delta t} + \frac{q_{i+1}^n - q_{i-1}^n}{2 \Delta x} = 0
+h_i^{n+1} = h_i^{n} - \frac{\Delta t}{\Delta x} \left( q_{i+1/2}^{n+1/2} - q_{i-1/2}^{n+1/2} \right)
 $$
 
+et 
+
 $$
-\frac{q_i^{n+1} - q_i^{n-1}}{2 \Delta t} + \frac{1}{2 \Delta x} \left( \frac{q_{i+1}^n q_{i+1}^n}{h_{i+1}^n} + \frac{1}{2} g h_{i+1}^n - \frac{q_{i-1}^n q_{i-1}^n}{h_{i-1}^n} - \frac{1}{2} g h_{i-1}^n \right) = 0
+q_i^{n+1} = q_i^{n} - \frac{\Delta t}{\Delta x} \left( \frac{q_{i+1/2}^{n+1/2}^2}{h_{i+1/2}^{n+1/2}} + \frac{1}{2} g h_{i+1/2}^{n+1/2} - \frac{q_{i-1/2}^{n+1/2}^2}{h_{i-1/2}^{n+1/2}} - \frac{1}{2} g h_{i-1/2}^{n+1/2} \right)
 $$
+
+Les valeurs de $q$ et $h$ au au temps intermédiaire $n+1/2$ sont calculées en utilisant les valeurs de $q$ et $h$ au temps $n$.
+
+$$
+h_{i+1/2}^{n+1/2} = \frac{h_{i+1}^{n} + h_{i}^{n}}{2} - \frac{\Delta t}{2 \Delta x} \left( q_{i+1}^{n} - q_{i}^{n} \right)
+$$
+
+et
+
+$$
+q_{i+1/2}^{n+1/2} = \frac{q_{i+1}^{n} + q_{i}^{n}}{2} - \frac{\Delta t}{2 \Delta x} \left( \frac{q_{i+1}^{n}^2}{h_{i+1}^{n}} + \frac{1}{2} g h_{i+1}^{n} - \frac{q_{i}^{n}^2}{h_{i}^{n}} - \frac{1}{2} g h_{i}^{n} \right)
+$$
+
 
 ## Description du projet
 
 Le projet est composé de plusieurs dossiers :
 
-- `consignes` : 
+- `consignes` :  contient les consignes du projet. Elles sont organisées en plusieurs parties chacune dans un fichier `md` différent.
+- `python/sequential` : contient une implémentation séquentielle de l'équation en eau peu profonde en 1D en Python.
+- `cpp/kokkos` : contient une implémentation C++ kokkos de l'équation en eau peu profonde en 1D. Cette implémentation ne sera pas utilisée pour ce projet.
+- `visualization` : contient des scripts Python pour visualiser les résultats de l'équation en eau peu profonde en 1D.
 
 ## Description du code séquentiel
 
