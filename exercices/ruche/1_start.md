@@ -21,7 +21,7 @@ passwd
 ruche-quota
 ```
 
-3) Rendez-vous dans votre espace de travail `$WORK` qui est plus approprié pour ce cours :
+3) Rendez-vous dans votre espace de travail `$WORKDIR` qui est plus approprié pour ce cours :
 
 ```bash
 cd $WORKDIR
