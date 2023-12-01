@@ -4,6 +4,12 @@ Cet exercice a pour but de vous familiariser avec le lancement de script Python 
 
 Nous allons préparer un script pour lancer un script Python depuis un noeud de calcul en utilisant plusieurs coeurs.
 
+N'oubliez pas de charger votre environnement :
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
+```
+
 1) Vous allez d'abord créer un nouveau dossier `test_slurm_python_parallel` et vous y rendre :
 
 ```bash
