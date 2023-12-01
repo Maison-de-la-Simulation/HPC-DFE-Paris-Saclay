@@ -24,8 +24,10 @@ ruche-quota
 3) Rendez-vous dans votre espace de travail `$WORK` qui est plus approprié pour ce cours :
 
 ```bash
-cd $WORK
+cd $WORKDIR
 ```
+
+Vous pouvez vérifier où vous vous trouver en utilisant la commande `pwd`
 
 4) Nous allons maintenant télécharger dans votre espace de travail le repository du cours en faisant :
 
