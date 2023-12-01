@@ -63,6 +63,25 @@ $$
 h_i^{n+1} = h_i^{n} - \frac{\Delta t}{\Delta x} \left( q_{i+1/2}^{n+1/2} - q_{i-1/2}^{n+1/2} \right)
 $$
 
+et 
+
+$$
+q_i^{n+1} = q_i^{n} - \frac{\Delta t}{\Delta x} \left( \frac{q_{i+1/2}^{n+1/2}^2}{h_{i+1/2}^{n+1/2}} + \frac{1}{2} g h_{i+1/2}^{n+1/2} - \frac{q_{i-1/2}^{n+1/2}^2}{h_{i-1/2}^{n+1/2}} - \frac{1}{2} g h_{i-1/2}^{n+1/2} \right)
+$$
+
+Les valeurs de $q$ et $h$ au au temps intermédiaire $n+1/2$ sont calculées en utilisant les valeurs de $q$ et $h$ au temps $n$.
+
+$$
+h_{i+1/2}^{n+1/2} = \frac{h_{i+1}^{n} + h_{i}^{n}}{2} - \frac{\Delta t}{2 \Delta x} \left( q_{i+1}^{n} - q_{i}^{n} \right)
+$$
+
+et
+
+$$
+q_{i+1/2}^{n+1/2} = \frac{q_{i+1}^{n} + q_{i}^{n}}{2} - \frac{\Delta t}{2 \Delta x} \left( \frac{q_{i+1}^{n}^2}{h_{i+1}^{n}} + \frac{1}{2} g h_{i+1}^{n} - \frac{q_{i}^{n}^2}{h_{i}^{n}} - \frac{1}{2} g h_{i}^{n} \right)
+$$
+
+
 ## Description du projet
 
 Le projet est composé de plusieurs dossiers :

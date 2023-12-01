@@ -53,6 +53,19 @@ On a alors :
 
 <p align="center"><img src=".extra//02b0ee35d24218cb4db3b50b2281bfb1.svg?invert_in_darkmode" align=middle width=258.61056705pt height=33.62942055pt/></p>
 
+et 
+
+<p align="center"><img src=".extra//3bd3a7a05c89a5da6db5ad63c607dc3d.svg?invert_in_darkmode" align=middle width=465.36947489999994pt height=59.1786591pt/></p>
+
+Les valeurs de <img src=".extra//d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode" align=middle width=7.928106449999989pt height=14.15524440000002pt/> et <img src=".extra//2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode" align=middle width=9.47111549999999pt height=22.831056599999986pt/> au au temps intermédiaire <img src=".extra//e2786a754952ac6992cd3299d8ccb6a2.svg?invert_in_darkmode" align=middle width=54.61569629999999pt height=24.65753399999998pt/> sont calculées en utilisant les valeurs de <img src=".extra//d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode" align=middle width=7.928106449999989pt height=14.15524440000002pt/> et <img src=".extra//2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode" align=middle width=9.47111549999999pt height=22.831056599999986pt/> au temps <img src=".extra//55a049b8f161ae7cfeb0197d75aff967.svg?invert_in_darkmode" align=middle width=9.86687624999999pt height=14.15524440000002pt/>.
+
+<p align="center"><img src=".extra//44137b708da8839b777c8ca64ff621c0.svg?invert_in_darkmode" align=middle width=283.8912186pt height=34.750915649999996pt/></p>
+
+et
+
+<p align="center"><img src=".extra//ee822ec16cfd1ae6da776916e452a097.svg?invert_in_darkmode" align=middle width=441.8228446499999pt height=42.668194799999995pt/></p>
+
+
 ## Description du projet
 
 Le projet est composé de plusieurs dossiers :
