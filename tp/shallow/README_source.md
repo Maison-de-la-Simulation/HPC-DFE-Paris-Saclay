@@ -81,6 +81,9 @@ $$
 q_{i+1/2}^{n+1/2} = \frac{q_{i+1}^{n} + q_{i}^{n}}{2} - \frac{\Delta t}{2 \Delta x} \left( \frac{q_{i+1}^{n}^2}{h_{i+1}^{n}} + \frac{1}{2} g h_{i+1}^{n} - \frac{q_{i}^{n}^2}{h_{i}^{n}} - \frac{1}{2} g h_{i}^{n} \right)
 $$
 
+Le schéma ci-dessous vous illustre la discrétisation en temps et en espace :
+
+<img src="../../support/materiel/shallow_water_discretiaztion.svg" height="400">
 
 ## Description du projet
 
