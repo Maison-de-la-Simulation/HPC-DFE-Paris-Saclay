@@ -92,6 +92,41 @@ d) Mettre à jour la section de code `# Terminal information` qui affiche dans l
 
 e) Faites tourner la simulation pour vérifier que tout fonctionne
 
-**Question 3.5 - Mesure du temps :** 
+**Question 3.5 - Mesure du temps :** Dans le code séquentiel, nous avons utilisé la fonction `time.time()` pour mesurer le temps d'exécution de la simulation.
+Nous allons maintenant adapter cette mesure au parallélisme MPI.
+Pour cela, nous allons utiliser la fonction `MPI.Wtime()` qui est une fonction MPI permettant de mesurer le temps.
 
-**Question 3.6 - sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostique (section de code `# Output`).
+a) Remplacer la fonction `time.time()` par `MPI.Wtime()` pour le calcul du temps passé dans la boucle en temps.
+
+b) Etant donné que chaque processus MPI a son propre temps, il faut maintenant réduire ces temps sur tous les processus MPI pour obtenir le temps total de la simulation. Nous allons calculer le temps minimum, maximum et moyen entre chaque processus. Pour cela, utilisez les fonctions MPI adéquates. Le pourcentage du temps passé sera calculé en utilisant le temps moyen.
+
+c) Décommenter la section `Timers` et mettre à jour l'affichage des temps de simulation pour afficher dans le tableau le temps min, max et moyen. Faites en sorte que seul le rang 0 puisse faire l'affichage.
+
+```python
+  print("")
+  print(" ------------------------------------------------ ")
+  print(" TIMERS")
+  print(" ------------------------------------------------------------------------| ")
+  print("            code part |  min  (s)  | mean (s)  | max (s)    | percentage |")
+  print(" ---------------------|------------|-----------|------------|------------|")
+```
+
+d) Ajouter un *timer* et les fonctions permettant de mesurer le temps passé uniquement dans les communications MPI point à point.
+
+e) Ajoutez un *timer* et les fonctions permettant de mesurer le temps passé dans les communications de réduction MPI.
+
+f) Ajouter un *timer* et les fonctions permettant de mesurer le temps passé dans les sorties de diagnostique.
+
+g) Faites tourner la simulation pour vérifier que tout fonctionne
+
+**Question 3.6 - sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostique (section de code `# Output`). Pour cela, nous allons rassemblé sur le rang 0 les données de chaque sous-domaine et les écrire dans un fichier.
+
+a) Décommentez la section `Output`
+
+b) Déclarez un tableau global `global_height` et `global_q` représentant la grille globale pour la hauteur d'eau et `q`.
+
+c) Utilisez la fonction MPI adéquate pour rassembler les données de chaque sous-domaine sur le rang 0 sur les tableaux précédemmment déclarés.
+
+d) Faites en sorte que seul le rang 0 puisse écrire les fichiers de diagnostique. Mettre à jour l'écriture pour écrire les tableaux globaux.
+
+e) Faites tourner la simulation pour vérifier que tout fonctionne. Vérifiez la cohérence des fichiers de diagnostique avec la version séquentielle.
