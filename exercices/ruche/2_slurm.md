@@ -7,10 +7,10 @@ Nous allons utiliser un script de lancement pour cela.
 
 Le but de cet exercice est de vous familiariser avec le lancement de jobs sur Ruche et de récupérer des informations sur la machine.
 
-1) Rendez-vous dans votre espace de travail $WORK qui est plus approprié pour ce cours :
+1) Rendez-vous dans votre espace de travail $WORKDIR qui est plus approprié pour ce cours :
 
 ```bash
-cd $WORK
+cd $WORKDIR
 ```
 
 2) Créer un dossier `test_slurm` et rendez-vous dedans :
