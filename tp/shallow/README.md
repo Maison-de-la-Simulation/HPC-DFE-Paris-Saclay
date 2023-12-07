@@ -65,6 +65,9 @@ et
 
 <p align="center"><img src=".extra//ee822ec16cfd1ae6da776916e452a097.svg?invert_in_darkmode" align=middle width=441.8228446499999pt height=42.668194799999995pt/></p>
 
+Le schéma ci-dessous vous illustre la discrétisation en temps et en espace :
+
+<img src="../../support/materiel/shallow_water_discretization.svg" height="400">
 
 ## Description du projet
 
