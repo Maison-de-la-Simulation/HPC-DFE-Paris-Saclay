@@ -30,6 +30,11 @@ number_of_ranks = comm.Get_size()
 # Chaque process récupère son numéro de rang dans le communicateur par défaut
 rank = comm.Get_rank()
 
+if rank == 0:
+    print("\nNouvelle simulation\n")
+
+
+
 # Chaque processus affiche ses informations :
 print("Je suis le rang  {} sur {}".format(rank, number_of_ranks))
 

@@ -50,6 +50,8 @@ global_size = size * number_of_ranks
 # Allocation d'un tableau global sur le rang 0
 if rank == 0:
     global_tab = np.zeros(global_size, dtype=np.float64)
+else:
+    global_tab = None
 
 # On récupère les tableaux locaux sur le rang 0
 comm.Gather(tab, global_tab, root=0)
@@ -58,7 +60,7 @@ comm.Gather(tab, global_tab, root=0)
 if rank == 0:
 
     # Vérification de la somme
-    sum_check = np.sum( np.range(0, number_of_ranks, 1, dtype=np.float64)*size )
+    sum_check = np.sum( np.arange(0, number_of_ranks, 1, dtype=np.float64)*size )
 
     print("Somme théorique du tableau global : {}".format(sum_check))
     print("Somme calculée du tableau global : {}".format(np.sum(global_tab)))

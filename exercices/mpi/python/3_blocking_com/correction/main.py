@@ -52,6 +52,5 @@ elif rank == 2:
     message = comm.recv(source=1, tag=tag)
     print("Le rang {} a reçu le message {} du rang 1".format(rank, message))
 
-
 # On finalise MPI
 MPI.Finalize()

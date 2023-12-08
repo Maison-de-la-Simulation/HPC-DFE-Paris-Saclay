@@ -1,9 +1,9 @@
 # Exercice : Communication collective MPI_GATHER
 
-Dans cet exercice nous allons simplement mettre en pratique la communication collective MPI_GATHER.
+Dans cet exercice nous allons simplement mettre en pratique la communication collective `gather`.
 
 Ici, chaque processus MPI a un tableau de taille `size` avec pour valeur initiale son rang MPI.
-Le but de l'exercice ets d'envoyer sur le rang 0 les tableaux de tous les processus MPI pour reconstruire un tableau global.
+Le but de l'exercice est d'envoyer sur le rang 0 les tableaux de tous les processus MPI pour reconstruire un tableau global.
 
 ## Consignes
 
@@ -16,5 +16,5 @@ Le but de l'exercice ets d'envoyer sur le rang 0 les tableaux de tous les proces
 Par exemple avec 4 processus MPI :
 
 ```bash
-mpirun -np 4 ./executable
+mpirun -np 4 python main.py
 ```
