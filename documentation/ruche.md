@@ -193,3 +193,22 @@ Ici ajoutez un nouveau site :
 - choisissez si vous souhaitez enregistrer le mot de passer ou le retaper à chaque connexion
 
 Une fois les paramètres rentrées, il suffit de cliquer sur connexion pour accéder au serveur distant.
+
+### Utilisation de VSCode sur Ruche par ssh
+
+Il est possible d'utiliser VSCode sur Ruche pour éditer des fichiers directement sur le serveur distant.
+
+Pour cela, il faut d'abord installer VSCode sur votre ordinateur.
+
+Ensuite, il faut installer l'extension Remote Development : https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
+
+Une fois l'extension installée, vous pouvez cliquer en bas à gauche sur l'icône suivante :
+
+<img src="../support/materiel/vscode_remote_ssh.png" height="300">
+
+Vous pouvez alors ajouter une nouvelle configuration de connexion ssh comme celle de Ruche.
+
+Une fois la connexion établie, vous pouvez ouvrir un terminal distant et travailler comme si vous étiez sur Ruche.
+
+Vous pouvez également ouvrir un dossier distant et travailler sur les fichiers directement sur Ruche.
+
