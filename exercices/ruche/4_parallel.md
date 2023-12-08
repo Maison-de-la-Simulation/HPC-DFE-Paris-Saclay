@@ -36,6 +36,8 @@ cd $SLURM_SUBMIT_DIR
 
 set -x
 
+source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
+
 mpirun -np 1 python main.py
 ```
 
@@ -60,6 +62,8 @@ Si le nombre de coeurs dépasse le nombre de coeurs par noeud, alors le script s
 cd $SLURM_SUBMIT_DIR
 
 set -x
+
+source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
 
 mpirun -np 2 python main.py
 ```
