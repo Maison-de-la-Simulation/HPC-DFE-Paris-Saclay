@@ -4,7 +4,7 @@ Ce deuxième exercice va mettre en pratique la notion de partage du travail dans
 Chaque rang va recevoir une quantité de travail indépendante à effectuer.
 La quantité de travail est bien répartie entre les processus.
 Le temps total sera mesuré avec la fonction MPI correspondante.
-Pour cela, nous repoartons de l'exercice précédent. 
+Pour cela, nous repartons de l'exercice précédent. 
 
 1. Calculez le nombre d'éléments sur chaque processus `local_N` en fonction du nombre total `N` et du nombre de rangs `number_of_ranks`.
 
