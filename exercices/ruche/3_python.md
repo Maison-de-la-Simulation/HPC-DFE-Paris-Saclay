@@ -2,8 +2,13 @@
 
 Cet exercice a pour but de vous familiariser avec le lancement de script Python sur un noeud de calcul.
 
+sur la frontale, n'oubliez pas de charger l'environnement Python :
 
-1) Nous allons maintenant préparer un second script pour lancer un script Python depuis un noeud de calcul.
+```bash
+source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
+```
+
+1) Nous allons maintenant préparer un script pour lancer un script Python depuis un noeud de calcul.
 
 Vous allez d'abord créer un nouveau dossier `test_slurm_python` et vous y rendre :
 
@@ -30,6 +35,8 @@ cd test_slurm_python
 cd $SLURM_SUBMIT_DIR
 
 set -x
+
+source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
 
 python hello.py
 ```
