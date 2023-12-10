@@ -90,7 +90,9 @@ c) A ce stade la boucle en temps peut tourner mais chaque sous-domaine est indé
 
 d) Mettre à jour la section de code `# Terminal information` qui affiche dans le terminal à interval régulier l'état de la simulation.
 
-e) Faites tourner la simulation pour vérifier que tout fonctionne
+e) Rajouter une barrier MPI à la fin de la boucle en temps pour s'assurer que tous les processus MPI ont fini leur travail avant de passer à la prochaine itération.
+
+f) Faites tourner la simulation pour vérifier que tout fonctionne
 
 **Question 3.5 - Mesure du temps :** Dans le code séquentiel, nous avons utilisé la fonction `time.time()` pour mesurer le temps d'exécution de la simulation.
 Nous allons maintenant adapter cette mesure au parallélisme MPI.
