@@ -86,13 +86,17 @@ a) Commencez par décommenter le calcul des équations en remplaçant `size` par
 
 b) Mettre à jour les conditions limites réfléchissantes pour qu'elles ne soient effectuées que par les rangs MPI aux extrémités du domaine.
 
-c) A ce stade la boucle en temps peut tourner mais chaque sous-domaine est indépendant. Il faut maintenant ajouter les communications nécessaires afin de mettre à jour les cellules fantômes. Utilisez les communications point à point pour cela (bloquantes ou non en fonction de votre préférence).
+c) A ce stade la boucle en temps peut tourner mais chaque sous-domaine est indépendant.
+Il faut maintenant ajouter les communications nécessaires afin de mettre à jour les cellules fantômes.
+Utilisez les communications point à point pour cela (bloquantes ou non en fonction de votre préférence).
 
-d) Mettre à jour la section de code `# Terminal information` qui affiche dans le terminal à interval régulier l'état de la simulation.
+d) Ajoutez une barrière explicite à la fin des échanges pour synchroniser l'ensemble des processus MPI.
 
-e) Rajouter une barrier MPI à la fin de la boucle en temps pour s'assurer que tous les processus MPI ont fini leur travail avant de passer à la prochaine itération.
+e) Mettre à jour la section de code `# Terminal information` qui affiche dans le terminal à interval régulier l'état de la simulation.
 
-f) Faites tourner la simulation pour vérifier que tout fonctionne
+f) Rajouter une barrier MPI à la fin de la boucle en temps pour s'assurer que tous les processus MPI ont fini leur travail avant de passer à la prochaine itération.
+
+g) Faites tourner la simulation pour vérifier que tout fonctionne
 
 **Question 3.5 - Mesure du temps :** Dans le code séquentiel, nous avons utilisé la fonction `time.time()` pour mesurer le temps d'exécution de la simulation.
 Nous allons maintenant adapter cette mesure au parallélisme MPI.
