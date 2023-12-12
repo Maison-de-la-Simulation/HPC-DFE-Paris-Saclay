@@ -53,6 +53,8 @@ Sur cette courbe, faites apparaître l'efficacité parfaite.
 
 5) Analysez les courbes et commentez les résultats.
 
+6) Selon vous, comment évoluerait le passage à l'échelle en augmentant ou en diminuant la discrétisation du domaine `N` ?
+
 ### 3. Etude de passage à l'échelle fort ou *strong scaling*
 
 Le passage à l'échelle forte consiste à garder la taille du problème constante et à augmenter le nombre de coeurs.
@@ -73,3 +75,9 @@ La simulation utilisant un seul coeur (équivalent séquentiel) aura les paramè
 Pour chaque configuration, il est préférable de faire plusieurs simulations pour obtenir une moyenne du temps de calcul et lisser les fluctuations.
 
 2) Tracez la courbe du temps de calcul (en ordonnée) en fonction du nombre de coeurs (en abscisse). Sur la courbe vous mettrez le temps total, le temps dans les communications point à point ainsi que le temps dans les phases de réduction. Utilisez les temps moyens donnés à la fin du code.
+
+3) Tracez la courbe d'efficacité (en ordonnée) en fonction du nombre de coeurs (en abscisse).
+
+4) Analysez les courbes et commentez les résultats.
+
+5) Selon vous, comment évoluerait le passage à l'échelle en augmentant ou en diminuant la discrétisation du domaine `N` ?
