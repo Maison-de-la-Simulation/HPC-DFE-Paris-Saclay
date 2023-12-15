@@ -49,8 +49,10 @@ rank = comm.Get_rank()
 # __________________________________
 # Paramètres globaux
 
+discretization = 10000000
+
 # Discrétisation par processus
-discretization_per_rank = 10000000
+discretization_per_rank = int(discretization / number_of_ranks)
 
 # Taille d'un rang
 rank_length = 0.5*np.pi / number_of_ranks
@@ -77,23 +79,40 @@ if (rank==0):
 
 local_integration = 0
 
+start = MPI.Wtime()
+
+# Normal loop
 for i in range(discretization_per_rank):
-    x = min + (i-0.5)*delta
+    x = min + (i+0.5)*delta
     local_integration += np.sin(x)*delta
 
-print(" Le rang {} a pour intégration locale {}".format(rank,local_integration))
+end_loop = MPI.Wtime() - start
+
+start = MPI.Wtime()
+
+# use numpy
+x = np.arange(min+0.5*delta, max, delta)
+local_integration = np.sum(np.sin(x)*delta)
+
+end_numpy = MPI.Wtime() - start
+
+print(" Le rang {} a pour intégration locale {} réalisée en {} ({}) secondes.".format(rank,local_integration, end_loop, end_numpy))
 
 # __________________________________
 # Réduction MPI
 
+start = MPI.Wtime()
+
 integration = comm.reduce(local_integration, op=MPI.SUM, root=0)
+
+end = MPI.Wtime()
 
 # Affichage du résultat depuis le rang 0
 
 if rank == 0:
 
     print()
-    print(" Le rang {} a pour résultat final {}".format(rank,integration))
+    print(" Le rang {} a pour résultat final {} réalisé en {} secondes".format(rank,integration, end-start))
 
 # On finalise MPI
 MPI.Finalize()
