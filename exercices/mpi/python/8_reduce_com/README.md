@@ -17,14 +17,16 @@ Les valeurs `min` et `max` représente les bornes du domaine local.
 
 2. Complétez l'intérieur de la boucle d'intégration pour effectuer la méthode des rectangles
 
-2. Complétez la ligne MPI destinées au processus de réduction des valeurs partielles
+3. Complétez la ligne MPI destinées au processus de réduction des valeurs partielles
 d'intégration dans la variable finale `integration`.
 
 ```python
 integration = comm.reduce(...)
 ```
 
-6. Exécutez le code en changeant le nombre de processus `N` :
+4. Rajoutez le calcul du temps passé dans la boucle d'intégration et le temps passé dans la réduction.
+
+5. Exécutez le code en changeant le nombre de processus `N` et observez l'effet sur le résultat et le temps :
 
 ```bash
 mpirun -np N python main.py
