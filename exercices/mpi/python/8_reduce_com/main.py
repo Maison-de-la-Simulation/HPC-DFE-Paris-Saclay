@@ -86,7 +86,7 @@ print(" Le rang {} a pour intégration locale {}".format(rank,local_integration)
 # __________________________________
 # Réduction MPI
 
-integration = comm.reduce(local_integration, op=MPI.SUM, root=0)
+integration = ???
 
 # Affichage du résultat depuis le rang 0
 
