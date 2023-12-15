@@ -49,7 +49,7 @@ rank = comm.Get_rank()
 # __________________________________
 # Paramètres globaux
 
-discretization = 10000000
+discretization = 100000000
 
 # Discrétisation par processus
 discretization_per_rank = int(discretization / number_of_ranks)
@@ -63,9 +63,6 @@ rank_length = 0.5*np.pi / number_of_ranks
 min   = rank * rank_length                            #Minimum local du rang
 max   = (rank+1) * rank_length                        # Maximum local du rang
 delta = rank_length / discretization_per_rank;         # Taille d'un rectangle
-
-# On affiche à l'écran quelques paramètres
-print(" Le rang {} s'occupe de la portion comprise entre {} et {}".format(rank,min,max))
 
 comm.Barrier()
 
@@ -90,6 +87,9 @@ local_integration = np.sum(np.sin(x)*delta)
 
 integration = comm.reduce(local_integration, op=MPI.SUM, root=0)
 
+# barrier
+comm.Barrier()
+
 end = MPI.Wtime()
 
 # __________________________________
@@ -98,14 +98,14 @@ end = MPI.Wtime()
 # On récupère le temps de calcul minimum avec un reduce
 min_time = comm.reduce(end-start, op=MPI.MIN, root=0)
 max_time = comm.reduce(end-start, op=MPI.MAX, root=0)
-mean_time = comm.reduce(end-start, op=MPI.SUM, root=0) / number_of_ranks
-
+mean_time = comm.reduce(end-start, op=MPI.SUM, root=0)
 
 # Affichage du résultat depuis le rang 0
 
 if rank == 0:
 
-    print()
+    mean_time = mean_time / number_of_ranks
+
     print(" Le rang {} a pour résultat final {} réalisé en {} secondes".format(rank,integration, min_time, max_time, mean_time))
 
 # On finalise MPI
