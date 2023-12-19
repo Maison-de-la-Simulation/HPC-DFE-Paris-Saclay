@@ -49,7 +49,7 @@ rank = comm.Get_rank()
 # __________________________________
 # Paramètres globaux
 
-discretization = 100000000
+discretization = 10000000
 
 # Discrétisation par processus
 discretization_per_rank = int(discretization / number_of_ranks)
