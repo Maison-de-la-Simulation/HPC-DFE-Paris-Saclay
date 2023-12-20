@@ -49,10 +49,10 @@ rank = comm.Get_rank()
 # __________________________________
 # Paramètres globaux
 
-discretization = 100000000
+# discretization = 320000000
 
 # Discrétisation par processus
-discretization_per_rank = int(discretization / number_of_ranks)
+discretization_per_rank = 320000000 # int(discretization / number_of_ranks)
 
 # Taille d'un rang
 rank_length = 0.5*np.pi / number_of_ranks
@@ -87,9 +87,6 @@ local_integration = np.sum(np.sin(x)*delta)
 
 integration = comm.reduce(local_integration, op=MPI.SUM, root=0)
 
-# barrier
-comm.Barrier()
-
 end = MPI.Wtime()
 
 # __________________________________
@@ -106,7 +103,7 @@ if rank == 0:
 
     mean_time = mean_time / number_of_ranks
 
-    print(" Le rang {} a pour résultat final {} réalisé en {} secondes".format(rank,integration, min_time, max_time, mean_time))
+    print(" Pour {} rangs - min : {}, max :  {}, moyen:  {} secondes".format(number_of_ranks, min_time, max_time, mean_time))
 
 # On finalise MPI
 MPI.Finalize()
