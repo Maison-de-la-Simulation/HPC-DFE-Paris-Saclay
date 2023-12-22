@@ -49,10 +49,10 @@ rank = comm.Get_rank()
 # __________________________________
 # Paramètres globaux
 
-discretization = 10000000
+# discretization = 320000000
 
 # Discrétisation par processus
-discretization_per_rank = int(discretization / number_of_ranks)
+discretization_per_rank = 320000000 # int(discretization / number_of_ranks)
 
 # Taille d'un rang
 rank_length = 0.5*np.pi / number_of_ranks
@@ -63,9 +63,6 @@ rank_length = 0.5*np.pi / number_of_ranks
 min   = rank * rank_length                            #Minimum local du rang
 max   = (rank+1) * rank_length                        # Maximum local du rang
 delta = rank_length / discretization_per_rank;         # Taille d'un rectangle
-
-# On affiche à l'écran quelques paramètres
-print(" Le rang {} s'occupe de la portion comprise entre {} et {}".format(rank,min,max))
 
 comm.Barrier()
 
@@ -81,38 +78,32 @@ local_integration = 0
 
 start = MPI.Wtime()
 
-# Normal loop
-for i in range(discretization_per_rank):
-    x = min + (i+0.5)*delta
-    local_integration += np.sin(x)*delta
-
-end_loop = MPI.Wtime() - start
-
-start = MPI.Wtime()
-
 # use numpy
 x = np.arange(min+0.5*delta, max, delta)
 local_integration = np.sum(np.sin(x)*delta)
 
-end_numpy = MPI.Wtime() - start
-
-print(" Le rang {} a pour intégration locale {} réalisée en {} ({}) secondes.".format(rank,local_integration, end_loop, end_numpy))
-
 # __________________________________
 # Réduction MPI
-
-start = MPI.Wtime()
 
 integration = comm.reduce(local_integration, op=MPI.SUM, root=0)
 
 end = MPI.Wtime()
 
+# __________________________________
+# Calcul du temps de calcul min, max et moyen
+
+# On récupère le temps de calcul minimum avec un reduce
+min_time = comm.reduce(end-start, op=MPI.MIN, root=0)
+max_time = comm.reduce(end-start, op=MPI.MAX, root=0)
+mean_time = comm.reduce(end-start, op=MPI.SUM, root=0)
+
 # Affichage du résultat depuis le rang 0
 
 if rank == 0:
 
-    print()
-    print(" Le rang {} a pour résultat final {} réalisé en {} secondes".format(rank,integration, end-start))
+    mean_time = mean_time / number_of_ranks
+
+    print(" Pour {} rangs - min : {}, max :  {}, moyen:  {} secondes".format(number_of_ranks, min_time, max_time, mean_time))
 
 # On finalise MPI
 MPI.Finalize()
