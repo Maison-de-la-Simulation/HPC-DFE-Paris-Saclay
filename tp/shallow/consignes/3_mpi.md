@@ -7,14 +7,14 @@ On modifiera les sources de ce dossier pour y introduire la parallélisation MPI
 
 Vous allez maintenant commenter les lignes de code qui ne sont pas encore parallélisées pour introduire la parallélisation MPI au fur et à mesure :
 
-* l'affichage dans le terminale
+* l'affichage dans le terminal
 * les *timers*
 * la boucle en temps
 
 **Question 3.1 - Initialisation de MPI :** Nous allons commencer par préparer le programme pour MPI.
 
-a) Commencez par inclure la bibliothèques MPI `mpi4py` au moment de l'importation des autres bibliothèques.
-Comme pour les exercices expliciter l'initialisation de MPI.
+a) Commencez par inclure la bibliothèque MPI `mpi4py` au moment de l'importation des autres bibliothèques.
+Comme pour les exercices, explicitez l'initialisation de MPI.
 
 b) Initialisez MPI au début du script entre la section `Input parameters` et `Initialization`.
 
@@ -25,11 +25,11 @@ d) Ajoutez une variable et la fonction permettant de récupérer le rang de chaq
 e) Ensuite, rajoutez la fonction permettant de finaliser MPI tout de suite à la fin du programme.
 
 f) Il est important de se rappeler que dans un programme MPI, le code que vous écrivez après l'initialisation de MPI est exécuté par tous les rangs.
-A partir de là, il est important d'identifier les zones que l'on souhaite être exécutées que par un seul rang.
+A partir de là, il est important d'identifier les zones que l'on souhaite qu'un seul rang exécute le code en question.
 Décommettez la partie `Terminal summary` et faites en sorte qu'elle ne soit affichée que par le rang 0.
 Ajoutez également l'affichage du nombre de rangs MPI.
 
-f) Exécuter le programme avec un seul rang MPI pour vérifier que tout fonctionne jusque là (cela évite de découvrir des erreurs plus tard).
+f) Exécuter le programme avec un seul rang MPI pour vérifier que tout fonctionne jusque-là (cela évite de découvrir des erreurs plus tard).
 
 **Question 3.2 - Création de la topologie cartésienne :** Nous allons maintenant à la suite de l'initialisation de MPI construire notre topologie cartésienne 1D.
 
@@ -72,7 +72,7 @@ h) A la fin de l'initialisation, on calcule la hauteur maximale d'eau. Ce calcul
 
 i) De même faites les mises à jour pour le calcul de la somme des hauteurs d'eau en appelant la fonction MPI adéquate.
 
-j) Mettre à,jour le calcul de la hauteur moyenne `average_height` et de quantité d'eau `water_quantity`
+j) Mettre à jour le calcul de la hauteur moyenne `average_height` et de quantité d'eau `water_quantity`
 
 k) Faites en sorte que seul le rang 0 puisse créer le dossier `diags`
 
@@ -90,23 +90,21 @@ c) A ce stade la boucle en temps peut tourner mais chaque sous-domaine est indé
 Il faut maintenant ajouter les communications nécessaires afin de mettre à jour les cellules fantômes.
 Utilisez les communications point à point pour cela (bloquantes ou non en fonction de votre préférence).
 
-d) Ajoutez une barrière explicite à la fin des échanges pour synchroniser l'ensemble des processus MPI.
+d) Mettre à jour la section de code `# Terminal information` qui affiche dans le terminal à intervalle régulier l'état de la simulation.
 
-e) Mettre à jour la section de code `# Terminal information` qui affiche dans le terminal à interval régulier l'état de la simulation.
+e) Rajouter une barrière MPI à la fin de la boucle en temps pour s'assurer que tous les processus MPI ont fini leur travail avant de passer à la prochaine itération.
 
-f) Rajouter une barrier MPI à la fin de la boucle en temps pour s'assurer que tous les processus MPI ont fini leur travail avant de passer à la prochaine itération.
-
-g) Faites tourner la simulation pour vérifier que tout fonctionne
+f) Faites tourner la simulation pour vérifier que tout fonctionne
 
 **Question 3.5 - Mesure du temps :** Dans le code séquentiel, nous avons utilisé la fonction `time.time()` pour mesurer le temps d'exécution de la simulation.
 Nous allons maintenant adapter cette mesure au parallélisme MPI.
 Pour cela, nous allons utiliser la fonction `MPI.Wtime()` qui est une fonction MPI permettant de mesurer le temps.
 
-a) Remplacer la fonction `time.time()` par `MPI.Wtime()` pour le calcul du temps passé dans la boucle en temps.
+a) Remplacez la fonction `time.time()` par `MPI.Wtime()` pour le calcul du temps passé dans la boucle en temps.
 
 b) Etant donné que chaque processus MPI a son propre temps, il faut maintenant réduire ces temps sur tous les processus MPI pour obtenir le temps total de la simulation. Nous allons calculer le temps minimum, maximum et moyen entre chaque processus. Pour cela, utilisez les fonctions MPI adéquates. Le pourcentage du temps passé sera calculé en utilisant le temps moyen.
 
-c) Décommenter la section `Timers` et mettre à jour l'affichage des temps de simulation pour afficher dans le tableau le temps min, max et moyen. Faites en sorte que seul le rang 0 puisse faire l'affichage.
+c) Décommentez la section `Timers` et mettre à jour l'affichage des temps de simulation pour afficher dans le tableau le temps min, max et moyen. Faites en sorte que seul le rang 0 puisse faire l'affichage.
 
 ```python
   print("")
@@ -117,22 +115,22 @@ c) Décommenter la section `Timers` et mettre à jour l'affichage des temps de s
   print(" ---------------------|------------|-----------|------------|------------|")
 ```
 
-d) Ajouter un *timer* et les fonctions permettant de mesurer le temps passé uniquement dans les communications MPI point à point.
+d) Ajoutez un *timer* et les fonctions permettant de mesurer le temps passé uniquement dans les communications MPI point à point.
 
 e) Ajoutez un *timer* et les fonctions permettant de mesurer le temps passé dans les communications de réduction MPI.
 
-f) Ajouter un *timer* et les fonctions permettant de mesurer le temps passé dans les sorties de diagnostique.
+f) Ajoutez un *timer* et les fonctions permettant de mesurer le temps passé dans les sorties de diagnostic.
 
 g) Faites tourner la simulation pour vérifier que tout fonctionne
 
-**Question 3.6 - sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostique (section de code `# Output`). Pour cela, nous allons rassemblé sur le rang 0 les données de chaque sous-domaine et les écrire dans un fichier.
+**Question 3.6 - sortie des diagnostiques :** Il ne nous reste plus qu'à mettre à jour la partie chargée de la sortie des fichiers de diagnostic (section de code `# Output`). Pour cela, nous allons rassembler sur le rang 0 les données de chaque sous-domaine et les écrire dans un fichier.
 
 a) Décommentez la section `Output`
 
 b) Déclarez un tableau global `global_height` et `global_q` représentant la grille globale pour la hauteur d'eau et `q`.
 
-c) Utilisez la fonction MPI adéquate pour rassembler les données de chaque sous-domaine sur le rang 0 sur les tableaux précédemmment déclarés.
+c) Utilisez la fonction MPI adéquate pour rassembler les données de chaque sous-domaine sur le rang 0 sur les tableaux précédemment déclarés.
 
-d) Faites en sorte que seul le rang 0 puisse écrire les fichiers de diagnostique. Mettre à jour l'écriture pour écrire les tableaux globaux.
+d) Faites en sorte que seul le rang 0 puisse écrire les fichiers de diagnostic. Mettre à jour l'écriture pour écrire les tableaux globaux.
 
-e) Faites tourner la simulation pour vérifier que tout fonctionne. Vérifiez la cohérence des fichiers de diagnostique avec la version séquentielle.
+e) Faites tourner la simulation pour vérifier que tout fonctionne. Vérifiez la cohérence des fichiers de diagnostic avec la version séquentielle.

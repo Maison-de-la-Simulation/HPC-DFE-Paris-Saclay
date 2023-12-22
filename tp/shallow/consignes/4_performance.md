@@ -17,11 +17,11 @@ Nous allons ici faire tourner le code parallèle avec les sorties activées.
 * `print_period` : 1000
 * `output_period` : 100
 
-2) Comparer les résultats avec le code séquentiel pour valider le code parallèle. L'idéal est de faire une comparaison directe des fichiers de sortie en calculant par exemple l'erreur entre les deux fichiers.
+2) Comparez les résultats avec le code séquentiel pour valider le code parallèle. L'idéal est de faire une comparaison directe des fichiers de sortie en calculant par exemple l'erreur entre les deux fichiers.
 
-3) Rajouter dans le rapport quelques figures de la simulation pour montrer que le code fonctionne correctement.
+3) Rajoutez dans le rapport quelques figures de la simulation pour montrer que le code fonctionne correctement.
 
-4) Analyser le temps passé dans chaque partie du code et commentez.
+4) Analysez le temps passé dans chaque partie du code et commentez.
 
 ### 2. Etude de passage à l'échelle faible ou *weak scaling*
 
@@ -30,13 +30,13 @@ La charge par unité de calcul et donc par coeur reste constante.
 Le passage à l'échelle faible étudie la capacité d'un code à simuler un problème plus grand avec plus de ressource en un temps donné.
 Dans les études de passage à l'échelle faible, on désactivera les sorties sur le disque.
 
-1) Réalisez une étude de passage à l'échelle faible en utilisant 1, 2, 4, 8, 16 et 40 coeurs. Rappelon qu'un noeud CPU de Ruche se compose de 2 sockets de 20 coeurs chacun.
+1) Réalisez une étude de passage à l'échelle faible en utilisant 1, 2, 4, 8, 16 et 40 coeurs. Rappelons qu'un noeud CPU de Ruche se compose de 2 sockets de 20 coeurs chacun.
 
 La simulation utilisant un seul coeur (équivalent séquentiel) aura les paramètres suivants :
 
 * `L` : 5
-* `N` : 1280000
-* `iterations` : 100
+* `N` : 128000
+* `iterations` : 1000
 * `print_period` : 100
 * `output_period` : 0
 
@@ -57,7 +57,7 @@ Sur cette courbe, faites apparaître l'efficacité parfaite.
 
 ### 3. Etude de passage à l'échelle fort ou *strong scaling*
 
-Le passage à l'échelle forte consiste à garder la taille du problème constante et à augmenter le nombre de coeurs.
+Le passage à l'échelle fort consiste à garder la taille du problème constante et à augmenter le nombre de coeurs.
 La charge diminue proportionnellement par l'augmentation du nombre d'unités de calcul.
 Le passage à l'échelle forte étudie la capacité d'un code à simuler un même problème avec plus de ressource et donc par exemple dans le but de le résoudre en un temps plus court.
 Dans cette étude également on désactivera les sorties sur le disque.
