@@ -111,6 +111,10 @@ Cela permet de calculer les centres de cellules (les ronds verts et rouges) avan
 
 En pratique, on effectuera les échanges après le calcul des points intérieurs.
 
+Il sera nécessaire de calculer les index de début de chaque sous-domaine ``local_start``. Ces index permettent de définir les limites de chaque sous-domaine et de savoir quelles cellules sont des cellules fantômes et quelles cellules sont des cellules intérieures.
+
+<img src="../../support/materiel/shallow_domain_decomposition_3.svg" height="400">
+
 ## Description du projet
 
 Le projet est composé de plusieurs dossiers :
@@ -180,6 +184,7 @@ Les consignes du cours sont disponibles dans le dossier `./consignes`. Elles son
 * `2_machines.md` : découverte de la machine parallèle
 * `3_mpi.md` : parallélisation avec MPI
 * `4_performance.md` : analyse de la performance
+* `5_aide.md` : aide et conseils
 
 
 
