@@ -6,9 +6,9 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master, year-2022-2023 ]
+    branches: [ master, year-2024-2025 ]
   pull_request:
-    branches: [ master, year-2022-2023 ]
+    branches: [ master, year-2024-2025 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -34,6 +34,13 @@ jobs:
         run: |
           sudo apt-get install libhdf5-dev libhdf5-openmpi-dev
           h5c++ -show
+
+      - name: python3 packet
+        run: |
+          sudo apt-get install python3
+          python3 --version
+          pip3 install numpy
+          pip3 install mpi4py
 
       # ________________________________________________________
       # Exercises
