@@ -15,3 +15,5 @@
 
 **/CMakeCache.txt
 **/CMakeFiles
+
+.vscode
