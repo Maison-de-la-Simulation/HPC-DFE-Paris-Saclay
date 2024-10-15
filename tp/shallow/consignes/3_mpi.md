@@ -29,7 +29,7 @@ A partir de là, il est important d'identifier les zones que l'on souhaite qu'un
 Décommettez la partie `Terminal summary` et faites en sorte qu'elle ne soit affichée que par le rang 0.
 Ajoutez également l'affichage du nombre de rangs MPI.
 
-f) Exécuter le programme avec un seul rang MPI pour vérifier que tout fonctionne jusque-là (cela évite de découvrir des erreurs plus tard).
+g) Exécuter le programme avec un seul rang MPI pour vérifier que tout fonctionne jusque-là (cela évite de découvrir des erreurs plus tard).
 
 **Question 3.2 - Création de la topologie cartésienne :** Nous allons maintenant à la suite de l'initialisation de MPI construire notre topologie cartésienne 1D.
 

@@ -26,6 +26,6 @@ La ligne `Liste de processeur(s)` vous donne le nombre total de coeurs disponibl
 
 - d) Donnez le nombre de coeurs par processeurs (ou coeurs par socket).
 
-- d) Donnez la taille du cache L2 et L3.
+- e) Donnez la taille du cache L2 et L3.
 
-- e) Donnez la taille de la mémoire RAM disponible sur le noeud en utilisant la commande `free -h`.
+- f) Donnez la taille de la mémoire RAM disponible sur le noeud en utilisant la commande `free -h`.
