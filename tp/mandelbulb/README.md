@@ -11,9 +11,10 @@ Les Mandelbulbs sont les versions 3D des fractals de Mandelbrot en 2D.
 
 L'objectif de ce projet est de paralléliser un code séquentiel faisant le calcul d'un Mandelbulb en utilisant MPI.
 
-| ![patterns.png](./img/laser_wakefield.png) |
+| ![patterns.png](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Power_8_mandelbulb_fractal_overview.jpg/1920px-Power_8_mandelbulb_fractal_overview.jpg) |
 |:--:|
-|<b>Figure 1 - Exemple d'un Mandelbulb (https://en.wikipedia.org/wiki/Mandelbulb)</b>|
+|<b>Figure 1 - Exemple d'un Mandelbulb d'ordre 8 par Ondřej Karlík (https://en.wikipedia.org/wiki/Mandelbulb)</b>|
+
 
 ## Principes
 
@@ -21,27 +22,63 @@ Pour ce projet, nous utilisons formule bien connue de White and Nylander's.
 
 La construction d'un Mandelbulb est un processus itératif qui s'effectue pour un ensemble de point d'un espace donné.
 
-Pour un point situé à la position <img src="https://rawgit.com/in	git@github.com:Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/year-2024-2025/.extra//37fbb2c8364ceb3f7fb9bad29229c6a0.svg?invert_in_darkmode" align=middle width=88.93286489999998pt height=24.65753399999998pt/>, on actualise la valeur en suivant le processus itération suivant :
+Pour un point situé à la position $C = \left( x, y, y \right)$, on actualise la valeur en suivant le processus itération suivant :
 
-<p align="center"><img src="https://rawgit.com/in	git@github.com:Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/year-2024-2025/.extra//d7cecea680d5bb51d211e0379a0a257f.svg?invert_in_darkmode" align=middle width=144.33630255pt height=18.312383099999998pt/></p>
+$$
+V^{n+1} = F\left( V^{n} \right) + C
+$$
 
-Avec <img src="https://rawgit.com/in	git@github.com:Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/year-2024-2025/.extra//f1a9735700937c7c9243c04b42ab621f.svg?invert_in_darkmode" align=middle width=19.79457809999999pt height=26.76175259999998pt/> l'orbite initiale à définir.
+Avec $V^0$ l'orbite initiale à définir.
 
-La fonction <img src="https://rawgit.com/in	git@github.com:Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/year-2024-2025/.extra//b8bc815b5e9d5177af01fd4d3d3c2f10.svg?invert_in_darkmode" align=middle width=12.85392569999999pt height=22.465723500000017pt/> est définie dans des cordonnées sphériques par :
+La fonction $F$ est définie dans des cordonnées sphériques par :
 
-<p align="center"><img src="https://rawgit.com/in	git@github.com:Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/year-2024-2025/.extra//c1dec99aed2ad7c73156ca9b0ce2ddbf.svg?invert_in_darkmode" align=middle width=444.59462354999994pt height=16.438356pt/></p>
+$$
+F(r, \theta, \phi) = r^n \left( \sin{(n \theta)} \cos(n\phi), \sin (n \theta) \sin (n\phi), \cos(n \theta)  \right)
+$$
 
 avec :
 
-<p align="center"><img src="https://rawgit.com/in	git@github.com:Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/year-2024-2025/.extra//660ac6728e53aa916735f05a52f6975c.svg?invert_in_darkmode" align=middle width=122.1613569pt height=19.726228499999998pt/></p>
+$$
+r = \sqrt{ x^2 + y^2 + z^2 }
+$$
 
-<p align="center"><img src="https://rawgit.com/in	git@github.com:Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/year-2024-2025/.extra//5d45eaaa543bba6c410f981c454b8468.svg?invert_in_darkmode" align=middle width=119.2085334pt height=16.438356pt/></p>
+$$
+\phi = \arctan \left( y / x \right)
+$$
 
-<p align="center"><img src="https://rawgit.com/in	git@github.com:Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/year-2024-2025/.extra//b2a55ef71faa8f9b2c4f954053e211e6.svg?invert_in_darkmode" align=middle width=302.74346519999995pt height=29.58934275pt/></p>
+$$
+\theta = \arctan \left(  \sqrt{x^2 + y^2}  / z \right) = \arccos \left( z / r \right)
+$$
 
-## description du projet
+Ici, $n$ est l'ordre du Mandelbulb.
+
+Comme pour la version 2D, Le processus itératif s'arrête lorsque la valeur de $V$ dépasse une certaine valeur.
+
+Le seuil utilisé dans de nombreux scénarios est $r > 2$.
+
+## Description du projet
 
 ### Code séquentiel
+
+Le code séquentiel est présent dans le dossier `sequential/mandelbulb.py`.
+
+Il se compose de plusieurs parties :
+
+1) **Input parameters :** définition des paramètres d'entrée
+2) **Command line arguments :** gestion des arguments en ligne de commande
+3) **Initialization :** initialisation des variables et des conditions initiales
+4) **Terminal output summary :** affichage des informations de sortie dans le terminal
+5) **Mandelbulb computation :** calcul du Mandelbulb
+6) **Compute the volume of the Mandelbulb :** calcul du volume du Mandelbulb
+7) **Save the domain array using the vtk format :** sauvegarde du Mandelbulb au format VTK
+
+### Requirements
+
+Le code nécessite les bibliothèques suivantes :
+
+- `numpy`
+- `argparse`
+- `vtk`
 
 ### Visualisation
 
