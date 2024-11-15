@@ -76,9 +76,11 @@ Il se compose de plusieurs parties :
 
 Le code nécessite les bibliothèques suivantes :
 
-- `numpy`
-- `argparse`
-- `vtk`
+- `numpy` : numpy est une bibliothèque de calcul numérique en Python.
+- `time` : time est une bibliothèque standard de Python qui permet de gérer le temps.
+- `math` : math est une bibliothèque standard de Python qui permet de gérer les fonctions mathématiques.
+- `argparse` : argparse est une bibliothèque standard de Python qui permet de gérer les arguments en ligne de commande.
+- `vtk` : VTK est une bibliothèque de visualisation 3D. Elle est utilisée pour sauvegarder le Mandelbulb au format VTK permettant de le visualiser avec des logiciels comme Paraview.
 
 ### Visualisation
 

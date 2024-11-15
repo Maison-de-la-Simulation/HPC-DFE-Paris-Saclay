@@ -41,7 +41,6 @@ Le parallélisme par décomposition de domaine consiste à découper le domaine 
 Chaque sous-domaine est géré par un processus MPI unique.
 Il y a donc autant de sous-domaines que de processus MPI.
 Dans le cas de ce TP, nous allons découper le domaine en sous-domaines de même taille.
-Vous pouvez relire l'introduction du TP pour vous rafraîchir la mémoire.
 
 a) Mettre à jour l'allocation des tableaux pour les adapters aux sous-domaines
 

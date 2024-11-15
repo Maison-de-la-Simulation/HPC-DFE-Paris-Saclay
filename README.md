@@ -61,6 +61,7 @@ dans [le dossier exercices](./exercices/).
 - [Simulation de vie](./tp/life/).
 - [Discrétisation des équations de Maxwell par un schéma de Yee](./tp/maxwell/).
 - [Equation en eau peu profonde](./tp/shallow/).
+- [Mandelbulb](./tp/mandelbulb/).
 
 ## Installation des dépendances
 
