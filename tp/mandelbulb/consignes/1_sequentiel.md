@@ -18,8 +18,8 @@ Paraview est un logiciel de visualisation et d'analyse de données 3D. Il est tr
 <img src="../../../support/materiel/mandelbulb_paraview_2.png" width="400">
 
 - c) Appuyez sur le bouton `Apply` pour visualiser le Mandelbulb. Pour le moment rien n'apparaît sauf un cube blanc représentant le domaine de calcul. On va maintenant choisir un type de représentation pour visualiser le Mandelbulb. Dans le menu en haut à gauche, cliquez sur le logo désignant des *Contour* our isosurfaces :
-
-![Paraview](../../../support/materiel/mandelbulb_paraview_3.png)
+- 
+<img src="../../../support/materiel/mandelbulb_paraview_3.png" width="400">
 
 A ce moment là, le mandelbulb s'affiche avec une couleur par défaut.
 
@@ -27,11 +27,11 @@ A ce moment là, le mandelbulb s'affiche avec une couleur par défaut.
 
 - d) Il est maintenant possible de modifier la valeur de l'isovaleur pour visualiser le Mandelbulb avec plus ou moins de détails :
 
-![Paraview](../../../support/materiel/mandelbulb_paraview_5.png)
+<img src="../../../support/materiel/mandelbulb_paraview_5.png" width="400">
 
 - e) On peut aussi adopter une couleur plus adaptée pour visualiser le Mandelbulb. Pour cela, dans le menu `Coloring`, sélectionnez `Iterations` au lieu de `Mandelbulb`. La couleur dépendra maintenant du nombre d'itérations nécessaires pour la zone considérée. 
 
-![Paraview](../../../support/materiel/mandelbulb_paraview_6.png)
+<img src="../../../support/materiel/mandelbulb_paraview_6.png" width="400">
 
 Vous pouvez aussi choisir une palette de couleur plus adaptée en cliquant sur `Edit Color Map`. Dans l'exemple ci-dessous, on a choisi la palette `Plasma` :
 
