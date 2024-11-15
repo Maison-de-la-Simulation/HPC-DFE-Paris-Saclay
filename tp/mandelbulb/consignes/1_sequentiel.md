@@ -15,7 +15,7 @@ Paraview est un logiciel de visualisation et d'analyse de données 3D. Il est tr
 
 - b) Dans le menu `File`, cliquez sur `Open` et sélectionnez le fichier `mandelbulb.vtk` généré par le code séquentiel. Le nom du fichier apparaît dans la fenêtre `Pipeline Browser` à gauche de l'interface :
 
-![Paraview](../../../support/materiel/mandelbulb_paraview_2.png)
+<img src="../../../support/materiel/mandelbulb_paraview_2.png" width="400">
 
 - c) Appuyez sur le bouton `Apply` pour visualiser le Mandelbulb. Pour le moment rien n'apparaît sauf un cube blanc représentant le domaine de calcul. On va maintenant choisir un type de représentation pour visualiser le Mandelbulb. Dans le menu en haut à gauche, cliquez sur le logo désignant des *Contour* our isosurfaces :
 
