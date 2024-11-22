@@ -48,4 +48,38 @@ b) Mettre à jour la boucle de calcul pour distribuer les calculs sur chaque sou
 
 c) Mettre à jour le calcul du temps en utilisant les fonctions MPI
 
-d) Mettre à jour le calcul du volume du Mandelbulb en utilisant les fonctions MPI. Ajouter des *timers* pour mesurer le temps passer dans cette étape.
+d) Mettre à jour le calcul du volume du Mandelbulb en utilisant les fonctions MPI adéquates. Ajouter des *timers* pour mesurer le temps passer dans cette étape.
+
+**Question 3.4 - Reconstitution du domaine global:**
+
+Tous les codes parallélisés se retrouvent devant le même défi : comment rassembler toutes les pièces du puzzle pour les sorties de fichiers sur disque (aussi appelés diagnostiques). 
+
+Il existe plusieurs méthodes :
+
+1. Reconsituer le domaine sur l'un des rangs qui se chargent alors d'écrire le résultat sur disque
+2. Chaque rand écrit son morceau de domaine dans un fichier qui lui est propre. Pour visualiser l'ensemble, il faut reconstituer le domaine a posteriori.
+3. Chaque rang accède à un même fichier de manière parallèle. On appelle cela une écriture parallélisée.
+
+De toute ces méthodes, la moins efficace est la première car elle nécessite des communications collectives couteuses. C'est un goulot d'étranglement qui aura un impact sur le passage à l'échelle. 
+
+La méthode 2 et 3 ont des avantages et des inconvénients. Si le système de fichier est performant, la méthode 2 permet une indépendance complète des rangs. Cependant, l'étape de post-traitement peur s'avérer couteuse. La méthode 3 réduit l'étape de post-traitement et permet aussi cetaines optimisations.
+
+Afin de pouvoir mettre à jour les sorties de fichiers sur disque et visualiser les résultats de la version parallèle, nous allons opter pour la méthode 1. Bien que moins efficace cette méthode reste pédagogique et surtout, ce cours n'aborde pas la méthode 3. Surtout nous ne la faisons qu'une fois ici et non à chaque itération.
+
+a) Déclarer pour le domaine, les itérations et la distance 3 tableaux destinés à representer le domaine global et donc à recueillir chaque sous-domaine.
+
+b) Utilisez la fonction `Gatherv` afin de reconstituer le domain global
+
+c) Faites en sorte que seul le rang 0 puisse écrire le fichier VTK.
+
+**Question 3.5 - vérification des résultats** 
+
+a) Vérifier que le Mandelbulb parallèle est le même que celui généré en séquentiel. Pour cela, calculez l'erreur $\Epsilon$ entre les deux. Soit $M_s$ le tableau du Mandelbulb séquentiel et $M_p$ le tableau de la version parallèle :
+
+$
+\Epsilon = \sum_{i,i,k}{\|A(i,j,k) - B(i,j,k)\|}
+$
+
+**Astuce:** Vous pouvez tout simplement écrire les tableaux numpy sur disque et calculer l'erreur en post-traitement à l'aide d'un script Python.
+
+b) Utilisez Paraview pour visualiser le Mandelbulb parallèle
