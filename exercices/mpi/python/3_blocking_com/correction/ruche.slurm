@@ -10,7 +10,7 @@
 
 set -x
 
-source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 mpirun -np 4 python3 main.py
 
 

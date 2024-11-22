@@ -10,10 +10,12 @@
 
 **/*.h5
 
-*.DS_Store
+**.DS_Store
 **/exe
 
 **/CMakeCache.txt
 **/CMakeFiles
+
+**.vtk
 
 .vscode

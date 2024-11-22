@@ -5,7 +5,7 @@ Cet exercice a pour but de vous familiariser avec le lancement de script Python 
 sur la frontale, n'oubliez pas de charger l'environnement Python :
 
 ```bash
-source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 ```
 
 1) Nous allons maintenant préparer un script pour lancer un script Python depuis un noeud de calcul.
@@ -36,7 +36,7 @@ cd $SLURM_SUBMIT_DIR
 
 set -x
 
-source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 
 python hello.py
 ```

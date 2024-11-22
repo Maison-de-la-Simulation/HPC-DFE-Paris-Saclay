@@ -21,7 +21,7 @@ for cores in number_of_cores:
     script += "#SBATCH --nodes={}                # Nombre d'unité de calcul ou de processus MPI \n".format(nodes)
     script += "#SBATCH --time=00:10:00           # Temps souhaité pour la réservation \n"
     script += "#SBATCH --partition=cpu_short     # Partition des jobs rapides \n"
-    script += "source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh \n"
+    script += "source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh \n"
     script += "set -x \n"
     script += "cd ${SLURM_SUBMIT_DIR} \n"
     script += "mpirun -np {} python3 ../../shallow_water.py -N 12800000 -i 100 -o 0 \n".format(cores)
