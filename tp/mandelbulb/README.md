@@ -82,16 +82,50 @@ Le code nécessite les bibliothèques suivantes :
 - `argparse` : argparse est une bibliothèque standard de Python qui permet de gérer les arguments en ligne de commande.
 - `vtk` : VTK est une bibliothèque de visualisation 3D. Elle est utilisée pour sauvegarder le Mandelbulb au format VTK permettant de le visualiser avec des logiciels comme Paraview.
 
+### Fonctionnement du code
+
+La version séquentiel du code tourne avec ses paramètres par défaut en faisant :
+
+```bash
+python mandelbulb.py
+```
+
+A la fin de l'exécution, le code produit un fichier au format vtk au nom de `mandelbulb.vtk`
+
+Les paramètres par défaut peuvent être modifiés directment dans le code ou en ligne de commande. Vous pouvez obtenir la liste des arguments en faisait :
+
+```bash
+python mandelbulb.py -h
+```
+
+Voici la liste des arguments disponibles :
+
+- `--domain_size` : résolution du domaine dans chaque direction
+- `--domain_min` : coordonnées minimales du domaine
+- `--domain_max` : coordonnées maximales du domaine
+- `--iterations` : nombre d'itérations
+- `--initial_position` : position initiale de l'orbite
+- `--bailout` : valeur de sortie pour la génération du Mandelbulb
+- `--power` : ordre du Mandelbulb
+
+Par exemple :
+
+```bash
+python mandelbulb.py --domain_size 100 --domain_min -2 -2 -2 --domain_max 2 2 2 --iterations 100 --initial_position 0 0 0 --bailout 2 --power 8
+```
+
 ### Visualisation
+
+Le code séquentiel produit à la fin un fichier au format VTK. Ce format très classique en visualisations scientifique peut être ensuite ouvert avec le logiciel de visualisation Paraview. Comment utiliser Paraview fera l'object de la première partie du projet.
 
 ## Consignes
 
 Le projet se découpe en 4 parties. Chaque partie fait l'objet d'un fichier spécifique :
 
-1. [Découvertes du code séquentiel](./1_sequential.md)
-2. [Découvertes de la machine](./2_machine.md)
-3. [Parallélisation](./3_mpi/md)
-4. [Etude de la performance](./4_performance.md)
+1. [Découvertes du code séquentiel](./consignes/1_sequential.md)
+2. [Découvertes de la machine](./consignes/2_machine.md)
+3. [Parallélisation](./consignes/3_mpi/md)
+4. [Etude de la performance](./consignes/4_performance.md)
 
 En plus des consignes, un fichier d'aide est à disposition. Ce fichier sera mis à jour au fur et à mesure de l'avancement du projet et de vos questions.
 
