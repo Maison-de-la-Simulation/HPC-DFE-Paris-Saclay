@@ -1,0 +1,6 @@
+name: mandelbulb
+dependencies:
+  - numpy
+  - argparse
+  - vtk
+  - mpi4py
