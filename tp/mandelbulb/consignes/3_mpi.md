@@ -26,13 +26,15 @@ f) Exécuter le programme avec un seul rang MPI pour vérifier que tout fonction
 
 **Question 3.2 - Création de la topologie cartésienne :**
 
-Nous allons maintenant à la suite de l'initialisation de MPI construire notre topologie cartésienne 1D. Cette topologie sera utilisée pour diviser le domaine en sous-domaines.On découpera le domaine dans la première direction.
+Nous allons maintenant à la suite de l'initialisation de MPI construire notre topologie cartésienne. Cette topologie sera utilisée pour diviser le domaine en sous-domaines. On adopte une topologie 3D, on divise donc le domaine en sous-blocs.
 
-a) Ajouter les paramètres nécessaires à la construction de la topologie cartésienne au début du programme et appelez les fonctions MPI pour la construire. Vous placerez cette étape après l'initialisation de MPI.
+a) Ajoutez un argument en ligne de commande `--ranks_per_dir` permettant de récupérer le nombre de rang MPI dans chaque direction `x`, `y` et `z`
 
-b) Calculez pour chaque rang MPI la taille du sous-domaine, l'indice du début et de la fin par rapport au tableau global. Vous en aurez besoin pour allouer les tableaux locaux et définir la boucle locale.
+b) Ajouter les paramètres nécessaires à la construction de la topologie cartésienne au début du programme et appelez les fonctions MPI pour la construire. Vous placerez cette étape après l'initialisation de MPI.
 
-c) Afin de vérifier que tout fonctionne, ajouter l'affichage des propriétés de chaque processus MPI dans la section `Terminal output summary`.
+c) Calculez pour chaque rang MPI la taille du sous-domaine, l'indice du premier et dernier index de chaque sous-domaine par rapport au domaine global. Vous en aurez besoin pour allouer les tableaux locaux et définir la boucle locale.
+
+d) Afin de vérifier que tout fonctionne, ajouter l'affichage des propriétés de chaque processus MPI dans la section `Terminal output summary`.
 
 **Question 3.3 - Décomposition de domaine :**
 
@@ -64,11 +66,15 @@ De toute ces méthodes, la moins efficace est la première car elle nécessite d
 
 La méthode 2 et 3 ont des avantages et des inconvénients. Si le système de fichier est performant, la méthode 2 permet une indépendance complète des rangs. Cependant, l'étape de post-traitement peur s'avérer couteuse. La méthode 3 réduit l'étape de post-traitement et permet aussi cetaines optimisations.
 
-Afin de pouvoir mettre à jour les sorties de fichiers sur disque et visualiser les résultats de la version parallèle, nous allons opter pour la méthode 1. Bien que moins efficace cette méthode reste pédagogique et surtout, ce cours n'aborde pas la méthode 3. Surtout nous ne la faisons qu'une fois ici et non à chaque itération.
+Afin de pouvoir mettre à jour les sorties de fichiers sur disque et visualiser les résultats de la version parallèle, nous allons opter pour la méthode 1.
+Bien que moins efficace cette méthode reste pédagogique et surtout, ce cours n'aborde pas la méthode 3.
+De plus nous ne la faisons qu'une fois à la fin des calculs et non à chaque itération.
 
-a) Déclarer pour le domaine, les itérations et la distance 3 tableaux destinés à representer le domaine global et donc à recueillir chaque sous-domaine.
+a) Déclarer pour les grandeurs `domaine`, les `iteration` et la `distance`, 3 tableaux destinés à recueillir chaque sous-domaine dans le rang 0.
 
 b) Utilisez la fonction `Gatherv` afin de reconstituer le domain global
+
+c) Déclarer des tableaux pour chaque grandeur représentant le domaine global. Reconstituer ce domaine à partir des sous-domaines récupérés sur le rang 0.
 
 c) Faites en sorte que seul le rang 0 puisse écrire le fichier VTK.
 
@@ -82,4 +88,4 @@ $
 
 **Astuce:** Vous pouvez tout simplement écrire les tableaux numpy sur disque et calculer l'erreur en post-traitement à l'aide d'un script Python.
 
-b) Utilisez Paraview pour visualiser le Mandelbulb parallèle
+b) Utilisez Paraview pour visualiser le Mandelbulb obtenu grâce au code MPI.

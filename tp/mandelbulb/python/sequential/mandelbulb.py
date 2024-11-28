@@ -240,7 +240,7 @@ for iz in range(domain_size[2]):
 imageData.GetPointData().SetScalars(scalars)
 
 # Create a vtkFloatArray object to store the iteration array
-scalars = vtk.vtkFloatArray()
+scalars = vtk.vtkIntArray()
 scalars.SetNumberOfComponents(1)
 scalars.SetName("Iterations")
 for iz in range(domain_size[2]):
