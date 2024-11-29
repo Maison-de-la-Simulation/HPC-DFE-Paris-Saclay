@@ -4,7 +4,7 @@ Pour en apprendre plus :
 - [Excellent cours de P.-Y. Lagrée](http://www.lmm.jussieu.fr/~lagree/COURS/MFEnv/code_C_saintvenant.pdf)
 - [Shallow Water Equations](https://en.wikipedia.org/wiki/Shallow_water_equations)
 
-## Objectifs
+## Introduction
 
 L'objectif de ce projet est de résoudre en parallèle grâce à MPI l'équation en eau peu profonde conservatrice en 1D.
 

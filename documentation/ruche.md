@@ -85,9 +85,9 @@ Par exemple, voici le contenu d'un script `launch.sh`.
 #SBATCH --job-name=master_dfe
 #SBATCH --output=output
 #SBATCH --error=error            # fichier qui réceptionne la sortie standard
-#SBATCH --ntasks=1                # Nombre d'unité de calcul ou de processus MPI
-#SBATCH --nodes=2                 # Nombre de noeuds à exploiter
-#SBATCH --time=01:00:00           # Temps souhaité pour la réservation
+#SBATCH --ntasks=2                # Nombre d'unité de calcul ou de processus MPI
+#SBATCH --nodes=1                 # Nombre de noeuds à exploiter
+#SBATCH --time=00:30:00           # Temps souhaité pour la réservation
 #SBATCH --partition=cpu_short     # Partition des jobs rapides
 
 # To clean and load modules defined at the compile and link phases

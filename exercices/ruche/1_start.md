@@ -72,7 +72,7 @@ En refaisant un `module list`, vous pouvez vérifier que tous les modules ont bi
 9) Le cours étant basé sur Python, j'ai préparer un environnement Anaconda contenant tous les paquets nécessaires. Vous pouvez le charger en faisant :
 
 ```bash
-source /gpfs/workdir/labotm/Installations/miniconda3/m2dfe_env.sh
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 ```
 
 Dans la suite du cours, vous n'aurez besoin que de cette commande pour charger votre environnement.

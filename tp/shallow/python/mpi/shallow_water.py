@@ -224,7 +224,7 @@ if (output_period > 0) and (rank == 0):
 # Terminal summary
 # _____________________________________
 
-if comm.rank == 0:
+if cart_comm.rank == 0:
 
     print(" ------------------------------------------------------------------------- ")
     print(" SHALLOW WATER 1D")
@@ -265,7 +265,7 @@ for ir in range(number_of_ranks):
             )
         )
 
-    comm.Barrier()
+    cart_comm.Barrier()
 
 # Attend 1 secondes
 time.sleep(1)
