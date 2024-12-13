@@ -37,20 +37,23 @@ print("Je suis le rang  {} sur {}".format(rank, number_of_ranks))
 N = 100000000
 
 # Distribution de la charge (des éléments) entre les rangs
-local_N = ???
+local_N = N // number_of_ranks
 
 # On va maintenant intialiser 3 tableaux numpy sur chaque rang de taille `local_N` de manière aléatoire
 # Ici, il faut bien comprendre que chaque processus possède sa version de A, B et C.
-???
+
+A = np.random.rand(local_N)
+B = np.random.rand(local_N)
+C = np.random.rand(local_N)
 
 # On récupère le temps avant :
-start_timer = ???
+start_timer = MPI.Wtime()
 
 # Chaque rang fait fait des calculs sur son tableau :
 A = 2.9*B + 5.2*C + 265.7*B*C + B**2 + C**2
 
 # On récupère le temps après :
-stop_timer = ???
+stop_timer = MPI.Wtime()
 
 # Chaque rang va maintenant afficher le temps passé à faire ses calculs :
 print("Le rang {} a fait ses calculs en {} s".format(rank, stop_timer - start_timer))

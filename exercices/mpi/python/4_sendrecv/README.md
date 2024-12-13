@@ -34,3 +34,9 @@ La première étape consiste à déterminer le contenu de ces variables pour cha
 ```bash
 mpirun -np 4 python main.py
 ```
+
+**Warning**: n'oubliez pas de charger l'environnement Python avant d'exécuter le code.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
