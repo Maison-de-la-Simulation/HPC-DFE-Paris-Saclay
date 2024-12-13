@@ -13,3 +13,9 @@ Cet exercice met en pratique non plus la communication d'un simple entier mais c
 ```bash
 mpirun -np 4 ./executable
 ```
+
+**Warning**: n'oubliez pas de charger l'environnement Python avant d'exécuter le code.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```

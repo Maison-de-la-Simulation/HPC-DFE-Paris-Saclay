@@ -16,7 +16,7 @@ Pour vous connecter à Ruche, vous devez installer l'extension `Remote - SSH` de
 
 Cliquer en bas à gauche sur l’icône de connexion à un serveur distant.
 
-<img src="../support/materiel/vscode_remote_ssh_2.png" height="300">
+<img src="../support/materiel/vscode_remote_ssh_2.png" height="500">
 
 Choisissez ensuite l'option `Se connecter à l'host` et entrez l'adresse de Ruche :
 
@@ -30,7 +30,7 @@ Si c'es la première fois que vous vous connectez à Ruche depuis votre ordinate
 
 Une fois connecté à Ruche, vous pouvez ouvrir un dossier en cliquant sur le bouton `ouvrir un dossier`.
 
-<img src="../support/materiel/vscode_ouverture_dossier.png" height="300">
+<img src="../support/materiel/vscode_ouverture_dossier.png" height="500">
 
 VScode va se réouvrir avec le dossier distant ouvert. Vous pouvez alors travailler sur les fichiers comme si vous étiez sur votre ordinateur.
 

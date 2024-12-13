@@ -24,3 +24,9 @@ Au début du programme, les variables suivantes sont définies :
 ```bash
 mpirun -np N python main.py
 ```
+
+**Warning**: n'oubliez pas de charger l'environnement Python avant d'exécuter le code.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
