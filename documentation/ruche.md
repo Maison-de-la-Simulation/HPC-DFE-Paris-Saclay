@@ -161,6 +161,14 @@ Il existe différentes méthodes pour transférer des fichiers depuis son ordina
 
 La commande `scp` utilise le protocole ssh (celui que vous utilisez en ligne de commande pour vous connectez à Ruche) pour transférer des données.
 
+Voici comment utiliser cette commande :
+
+```bash
+scp <login>@@ruche.mesocentre.universite-paris-saclay.fr:<chemin vers fichier VTK sur ruche> <chemin où le mettre sur votre machine>
+```
+
+La commande `scp` utilise le protocole ssh et vous demandera votre mot de passe.
+
 De nombreux sites en ligne vous expliquerons comment cette commande fonctionne.
 
 ### RSYNC
