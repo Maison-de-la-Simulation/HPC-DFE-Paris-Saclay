@@ -9,6 +9,12 @@ Vous pouvez le faire tourner sur Ruche en n'utilisant qu'un seul coeur ou sur vo
 
 Paraview est un logiciel de visualisation et d'analyse de données 3D. Il est très utilisé dans le domaine de la simulation numérique pour visualiser les résultats des calculs. Il est gratuit et téléchargeable sur le site officiel de [Paraview](https://www.paraview.org/download/). Il est également possible de l'obtenir via les gestionnaires de paquets classiques. Sur beaucoup de supercalculateurs, il est aussi déjà installé.
 
+Pour ramener un fichier VTK sur votre machine personnelle, vous pouvez utiliser la commande `scp` :
+
+```bash
+scp <login>@@ruche.mesocentre.universite-paris-saclay.fr:<chemin vers fichier VTK sur ruche> <chemin où le mettre sur votre machine>
+```
+
 - a) Si vous utilisez votre ordinateur personnel, téléchargez et installez Paraview. Puis ouvrez le logiciel. Vous obtenez une interface proche de celle-ci :
 
 ![Paraview](../../../support/materiel/mandelbulb_paraview_1.png)

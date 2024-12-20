@@ -10,3 +10,4 @@ Vous pouvez le faire tourner sur Ruche en n'utilisant qu'un seul coeur ou sur vo
 - a) Utilisez les scripts Python fournis dans le dossier [python](../visualization/) pour visualiser les résultats (utilisez le [README](./visualization/README.md) pour plus d'information).
 
 - b) Placez dans le rapport quelques images représentant l'évolution du code séquentiel.
+
