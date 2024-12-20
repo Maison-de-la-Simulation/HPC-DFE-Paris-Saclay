@@ -1,13 +1,13 @@
 # I. Découverte du code séquentiel
 
 Cette première partie a pour but de vous familiariser avec le code séquentiel fourni.
-Vous pouvez le faire tourner sur Ruche en n'utilisant qu'un seul coeur ou sur votre ordinateur personnelle.
+Vous pouvez le faire tourner sur Ruche en n'utilisant qu'un seul coeur ou sur votre ordinateur personnel.
 
 **Question 1.1 - première exécution :** Ouvrez le fichier `mandelbulb.py` et prenez le temps de le comprendre. Une fois que vous avez une bonne vision du fonctionnement du code séquentiel, compilez et exécutez-le avec les paramètres par défaut.
 
 **Question 1.2 - visualisation :** L'exécution génère un fichier `mandelbulb.vtk` qu'il est possible de visualiser avec le logiciel `Paraview`. Nous allons voir comment visualiser les résultats de l'exécution étape par étape.
 
-Paraview est un logiciel de visualisation et d'analyse de données 3D. Il est très utilisé dans le domaine de la simulation numérique pour visualiser les résultats de calculs. Il est gratuit et téléchargeable sur le site officiel de [Paraview](https://www.paraview.org/download/). Il est également possible de l'obtenir via les gestionnaires de paquets classiques. Sur beaucoup de supercalculateurs, il est aussi déjà installé.
+Paraview est un logiciel de visualisation et d'analyse de données 3D. Il est très utilisé dans le domaine de la simulation numérique pour visualiser les résultats des calculs. Il est gratuit et téléchargeable sur le site officiel de [Paraview](https://www.paraview.org/download/). Il est également possible de l'obtenir via les gestionnaires de paquets classiques. Sur beaucoup de supercalculateurs, il est aussi déjà installé.
 
 - a) Si vous utilisez votre ordinateur personnel, téléchargez et installez Paraview. Puis ouvrez le logiciel. Vous obtenez une interface proche de celle-ci :
 
@@ -17,15 +17,15 @@ Paraview est un logiciel de visualisation et d'analyse de données 3D. Il est tr
 
 <img src="../../../support/materiel/mandelbulb_paraview_2.png" width="400">
 
-- c) Appuyez sur le bouton `Apply` pour visualiser le Mandelbulb. Pour le moment rien n'apparaît sauf un cube blanc représentant le domaine de calcul. On va maintenant choisir un type de représentation pour visualiser le Mandelbulb. Dans le menu en haut à gauche, cliquez sur le logo désignant des *Contour* our isosurfaces :
+- c) Appuyez sur le bouton `Apply` pour visualiser le Mandelbulb. Pour le moment rien n'apparaît sauf un cube blanc représentant le domaine de calcul. On va maintenant choisir un type de représentation pour visualiser le Mandelbulb. Dans le menu en haut à gauche, cliquez sur le logo désignant des *Contour* ou isosurfaces :
 - 
 <img src="../../../support/materiel/mandelbulb_paraview_3.png" width="400">
 
-A ce moment là, le mandelbulb s'affiche avec une couleur par défaut.
+A ce moment-là, le mandelbulb s'affiche avec une couleur par défaut.
 
 ![Paraview](../../../support/materiel/mandelbulb_paraview_4.png)
 
-- d) Il est maintenant possible de modifier la valeur de l'isovaleur pour visualiser le Mandelbulb avec plus ou moins de détails :
+- d) Il est maintenant possible de modifier la valeur de l'isovaleur pour visualiser le Mandelbulb sur différente profondeurs :
 
 <img src="../../../support/materiel/mandelbulb_paraview_5.png" width="400">
 
