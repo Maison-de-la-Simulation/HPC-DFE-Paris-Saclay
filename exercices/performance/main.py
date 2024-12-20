@@ -39,6 +39,8 @@ import time
 
 discretization = 320000000
 
+dtype = np.float32
+
 # _______________________________________________
 # Command line arguments
 
@@ -71,6 +73,12 @@ if rank == 0:
     print(" Integration: ")
     print("   - Number of ranks: ", number_of_ranks)
     print("   - Discretization: ", discretization)
+    print("   - dtype: ", dtype)
+    if dtype == np.float32:
+        type_size = 4
+    elif dtype == np.float64:
+        type_size = 8
+    print("   - size (Mo): ", discretization*type_size/1024/1024)
 
 # __________________________________
 # Paramètres globaux
@@ -97,7 +105,7 @@ local_integration = 0
 start = MPI.Wtime()
 
 # use numpy
-x = np.arange(min+0.5*delta, max, delta)
+x = np.arange(min+0.5*delta, max, delta, dtype=dtype)
 local_integration = np.sum(np.sin(x)*delta)
 
 # __________________________________

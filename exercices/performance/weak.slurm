@@ -15,5 +15,3 @@ mpirun -np 4 python3 main.py -N 1280000000
 mpirun -np 8 python3 main.py -N 2560000000
 mpirun -np 16 python3 main.py -N 5120000000
 mpirun -np 20 python3 main.py -N 6400000000
-mpirun -np 32 python3 main.py -N 10240000000
-mpirun -np 40 python3 main.py -N 12800000000
