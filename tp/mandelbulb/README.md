@@ -11,7 +11,8 @@ Les Mandelbulbs sont les versions 3D des fractals de Mandelbrot.
 
 L'objectif de ce projet est de paralléliser un code séquentiel faisant le calcul d'un Mandelbulb en utilisant MPI.
 
-| ![patterns.png](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Power_8_mandelbulb_fractal_overview.jpg/1920px-Power_8_mandelbulb_fractal_overview.jpg) |
+
+| <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Power_8_mandelbulb_fractal_overview.jpg/1920px-Power_8_mandelbulb_fractal_overview.jpg" width="400"> |
 |:--:|
 |<b>Figure 1 - Exemple d'un Mandelbulb d'ordre 8 par Ondřej Karlík (https://en.wikipedia.org/wiki/Mandelbulb)</b>|
 
