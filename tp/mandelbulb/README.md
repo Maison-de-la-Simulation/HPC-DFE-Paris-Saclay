@@ -7,7 +7,7 @@ Pour en apprendre plus :
 
 ## Introduction
 
-Les Mandelbulbs sont les versions 3D des fractals de Mandelbrot en 2D.
+Les Mandelbulbs sont les versions 3D des fractals de Mandelbrot.
 
 L'objectif de ce projet est de paralléliser un code séquentiel faisant le calcul d'un Mandelbulb en utilisant MPI.
 
@@ -20,9 +20,9 @@ L'objectif de ce projet est de paralléliser un code séquentiel faisant le calc
 
 Pour ce projet, nous utilisons formule bien connue de White and Nylander's.
 
-La construction d'un Mandelbulb est un processus itératif qui s'effectue pour un ensemble de point d'un espace donné.
+La construction d'un Mandelbulb est un processus itératif qui s'effectue pour un ensemble de point d'un espace donné, donc autrement dit sur une grille 3D ou un tenseur 3D.
 
-Pour un point situé à la position $C = \left( x, y, y \right)$, on actualise la valeur en suivant le processus itération suivant :
+Pour un point situé à la position $C = \left( x, y, y \right)$, on actualise la valeur en suivant le processus itératif suivant :
 
 $$
 V^{n+1} = F\left( V^{n} \right) + C
@@ -60,7 +60,7 @@ Le seuil utilisé dans de nombreux scénarios est $r > 2$.
 
 ### Code séquentiel
 
-Le code séquentiel est présent dans le dossier `sequential/mandelbulb.py`.
+Le code séquentielle est présente dans le dossier `sequential/mandelbulb.py`.
 
 Il se compose de plusieurs parties :
 
@@ -84,7 +84,7 @@ Le code nécessite les bibliothèques suivantes :
 
 ### Fonctionnement du code
 
-La version séquentiel du code tourne avec ses paramètres par défaut en faisant :
+La version séquentielle du code tourne avec ses paramètres par défaut en faisant :
 
 ```bash
 python mandelbulb.py
@@ -92,7 +92,7 @@ python mandelbulb.py
 
 A la fin de l'exécution, le code produit un fichier au format vtk au nom de `mandelbulb.vtk`
 
-Les paramètres par défaut peuvent être modifiés directment dans le code ou en ligne de commande. Vous pouvez obtenir la liste des arguments en faisait :
+Les paramètres par défaut peuvent être modifiés directement dans le code ou en ligne de commande. Vous pouvez obtenir la liste des arguments en faisait :
 
 ```bash
 python mandelbulb.py -h
@@ -116,7 +116,7 @@ python mandelbulb.py --domain_size 100 --domain_min -2 -2 -2 --domain_max 2 2 2 
 
 ### Visualisation
 
-Le code séquentiel produit à la fin un fichier au format VTK. Ce format très classique en visualisations scientifique peut être ensuite ouvert avec le logiciel de visualisation Paraview. Comment utiliser Paraview fera l'object de la première partie du projet.
+Le code séquentiel produit à la fin un fichier au format VTK. Ce format, très classique en visualisations scientifique, peut être ensuite ouvert avec le logiciel de visualisation Paraview. Comment utiliser Paraview fera l'object de la première partie du projet.
 
 ## Consignes
 
@@ -130,3 +130,23 @@ Le projet se découpe en 4 parties. Chaque partie fait l'objet d'un fichier spé
 En plus des consignes, un fichier d'aide est à disposition. Ce fichier sera mis à jour au fur et à mesure de l'avancement du projet et de vos questions.
 
 5. [Aide](./5_aide.md)
+
+## Notation
+
+Vous serez noté sur le code et la construction d'un rapport de projet.
+
+Chaque question rapporte des points selon la difficulté. Même si le code ne fonctionne pas, j'analyse l'ensemble du code étape par étape pour voir si vous avez compris les concepts.
+
+Le rapport permet de répondre aux quelques questions posées dans les consignes. Il doit être clair et concis. Il n'est pas nécessaire de faire une introduction sur le sujet, répondez simplement aux questions posées. Le format (tex, docx, etc) est libre. L'idée c'est efficacité et clarté.
+
+Vous rendrez votre projet en m'envoyant un email avec un lien vers une archive zip ou tar contenant : 
+- le code source parallèle (fichier `mandelbulb.py`)
+- le rapport
+
+Attention, il ne faut pas y mettre :
+- résultats de simulations
+- autres scripts
+
+## Date de rendu
+
+La date est à déterminer. Elle sera communiquée ultérieurement.

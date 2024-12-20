@@ -2,7 +2,7 @@
 
 Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement le standard MPI.
 
-**Préparation :** Faites maintenant une copie du dossier `sequentiel` et appelez-le `mpi`.
+**Préparation :** Faites maintenant une copie du dossier `sequential` et appelez-le `mpi`.
 On modifiera le fichier `main.py` dans `mpi` pour y introduire le parallélisme.
 
 L'introduction du parallélisme se fera étape par étape. Avant de démarrer, nous allons commenter les lignes de code qui ne sont pas encore parallélisées pour introduire la parallélisation MPI au fur et à mesure :
@@ -26,7 +26,11 @@ f) Exécuter le programme avec un seul rang MPI pour vérifier que tout fonction
 
 **Question 3.2 - Création de la topologie cartésienne :**
 
-Nous allons maintenant à la suite de l'initialisation de MPI construire notre topologie cartésienne. Cette topologie sera utilisée pour diviser le domaine en sous-domaines. On adopte une topologie 3D, on divise donc le domaine en sous-blocs.
+Nous allons maintenant à la suite de l'initialisation de MPI construire notre topologie cartésienne. Cette topologie sera utilisée pour diviser le domaine en sous-domaines.
+
+Vous avez le choix de choisir une topologie 1D (parallèlisme dans une seule direction) ou de tenter une topologie 3D (parallèlisme dans toutes les directions). Le choix d'une topologie 3D rapportera des points supplémentaires mais élève la difficulté.
+
+<img src="../../../support/materiel/mandelbulb_topology.png" width="600">
 
 a) Ajoutez un argument en ligne de commande `--ranks_per_dir` permettant de récupérer le nombre de rang MPI dans chaque direction `x`, `y` et `z`
 
@@ -44,7 +48,7 @@ Chaque sous-domaine est géré par un processus MPI unique.
 Il y a donc autant de sous-domaines que de processus MPI.
 Dans le cas de ce TP, nous allons découper le domaine en sous-domaines de même taille.
 
-a) Mettre à jour l'allocation des tableaux pour les adapters aux sous-domaines
+a) Mettre à jour l'allocation des tableaux pour les adapter aux sous-domaines
 
 b) Mettre à jour la boucle de calcul pour distribuer les calculs sur chaque sous-domaine.
 
@@ -58,13 +62,13 @@ Tous les codes parallélisés se retrouvent devant le même défi : comment rass
 
 Il existe plusieurs méthodes :
 
-1. Reconsituer le domaine sur l'un des rangs qui se chargent alors d'écrire le résultat sur disque
+1. Reconstituer le domaine sur l'un des rangs qui se chargent alors d'écrire le résultat sur disque
 2. Chaque rand écrit son morceau de domaine dans un fichier qui lui est propre. Pour visualiser l'ensemble, il faut reconstituer le domaine a posteriori.
 3. Chaque rang accède à un même fichier de manière parallèle. On appelle cela une écriture parallélisée.
 
 De toute ces méthodes, la moins efficace est la première car elle nécessite des communications collectives couteuses. C'est un goulot d'étranglement qui aura un impact sur le passage à l'échelle. 
 
-La méthode 2 et 3 ont des avantages et des inconvénients. Si le système de fichier est performant, la méthode 2 permet une indépendance complète des rangs. Cependant, l'étape de post-traitement peur s'avérer couteuse. La méthode 3 réduit l'étape de post-traitement et permet aussi cetaines optimisations.
+La méthode 2 et 3 ont des avantages et des inconvénients. Si le système de fichier est performant, la méthode 2 permet une indépendance complète des rangs. Cependant, l'étape de post-traitement peur s'avérer couteuse. La méthode 3 réduit l'étape de post-traitement et permet aussi certaines optimisations.
 
 Afin de pouvoir mettre à jour les sorties de fichiers sur disque et visualiser les résultats de la version parallèle, nous allons opter pour la méthode 1.
 Bien que moins efficace cette méthode reste pédagogique et surtout, ce cours n'aborde pas la méthode 3.
