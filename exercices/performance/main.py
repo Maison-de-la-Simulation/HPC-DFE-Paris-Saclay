@@ -121,7 +121,7 @@ if rank == 0:
 
     mean_time = mean_time / number_of_ranks
 
-    print(" Time - min : {}, max :  {}, moyen:  {} secondes".format(number_of_ranks, min_time, max_time, mean_time))
+    print(" Time - min : {}, max :  {}, moyen:  {} secondes".format(min_time, max_time, mean_time))
 
 # On finalise MPI
 MPI.Finalize()
