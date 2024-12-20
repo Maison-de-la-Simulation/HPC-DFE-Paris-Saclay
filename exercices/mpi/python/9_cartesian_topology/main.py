@@ -68,7 +68,9 @@ if cart_rank == 0:
 
     # On fabrique maintenant une matrice `ranks_matrix` qui de la topologie cartésienne 2d 
     # et on l'affiche à l'écran
+    ???
 
+    # Boucle sur les rangs pour remplir la matrice
     ???
 
     # On affiche la matrice finale

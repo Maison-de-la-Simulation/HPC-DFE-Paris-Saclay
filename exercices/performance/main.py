@@ -34,6 +34,25 @@ from mpi4py import MPI
 import numpy as np
 import time
 
+# __________________________________
+# Paramètres globaux
+
+discretization = 320000000
+
+# _______________________________________________
+# Command line arguments
+
+import argparse
+
+parser = argparse.ArgumentParser(description='Integration')
+parser.add_argument('-N', type=int, help='Discretization', default=discretization)
+args = parser.parse_args()
+
+discretization = args.N
+
+# _______________________________________________
+# MPI init
+
 # MPI init
 MPI.Init()
 
@@ -46,19 +65,21 @@ number_of_ranks = comm.Get_size()
 # Chaque process récupère son numéro de rang dans le communicateur par défaut
 rank = comm.Get_rank()
 
+# _______________________________________________
+# Summary
+if rank == 0:
+    print(" Integration: ")
+    print("   - Number of ranks: ", number_of_ranks)
+    print("   - Discretization: ", discretization)
+
 # __________________________________
 # Paramètres globaux
 
-# discretization = 320000000
-
 # Discrétisation par processus
-discretization_per_rank = 320000000 # int(discretization / number_of_ranks)
+discretization_per_rank = int(discretization / number_of_ranks)
 
 # Taille d'un rang
 rank_length = 0.5*np.pi / number_of_ranks
-
-# __________________________________
-# Paramètres locaux
 
 min   = rank * rank_length                            #Minimum local du rang
 max   = (rank+1) * rank_length                        # Maximum local du rang
@@ -67,9 +88,6 @@ delta = rank_length / discretization_per_rank;         # Taille d'un rectangle
 comm.Barrier()
 
 time.sleep(0.5)
-
-if (rank==0):
-    print()
 
 # __________________________________
 # Intégration
@@ -103,7 +121,7 @@ if rank == 0:
 
     mean_time = mean_time / number_of_ranks
 
-    print(" Pour {} rangs - min : {}, max :  {}, moyen:  {} secondes".format(number_of_ranks, min_time, max_time, mean_time))
+    print(" Time - min : {}, max :  {}, moyen:  {} secondes".format(number_of_ranks, min_time, max_time, mean_time))
 
 # On finalise MPI
 MPI.Finalize()

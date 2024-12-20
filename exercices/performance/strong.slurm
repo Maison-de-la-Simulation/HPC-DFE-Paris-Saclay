@@ -8,14 +8,10 @@
 #SBATCH --time=00:10:00           # Temps souhaité pour la réservation
 #SBATCH --partition=cpu_short     # Partition des jobs rapides
 
-set -x
-
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
-mpirun -np 1 python3 main.py
-mpirun -np 2 python3 main.py
-mpirun -np 4 python3 main.py
-mpirun -np 8 python3 main.py
-mpirun -np 16 python3 main.py
-mpirun -np 20 python3 main.py
-
-
+mpirun -np 1 python3 main.py -N 32000000
+mpirun -np 2 python3 main.py -N 32000000
+mpirun -np 4 python3 main.py -N 32000000
+mpirun -np 8 python3 main.py -N 32000000
+mpirun -np 16 python3 main.py -N 32000000
+mpirun -np 20 python3 main.py -N 32000000
