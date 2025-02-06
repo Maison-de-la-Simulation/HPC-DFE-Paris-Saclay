@@ -80,6 +80,8 @@ b) Utilisez la fonction `Gatherv` afin de reconstituer le domain global
 
 c) Déclarer des tableaux pour chaque grandeur représentant le domaine global. Reconstituer ce domaine à partir des sous-domaines récupérés sur le rang 0.
 
+<img src="../../../support/materiel/mandelbulb_domain_reconsitution.png" width="600">
+
 c) Faites en sorte que seul le rang 0 puisse écrire le fichier VTK.
 
 **Question 3.5 - vérification des résultats** 

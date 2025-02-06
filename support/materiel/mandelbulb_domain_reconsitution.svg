@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="125.98626mm"
+   height="256.31244mm"
+   viewBox="0 0 125.98626 256.31244"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   sodipodi:docname="mandelbulb_domain_reconsitution.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.83364411"
+     inkscape:cx="283.09442"
+     inkscape:cy="283.6942"
+     inkscape:window-width="1920"
+     inkscape:window-height="954"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ConcaveTriangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Concave triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path7" />
+    </marker>
+    <rect
+       x="509.7753"
+       y="478.39145"
+       width="107.7229"
+       height="22.053507"
+       id="rect14" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="447.23225"
+       height="67.712117"
+       id="rect5" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect6" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect6-2" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect7" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="461.62688"
+       height="64.113459"
+       id="rect5-9" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect8" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect8-6" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="200.77286"
+       height="95.110641"
+       id="rect13" />
+    <marker
+       style="overflow:visible"
+       id="ConcaveTriangle-6"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Concave triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path7-5" />
+    </marker>
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="452.28621"
+       height="79.6973"
+       id="rect16" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect6-2-0" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect7-7" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect8-68" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="315.28146"
+       height="42.521511"
+       id="rect8-6-3" />
+    <marker
+       style="overflow:visible"
+       id="ConcaveTriangle-8"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Concave triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path7-6" />
+    </marker>
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="200.77286"
+       height="95.110641"
+       id="rect13-7" />
+    <rect
+       x="63.26371"
+       y="15.55665"
+       width="200.77286"
+       height="95.110641"
+       id="rect13-7-3" />
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-7.7306431,-4.4799355)">
+    <rect
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:0.55;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect1"
+       width="27.989004"
+       height="27.989004"
+       x="18.659338"
+       y="21.089161" />
+    <rect
+       style="fill:#85e182;fill-opacity:1;stroke:#000000;stroke-width:0.55;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect2"
+       width="27.989004"
+       height="27.989004"
+       x="51.996868"
+       y="21.089161" />
+    <rect
+       style="fill:#0074ff;fill-opacity:1;stroke:#000000;stroke-width:0.55;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect3"
+       width="27.989004"
+       height="27.989004"
+       x="18.659338"
+       y="54.426693" />
+    <rect
+       style="fill:#ffb500;fill-opacity:1;stroke:#000000;stroke-width:0.55;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect4"
+       width="27.989004"
+       height="27.989004"
+       x="51.997002"
+       y="54.426693" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-7.9772961,0.41186356)"
+       id="text4"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect5);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="90.322266"
+         y="30.697656"
+         id="tspan3">Décomposition du domaine global  en sous-</tspan><tspan
+         x="125.73242"
+         y="51.897653"
+         id="tspan4">domaine (topologie cartésienne 2D)</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-9.3788756,88.836973)"
+       id="text4-3"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect5-9);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="94.199219"
+         y="30.697656"
+         id="tspan5">On ramène le tout sur le rang 0 dans un seul </tspan><tspan
+         x="260.41016"
+         y="51.897653"
+         id="tspan8">tableau</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-25.981923,40.623819)"
+       id="text6-5"
+       style="font-weight:bold;font-size:13.3333px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans Bold';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect6-2);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="188.02027"
+         y="25.650625"
+         id="tspan10"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan9">MPI rang 0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,8.4621852,40.114191)"
+       id="text6"
+       style="font-weight:bold;font-size:13.3333px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans Bold';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect7);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="188.02027"
+         y="25.650625"
+         id="tspan13"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan11">MPI rang 1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,7.3494251,73.618533)"
+       id="text7"
+       style="font-weight:bold;font-size:13.3333px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans Bold';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect8);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="188.26766"
+         y="25.650625"
+         id="tspan18"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan16">MPI rang 3</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-26.506336,73.467952)"
+       id="text7-2"
+       style="font-weight:bold;font-size:13.3333px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans Bold';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect8-6);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="188.26766"
+         y="25.650625"
+         id="tspan20"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan19">MPI rang 2</tspan></tspan></text>
+    <rect
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:0.547229;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect9"
+       width="59.859798"
+       height="12.955453"
+       x="19.331221"
+       y="111.11438" />
+    <rect
+       style="fill:#85e182;fill-opacity:1;stroke:#000000;stroke-width:0.547229;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect10"
+       width="59.859798"
+       height="12.955453"
+       x="19.331221"
+       y="125.40187" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.23258;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect11"
+       width="65.009438"
+       height="60.520981"
+       x="16.307556"
+       y="108.31509" />
+    <rect
+       style="fill:#0074ff;fill-opacity:1;stroke:#000000;stroke-width:0.547229;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect12"
+       width="59.859798"
+       height="12.955453"
+       x="19.106798"
+       y="139.76491" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,66.260386,127.14335)"
+       id="text12"
+       style="font-weight:bold;font-size:13.3333px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans Bold';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect13);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="74.643454"
+         y="25.650625"
+         id="tspan22"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan21">Les sous-domaines sont alors </tspan></tspan><tspan
+         x="77.023005"
+         y="39.783922"
+         id="tspan24"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan23">stockés les uns à la suite des </tspan></tspan><tspan
+         x="80.84461"
+         y="53.917219"
+         id="tspan26"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan25">autres dans un seul tableau
+</tspan></tspan><tspan
+         x="163.65039"
+         y="68.050516"
+         id="tspan28"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan27">
+</tspan></tspan><tspan
+         x="92.683773"
+         y="82.183813"
+         id="tspan30"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan29">(principe de la mémoire </tspan></tspan><tspan
+         x="134.9851"
+         y="96.317114"
+         id="tspan32"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan31">contigue)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,66.247007,22.483175)"
+       id="text12-9"
+       style="font-weight:bold;font-size:13.3333px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans Bold';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect13-7);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="85.79577"
+         y="25.650625"
+         id="tspan34"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan33">Chaque sous-domaine est </tspan></tspan><tspan
+         x="124.36338"
+         y="39.783922"
+         id="tspan36"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan35">indépendant.
+</tspan></tspan><tspan
+         x="163.65039"
+         y="53.917219"
+         id="tspan38"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan37">
+</tspan></tspan><tspan
+         x="72.296455"
+         y="68.050516"
+         id="tspan40"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan39">La mémoire est 1D et contigue </tspan></tspan><tspan
+         x="85.38887"
+         y="82.183813"
+         id="tspan42"><tspan
+           style="font-weight:normal;-inkscape-font-specification:'Clear Sans'"
+           id="tspan41">suivant l'ordre des flèches </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text13"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect14);display:inline;fill:#0074ff;fill-opacity:1;stroke:#000000;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1" />
+    <rect
+       style="fill:#ffb500;fill-opacity:1;stroke:#000000;stroke-width:0.547229;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect15"
+       width="59.859798"
+       height="12.955453"
+       x="19.106798"
+       y="154.05222" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:0.5, 0.5;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+       d="M 20.390576,23.115539 H 45.189285 L 20.166154,26.369668 H 44.852651 L 20.278365,29.736007 H 44.403806"
+       id="path15" />
+    <rect
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:0.55;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect1-9"
+       width="27.989004"
+       height="27.989004"
+       x="19.544802"
+       y="200.15352" />
+    <rect
+       style="fill:#85e182;fill-opacity:1;stroke:#000000;stroke-width:0.55;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect2-6"
+       width="27.989004"
+       height="27.989004"
+       x="49.178165"
+       y="200.15352" />
+    <rect
+       style="fill:#0074ff;fill-opacity:1;stroke:#000000;stroke-width:0.55;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect3-7"
+       width="27.989004"
+       height="27.989004"
+       x="19.544802"
+       y="229.25777" />
+    <rect
+       style="fill:#ffb500;fill-opacity:1;stroke:#000000;stroke-width:0.55;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect4-8"
+       width="27.989004"
+       height="27.989004"
+       x="49.179489"
+       y="229.56364" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:0.5, 0.5;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ConcaveTriangle-8)"
+       d="m 21.276041,202.17989 h 54.422507 l -54.646929,3.25413 h 54.534717 l -54.422506,3.36634 h 54.085872"
+       id="path15-4"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:0.5, 0.5;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ConcaveTriangle-6)"
+       d="m 20.600559,112.32726 h 56.666734 l -56.891156,3.25413 56.778944,0.11221 -56.666733,3.25412 h 56.891156"
+       id="path15-1"
+       sodipodi:nodetypes="cccccc" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-9.2820126,173.52466)"
+       id="text15"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20px;line-height:106%;font-family:'Clear Sans';-inkscape-font-specification:'Clear Sans';text-align:center;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect16);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.07874;stroke-linecap:square;stroke-linejoin:round"><tspan
+         x="84.905273"
+         y="30.697656"
+         id="tspan43">Il faut maintenant réagencer la mémoire pour </tspan><tspan
+         x="117.2002"
+         y="51.897653"
+         id="tspan44">obtenir de nouveau la forme suivante :</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.23332;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+       id="rect17"
+       width="63.213314"
+       height="62.31562"
+       x="16.773314"
+       y="197.86011" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:0.5, 0.5;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+       d="M 53.398266,23.115539 H 78.196975 L 53.173844,26.369668 H 77.860341 L 53.286055,29.736007 H 77.411496"
+       id="path17" />
+  </g>
+</svg>
