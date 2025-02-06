@@ -78,7 +78,9 @@ a) Déclarer pour les grandeurs `domaine`, les `iteration` et la `distance`, 3 t
 
 b) Utilisez la fonction `Gatherv` afin de reconstituer le domain global
 
-c) Déclarer des tableaux pour chaque grandeur représentant le domaine global. Reconstituer ce domaine à partir des sous-domaines récupérés sur le rang 0.
+c) Déclarer des tableaux pour chaque grandeur représentant le domaine global. Reconstituer ce domaine à partir des sous-domaines récupérés sur le rang 0. Le schéma ci-dessous pourra vous aider à comprendre le processus.
+
+<img src="../../../support/materiel/mandelbulb_domain_reconsitution.png" width="500">
 
 c) Faites en sorte que seul le rang 0 puisse écrire le fichier VTK.
 
