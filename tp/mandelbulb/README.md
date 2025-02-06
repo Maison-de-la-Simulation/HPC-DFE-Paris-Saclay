@@ -125,7 +125,7 @@ Le projet se découpe en 4 parties. Chaque partie fait l'objet d'un fichier spé
 
 1. [Découvertes du code séquentiel](./consignes/1_sequential.md)
 2. [Découvertes de la machine](./consignes/2_machine.md)
-3. [Parallélisation](./consignes/3_mpi/md)
+3. [Parallélisation](./consignes/3_mpi.md)
 4. [Etude de la performance](./consignes/4_performance.md)
 
 En plus des consignes, un fichier d'aide est à disposition. Ce fichier sera mis à jour au fur et à mesure de l'avancement du projet et de vos questions.
