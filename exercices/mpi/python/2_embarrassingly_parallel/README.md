@@ -44,3 +44,5 @@ mpirun -np N python main.py
 
 6. Avec 4 processus, choisissez un nombre important d'éléments pour faire durer l'exécution plusieurs secondes 
 et observer l'effet sur les tâches de votre système (via `top` ou `htop` par exemple)
+
+7. Lancez le code sur un noeud de Ruche en utilisant le script SLURM fourni `ruche.slurm`. Modifiez le nombre de tâches dans le script SLURM et observez l'effet sur le temps de calcul.
