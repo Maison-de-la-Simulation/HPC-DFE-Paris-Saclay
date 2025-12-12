@@ -4,7 +4,7 @@ Cet exercice met en pratique l'utilisation des communications non-bloquantes `is
 Pour cela, l'exercice reprend le principe de l'anneau de communication implémenté  dans l'exercice précédent.
 
 > [!WARNING]  
-> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+> n'oubliez pas de charger Miniforges avant de commencer cet exercice.
 
 ```bash
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
@@ -14,7 +14,20 @@ source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 
 1. Ajoutez les appels à `isend` et `irecv` en prenant soin de placer les bons paramètres.
 
+Pour rappel, voici la syntaxe des fonctions `isend` et `irecv` :
+
+```python
+request = comm.isend(message, dest=..., tag=...)
+request = comm.irecv(source=..., tag=...)
+```
+
 2. Ajoutez les appels à `wait` pour finaliser les communications et récupérer le message envoyé.
+
+Pour rappel, voici la syntaxe de la fonction `wait` :
+
+```python
+message = request.wait()
+```
 
 3. Executez le code comme pour l'exercice précédent en variant le nombre de processus `N` :
 

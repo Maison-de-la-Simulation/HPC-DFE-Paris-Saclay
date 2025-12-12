@@ -6,7 +6,7 @@ Ici, chaque processus MPI a un tableau de taille `size` avec pour valeur initial
 Le but de l'exercice est d'envoyer sur le rang 0 les tableaux de tous les processus MPI pour reconstruire un tableau global.
 
 > [!WARNING]  
-> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+> n'oubliez pas de charger Miniforges avant de commencer cet exercice.
 
 ```bash
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh

@@ -7,7 +7,7 @@ Le domaine d'intgération est subdivisé suivant le nombre de processus MPI dema
 <img src="../../../../support/materiel/sin_integration.svg" height="400">
 
 > [!WARNING]  
-> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+> n'oubliez pas de charger Miniforges avant de commencer cet exercice.
 
 ```bash
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
