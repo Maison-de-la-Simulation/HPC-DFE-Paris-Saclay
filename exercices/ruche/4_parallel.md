@@ -34,8 +34,6 @@ cd test_slurm_python_parallel
 # Permet de s'assurer que l'exécution a lieu dans le dossier de soumission du job
 cd $SLURM_SUBMIT_DIR
 
-set -x
-
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 
 mpirun -np 1 python main.py
@@ -46,8 +44,28 @@ Le paramètre `--ntasks` indique le nombre de coeurs que nous souhaitons utilise
 Si le nombre de coeurs est supérieur à 1, alors le script sera exécuté en parallèle.
 Si le nombre de coeurs dépasse le nombre de coeurs par noeud, alors le script sera exécuté sur plusieurs noeuds pour satisfaire le nombre total de coeurs demandé.
 
+Lancez maintenant le job avec la commande `sbatch` :
 
-4) Lancez le job en demandant 2 coeurs et observez le résultat dans le fichier `output`. Vous devez également ajuster le nombre de processus MPI demandé.
+```bash
+sbatch launch.slurm
+```
+
+Vous pouvez vérifier l'état de votre job avec la commande `squeue` :
+
+```bash
+squeue -u $USER
+```
+
+Vous pouvez ensuite vérifier qu'un fichier `output`  et `error` ont été créés dans le dossier. Pour rappel, le fichier `output` contient la sortie standard du programme et le fichier `error` contient les erreurs éventuelles.
+
+Pour visualiser le contenu du fichier `output`, vous pouvez utiliser la commande `cat` :
+
+```bash
+cat output
+```
+
+
+1) Lancez le job en demandant 2 coeurs et observez le résultat dans le fichier `output`. Vous devez également ajuster le nombre de processus MPI demandé.
 
 ```bash
 #!/bin/bash
@@ -61,11 +79,21 @@ Si le nombre de coeurs dépasse le nombre de coeurs par noeud, alors le script s
 # Permet de s'assurer que l'exécution a lieu dans le dossier de soumission du job
 cd $SLURM_SUBMIT_DIR
 
-set -x
-
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 
 mpirun -np 2 python main.py
+```
+
+Lancez maintenant le job avec la commande `sbatch` :
+
+```bash
+sbatch launch.slurm
+```
+
+Visualisez le contenu du fichier `output` :
+
+```bash
+cat output
 ```
 
 5) Vous pouvez augmenter le nombre de coeurs pour augmenter le parallélisme. 
