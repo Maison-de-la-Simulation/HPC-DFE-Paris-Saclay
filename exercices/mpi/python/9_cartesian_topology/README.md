@@ -7,6 +7,13 @@ Au début du programme, les variables suivantes sont définies :
 * `dims` : tableau de taille `ndims` contenant le nombre de rangs MPI dans chaque dimension
 * `periods` : tableau de taille `ndims` contenant les conditions aux limites de la topologie
 
+> [!WARNING]  
+> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
+
 ## Consignes
 
 1. Complétez la ligne MPI destinées à la création de la topologie cartésienne 2D en utilisant les variables `ndims`, `dims`, et `periods`.
@@ -23,10 +30,4 @@ Au début du programme, les variables suivantes sont définies :
 
 ```bash
 mpirun -np N python main.py
-```
-
-**Warning**: n'oubliez pas de charger l'environnement Python avant d'exécuter le code.
-
-```bash
-source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 ```

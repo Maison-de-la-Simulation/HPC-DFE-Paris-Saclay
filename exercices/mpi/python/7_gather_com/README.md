@@ -5,6 +5,13 @@ Dans cet exercice nous allons simplement mettre en pratique la communication col
 Ici, chaque processus MPI a un tableau de taille `size` avec pour valeur initiale son rang MPI.
 Le but de l'exercice est d'envoyer sur le rang 0 les tableaux de tous les processus MPI pour reconstruire un tableau global.
 
+> [!WARNING]  
+> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
+
 ## Consignes
 
 1. Complétez la taille du tableau global et son allocation sur le processus 0
@@ -17,10 +24,4 @@ Par exemple avec 4 processus MPI :
 
 ```bash
 mpirun -np 4 python main.py
-```
-
-**Warning**: n'oubliez pas de charger l'environnement Python avant d'exécuter le code.
-
-```bash
-source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 ```
