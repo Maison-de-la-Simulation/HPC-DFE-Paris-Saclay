@@ -4,7 +4,7 @@ Dans cette dernière partie, nous allons maintenant étudier la performance du c
 Pour cela nous allons regarder les deux types de passage à l'échelle que sont le *weak* ou *strong scaling*.
 Dans chaque cas, vous ferez votre propre étude en utilisant le super-calculateur Ruche.
 
-### 2. Etude de passage à l'échelle faible ou *weak scaling*
+### 1. Etude de passage à l'échelle faible ou *weak scaling*
 
 Le passage à l'échelle faible consiste à augmenter la taille du problème proportionnellement au nombre de coeurs.
 La charge par unité de calcul et donc par coeur reste constante.
@@ -29,7 +29,7 @@ d) Tracez la courbe d'efficacité (en ordonnée) en fonction du nombre de coeurs
 
 e) Analysez les courbes et commentez les résultats.
 
-### 3. Etude de passage à l'échelle fort ou *strong scaling*
+### 2. Etude de passage à l'échelle fort ou *strong scaling*
 
 Le passage à l'échelle fort consiste à garder la taille du problème constante et à augmenter le nombre de coeurs.
 La charge diminue proportionnellement par l'augmentation du nombre d'unités de calcul.

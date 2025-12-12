@@ -82,7 +82,7 @@ c) Déclarer des tableaux pour chaque grandeur représentant le domaine global. 
 
 <img src="../../../support/materiel/mandelbulb_domain_reconsitution.png" width="500">
 
-c) Faites en sorte que seul le rang 0 puisse écrire le fichier VTK.
+d) Faites en sorte que seul le rang 0 puisse écrire le fichier VTK.
 
 **Question 3.5 - vérification des résultats** 
 
