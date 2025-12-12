@@ -56,7 +56,7 @@ A = 2.9*B + 5.2*C + 265.7*B*C + B**2 + C**2
 ???
 
 # Chaque rang va maintenant afficher le temps passé à faire ses calculs :
-print("Le rang {} a fait ses calculs en {} s".format(rank, ???)
+print("Le rang {} a fait ses calculs en {} s".format(rank, ???))
 
 # On finalise MPI
 MPI.Finalize()
