@@ -34,8 +34,6 @@ cd test_slurm_python_parallel
 # Permet de s'assurer que l'exécution a lieu dans le dossier de soumission du job
 cd $SLURM_SUBMIT_DIR
 
-set -x
-
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 
 mpirun -np 1 python main.py
@@ -52,8 +50,22 @@ Lancez maintenant le job avec la commande `sbatch` :
 sbatch launch.slurm
 ```
 
+Vous pouvez vérifier l'état de votre job avec la commande `squeue` :
 
-4) Lancez le job en demandant 2 coeurs et observez le résultat dans le fichier `output`. Vous devez également ajuster le nombre de processus MPI demandé.
+```bash
+squeue -u $USER
+```
+
+Vous pouvez ensuite vérifier qu'un fichier `output`  et `error` ont été créés dans le dossier. Pour rappel, le fichier `output` contient la sortie standard du programme et le fichier `error` contient les erreurs éventuelles.
+
+Pour visualiser le contenu du fichier `output`, vous pouvez utiliser la commande `cat` :
+
+```bash
+cat output
+```
+
+
+1) Lancez le job en demandant 2 coeurs et observez le résultat dans le fichier `output`. Vous devez également ajuster le nombre de processus MPI demandé.
 
 ```bash
 #!/bin/bash
@@ -67,8 +79,6 @@ sbatch launch.slurm
 # Permet de s'assurer que l'exécution a lieu dans le dossier de soumission du job
 cd $SLURM_SUBMIT_DIR
 
-set -x
-
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 
 mpirun -np 2 python main.py
@@ -80,5 +90,10 @@ Lancez maintenant le job avec la commande `sbatch` :
 sbatch launch.slurm
 ```
 
+Visualisez le contenu du fichier `output` :
+
+```bash
+cat output
+```
 
 5) Vous pouvez augmenter le nombre de coeurs pour augmenter le parallélisme. 
