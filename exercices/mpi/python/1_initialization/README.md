@@ -3,7 +3,8 @@
 Ce premier exercise a simplement pour but de créer un premier programme MPI en Python
 capable de récupérer le nombre total de rangs et d'afficher pour chaque rang leur numéro dans le communicateur par défaut (`MPI_COMM_WORLD`).
 
-Warning: n'oubliez pas de charger miniforge avant de commencer cet exercice.
+> [!WARNING]  
+> n'oubliez pas de charger miniforge avant de commencer cet exercice.
 
 ```bash
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
