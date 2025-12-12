@@ -36,6 +36,15 @@ La première étape consiste à déterminer le contenu de ces variables pour cha
 
 2. Complétez ensuite la fonction `sendrecv` pour effectuer l'anneau de communication décrit en introduction.
 
+Pour rappeln la fonction `sendrecv` s'écrit de la manière suivante :
+
+```python
+comm.sendrecv(message, dest, sendtag=..., recvbuf=..., source=..., recvtag=..., status=None)
+```
+
+où `message` est la variable à envoyer, `dest` le rang destinataire, `recvbuf` la variable de réception, `source` le rang émetteur.
+
+
 3. Exécutez le code sur au moins 2 processus pour que l'exécution soit intéressante. Faites varier ce nombre.
 
 ```bash
