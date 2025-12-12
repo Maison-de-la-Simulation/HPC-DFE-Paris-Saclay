@@ -46,6 +46,12 @@ Le paramètre `--ntasks` indique le nombre de coeurs que nous souhaitons utilise
 Si le nombre de coeurs est supérieur à 1, alors le script sera exécuté en parallèle.
 Si le nombre de coeurs dépasse le nombre de coeurs par noeud, alors le script sera exécuté sur plusieurs noeuds pour satisfaire le nombre total de coeurs demandé.
 
+Lancez maintenant le job avec la commande `sbatch` :
+
+```bash
+sbatch launch.slurm
+```
+
 
 4) Lancez le job en demandant 2 coeurs et observez le résultat dans le fichier `output`. Vous devez également ajuster le nombre de processus MPI demandé.
 
@@ -67,5 +73,12 @@ source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 
 mpirun -np 2 python main.py
 ```
+
+Lancez maintenant le job avec la commande `sbatch` :
+
+```bash
+sbatch launch.slurm
+```
+
 
 5) Vous pouvez augmenter le nombre de coeurs pour augmenter le parallélisme. 
