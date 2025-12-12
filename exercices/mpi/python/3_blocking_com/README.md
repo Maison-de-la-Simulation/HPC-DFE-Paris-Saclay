@@ -4,6 +4,13 @@ Ce deuxième exercise a pour but d'illustrer l'utilisation des communications bl
 Dans ce code, le processus MPI de rang 1 envoie un message au processus
 de rang 2.
 
+> [!WARNING]  
+> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
+
 ## Consignes
 
 1. Prenez le temps de regarder le code dans sa globalité.

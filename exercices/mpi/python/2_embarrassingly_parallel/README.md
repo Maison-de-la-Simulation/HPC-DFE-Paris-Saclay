@@ -1,5 +1,12 @@
 # Exercice 2 : Parallelisme parfait
 
+> [!WARNING]  
+> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
+
 Ce deuxième exercice va mettre en pratique la notion de partage du travail dans le cadre d'un parallélisme parfait.
 Chaque rang va recevoir une quantité de travail indépendante à effectuer.
 La quantité de travail est bien répartie entre les processus.
