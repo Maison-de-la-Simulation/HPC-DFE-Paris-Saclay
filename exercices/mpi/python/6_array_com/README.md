@@ -1,9 +1,9 @@
 # Exercice 6 - Communication de tableaux
 
-Cet exercice met en pratique non plus la communication d'un simple entier mais celle d'un tableau de type numpy.
+Cet exercice met en pratique non plus la communication d'un simple entier mais celle d'un tableau de type Numpy.
 
 > [!WARNING]  
-> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+> n'oubliez pas de charger Miniforges avant de commencer cet exercice.
 
 ```bash
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
