@@ -9,6 +9,13 @@ On effectue un anneau périodique.
 
 On fait en sorte que chaque rang envoie au rang supérieur la valeur de son propre rang.
 
+> [!WARNING]  
+> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
+
 ## Consignes
 
 1. On va stocker dans la variable `send_rank` à qui on envoie le message et dans `recv_rank` de qui on reçoit.

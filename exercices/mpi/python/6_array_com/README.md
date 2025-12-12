@@ -2,6 +2,13 @@
 
 Cet exercice met en pratique non plus la communication d'un simple entier mais celle d'un tableau de type numpy.
 
+> [!WARNING]  
+> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
+
 ## Consignes
 
 1. Complétez la première communication bloquante pour l'échange d'un tableau d'entier
@@ -12,10 +19,4 @@ Cet exercice met en pratique non plus la communication d'un simple entier mais c
 
 ```bash
 mpirun -np 4 ./executable
-```
-
-**Warning**: n'oubliez pas de charger l'environnement Python avant d'exécuter le code.
-
-```bash
-source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 ```

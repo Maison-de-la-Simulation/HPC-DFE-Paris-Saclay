@@ -1,5 +1,11 @@
 # Exercice 2 : Parallelisme parfait
 
+Ce deuxième exercice va mettre en pratique la notion de partage du travail dans le cadre d'un parallélisme parfait.
+Chaque rang va recevoir une quantité de travail indépendante à effectuer.
+La quantité de travail est bien répartie entre les processus.
+Le temps total sera mesuré avec la fonction MPI correspondante.
+Pour cela, nous repartons de l'exercice précédent. 
+
 > [!WARNING]  
 > n'oubliez pas de charger miniforge avant de commencer cet exercice.
 
@@ -7,11 +13,7 @@
 source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 ```
 
-Ce deuxième exercice va mettre en pratique la notion de partage du travail dans le cadre d'un parallélisme parfait.
-Chaque rang va recevoir une quantité de travail indépendante à effectuer.
-La quantité de travail est bien répartie entre les processus.
-Le temps total sera mesuré avec la fonction MPI correspondante.
-Pour cela, nous repartons de l'exercice précédent. 
+## Consignes
 
 1. Calculez le nombre d'éléments sur chaque processus `local_N` en fonction du nombre total `N` et du nombre de rangs `number_of_ranks`.
 
@@ -31,12 +33,14 @@ A = 2.9*B + 5.2*C + 265.7*B*C + B**2 + C**2
 
 3. Utilisez la fonction MPI du temps `MPI.Wtime()` pour calculer le *timer* avant et après la boucle de calcul.
 
-4. Testez votre code en utilisant 1, 2 puis 4 processus jusqu'au maximum de votre ordinateur et observez l'effet sur le temps de calcul
+4. Mettre à jour l'affichage du temps de calcul pour chaque rang en utilisant les variables de temps avant et après le calcul.
+
+5. Testez votre code en utilisant 1, 2 puis 4 processus jusqu'au maximum de votre ordinateur et observez l'effet sur le temps de calcul
 
 ```bash
 # Exemple pour N processus
 mpirun -np N python main.py
 ```
 
-5. Avec 4 processus, choisissez un nombre important d'éléments pour faire durer l'exécution plusieurs secondes 
+6. Avec 4 processus, choisissez un nombre important d'éléments pour faire durer l'exécution plusieurs secondes 
 et observer l'effet sur les tâches de votre système (via `top` ou `htop` par exemple)

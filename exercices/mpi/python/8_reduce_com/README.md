@@ -6,6 +6,13 @@ Le domaine d'intgération est subdivisé suivant le nombre de processus MPI dema
 
 <img src="../../../../support/materiel/sin_integration.svg" height="400">
 
+> [!WARNING]  
+> n'oubliez pas de charger miniforge avant de commencer cet exercice.
+
+```bash
+source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
+```
+
 ## Consignes
 
 La variable `discretization_per_rank` représente le nombre de `delta` utilisé
@@ -30,10 +37,4 @@ integration = comm.reduce(...)
 
 ```bash
 mpirun -np N python main.py
-```
-
-**Warning**: n'oubliez pas de charger l'environnement Python avant d'exécuter le code.
-
-```bash
-source /gpfs/workdir/labotm/Installations/miniforges3/m2dfe_env.sh
 ```
