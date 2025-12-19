@@ -66,8 +66,7 @@ print("Je suis le rang {} dans le communicateur global et le rang {} dans le com
 # On récupère le rang 0 dans le communicateur cartésien
 if cart_rank == 0:
 
-    # On fabrique maintenant une matrice `ranks_matrix` qui de la topologie cartésienne 2d 
-    # et on l'affiche à l'écran
+    # On fabrique maintenant une matrice `ranks_matrix` qui a la même taille de la topologie cartésienne 2d 
     ???
 
     # Boucle sur les rangs pour remplir la matrice
