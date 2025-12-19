@@ -119,15 +119,15 @@ end = MPI.Wtime()
 # Calcul du temps de calcul min, max et moyen
 
 # On récupère le temps de calcul minimum avec un reduce
-min_time = comm.reduce(end-start, op=MPI.MIN, root=0)
-max_time = comm.reduce(end-start, op=MPI.MAX, root=0)
-mean_time = comm.reduce(end-start, op=MPI.SUM, root=0)
+min_time = comm.reduce(???)
+max_time = comm.reduce(???)
+mean_time = comm.reduce(???)
 
 # Affichage du résultat depuis le rang 0
 
 if rank == 0:
 
-    mean_time = mean_time / number_of_ranks
+    mean_time = ???
 
     print(" Time - min : {}, max :  {}, moyen:  {} secondes".format(min_time, max_time, mean_time))
 

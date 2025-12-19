@@ -79,16 +79,16 @@ if (rank==0):
 
 local_integration = 0
 
-start = MPI.Wtime()
+#start = MPI.Wtime()
 
 # Normal loop
-for i in range(discretization_per_rank):
-    x = min + (i+0.5)*delta
-    local_integration += np.sin(x)*delta
+#for i in range(discretization_per_rank):
+#    x = min + (i+0.5)*delta
+#    local_integration += np.sin(x)*delta
 
-end_loop = MPI.Wtime() - start
+#end_loop = MPI.Wtime() - start
 
-start = MPI.Wtime()
+#start = MPI.Wtime()
 
 # use numpy
 x = np.arange(min+0.5*delta, max, delta)
