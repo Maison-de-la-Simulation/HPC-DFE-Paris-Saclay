@@ -3,7 +3,7 @@
 Dans cette troisième partie, nous allons paralléliser le programme séquentiel en utilisant la méthode par passage de message et plus spécifiquement le standard MPI.
 
 **Préparation :** Faites maintenant une copie du dossier `sequential` et appelez-le `mpi`.
-On modifiera le fichier `main.py` dans `mpi` pour y introduire le parallélisme.
+On modifiera le fichier `mandelbulb.py` dans `mpi` pour y introduire le parallélisme.
 
 L'introduction du parallélisme se fera étape par étape. Avant de démarrer, nous allons commenter les lignes de code qui ne sont pas encore parallélisées pour introduire la parallélisation MPI au fur et à mesure :
 
