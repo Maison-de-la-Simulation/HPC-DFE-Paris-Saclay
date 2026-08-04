@@ -1,0 +1,2 @@
+- Exemple en schéma tableau pour reduce
+- Revoir la partie sur la performance (ajouter la notion de throughput)
