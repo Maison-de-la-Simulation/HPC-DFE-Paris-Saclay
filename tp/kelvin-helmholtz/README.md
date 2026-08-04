@@ -62,7 +62,9 @@ $$D^n = \nu \left( \frac{\partial^2 \omega^n}{\partial x^2} + \frac{\partial^2 \
 
 The following video illustrates the evolution of the Kelvin-Helmholtz instability over time, showing the formation of characteristic wave patterns and vortices as the two fluids interact.
 
-<video controls src="assets/animation.mp4" title="Title"></video>
+<video controls src="./assets/animation.mp4" title="Kelvin-Helmholtz instability"></video>
+
+![Kelvin-Helmholtz instability](./assets/animation.mp4)
 
 ## Description of the project
 
