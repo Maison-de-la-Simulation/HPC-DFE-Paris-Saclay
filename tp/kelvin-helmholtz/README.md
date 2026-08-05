@@ -44,7 +44,9 @@ This equation can be decomposed into 3 components:
 
 Solving numerically these equations implies the following steps:
 
-1. Compute the vorticity field $\omega$ at each time step by solving the vorticity transport equation. For this purpose, we use a finite difference method to discretize the spatial derivatives and an explicit Euler time-stepping scheme to advance the solution in time.
+**Vorticity field computation:**
+
+We compute the vorticity field $\omega$ at each time step by solving the vorticity transport equation. For this purpose, we use a finite difference method to discretize the spatial derivatives and an explicit Euler time-stepping scheme to advance the solution in time.
 
 $$ \omega^{n+1} = \omega^n + \Delta t \left( A^n +  D^n \right) $$
 
@@ -56,18 +58,27 @@ Same for the diffusion term $D^n$:
 
 $$D^n = \nu \left( \frac{\partial^2 \omega^n}{\partial x^2} + \frac{\partial^2 \omega^n}{\partial y^2} \right)$$
 
-2. Compute the streamfunction $\psi$ by solving the Poisson equation $\nabla^2 \psi = -\omega$. We use a Poisson solver based on the Fast Fourier Transform (FFT) to efficiently solve this equation in the frequency domain.
+**Computation of the streamfunction:**
 
-3. Compute the velocity field $\mathbf{u}$ from the streamfunction $\psi$ using the relations $u_x = \frac{\partial \psi}{\partial y}$ and $u_y = -\frac{\partial \psi}{\partial x}$. We use central difference schemes to approximate the spatial derivatives.
+The streamfunction $\psi$ is computed by solving the Poisson equation $\nabla^2 \psi = -\omega$. We use a Poisson solver based on the Fast Fourier Transform (FFT) to efficiently solve this equation in the frequency domain.
+
+For this aim, we first compute the 2D FFT of the vorticity field $\omega$ to obtain its representation in the frequency domain called $\hat{\omega}$. Then, we solve the Poisson equation in the frequency domain by dividing $\hat{\omega}$ by the squared wave numbers $k^2 = k_x^2 + k_y^2$, where $k_x$ and $k_y$ are the wave numbers in the x and y directions, respectively. Finally, we compute the inverse 2D FFT of the result to obtain the streamfunction $\psi$ in the spatial domain.
+
+**Velocity field computation:**
+
+Compute the velocity field $\mathbf{u}$ from the streamfunction $\psi$ using the relations $u_x = \frac{\partial \psi}{\partial y}$ and $u_y = -\frac{\partial \psi}{\partial x}$. We use central difference schemes to approximate the spatial derivatives.
+
+This step is repeated for each time step until the desired simulation time is reached. The resulting vorticity and velocity fields can be visualized to observe the evolution of the Kelvin-Helmholtz instability over time.
 
 The following video illustrates the evolution of the Kelvin-Helmholtz instability over time, showing the formation of characteristic wave patterns and vortices as the two fluids interact.
 
 <video controls src="./assets/animation.mp4" title="Kelvin-Helmholtz instability"></video>
 
-![Kelvin-Helmholtz instability](./assets/animation.mp4)
+![Watch the Kelvin-Helmholtz instability video](./assets/animation.mp4)
 
 ## Description of the project
 
 ### Sequential Code
 
 A sequential version of the code is present at `python/seq/main.py`.
+
