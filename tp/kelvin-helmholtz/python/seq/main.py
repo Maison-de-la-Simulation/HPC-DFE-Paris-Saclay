@@ -17,6 +17,8 @@ Numerical methods:
 Run:
     python main.py
 """
+# ___________________________________________________________________________
+# Libraries
 
 import argparse
 import os
@@ -88,7 +90,7 @@ timer_snapshot_write = 0.0
 energy_total = 0.0
 
 # ___________________________________________________________________________
-# Domain parameters
+# Domain definition
 
 dx = Lx / Nx
 dy = Ly / Ny
@@ -104,7 +106,7 @@ X, Y = np.meshgrid(x, y, indexing='ij')
 kx = 2.0 * np.pi * np.fft.fftfreq(Nx, d=dx)   # full x wave numbers
 ky = 2.0 * np.pi * np.fft.fftfreq(Ny, d=dy)   # full y wave numbers
 
-# Global K² for Poisson solve on rank 0
+# Global K² for Poisson solve
 KX_global, KY_global = np.meshgrid(kx, ky, indexing='ij')
 K2_global = KX_global**2 + KY_global**2
 K2_global[0, 0] = 1.0   # avoid division by zero for the mean mode
@@ -113,14 +115,14 @@ K2_global[0, 0] = 1.0   # avoid division by zero for the mean mode
 # ___________________________________________________________________________
 # Spatial operators
 
-def d_dx_fd(fg):
+def d_dx(fg):
     """∂f/∂x — 2nd-order centred FD from an already-extended ghosted field.
     Always uses nearest neighbours f[i+1], f[i-1]
     """
     return (np.roll(fg, -1, axis=0) - np.roll(fg, 1, axis=0)) / (2.0 * dx)
 
 
-def d_dy_fd(f):
+def d_dy(f):
     """∂f/∂y — 2nd-order centred FD, periodic BCs (y not decomposed, use np.roll).
     f : (nx_local, Ny)  →  (nx_local, Ny)
     """
@@ -131,8 +133,8 @@ def d_dy_fd(f):
 
 def advection_term(ux, uy, omega):
     """Compute the advective term A = -(ux·∇)ω from the ghost-extended omega field."""
-    domega_dx = d_dx_fd(omega)
-    domega_dy = d_dy_fd(omega)
+    domega_dx = d_dx(omega)
+    domega_dy = d_dy(omega)
     return -(ux * domega_dx + uy * domega_dy)
 
 
@@ -154,8 +156,8 @@ def solve_poisson(omega):
 
 def velocity_from_psi(psi):
     """Return (ux, uy) from a ghost-extended psi field."""
-    ux = d_dy_fd(psi)
-    uy = -d_dx_fd(psi)
+    ux = d_dy(psi)
+    uy = -d_dx(psi)
     return ux, uy
 
 def compute_velocity(omega):
@@ -182,13 +184,17 @@ def initial_vorticity(X, Y, Ly, delta, amp):
     omega += amp * np.sin(2.0 * np.pi * X / Lx)
     return omega
 
-omega = initial_vorticity(X, Y, Ly, delta, amp)
-
 # ___________________________________________________________________________
-# I/O : save snapshots and prepare output directory
+# Save snapshots and prepare output directory
+
+def prepare_output_dir(path, clear=False):
+    """Prepare output directory."""
+    if clear and os.path.isdir(path):
+        shutil.rmtree(path)
+    os.makedirs(path, exist_ok=True)
 
 def save_snapshot(output_dir, step, t, omega, ux, uy):
-    """Gather local fields on rank 0 and write a single global snapshot file."""
+    """Write a single global snapshot file."""
 
     os.makedirs(output_dir, exist_ok=True)
     path = os.path.join(output_dir, f"snapshot_{step:06d}.npz")
@@ -205,12 +211,6 @@ def save_snapshot(output_dir, step, t, omega, ux, uy):
         nx=np.int32(Nx),
         ny=np.int32(Ny),
     )
-
-def prepare_output_dir(path, clear=False):
-    """Prepare output directory."""
-    if clear and os.path.isdir(path):
-        shutil.rmtree(path)
-    os.makedirs(path, exist_ok=True)
 
 # ___________________________________________________________________________
 # Parameters summary
@@ -238,23 +238,26 @@ print(sep)
 
 prepare_output_dir(output_dir, clear_output)
 
+# __________________________________________________________________________
+# Initial conditions
+
+omega = initial_vorticity(X, Y, Ly, delta, amp)
+psi = solve_poisson(omega)
+ux, uy = velocity_from_psi(psi)
+
 # ___________________________________________________________________________
 #
 # Main time loop
 # ___________________________________________________________________________
-
-t = 0.0
-
-psi = solve_poisson(omega)
-ux, uy = velocity_from_psi(psi)
-
-timer_loop = time.time()
 
 print(f" ⚙️  Starting main time loop")
 print(sep)
 header = f"{'step':>8} {'energy':>16}"
 print(header)
 print("-" * len(header))
+
+t = 0.0
+timer_loop = time.time()
 
 for i in range(n_steps):
 

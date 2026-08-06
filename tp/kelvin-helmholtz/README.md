@@ -82,3 +82,95 @@ The following video illustrates the evolution of the Kelvin-Helmholtz instabilit
 
 A sequential version of the code is present at `python/seq/main.py`.
 
+The code is in a single Python script and is organized into several parts for simplicity:
+
+1) User defined global parameters
+2) Argument parsing
+3) Computation of internal global parameters
+4) Contruction of the domain
+5) Wave numbers for FFT poisson solver
+6) Function definition
+   - Functions of the spatial derivatives
+   - Functions for the computation of the avection and diffusion terms
+   - Functions for the Poisson solver and the computation of the velocity field
+   -  Function to compute the energy
+   -  Function to initialize omega
+   -  Function to save the domain (snapshot) at a given timestep
+7) Summary printing of the parameters
+8) Main loop for the time stepping
+9) Time measurement and printing of the total execution time
+
+### Requirements
+
+The execution of the sequential code and the tutorial require the following libraries:
+
+- argparse
+- os
+- shutil
+- numpy
+- time
+- mpi4py
+- matplotlib
+
+### How to run the sequential code
+
+The sequential code can be easily executed using python and the default parameters:
+
+```python
+python main.py
+```
+
+Several options can be modified using command line arguments. For the list of available parameters, you can use the help page:
+
+```python
+python main.py -h
+
+  -h, --help     show this help message and exit
+  --Nx, --nx NX  Global number of grid points in the x direction
+  --Ny, --ny NY  Global number of grid points in the y direction
+  --Lx LX        Domain length in x
+  --Ly LY        Domain length in y
+  --T_end T_END  Final simulation time
+  --dt DT        Time step
+```
+
+For instance, if you want a discretization of 1024 * 2048, you can change it with the following arguments:
+
+```python
+python main.py -NX 1024 -NY 2048
+```
+
+### Snapshots and visualization
+
+As any simulation code, our sequential code has some diagnostics that enables to dump the state of the simulation at a given timestep. The function `save_snapshot` is used for this purpose.
+
+It creates a Numpy container file with the following fields: `omega`, `ux`, `uy`, time (variable `t`), `dx`, `dy`, `Lx`, `Ly`, `nx`, `ny`. Numpy files are binary files and can not be read directly. However, simple Python code can be used to read them.
+
+The frequency of the snapshots can be set using the global parameter `output_period`.
+
+By default, the snapshots are stored in a folder called `diags` where the script is executed.
+
+We provide some simple Python scripts to read and display the snapshots in the `./visualization` folder:
+
+- `plot.py`: enables to plot a snapshot for a single timestep (using Matplotlib)
+
+```python
+# To get some help
+python plot.py -h
+# To plot an image
+python plot.py diags/snapshot_000000.npz
+```
+
+The script generates this type of image with the voticity and the velocities:
+
+![snapshot](./assets/snapshot.png)
+
+- `animate.py`: enables to create an animation (using Matplotlib). Some options can be used to generate a mp4 video.
+
+```python
+# To get some help
+python animate.py -h
+# To plot an image
+python animate.py diags
+```
+
