@@ -153,21 +153,6 @@ def solve_poisson(omega):
     psi_hat = omega_hat / K2_global
     psi = np.real(np.fft.ifft2(psi_hat))
     return psi
-
-def velocity_from_psi(psi):
-    """Return (ux, uy) from a ghost-extended psi field."""
-    ux = d_dy(psi)
-    uy = -d_dx(psi)
-    return ux, uy
-
-def compute_velocity(omega):
-    """Return (ux, uy) from ψ via FD derivatives.
-      ux =  ∂ψ/∂y  — FD
-      uy = -∂ψ/∂x  — FD
-    """
-    psi = solve_poisson(omega)
-    return velocity_from_psi(psi)
-
 # ___________________________________________________________________________
 # Energy
 
@@ -241,16 +226,23 @@ prepare_output_dir(output_dir, clear_output)
 # __________________________________________________________________________
 # Initial conditions
 
+print(f" ⚙️  Initialization of the domain")
+
 omega = initial_vorticity(X, Y, Ly, delta, amp)
 psi = solve_poisson(omega)
-ux, uy = velocity_from_psi(psi)
+ux = d_dy(psi)
+uy = -d_dx(psi)
+energy = total_energy(ux, uy)
+
+print(f"  - Initial energy     : {energy}")
+print(sep)
 
 # ___________________________________________________________________________
 #
 # Main time loop
 # ___________________________________________________________________________
 
-print(f" ⚙️  Starting main time loop")
+print(f" 🎢  Starting main time loop")
 print(sep)
 header = f"{'step':>8} {'energy':>16}"
 print(header)
@@ -290,7 +282,8 @@ for i in range(n_steps):
     # 6. Update velocity from Psi
 
     t0 = time.time()
-    ux, uy = velocity_from_psi(psi)
+    ux = d_dy(psi)
+    uy = -d_dx(psi)
     timer_velocity += time.time() - t0
 
     # 7. Compute and track the kinetic energy

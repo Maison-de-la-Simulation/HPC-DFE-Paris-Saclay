@@ -106,7 +106,7 @@ The code is in a single Python script and is organized into several parts for si
 6) Function definition
    - Functions of the spatial derivatives
    - Functions for the computation of the avection and diffusion terms
-   - Functions for the Poisson solver and the computation of the velocity field
+   - Functions for the Poisson solver
    -  Function to compute the energy
    -  Function to initialize omega
    -  Function to save the domain (snapshot) at a given timestep
