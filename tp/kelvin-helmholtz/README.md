@@ -174,3 +174,33 @@ python animate.py -h
 python animate.py diags
 ```
 
+## Instructions
+
+The project is divided into 4 parts. Each part corresponds to a specific file:
+
+1. [Introduction to sequential code](./instructions/1_sequential.md)
+2. [Exploring the machine](./instructions/2_machine.md)
+3. [Parallelization](./instructions/3_mpi.md)
+4. [Performance analysis](./instructions/4_performance.md)
+
+In addition to the instructions, a help file is available. This file will be updated as the project progresses and in response to your questions.
+
+5. [Help page](./5_help.md)
+
+## Assessment
+
+You will be graded on your code and the production of a project report.
+
+Each question is worth points based on its difficulty. Even if the code does not work, I will analyze the entire code step-by-step to see whether you have understood the concepts.
+
+The purpose of the report is to answer the questions provided in the instructions. It must be clear and concise. There is no need to provide an introduction to the subject; simply answer the questions asked. You may use any format (TeX, .docx, etc.). The goal is efficiency and clarity.
+
+You will submit your project by sending me an email with a link to a .zip or .tar archive containing:
+- the parallel source code (the `mandelbulb.py` file)
+- the report
+
+Please note, do **not** include:
+- simulation results
+- other scripts
+
+The project submission date will be announced during the course of the year.
