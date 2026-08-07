@@ -10,7 +10,7 @@ Domain is solved directly on the full grid, without MPI decomposition.
 
 Numerical methods:
     - Poisson       : global FFT2 solve
-    - x-derivatives : 2nd-order centred FD with periodic ghost cells
+    - x-derivatives : 2nd-order centred FD with periodic wrap
     - y-derivatives : 2nd-order centred FD with periodic wrap
     - Time          : explicit Euler
 
@@ -116,14 +116,14 @@ K2_global[0, 0] = 1.0   # avoid division by zero for the mean mode
 # Spatial operators
 
 def d_dx(fg):
-    """∂f/∂x — 2nd-order centred FD from an already-extended ghosted field.
+    """∂f/∂x — 2nd-order centred FD, periodic BCs
     Always uses nearest neighbours f[i+1], f[i-1]
     """
     return (np.roll(fg, -1, axis=0) - np.roll(fg, 1, axis=0)) / (2.0 * dx)
 
 
 def d_dy(f):
-    """∂f/∂y — 2nd-order centred FD, periodic BCs (y not decomposed, use np.roll).
+    """∂f/∂y — 2nd-order centred FD, periodic BCs
     f : (nx_local, Ny)  →  (nx_local, Ny)
     """
     return (np.roll(f, -1, axis=1) - np.roll(f, 1, axis=1)) / (2.0 * dy)

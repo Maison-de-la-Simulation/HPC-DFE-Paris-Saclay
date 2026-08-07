@@ -74,7 +74,15 @@ For this aim, we first compute the 2D FFT of the vorticity field $\omega$ to obt
 
 Compute the velocity field $\mathbf{u}$ from the streamfunction $\psi$ using the relations $u_x = \frac{\partial \psi}{\partial y}$ and $u_y = -\frac{\partial \psi}{\partial x}$. We use central difference schemes to approximate the spatial derivatives.
 
+**Boundary conditions:**
+
+We use full periodic boundary conditions. The periodic conditons are naturally managed in the discretized operators taking advantage of `np.roll`.
+
 This step is repeated for each time step until the desired simulation time is reached. The resulting vorticity and velocity fields can be visualized to observe the evolution of the Kelvin-Helmholtz instability over time.
+
+The domain is initialized the following vorticity:
+
+$$\omega = \frac{1}{\delta} \left[ \cosh^{-2}\left(\frac{Y - 0.25 L_y}{\delta}\right) - \cosh^{-2}\left(\frac{Y - 0.75 L_y}{\delta}\right) \right] + A \sin\left(\frac{2\pi X}{L_x}\right)$$
 
 The following video illustrates the evolution of the Kelvin-Helmholtz instability over time, showing the formation of characteristic wave patterns and vortices as the two fluids interact.
 
