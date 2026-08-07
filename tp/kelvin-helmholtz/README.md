@@ -42,21 +42,27 @@ This equation can be decomposed into 3 components:
 - the advection term $A = (\mathbf{u} \cdot \nabla) \omega$,
 - the diffusion term $D = \nu \nabla^2 \omega$.
 
+A finite difference method is used to solve the problem. A structured cartesian grid is then used to discretized `omega`, `phi`, `ux` and `uy`.
+
 Solving numerically these equations implies the following steps:
 
 **Vorticity field computation:**
 
 We compute the vorticity field $\omega$ at each time step by solving the vorticity transport equation. For this purpose, we use a finite difference method to discretize the spatial derivatives and an explicit Euler time-stepping scheme to advance the solution in time.
 
-$$ \omega^{n+1} = \omega^n + \Delta t \left( A^n +  D^n \right) $$
+$$ \omega^{n+1}_i = \omega^n_i + \Delta t \left( A^n_i +  D^n_i \right) $$
 
-The advection term $A^n$ is computed using a central difference scheme:
+The advection term $A^n = - \left( u_x^n \frac{\partial \omega^n}{\partial x} + u_y^n \frac{\partial \omega^n}{\partial y} \right)$ is computed using a central difference scheme:
 
-$$A^n = - \left( u_x^n \frac{\partial \omega^n}{\partial x} + u_y^n \frac{\partial \omega^n}{\partial y} \right)$$
+$$A_i = -\left( u_x \frac{\omega_{i+1} - \omega_{i-1}}{2 \Delta x} + u_y \frac{\omega_{j+1} - \omega_{j-1}}{2 \Delta y} \right)$$
 
 Same for the diffusion term $D^n$:
 
-$$D^n = \nu \left( \frac{\partial^2 \omega^n}{\partial x^2} + \frac{\partial^2 \omega^n}{\partial y^2} \right)$$
+$$D^n_i = \nu \left( \frac{\partial^2 \omega^n}{\partial x^2} + \frac{\partial^2 \omega^n}{\partial y^2} \right)$$
+
+that becomes using the current discretization method:
+
+$$D_i = \nu \left( \frac{\omega_{i+1} - 2\omega_{i} + \omega_{i-1}}{\Delta x^2} + \frac{\omega_{j+1} - 2\omega_{j} + \omega_{j-1}}{\Delta y^2} \right)$$
 
 **Computation of the streamfunction:**
 
