@@ -26,6 +26,8 @@ e) Run the code to test that the MPI init is working correctly
 
 The next step is the domain decomposition. For simplicity, we will devide the domain into blocks only the `x` direction.
 
+![domain decomposition](../assets/domain_decomposition.png)
+
 For this aim, each rank will have a local version of `omega`, `psi`, `ux` and `uy`.
 
 For `omega` and `psi`, we will have to add extra column for the management of the ghost cells.
