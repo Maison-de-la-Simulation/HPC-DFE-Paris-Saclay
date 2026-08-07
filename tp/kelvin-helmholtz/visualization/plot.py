@@ -4,7 +4,7 @@ plot.py  —  plot all fields of a Kelvin-Helmholtz snapshot
 Usage:
     python plot.py <path/to/snapshot_XXXXXX.npz>
 
-The .npz file must contain: 'omega', 'u', 'v', 'time', 'dx', 'dy', 'Lx', 'Ly', 'nx', 'ny'
+The .npz file must contain: 'omega', 'ux', 'uy', 'time', 'dx', 'dy', 'Lx', 'Ly', 'nx', 'ny'
 """
 
 import sys

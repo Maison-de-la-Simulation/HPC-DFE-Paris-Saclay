@@ -113,7 +113,7 @@ c) Uncomment and update the function `d_dx` to perform the derivative only on th
 
 d) Uncomment and update the velocity field `ux` and `uy` using `d_dx`. Check that the results are correct.
 
-e) Update the computation of the energy so that it can be computed using MPI at the end of the initialization. The rank 0 should be able to get the final total value. Check that the result is the same as the sequential code.
+e) Update the computation of the energy so that it can be computed using MPI at the end of the initialization. The rank 0 should be able to get the final total value. Check that the energy is the same for the sequential and the mpi version.
 
 **Question 3.5 - Main time loop**
 
@@ -133,3 +133,32 @@ c) We will now adapt the function `save_snapshot` to make it worlk with MPI. The
 
 For simplicity, implement only the first method. During the performance tests, we will deactivate the snapshots.
 
+b) Use the visualization script to visualize the snapshots. Add some images in your report.
+
+c) Check that the results are similar to the sequential version. For this aim, you can use the script `compare.py` that compare and estimate the error between two snapshots :
+
+```python
+python compare.py seq/diags/snapshot_000000.npz mpi/diags/snapshot_000000.npz
+```
+
+**Question 3.6 - Timers**
+
+
+The final update we need to make is to the timers.
+
+a) First, uncomment the timers and replace the usage of `time` with `MPI.Wtime()`.
+
+b) The `timer_specs` list stores the timers along with their corresponding names. The following loop:
+
+```python
+timer_stats = []
+for timer_name, timer_value in timer_specs:
+    percentage = timer_value / timer_loop * 100.0
+    timer_stats.append((timer_name, timer_value, percentage))
+```
+
+calculates the percentage of time spent on each part of the code relative to the total time spent in the time loop.
+
+Now, since we have a timer value for each rank in parallel, update this loop to use the appropriate MPI functions to compute the **minimum**, **mean**, and **maximum** values across all ranks. Consequently, update the creation of the `timer_stats` list. The percentage can be calculated using the **mean** value.
+
+c) Finally, update the timers' output to display the **min**, **mean**, and **max** values.

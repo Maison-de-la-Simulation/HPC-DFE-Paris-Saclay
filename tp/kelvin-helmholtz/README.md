@@ -188,6 +188,12 @@ python animate.py -h
 python animate.py diags
 ```
 
+- `compare.py`: enables the comparison between two snapshots
+
+```python
+python compare.py seq/diags/snapshot_000000.npz mpi/diags/snapshot_000000.npz
+```
+
 ## Instructions
 
 The project is divided into 4 parts. Each part corresponds to a specific file:
