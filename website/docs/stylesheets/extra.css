@@ -1,0 +1,119 @@
+/* ---------- Figures ---------- */
+.md-typeset figure {
+  margin: 1.5em auto;
+}
+.md-typeset figure img,
+.md-typeset figure video {
+  border-radius: 6px;
+  max-width: 100%;
+}
+.md-typeset figcaption {
+  font-size: 0.75rem;
+  color: var(--md-default-fg-color--light);
+  max-width: 42rem;
+  margin: 0.6em auto 0;
+}
+.md-typeset video {
+  width: 100%;
+  display: block;
+  background: #000;
+}
+
+/* Two figures side by side, stacked on small screens */
+.md-typeset .figure-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+.md-typeset .figure-row figure {
+  margin: 0;
+}
+
+/* Product shots on white background, contained in a card */
+.md-typeset img.on-white {
+  background: #fff;
+  padding: 0.5rem;
+}
+
+/* Images inside grid cards: uniform height */
+.md-typeset .grid.cards img {
+  display: block;
+  width: 100%;
+  height: 11rem;
+  object-fit: contain;
+  border-radius: 6px;
+}
+.md-typeset .grid.cards img:not(.on-white) {
+  object-fit: cover;
+}
+
+/* ---------- Home hero ---------- */
+.md-typeset .hero {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  background: #0d1030 url("../assets/images/introduction/banniere-code.jpg") center / cover;
+  color: #fff;
+  padding: 3rem 2rem;
+}
+.md-typeset .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10, 14, 50, 0.92) 0%, rgba(10, 14, 50, 0.55) 100%);
+}
+.md-typeset .hero > * {
+  position: relative;
+}
+.md-typeset .hero h1 {
+  color: #fff;
+  margin: 0 0 0.4em;
+  font-weight: 700;
+}
+.md-typeset .hero p {
+  margin: 0.3em 0;
+  max-width: 34rem;
+  opacity: 0.92;
+}
+.md-typeset .hero .md-button {
+  color: #fff;
+  border-color: #fff;
+  margin-top: 1rem;
+}
+.md-typeset .hero .md-button--primary {
+  background: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+}
+
+/* ---------- History timeline ---------- */
+.md-typeset .timeline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.4rem 0 0.8rem;
+}
+.md-typeset .timeline-meta span {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+  background: var(--md-code-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* ---------- Inline SVG diagrams (theme aware) ---------- */
+.md-typeset .diagram {
+  display: block;
+  margin: 1.5rem auto;
+  max-width: 36rem;
+  width: 100%;
+  height: auto;
+}
+.diagram .mem   { fill: var(--md-accent-fg-color--transparent); stroke: var(--md-accent-fg-color); stroke-width: 2; }
+.diagram .cpu   { fill: var(--md-primary-fg-color--transparent, rgba(63, 81, 181, 0.1)); stroke: var(--md-primary-fg-color); stroke-width: 2; }
+.diagram .link  { stroke: var(--md-default-fg-color--light); stroke-width: 2.5; fill: none; }
+.diagram .bus   { fill: var(--md-default-fg-color--lightest); stroke: var(--md-default-fg-color--light); stroke-width: 1.5; }
+.diagram text   { fill: var(--md-default-fg-color); font-family: var(--md-text-font-family); font-size: 13px; text-anchor: middle; dominant-baseline: middle; }
+.diagram text.small { font-size: 11px; fill: var(--md-default-fg-color--light); }
+[data-md-color-scheme="slate"] .diagram .cpu { fill: rgba(140, 158, 255, 0.12); stroke: #8c9eff; }

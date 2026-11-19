@@ -1,0 +1,102 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
+<div class="hero" markdown>
+
+# Calcul Haute Performance
+
+Master 2 Dynamique des Fluides et Énergétique — Université Paris-Saclay
+
+Les bases du calcul haute performance et de la programmation parallèle
+par échange de messages avec MPI.
+
+[Commencer le cours](introduction/index.md){ .md-button .md-button--primary }
+[Voir le dépôt GitHub](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay){ .md-button }
+
+</div>
+
+## Contenu du cours
+
+<div class="grid cards" markdown>
+
+-   :material-rocket-launch:{ .lg .middle } __I. Introduction au calcul parallèle__
+
+    ---
+
+    Qu'est-ce que le HPC, un peu d'histoire et le fonctionnement d'un
+    super-calculateur.
+
+    [:octicons-arrow-right-24: Lire le chapitre](introduction/index.md)
+
+-   :material-server:{ .lg .middle } __II. Prise en main d'un super-calculateur__
+
+    ---
+
+    Connexion, environnement, soumission de travaux.
+
+    *Bientôt en ligne* — en attendant :
+    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/Super-calculateur.pdf)
+
+-   :material-transit-connection-variant:{ .lg .middle } __III. Parallélisme par échange de messages (MPI)__
+
+    ---
+
+    Communications point à point, collectives, topologies.
+
+    *Bientôt en ligne* — en attendant :
+    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/MPI_python.pdf)
+
+-   :material-speedometer:{ .lg .middle } __IV. Mesure de la performance__
+
+    ---
+
+    Accélération, efficacité, scalabilité forte et faible.
+
+    *Bientôt en ligne* — en attendant :
+    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/mesure_performance.pdf)
+
+-   :material-flask:{ .lg .middle } __V. Travaux pratiques__
+
+    ---
+
+    Exercices et TPs dans le dépôt GitHub du cours.
+
+    [:octicons-arrow-right-24: Exercices](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices) ·
+    [:octicons-arrow-right-24: TPs](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/tp)
+
+</div>
+
+## Qui suis-je ?
+
+<div class="grid" markdown>
+
+<div markdown>
+
+**Mathieu Lobet** — ingénieur-chercheur à la
+[Maison de la Simulation](https://www.maisondelasimulation.fr/), CEA Saclay.
+
+- Thèse en physique des plasmas
+- Optimisation CPU et programmation GPU
+- Développement de codes de physique (par exemple [Smilei](https://smileipic.github.io/Smilei/))
+- Traitement automatisé par l'IA
+
+La Maison de la Simulation est un laboratoire multi-tutelle CEA, CNRS et
+Université Paris-Saclay, situé près du campus, au CEA Saclay. Elle est
+spécialisée dans le calcul scientifique : mathématiques appliquées,
+développement de codes et de bibliothèques, calcul parallèle, analyse des
+données et IA pour le calcul scientifique.
+
+</div>
+
+![Bâtiment de la Maison de la Simulation](assets/images/introduction/maison-de-la-simulation.jpg)
+
+</div>
+
+!!! tip "Un cours en accès libre"
+
+    Tout le cours (supports, exercices, TPs) est disponible sur GitHub :
+    [Maison-de-la-Simulation/HPC-DFE-Paris-Saclay](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay).
+    N'hésitez pas à ouvrir une *issue* si vous repérez une erreur.

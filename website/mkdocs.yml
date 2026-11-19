@@ -1,0 +1,82 @@
+site_name: M2DFE - Calcul Haute Performance
+site_description: Cours de Calcul Haute Performance du Master 2 Dynamique des Fluides et Énergétique (Université Paris-Saclay)
+site_author: Mathieu Lobet
+site_url: https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/
+repo_url: https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay
+repo_name: HPC-DFE-Paris-Saclay
+edit_uri: edit/master/website/docs/
+# Keeps relative paths in raw HTML (<video>, <img>) identical to Markdown ones
+use_directory_urls: false
+copyright: Maison de la Simulation – CEA Saclay · Master 2 DFE, Université Paris-Saclay
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Passer en mode sombre
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Passer en mode clair
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    logo: material/server-network
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+nav:
+  - Accueil: index.md
+  - Introduction au HPC:
+      - introduction/index.md
+      - 1. Qu'est-ce que le HPC ?: introduction/qu-est-ce-que-le-hpc.md
+      - 2. Un peu d'histoire: introduction/histoire.md
+      - 3. Fonctionnement d'un super-calculateur: introduction/fonctionnement.md
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
