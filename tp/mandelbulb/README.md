@@ -23,7 +23,7 @@ Pour ce projet, nous utilisons formule bien connue de White and Nylander's.
 
 La construction d'un Mandelbulb est un processus itératif qui s'effectue pour un ensemble de point d'un espace donné, donc autrement dit sur une grille 3D ou un tenseur 3D.
 
-Pour un point situé à la position $C = \left( x, y, y \right)$, on actualise la valeur en suivant le processus itératif suivant :
+Pour un point situé à la position $C = \left( x, y, z \right)$, on actualise la valeur en suivant le processus itératif suivant :
 
 $$
 V^{n+1} = F\left( V^{n} \right) + C
