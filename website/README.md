@@ -30,6 +30,14 @@ website/
 Ajouter un chapitre : créer `docs/<chapitre>/`, puis l'ajouter dans la
 section `nav` de `mkdocs.yml`.
 
+### Images partagées avec le reste du dépôt
+
+Une image utilisée à la fois par le site et par un README du dépôt n'est
+stockée qu'une fois, dans `website/docs/assets/images/`. Le README pointe
+alors vers ce fichier (par exemple
+`../website/docs/assets/images/super-calculateur/filezilla.jpg`) et la copie
+de `support/materiel/` est supprimée.
+
 ### Syntaxe utile
 
 - Maths : `\(x^2\)` en ligne, `\[ ... \]` en bloc.

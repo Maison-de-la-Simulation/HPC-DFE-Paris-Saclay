@@ -116,4 +116,9 @@
 .diagram .bus   { fill: var(--md-default-fg-color--lightest); stroke: var(--md-default-fg-color--light); stroke-width: 1.5; }
 .diagram text   { fill: var(--md-default-fg-color); font-family: var(--md-text-font-family); font-size: 13px; text-anchor: middle; dominant-baseline: middle; }
 .diagram text.small { font-size: 11px; fill: var(--md-default-fg-color--light); }
+.md-typeset .diagram-wide { max-width: 44rem; }
+.diagram .frame { fill: none; stroke: var(--md-default-fg-color--lighter); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.diagram .node  { fill: var(--md-primary-fg-color); opacity: 0.55; }
+.diagram .arrowhead { fill: var(--md-default-fg-color--light); }
+[data-md-color-scheme="slate"] .diagram .node { fill: #8c9eff; }
 [data-md-color-scheme="slate"] .diagram .cpu { fill: rgba(140, 158, 255, 0.12); stroke: #8c9eff; }

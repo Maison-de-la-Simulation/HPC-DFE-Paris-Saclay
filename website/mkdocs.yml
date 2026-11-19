@@ -52,6 +52,11 @@ nav:
       - 1. Qu'est-ce que le HPC ?: introduction/qu-est-ce-que-le-hpc.md
       - 2. Un peu d'histoire: introduction/histoire.md
       - 3. Fonctionnement d'un super-calculateur: introduction/fonctionnement.md
+  - Prise en main d'un super-calculateur:
+      - super-calculateur/index.md
+      - 1. Architecture: super-calculateur/architecture.md
+      - 2. Connexion et environnement: super-calculateur/environnement.md
+      - 3. SLURM et premier job: super-calculateur/slurm.md
 
 markdown_extensions:
   - abbr

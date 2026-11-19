@@ -35,10 +35,10 @@ par échange de messages avec MPI.
 
     ---
 
-    Connexion, environnement, soumission de travaux.
+    Architecture, connexion, environnement et soumission de jobs avec
+    SLURM sur le super-calculateur Ruche.
 
-    *Bientôt en ligne* — en attendant :
-    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/Super-calculateur.pdf)
+    [:octicons-arrow-right-24: Lire le chapitre](super-calculateur/index.md)
 
 -   :material-transit-connection-variant:{ .lg .middle } __III. Parallélisme par échange de messages (MPI)__
 
