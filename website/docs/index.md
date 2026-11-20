@@ -22,6 +22,15 @@ par échange de messages avec MPI.
 
 <div class="grid cards" markdown>
 
+-   :material-laptop:{ .lg .middle } __Installer le cours__
+
+    ---
+
+    Installer Python, MPI et le dépôt du cours sur votre ordinateur :
+    Linux, macOS et Windows.
+
+    [:octicons-arrow-right-24: Suivre le guide](installation.md)
+
 -   :material-rocket-launch:{ .lg .middle } __I. Introduction au calcul parallèle__
 
     ---

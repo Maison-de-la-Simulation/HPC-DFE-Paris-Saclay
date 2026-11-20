@@ -50,6 +50,7 @@ theme:
 
 nav:
   - Accueil: index.md
+  - Installation: installation.md
   - Introduction au HPC:
       - introduction/index.md
       - 1. Qu'est-ce que le HPC ?: introduction/qu-est-ce-que-le-hpc.md
