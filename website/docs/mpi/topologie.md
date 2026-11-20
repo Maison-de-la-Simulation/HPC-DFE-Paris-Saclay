@@ -1,4 +1,4 @@
-# 5. Topologie cartésienne
+# 7. Topologie cartésienne
 
 ## Décomposition de domaine
 

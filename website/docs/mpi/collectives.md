@@ -1,4 +1,4 @@
-# 4. Communications collectives
+# 5.1 Communications collectives : diffusion et collecte
 
 ## Les différents types
 
@@ -233,7 +233,8 @@ donnée différente**.
     2 et 3 reçoivent `[0, 4, 8]`, `[1, 5, 9]`, `[2, 6]` et `[3, 7]` dans
     `mes_valeurs`.
     Pour des tableaux NumPy de tailles différentes, il faut utiliser
-    `Scatterv`, l'équivalent de `Gatherv` présenté plus bas.
+    `Scatterv`, l'équivalent de
+    [`Gatherv`](collectives-avancees.md#collecte-de-tailles-variables-gatherv).
 
 !!! warning "Une erreur fréquente"
 
@@ -359,7 +360,6 @@ l'ordre des rangs (la donnée du rang `i` est à l'indice `i`).
 
     Dans votre éditeur : `exercices/mpi/python/gather_com/README.md`.
 
-
 ## Collecte pour tous : `allgather`
 
 Comme `gather`, mais **tous les rangs** reçoivent la liste complète. Il
@@ -403,7 +403,7 @@ mais en un seul appel, que MPI peut optimiser.
 
     Un usage courant : chaque rang annonce combien de valeurs il possède,
     et tous en déduisent `count` et `displacement`, utiles par exemple
-    pour [`Gatherv`](#collecte-de-tailles-variables-gatherv).
+    pour [`Gatherv`](collectives-avancees.md#collecte-de-tailles-variables-gatherv).
 
     ```python
     size = comm.Get_size()
@@ -435,211 +435,12 @@ mais en un seul appel, que MPI peut optimiser.
     Avec 4 processus, sur **chaque** rang, `full` vaut
     `[0. 0. 1. 10. 2. 20. 3. 30.]`.
 
-## Réduction : `reduce`
-
-Envoi de données réparties sur plusieurs processus vers **un seul
-processus**, avec une **opération de réduction** (somme, produit,
-maximum…) réalisée au passage.
-
---8<-- "mpi/reduce.svg"
-
-`reduce` est appelée par tous les processus en même temps :
-
-```python
-reduced = comm.reduce(local_value, op=MPI.SUM, root=0)
-```
-
-| Paramètre | Rôle |
-|---|---|
-| `local_value` | Valeur envoyée par chaque processus |
-| `reduced` | Résultat de la réduction, sur `root` seulement (`None` ailleurs) |
-| `op` | Opération de réduction |
-| `root` | Processus qui reçoit le résultat |
-
-:material-book-open-variant: [Documentation de `Comm.reduce`](https://mpi4py.readthedocs.io/en/stable/reference/mpi4py.MPI.Comm.html#mpi4py.MPI.Comm.reduce)
-
-### Opérations de réduction
-
-| Opération | Effet |
-|---|---|
-| `MPI.SUM` | Somme des données |
-| `MPI.PROD` | Produit des données |
-| `MPI.MAX` | Maximum des valeurs |
-| `MPI.MIN` | Minimum des valeurs |
-
-D'autres opérations existent (opérations logiques, position du
-maximum…).
-
-### Exemples
-
-=== "Somme sur le rang 0"
-
-    ```python
-    local_value = 125.87 * rank
-    total = comm.reduce(local_value, op=MPI.SUM, root=0)
-    ```
-
-=== "Produit sur le rang 3"
-
-    ```python
-    local_value = 5 * rank
-    prod = comm.reduce(local_value, op=MPI.PROD, root=3)
-    ```
-
-=== "Maximum d'un tableau"
-
-    ```python
-    import numpy as np
-
-    # Tableau stocké sur chaque processus
-    local_array = np.random.rand(5)
-
-    # Pour chaque indice, maximum sur l'ensemble des processus
-    max_array = comm.reduce(local_array, op=MPI.MAX, root=0)
-
-    # Puis maximum sur tous les indices
-    if rank == 0:
-        global_max = np.max(max_array)
-    ```
-
-## Réduction pour tous : `allreduce`
-
-Comme `reduce`, mais le résultat est envoyé à **tous** les processus.
-
---8<-- "mpi/allreduce.svg"
-
-```python
-total = comm.allreduce(local_value, op=MPI.SUM)
-```
-
-Il n'y a pas de `root` : chaque processus reçoit le résultat de la
-réduction.
-
-:material-book-open-variant: [Documentation de `Comm.allreduce`](https://mpi4py.readthedocs.io/en/stable/reference/mpi4py.MPI.Comm.html#mpi4py.MPI.Comm.allreduce)
-
-!!! example "Exercice 8 — Utilisation de `reduce`"
-
-    Calculer une intégrale en parallèle à l'aide d'une réduction.
-
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/reduce_com)
-
-    Dans votre éditeur : `exercices/mpi/python/reduce_com/README.md`.
-
-## Données de taille variable : les variantes `v`
-
-Certaines communications collectives (hors réductions) imposent que
-chaque rang échange la **même quantité** de données. Cette limitation est
-levée par des variantes, dont le nom se termine par un **v** :
-`Gatherv`, `Scatterv`, `Allgatherv`, `Alltoallv`.
-
-### Collecte de tailles variables : `Gatherv`
-
-`Gatherv` envoie des données de **tailles différentes**, réparties sur
-plusieurs processus, vers un processus unique. Contrairement à `Gather`,
-qui range les contributions dans l'ordre des rangs, `Gatherv` permet
-aussi de **choisir où placer** chaque contribution.
-
-```python
-comm.Gatherv(send_buffer, [recv_buffer, count, displacement, MPI.DOUBLE], root=0)
-```
-
-| Paramètre | Rôle |
-|---|---|
-| `send_buffer` | Tableau envoyé par chaque processus |
-| `recv_buffer` | Tableau réunissant toutes les contributions (sur `root`) |
-| `count` | Liste du nombre de valeurs envoyées par chaque rang |
-| `displacement` | Position, dans `recv_buffer`, de la première valeur venant de chaque rang |
-| `MPI.DOUBLE` | Type des données reçues |
-| `root` | Processus qui reçoit les données |
-
-Les listes `count` et `displacement` ont pour taille le nombre de rangs
-du communicateur. Avec les mêmes contributions, trois choix de
-`displacement` donnent trois rangements différents :
-
---8<-- "mpi/gatherv.svg"
-
-## Communications collectives non bloquantes
-
-Toutes les communications collectives présentées ont aussi un équivalent
-**non bloquant**, dont le nom commence par un **I** : `Ibcast`,
-`Iscatter`, `Igather`, `Igatherv`, `Ireduce`, `Iallreduce`, `Ialltoall`…
-Elles fonctionnent comme les communications point à point non bloquantes
-(`isend`, `irecv`) :
-
-- l'appel **rend la main tout de suite** et renvoie une **requête** ;
-- la communication se déroule **en arrière-plan**, pendant que le
-  processus continue à calculer : c'est le **recouvrement** des
-  communications par le calcul ;
-- il faut appeler `Wait` sur la requête **avant d'utiliser le résultat**.
-
-Avec mpi4py, ces fonctions existent dans la version à majuscule, qui
-travaille sur des tableaux NumPy.
-
-### Exemple : une réduction pendant un calcul
-
-Chaque rang calcule une somme partielle. La somme totale est lancée avec
-`Iallreduce`, et chaque rang effectue un autre calcul, qui n'en dépend
-pas, pendant que la réduction a lieu :
-
-```python
-import numpy as np
-from mpi4py import MPI
-
-comm = MPI.COMM_WORLD
-rank = comm.Get_rank()
-
-# Chaque rang calcule une somme partielle
-local_sum = np.array([float(rank + 1)])
-total = np.empty(1)
-
-# Lancement de la réduction : la fonction rend la main tout de suite
-req = comm.Iallreduce(local_sum, total, op=MPI.SUM)
-
-# Calcul qui n'a pas besoin de total : il recouvre la communication
-other = np.sum(np.arange(1_000_000) * 0.5)
-
-# On attend la fin de la réduction avant d'utiliser total
-req.Wait()
-print(f"Rang {rank} : total = {total[0]}")
-```
-
-Avec 4 processus, chaque rang affiche `total = 10.0` (1 + 2 + 3 + 4).
-
-### Exemple : plusieurs collectives en même temps
-
-On peut lancer plusieurs collectives non bloquantes à la suite, puis les
-attendre toutes ensemble avec `Waitall` :
-
-```python
-data = np.arange(4, dtype=np.float64) if rank == 0 else np.empty(4)
-maximum = np.empty(1)
-
-req_bcast = comm.Ibcast(data, root=0)
-req_max = comm.Iallreduce(np.array([float(rank)]), maximum, op=MPI.MAX)
-
-MPI.Request.Waitall([req_bcast, req_max])
-```
-
-Après le `Waitall`, tous les rangs ont reçu le tableau `data` du rang 0
-et connaissent le plus grand rang (`maximum`).
-
-!!! warning "Les règles à respecter"
-
-    - **Tous les processus** du communicateur doivent appeler la même
-      collective, **dans le même ordre**, comme pour les versions
-      bloquantes.
-    - Avant le `Wait`, on ne doit **ni lire le tampon de réception**
-      (`total`), **ni modifier le tampon d'envoi** (`local_sum`).
-    - Le calcul lancé pendant la communication ne doit pas dépendre de
-      son résultat : sinon, il n'y a rien à recouvrir.
-
-D'autres variantes sont à découvrir dans le
-[cours de l'IDRIS](http://www.idris.fr/formations/mpi/) et la
-documentation de MPI.
-
 ## Bilan
 
 !!! success "À ce stade, vous savez"
 
-    - effectuer des communications collectives ;
-    - effectuer des réductions.
+    - diffuser une donnée à tous les processus avec `bcast` ;
+    - distribuer des données entre les processus avec `scatter` ;
+    - rassembler des données avec `gather` et `allgather`.
+
+La suite : les [réductions](reductions.md).

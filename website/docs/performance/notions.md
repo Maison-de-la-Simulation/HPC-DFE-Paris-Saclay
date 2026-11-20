@@ -28,5 +28,5 @@ Parallélisme parfait (*embarrassingly parallel*)
 Chaque processus travaille alors de façon totalement indépendante. C'est
 le cas idéal, qui sert de référence pour juger la performance d'un code
 réel. L'exercice 2 du chapitre MPI,
-[Parallélisme parfait](../mpi/approche.md#notion-de-parallelisme), en est
+[Parallélisme parfait](../mpi/premier-programme.md#notion-de-parallelisme), en est
 un exemple.

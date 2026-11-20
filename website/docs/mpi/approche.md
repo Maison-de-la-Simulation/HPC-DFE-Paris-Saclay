@@ -113,69 +113,10 @@ MPI.Finalize()
     Vous pouvez aussi ouvrir l'énoncé dans votre éditeur :
     `exercices/mpi/python/initialization/README.md`.
 
-## Notion de parallélisme
-
-On parle de **parallélisme** lorsque chaque processus travaille sur ses
-tâches **en même temps** que les autres. La base du parallélisme consiste
-donc à découper une charge de travail en sous-tâches et à les distribuer
-sur l'ensemble des travailleurs.
-
---8<-- "mpi/seq-vs-par.svg"
-
-Le parallélisme est **parfait** lorsque tous les travailleurs ont la même
-charge de travail. Dans le cas contraire, on parle de **déséquilibre de
-charge** : les processus qui ont fini attendent les autres, et ce temps
-d'attente est perdu.
-
---8<-- "mpi/balance.svg"
-
-## Mesurer le temps
-
-`MPI.Wtime()` renvoie le temps écoulé, en secondes, sur le processus
-courant. Deux appels et une soustraction donnent le temps passé dans une
-section du code :
-
-```python
-start = MPI.Wtime()
-
-# Phase de calcul
-...
-
-elapsed = MPI.Wtime() - start
-```
-
-Comparer ce temps d'un processus à l'autre permet d'estimer le
-déséquilibre de charge.
-
-## Différencier le code selon le rang
-
-Le programme s'exécute simultanément autant de fois qu'il y a de
-processus : **chaque ligne est exécutée par chaque processus**. Pour
-réserver une portion de code à certains processus, on utilise une
-condition sur le rang :
-
-```python
-rank = comm.Get_rank()
-
-if rank == 1:
-    # Actions exécutées uniquement par le processus de rang 1
-    ...
-```
-
-!!! example "Exercice 2 — Parallélisme parfait"
-
-    Vous familiariser avec la notion de parallélisme en partageant le
-    travail entre les processus.
-
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/embarrassingly_parallel)
-
-    Dans votre éditeur :
-    `exercices/mpi/python/embarrassingly_parallel/README.md`.
-
 ## Bilan
 
 !!! success "À ce stade, vous savez"
 
-    - écrire un programme parallèle simple ;
+    - écrire et lancer un premier programme MPI ;
     - exécuter un programme MPI avec `mpirun` ;
     - récupérer le nombre de rangs et le rang de chaque processus.

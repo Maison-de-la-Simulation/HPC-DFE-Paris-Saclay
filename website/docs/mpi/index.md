@@ -31,21 +31,30 @@ milliers de nœuds d'un super-calculateur.
 
     ---
 
-    Échange de messages, `mpirun`, communicateur et rang, parallélisme et
-    équilibrage de charge. **Exercices 1 et 2.**
+    Échange de messages, `mpirun`, communicateur et rang, structure d'un
+    programme MPI. **Exercice 1.**
 
     [:octicons-arrow-right-24: Lire](approche.md)
 
--   __2. Communications point à point bloquantes__
+-   __2. Premier programme parallèle__
 
     ---
 
-    `send`, `recv`, `sendrecv`, barrières explicites et implicites.
-    **Exercices 3 et 4.**
+    Parallélisme de données, répartition du travail selon le rang,
+    mesure du temps d'exécution. **Exercice 2.**
+
+    [:octicons-arrow-right-24: Lire](premier-programme.md)
+
+-   __3. Communications point à point bloquantes__
+
+    ---
+
+    `send`, `recv`, `sendrecv`, barrières explicites et implicites,
+    mesure du temps d'une section. **Exercices 3 et 4.**
 
     [:octicons-arrow-right-24: Lire](point-a-point.md)
 
--   __3. Communications non bloquantes__
+-   __4. Communications non bloquantes__
 
     ---
 
@@ -54,16 +63,29 @@ milliers de nœuds d'un super-calculateur.
 
     [:octicons-arrow-right-24: Lire](non-bloquantes.md)
 
--   __4. Communications collectives__
+-   __5. Communications collectives__
 
     ---
 
-    `bcast`, `scatter`, `gather`, `reduce`, `allreduce` et leurs variantes.
-    **Exercices 7 et 8.**
+    [5.1 Diffusion et collecte](collectives.md) : `bcast`, `scatter`,
+    `gather`, `allgather`. **Exercice 7.**
 
-    [:octicons-arrow-right-24: Lire](collectives.md)
+    [5.2 Réductions](reductions.md) : `reduce`, `allreduce`, opérateurs.
+    **Exercice 8.**
 
--   __5. Topologie cartésienne__
+    [5.3 Tailles variables et non bloquantes](collectives-avancees.md) :
+    `Gatherv`, `Iallreduce`…
+
+-   __6. Python face au C et au Fortran__
+
+    ---
+
+    Le même code dans les trois langages, fonctions en minuscules et en
+    majuscule, performances.
+
+    [:octicons-arrow-right-24: Lire](python-c-fortran.md)
+
+-   __7. Topologie cartésienne__
 
     ---
 

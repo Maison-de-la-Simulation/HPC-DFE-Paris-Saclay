@@ -1,4 +1,4 @@
-# 3. Communications point à point non bloquantes
+# 4. Communications point à point non bloquantes
 
 ## Principe
 

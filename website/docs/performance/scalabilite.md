@@ -19,36 +19,13 @@ calcul.
 
 ## Mesurer le temps
 
-Une étude de scalabilité repose sur des mesures de temps. Avec MPI, la
-fonction `MPI.Wtime()` renvoie le temps écoulé en secondes sur le
-processus courant. Deux appels et une soustraction donnent le temps passé
-dans une section du code :
+Une étude de scalabilité repose sur des mesures de temps, réalisées avec
+`MPI.Wtime()`. Pour une étude de scalabilité, on retient en général le
+temps du processus **le plus lent**, qui détermine la durée de
+l'exécution.
 
-=== "Python"
-
-    ```python
-    start = MPI.Wtime()
-
-    # Des calculs...
-
-    elapsed = MPI.Wtime() - start
-    ```
-
-=== "C / C++"
-
-    ```cpp
-    double start = MPI_Wtime();
-
-    // Des calculs...
-
-    double elapsed = MPI_Wtime() - start;
-    ```
-
-:material-book-open-variant: [Documentation de `MPI_Wtime` (RookieHPC)](https://rookiehpc.github.io/mpi/docs/mpi_wtime/index.html)
-
-Chaque processus mesure son propre temps. Pour une étude de scalabilité,
-on retient en général le temps du processus **le plus lent**, qui
-détermine la durée de l'exécution.
+:material-book-open-variant: Voir [Mesurer le temps d'exécution](../mpi/premier-programme.md#mesurer-le-temps-dexecution)
+dans le chapitre MPI.
 
 ## Scalabilité faible
 

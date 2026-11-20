@@ -1,4 +1,4 @@
-# 2. Communications point à point bloquantes
+# 3. Communications point à point bloquantes
 
 ## Notion de communication point à point
 
@@ -102,16 +102,11 @@ if rank == destination:
 
 !!! tip "Minuscules ou majuscules ?"
 
-    mpi4py propose deux familles de fonctions :
-
-    - en **minuscules** (`send`, `recv`, `gather`…) : elles acceptent
-      n'importe quel objet Python (nombre, liste, dictionnaire). Simples à
-      utiliser, mais plus lentes, car l'objet est converti avant l'envoi.
-    - avec une **majuscule** (`Send`, `Recv`, `Gather`…) : elles
-      travaillent directement sur des tableaux NumPy, sans conversion.
-      C'est la version à privilégier pour de gros volumes de données.
-
-    :material-book-open-variant: [Tutoriel mpi4py](https://mpi4py.readthedocs.io/en/stable/tutorial.html)
+    `send` et `recv` envoient des objets Python ; `Send` et `Recv`
+    envoient directement des tableaux NumPy, beaucoup plus vite pour de
+    gros volumes. Voir
+    [Deux familles de fonctions](python-c-fortran.md#deux-familles-de-fonctions-minuscules-et-majuscules)
+    dans la partie 6.
 
 ## Anatomie d'une communication
 
@@ -199,6 +194,59 @@ attend son partenaire, et cette attente est une perte de ressources.
 
 --8<-- "mpi/barrier-implicit.svg"
 
+## Mesurer le temps d'une section parallèle
+
+Les barrières et les communications point à point complètent la mesure du
+temps vue dans la partie
+[Premier programme parallèle](premier-programme.md#mesurer-le-temps-dexecution).
+
+### Synchroniser avant de mesurer
+
+Les processus n'atteignent pas tous le début de la section au même
+moment. Pour mesurer le **temps total** d'une section, du point de vue de
+l'ensemble du programme, on place des **barrières** au début et à la fin :
+
+```python
+comm.Barrier()                       # tous partent du même point
+start = MPI.Wtime()
+
+# Section à mesurer
+...
+
+comm.Barrier()                       # on attend le plus lent
+total = MPI.Wtime() - start
+```
+
+Le temps mesuré correspond alors à celui du processus **le plus lent**,
+qui détermine la durée réelle de la section. Avec l'exemple de la partie
+précédente, où les rangs travaillent 0,1, 0,2, 0,3 et 0,4 s, `total` vaut
+environ `0.4 s` sur tous les rangs.
+
+!!! warning "Les barrières ont un coût"
+
+    Une barrière force les processus à s'attendre. On l'ajoute pour
+    **mesurer**, mais on évite d'en laisser dans les parties du code dont
+    on veut la meilleure performance.
+
+### Rassembler les temps sur un rang
+
+Pour analyser les temps, on les rassemble en général sur le rang 0, avec
+les communications point à point vues dans cette partie :
+
+```python
+if rank == 0:
+    times = [elapsed]
+    for source in range(1, comm.Get_size()):
+        times.append(comm.recv(source=source))
+    print(f"Min : {min(times):.3f} s, max : {max(times):.3f} s")
+else:
+    comm.send(elapsed, dest=0)
+```
+
+Dans la partie sur les [réductions](reductions.md), nous
+verrons comment obtenir directement le minimum, le maximum ou la moyenne
+en une seule instruction, avec `reduce`.
+
 !!! example "Exercice 4 — Communication en anneau"
 
     Tester `sendrecv` au travers d'un anneau de communication.
@@ -213,4 +261,6 @@ attend son partenaire, et cette attente est une perte de ressources.
 
     - faire communiquer différents processus entre eux ;
     - gérer des chaînes de communication ;
-    - demander une synchronisation explicite.
+    - demander une synchronisation explicite ;
+    - mesurer le temps total d'une section et rassembler les temps sur un
+      rang.

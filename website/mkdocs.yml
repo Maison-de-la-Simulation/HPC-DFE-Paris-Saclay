@@ -18,14 +18,14 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: custom
       accent: deep orange
       toggle:
         icon: material/weather-night
         name: Passer en mode sombre
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: custom
       accent: deep orange
       toggle:
         icon: material/weather-sunny
@@ -64,10 +64,15 @@ nav:
   - MPI:
       - mpi/index.md
       - 1. Description de l'approche: mpi/approche.md
-      - 2. Communications bloquantes: mpi/point-a-point.md
-      - 3. Communications non bloquantes: mpi/non-bloquantes.md
-      - 4. Communications collectives: mpi/collectives.md
-      - 5. Topologie cartésienne: mpi/topologie.md
+      - 2. Premier programme parallèle: mpi/premier-programme.md
+      - 3. Communications bloquantes: mpi/point-a-point.md
+      - 4. Communications non bloquantes: mpi/non-bloquantes.md
+      - 5. Communications collectives:
+          - 5.1 Diffusion et collecte: mpi/collectives.md
+          - 5.2 Réductions: mpi/reductions.md
+          - 5.3 Tailles variables et non bloquantes: mpi/collectives-avancees.md
+      - 6. Python face au C et au Fortran: mpi/python-c-fortran.md
+      - 7. Topologie cartésienne: mpi/topologie.md
   - Performance:
       - performance/index.md
       - 1. Déséquilibre et parallélisme parfait: performance/notions.md
