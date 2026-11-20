@@ -2,6 +2,8 @@
 
 ![CI](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/actions/workflows/main.yml/badge.svg)
 
+> **Site web du cours : <https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/>**
+
 Ce cours de HPC s'articule autour de 4 dossiers :
 - `support`: Les supports de cours (odt et pdf) sont dans cet espace
 - `exercices`: Les exercices mentionnés dans le cours sont dans ce dossier.
@@ -12,10 +14,6 @@ Ce cours de HPC s'articule autour de 4 dossiers :
 
 Ce cours vous présente les bases du calcul haute performance et vous donne les
 bases de la programmation parallèle par passage de message via le standard MPI.
-
-> **Site web du cours : <https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/>**
->
-> Les supports de cours sont progressivement transférés sur ce site.
 
 Le cours se divise en plusieurs parties :
 - [Cours d'introduction au calcul haute-performance](./support/Introduction_HPC.pdf)
