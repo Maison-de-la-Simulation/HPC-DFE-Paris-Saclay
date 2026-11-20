@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 195" role="img" aria-label="Quatre processus, chacun avec sa mémoire privée, échangent des messages">
+<defs><marker id="ar-mp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="mem" x="20" y="20" width="120" height="60" rx="6"/>
+<text class="small" x="80" y="50">Mémoire privée</text>
+<circle class="cpu" cx="80" cy="130" r="26"/>
+<text x="80" y="130">P0</text>
+<line class="link" x1="80" y1="80" x2="80" y2="104"/>
+<rect class="mem" x="180" y="20" width="120" height="60" rx="6"/>
+<text class="small" x="240" y="50">Mémoire privée</text>
+<circle class="cpu" cx="240" cy="130" r="26"/>
+<text x="240" y="130">P1</text>
+<line class="link" x1="240" y1="80" x2="240" y2="104"/>
+<rect class="mem" x="340" y="20" width="120" height="60" rx="6"/>
+<text class="small" x="400" y="50">Mémoire privée</text>
+<circle class="cpu" cx="400" cy="130" r="26"/>
+<text x="400" y="130">P2</text>
+<line class="link" x1="400" y1="80" x2="400" y2="104"/>
+<rect class="mem" x="500" y="20" width="120" height="60" rx="6"/>
+<text class="small" x="560" y="50">Mémoire privée</text>
+<circle class="cpu" cx="560" cy="130" r="26"/>
+<text x="560" y="130">P3</text>
+<line class="link" x1="560" y1="80" x2="560" y2="104"/>
+<line class="link" x1="106" y1="130" x2="214" y2="130" marker-end="url(#ar-mp)" marker-start="url(#ar-mp)"/>
+<line class="link" x1="266" y1="130" x2="374" y2="130" marker-end="url(#ar-mp)" marker-start="url(#ar-mp)"/>
+<line class="link" x1="426" y1="130" x2="534" y2="130" marker-end="url(#ar-mp)" marker-start="url(#ar-mp)"/>
+<text class="small" x="320" y="182">Messages : échange de données et synchronisation</text>
+</svg>

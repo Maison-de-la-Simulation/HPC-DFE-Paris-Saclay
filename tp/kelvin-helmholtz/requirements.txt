@@ -1,7 +1,9 @@
-argparse
-os
-shutil
+# Dépendances du TP Kelvin-Helmholtz (codes séquentiel et MPI, visualisation)
+# Installation : pip install -r requirements.txt
+# mpi4py nécessite une implémentation de MPI installée (voir documentation/mpi.md)
 numpy
 matplotlib
-time
 mpi4py
+
+# Optionnel, pour le mode parallel_mode = "mpi4py_fft" de la version MPI :
+# mpi4py-fft

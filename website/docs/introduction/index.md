@@ -1,7 +1,5 @@
 # I. Introduction au calcul parallèle
 
-![Simulation d'un plasma](../assets/images/introduction/section-plasma.jpg)
-
 Ce premier chapitre pose le décor : à quoi sert la simulation numérique,
 pourquoi elle a besoin de super-calculateurs, d'où viennent ces machines
 et comment elles sont organisées.
@@ -14,6 +12,7 @@ et comment elles sont organisées.
 - estimer un **ordre de grandeur** de temps de calcul et comprendre ce
   qu'est un flop/s ;
 - situer les grandes étapes de l'**histoire** des super-calculateurs ;
+- distinguer **calcul séquentiel** et **calcul parallèle** ;
 - distinguer **mémoire distribuée** et **mémoire partagée**, et relier ces
   notions aux modèles de programmation **MPI** et **OpenMP**.
 
@@ -39,7 +38,16 @@ et comment elles sont organisées.
 
     [:octicons-arrow-right-24: Lire](histoire.md)
 
--   __3. Fonctionnement d'un super-calculateur__
+-   __3. Notion de programme parallèle__
+
+    ---
+
+    Calcul séquentiel et parallèle, parallélisme de données et de
+    tâches, gains et limites.
+
+    [:octicons-arrow-right-24: Lire](programme-parallele.md)
+
+-   __4. Fonctionnement d'un super-calculateur__
 
     ---
 

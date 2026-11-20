@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 560 260" role="img" aria-label="Les voisins du rang 5 : 1 en −y, 9 en +y, 4 en −x, 6 en +x">
+<defs><marker id="ar-nb5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="cpu" x="70" y="148" width="116" height="60" rx="4"/>
+<text x="128.0" y="170">Rang 0</text>
+<text class="small" x="128.0" y="190">(0, 0)</text>
+<rect class="blk-sel" x="190" y="148" width="116" height="60" rx="4"/>
+<text x="248.0" y="170">Rang 1</text>
+<text class="small" x="248.0" y="190">−y : Shift(0, 1)[0]</text>
+<rect class="cpu" x="310" y="148" width="116" height="60" rx="4"/>
+<text x="368.0" y="170">Rang 2</text>
+<text class="small" x="368.0" y="190">(0, 2)</text>
+<rect class="cpu" x="430" y="148" width="116" height="60" rx="4"/>
+<text x="488.0" y="170">Rang 3</text>
+<text class="small" x="488.0" y="190">(0, 3)</text>
+<rect class="blk-sel" x="70" y="84" width="116" height="60" rx="4"/>
+<text x="128.0" y="106">Rang 4</text>
+<text class="small" x="128.0" y="126">−x : Shift(1, 1)[0]</text>
+<rect class="mem" x="190" y="84" width="116" height="60" rx="4"/>
+<text x="248.0" y="106">Rang 5</text>
+<text class="small" x="248.0" y="126">(1, 1)</text>
+<rect class="blk-sel" x="310" y="84" width="116" height="60" rx="4"/>
+<text x="368.0" y="106">Rang 6</text>
+<text class="small" x="368.0" y="126">+x : Shift(1, 1)[1]</text>
+<rect class="cpu" x="430" y="84" width="116" height="60" rx="4"/>
+<text x="488.0" y="106">Rang 7</text>
+<text class="small" x="488.0" y="126">(1, 3)</text>
+<rect class="cpu" x="70" y="20" width="116" height="60" rx="4"/>
+<text x="128.0" y="42">Rang 8</text>
+<text class="small" x="128.0" y="62">(2, 0)</text>
+<rect class="blk-sel" x="190" y="20" width="116" height="60" rx="4"/>
+<text x="248.0" y="42">Rang 9</text>
+<text class="small" x="248.0" y="62">+y : Shift(0, 1)[1]</text>
+<rect class="cpu" x="310" y="20" width="116" height="60" rx="4"/>
+<text x="368.0" y="42">Rang 10</text>
+<text class="small" x="368.0" y="62">(2, 2)</text>
+<rect class="cpu" x="430" y="20" width="116" height="60" rx="4"/>
+<text x="488.0" y="42">Rang 11</text>
+<text class="small" x="488.0" y="62">(2, 3)</text>
+<line class="link" x1="70" y1="228" x2="550" y2="228" marker-end="url(#ar-nb5)"/>
+<text class="small" x="310" y="244">direction 1 (x)</text>
+<line class="link" x1="54" y1="212" x2="54" y2="20" marker-end="url(#ar-nb5)"/>
+<text class="small" x="38" y="116.0" transform="rotate(-90 38 116.0)">direction 0 (y)</text>
+</svg>

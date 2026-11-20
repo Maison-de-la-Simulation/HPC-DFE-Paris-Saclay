@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 540 150" role="img" aria-label="Le communicateur MPI_COMM_WORLD regroupe les rangs 0 à 3 ; les rangs 2 et 3 forment un sous-communicateur">
+<rect class="frame" x="10" y="10" width="520" height="130" rx="12"/>
+<text class="small" x="270" y="30">MPI_COMM_WORLD (4 rangs)</text>
+<rect class="frame" x="268" y="48" width="250" height="82" rx="10"/>
+<text class="small" x="393" y="122">sous-communicateur</text>
+<circle class="cpu" cx="80" cy="82" r="26"/>
+<text x="80" y="82">0</text>
+<circle class="cpu" cx="205" cy="82" r="26"/>
+<text x="205" y="82">1</text>
+<circle class="cpu" cx="330" cy="82" r="26"/>
+<text x="330" y="82">2</text>
+<circle class="cpu" cx="455" cy="82" r="26"/>
+<text x="455" y="82">3</text>
+</svg>

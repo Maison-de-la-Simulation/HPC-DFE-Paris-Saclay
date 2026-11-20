@@ -122,3 +122,16 @@
 .diagram .arrowhead { fill: var(--md-default-fg-color--light); }
 [data-md-color-scheme="slate"] .diagram .node { fill: #8c9eff; }
 [data-md-color-scheme="slate"] .diagram .cpu { fill: rgba(140, 158, 255, 0.12); stroke: #8c9eff; }
+
+/* Data blocks, idle time and synchronisation lines (MPI chapter) */
+.diagram .blk-a   { fill: #ef9a9a; }
+.diagram .blk-b   { fill: #90caf9; }
+.diagram .blk-c   { fill: #a5d6a7; }
+.diagram .blk-d   { fill: #ffe082; }
+.diagram .blk-sum { fill: #ce93d8; }
+.diagram .blk-    { fill: none; stroke: var(--md-default-fg-color--lighter); stroke-width: 1; stroke-dasharray: 3 3; }
+.diagram .blk-sel { fill: var(--md-default-fg-color--lightest); stroke: var(--md-primary-fg-color); stroke-width: 2; }
+.diagram text.on-blk { fill: #1a1a1a; font-weight: 600; }
+.diagram .idle  { fill: none; stroke: var(--md-default-fg-color--lighter); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.diagram .sync  { stroke: var(--md-accent-fg-color); stroke-width: 2.5; stroke-dasharray: 6 4; }
+[data-md-color-scheme="slate"] .diagram .blk-sel { stroke: #8c9eff; }

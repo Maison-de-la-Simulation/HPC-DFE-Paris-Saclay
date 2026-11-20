@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 202" role="img" aria-label="gatherv : selon displacement, les contributions de taille différente sont placées à des positions différentes">
+<text class="small" x="130" y="14">Contributions (send_buffer)</text>
+<rect class="bus" x="10" y="26" width="62" height="26" rx="4"/>
+<text class="small" x="41" y="39">rang 0</text>
+<rect class="blk-a" x="82" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="96.0" y="39">A</text>
+<rect class="blk-a" x="112" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="126.0" y="39">A</text>
+<rect class="blk-a" x="142" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="156.0" y="39">A</text>
+<rect class="blk-a" x="172" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="186.0" y="39">A</text>
+<rect class="bus" x="10" y="60" width="62" height="26" rx="4"/>
+<text class="small" x="41" y="73">rang 1</text>
+<rect class="blk-b" x="82" y="60" width="28" height="26" rx="3"/>
+<text class="on-blk" x="96.0" y="73">B</text>
+<rect class="bus" x="10" y="94" width="62" height="26" rx="4"/>
+<text class="small" x="41" y="107">rang 2</text>
+<rect class="blk-c" x="82" y="94" width="28" height="26" rx="3"/>
+<text class="on-blk" x="96.0" y="107">C</text>
+<rect class="blk-c" x="112" y="94" width="28" height="26" rx="3"/>
+<text class="on-blk" x="126.0" y="107">C</text>
+<rect class="bus" x="10" y="128" width="62" height="26" rx="4"/>
+<text class="small" x="41" y="141">rang 3</text>
+<rect class="blk-d" x="82" y="128" width="28" height="26" rx="3"/>
+<text class="on-blk" x="96.0" y="141">D</text>
+<rect class="blk-d" x="112" y="128" width="28" height="26" rx="3"/>
+<text class="on-blk" x="126.0" y="141">D</text>
+<rect class="blk-d" x="142" y="128" width="28" height="26" rx="3"/>
+<text class="on-blk" x="156.0" y="141">D</text>
+<text class="small" x="470" y="14">recv_buffer sur le rang 0</text>
+<rect class="blk-a" x="320" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="334.0" y="39">A</text>
+<rect class="blk-a" x="350" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="364.0" y="39">A</text>
+<rect class="blk-a" x="380" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="394.0" y="39">A</text>
+<rect class="blk-a" x="410" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="424.0" y="39">A</text>
+<rect class="blk-b" x="440" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="454.0" y="39">B</text>
+<rect class="blk-c" x="470" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="484.0" y="39">C</text>
+<rect class="blk-c" x="500" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="514.0" y="39">C</text>
+<rect class="blk-d" x="530" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="544.0" y="39">D</text>
+<rect class="blk-d" x="560" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="574.0" y="39">D</text>
+<rect class="blk-d" x="590" y="26" width="28" height="26" rx="3"/>
+<text class="on-blk" x="604.0" y="39">D</text>
+<text class="small" x="470" y="62">displacement = [0, 4, 5, 7]</text>
+<rect class="blk-d" x="320" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="334.0" y="93">D</text>
+<rect class="blk-d" x="350" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="364.0" y="93">D</text>
+<rect class="blk-d" x="380" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="394.0" y="93">D</text>
+<rect class="blk-c" x="410" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="424.0" y="93">C</text>
+<rect class="blk-c" x="440" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="454.0" y="93">C</text>
+<rect class="blk-b" x="470" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="484.0" y="93">B</text>
+<rect class="blk-a" x="500" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="514.0" y="93">A</text>
+<rect class="blk-a" x="530" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="544.0" y="93">A</text>
+<rect class="blk-a" x="560" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="574.0" y="93">A</text>
+<rect class="blk-a" x="590" y="80" width="28" height="26" rx="3"/>
+<text class="on-blk" x="604.0" y="93">A</text>
+<text class="small" x="470" y="116">displacement = [6, 5, 3, 0]</text>
+<rect class="blk-b" x="320" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="334.0" y="147">B</text>
+<rect class="blk-a" x="350" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="364.0" y="147">A</text>
+<rect class="blk-a" x="380" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="394.0" y="147">A</text>
+<rect class="blk-a" x="410" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="424.0" y="147">A</text>
+<rect class="blk-a" x="440" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="454.0" y="147">A</text>
+<rect class="blk-d" x="470" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="484.0" y="147">D</text>
+<rect class="blk-d" x="500" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="514.0" y="147">D</text>
+<rect class="blk-d" x="530" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="544.0" y="147">D</text>
+<rect class="blk-c" x="560" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="574.0" y="147">C</text>
+<rect class="blk-c" x="590" y="134" width="28" height="26" rx="3"/>
+<text class="on-blk" x="604.0" y="147">C</text>
+<text class="small" x="470" y="170">displacement = [1, 0, 8, 5]</text>
+<text class="small" x="335" y="190">0</text>
+<text class="small" x="365" y="190">1</text>
+<text class="small" x="395" y="190">2</text>
+<text class="small" x="425" y="190">3</text>
+<text class="small" x="455" y="190">4</text>
+<text class="small" x="485" y="190">5</text>
+<text class="small" x="515" y="190">6</text>
+<text class="small" x="545" y="190">7</text>
+<text class="small" x="575" y="190">8</text>
+<text class="small" x="605" y="190">9</text>
+<text class="small" x="130" y="170">count = [4, 1, 2, 3]</text>
+</svg>

@@ -116,15 +116,14 @@ The code is in a single Python script and is organized into several parts for si
 
 ### Requirements
 
-The execution of the sequential code and the tutorial require the following libraries:
+The execution of the codes and the visualization scripts requires `numpy`,
+`matplotlib` and `mpi4py` (which needs an MPI implementation, see
+[documentation/mpi.md](../../documentation/mpi.md)). They are listed in
+[requirements.txt](./requirements.txt):
 
-- argparse
-- os
-- shutil
-- numpy
-- time
-- mpi4py
-- matplotlib
+```bash
+pip install -r requirements.txt
+```
 
 ### How to run the sequential code
 

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" role="img" aria-label="Nœud de calcul : un processeur de 4 cœurs, chacun avec ses caches L1 et L2, un cache L3 partagé par les cœurs, et la mémoire vive (RAM) reliée au processeur">
+  <title>Nœud de calcul : cœurs, caches et mémoire vive</title>
+  <g font-family="Inter, Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="middle">
+    <!-- Node -->
+    <rect x="6" y="6" width="548" height="388" rx="22" fill="#fff3e0" stroke="#fb8c00" stroke-width="4"/>
+    <text x="200" y="34" font-size="22" font-weight="700" fill="#e65100">Nœud de calcul</text>
+    <!-- Memory bus -->
+    <rect x="366" y="200" width="48" height="16" fill="#9aa0a6"/>
+    <!-- Processor -->
+    <rect x="26" y="54" width="344" height="320" rx="18" fill="#2f343b"/>
+    <text x="198" y="76" font-size="18" font-weight="700" fill="#ffffff">Processeur</text>
+    <g fill="#5c6bc0">
+      <rect x="40" y="92" width="152" height="104" rx="10"/>
+      <rect x="204" y="92" width="152" height="104" rx="10"/>
+      <rect x="40" y="206" width="152" height="104" rx="10"/>
+      <rect x="204" y="206" width="152" height="104" rx="10"/>
+    </g>
+    <g font-size="19" font-weight="700" fill="#ffffff">
+      <text x="116" y="114">Cœur 1</text><text x="280" y="114">Cœur 2</text>
+      <text x="116" y="228">Cœur 3</text><text x="280" y="228">Cœur 4</text>
+    </g>
+    <!-- Private caches L1 / L2 -->
+    <g fill="#ffe082">
+      <rect x="52" y="132" width="58" height="52" rx="6"/><rect x="216" y="132" width="58" height="52" rx="6"/>
+      <rect x="52" y="246" width="58" height="52" rx="6"/><rect x="216" y="246" width="58" height="52" rx="6"/>
+    </g>
+    <g fill="#ffb74d">
+      <rect x="122" y="132" width="58" height="52" rx="6"/><rect x="286" y="132" width="58" height="52" rx="6"/>
+      <rect x="122" y="246" width="58" height="52" rx="6"/><rect x="286" y="246" width="58" height="52" rx="6"/>
+    </g>
+    <g font-size="20" font-weight="700" fill="#3e2723">
+      <text x="81" y="159">L1</text><text x="151" y="159">L2</text>
+      <text x="245" y="159">L1</text><text x="315" y="159">L2</text>
+      <text x="81" y="273">L1</text><text x="151" y="273">L2</text>
+      <text x="245" y="273">L1</text><text x="315" y="273">L2</text>
+    </g>
+    <!-- Shared cache L3 -->
+    <rect x="40" y="320" width="316" height="42" rx="8" fill="#f57c00"/>
+    <text x="198" y="342" font-size="19" font-weight="700" fill="#ffffff">Cache L3 (partagé)</text>
+    <!-- RAM module -->
+    <rect x="414" y="70" width="122" height="286" rx="8" fill="#2e7d32"/>
+    <g fill="#37474f">
+      <rect x="445" y="88" width="60" height="44" rx="4"/>
+      <rect x="445" y="142" width="60" height="44" rx="4"/>
+      <rect x="445" y="240" width="60" height="44" rx="4"/>
+      <rect x="445" y="294" width="60" height="44" rx="4"/>
+    </g>
+    <text x="475" y="207" font-size="24" font-weight="700" fill="#ffffff">RAM</text>
+  </g>
+</svg>

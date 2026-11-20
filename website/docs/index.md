@@ -44,10 +44,10 @@ par échange de messages avec MPI.
 
     ---
 
-    Communications point à point, collectives, topologies.
+    Communications point à point, collectives, topologies, avec Python
+    et mpi4py.
 
-    *Bientôt en ligne* — en attendant :
-    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/MPI_python.pdf)
+    [:octicons-arrow-right-24: Lire le chapitre](mpi/index.md)
 
 -   :material-speedometer:{ .lg .middle } __IV. Mesure de la performance__
 

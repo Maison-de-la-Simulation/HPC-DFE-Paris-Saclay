@@ -228,17 +228,3 @@ le [**TOP500**](https://www.top500.org/).
 <figure markdown>
 ![Site du TOP500](../assets/images/introduction/top500.jpg)
 </figure>
-
-## Testez-vous
-
-??? question "Combien de temps faudrait-il pour simuler la goutte d'eau sur une machine de 1 Eflop/s ?"
-
-    \( t = 10^{21} / 10^{18} = 10^{3}\ \text{s} \approx 17\ \text{minutes}\).
-    Le même calcul qu'en 30 ans sur un ordinateur de bureau.
-
-??? question "Quelle est la différence entre puissance théorique et puissance réelle ?"
-
-    La puissance théorique est la somme des puissances crête de toutes les
-    unités de calcul. La puissance réelle est mesurée par un *benchmark*
-    (par exemple HPL pour le TOP500) ; elle est toujours inférieure à la
-    puissance théorique.

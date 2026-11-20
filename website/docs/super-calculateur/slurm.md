@@ -91,17 +91,3 @@ celle de SLURM.
     ```bash
     vim exercices/ruche/2_slurm.md
     ```
-
-## Testez-vous
-
-??? question "Votre job reste en attente dans `squeue`. Est-ce une erreur ?"
-
-    Non : SLURM attend que les ressources demandées se libèrent et
-    applique des règles de priorité entre les utilisateurs. Plus vous
-    demandez de ressources ou de temps, plus l'attente peut être longue.
-
-??? question "Où trouver ce que votre programme a affiché ?"
-
-    Dans les fichiers indiqués par `--output` (sortie standard) et
-    `--error` (sortie d'erreur), ici `output` et `error`, dans le dossier
-    de soumission.

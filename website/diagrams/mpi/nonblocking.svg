@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 182" role="img" aria-label="isend et irecv rendent la main tout de suite ; le calcul continue pendant l'échange jusqu'au wait">
+<defs><marker id="ar-nb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="small" x="32" y="43">rang 0</text>
+<rect class="mem" x="70" y="30" width="38" height="26" rx="4"/>
+<text class="small" x="89.0" y="43.0">isend</text>
+<rect class="cpu" x="112" y="30" width="68" height="26" rx="4"/>
+<text class="small" x="146.0" y="43.0">Calcul</text>
+<rect class="cpu" x="182" y="30" width="68" height="26" rx="4"/>
+<text class="small" x="216.0" y="43.0">Calcul</text>
+<rect class="cpu" x="252" y="30" width="68" height="26" rx="4"/>
+<text class="small" x="286.0" y="43.0">Calcul</text>
+<rect class="cpu" x="322" y="30" width="68" height="26" rx="4"/>
+<text class="small" x="356.0" y="43.0">Calcul</text>
+<rect class="cpu" x="392" y="30" width="68" height="26" rx="4"/>
+<text class="small" x="426.0" y="43.0">Calcul</text>
+<rect class="mem" x="466" y="30" width="42" height="26" rx="4"/>
+<text class="small" x="487.0" y="43.0">wait</text>
+<rect class="cpu" x="512" y="30" width="108" height="26" rx="4"/>
+<text class="small" x="566.0" y="43.0">Calcul</text>
+<text class="small" x="32" y="123">rang 1</text>
+<rect class="mem" x="70" y="110" width="38" height="26" rx="4"/>
+<text class="small" x="89.0" y="123.0">irecv</text>
+<rect class="cpu" x="112" y="110" width="68" height="26" rx="4"/>
+<text class="small" x="146.0" y="123.0">Calcul</text>
+<rect class="cpu" x="182" y="110" width="68" height="26" rx="4"/>
+<text class="small" x="216.0" y="123.0">Calcul</text>
+<rect class="cpu" x="252" y="110" width="68" height="26" rx="4"/>
+<text class="small" x="286.0" y="123.0">Calcul</text>
+<rect class="cpu" x="322" y="110" width="68" height="26" rx="4"/>
+<text class="small" x="356.0" y="123.0">Calcul</text>
+<rect class="cpu" x="392" y="110" width="68" height="26" rx="4"/>
+<text class="small" x="426.0" y="123.0">Calcul</text>
+<rect class="mem" x="466" y="110" width="42" height="26" rx="4"/>
+<text class="small" x="487.0" y="123.0">wait</text>
+<rect class="cpu" x="512" y="110" width="108" height="26" rx="4"/>
+<text class="small" x="566.0" y="123.0">Calcul</text>
+<rect class="frame" x="110" y="62" width="350" height="42" rx="6"/>
+<text class="small" x="285" y="76">échange en arrière-plan</text>
+<text class="small" x="285" y="92">recouvrement communication / calcul</text>
+<line class="link" x1="70" y1="162" x2="620" y2="162" marker-end="url(#ar-nb)"/>
+<text class="small" x="600" y="176">Temps</text>
+</svg>

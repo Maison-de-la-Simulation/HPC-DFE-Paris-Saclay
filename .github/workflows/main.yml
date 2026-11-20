@@ -127,8 +127,12 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Python packages
-        run: pip install numpy matplotlib mpi4py vtk
+      - name: Install Python packages (requirements of each TP)
+        run: |
+          pip install \
+            -r tp/kelvin-helmholtz/requirements.txt \
+            -r tp/mandelbulb/requirements.txt \
+            -r tp/shallow/requirements.txt
 
       - name: Kelvin-Helmholtz - sequential
         working-directory: tp/kelvin-helmholtz/python/seq

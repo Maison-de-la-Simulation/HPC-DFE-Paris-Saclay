@@ -172,17 +172,3 @@ enveloppe énergétique de 20 MW.
 ![Le super-calculateur Frontier](../assets/images/introduction/frontier.jpg)
 <figcaption><strong>Frontier</strong> (USA), premier super-ordinateur à atteindre une puissance exaflopique : \(10^{18}\) opérations par seconde en double précision.</figcaption>
 </figure>
-
-## Testez-vous
-
-??? question "Qu'est-ce qu'un processeur vectoriel ?"
-
-    Un processeur qui applique la **même opération** à tous les éléments
-    d'un vecteur de données **en même temps**, au lieu de traiter un
-    élément après l'autre (processeur scalaire).
-
-??? question "Pourquoi les super-calculateurs utilisent-ils depuis les années 90 des processeurs issus du grand public ?"
-
-    Pour des raisons économiques et techniques : coûts de R&D et de
-    production réduits, et outils de développement communs avec le reste
-    de l'informatique.

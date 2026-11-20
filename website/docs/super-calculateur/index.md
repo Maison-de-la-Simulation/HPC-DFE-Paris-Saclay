@@ -1,7 +1,5 @@
 # II. Prise en main d'un super-calculateur
 
-![Simulation d'un plasma](../assets/images/introduction/section-plasma.jpg)
-
 Ce chapitre vous apprend à utiliser concrètement un super-calculateur :
 s'y connecter, préparer son environnement et lancer des calculs via un
 ordonnanceur de tâches.
