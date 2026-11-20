@@ -9,6 +9,7 @@ Ce cours de HPC s'articule autour de 4 dossiers :
 - `exercices`: Les exercices mentionnés dans le cours sont dans ce dossier.
 - `tp`: Ce dossier contient les TPs.
 - `documentation` : de l'aide à l'installation des bibliothèques et autre
+- `website` : contient les pages et les assets pour le déploiement du site web
 
 ## Supports de cours
 
