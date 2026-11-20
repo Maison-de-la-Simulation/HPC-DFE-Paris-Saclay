@@ -1,11 +1,11 @@
 # Cours de Calcul Haute Performance - Master 2 Dynamique des Fluide et Energétique - Paris Saclay
 
-![CI](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/actions/workflows/main.yml/badge.svg)
+[![CI](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/actions/workflows/main.yml/badge.svg)](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/actions/workflows/main.yml)
+[![Site web](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/actions/workflows/website.yml/badge.svg?branch=master)](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/actions/workflows/website.yml)
 
 > **Site web du cours : <https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/>**
 
 Ce cours de HPC s'articule autour de 4 dossiers :
-- `support`: Les supports de cours (odt et pdf) sont dans cet espace
 - `exercices`: Les exercices mentionnés dans le cours sont dans ce dossier.
 - `tp`: Ce dossier contient les TPs.
 - `documentation` : de l'aide à l'installation des bibliothèques et autre
