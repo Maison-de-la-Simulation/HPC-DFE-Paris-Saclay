@@ -88,7 +88,7 @@ local_integration = 0
 
 #end_loop = MPI.Wtime() - start
 
-#start = MPI.Wtime()
+start = MPI.Wtime()
 
 # use numpy
 x = np.arange(min+0.5*delta, max, delta)
@@ -96,7 +96,7 @@ local_integration = np.sum(np.sin(x)*delta)
 
 end_numpy = MPI.Wtime() - start
 
-print(" Le rang {} a pour intégration locale {} réalisée en {} ({}) secondes.".format(rank,local_integration, end_loop, end_numpy))
+print(" Le rang {} a pour intégration locale {} réalisée en {} secondes.".format(rank,local_integration, end_numpy))
 
 # __________________________________
 # Réduction MPI

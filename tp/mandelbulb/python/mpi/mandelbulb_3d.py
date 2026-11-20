@@ -342,16 +342,17 @@ if cart_comm.rank == 0:
 # ____________________________________________________________________
 
 mean_time_loop = cart_comm.reduce(end - start, op=MPI.SUM, root=0)
-mean_time_loop = mean_time_loop/number_of_ranks
 min_time_loop = cart_comm.reduce(end - start, op=MPI.MIN, root=0)
 max_time_loop = cart_comm.reduce(end - start, op=MPI.MAX, root=0)
 
 mean_time_volume = cart_comm.reduce(time_end_volume - time_start_volume, op=MPI.SUM, root=0)
-mean_time_volume = mean_time_volume/number_of_ranks
 min_time_volume = cart_comm.reduce(time_end_volume - time_start_volume, op=MPI.MIN, root=0)
 max_time_volume = cart_comm.reduce(time_end_volume - time_start_volume, op=MPI.MAX, root=0)
 
 if cart_comm.rank == 0:
+    # reduce only returns the result on the root rank
+    mean_time_loop = mean_time_loop/number_of_ranks
+    mean_time_volume = mean_time_volume/number_of_ranks
     print(" > Time to process the Mandelbulb: mean = {}, min = {}, max = {}".format(mean_time_loop, min_time_loop, max_time_loop))
     print(" > Time to compute the volume: mean = {}, min = {}, max = {}".format(mean_time_volume, min_time_volume, max_time_volume))
 
