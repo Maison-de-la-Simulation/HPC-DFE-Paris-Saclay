@@ -69,7 +69,3 @@ dans [le dossier exercices](./exercices/).
 - [HDF5](./documentation/hdf5.md).
 - [readme2tex](./documentation/readme2tex.md).
 - [Utilisation de Ruche](./documentation/ruche.md).
-
-## Deepnote
-
-Vous pouvez essayer ce projet en ligne grâce au service [Deepnote](./documentation/deepnote.md).
