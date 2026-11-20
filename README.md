@@ -55,7 +55,7 @@ dans [le dossier exercices](./exercices/).
 
 ## Installation des dépendances
 
-- [MPI](./documentation/mpi.md).
+- [Installer le cours sur son ordinateur](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html).
 - [HDF5](./documentation/hdf5.md).
 - [readme2tex](./documentation/readme2tex.md).
 - [Utilisation de Ruche](./documentation/ruche.md).

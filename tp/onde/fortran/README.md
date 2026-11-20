@@ -75,7 +75,7 @@ C'est normalement le cas de la plupart des compilateurs récents.
 
 Vous aurez aussi besoin d'installer MPI.
 Sur les postes de travail de l'université, MPI est déjà installé.
-Pour l'installer sur vos ordinateurs personnels, utilisez les instructions dans le dossier [./documentation](../../documentation/mpi.md).
+Pour l'installer sur vos ordinateurs personnels, utilisez les instructions du [guide d'installation](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html).
 
 ## Compilation et exécution du programme
 

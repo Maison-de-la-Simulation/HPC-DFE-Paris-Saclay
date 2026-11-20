@@ -78,7 +78,7 @@ Il se compose de plusieurs parties :
 Le code nécessite les bibliothèques suivantes :
 
 - `numpy` : numpy est une bibliothèque de calcul numérique en Python.
-- `mpi4py` : l'interface Python de MPI, pour la version parallèle. Elle nécessite une implémentation de MPI (voir [documentation/mpi.md](../../documentation/mpi.md)).
+- `mpi4py` : l'interface Python de MPI, pour la version parallèle. Elle nécessite une implémentation de MPI (voir le [guide d'installation](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)).
 - `vtk` : VTK est une bibliothèque de visualisation 3D. Elle est utilisée pour sauvegarder le Mandelbulb au format VTK permettant de le visualiser avec des logiciels comme Paraview.
 - `matplotlib` : pour les scripts de tracé des études de scalabilité.
 

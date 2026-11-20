@@ -111,8 +111,8 @@ Le projet est composé de plusieurs dossiers :
 ## Dépendances
 
 Les codes et les scripts de visualisation nécessitent `numpy`, `matplotlib`,
-`scipy` et `mpi4py` (qui nécessite une implémentation de MPI, voir
-[documentation/mpi.md](../../documentation/mpi.md)). Elles sont listées dans
+`scipy` et `mpi4py` (qui nécessite une implémentation de MPI, voir le
+[guide d'installation](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)). Elles sont listées dans
 [requirements.txt](./requirements.txt) :
 
 ```bash

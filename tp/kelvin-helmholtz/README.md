@@ -117,8 +117,8 @@ The code is in a single Python script and is organized into several parts for si
 ### Requirements
 
 The execution of the codes and the visualization scripts requires `numpy`,
-`matplotlib` and `mpi4py` (which needs an MPI implementation, see
-[documentation/mpi.md](../../documentation/mpi.md)). They are listed in
+`matplotlib` and `mpi4py` (which needs an MPI implementation, see the
+[installation guide](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)). They are listed in
 [requirements.txt](./requirements.txt):
 
 ```bash
