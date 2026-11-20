@@ -136,10 +136,10 @@ left_rank, right_rank = cart_comm.Shift(0, 1)
 
     Mettre en place une topologie cartésienne 2D.
 
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/9_cartesian_topology)
+    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/cartesian_topology)
 
     Dans votre éditeur :
-    `exercices/mpi/python/9_cartesian_topology/README.md`.
+    `exercices/mpi/python/cartesian_topology/README.md`.
 
 ## Bilan
 

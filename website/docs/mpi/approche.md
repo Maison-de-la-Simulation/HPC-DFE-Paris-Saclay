@@ -108,10 +108,10 @@ MPI.Finalize()
 
     Concevoir vos premiers programmes MPI et les lancer.
 
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/1_initialization)
+    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/initialization)
 
     Vous pouvez aussi ouvrir l'énoncé dans votre éditeur :
-    `exercices/mpi/python/1_initialization/README.md`.
+    `exercices/mpi/python/initialization/README.md`.
 
 ## Notion de parallélisme
 
@@ -167,10 +167,10 @@ if rank == 1:
     Vous familiariser avec la notion de parallélisme en partageant le
     travail entre les processus.
 
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/2_embarrassingly_parallel)
+    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/embarrassingly_parallel)
 
     Dans votre éditeur :
-    `exercices/mpi/python/2_embarrassingly_parallel/README.md`.
+    `exercices/mpi/python/embarrassingly_parallel/README.md`.
 
 ## Bilan
 

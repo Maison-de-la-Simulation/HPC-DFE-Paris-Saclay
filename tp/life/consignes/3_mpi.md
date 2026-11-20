@@ -33,7 +33,7 @@ Rajoutez la déclaration des nouveaux paramètres nécessaires à MPI là où to
 Placez l'initialisation de MPI après la déclaration des paramètre avant la configuration par défaut.
 
 c) Toujours au début de [main.cpp](../cpp/main.cpp), ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
-Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
+Aidez-vous du premier exercice sur MPI si besoin `initialization`.
 
 d) Ensuite, rajoutez la fonction permettant de finaliser MPI tout de suite à la fin du programme.
 

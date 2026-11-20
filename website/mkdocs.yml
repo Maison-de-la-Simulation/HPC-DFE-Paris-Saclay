@@ -68,6 +68,11 @@ nav:
       - 3. Communications non bloquantes: mpi/non-bloquantes.md
       - 4. Communications collectives: mpi/collectives.md
       - 5. Topologie cartésienne: mpi/topologie.md
+  - Performance:
+      - performance/index.md
+      - 1. Déséquilibre et parallélisme parfait: performance/notions.md
+      - 2. Scalabilité: performance/scalabilite.md
+      - 3. Loi d'Amdahl: performance/amdahl.md
 
 markdown_extensions:
   - abbr

@@ -83,15 +83,15 @@ et un dossier `correction`.
 
 | N° | Exercice | Notion |
 |---|---|---|
-| 1 | [Premier programme MPI](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/1_initialization) | Initialisation, rang, nombre de rangs |
-| 2 | [Parallélisme parfait](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/2_embarrassingly_parallel) | Partage du travail |
-| 3 | [Communications bloquantes](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/3_blocking_com) | `send` / `recv` |
-| 4 | [Communication en anneau](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/4_sendrecv) | `sendrecv` |
-| 5 | [Communications non bloquantes](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/5_nonblocking_com) | `isend` / `irecv` |
-| 6 | [Communications de tableaux](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/6_array_com) | Tableaux NumPy |
-| 7 | [Collecte](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/7_gather_com) | `gather` |
-| 8 | [Réduction](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/8_reduce_com) | `reduce` |
-| 9 | [Topologie cartésienne](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/9_cartesian_topology) | `Create_cart`, `Shift` |
+| 1 | [Premier programme MPI](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/initialization) | Initialisation, rang, nombre de rangs |
+| 2 | [Parallélisme parfait](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/embarrassingly_parallel) | Partage du travail |
+| 3 | [Communications bloquantes](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/blocking_com) | `send` / `recv` |
+| 4 | [Communication en anneau](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/sendrecv) | `sendrecv` |
+| 5 | [Communications non bloquantes](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/nonblocking_com) | `isend` / `irecv` |
+| 6 | [Communications de tableaux](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/array_com) | Tableaux NumPy |
+| 7 | [Collecte](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/gather_com) | `gather` |
+| 8 | [Réduction](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/reduce_com) | `reduce` |
+| 9 | [Topologie cartésienne](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/cartesian_topology) | `Create_cart`, `Shift` |
 
 ## Pour aller plus loin
 

@@ -93,14 +93,14 @@ _, recv_message = MPI.Request.waitall([req_send, req_recv])
 
     Mettre en pratique `isend` et `irecv`.
 
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/5_nonblocking_com)
+    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/nonblocking_com)
 
-    Dans votre éditeur : `exercices/mpi/python/5_nonblocking_com/README.md`.
+    Dans votre éditeur : `exercices/mpi/python/nonblocking_com/README.md`.
 
 !!! example "Exercice 6 — Communications de tableaux"
 
     Communiquer non plus un simple nombre mais un tableau NumPy.
 
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/6_array_com)
+    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/array_com)
 
-    Dans votre éditeur : `exercices/mpi/python/6_array_com/README.md`.
+    Dans votre éditeur : `exercices/mpi/python/array_com/README.md`.

@@ -53,10 +53,10 @@ par échange de messages avec MPI.
 
     ---
 
-    Accélération, efficacité, scalabilité forte et faible.
+    Déséquilibre de charge, scalabilité forte et faible, efficacité et
+    loi d'Amdahl.
 
-    *Bientôt en ligne* — en attendant :
-    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/mesure_performance.pdf)
+    [:octicons-arrow-right-24: Lire le chapitre](performance/index.md)
 
 -   :material-flask:{ .lg .middle } __V. Travaux pratiques__
 

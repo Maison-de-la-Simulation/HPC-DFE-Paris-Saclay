@@ -69,39 +69,39 @@ jobs:
         run: pip install numpy matplotlib mpi4py
 
       - name: 1 - Initialization
-        working-directory: exercices/mpi/python/1_initialization/correction
+        working-directory: exercices/mpi/python/initialization/correction
         run: $MPIRUN -np 4 python main.py
 
       - name: 2 - Embarrassingly parallel
-        working-directory: exercices/mpi/python/2_embarrassingly_parallel/correction
+        working-directory: exercices/mpi/python/embarrassingly_parallel/correction
         run: $MPIRUN -np 4 python main.py
 
       - name: 3 - Blocking communications
-        working-directory: exercices/mpi/python/3_blocking_com/correction
+        working-directory: exercices/mpi/python/blocking_com/correction
         run: $MPIRUN -np 4 python main.py
 
       - name: 4 - Sendrecv
-        working-directory: exercices/mpi/python/4_sendrecv/correction
+        working-directory: exercices/mpi/python/sendrecv/correction
         run: $MPIRUN -np 4 python main.py
 
       - name: 5 - Non-blocking communications
-        working-directory: exercices/mpi/python/5_nonblocking_com/correction
+        working-directory: exercices/mpi/python/nonblocking_com/correction
         run: $MPIRUN -np 4 python main.py
 
       - name: 6 - Array communications
-        working-directory: exercices/mpi/python/6_array_com/correction
+        working-directory: exercices/mpi/python/array_com/correction
         run: $MPIRUN -np 4 python main.py
 
       - name: 7 - Gather
-        working-directory: exercices/mpi/python/7_gather_com/correction
+        working-directory: exercices/mpi/python/gather_com/correction
         run: $MPIRUN -np 4 python main.py
 
       - name: 8 - Reduce
-        working-directory: exercices/mpi/python/8_reduce_com/correction
+        working-directory: exercices/mpi/python/reduce_com/correction
         run: $MPIRUN -np 4 python main.py
 
       - name: 9 - Cartesian topology (4 x 5 grid)
-        working-directory: exercices/mpi/python/9_cartesian_topology/correction
+        working-directory: exercices/mpi/python/cartesian_topology/correction
         run: $MPIRUN -np 20 python main.py
 
       - name: Performance

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 262" role="img" aria-label="Loi d'Amdahl : sur 1 unité, le temps est la somme d'une partie séquentielle et d'une partie parallèle ; sur 4 unités, seule la partie parallèle est divisée par 4">
+<defs><marker id="ar-amd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="small" x="56" y="34">1 unité</text>
+<rect class="mem" x="110" y="21" width="78" height="26" rx="4"/>
+<text class="small" x="149" y="34">αs</text>
+<rect class="cpu" x="190" y="21" width="398" height="26" rx="4"/>
+<text class="small" x="389" y="34">αp</text>
+<text class="small" x="350" y="62">t(1) = (αs + αp) t(1)</text>
+<text class="small" x="56" y="128">4 unités</text>
+<rect class="mem" x="110" y="86" width="78" height="26" rx="4"/>
+<text class="small" x="149" y="99">αs</text>
+<rect class="cpu" x="190" y="86" width="98" height="26" rx="4"/>
+<text class="small" x="239" y="99">αp / 4</text>
+<rect class="idle" x="110" y="116" width="78" height="26" rx="4"/>
+<rect class="cpu" x="190" y="116" width="98" height="26" rx="4"/>
+<text class="small" x="239" y="129">αp / 4</text>
+<rect class="idle" x="110" y="146" width="78" height="26" rx="4"/>
+<rect class="cpu" x="190" y="146" width="98" height="26" rx="4"/>
+<text class="small" x="239" y="159">αp / 4</text>
+<rect class="idle" x="110" y="176" width="78" height="26" rx="4"/>
+<rect class="cpu" x="190" y="176" width="98" height="26" rx="4"/>
+<text class="small" x="239" y="189">αp / 4</text>
+<text class="small" x="240" y="222">t(4) = (αs + αp / 4) t(1)</text>
+<text class="small" x="440" y="128">temps gagné</text>
+<line class="link" x1="110" y1="244" x2="620" y2="244" marker-end="url(#ar-amd)"/>
+<text class="small" x="600" y="258">Temps</text>
+</svg>

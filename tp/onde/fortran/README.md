@@ -298,7 +298,7 @@ Notez qu'il faudra l'inclure dans chaque fichier où sera appelées des fonction
 Effectuez l'initialisation de MPI tout en récupérant le nombre de rang et le rang du processus en cours.
 Vous devrez déclarer les nouveaux paramètres dans le fichier [parameters.F90](./sequential/parameters.F90).
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
-Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
+Aidez-vous du premier exercice sur MPI si besoin `initialization`.
 N'oubliez pas de finaliser MPI tout de suite à la fin du programme.
 
 **Question 4.3 - Timers :** Avant de rentrer dans le coeur du sujet, nous allons préparer le calcul du temps avec MPI.
@@ -334,7 +334,7 @@ Ces fonctions doivent être placées après la lecture des paramètres mais avan
 
 - d) Rajoutez une condition qui vérifie que le nombre de processus dans chaque direction est conforme avec le nombre total de processus donné par la commande `mpirun`.
 
-Pour les points a) à c), vous pouvez utiliser l'exercice 6 `6_cartesian_com` pour vous aider ainsi que le cours.
+Pour les points a) à c), vous pouvez utiliser l'exercice 6 `cartesian_com` pour vous aider ainsi que le cours.
 
 - e) Compilez le code et exécutez-le en demandant qu'un seul processus pour vérifier qu'il n'y a pas d'erreur à ce stade.
 

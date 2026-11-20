@@ -124,9 +124,9 @@ chacune du temps :
 
     Tester les communications bloquantes `send` et `recv`.
 
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/3_blocking_com)
+    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/blocking_com)
 
-    Dans votre éditeur : `exercices/mpi/python/3_blocking_com/README.md`.
+    Dans votre éditeur : `exercices/mpi/python/blocking_com/README.md`.
 
 ## Échange mutuel : `sendrecv`
 
@@ -203,9 +203,9 @@ attend son partenaire, et cette attente est une perte de ressources.
 
     Tester `sendrecv` au travers d'un anneau de communication.
 
-    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/4_sendrecv)
+    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/mpi/python/sendrecv)
 
-    Dans votre éditeur : `exercices/mpi/python/4_sendrecv/README.md`.
+    Dans votre éditeur : `exercices/mpi/python/sendrecv/README.md`.
 
 ## Bilan
 
