@@ -13,6 +13,10 @@ Ce cours de HPC s'articule autour de 4 dossiers :
 Ce cours vous présente les bases du calcul haute performance et vous donne les
 bases de la programmation parallèle par passage de message via le standard MPI.
 
+> **Site web du cours : <https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/>**
+>
+> Les supports de cours sont progressivement transférés sur ce site.
+
 Le cours se divise en plusieurs parties :
 - [Cours d'introduction au calcul haute-performance](./support/Introduction_HPC.pdf)
 - [Cours sur MPI en Python](./support/MPI_python.pdf)
@@ -25,11 +29,6 @@ Le cours se divise en plusieurs parties :
 
 Il y a plusieurs exercices en lien avec le cours que vous trouverez
 dans [le dossier exercices](./exercices/).
-
-- Exercices OpenMP
-  - [Région parallèle](./exercices/openmp/1_omp_parallel)
-  - [Boucle parallèle](./exercices/openmp/2_omp_do)
-  - [Région critical et atomics](./exercices/openmp/3_omp_critical)
 
 - Exercices MPI Python
   - [Initialisation de MPI](./exercices/mpi/python/1_initialization).
@@ -52,6 +51,11 @@ dans [le dossier exercices](./exercices/).
   - [Création d'un communicateur cartésien](./exercices/mpi/cpp/7_cartesian_com).
   - [Utilisation du type vector](./exercices/mpi/cpp/8_type_vector).
   - [Exercice d'échange de cellules fantômes](./exercices/mpi/cpp/9_gather_matrix).
+
+- Exercices OpenMP
+  - [Région parallèle](./exercices/openmp/1_omp_parallel)
+  - [Boucle parallèle](./exercices/openmp/2_omp_do)
+  - [Région critical et atomics](./exercices/openmp/3_omp_critical)
 
 ## Travaux pratiques
 
