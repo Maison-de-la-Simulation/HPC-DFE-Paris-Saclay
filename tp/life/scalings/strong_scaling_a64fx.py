@@ -85,7 +85,7 @@ ax0.legend(loc="best",ncol=2)
 
 fig0.tight_layout()
 
-fig0.savefig("../../../support/materiel/life_mpi_strong_scaling_time.png")
+fig0.savefig("../../../assets/life_mpi_strong_scaling_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
@@ -109,7 +109,7 @@ ax.legend(loc="best")
 
 fig1.tight_layout()
 
-fig1.savefig("../../../support/materiel/life_mpi_strong_scaling_efficiency.png")
+fig1.savefig("../../../assets/life_mpi_strong_scaling_efficiency.png")
 
 # ______________________________________________________________________________
 # Figure Part MPI
@@ -131,7 +131,7 @@ ax.legend(loc="best")
 
 fig2.tight_layout()
 
-fig2.savefig("../../../support/materiel/life_mpi_strong_scaling_part.png")
+fig2.savefig("../../../assets/life_mpi_strong_scaling_part.png")
 
 # _____________________________________________________________________________
 

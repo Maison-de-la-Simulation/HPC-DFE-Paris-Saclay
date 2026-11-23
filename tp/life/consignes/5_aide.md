@@ -71,7 +71,7 @@ décrire une ligne bien qu'un `MPI_Type_vector` fonctionne aussi.
 
 Le schéma suivant vous aidera à dimensionner vos types dérivés.
 
-<img src="../../../support/materiel/life_subdomain.svg" height="800">
+<img src="../../../assets/life_subdomain.svg" height="800">
 
 Attention ensuite à bien calculer l'indice de départ dans les fonctions d'échange.
 

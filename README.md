@@ -63,6 +63,5 @@ dans [le dossier exercices](./exercices/).
 
 - [Installer le cours sur son ordinateur](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html).
 - Bibliothèques Python du cours : `pip install -r requirements.txt` (fichier [requirements.txt](./requirements.txt)). h5py et VTK y sont facultatifs : h5py sert au chapitre HDF5 et au TP Kelvin-Helmholtz, VTK au TP Mandelbulb.
-- [HDF5](./documentation/hdf5.md).
-- [readme2tex](./documentation/readme2tex.md).
+- [HDF5 parallèle](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html#4-installer-hdf5-en-version-parallele-facultatif).
 - [Utilisation de Ruche](./documentation/ruche.md).

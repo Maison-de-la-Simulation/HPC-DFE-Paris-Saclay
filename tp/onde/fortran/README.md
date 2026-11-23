@@ -46,7 +46,7 @@ dt \leq dx / c
 Dans le code, les grandeurs discrétisées seront donc représentées par une grille structurée comme illustrée
 sur la figure ci-dessous :
 
-<img src="../../../support/materiel/discretization_wave_equation.png" width="80%"/>
+<img src="../../../assets/discretization_wave_equation.png" width="80%"/>
 
 On remarque qu'obtenir la valeur de $`U^{n+1}_{i,j}`$ ne fait qu'appel qu'à des noeuds proches.
 Ce type de problème se nomme problème de *stencil*.
@@ -348,7 +348,7 @@ Il est nécessaire de mettre en place dans un modèle de programmation par passa
 afin de recevoir des sous-domaines voisins la portion de données nécessaire à la résolution du schéma numérique.
 La décomposition MPI et les cellules fantômes sont illustrées par la figure ci-dessous :
 
-![MPI decomposition pour l'équation d'onde](../../../support/materiel/mpi_decomposition_wave_equation.png)
+![MPI decomposition pour l'équation d'onde](../../../assets/mpi_decomposition_wave_equation.png)
 
 Pour les noeuds qui sont aux bords des sous-domaines, il est nécessaire de communiquer les valeurs adjacentes situées sur les autres sous-domaines MPI pour résoudre le schéma numérique.
 Au lieu de communiquer chaque valeur une par une, il est préférable de les communiquer par bloc et de les stocker dans ce qu'on appelle

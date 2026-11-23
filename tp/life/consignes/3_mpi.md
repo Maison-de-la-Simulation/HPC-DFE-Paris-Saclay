@@ -101,18 +101,18 @@ Le but va maintenant être de décomposer le domaine en sous-domaine.
 La figure ci-dessous illustre les différentes étapes et la création des cellules fantômes.
 Chaque cellule a besoin du contenu des voisines au temps précédent pour savoir comment évoluer.
 
-<img src="../../../support/materiel/life_grid_decomposition_0.svg" height="500">
+<img src="../../../assets/life_grid_decomposition_0.svg" height="500">
 
 La figure suivant illustre la décomposition de la grille avec une topologie cartésienne.
 Il y a dans cet exemple 4 rangs et donc 4 sous-domaines avec chacun leur grille indépendante.
 Après la décomposition du domaine, certaines cellules à la frontière avec les autres rangs MPI n'ont plus directement accès au contenu de leurs voisines.
 
-<img src="../../../support/materiel/life_grid_decomposition_1.svg" height="500">
+<img src="../../../assets/life_grid_decomposition_1.svg" height="500">
 
 On fabrique donc une nouvelle rangée de cellule tout autour des frontières entre sous-domaines MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
 Ces rangées se nomment cellules fantômes.
 
-<img src="../../../support/materiel/life_grid_decomposition_2.svg" height="1100">
+<img src="../../../assets/life_grid_decomposition_2.svg" height="1100">
 
 Il faudra à chaque itération utiliser les communications MPI pour remplir ces cellules fantômes à partir des autres rangs.
 Les communications doivent se faire par étape, d'abord une direction (x par exemple) puis une autre (y).

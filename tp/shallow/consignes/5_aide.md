@@ -16,4 +16,4 @@ Il y a plusieurs choix possible pour l'initialisation de cette variable. On peut
 
 J'ai mis à jour le schéma des consignes pour le faire apparaître plus clairement. Dans ce cas, j'ai choisi de faire apparaître `local_start` comme étant le premier point du sous-domaine.
 
-<img src="../../../support/materiel/shallow_domain_decomposition_3.svg" height="400">
+<img src="../../../assets/shallow_domain_decomposition_3.svg" height="400">

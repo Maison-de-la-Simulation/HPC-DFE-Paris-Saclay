@@ -30,7 +30,7 @@ Nous allons maintenant à la suite de l'initialisation de MPI construire notre t
 
 Vous avez le choix de choisir une topologie 1D (parallèlisme dans une seule direction) ou de tenter une topologie 3D (parallèlisme dans toutes les directions). Le choix d'une topologie 3D rapportera des points supplémentaires mais élève la difficulté.
 
-<img src="../../../support/materiel/mandelbulb_topology.png" width="600">
+<img src="../../../assets/mandelbulb_topology.png" width="600">
 
 a) Ajoutez un argument en ligne de commande `--ranks_per_dir` permettant de récupérer le nombre de rang MPI dans chaque direction `x`, `y` et `z`
 
@@ -80,7 +80,7 @@ b) Utilisez la fonction `Gatherv` afin de reconstituer le domain global
 
 c) Déclarer des tableaux pour chaque grandeur représentant le domaine global. Reconstituer ce domaine à partir des sous-domaines récupérés sur le rang 0. Le schéma ci-dessous pourra vous aider à comprendre le processus.
 
-<img src="../../../support/materiel/mandelbulb_domain_reconsitution.png" width="500">
+<img src="../../../assets/mandelbulb_domain_reconsitution.png" width="500">
 
 d) Faites en sorte que seul le rang 0 puisse écrire le fichier VTK.
 

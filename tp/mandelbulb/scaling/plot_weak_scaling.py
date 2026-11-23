@@ -66,7 +66,7 @@ ax.legend(loc="best",ncol=2)
 
 fig0.tight_layout()
 
-#fig0.savefig("../../../support/materiel/mandelbulb_mpi_weak_scaling_time.png")
+#fig0.savefig("../../../assets/mandelbulb_mpi_weak_scaling_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
@@ -87,7 +87,7 @@ ax.legend(loc="best")
 
 fig1.tight_layout()
 
-#fig1.savefig("../../../support/materiel/mandelbulb_mpi_weak_scaling_efficiency.png")
+#fig1.savefig("../../../assets/mandelbulb_mpi_weak_scaling_efficiency.png")
 
 # _____________________________________________________________________________
 

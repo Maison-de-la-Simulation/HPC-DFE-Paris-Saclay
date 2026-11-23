@@ -60,9 +60,9 @@ c) Affichez la courbe en temps et d'efficacité correspondante en y faisant appa
 
 Nous avons de notre côté également effectué ce test :
 
-<img src="../../../support/materiel/maxwell_mpi_weak_scaling_time.png" height="400">
-<img src="../../../support/materiel/maxwell_mpi_weak_scaling_efficiency.png" height="400">
-<img src="../../../support/materiel/maxwell_mpi_weak_scaling_part.png" height="400">
+<img src="../../../assets/maxwell_mpi_weak_scaling_time.png" height="400">
+<img src="../../../assets/maxwell_mpi_weak_scaling_efficiency.png" height="400">
+<img src="../../../assets/maxwell_mpi_weak_scaling_part.png" height="400">
 
 
 d) Commentez ce *weak scaling* en vous aidant de toutes les courbes
@@ -86,8 +86,8 @@ b) Affichez la courbe en temps et d'efficacité correspondante en y faisant appa
 
 Nous avons de notre côté également effectué ce test :
 
-<img src="../../../support/materiel/maxwell_mpi_strong_scaling_time.png" height="450">
-<img src="../../../support/materiel/maxwell_mpi_strong_scaling_efficiency.png" height="400">
-<img src="../../../support/materiel/maxwell_mpi_strong_scaling_part.png" height="400">
+<img src="../../../assets/maxwell_mpi_strong_scaling_time.png" height="450">
+<img src="../../../assets/maxwell_mpi_strong_scaling_efficiency.png" height="400">
+<img src="../../../assets/maxwell_mpi_strong_scaling_part.png" height="400">
 
 c) Commentez ce *strong scaling* en vous aidant de toutes les courbes.

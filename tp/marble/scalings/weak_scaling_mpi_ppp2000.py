@@ -83,7 +83,7 @@ ax.set_ylabel("Temps (s)")
 ax.legend(loc="best",ncol=2)
 
 fig0.tight_layout()
-fig0.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp2000_time.png")
+fig0.savefig("../../../assets/marble_mpi_weak_scaling_ppp2000_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
@@ -106,7 +106,7 @@ ax.set_ylabel("Efficacite")
 ax.legend(loc="best")
 
 fig1.tight_layout()
-fig1.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp2000_efficiency.png")
+fig1.savefig("../../../assets/marble_mpi_weak_scaling_ppp2000_efficiency.png")
 # ______________________________________________________________________________
 # Figure Part MPI
 
@@ -126,7 +126,7 @@ ax.set_ylabel("Part (%)")
 ax.legend(loc="best")
 
 fig2.tight_layout()
-fig2.savefig("../../../support/materiel/marble_mpi_weak_scaling_ppp2000_part.png")
+fig2.savefig("../../../assets/marble_mpi_weak_scaling_ppp2000_part.png")
 
 # _____________________________________________________________________________
 

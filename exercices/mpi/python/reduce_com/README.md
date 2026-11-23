@@ -4,7 +4,7 @@ Dans cet exercice, nous intégrons la fonction `f(x) = sin(x)` de
 manière numérique entre 0 et pi/2 en utilisant la méthode des rectangles
 Le domaine d'intgération est subdivisé suivant le nombre de processus MPI demandé.
 
-<img src="../../../../support/materiel/sin_integration.svg" height="400">
+<img src="../../../../assets/sin_integration.svg" height="400">
 
 > [!WARNING]  
 > n'oubliez pas de charger Miniforges avant de commencer cet exercice.

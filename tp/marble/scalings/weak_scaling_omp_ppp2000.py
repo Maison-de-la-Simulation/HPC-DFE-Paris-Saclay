@@ -92,7 +92,7 @@ ax1.legend(loc="best",ncol=2)
 
 fig0.tight_layout()
 
-fig0.savefig("../../../support/materiel/marble_omp_strong_scaling_ppp2000_time.png")
+fig0.savefig("../../../assets/marble_omp_strong_scaling_ppp2000_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
