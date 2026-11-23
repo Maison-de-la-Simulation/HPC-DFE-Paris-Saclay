@@ -24,7 +24,8 @@ mpi4py
 # Vous pouvez supprimer ces lignes si vous ne faites pas l'exercice ou le TP
 # concerné.
 
-# h5py : fichiers HDF5, uniquement pour le chapitre et l'exercice HDF5.
+# h5py : fichiers HDF5, pour le chapitre et l'exercice HDF5 et pour les
+# snapshots du TP Kelvin-Helmholtz.
 # Attention : la version installée par pip ne gère pas l'écriture parallèle
 # (pilote mpio). Voir l'étape 4 du guide d'installation pour la version
 # parallèle.

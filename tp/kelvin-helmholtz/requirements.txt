@@ -5,5 +5,9 @@ numpy
 matplotlib
 mpi4py
 
+# Snapshots au format HDF5. La version MPI utilise HDF5 parallèle : h5py doit
+# alors être compilé avec MPI (voir l'étape 4 du guide d'installation).
+h5py
+
 # Optionnel, pour le mode parallel_mode = "mpi4py_fft" de la version MPI :
 # mpi4py-fft

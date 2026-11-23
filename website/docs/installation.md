@@ -12,7 +12,7 @@ faut installer quelques outils, puis récupérer le dépôt du cours.
 | **Python 3** (3.10 ou plus récent) | Exécuter les exercices et les TPs |
 | **Une implémentation de MPI** (Open MPI) | Fournir la commande `mpirun` et la bibliothèque MPI |
 | **NumPy, Matplotlib, SciPy, mpi4py** | Les bibliothèques Python utilisées dans tout le cours |
-| **h5py, VTK** (facultatifs) | h5py pour le chapitre HDF5, VTK pour le TP Mandelbulb |
+| **h5py, VTK** (facultatifs) | h5py pour le chapitre HDF5 et le TP Kelvin-Helmholtz, VTK pour le TP Mandelbulb |
 | **HDF5 parallèle** (facultatif) | Écrire un fichier HDF5 en parallèle, pour le chapitre [HDF5](hdf5/index.md) |
 | **Visual Studio Code** (conseillé) | Éditer le code, sur votre ordinateur ou à distance sur Ruche |
 
@@ -145,7 +145,8 @@ bibliothèques utilisées dans les exercices et les TPs :
 
 - **nécessaires à tout le cours** : NumPy, Matplotlib, SciPy et mpi4py ;
 - **facultatives**, selon l'exercice ou le TP :
-    - **h5py**, uniquement pour le chapitre et l'exercice [HDF5](hdf5/index.md) ;
+    - **h5py**, pour le chapitre et l'exercice [HDF5](hdf5/index.md) et pour
+      le TP Kelvin-Helmholtz ;
     - **VTK**, uniquement pour le TP Mandelbulb.
 
 Vous pouvez retirer les lignes `h5py` et `vtk` du fichier si vous n'en avez
@@ -176,7 +177,8 @@ pip install -r tp/mandelbulb/requirements.txt
 ## 4. Installer HDF5 en version parallèle (facultatif)
 
 Cette étape n'est nécessaire que pour **l'écriture parallèle** de fichiers
-HDF5, vue dans le chapitre [HDF5](hdf5/index.md). Le reste du cours
+HDF5, vue dans le chapitre [HDF5](hdf5/index.md) et utilisée par la
+version MPI du TP Kelvin-Helmholtz. Le reste du cours
 fonctionne avec le h5py installé à l'étape 3.
 
 L'écriture parallèle demande une version de h5py **compilée avec MPI**,

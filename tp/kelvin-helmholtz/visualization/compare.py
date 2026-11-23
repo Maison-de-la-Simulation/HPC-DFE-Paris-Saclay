@@ -2,9 +2,10 @@
 compare.py — compare the error between two snapshots
 
 Usage:
-    python plot.py <path/to/snapshot_XXXXXX.npz> <path/to/snapshot_XXXXXX.npz> 
+    python compare.py <path/to/snapshot_XXXXXX.h5> <path/to/snapshot_XXXXXX.h5>
 
-The .npz file must contain: 'omega', 'ux', 'uy', 'time', 'dx', 'dy', 'Lx', 'Ly', 'nx', 'ny'
+The HDF5 files contain the datasets 'omega', 'ux', 'uy' and the attributes
+'time', 'dx', 'dy', 'Lx', 'Ly', 'nx', 'ny' (see snapshot.py).
 """
 
 import sys
@@ -12,15 +13,17 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
+from snapshot import load_snapshot
+
 # ---------------------------------------------------------------------------
 # Argument
 # ---------------------------------------------------------------------------
 if len(sys.argv) != 3:
-    print("Usage: python plot.py <snapshot_XXXXXX.npz> <snapshot_XXXXXX.npz>")
+    print("Usage: python compare.py <snapshot_XXXXXX.h5> <snapshot_XXXXXX.h5>")
     sys.exit(1)
 
 filepath0 = sys.argv[1]
-filepath1 = sys.argv[1]
+filepath1 = sys.argv[2]
 
 if not os.path.isfile(filepath0):
     print(f"Error: file not found: {filepath0}")
@@ -33,21 +36,21 @@ if not os.path.isfile(filepath1):
 # ---------------------------------------------------------------------------
 # Load
 # ---------------------------------------------------------------------------
-f0     = np.load(filepath0)
+f0     = load_snapshot(filepath0)
 omega0 = f0["omega"]
-ux0     = f0["ux"]
-uy0     = f0["uy"]
-t0     = float(f0["time"])
-Lx0    = float(f0["Lx"])
-Ly0    = float(f0["Ly"])
+ux0    = f0["ux"]
+uy0    = f0["uy"]
+t0     = f0["t"]
+Lx0    = f0["Lx"]
+Ly0    = f0["Ly"]
 
-f1     = np.load(filepath1)
+f1     = load_snapshot(filepath1)
 omega1 = f1["omega"]
-ux1     = f1["ux"]
-uy1     = f1["uy"]
-t1     = float(f1["time"])
-Lx1    = float(f1["Lx"])
-Ly1    = float(f1["Ly"])
+ux1    = f1["ux"]
+uy1    = f1["uy"]
+t1     = f1["t"]
+Lx1    = f1["Lx"]
+Ly1    = f1["Ly"]
 
 omega_error = np.abs(omega0 - omega1)
 ux_error = np.abs(ux0 - ux1)

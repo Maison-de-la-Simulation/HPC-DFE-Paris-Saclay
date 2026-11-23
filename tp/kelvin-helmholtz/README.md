@@ -157,7 +157,12 @@ python main.py -NX 1024 -NY 2048
 
 As any simulation code, our sequential code has some diagnostics that enables to dump the state of the simulation at a given timestep. The function `save_snapshot` is used for this purpose.
 
-It creates a Numpy container file with the following fields: `omega`, `ux`, `uy`, time (variable `t`), `dx`, `dy`, `Lx`, `Ly`, `nx`, `ny`. Numpy files are binary files and can not be read directly. However, simple Python code can be used to read them.
+It creates an [HDF5](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/hdf5/index.html) file `snapshot_XXXXXX.h5` with:
+
+- the datasets `omega`, `ux` and `uy` (arrays of shape `Nx` x `Ny`);
+- the attributes `time`, `dx`, `dy`, `Lx`, `Ly`, `nx` and `ny`.
+
+HDF5 files are binary files and can not be read directly. They can be read with Python and `h5py`, or explored with the command-line tools `h5ls -r snapshot_000000.h5` and `h5dump`.
 
 The frequency of the snapshots can be set using the global parameter `output_period`.
 
@@ -171,7 +176,7 @@ We provide some simple Python scripts to read and display the snapshots in the `
 # To get some help
 python plot.py -h
 # To plot an image
-python plot.py diags/snapshot_000000.npz
+python plot.py diags/snapshot_000000.h5
 ```
 
 The script generates this type of image with the voticity and the velocities:
@@ -190,7 +195,7 @@ python animate.py diags
 - `compare.py`: enables the comparison between two snapshots
 
 ```python
-python compare.py seq/diags/snapshot_000000.npz mpi/diags/snapshot_000000.npz
+python compare.py seq/diags/snapshot_000000.h5 mpi/diags/snapshot_000000.h5
 ```
 
 ## Instructions

@@ -31,9 +31,8 @@ def block_rows(Nx, number_of_ranks, rank):
     return start, n_local
 
 
-def print_time(comm, name, start_time):
-    """Affiche, depuis le rang 0, le temps du rang le plus lent depuis start_time."""
-    elapsed = MPI.Wtime() - start_time
+def print_time(comm, name, elapsed):
+    """Affiche, depuis le rang 0, la durée elapsed du rang le plus lent."""
     max_elapsed = comm.reduce(elapsed, op=MPI.MAX, root=0)
     if comm.Get_rank() == 0:
         print(f"{name} : {max_elapsed:.4f} s")
@@ -80,7 +79,9 @@ with h5py.File(f"methode1_rang_{rank}.h5", "w") as f:
     dset.attrs["global_shape"] = (Nx, Ny)
     dset.attrs["number_of_ranks"] = number_of_ranks
 
-print_time(comm, "Méthode 1 (un fichier par rang)", start_time)
+end_time = MPI.Wtime()
+
+print_time(comm, "Méthode 1 (un fichier par rang)", end_time - start_time)
 
 # ______________________________________________________________________________
 # Méthode 2 - Le rang 0 rassemble les bandes de tous les rangs et écrit seul
@@ -111,7 +112,9 @@ if rank == 0:
         dset = f.create_dataset("champ", data=champ)
         dset.attrs["number_of_ranks"] = number_of_ranks
 
-print_time(comm, "Méthode 2 (tout sur le rang 0)", start_time)
+end_time = MPI.Wtime()
+
+print_time(comm, "Méthode 2 (tout sur le rang 0)", end_time - start_time)
 
 # ______________________________________________________________________________
 # Méthode 3 - Écriture parallèle dans un seul fichier HDF5 (MPI-IO)
@@ -134,7 +137,9 @@ if h5py.get_config().mpi:
         with dset.collective:
             dset[start:start + n_local, :] = local
 
-    print_time(comm, "Méthode 3 (HDF5 parallèle)", start_time)
+    end_time = MPI.Wtime()
+
+    print_time(comm, "Méthode 3 (HDF5 parallèle)", end_time - start_time)
 
 elif rank == 0:
     print("Méthode 3 ignorée : h5py n'a pas été compilé avec MPI")

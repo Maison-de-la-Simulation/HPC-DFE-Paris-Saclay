@@ -30,9 +30,8 @@ def block_rows(Nx, number_of_ranks, rank):
     return start, n_local
 
 
-def print_time(comm, name, start_time):
-    """Affiche, depuis le rang 0, le temps du rang le plus lent depuis start_time."""
-    elapsed = MPI.Wtime() - start_time
+def print_time(comm, name, elapsed):
+    """Affiche, depuis le rang 0, la durée elapsed du rang le plus lent."""
     max_elapsed = comm.reduce(elapsed, op=MPI.MAX, root=0)
     if comm.Get_rank() == 0:
         print(f"{name} : {max_elapsed:.4f} s")

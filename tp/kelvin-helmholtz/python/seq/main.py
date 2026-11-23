@@ -23,6 +23,7 @@ Run:
 import argparse
 import os
 import shutil
+import h5py
 import numpy as np
 import time
 
@@ -179,23 +180,25 @@ def prepare_output_dir(path, clear=False):
     os.makedirs(path, exist_ok=True)
 
 def save_snapshot(output_dir, step, t, omega, ux, uy):
-    """Write a single global snapshot file."""
+    """Write a single global snapshot in an HDF5 file.
+
+    The file contains one dataset per field (omega, ux, uy), of shape (Nx, Ny),
+    and the simulation parameters as attributes of the root group.
+    """
 
     os.makedirs(output_dir, exist_ok=True)
-    path = os.path.join(output_dir, f"snapshot_{step:06d}.npz")
-    np.savez(
-        path,
-        omega=omega,
-        ux=ux,
-        uy=uy,
-        time=np.float64(t),
-        dx=np.float64(dx),
-        dy=np.float64(dy),
-        Lx=np.float64(Lx),
-        Ly=np.float64(Ly),
-        nx=np.int32(Nx),
-        ny=np.int32(Ny),
-    )
+    path = os.path.join(output_dir, f"snapshot_{step:06d}.h5")
+    with h5py.File(path, "w") as f:
+        f.create_dataset("omega", data=omega)
+        f.create_dataset("ux", data=ux)
+        f.create_dataset("uy", data=uy)
+        f.attrs["time"] = t
+        f.attrs["dx"] = dx
+        f.attrs["dy"] = dy
+        f.attrs["Lx"] = Lx
+        f.attrs["Ly"] = Ly
+        f.attrs["nx"] = Nx
+        f.attrs["ny"] = Ny
 
 # ___________________________________________________________________________
 # Parameters summary
@@ -218,7 +221,7 @@ dt_cfl = min(dx, dy)**2 / (2.0 * nu)
 print(f"  - Output dir    : {output_dir}/")
 print(f"  - Clear output  : {clear_output}")
 print(f"  - Output period : {output_period}  ({save_every} steps)")
-print(f"  - Snapshots     : ~{n_snapshots} files (written by rank 0)")
+print(f"  - Snapshots     : ~{n_snapshots} HDF5 files")
 print(sep)
 
 prepare_output_dir(output_dir, clear_output)
@@ -291,7 +294,7 @@ for i in range(n_steps):
     energy = total_energy(ux, uy)
     timer_energy += time.time() - t0
 
-    # 8. Save snapshot (rank 0 writes global file)
+    # 8. Save snapshot (HDF5 file)
 
     if i % save_every == 0:
         t0 = time.time()
