@@ -116,14 +116,31 @@ The code is in a single Python script and is organized into several parts for si
 
 ### Requirements
 
-The execution of the codes and the visualization scripts requires `numpy`,
-`matplotlib` and `mpi4py` (which needs an MPI implementation, see the
-[installation guide](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)). They are listed in
-[requirements.txt](./requirements.txt):
+The codes and the visualization scripts require the following Python
+libraries, listed in [requirements.txt](./requirements.txt):
+
+- `numpy` and `matplotlib`;
+- `mpi4py`, which needs an MPI implementation (Open MPI, MPICH...);
+- `h5py`, to write and read the snapshots in HDF5 format.
 
 ```bash
 pip install -r requirements.txt
 ```
+
+The MPI version writes the snapshots with **parallel HDF5**: `h5py` must then
+be built with MPI support, which is not the case of the version installed by
+`pip`. Check it with:
+
+```bash
+python -c "import h5py; print(h5py.get_config().mpi)"   # must print True
+```
+
+The installation of MPI and of the parallel version of `h5py` is described in
+the [installation guide](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)
+of the course (steps 1 and 4).
+
+Optionally, [ParaView](https://www.paraview.org/) can be used to visualize the
+whole evolution of the simulation as a 3D volume (see `stack.py` below).
 
 ### How to run the sequential code
 
@@ -198,6 +215,23 @@ python animate.py diags
 python compare.py seq/diags/snapshot_000000.h5 mpi/diags/snapshot_000000.h5
 ```
 
+- `stack.py`: stacks all the snapshots into a 3D volume (x, y, time) that can be opened with [ParaView](https://www.paraview.org/). Time becomes the third axis, so that the whole evolution of the instability can be seen at once, for instance with an isosurface or a slice of the vorticity.
+
+Two output formats are available:
+
+```python
+# HDF5 + XDMF (default): stack.h5 (the 3D arrays) and stack.xdmf (the description read by ParaView)
+python stack.py diags
+# VTK: a single legacy VTK file stack.vtk
+python stack.py diags --format vtk
+# Options: use one snapshot out of 2, and stretch the time axis
+python stack.py diags --output kh_xyt --every 2 --time-scale 0.5
+```
+
+Then open `stack.xdmf` (choose the *Xdmf Reader* if asked) or `stack.vtk` in ParaView. The axes are X = x, Y = y and Z = time. By default, the time axis is scaled so that its length equals `Lx`.
+
+The two formats contain exactly the same data. The VTK file is simpler (a single file, opened directly by ParaView), while HDF5 + XDMF keeps the data in HDF5, readable with `h5py` and the HDF5 tools, and is better suited to large data.
+
 ## Instructions
 
 The project is divided into 4 parts. Each part corresponds to a specific file:
@@ -220,7 +254,7 @@ Each question is worth points based on its difficulty. Even if the code does not
 The purpose of the report is to answer the questions provided in the instructions. It must be clear and concise. There is no need to provide an introduction to the subject; simply answer the questions asked. You may use any format (TeX, .docx, etc.). The goal is efficiency and clarity.
 
 You will submit your project by sending me an email with a link to a .zip or .tar archive containing:
-- the parallel source code (the `mandelbulb.py` file)
+- the parallel source code (the `main.py` file)
 - the report
 
 Please note, do **not** include:
