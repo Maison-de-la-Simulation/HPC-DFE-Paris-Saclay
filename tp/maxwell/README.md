@@ -91,7 +91,7 @@ $$
 
 Le modèle discrétisé peut être représenté par le schéma suivant :
 
-<img src="../../support/materiel/maxwell_yee_grid.png" height="400">
+<img src="../../assets/maxwell_yee_grid.png" height="400">
 
 Ici, les composantes de champ sont représentées par des noeuds colorés :
 
@@ -109,7 +109,7 @@ C'est la grille la plus large.
 Dans la figure ci-dessous, nous avons représenté la grille définie par les noeuds oranges du champ $E_z$.
 Il s'agit de la grille primale.
 
-<img src="../../support/materiel/maxwell_yee_grid_3.png" height="400">
+<img src="../../assets/maxwell_yee_grid_3.png" height="400">
 
 Le grille primale est celle qui contient le moins de noeuds.
 Par définition, si la grille primale a une taille de $n_{xp} \times n_{yp}$ alors la grille duale a une taille de $n_{xd} = n_{xp} + 1 \times n_{yd} = n_{yp} + 1$.
@@ -120,14 +120,14 @@ Elle a donc une taille $n_{xp} \times n_{yd}$.
 De la même manière, la grille définie par les noeuds verts (composante $Ex$ et $By$) est au contraire duale dans la direction $x$ et primale dans la direction $y$.
 La figure ci-dessous résume la notion de grille primale et duale :
 
-<img src="../../support/materiel/maxwell_primal_dual.png" height="400">
+<img src="../../assets/maxwell_primal_dual.png" height="400">
 
 ### Conditions limites
 
 Il faut maintenant se pencher sur les conditions limites.
 Les composantes de champs qui nécessitent d'être traitées sont aux bords sont situées sur la ligne violette de la figure ci-dessous :
 
-<img src="../../support/materiel/maxwell_yee_grid_2.png" height="400">
+<img src="../../assets/maxwell_yee_grid_2.png" height="400">
 
 De plus, les équations nous disent que les inconnus aux bords sont toutes des composantes du champ magnétique.
 En effet les champs électriques aux bords se calculent à partir des champs magnétiques connus.
@@ -255,7 +255,7 @@ python -i plot_binary.py <chemin vers un fichier diag*.bin>
 
 Voici un exemple d'image produite par la lecture d'un fichier via le script `plot_all_fields.py`.
 
-<img src="../../support/materiel/maxwell_image.png" height="400">
+<img src="../../assets/maxwell_image.png" height="400">
 
 ## Consignes de TP <a id="consignes"></a>
 

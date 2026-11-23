@@ -37,7 +37,7 @@ Une image utilisée à la fois par le site et par un README du dépôt n'est
 stockée qu'une fois, dans `website/docs/assets/images/`. Le README pointe
 alors vers ce fichier (par exemple
 `../website/docs/assets/images/super-calculateur/filezilla.jpg`) et la copie
-de `support/materiel/` est supprimée.
+de `assets/` est supprimée.
 
 ### Schémas
 

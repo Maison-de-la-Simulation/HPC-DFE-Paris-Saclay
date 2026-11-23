@@ -99,18 +99,18 @@ Lorsque le bord d'un sous-domaine coïncide avec les bords du domaine global alo
 Lorsque les bords d'un sous-domaine est une frontière avec un autre sous-domaine, il va falloir échanger des données.
 La figure ci-dessous illustre l'état d'un domaine utilisant la notion de *stencil* comme c'est le cas ici.
 
-<img src="../../../support/materiel/life_grid_decomposition_0.svg" height="500">
+<img src="../../../assets/life_grid_decomposition_0.svg" height="500">
 
 La figure suivante illustre la décomposition de la grille avec une topologie cartésienne.
 Il y a dans cet exemple 4 rangs et donc 4 sous-domaines avec chacun leurs grilles indépendantes.
 Après la décomposition du domaine, certaines cellules à la frontière avec les autres rangs MPI n'ont plus directement accès au contenu de leurs voisines.
 
-<img src="../../../support/materiel/life_grid_decomposition_1.svg" height="500">
+<img src="../../../assets/life_grid_decomposition_1.svg" height="500">
 
 On fabrique donc une nouvelle rangée de cellules tout autour des frontières entre sous-domaines MPI dans le but de stocker les cellules voisines dont le contenu n'est connu que des autres rangs.
 Ces rangées se nomment cellules fantômes.
 
-<img src="../../../support/materiel/life_grid_decomposition_2.svg" height="1100">
+<img src="../../../assets/life_grid_decomposition_2.svg" height="1100">
 
 Il faudra à chaque itération utiliser les communications MPI pour remplir ces cellules fantômes à partir des autres rangs.
 Les communications doivent se faire par étape, d'abord une direction (x par exemple) puis une autre (y).
@@ -118,7 +118,7 @@ De la sorte, les voisins aux coins sont transférés au bon rang en 2 fois comme
 
 Dans le cas du schéma de Yee et ses grilles *stagered*, le problème est schématisé par la figure ci-dessous
 
-<img src="../../../support/materiel/maxwell_mpi_com.png" height="1000">
+<img src="../../../assets/maxwell_mpi_com.png" height="1000">
 
 On commence par diviser la grille duale en sous-grille dans la direction x.
 Il y a donc le même nombre de points dans chaque grille duale.

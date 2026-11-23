@@ -5,7 +5,7 @@ Cet exercice consiste à utiliser le type dérivé vector.
 Dans cet exercice chaque rang MPI possède un tableau 2D du nom de `array`.
 Pour rappel, en C++, c'est toujours l'indice le plus interne qui correspond à l'indice le plus rapide, c'est à dire à la continuité des données stockées en mémoire.
 
-<img src="../../../support/materiel/array.svg" height="400">
+<img src="../../../../assets/array.svg" height="400">
 
 Chaque rang va communiquer au rang suivant  sa colonne la plus à droite en utilisant le concept
 d'anneau périodique.

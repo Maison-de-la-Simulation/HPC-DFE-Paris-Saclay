@@ -1,6 +1,6 @@
 # Simulation de particules par la mécanique du point avec collisions
 
-<img src="../../support/materiel/marble.png" height="400">
+<img src="../../assets/marble.png" height="400">
 
 ## Présentation des modèles
 
@@ -113,7 +113,7 @@ Ces conditions imposent notre pas de temps $\Delta t$ pour prendre en compte tou
 Entre chaque pas de temps, la distance relative que deux particules peuvent parcourir ne doit pas dépasser deux rayons $2R$.
 Dans le cas contraire certaines particules se traversent sans se collisionner.
 
-<img src="../../support/materiel/collision.png" height="200">
+<img src="../../assets/collision.png" height="200">
 
 Lorsqu'il y a collision, la vitesse des particules est actualisée suivant la méthode mathématique présentée au-dessus.
 On appelle la vitesse post-collision $v_n$.
@@ -211,7 +211,7 @@ Dans une version séquentielle normale, la décomposition en sous-domaine est in
 Toutes les particules sont traitées comme appartenant au même domaine.
 Néanmoins, la décomposition de domaine sera nécessaire dans les versions parallèles.
 
-<img src="../../support/materiel/patch.png" height="400">
+<img src="../../assets/patch.png" height="400">
 
 La version séquentielle avec *patch* se compose des fichiers et headers suivant :
 - [main.cpp](./cpp/patch/main.cpp)
@@ -236,7 +236,7 @@ En 3D par exemple chaque patch a 26 voisins.
 De fait, il y a 26 directions en incluant les faces, les arrêtes et les coins.
 Dans le tableau principal des particules (celles du *patch*), les particules sont simplement marquées afin de les supprimer de manière optimisée à l'étape suivante.
 
-<img src="../../support/materiel/particle_exchange_process.png" height="400">
+<img src="../../assets/particle_exchange_process.png" height="400">
 
 2. La deuxième étape est la suppression des particules ayant quittée le *patch* du tableau principale. Il est préférable d'effectuer cette opération pour toutes les particules en une fois car l'algorithme utilisé est plus efficace.
 La méthode consiste à remplir les cases mémoires vides des particules ayant quittée le *patch* par les particules de la fin du tableau.

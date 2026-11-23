@@ -6,7 +6,7 @@ La documentation du calculateur est disponible en ligne : https://mesocentre.pag
 
 ## Architecture d'un super-calculateur
 
-![super-calculateur](../support/materiel/super-calculateur.png)
+![super-calculateur](../assets/super-calculateur.png)
 
 Un super-calculateur se compose de différentes partitions.
 
@@ -192,7 +192,7 @@ Pour cela cliquez sur l'icône pointé par la flèche rouge.
 
 Vous ouvez alors la page suivante :
 
-<img src="../support/materiel/filezilla_interface_2.png" height="300">
+<img src="../assets/filezilla_interface_2.png" height="300">
 
 Ici ajoutez un nouveau site :
 - choisissez la connexion de type SFTP

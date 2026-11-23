@@ -92,7 +92,7 @@ ax1.legend(loc="best",ncol=2)
 
 fig0.tight_layout()
 
-fig0.savefig("../../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_time.png")
+fig0.savefig("../../../assets/marble_omp_strong_scaling_ppp1000_mp_time.png")
 
 # ______________________________________________________________________________
 # Figure efficacite
@@ -116,7 +116,7 @@ ax.legend(loc="best")
 
 fig.tight_layout()
 
-fig.savefig("../../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_efficiency.png")
+fig.savefig("../../../assets/marble_omp_strong_scaling_ppp1000_mp_efficiency.png")
 
 # ______________________________________________________________________________
 # Figure Part MPI
@@ -138,7 +138,7 @@ ax.legend(loc="best")
 
 fig.tight_layout()
 
-fig.savefig("../../../support/materiel/marble_omp_strong_scaling_ppp1000_mp_part.png")
+fig.savefig("../../../assets/marble_omp_strong_scaling_ppp1000_mp_part.png")
 
 # _____________________________________________________________________________
 

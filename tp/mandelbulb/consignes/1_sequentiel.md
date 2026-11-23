@@ -17,31 +17,31 @@ scp <login>@@ruche.mesocentre.universite-paris-saclay.fr:<chemin vers fichier VT
 
 - a) Si vous utilisez votre ordinateur personnel, téléchargez et installez Paraview. Puis ouvrez le logiciel. Vous obtenez une interface proche de celle-ci :
 
-![Paraview](../../../support/materiel/mandelbulb_paraview_1.png)
+![Paraview](../../../assets/mandelbulb_paraview_1.png)
 
 - b) Dans le menu `File`, cliquez sur `Open` et sélectionnez le fichier `mandelbulb.vtk` généré par le code séquentiel. Le nom du fichier apparaît dans la fenêtre `Pipeline Browser` à gauche de l'interface :
 
-<img src="../../../support/materiel/mandelbulb_paraview_2.png" width="400">
+<img src="../../../assets/mandelbulb_paraview_2.png" width="400">
 
 - c) Appuyez sur le bouton `Apply` pour visualiser le Mandelbulb. Pour le moment rien n'apparaît sauf un cube blanc représentant le domaine de calcul. On va maintenant choisir un type de représentation pour visualiser le Mandelbulb. Dans le menu en haut à gauche, cliquez sur le logo désignant des *Contour* ou isosurfaces :
 - 
-<img src="../../../support/materiel/mandelbulb_paraview_3.png" width="400">
+<img src="../../../assets/mandelbulb_paraview_3.png" width="400">
 
 A ce moment-là, le mandelbulb s'affiche avec une couleur par défaut.
 
-![Paraview](../../../support/materiel/mandelbulb_paraview_4.png)
+![Paraview](../../../assets/mandelbulb_paraview_4.png)
 
 - d) Il est maintenant possible de modifier la valeur de l'isovaleur pour visualiser le Mandelbulb sur différente profondeurs :
 
-<img src="../../../support/materiel/mandelbulb_paraview_5.png" width="400">
+<img src="../../../assets/mandelbulb_paraview_5.png" width="400">
 
 - e) On peut aussi adopter une couleur plus adaptée pour visualiser le Mandelbulb. Pour cela, dans le menu `Coloring`, sélectionnez `Iterations` au lieu de `Mandelbulb`. La couleur dépendra maintenant du nombre d'itérations nécessaires pour la zone considérée. 
 
-<img src="../../../support/materiel/mandelbulb_paraview_6.png" width="400">
+<img src="../../../assets/mandelbulb_paraview_6.png" width="400">
 
 Vous pouvez aussi choisir une palette de couleur plus adaptée en cliquant sur `Edit Color Map`. Dans l'exemple ci-dessous, on a choisi la palette `Plasma` :
 
-![Paraview](../../../support/materiel/mandelbulb_paraview_7.png)
+![Paraview](../../../assets/mandelbulb_paraview_7.png)
 
 Il existe de nombreuses autres options pour améliorer le rendu. A vous d'explorer en fonction de vos envies.
 

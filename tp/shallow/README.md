@@ -40,7 +40,7 @@ avec $u(x,t)$ la vitesse de l'eau.
 
 On considère ici un canal 1D de longueur $L$ avec des conditions aux limites réfléchissantes (des conditions périodiques sont aussi disponibles).
 
-<img src="../../support/materiel/shallow_parameters.svg" height="400">
+<img src="../../assets/shallow_parameters.svg" height="400">
 
 On discrétise l'espace en $N$ points de discrétisation régulièrement espacés de $\Delta x$.
 
@@ -85,7 +85,7 @@ $$
 
 Le schéma ci-dessous vous illustre la discrétisation en temps et en espace :
 
-<img src="../../support/materiel/shallow_discretization.svg" height="400">
+<img src="../../assets/shallow_discretization.svg" height="400">
 
 ## Objectifs du projet
 
@@ -97,13 +97,13 @@ Pour le paralléliser, vous devrez découper le domaine en plusieurs sous-domain
 
 Commençons par faire un découpage en points : on distribue les points sur chaque processus MPI. On obtient donc un découpage comme ceci si on considère 3 processus MPI : 
 
-<img src="../../support/materiel/shallow_domain_decomposition.svg" height="400">
+<img src="../../assets/shallow_domain_decomposition.svg" height="400">
 
 En l'état, on remarque qu'un problème se pose pour le calcul des points situés aux bords des sous-domaines MPI (en vert sur le schéma). Il est nécessaire pour cela d'ajouter ce que l'on appelle des cellules fantômes. 
 Ce sont des cellules supplémentaires qui étendent le domaine de calcul de chaque processus MPI et qui recouvre les cellules des processus voisins.
 Avant d'effectuer un calcul au sein du sous-domaine, chaque processus MPI doit donc récupérer les valeurs des cellules fantômes des processus voisins afin d'avoir les dernières données à jour.
 
-<img src="../../support/materiel/shallow_domain_decomposition_2.svg" height="400">
+<img src="../../assets/shallow_domain_decomposition_2.svg" height="400">
 
 En ajoutant les cellules fantômes, on commence par mettre à jour les points aux bords (les tirets verts et oranges) à partir des données sur les voisins.
 
@@ -113,7 +113,7 @@ En pratique, on effectuera les échanges après le calcul des points intérieurs
 
 Il sera nécessaire de calculer les index de début de chaque sous-domaine ``local_start``. Ces index permettent de définir les limites de chaque sous-domaine et de savoir quelles cellules sont des cellules fantômes et quelles cellules sont des cellules intérieures.
 
-<img src="../../support/materiel/shallow_domain_decomposition_3.svg" height="400">
+<img src="../../assets/shallow_domain_decomposition_3.svg" height="400">
 
 ## Description du projet
 
