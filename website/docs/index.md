@@ -58,7 +58,16 @@ par échange de messages avec MPI.
 
     [:octicons-arrow-right-24: Lire le chapitre](mpi/index.md)
 
--   :material-speedometer:{ .lg .middle } __IV. Mesure de la performance__
+-   :material-database:{ .lg .middle } __IV. Écriture parallèle avec HDF5__
+
+    ---
+
+    Stratégies d'écriture, format HDF5, écriture d'un fichier unique en
+    parallèle avec h5py.
+
+    [:octicons-arrow-right-24: Lire le chapitre](hdf5/index.md)
+
+-   :material-speedometer:{ .lg .middle } __V. Mesure de la performance__
 
     ---
 
@@ -67,7 +76,7 @@ par échange de messages avec MPI.
 
     [:octicons-arrow-right-24: Lire le chapitre](performance/index.md)
 
--   :material-flask:{ .lg .middle } __V. Travaux pratiques__
+-   :material-flask:{ .lg .middle } __VI. Travaux pratiques__
 
     ---
 

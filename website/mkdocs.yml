@@ -74,6 +74,7 @@ nav:
           - 5.3 Tailles variables et non bloquantes: mpi/collectives-avancees.md
       - 6. Python face au C et au Fortran: mpi/python-c-fortran.md
       - 7. Topologie cartésienne: mpi/topologie.md
+  - HDF5: hdf5/index.md
   - Performance:
       - performance/index.md
       - 1. Déséquilibre et parallélisme parfait: performance/notions.md

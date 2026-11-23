@@ -27,6 +27,9 @@ dans [le dossier exercices](./exercices/).
   - [Réduction MPI.Reduce](./exercices/mpi/python/reduce_com).
   - [Exercice de construction d'une topologie cartésienne](./exercices/mpi/python/cartesian_topology).
 
+- Exercice HDF5
+  - [Écriture parallèle de fichiers HDF5](./exercices/hdf5).
+
 - Exercices MPI C++
   - [Initialisation de MPI](./exercices/mpi/cpp/initialization).
   - [Initiation aux communications bloquantes](./exercices/mpi/cpp/blocking_com).
@@ -56,6 +59,7 @@ dans [le dossier exercices](./exercices/).
 ## Installation des dépendances
 
 - [Installer le cours sur son ordinateur](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html).
+- Bibliothèques Python du cours : `pip install -r requirements.txt` (fichier [requirements.txt](./requirements.txt)). h5py et VTK y sont facultatifs : ils ne servent qu'au chapitre HDF5 et au TP Mandelbulb.
 - [HDF5](./documentation/hdf5.md).
 - [readme2tex](./documentation/readme2tex.md).
 - [Utilisation de Ruche](./documentation/ruche.md).

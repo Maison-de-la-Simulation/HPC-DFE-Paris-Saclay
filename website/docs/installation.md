@@ -11,7 +11,9 @@ faut installer quelques outils, puis récupérer le dépôt du cours.
 | **Git** | Récupérer le dépôt du cours et le mettre à jour |
 | **Python 3** (3.10 ou plus récent) | Exécuter les exercices et les TPs |
 | **Une implémentation de MPI** (Open MPI) | Fournir la commande `mpirun` et la bibliothèque MPI |
-| **NumPy, Matplotlib, mpi4py** | Les bibliothèques Python utilisées dans le cours |
+| **NumPy, Matplotlib, SciPy, mpi4py** | Les bibliothèques Python utilisées dans tout le cours |
+| **h5py, VTK** (facultatifs) | h5py pour le chapitre HDF5, VTK pour le TP Mandelbulb |
+| **HDF5 parallèle** (facultatif) | Écrire un fichier HDF5 en parallèle, pour le chapitre [HDF5](hdf5/index.md) |
 | **Visual Studio Code** (conseillé) | Éditer le code, sur votre ordinateur ou à distance sur Ruche |
 
 ## 1. Installer Git, Python et MPI
@@ -131,19 +133,34 @@ python3 -m venv .venv
 # Activation (à refaire dans chaque nouveau terminal)
 source .venv/bin/activate
 
-# Installation des bibliothèques
-pip install numpy matplotlib mpi4py
+# Installation des bibliothèques du cours
+pip install -r requirements.txt
 ```
 
 Quand l'environnement est activé, son nom `(.venv)` apparaît au début de
 la ligne de commande.
 
-Certains TPs utilisent d'autres bibliothèques. Chacun a son fichier
-`requirements.txt` :
+Le fichier `requirements.txt`, à la racine du dépôt, contient toutes les
+bibliothèques utilisées dans les exercices et les TPs :
+
+- **nécessaires à tout le cours** : NumPy, Matplotlib, SciPy et mpi4py ;
+- **facultatives**, selon l'exercice ou le TP :
+    - **h5py**, uniquement pour le chapitre et l'exercice [HDF5](hdf5/index.md) ;
+    - **VTK**, uniquement pour le TP Mandelbulb.
+
+Vous pouvez retirer les lignes `h5py` et `vtk` du fichier si vous n'en avez
+pas besoin. Chaque TP a aussi son propre fichier `requirements.txt`, si vous
+ne voulez installer que ce dont il a besoin :
 
 ```bash
 pip install -r tp/mandelbulb/requirements.txt
 ```
+
+!!! note "h5py et l'écriture parallèle"
+
+    La version de h5py installée par pip ne gère pas l'écriture parallèle
+    de fichiers HDF5. Elle suffit pour la plupart du cours ; pour la
+    version parallèle, voir l'[étape 4](#4-installer-hdf5-en-version-parallele-facultatif).
 
 ??? note "Alternative : conda"
 
@@ -152,11 +169,75 @@ pip install -r tp/mandelbulb/requirements.txt
     commande, sous Linux comme sous macOS :
 
     ```bash
-    conda create -n hpc -c conda-forge python numpy matplotlib mpi4py openmpi
+    conda create -n hpc -c conda-forge python numpy matplotlib scipy mpi4py openmpi h5py vtk
     conda activate hpc
     ```
 
-## 4. Vérifier l'installation
+## 4. Installer HDF5 en version parallèle (facultatif)
+
+Cette étape n'est nécessaire que pour **l'écriture parallèle** de fichiers
+HDF5, vue dans le chapitre [HDF5](hdf5/index.md). Le reste du cours
+fonctionne avec le h5py installé à l'étape 3.
+
+L'écriture parallèle demande une version de h5py **compilée avec MPI**,
+ce que pip ne fournit pas : il faut d'abord installer la bibliothèque
+HDF5 en version parallèle, puis recompiler h5py avec elle. Lancez ces
+commandes avec l'environnement `.venv` activé.
+
+=== ":material-linux: Linux"
+
+    Sur **Ubuntu** ou **Debian** :
+
+    ```bash
+    # 1. HDF5 parallèle, et les outils h5ls et h5dump
+    sudo apt install libhdf5-openmpi-dev hdf5-tools
+
+    # 2. Compilation de h5py avec MPI
+    export HDF5_DIR=/usr/lib/$(uname -m)-linux-gnu/hdf5/openmpi
+    CC=mpicc HDF5_MPI="ON" pip install --no-binary=h5py --no-cache-dir --force-reinstall h5py
+    ```
+
+=== ":material-apple: macOS"
+
+    ```bash
+    # 1. HDF5 parallèle (fournit aussi h5ls et h5dump)
+    brew install hdf5-mpi
+
+    # 2. Vérification : ce fichier doit exister
+    ls $(brew --prefix hdf5-mpi)/lib/libhdf5.dylib
+
+    # 3. Compilation de h5py avec MPI
+    export HDF5_DIR=$(brew --prefix hdf5-mpi)
+    CC=mpicc HDF5_MPI="ON" pip install --no-binary=h5py --no-cache-dir --force-reinstall h5py
+    ```
+
+    `brew --prefix hdf5-mpi` renvoie un chemin **même si le paquet n'est
+    pas installé**. Si l'étape 1 a échoué, l'étape 3 s'arrête avec
+    `Unable to load dependency HDF5` : d'où la vérification de l'étape 2.
+
+=== ":material-microsoft-windows: Windows"
+
+    Dans le terminal **Ubuntu** de WSL, suivez l'onglet **Linux**.
+
+Les options `--force-reinstall` et `--no-cache-dir` obligent pip à
+recompiler h5py, au lieu de garder la version standard installée à
+l'étape 3. Vérifiez ensuite que h5py gère MPI :
+
+```bash
+python -c "import h5py; print(h5py.get_config().mpi)"   # doit afficher True
+```
+
+??? note "Avec conda"
+
+    conda-forge fournit directement une version de h5py compilée avec MPI :
+
+    ```bash
+    conda install -c conda-forge "h5py=*=mpi_openmpi*"
+    ```
+
+:material-book-open-variant: [h5py et MPI (documentation officielle)](https://docs.h5py.org/en/stable/mpi.html)
+
+## 5. Vérifier l'installation
 
 Vérifiez que MPI est disponible, puis lancez la correction de l'exercice 1
 sur 4 processus :
@@ -179,7 +260,7 @@ Je suis le rang  2 sur 4
 
 Si c'est le cas, votre installation est prête.
 
-## 5. Mettre à jour le dépôt
+## 6. Mettre à jour le dépôt
 
 Le cours évolue pendant l'année. Pour récupérer les dernières versions,
 depuis le dossier du dépôt :
@@ -194,7 +275,7 @@ git pull
     conflit avec les mises à jour. Le plus simple est de copier un
     exercice avant de le modifier, ou de travailler dans un dossier à part.
 
-## 6. Éditer le code avec VS Code
+## 7. Éditer le code avec VS Code
 
 [Visual Studio Code](https://code.visualstudio.com/) existe pour Linux,
 macOS et Windows. Ouvrez le dossier du dépôt avec *Fichier → Ouvrir le
@@ -240,6 +321,17 @@ code .
 
     L'environnement virtuel n'est pas activé dans ce terminal. Relancez
     `source .venv/bin/activate` depuis le dossier du dépôt.
+
+??? question "`Unable to load dependency HDF5` en compilant h5py"
+
+    La bibliothèque HDF5 parallèle n'est pas installée, ou `HDF5_DIR` ne
+    pointe pas vers elle. Reprenez l'étape 4 et vérifiez que le fichier
+    `libhdf5` existe bien dans le dossier `lib` de `HDF5_DIR`.
+
+??? question "`h5py was built without MPI support, can't use mpio driver`"
+
+    h5py est installé en version standard. Recompilez-le en suivant
+    l'étape 4, avec les options `--force-reinstall` et `--no-cache-dir`.
 
 ??? question "Sous macOS, un message `shmem: mmap: an error occurred`"
 
