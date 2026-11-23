@@ -9,5 +9,8 @@ mpi4py
 # alors être compilé avec MPI (voir l'étape 4 du guide d'installation).
 h5py
 
-# Optionnel, pour le mode parallel_mode = "mpi4py_fft" de la version MPI :
+# Facultatif : FFT distribuée pour le solveur de Poisson de la version MPI
+# (parallel_mode = "mpi4py_fft", question 3.3). Nécessite la bibliothèque FFTW :
+# voir l'étape 5 du guide d'installation. Décommentez la ligne suivante une
+# fois FFTW installé :
 # mpi4py-fft

@@ -139,8 +139,16 @@ The installation of MPI and of the parallel version of `h5py` is described in
 the [installation guide](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)
 of the course (steps 1 and 4).
 
+The MPI version can also solve the Poisson equation with a distributed FFT,
+using the library [`mpi4py-fft`](https://mpi4py-fft.readthedocs.io/) (see
+question 3.3 of the [MPI instructions](./instructions/3_mpi.md)). This library
+is optional and relies on FFTW, which must be installed first: see step 5 of
+the [installation guide](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html#5-installer-mpi4py-fft-facultatif).
+
 Optionally, [ParaView](https://www.paraview.org/) can be used to visualize the
-whole evolution of the simulation as a 3D volume (see `stack.py` below).
+whole evolution of the simulation as a 3D volume (see `stack.py` below). Its
+installation is described in step 6 of the
+[installation guide](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html#6-installer-paraview-facultatif).
 
 ### How to run the sequential code
 

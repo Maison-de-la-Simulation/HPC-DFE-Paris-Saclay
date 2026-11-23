@@ -14,7 +14,8 @@ faut installer quelques outils, puis récupérer le dépôt du cours.
 | **NumPy, Matplotlib, SciPy, mpi4py** | Les bibliothèques Python utilisées dans tout le cours |
 | **h5py, VTK** (facultatifs) | h5py pour le chapitre HDF5 et le TP Kelvin-Helmholtz, VTK pour le TP Mandelbulb |
 | **HDF5 parallèle** (facultatif) | Écrire un fichier HDF5 en parallèle, pour le chapitre [HDF5](hdf5/index.md) |
-| **Visual Studio Code** (conseillé) | Éditer le code, sur votre ordinateur ou à distance sur Ruche |
+| **mpi4py-fft** (facultatif) | FFT distribuées, pour la version MPI du TP Kelvin-Helmholtz |
+| **ParaView** (facultatif) | Visualiser les résultats en 3D (TP Mandelbulb, TP Kelvin-Helmholtz) |
 
 ## 1. Installer Git, Python et MPI
 
@@ -239,7 +240,99 @@ python -c "import h5py; print(h5py.get_config().mpi)"   # doit afficher True
 
 :material-book-open-variant: [h5py et MPI (documentation officielle)](https://docs.h5py.org/en/stable/mpi.html)
 
-## 5. Vérifier l'installation
+## 5. Installer mpi4py-fft (facultatif)
+
+[mpi4py-fft](https://mpi4py-fft.readthedocs.io/) calcule des **FFT
+distribuées** entre plusieurs processus MPI. Il ne sert que pour la version
+MPI du TP Kelvin-Helmholtz, où il permet de résoudre l'équation de Poisson
+sans rassembler tout le domaine sur un seul processus.
+
+mpi4py-fft s'appuie sur la bibliothèque [FFTW](https://www.fftw.org/), qu'il
+faut installer avant le paquet Python. Lancez ces commandes avec
+l'environnement `.venv` activé.
+
+=== ":material-linux: Linux"
+
+    Sur **Ubuntu** ou **Debian** :
+
+    ```bash
+    sudo apt install libfftw3-dev
+    pip install mpi4py-fft
+    ```
+
+=== ":material-apple: macOS"
+
+    ```bash
+    brew install fftw
+    pip install mpi4py-fft
+    ```
+
+=== ":material-microsoft-windows: Windows"
+
+    Dans le terminal **Ubuntu** de WSL, suivez l'onglet **Linux**.
+
+Vérifiez ensuite l'installation :
+
+```bash
+python -c "import mpi4py_fft; print(mpi4py_fft.__version__)"
+```
+
+??? note "Avec conda"
+
+    conda-forge fournit mpi4py-fft avec FFTW, en une seule commande :
+
+    ```bash
+    conda install -c conda-forge mpi4py-fft
+    ```
+
+## 6. Installer ParaView (facultatif)
+
+[ParaView](https://www.paraview.org/) est un logiciel libre de visualisation
+de données scientifiques, très utilisé en calcul haute performance. Dans ce
+cours, il sert à visualiser en 3D les résultats du TP Mandelbulb (fichiers
+`.vtk`) et l'évolution complète du TP Kelvin-Helmholtz (script `stack.py`).
+Il s'installe comme une application classique, en dehors de l'environnement
+Python.
+
+=== ":material-linux: Linux"
+
+    Téléchargez la version Linux sur la
+    [page de téléchargement de ParaView](https://www.paraview.org/download/),
+    décompressez l'archive, puis lancez `bin/paraview`.
+
+    La plupart des distributions proposent aussi un paquet, souvent moins
+    récent :
+
+    ```bash
+    sudo apt install paraview
+    ```
+
+=== ":material-apple: macOS"
+
+    Téléchargez l'image disque (`.dmg`) sur la
+    [page de téléchargement de ParaView](https://www.paraview.org/download/),
+    en choisissant la version adaptée à votre processeur (Apple Silicon ou
+    Intel), ou installez-le avec Homebrew :
+
+    ```bash
+    brew install --cask paraview
+    ```
+
+=== ":material-microsoft-windows: Windows"
+
+    Téléchargez et lancez l'installeur Windows (`.msi`) sur la
+    [page de téléchargement de ParaView](https://www.paraview.org/download/).
+
+    ParaView s'installe **sous Windows**, pas dans WSL. Pour ouvrir un
+    fichier produit dans WSL, passez par le dossier Linux, accessible depuis
+    l'explorateur Windows à l'adresse `\\wsl$\Ubuntu\home\<votre_login>`.
+
+Sur Ruche, il est plus simple de rapatrier les fichiers sur votre ordinateur
+(avec `scp` ou FileZilla, voir
+[Connexion et environnement](super-calculateur/environnement.md)) et de les
+ouvrir avec votre ParaView local.
+
+## 7. Vérifier l'installation
 
 Vérifiez que MPI est disponible, puis lancez la correction de l'exercice 1
 sur 4 processus :
@@ -262,7 +355,7 @@ Je suis le rang  2 sur 4
 
 Si c'est le cas, votre installation est prête.
 
-## 6. Mettre à jour le dépôt
+## 8. Mettre à jour le dépôt
 
 Le cours évolue pendant l'année. Pour récupérer les dernières versions,
 depuis le dossier du dépôt :
@@ -276,24 +369,6 @@ git pull
     Si vous modifiez les fichiers du dépôt, `git pull` peut entrer en
     conflit avec les mises à jour. Le plus simple est de copier un
     exercice avant de le modifier, ou de travailler dans un dossier à part.
-
-## 7. Éditer le code avec VS Code
-
-[Visual Studio Code](https://code.visualstudio.com/) existe pour Linux,
-macOS et Windows. Ouvrez le dossier du dépôt avec *Fichier → Ouvrir le
-dossier*, ou depuis un terminal :
-
-```bash
-code .
-```
-
-- Sous **Windows avec WSL**, installez l'extension **WSL** de VS Code,
-  puis lancez `code .` depuis le terminal Ubuntu : VS Code s'ouvre sous
-  Windows mais travaille dans Linux.
-- L'extension **Python** de VS Code ajoute la coloration, la complétion et
-  la sélection de l'environnement `.venv`.
-- Pour travailler directement sur Ruche, voir
-  [Connexion et environnement](super-calculateur/environnement.md).
 
 ## Problèmes fréquents
 
@@ -334,6 +409,12 @@ code .
 
     h5py est installé en version standard. Recompilez-le en suivant
     l'étape 4, avec les options `--force-reinstall` et `--no-cache-dir`.
+
+??? question "L'installation de mpi4py-fft échoue"
+
+    La bibliothèque FFTW n'est pas installée, ou pip ne la trouve pas.
+    Reprenez l'étape 5 en installant FFTW avant `pip install mpi4py-fft`,
+    ou utilisez la commande conda.
 
 ??? question "Sous macOS, un message `shmem: mmap: an error occurred`"
 

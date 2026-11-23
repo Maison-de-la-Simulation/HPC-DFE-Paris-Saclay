@@ -46,7 +46,7 @@ e) Add in the section `Parameters summary` the print of the local size and index
 
 f) Update the function `initial_vorticity` and check that `omega` is well initialized
 
-**Question 3.4 - Parallel poisson solver:**
+**Question 3.3 - Parallel poisson solver:**
 
 To parallize the poisson solver using MPI, we need to perform a parallel FFT. Unfortunately, we can perform a local FFT to each domain without affecting the numerical accuracy. There are therefore 2 solutions proposed for this project:
 
