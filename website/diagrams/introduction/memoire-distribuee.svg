@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 560 250" role="img" aria-label="Quatre unités de calcul, chacune avec sa propre mémoire vive, reliées par un réseau">
+<rect class="bus" x="40" y="203" width="480" height="24" rx="12"/>
+<text x="280" y="215">réseau</text>
+<g><rect class="mem" x="30" y="20" width="110" height="50" rx="6"/><text x="85" y="45">Mémoire vive</text><line class="link" x1="85" y1="70" x2="85" y2="100"/><rect class="cpu" x="30" y="100" width="110" height="60" rx="6"/><text x="85" y="130">Unité de calcul</text><line class="link" x1="85" y1="160" x2="85" y2="203"/></g>
+<g><rect class="mem" x="160" y="20" width="110" height="50" rx="6"/><text x="215" y="45">Mémoire vive</text><line class="link" x1="215" y1="70" x2="215" y2="100"/><rect class="cpu" x="160" y="100" width="110" height="60" rx="6"/><text x="215" y="130">Unité de calcul</text><line class="link" x1="215" y1="160" x2="215" y2="203"/></g>
+<g><rect class="mem" x="290" y="20" width="110" height="50" rx="6"/><text x="345" y="45">Mémoire vive</text><line class="link" x1="345" y1="70" x2="345" y2="100"/><rect class="cpu" x="290" y="100" width="110" height="60" rx="6"/><text x="345" y="130">Unité de calcul</text><line class="link" x1="345" y1="160" x2="345" y2="203"/></g>
+<g><rect class="mem" x="420" y="20" width="110" height="50" rx="6"/><text x="475" y="45">Mémoire vive</text><line class="link" x1="475" y1="70" x2="475" y2="100"/><rect class="cpu" x="420" y="100" width="110" height="60" rx="6"/><text x="475" y="130">Unité de calcul</text><line class="link" x1="475" y1="160" x2="475" y2="203"/></g>
+</svg>

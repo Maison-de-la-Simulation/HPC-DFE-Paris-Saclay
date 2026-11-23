@@ -19,6 +19,7 @@ mkdocs serve        # http://127.0.0.1:8000, rechargement automatique
 website/
 ├── mkdocs.yml                 # configuration, menu de navigation
 ├── requirements.txt
+├── diagrams/<chapitre>/       # schémas SVG, insérés dans les pages
 └── docs/
     ├── index.md               # page d'accueil
     ├── introduction/          # chapitre I (une page par section)
@@ -29,6 +30,29 @@ website/
 
 Ajouter un chapitre : créer `docs/<chapitre>/`, puis l'ajouter dans la
 section `nav` de `mkdocs.yml`.
+
+### Images partagées avec le reste du dépôt
+
+Une image utilisée à la fois par le site et par un README du dépôt n'est
+stockée qu'une fois, dans `website/docs/assets/images/`. Le README pointe
+alors vers ce fichier (par exemple
+`../website/docs/assets/images/super-calculateur/filezilla.jpg`) et la copie
+de `support/materiel/` est supprimée.
+
+### Schémas
+
+Les schémas sont des fichiers SVG rangés dans `diagrams/<chapitre>/`. Une
+page les insère avec une ligne d'inclusion (extension `pymdownx.snippets`) :
+
+```markdown
+--8<-- "mpi/bcast.svg"
+```
+
+Le SVG est copié tel quel dans la page HTML : il utilise les classes CSS de
+`docs/stylesheets/extra.css` (`.diagram`, `.cpu`, `.mem`, `.link`…), qui
+suivent les couleurs du thème clair ou sombre. Ouvert seul, hors du site, un
+schéma s'affiche donc sans ses couleurs. Le fichier ne doit pas contenir de
+ligne vide.
 
 ### Syntaxe utile
 

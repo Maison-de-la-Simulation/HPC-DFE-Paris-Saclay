@@ -185,7 +185,7 @@ En fonction de votre OS, vous pouvez aussi passer par un magasin d'applicaiton o
 
 Une fois FileZilla démarré, vous obtenez l'interface suivante :
 
-<img src="../support/materiel/filezilla_interface.png" height="300">
+<img src="../website/docs/assets/images/super-calculateur/filezilla.jpg" height="300">
 
 On va d'abord configurer la connexion. 
 Pour cela cliquez sur l'icône pointé par la flèche rouge. 
@@ -212,7 +212,7 @@ Ensuite, il faut installer l'extension SSH Remote sur VSCode.
 
 Une fois l'extension installée, vous pouvez cliquer en bas à gauche sur l'icône suivante :
 
-<img src="../support/materiel/vscode_remote_ssh.png" height="300">
+<img src="../website/docs/assets/images/super-calculateur/vscode-remote-ssh.png" height="300">
 
 Choisissez ensuite l'option `Remote SSH: Connect to Host...` et entrez l'adresse de Ruche :
 

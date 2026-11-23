@@ -98,7 +98,7 @@ C'est le cas sur les postes de travail de l'université.
 Vous aurez aussi besoin d'installer une bibliothèque MPI.
 Sur les postes de travail de l'université, OpenMPI est déjà installé.
 Pour l'installer sur vos ordinateurs personnels, utilisez les instructions
-dans le dossier [./documentation](../../documentation/mpi.md).
+du [guide d'installation](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html).
 
 ### Compilation et exécution
 

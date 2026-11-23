@@ -1,6 +1,10 @@
+# Environnement conda du TP Mandelbulb
+# Installation : conda env create -f environment.yml && conda activate mandelbulb
 name: mandelbulb
+channels:
+  - conda-forge
 dependencies:
   - numpy
-  - argparse
-  - vtk
+  - matplotlib
   - mpi4py
+  - vtk

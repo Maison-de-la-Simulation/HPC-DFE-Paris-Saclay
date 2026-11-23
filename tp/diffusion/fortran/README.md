@@ -83,7 +83,7 @@ Ouvrez le fichier `parallelism.F90`.
 Compléter les noms de fonctions MPI correspondantes permettant de créer la
 topologie cartésienne.
 Utilisez les noms de variables donnés en entête de fonction.
-Vous pouvez utiliser l'exercice 6 `6_cartesian_com` pour vous aider ainsi
+Vous pouvez utiliser l'exercice 6 `cartesian_com` pour vous aider ainsi
 que le cours.
 
 6. **Les timers** : L'étape suivante dans le `main.F90`est l'initialisation des timers qui

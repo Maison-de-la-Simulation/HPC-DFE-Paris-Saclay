@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 680 300" role="img" aria-label="Une grille 4 × 4 répartie en 4 blocs entre 4 rangs est stockée ligne par ligne dans le fichier : le bloc de chaque rang y est découpé en 2 morceaux. En écriture indépendante, cela fait 8 petites écritures ; en écriture collective, 2 processus agrégateurs écrivent 2 gros morceaux contigus">
+<text class="small" x="80" y="16">Grille 4 × 4, 4 rangs</text>
+<rect class="blk-a" x="30" y="28" width="23" height="23" rx="3"/><text class="on-blk" x="41.5" y="39.5">0</text>
+<rect class="blk-a" x="55" y="28" width="23" height="23" rx="3"/><text class="on-blk" x="66.5" y="39.5">0</text>
+<rect class="blk-b" x="80" y="28" width="23" height="23" rx="3"/><text class="on-blk" x="91.5" y="39.5">1</text>
+<rect class="blk-b" x="105" y="28" width="23" height="23" rx="3"/><text class="on-blk" x="116.5" y="39.5">1</text>
+<rect class="blk-a" x="30" y="53" width="23" height="23" rx="3"/><text class="on-blk" x="41.5" y="64.5">0</text>
+<rect class="blk-a" x="55" y="53" width="23" height="23" rx="3"/><text class="on-blk" x="66.5" y="64.5">0</text>
+<rect class="blk-b" x="80" y="53" width="23" height="23" rx="3"/><text class="on-blk" x="91.5" y="64.5">1</text>
+<rect class="blk-b" x="105" y="53" width="23" height="23" rx="3"/><text class="on-blk" x="116.5" y="64.5">1</text>
+<rect class="blk-c" x="30" y="78" width="23" height="23" rx="3"/><text class="on-blk" x="41.5" y="89.5">2</text>
+<rect class="blk-c" x="55" y="78" width="23" height="23" rx="3"/><text class="on-blk" x="66.5" y="89.5">2</text>
+<rect class="blk-d" x="80" y="78" width="23" height="23" rx="3"/><text class="on-blk" x="91.5" y="89.5">3</text>
+<rect class="blk-d" x="105" y="78" width="23" height="23" rx="3"/><text class="on-blk" x="116.5" y="89.5">3</text>
+<rect class="blk-c" x="30" y="103" width="23" height="23" rx="3"/><text class="on-blk" x="41.5" y="114.5">2</text>
+<rect class="blk-c" x="55" y="103" width="23" height="23" rx="3"/><text class="on-blk" x="66.5" y="114.5">2</text>
+<rect class="blk-d" x="80" y="103" width="23" height="23" rx="3"/><text class="on-blk" x="91.5" y="114.5">3</text>
+<rect class="blk-d" x="105" y="103" width="23" height="23" rx="3"/><text class="on-blk" x="116.5" y="114.5">3</text>
+<text class="small" x="80" y="146">ligne 0 en haut</text>
+<text class="small" x="416" y="16">Dans le fichier : les lignes les unes à la suite des autres</text>
+<text class="start" x="200" y="50">Écriture indépendante</text>
+<rect class="blk-a" x="200" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="212.5" y="74">0</text>
+<rect class="blk-a" x="227" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="239.5" y="74">0</text>
+<rect class="blk-b" x="254" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="266.5" y="74">1</text>
+<rect class="blk-b" x="281" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="293.5" y="74">1</text>
+<rect class="blk-a" x="308" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="320.5" y="74">0</text>
+<rect class="blk-a" x="335" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="347.5" y="74">0</text>
+<rect class="blk-b" x="362" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="374.5" y="74">1</text>
+<rect class="blk-b" x="389" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="401.5" y="74">1</text>
+<rect class="blk-c" x="416" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="428.5" y="74">2</text>
+<rect class="blk-c" x="443" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="455.5" y="74">2</text>
+<rect class="blk-d" x="470" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="482.5" y="74">3</text>
+<rect class="blk-d" x="497" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="509.5" y="74">3</text>
+<rect class="blk-c" x="524" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="536.5" y="74">2</text>
+<rect class="blk-c" x="551" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="563.5" y="74">2</text>
+<rect class="blk-d" x="578" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="590.5" y="74">3</text>
+<rect class="blk-d" x="605" y="62" width="25" height="24" rx="3"/><text class="on-blk" x="617.5" y="74">3</text>
+<line class="link" x1="202" y1="96" x2="250" y2="96"/>
+<line class="link" x1="256" y1="96" x2="304" y2="96"/>
+<line class="link" x1="310" y1="96" x2="358" y2="96"/>
+<line class="link" x1="364" y1="96" x2="412" y2="96"/>
+<line class="link" x1="418" y1="96" x2="466" y2="96"/>
+<line class="link" x1="472" y1="96" x2="520" y2="96"/>
+<line class="link" x1="526" y1="96" x2="574" y2="96"/>
+<line class="link" x1="580" y1="96" x2="628" y2="96"/>
+<text class="small" x="416" y="114">chaque rang écrit seul ses 2 morceaux : 8 petites écritures</text>
+<text class="start" x="200" y="160">Écriture collective</text>
+<rect class="blk-a" x="200" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="212.5" y="184">0</text>
+<rect class="blk-a" x="227" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="239.5" y="184">0</text>
+<rect class="blk-b" x="254" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="266.5" y="184">1</text>
+<rect class="blk-b" x="281" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="293.5" y="184">1</text>
+<rect class="blk-a" x="308" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="320.5" y="184">0</text>
+<rect class="blk-a" x="335" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="347.5" y="184">0</text>
+<rect class="blk-b" x="362" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="374.5" y="184">1</text>
+<rect class="blk-b" x="389" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="401.5" y="184">1</text>
+<rect class="blk-c" x="416" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="428.5" y="184">2</text>
+<rect class="blk-c" x="443" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="455.5" y="184">2</text>
+<rect class="blk-d" x="470" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="482.5" y="184">3</text>
+<rect class="blk-d" x="497" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="509.5" y="184">3</text>
+<rect class="blk-c" x="524" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="536.5" y="184">2</text>
+<rect class="blk-c" x="551" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="563.5" y="184">2</text>
+<rect class="blk-d" x="578" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="590.5" y="184">3</text>
+<rect class="blk-d" x="605" y="172" width="25" height="24" rx="3"/><text class="on-blk" x="617.5" y="184">3</text>
+<line class="sync" x1="202" y1="206" x2="412" y2="206"/>
+<text class="small" x="308" y="222">agrégateur 1</text>
+<line class="sync" x1="418" y1="206" x2="628" y2="206"/>
+<text class="small" x="524" y="222">agrégateur 2</text>
+<text class="small" x="416" y="246">les données sont d'abord regroupées entre processus,</text>
+<text class="small" x="416" y="262">puis 2 agrégateurs écrivent 2 gros morceaux contigus</text>
+</svg>

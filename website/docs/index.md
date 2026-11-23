@@ -22,6 +22,15 @@ par échange de messages avec MPI.
 
 <div class="grid cards" markdown>
 
+-   :material-laptop:{ .lg .middle } __Installer le cours__
+
+    ---
+
+    Installer Python, MPI et le dépôt du cours sur votre ordinateur :
+    Linux, macOS et Windows.
+
+    [:octicons-arrow-right-24: Suivre le guide](installation.md)
+
 -   :material-rocket-launch:{ .lg .middle } __I. Introduction au calcul parallèle__
 
     ---
@@ -35,30 +44,48 @@ par échange de messages avec MPI.
 
     ---
 
-    Connexion, environnement, soumission de travaux.
+    Architecture, connexion, environnement et soumission de jobs avec
+    SLURM sur le super-calculateur Ruche.
 
-    *Bientôt en ligne* — en attendant :
-    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/Super-calculateur.pdf)
+    [:octicons-arrow-right-24: Lire le chapitre](super-calculateur/index.md)
 
 -   :material-transit-connection-variant:{ .lg .middle } __III. Parallélisme par échange de messages (MPI)__
 
     ---
 
-    Communications point à point, collectives, topologies.
+    Communications point à point, collectives, topologies, avec Python
+    et mpi4py.
 
-    *Bientôt en ligne* — en attendant :
-    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/MPI_python.pdf)
+    [:octicons-arrow-right-24: Lire le chapitre](mpi/index.md)
 
--   :material-speedometer:{ .lg .middle } __IV. Mesure de la performance__
+-   :material-database:{ .lg .middle } __IV. Écriture parallèle avec HDF5__
 
     ---
 
-    Accélération, efficacité, scalabilité forte et faible.
+    Stratégies d'écriture, format HDF5, écriture d'un fichier unique en
+    parallèle avec h5py.
 
-    *Bientôt en ligne* — en attendant :
-    [support PDF](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/blob/master/support/mesure_performance.pdf)
+    [:octicons-arrow-right-24: Lire le chapitre](hdf5/index.md)
 
--   :material-flask:{ .lg .middle } __V. Travaux pratiques__
+-   :material-sine-wave:{ .lg .middle } __V. FFT distribuée__
+
+    ---
+
+    Principe d'une FFT distribuée, bibliothèque mpi4py-fft et résolution
+    de l'équation de Poisson du TP Kelvin-Helmholtz.
+
+    [:octicons-arrow-right-24: Lire le chapitre](fft/index.md)
+
+-   :material-speedometer:{ .lg .middle } __VI. Mesure de la performance__
+
+    ---
+
+    Déséquilibre de charge, scalabilité forte et faible, efficacité et
+    loi d'Amdahl.
+
+    [:octicons-arrow-right-24: Lire le chapitre](performance/index.md)
+
+-   :material-flask:{ .lg .middle } __VII. Travaux pratiques__
 
     ---
 

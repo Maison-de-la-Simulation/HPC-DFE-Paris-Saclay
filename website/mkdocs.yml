@@ -7,6 +7,9 @@ repo_name: HPC-DFE-Paris-Saclay
 edit_uri: edit/master/website/docs/
 # Keeps relative paths in raw HTML (<video>, <img>) identical to Markdown ones
 use_directory_urls: false
+# Reload the preview when a diagram changes (diagrams/ is outside docs/)
+watch:
+  - diagrams
 copyright: Maison de la Simulation – CEA Saclay · Master 2 DFE, Université Paris-Saclay
 
 theme:
@@ -15,14 +18,14 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: custom
       accent: deep orange
       toggle:
         icon: material/weather-night
         name: Passer en mode sombre
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: custom
       accent: deep orange
       toggle:
         icon: material/weather-sunny
@@ -47,11 +50,37 @@ theme:
 
 nav:
   - Accueil: index.md
+  - Installation: installation.md
   - Introduction au HPC:
       - introduction/index.md
       - 1. Qu'est-ce que le HPC ?: introduction/qu-est-ce-que-le-hpc.md
       - 2. Un peu d'histoire: introduction/histoire.md
-      - 3. Fonctionnement d'un super-calculateur: introduction/fonctionnement.md
+      - 3. Notion de programme parallèle: introduction/programme-parallele.md
+      - 4. Fonctionnement d'un super-calculateur: introduction/fonctionnement.md
+  - Prise en main d'un super-calculateur:
+      - super-calculateur/index.md
+      - 1. Architecture: super-calculateur/architecture.md
+      - 2. Connexion et environnement: super-calculateur/environnement.md
+      - 3. SLURM et premier job: super-calculateur/slurm.md
+  - MPI:
+      - mpi/index.md
+      - 1. Description de l'approche: mpi/approche.md
+      - 2. Premier programme parallèle: mpi/premier-programme.md
+      - 3. Communications bloquantes: mpi/point-a-point.md
+      - 4. Communications non bloquantes: mpi/non-bloquantes.md
+      - 5. Communications collectives:
+          - 5.1 Diffusion et collecte: mpi/collectives.md
+          - 5.2 Réductions: mpi/reductions.md
+          - 5.3 Tailles variables et non bloquantes: mpi/collectives-avancees.md
+      - 6. Python face au C et au Fortran: mpi/python-c-fortran.md
+      - 7. Topologie cartésienne: mpi/topologie.md
+  - HDF5: hdf5/index.md
+  - FFT distribuée: fft/index.md
+  - Performance:
+      - performance/index.md
+      - 1. Déséquilibre et parallélisme parfait: performance/notions.md
+      - 2. Scalabilité: performance/scalabilite.md
+      - 3. Loi d'Amdahl: performance/amdahl.md
 
 markdown_extensions:
   - abbr
@@ -70,12 +99,18 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight
+  # Diagrams are SVG files in diagrams/, inserted inline at build time
+  # (--8<-- "chapter/name.svg") so they keep the theme colors (light/dark)
+  - pymdownx.snippets:
+      base_path: [diagrams]
+      check_paths: true
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
 
 extra_javascript:
   - javascripts/mathjax.js
+  - javascripts/external-links.js
   - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
 
 extra_css:

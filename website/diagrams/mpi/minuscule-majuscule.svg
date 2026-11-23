@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 660 250" role="img" aria-label="En minuscules, l'objet Python est converti en octets avec pickle, envoyé, puis reconstruit en un nouvel objet ; avec une majuscule, MPI copie directement la mémoire du tableau NumPy dans un tableau de réception préparé à l'avance">
+<defs><marker id="ar-mm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text x="330" y="14">Minuscules : comm.send(obj) / obj = comm.recv()</text>
+<rect class="cpu" x="10" y="30" width="100" height="44" rx="6"/><text x="60" y="47">objet</text><text class="small" x="60" y="63">Python</text>
+<line class="link" x1="110" y1="52" x2="138" y2="52" marker-end="url(#ar-mm)"/>
+<rect class="mem" x="140" y="30" width="92" height="44" rx="6"/><text x="186" y="47">pickle</text><text class="small" x="186" y="63">conversion</text>
+<line class="link" x1="232" y1="52" x2="260" y2="52" marker-end="url(#ar-mm)"/>
+<rect class="bus" x="262" y="30" width="136" height="44" rx="6"/><text x="330" y="47">octets</text><text class="small" x="330" y="63">envoyés par MPI</text>
+<line class="link" x1="398" y1="52" x2="426" y2="52" marker-end="url(#ar-mm)"/>
+<rect class="mem" x="428" y="30" width="92" height="44" rx="6"/><text x="474" y="47">unpickle</text><text class="small" x="474" y="63">reconstruction</text>
+<line class="link" x1="520" y1="52" x2="548" y2="52" marker-end="url(#ar-mm)"/>
+<rect class="cpu" x="550" y="30" width="100" height="44" rx="6"/><text x="600" y="47">nouvel</text><text class="small" x="600" y="63">objet renvoyé</text>
+<text class="small" x="330" y="96">n'importe quel objet, rien à préparer, mais conversions et copies en plus</text>
+<line class="frame" x1="10" y1="118" x2="650" y2="118"/>
+<text x="330" y="142">Majuscule : comm.Send(tableau) / comm.Recv(tableau)</text>
+<rect class="cpu" x="10" y="158" width="150" height="44" rx="6"/><text x="85" y="175">tableau NumPy</text><text class="small" x="85" y="191">mémoire de l'expéditeur</text>
+<line class="link" x1="160" y1="180" x2="258" y2="180" marker-end="url(#ar-mm)"/>
+<rect class="bus" x="262" y="158" width="136" height="44" rx="6"/><text x="330" y="175">mémoire brute</text><text class="small" x="330" y="191">envoyée par MPI</text>
+<line class="link" x1="398" y1="180" x2="496" y2="180" marker-end="url(#ar-mm)"/>
+<rect class="cpu" x="500" y="158" width="150" height="44" rx="6"/><text x="575" y="175">tableau NumPy</text><text class="small" x="575" y="191">préparé à l'avance</text>
+<text class="small" x="330" y="226">aucune conversion, vitesse proche du C, mais taille et type à prévoir</text>
+</svg>

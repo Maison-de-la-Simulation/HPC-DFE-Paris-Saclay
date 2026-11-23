@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 560 124" role="img" aria-label="Shift(0, 1) sur le rang 5 : la source est le rang 1, la destination le rang 9">
+<defs><marker id="ar-sh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="blk-sel" x="20" y="30" width="120" height="56" rx="4"/>
+<text x="80" y="50">Rang 1</text>
+<text class="small" x="80" y="70">source</text>
+<rect class="mem" x="220" y="30" width="120" height="56" rx="4"/>
+<text x="280" y="50">Rang 5</text>
+<text class="small" x="280" y="70">rang courant</text>
+<rect class="blk-sel" x="420" y="30" width="120" height="56" rx="4"/>
+<text x="480" y="50">Rang 9</text>
+<text class="small" x="480" y="70">destination</text>
+<line class="link" x1="140" y1="58" x2="218" y2="58" marker-end="url(#ar-sh)"/>
+<line class="link" x1="340" y1="58" x2="418" y2="58" marker-end="url(#ar-sh)"/>
+<text class="small" x="280" y="16">cart_comm.Shift(0, 1) sur le rang 5 renvoie (1, 9)</text>
+<text class="small" x="280" y="110">déplacement > 0 : vers les coordonnées croissantes de la direction 0</text>
+</svg>

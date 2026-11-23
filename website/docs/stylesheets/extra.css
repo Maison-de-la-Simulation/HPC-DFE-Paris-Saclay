@@ -1,3 +1,19 @@
+/* ---------- Theme colors: night blue ---------- */
+:root {
+  --md-primary-fg-color:        #14213d;
+  --md-primary-fg-color--light: #2c3e66;
+  --md-primary-fg-color--dark:  #0b1328;
+  --md-primary-bg-color:        #ffffff;
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.7);
+}
+/* Links stay a readable blue, distinct from the body text */
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: #1f4fa3;
+}
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: #8fb3ff;
+}
+
 /* ---------- Figures ---------- */
 .md-typeset figure {
   margin: 1.5em auto;
@@ -116,4 +132,64 @@
 .diagram .bus   { fill: var(--md-default-fg-color--lightest); stroke: var(--md-default-fg-color--light); stroke-width: 1.5; }
 .diagram text   { fill: var(--md-default-fg-color); font-family: var(--md-text-font-family); font-size: 13px; text-anchor: middle; dominant-baseline: middle; }
 .diagram text.small { font-size: 11px; fill: var(--md-default-fg-color--light); }
+.md-typeset .diagram-wide { max-width: 44rem; }
+.diagram .frame { fill: none; stroke: var(--md-default-fg-color--lighter); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.diagram .node  { fill: var(--md-primary-fg-color); opacity: 0.55; }
+.diagram .arrowhead { fill: var(--md-default-fg-color--light); }
+[data-md-color-scheme="slate"] .diagram .node { fill: #8c9eff; }
 [data-md-color-scheme="slate"] .diagram .cpu { fill: rgba(140, 158, 255, 0.12); stroke: #8c9eff; }
+
+/* Data blocks, idle time and synchronisation lines (MPI chapter) */
+.diagram .blk-a   { fill: #ef9a9a; }
+.diagram .blk-b   { fill: #90caf9; }
+.diagram .blk-c   { fill: #a5d6a7; }
+.diagram .blk-d   { fill: #ffe082; }
+.diagram .blk-sum { fill: #ce93d8; }
+.diagram .blk-    { fill: none; stroke: var(--md-default-fg-color--lighter); stroke-width: 1; stroke-dasharray: 3 3; }
+.diagram .blk-sel { fill: var(--md-default-fg-color--lightest); stroke: var(--md-primary-fg-color); stroke-width: 2; }
+.diagram text.on-blk { fill: #1a1a1a; font-weight: 600; }
+.diagram .idle  { fill: none; stroke: var(--md-default-fg-color--lighter); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.diagram .sync  { stroke: var(--md-accent-fg-color); stroke-width: 2.5; stroke-dasharray: 6 4; }
+[data-md-color-scheme="slate"] .diagram .blk-sel { stroke: #8c9eff; }
+
+/* Line charts (performance chapter): validated categorical slots 1-3,
+   stepped separately for the light and dark surfaces */
+.diagram .series { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.diagram .s1 { stroke: #2a78d6; }
+.diagram .s2 { stroke: #eb6834; }
+.diagram .s3 { stroke: #1baf7a; }
+[data-md-color-scheme="slate"] .diagram .s1 { stroke: #3987e5; }
+[data-md-color-scheme="slate"] .diagram .s2 { stroke: #d95926; }
+[data-md-color-scheme="slate"] .diagram .s3 { stroke: #199e70; }
+.diagram .grid  { stroke: var(--md-default-fg-color--lightest); stroke-width: 1; }
+.diagram text.label { font-size: 12px; fill: var(--md-default-fg-color); }
+.diagram text.start { text-anchor: start; }
+
+/* ---------- Section titles: clearer separation between sections ---------- */
+.md-typeset h2 {
+  margin-top: 2.6rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  font-weight: 500;
+  color: var(--md-primary-fg-color);
+}
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  color: #c5d3f5;
+}
+/* No rule above the first section of a page, right after the title */
+.md-typeset h1 + h2,
+.md-typeset h1 + p + h2 {
+  border-top: none;
+  padding-top: 0;
+}
+.md-typeset h3 {
+  font-weight: 600;
+}
+/* Headings inside cards and admonitions keep the default look */
+.md-typeset .grid h2,
+.md-typeset .admonition h2,
+.md-typeset .hero h2 {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}

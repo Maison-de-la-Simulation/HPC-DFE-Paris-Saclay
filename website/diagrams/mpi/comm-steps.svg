@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 130" role="img" aria-label="Une communication enchaîne initialisation, paquetage, transfert, dépaquetage et finalisation">
+<defs><marker id="ar-cs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="bus" x="10" y="20" width="116" height="54" rx="6"/>
+<text x="68" y="40">Initialisation</text>
+<text class="small" x="68" y="58">de l'échange</text>
+<rect class="cpu" x="136" y="20" width="116" height="54" rx="6"/>
+<text x="194" y="40">Paquetage</text>
+<text class="small" x="194" y="58">des données</text>
+<rect class="mem" x="262" y="20" width="116" height="54" rx="6"/>
+<text x="320" y="40">Transfert</text>
+<text class="small" x="320" y="58">(réseau)</text>
+<rect class="cpu" x="388" y="20" width="116" height="54" rx="6"/>
+<text x="446" y="40">Dépaquetage</text>
+<text class="small" x="446" y="58">des données</text>
+<rect class="bus" x="514" y="20" width="116" height="54" rx="6"/>
+<text x="572" y="40">Finalisation</text>
+<text class="small" x="572" y="58">de l'échange</text>
+<text class="small" x="68" y="92">send</text>
+<text class="small" x="574" y="92">recv</text>
+<line class="link" x1="10" y1="110" x2="630" y2="110" marker-end="url(#ar-cs)"/>
+<text class="small" x="610" y="124">Temps</text>
+</svg>

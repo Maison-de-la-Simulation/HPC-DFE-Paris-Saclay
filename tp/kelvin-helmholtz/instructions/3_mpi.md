@@ -46,13 +46,13 @@ e) Add in the section `Parameters summary` the print of the local size and index
 
 f) Update the function `initial_vorticity` and check that `omega` is well initialized
 
-**Question 3.4 - Parallel poisson solver:**
+**Question 3.3 - Parallel poisson solver:**
 
 To parallize the poisson solver using MPI, we need to perform a parallel FFT. Unfortunately, we can perform a local FFT to each domain without affecting the numerical accuracy. There are therefore 2 solutions proposed for this project:
 
 1) **Easy but not efficient:** You can use MPI to gather in rank 0 all subdomains for `omega`, perform the Poisson solver on Rank 0 and then redistribute the solution of `phi` to the different ranks.
 
-2) **Efficient solution:** there is a parallel implementation of fft using MPI via the library `mpi4py_fft`.
+2) **Efficient solution:** there is a parallel implementation of fft using MPI via the library `mpi4py_fft`. The principle of a distributed FFT and the minimal use of `mpi4py_fft` are presented in the [FFT chapter of the course](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/fft/index.html).
 
 Here is an example on how to use `mpi4py_fft`for our specific case:
 
@@ -123,22 +123,22 @@ a) Uncomment the full time loop except the computation of the timers and the sna
 
 b) Then, make sure that all the prints are only handled by rank 0. You can make a first run in parallel and check that the energy is the same as in the sequential version.
 
-c) We will now adapt the function `save_snapshot` to make it worlk with MPI. There are several methods to do that:
+c) We will now adapt the function `save_snapshot` to make it work with MPI. The sequential version writes the snapshots in HDF5 files. There are several methods to do that in parallel (see the [HDF5 chapter of the course](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/hdf5/index.html)):
 
-1) **Simple and inefficient method:** As for the FFT, the simple version consists on gathering all subdomain in rank 0 and to let this rank producing the snapshop using the same function. This method is however not scalable.
+1) **Simple and inefficient method:** As for the FFT, the simple version consists on gathering all subdomain in rank 0 and to let this rank producing the snapshot using the same function. This method is however not scalable.
 
-2) **Parallel writing:** Another solution consists in having all ranks creating their own file. Then, after the simulation, the visualization scripts have to be adapt to read the different pieces of the puzzle. This method is more scalable than the previous one but will rapidly reach a limit due to the capacity of the file system of your machine to create multiple files at the same time.
+2) **One file per rank:** Another solution consists in having all ranks creating their own file. Then, after the simulation, the visualization scripts have to be adapted to read the different pieces of the puzzle. This method is more scalable than the previous one but will rapidly reach a limit due to the capacity of the file system of your machine to create multiple files at the same time.
 
-3) **Using parallel libraries for this aim such as HDF5 or Adios:** this is the best solution but out of the scope of this project.
+3) **Parallel HDF5:** all ranks open the same HDF5 file with the `mpio` driver of `h5py`, create the datasets with their global shape `(Nx, Ny)`, and each rank writes its x-slab `[i_start:i_end]` with a collective write. This is the most scalable solution, and the file is identical to the sequential one, so the visualization scripts work unchanged.
 
-For simplicity, implement only the first method. During the performance tests, we will deactivate the snapshots.
+Implement the third method. It requires `h5py` built with MPI support (`python -c "import h5py; print(h5py.get_config().mpi)"` must print `True`, see step 4 of the [installation guide](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)). If it is not available, start with the first method. During the performance tests, we will deactivate the snapshots.
 
 b) Use the visualization script to visualize the snapshots. Add some images in your report.
 
 c) Check that the results are similar to the sequential version. For this aim, you can use the script `compare.py` that compare and estimate the error between two snapshots :
 
 ```python
-python compare.py seq/diags/snapshot_000000.npz mpi/diags/snapshot_000000.npz
+python compare.py seq/diags/snapshot_000000.h5 mpi/diags/snapshot_000000.h5
 ```
 
 **Question 3.6 - Timers**

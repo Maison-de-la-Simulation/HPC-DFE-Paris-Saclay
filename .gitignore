@@ -19,3 +19,11 @@
 **.vtk
 
 .vscode
+# Correction MPI du TP Kelvin-Helmholtz : publiée après les examens
+tp/kelvin-helmholtz/python/mpi/
+
+# Descriptions XDMF générées pour ParaView
+**/*.xdmf
+
+# Cache Python
+**/__pycache__/

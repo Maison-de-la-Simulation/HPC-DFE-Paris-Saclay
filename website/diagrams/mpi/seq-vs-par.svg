@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 255" role="img" aria-label="En séquentiel, un processus enchaîne 9 calculs ; en parallèle, 3 processus en font 3 chacun, en même temps">
+<defs><marker id="ar-sp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="small" x="52" y="34">Séquentiel</text>
+<text class="small" x="52" y="62">rang 0</text>
+<rect class="cpu" x="100" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="127.0" y="62.0">Calcul</text>
+<rect class="cpu" x="156" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="183.0" y="62.0">Calcul</text>
+<rect class="cpu" x="212" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="239.0" y="62.0">Calcul</text>
+<rect class="cpu" x="268" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="295.0" y="62.0">Calcul</text>
+<rect class="cpu" x="324" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="351.0" y="62.0">Calcul</text>
+<rect class="cpu" x="380" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="407.0" y="62.0">Calcul</text>
+<rect class="cpu" x="436" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="463.0" y="62.0">Calcul</text>
+<rect class="cpu" x="492" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="519.0" y="62.0">Calcul</text>
+<rect class="cpu" x="548" y="49" width="54" height="26" rx="4"/>
+<text class="small" x="575.0" y="62.0">Calcul</text>
+<text class="small" x="52" y="104">Parallèle</text>
+<text class="small" x="52" y="133">rang 0</text>
+<rect class="cpu" x="100" y="120" width="54" height="26" rx="4"/>
+<text class="small" x="127.0" y="133.0">Calcul</text>
+<rect class="cpu" x="156" y="120" width="54" height="26" rx="4"/>
+<text class="small" x="183.0" y="133.0">Calcul</text>
+<rect class="cpu" x="212" y="120" width="54" height="26" rx="4"/>
+<text class="small" x="239.0" y="133.0">Calcul</text>
+<text class="small" x="52" y="167">rang 1</text>
+<rect class="cpu" x="100" y="154" width="54" height="26" rx="4"/>
+<text class="small" x="127.0" y="167.0">Calcul</text>
+<rect class="cpu" x="156" y="154" width="54" height="26" rx="4"/>
+<text class="small" x="183.0" y="167.0">Calcul</text>
+<rect class="cpu" x="212" y="154" width="54" height="26" rx="4"/>
+<text class="small" x="239.0" y="167.0">Calcul</text>
+<text class="small" x="52" y="201">rang 2</text>
+<rect class="cpu" x="100" y="188" width="54" height="26" rx="4"/>
+<text class="small" x="127.0" y="201.0">Calcul</text>
+<rect class="cpu" x="156" y="188" width="54" height="26" rx="4"/>
+<text class="small" x="183.0" y="201.0">Calcul</text>
+<rect class="cpu" x="212" y="188" width="54" height="26" rx="4"/>
+<text class="small" x="239.0" y="201.0">Calcul</text>
+<line class="link" x1="100" y1="232" x2="620" y2="232" marker-end="url(#ar-sp)"/>
+<text class="small" x="600" y="246">Temps</text>
+</svg>

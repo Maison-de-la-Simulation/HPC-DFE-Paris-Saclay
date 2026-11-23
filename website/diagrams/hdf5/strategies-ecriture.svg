@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 660 270" role="img" aria-label="Trois stratégies d'écriture : un fichier par processus ; tous les processus envoient leurs données au rang 0 qui écrit un seul fichier ; écriture parallèle où chaque processus écrit sa partie dans un fichier partagé">
+<defs><marker id="ar-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text x="110" y="16">1. Un fichier par processus</text>
+<rect class="cpu" x="15" y="34" width="42" height="34" rx="5"/><text x="36" y="51">0</text>
+<rect class="cpu" x="63" y="34" width="42" height="34" rx="5"/><text x="84" y="51">1</text>
+<rect class="cpu" x="111" y="34" width="42" height="34" rx="5"/><text x="132" y="51">2</text>
+<rect class="cpu" x="159" y="34" width="42" height="34" rx="5"/><text x="180" y="51">3</text>
+<text x="330" y="16">2. Tout sur le rang 0</text>
+<rect class="cpu" x="235" y="34" width="42" height="34" rx="5"/><text x="256" y="51">0</text>
+<rect class="cpu" x="283" y="34" width="42" height="34" rx="5"/><text x="304" y="51">1</text>
+<rect class="cpu" x="331" y="34" width="42" height="34" rx="5"/><text x="352" y="51">2</text>
+<rect class="cpu" x="379" y="34" width="42" height="34" rx="5"/><text x="400" y="51">3</text>
+<text x="550" y="16">3. Écriture parallèle</text>
+<rect class="cpu" x="455" y="34" width="42" height="34" rx="5"/><text x="476" y="51">0</text>
+<rect class="cpu" x="503" y="34" width="42" height="34" rx="5"/><text x="524" y="51">1</text>
+<rect class="cpu" x="551" y="34" width="42" height="34" rx="5"/><text x="572" y="51">2</text>
+<rect class="cpu" x="599" y="34" width="42" height="34" rx="5"/><text x="620" y="51">3</text>
+<line class="link" x1="36" y1="68" x2="36" y2="148" marker-end="url(#ar-io)"/>
+<rect class="mem" x="15" y="150" width="42" height="50" rx="4"/><text class="small" x="36" y="175">f0.h5</text>
+<line class="link" x1="84" y1="68" x2="84" y2="148" marker-end="url(#ar-io)"/>
+<rect class="mem" x="63" y="150" width="42" height="50" rx="4"/><text class="small" x="84" y="175">f1.h5</text>
+<line class="link" x1="132" y1="68" x2="132" y2="148" marker-end="url(#ar-io)"/>
+<rect class="mem" x="111" y="150" width="42" height="50" rx="4"/><text class="small" x="132" y="175">f2.h5</text>
+<line class="link" x1="180" y1="68" x2="180" y2="148" marker-end="url(#ar-io)"/>
+<rect class="mem" x="159" y="150" width="42" height="50" rx="4"/><text class="small" x="180" y="175">f3.h5</text>
+<text class="small" x="110" y="226">4 fichiers à recombiner</text>
+<path class="link" d="M 304 68 C 304 100, 265 90, 263 72" marker-end="url(#ar-io)"/>
+<path class="link" d="M 352 68 C 352 100, 265 90, 263 72" marker-end="url(#ar-io)"/>
+<path class="link" d="M 400 68 C 400 100, 265 90, 263 72" marker-end="url(#ar-io)"/>
+<line class="link" x1="256" y1="68" x2="256" y2="148" marker-end="url(#ar-io)"/>
+<rect class="mem" x="235" y="150" width="186" height="50" rx="4"/><text class="small" x="330" y="175">un seul fichier, écrit par le rang 0</text>
+<text class="small" x="330" y="226">le rang 0 reçoit tout :</text><text class="small" x="330" y="242">mémoire et temps limités</text>
+<rect class="mem" x="455" y="150" width="186" height="50" rx="4"/>
+<line class="link" x1="476" y1="68" x2="476" y2="148" marker-end="url(#ar-io)"/>
+<text class="small" x="476" y="175">partie 0</text>
+<line class="link" x1="524" y1="68" x2="524" y2="148" marker-end="url(#ar-io)"/>
+<line class="frame" x1="500" y1="150" x2="500" y2="200"/>
+<text class="small" x="524" y="175">partie 1</text>
+<line class="link" x1="572" y1="68" x2="572" y2="148" marker-end="url(#ar-io)"/>
+<line class="frame" x1="548" y1="150" x2="548" y2="200"/>
+<text class="small" x="572" y="175">partie 2</text>
+<line class="link" x1="620" y1="68" x2="620" y2="148" marker-end="url(#ar-io)"/>
+<line class="frame" x1="596" y1="150" x2="596" y2="200"/>
+<text class="small" x="620" y="175">partie 3</text>
+<text class="small" x="550" y="226">un seul fichier, chaque rang</text><text class="small" x="550" y="242">écrit sa partie en même temps</text>
+</svg>

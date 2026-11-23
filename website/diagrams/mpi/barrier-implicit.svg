@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 180" role="img" aria-label="Communication bloquante : les processus en avance attendent leurs partenaires">
+<defs><marker id="ar-bi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="small" x="32" y="33">rang 0</text>
+<rect class="cpu" x="70" y="20" width="48" height="26" rx="4"/>
+<text class="small" x="94.0" y="33.0">Calcul</text>
+<rect class="cpu" x="120" y="20" width="48" height="26" rx="4"/>
+<text class="small" x="144.0" y="33.0">Calcul</text>
+<rect class="cpu" x="170" y="20" width="48" height="26" rx="4"/>
+<text class="small" x="194.0" y="33.0">Calcul</text>
+<rect class="idle" x="220" y="20" width="104" height="26" rx="4"/>
+<text class="small" x="273.0" y="33">attente</text>
+<rect class="mem" x="330" y="20" width="94" height="26" rx="4"/>
+<text class="small" x="377.0" y="33.0">Communication</text>
+<rect class="cpu" x="430" y="20" width="98" height="26" rx="4"/>
+<text class="small" x="479.0" y="33.0">Calcul</text>
+<text class="small" x="32" y="69">rang 1</text>
+<rect class="cpu" x="70" y="56" width="48" height="26" rx="4"/>
+<text class="small" x="94.0" y="69.0">Calcul</text>
+<rect class="cpu" x="120" y="56" width="48" height="26" rx="4"/>
+<text class="small" x="144.0" y="69.0">Calcul</text>
+<rect class="cpu" x="170" y="56" width="48" height="26" rx="4"/>
+<text class="small" x="194.0" y="69.0">Calcul</text>
+<rect class="cpu" x="220" y="56" width="48" height="26" rx="4"/>
+<text class="small" x="244.0" y="69.0">Calcul</text>
+<rect class="cpu" x="270" y="56" width="48" height="26" rx="4"/>
+<text class="small" x="294.0" y="69.0">Calcul</text>
+<rect class="mem" x="330" y="56" width="94" height="26" rx="4"/>
+<text class="small" x="377.0" y="69.0">Communication</text>
+<rect class="cpu" x="430" y="56" width="98" height="26" rx="4"/>
+<text class="small" x="479.0" y="69.0">Calcul</text>
+<text class="small" x="32" y="105">rang 2</text>
+<rect class="cpu" x="70" y="92" width="48" height="26" rx="4"/>
+<text class="small" x="94.0" y="105.0">Calcul</text>
+<rect class="cpu" x="120" y="92" width="48" height="26" rx="4"/>
+<text class="small" x="144.0" y="105.0">Calcul</text>
+<rect class="idle" x="170" y="92" width="154" height="26" rx="4"/>
+<text class="small" x="248.0" y="105">attente</text>
+<rect class="mem" x="330" y="92" width="94" height="26" rx="4"/>
+<text class="small" x="377.0" y="105.0">Communication</text>
+<rect class="cpu" x="430" y="92" width="98" height="26" rx="4"/>
+<text class="small" x="479.0" y="105.0">Calcul</text>
+<line class="sync" x1="327" y1="10" x2="327" y2="128"/>
+<text class="small" x="327" y="142">send / recv / sendrecv</text>
+<line class="link" x1="70" y1="160" x2="620" y2="160" marker-end="url(#ar-bi)"/>
+<text class="small" x="600" y="174">Temps</text>
+</svg>

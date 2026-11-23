@@ -1,0 +1,40 @@
+# Bibliothèques Python de l'ensemble du cours (exercices et TPs)
+#
+# Installation, dans un environnement virtuel :
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# mpi4py nécessite une implémentation de MPI déjà installée (Open MPI...).
+# Guide d'installation : https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html
+
+# ______________________________________________________________________________
+# Bibliothèques nécessaires à tout le cours
+
+# Calcul et visualisation
+numpy
+matplotlib
+scipy
+
+# MPI pour Python
+mpi4py
+
+# ______________________________________________________________________________
+# Bibliothèques facultatives : elles ne servent qu'à certains exercices ou TPs.
+# Vous pouvez supprimer ces lignes si vous ne faites pas l'exercice ou le TP
+# concerné.
+
+# h5py : fichiers HDF5, pour le chapitre et l'exercice HDF5 et pour les
+# snapshots du TP Kelvin-Helmholtz.
+# Attention : la version installée par pip ne gère pas l'écriture parallèle
+# (pilote mpio). Voir l'étape 4 du guide d'installation pour la version
+# parallèle.
+h5py
+
+# vtk : sortie au format VTK, uniquement pour le TP Mandelbulb.
+vtk
+
+# mpi4py-fft : FFT distribuée, pour l'exercice FFT et la version MPI du TP
+# Kelvin-Helmholtz. Nécessite la bibliothèque FFTW (étape 5 du guide
+# d'installation) : décommentez la ligne suivante une fois FFTW installé.
+# mpi4py-fft

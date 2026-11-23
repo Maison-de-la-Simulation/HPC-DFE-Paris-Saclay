@@ -39,7 +39,7 @@ b) Effectuez l'initialisation de MPI au début du fichier [main.cpp](../cpp/patc
 
 c) Toujours au début de [main.cpp](../cpp/patch/main.cpp), ajoutez les fonctions permettant de récupérer le nombre de rang et le rang du processus en cours.
 Les variables très locales comme l'erreur MPI par exemple peuvent être déclarées localement.
-Aidez-vous du premier exercice sur MPI si besoin `1_initialization`.
+Aidez-vous du premier exercice sur MPI si besoin `initialization`.
 
 d) Ensuite, rajoutez la fonction permettant de finaliser MPI tout de suite à la fin du programme.
 

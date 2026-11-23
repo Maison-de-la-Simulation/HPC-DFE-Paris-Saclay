@@ -108,6 +108,17 @@ Le projet est composé de plusieurs dossiers :
 - `visualization` : contient des scripts Python pour visualiser les résultats de l'équation en eau peu profonde en 1D.
 - `cpp/kokkos` : contient une implémentation C++ kokkos de l'équation en eau peu profonde en 1D. Cette implémentation ne sera pas utilisée pour ce projet.
 
+## Dépendances
+
+Les codes et les scripts de visualisation nécessitent `numpy`, `matplotlib`,
+`scipy` et `mpi4py` (qui nécessite une implémentation de MPI, voir le
+[guide d'installation](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)). Elles sont listées dans
+[requirements.txt](./requirements.txt) :
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Description du code séquentiel
 
 Le code séquentiel est divisé en plusieurs parties : 

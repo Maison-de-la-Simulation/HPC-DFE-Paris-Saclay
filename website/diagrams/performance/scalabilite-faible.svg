@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 240" role="img" aria-label="Scalabilité faible : avec 1, 2 puis 4 unités de calcul, chaque unité garde la même charge et le domaine total grandit">
+<rect class="cpu" x="40" y="45" width="117" height="117" rx="3"/>
+<text class="small" x="98.5" y="103.5">U1</text>
+<text x="100" y="200">1 unité de calcul</text>
+<rect class="cpu" x="245" y="67.8" width="71.4" height="71.4" rx="3"/>
+<text class="small" x="280.7" y="103.5">U1</text>
+<rect class="cpu" x="319.4" y="67.8" width="71.4" height="71.4" rx="3"/>
+<text class="small" x="355.1" y="103.5">U2</text>
+<text x="319.4" y="200">2 unités de calcul</text>
+<rect class="cpu" x="450" y="30.6" width="71.4" height="71.4" rx="3"/>
+<text class="small" x="485.7" y="66.3">U1</text>
+<rect class="cpu" x="524.4" y="30.6" width="71.4" height="71.4" rx="3"/>
+<text class="small" x="560.1" y="66.3">U2</text>
+<rect class="cpu" x="450" y="105" width="71.4" height="71.4" rx="3"/>
+<text class="small" x="485.7" y="140.7">U3</text>
+<rect class="cpu" x="524.4" y="105" width="71.4" height="71.4" rx="3"/>
+<text class="small" x="560.1" y="140.7">U4</text>
+<text x="524.4" y="200">4 unités de calcul</text>
+<text class="small" x="320" y="228">même charge par unité : le domaine grandit avec le nombre d'unités</text>
+</svg>

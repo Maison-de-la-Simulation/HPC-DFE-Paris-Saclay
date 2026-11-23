@@ -1,0 +1,7 @@
+# Dépendances du TP eau peu profonde (codes séquentiel et MPI, visualisation, scalabilité)
+# Installation : pip install -r requirements.txt
+# mpi4py nécessite une implémentation de MPI installée (voir https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/installation.html)
+numpy
+matplotlib
+scipy
+mpi4py

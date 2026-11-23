@@ -6,12 +6,12 @@
 python main.py
 ```
 
-**Question 2.2 - visualization:** Visualization can be performed using the scripts in the directory `visualiaztion`.
+**Question 2.2 - visualization:** Visualization can be performed using the scripts in the directory `visualization`.
 
 Plot some snapshots at different timesteps or create an animation to ensure that the simulation has run correctly.
 
 ```python
-python visualiaztion/plot.py python plot.py diags/snapshot_000000.npz
+python ../../visualization/plot.py diags/snapshot_000000.h5
 ```
 
 **Question 2.3 - read the code:** Take the time now to read the code and to understand the structure. You can also run it again by changing the initial parameters.

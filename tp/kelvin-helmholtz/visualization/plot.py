@@ -2,9 +2,10 @@
 plot.py  —  plot all fields of a Kelvin-Helmholtz snapshot
 
 Usage:
-    python plot.py <path/to/snapshot_XXXXXX.npz>
+    python plot.py <path/to/snapshot_XXXXXX.h5>
 
-The .npz file must contain: 'omega', 'ux', 'uy', 'time', 'dx', 'dy', 'Lx', 'Ly', 'nx', 'ny'
+The HDF5 file contains the datasets 'omega', 'ux', 'uy' and the attributes
+'time', 'dx', 'dy', 'Lx', 'Ly', 'nx', 'ny' (see snapshot.py).
 """
 
 import sys
@@ -12,11 +13,13 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
+from snapshot import load_snapshot
+
 # ---------------------------------------------------------------------------
 # Argument
 # ---------------------------------------------------------------------------
 if len(sys.argv) != 2:
-    print("Usage: python plot.py <snapshot_XXXXXX.npz>")
+    print("Usage: python plot.py <snapshot_XXXXXX.h5>")
     sys.exit(1)
 
 filepath = sys.argv[1]
@@ -27,13 +30,13 @@ if not os.path.isfile(filepath):
 # ---------------------------------------------------------------------------
 # Load
 # ---------------------------------------------------------------------------
-f     = np.load(filepath)
-omega = f["omega"]
-ux     = f["ux"]
-uy     = f["uy"]
-t     = float(f["time"])
-Lx    = float(f["Lx"])
-Ly    = float(f["Ly"])
+snap  = load_snapshot(filepath)
+omega = snap["omega"]
+ux    = snap["ux"]
+uy    = snap["uy"]
+t     = snap["t"]
+Lx    = snap["Lx"]
+Ly    = snap["Ly"]
 
 fields = [
     (omega, r"Vorticity $\omega$", "RdBu_r"),

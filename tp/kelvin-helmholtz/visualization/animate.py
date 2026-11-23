@@ -5,7 +5,7 @@ Usage:
     python animate.py <output_dir> [--save animation.gif] [--every 2] [--dpi 80] [--scale 0.5]
 
 Arguments:
-    output_dir      directory containing snapshot_XXXXXX.npz files
+    output_dir      directory containing snapshot_XXXXXX.h5 files
     --save <file>   (optional) save the animation to a file instead of
                     displaying it (requires ffmpeg for .mp4 or pillow for .gif)
     --every N       use only every Nth snapshot to reduce file size (default: 1)
@@ -15,17 +15,18 @@ Arguments:
 
 import sys
 import os
-import glob
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+from snapshot import list_snapshots, load_snapshot
+
 # ---------------------------------------------------------------------------
 # Arguments
 # ---------------------------------------------------------------------------
 parser = argparse.ArgumentParser(description="Animate Kelvin-Helmholtz snapshots.")
-parser.add_argument("output_dir", help="directory containing snapshot_XXXXXX.npz files")
+parser.add_argument("output_dir", help="directory containing snapshot_XXXXXX.h5 files")
 parser.add_argument("--save", metavar="FILE", default=None,
                     help="save animation to FILE (.mp4 or .gif)")
 parser.add_argument("--fps", type=int, default=20, help="frames per second (default: 20)")
@@ -51,26 +52,15 @@ if not os.path.isdir(args.output_dir):
 # ---------------------------------------------------------------------------
 # Load snapshots (sorted by step index)
 # ---------------------------------------------------------------------------
-pattern = os.path.join(args.output_dir, "snapshot_*.npz")
-files   = sorted(glob.glob(pattern))
+files = list_snapshots(args.output_dir)
 
 if not files:
-    print(f"Error: no snapshot_*.npz files found in '{args.output_dir}'")
+    print(f"Error: no snapshot_*.h5 files found in '{args.output_dir}'")
     sys.exit(1)
 
 print(f"Found {len(files)} snapshots in '{args.output_dir}'")
 
-snapshots = []
-for path in files:
-    f = np.load(path)
-    snapshots.append({
-        "omega": f["omega"],
-        "ux":     f["ux"],
-        "uy":     f["uy"],
-        "t":     float(f["time"]),
-        "Lx":    float(f["Lx"]),
-        "Ly":    float(f["Ly"]),
-    })
+snapshots = [load_snapshot(path) for path in files]
 
 snapshots = snapshots[::args.every]
 print(f"Using {len(snapshots)} snapshots after --every={args.every}")

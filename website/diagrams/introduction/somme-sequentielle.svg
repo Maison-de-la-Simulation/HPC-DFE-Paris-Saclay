@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 132" role="img" aria-label="Somme des nombres de 1 à 16 en séquentiel : une seule unité de calcul additionne les 16 nombres l'un après l'autre et obtient 136">
+<defs><marker id="ar-seq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="blk-b" x="48" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="64" y="21">1</text>
+<rect class="blk-b" x="82" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="98" y="21">2</text>
+<rect class="blk-b" x="116" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="132" y="21">3</text>
+<rect class="blk-b" x="150" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="166" y="21">4</text>
+<rect class="blk-b" x="184" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="200" y="21">5</text>
+<rect class="blk-b" x="218" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="234" y="21">6</text>
+<rect class="blk-b" x="252" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="268" y="21">7</text>
+<rect class="blk-b" x="286" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="302" y="21">8</text>
+<rect class="blk-b" x="320" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="336" y="21">9</text>
+<rect class="blk-b" x="354" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="370" y="21">10</text>
+<rect class="blk-b" x="388" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="404" y="21">11</text>
+<rect class="blk-b" x="422" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="438" y="21">12</text>
+<rect class="blk-b" x="456" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="472" y="21">13</text>
+<rect class="blk-b" x="490" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="506" y="21">14</text>
+<rect class="blk-b" x="524" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="540" y="21">15</text>
+<rect class="blk-b" x="558" y="8" width="32" height="26" rx="3"/><text class="on-blk" x="574" y="21">16</text>
+<line class="link" x1="320" y1="36" x2="320" y2="62" marker-end="url(#ar-seq)"/>
+<rect class="cpu" x="245" y="64" width="150" height="40" rx="6"/><text x="320" y="84">1 unité de calcul</text>
+<line class="link" x1="395" y1="84" x2="448" y2="84" marker-end="url(#ar-seq)"/>
+<rect class="mem" x="450" y="66" width="120" height="36" rx="6"/><text x="510" y="84">somme = 136</text>
+<text class="small" x="320" y="122">les 16 nombres sont additionnés l'un après l'autre</text>
+</svg>

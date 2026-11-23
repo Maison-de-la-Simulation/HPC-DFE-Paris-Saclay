@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 640 172" role="img" aria-label="allgather : chaque rang envoie son élément et tous les rangs reçoivent A, B, C, D">
+<defs><marker id="ar-allgather" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="small" x="120" y="14">Avant</text>
+<rect class="bus" x="10" y="26" width="62" height="26" rx="4"/>
+<text class="small" x="41" y="39">rang 0</text>
+<rect class="blk-a" x="82" y="26" width="32" height="26" rx="3"/>
+<text class="on-blk" x="98.0" y="39">A</text>
+<rect class="bus" x="10" y="62" width="62" height="26" rx="4"/>
+<text class="small" x="41" y="75">rang 1</text>
+<rect class="blk-b" x="82" y="62" width="32" height="26" rx="3"/>
+<text class="on-blk" x="98.0" y="75">B</text>
+<rect class="bus" x="10" y="98" width="62" height="26" rx="4"/>
+<text class="small" x="41" y="111">rang 2</text>
+<rect class="blk-c" x="82" y="98" width="32" height="26" rx="3"/>
+<text class="on-blk" x="98.0" y="111">C</text>
+<rect class="bus" x="10" y="134" width="62" height="26" rx="4"/>
+<text class="small" x="41" y="147">rang 3</text>
+<rect class="blk-d" x="82" y="134" width="32" height="26" rx="3"/>
+<text class="on-blk" x="98.0" y="147">D</text>
+<text class="small" x="480" y="14">Après</text>
+<rect class="bus" x="370" y="26" width="62" height="26" rx="4"/>
+<text class="small" x="401" y="39">rang 0</text>
+<rect class="blk-a" x="442" y="26" width="32" height="26" rx="3"/>
+<text class="on-blk" x="458.0" y="39">A</text>
+<rect class="blk-b" x="476" y="26" width="32" height="26" rx="3"/>
+<text class="on-blk" x="492.0" y="39">B</text>
+<rect class="blk-c" x="510" y="26" width="32" height="26" rx="3"/>
+<text class="on-blk" x="526.0" y="39">C</text>
+<rect class="blk-d" x="544" y="26" width="32" height="26" rx="3"/>
+<text class="on-blk" x="560.0" y="39">D</text>
+<rect class="bus" x="370" y="62" width="62" height="26" rx="4"/>
+<text class="small" x="401" y="75">rang 1</text>
+<rect class="blk-a" x="442" y="62" width="32" height="26" rx="3"/>
+<text class="on-blk" x="458.0" y="75">A</text>
+<rect class="blk-b" x="476" y="62" width="32" height="26" rx="3"/>
+<text class="on-blk" x="492.0" y="75">B</text>
+<rect class="blk-c" x="510" y="62" width="32" height="26" rx="3"/>
+<text class="on-blk" x="526.0" y="75">C</text>
+<rect class="blk-d" x="544" y="62" width="32" height="26" rx="3"/>
+<text class="on-blk" x="560.0" y="75">D</text>
+<rect class="bus" x="370" y="98" width="62" height="26" rx="4"/>
+<text class="small" x="401" y="111">rang 2</text>
+<rect class="blk-a" x="442" y="98" width="32" height="26" rx="3"/>
+<text class="on-blk" x="458.0" y="111">A</text>
+<rect class="blk-b" x="476" y="98" width="32" height="26" rx="3"/>
+<text class="on-blk" x="492.0" y="111">B</text>
+<rect class="blk-c" x="510" y="98" width="32" height="26" rx="3"/>
+<text class="on-blk" x="526.0" y="111">C</text>
+<rect class="blk-d" x="544" y="98" width="32" height="26" rx="3"/>
+<text class="on-blk" x="560.0" y="111">D</text>
+<rect class="bus" x="370" y="134" width="62" height="26" rx="4"/>
+<text class="small" x="401" y="147">rang 3</text>
+<rect class="blk-a" x="442" y="134" width="32" height="26" rx="3"/>
+<text class="on-blk" x="458.0" y="147">A</text>
+<rect class="blk-b" x="476" y="134" width="32" height="26" rx="3"/>
+<text class="on-blk" x="492.0" y="147">B</text>
+<rect class="blk-c" x="510" y="134" width="32" height="26" rx="3"/>
+<text class="on-blk" x="526.0" y="147">C</text>
+<rect class="blk-d" x="544" y="134" width="32" height="26" rx="3"/>
+<text class="on-blk" x="560.0" y="147">D</text>
+<line class="link" x1="240" y1="94" x2="358" y2="94" marker-end="url(#ar-allgather)"/>
+<text x="299" y="80">allgather</text>
+</svg>
