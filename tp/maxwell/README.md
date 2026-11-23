@@ -16,7 +16,6 @@ Ce TP se compose de plusieurs répertoires :
 - [cpp/sequential](./cpp/sequential) : ce dossier contient le fichier source du code séquentiel et le makefile pour le compiler.
 - [visualization](./python) : ce dossier contient des scripts dédiés à la visualisation des résultats.
 - [scalings](./python) : ce dossier contient des scripts permettant d'afficher les courbes de scalabilité
-- [.extra](./.extra) : ce dossier sert uniquement pour GitHub
 
 ## Présentation du modèle <a id="modele"></a>
 
@@ -28,42 +27,67 @@ On rappelle les équations de Maxwell dans le vide :
 
 Maxwell-Ampère  :
 
-<p align="center"><img src=".extra//2ba4806c4179b91768ae5de6aa4f95f1.svg?invert_in_darkmode" align=middle width=173.07893955pt height=33.81208709999999pt/></p>
+$$
+\frac{1}{c^2} \frac{\partial E}{\partial t}  = - \mu_0 \vec{J} + \nabla \times \vec{B}
+$$
 
 Maxwell Faraday :
 
-<p align="center"><img src=".extra//6d5dd1abd04119bbe000966bdb8b84f3.svg?invert_in_darkmode" align=middle width=106.68419024999999pt height=33.81208709999999pt/></p>
+$$
+\frac{\partial B}{\partial t} = - \nabla \times \vec{E}
+$$
 
 Maxwell Gauss :
 
-<p align="center"><img src=".extra//ac35e7e2e9828c6c627824cedac3fda7.svg?invert_in_darkmode" align=middle width=68.7896517pt height=15.89952705pt/></p>
+$$
+\nabla \cdot \vec{E} = 0
+$$
 
 Maxwell Flux :
 
-<p align="center"><img src=".extra//9f912dfbf42cb7130565c37d471ce31d.svg?invert_in_darkmode" align=middle width=69.00087479999999pt height=15.89952705pt/></p>
+$$
+\nabla \cdot \vec{B} = 0
+$$
 
 Dans le cadre de la discrétisation de Yee, on ne s'intéresse qu'à Maxwell-Ampère  et Maxwell-Faraday. On commence par normaliser les équations pour éliminer les constantes et réduire l'amplitude des champs (ce qui est toujours préférable en informatique).
 
-<p align="center"><img src=".extra//4603a45c5d22c4c4ec2fca4207a07bf1.svg?invert_in_darkmode" align=middle width=137.36610195pt height=33.81208709999999pt/></p>
-<p align="center"><img src=".extra//6d5dd1abd04119bbe000966bdb8b84f3.svg?invert_in_darkmode" align=middle width=106.68419024999999pt height=33.81208709999999pt/></p>
+$$
+\frac{\partial E}{\partial t} = - \vec{J} + \nabla \times \vec{B}
+$$
+$$
+\frac{\partial B}{\partial t} = - \nabla \times \vec{E}
+$$
 
 En 2D, la discrétisation donne les équations suivantes pour Maxwell Ampère :
         
-<p align="center"><img src=".extra//ad7015d0a9a6cf54e178878906df03c7.svg?invert_in_darkmode" align=middle width=318.42411315pt height=36.82577085pt/></p>
+$$
+Ex_{i,j}^{n} = Ex_{i,j}^{n-1} + \frac{\Delta t}{\Delta y} \left( Bz_{i,j+1}^{n-1/2}  - Bz_{i,j}^{n-1/2}\right)
+$$
 
-<p align="center"><img src=".extra//c8e58c2c82b57b667d40e0b52121fa3b.svg?invert_in_darkmode" align=middle width=317.08854045pt height=33.62942055pt/></p>
+$$
+Ey_{i,j}^{n} = Ey_{i,j}^{n-1} + \frac{\Delta t}{\Delta x} \left( Bz_{i+1,j}^{n-1/2}  - Bz_{i,j}^{n-1/2}\right)
+$$
 
-<p align="center"><img src=".extra//11eb95a1f61dfd6015539c701060ebef.svg?invert_in_darkmode" align=middle width=529.30628685pt height=36.82577085pt/></p>
+$$
+Ez_{i,j}^{n} = Ez_{i,j}^{n-1} + \frac{\Delta t}{\Delta x} \left( By_{i+1,j}^{n-1/2}  - By_{i,j}^{n-1/2}\right) - \frac{\Delta t}{\Delta y} \left( Bx_{i,j+1}^{n-1/2}  - Bx_{i,j}^{n-1/2}\right)
+$$
 
-Où <img src=".extra//c461456e376ee5b83866a0c882334b0f.svg?invert_in_darkmode" align=middle width=65.57458379999998pt height=24.65753399999998pt/> est l'itération  en temps, <img src=".extra//77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663225699999989pt height=21.68300969999999pt/> et <img src=".extra//36b5afebdba34564d884d347484ac0c7.svg?invert_in_darkmode" align=middle width=7.710416999999989pt height=21.68300969999999pt/> respectivement la discrétisation en espace suivant les directions <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> et <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>.
+Où $n = t / \Delta t$ est l'itération  en temps, $i$ et $j$ respectivement la discrétisation en espace suivant les directions $x$ et $y$.
 
 Puis pour Maxwell Faraday :
 
-<p align="center"><img src=".extra//c9127617f1f76d611abaeccae3fdbbee.svg?invert_in_darkmode" align=middle width=318.7628367pt height=36.82577085pt/></p>
+$$
+Bx_{i,j}^{n-1/2} = Bx_{i,j}^{n+1/2}  - \frac{\Delta t}{\Delta y} \left( Ez_{i,j}^{n}  - Ez_{i,j-1}^{n}\right)
+$$
 
-<p align="center"><img src=".extra//256790f70fd976bd4fac7e4d3dce1460.svg?invert_in_darkmode" align=middle width=318.01703834999995pt height=33.62942055pt/></p>
+$$
+By_{i,j}^{n-1/2} = By_{i,j}^{n+1/2}  + \frac{\Delta t}{\Delta x} \left( Ez_{i,j}^{n}  - Ez_{i-1,j}^{n}\right)
+$$
 
-<p align="center"><img src=".extra//ada59b372a869c3c1efb946ff3dbe61b.svg?invert_in_darkmode" align=middle width=495.31067025pt height=36.82577085pt/></p>
+$$
+Bz_{i,j}^{n-1/2} = Bz_{i,j}^{n+1/2}  + \frac{\Delta t}{\Delta y} \left( Ex_{i,j}^{n}  - Ex_{i,j-1}^{n}\right) 
+                                     - \frac{\Delta t}{\Delta x} \left( Ey_{i,j}^{n}  - Ey_{i-1,j}^{n}\right)
+$$
 
 Le modèle discrétisé peut être représenté par le schéma suivant :
 
@@ -71,29 +95,29 @@ Le modèle discrétisé peut être représenté par le schéma suivant :
 
 Ici, les composantes de champ sont représentées par des noeuds colorés :
 
-- rouge : <img src=".extra//a4d087895430764308affdb5cdb32ffe.svg?invert_in_darkmode" align=middle width=19.221008399999988pt height=22.465723500000017pt/>
-- vert : <img src=".extra//b7a981c903e3370fc32d1c5ee077472f.svg?invert_in_darkmode" align=middle width=22.47716459999999pt height=22.465723500000017pt/> et <img src=".extra//fcda124f6906a9960dc2e7b5b3c05029.svg?invert_in_darkmode" align=middle width=21.94262894999999pt height=22.465723500000017pt/>
-- orange : <img src=".extra//bf80349ccc773775c05ac2c3c1e7fa2f.svg?invert_in_darkmode" align=middle width=21.44979869999999pt height=22.465723500000017pt/>
-- bleu : <img src=".extra//a896e653d3de6b3985bf932a92e194b7.svg?invert_in_darkmode" align=middle width=21.73140254999999pt height=22.465723500000017pt/> et <img src=".extra//13119eef6557213b4399d373183db140.svg?invert_in_darkmode" align=middle width=22.68839099999999pt height=22.465723500000017pt/>
+- rouge : $B_z$
+- vert : $Ex$ et $By$
+- orange : $Ez$
+- bleu : $Ey$ et $Bx$
 
-On remarque que les grilles qui composent les noeuds ne sont pas donc pas toutes superposées mais sont décalées en espace de <img src=".extra//e480030e45dcbe38c4de81952c8f8d73.svg?invert_in_darkmode" align=middle width=44.09830259999999pt height=22.465723500000017pt/> et/ou <img src=".extra//6a9471360fd71e276c860a8fffe83b7a.svg?invert_in_darkmode" align=middle width=43.352540549999986pt height=22.465723500000017pt/>. En anglais, on parle de grille *staggered*. En 2D, certaines composantes existent à la même position mais ce n'est pas le cas en 3D.
-Les champs électriques et magnétiques sont également décalés en temps de <img src=".extra//0a329f8795cb025fc8778306028ae6aa.svg?invert_in_darkmode" align=middle width=40.63941254999999pt height=22.465723500000017pt/>.
+On remarque que les grilles qui composent les noeuds ne sont pas donc pas toutes superposées mais sont décalées en espace de $0.5 \Delta x$ et/ou $0.5 \Delta y$. En anglais, on parle de grille *staggered*. En 2D, certaines composantes existent à la même position mais ce n'est pas le cas en 3D.
+Les champs électriques et magnétiques sont également décalés en temps de $0.5 \Delta t$.
 
-La grille représentée par les noeuds rouge du champ <img src=".extra//e52d2c1ed64b7a4dd504cc2f505810cb.svg?invert_in_darkmode" align=middle width=21.66102509999999pt height=22.465723500000017pt/> est appelée grille duale.
+La grille représentée par les noeuds rouge du champ $Bz$ est appelée grille duale.
 C'est la grille la plus large.
 
-Dans la figure ci-dessous, nous avons représenté la grille définie par les noeuds oranges du champ <img src=".extra//b2100207f858f063bea374511472fccd.svg?invert_in_darkmode" align=middle width=18.88707644999999pt height=22.465723500000017pt/>.
+Dans la figure ci-dessous, nous avons représenté la grille définie par les noeuds oranges du champ $E_z$.
 Il s'agit de la grille primale.
 
 <img src="../../support/materiel/maxwell_yee_grid_3.png" height="400">
 
 Le grille primale est celle qui contient le moins de noeuds.
-Par définition, si la grille primale a une taille de <img src=".extra//272af74b9dbbb880bbf4e3ffa9fc64ad.svg?invert_in_darkmode" align=middle width=68.73375134999998pt height=19.1781018pt/> alors la grille duale a une taille de <img src=".extra//102564694b48b1e313920ae04093e294.svg?invert_in_darkmode" align=middle width=219.60936855pt height=21.18721440000001pt/>.
+Par définition, si la grille primale a une taille de $n_{xp} \times n_{yp}$ alors la grille duale a une taille de $n_{xd} = n_{xp} + 1 \times n_{yd} = n_{yp} + 1$.
 
 Toutes les autres composantes sont une combinaison duale / primale.
-Par exemple, la grille définie par les noeuds bleus (composantes <img src=".extra//a896e653d3de6b3985bf932a92e194b7.svg?invert_in_darkmode" align=middle width=21.73140254999999pt height=22.465723500000017pt/> et <img src=".extra//13119eef6557213b4399d373183db140.svg?invert_in_darkmode" align=middle width=22.68839099999999pt height=22.465723500000017pt/>) est primale dans la direction <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> mais duale dans la direction <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>.
-Elle a donc une taille <img src=".extra//1eca62f8948ef6841d35298541aa46e5.svg?invert_in_darkmode" align=middle width=68.80035194999999pt height=19.1781018pt/>.
-De la même manière, la grille définie par les noeuds verts (composante <img src=".extra//b7a981c903e3370fc32d1c5ee077472f.svg?invert_in_darkmode" align=middle width=22.47716459999999pt height=22.465723500000017pt/> et <img src=".extra//fcda124f6906a9960dc2e7b5b3c05029.svg?invert_in_darkmode" align=middle width=21.94262894999999pt height=22.465723500000017pt/>) est au contraire duale dans la direction <img src=".extra//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> et primale dans la direction <img src=".extra//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>.
+Par exemple, la grille définie par les noeuds bleus (composantes $Ey$ et $Bx$) est primale dans la direction $x$ mais duale dans la direction $y$.
+Elle a donc une taille $n_{xp} \times n_{yd}$.
+De la même manière, la grille définie par les noeuds verts (composante $Ex$ et $By$) est au contraire duale dans la direction $x$ et primale dans la direction $y$.
 La figure ci-dessous résume la notion de grille primale et duale :
 
 <img src="../../support/materiel/maxwell_primal_dual.png" height="400">
@@ -116,16 +140,20 @@ Une façon de générer un champ électromagnétique est de mouvoir une charge d
 On choisit ici de faire osciller une bille le long d'un segment.
 Il faut alors calculer le courant généré par cette bille et l'ajouter aux équations de Maxwell-Ampère.
 
-Soit <img src=".extra//2c09d6fe231fc69cfcee32fa0b3785df.svg?invert_in_darkmode" align=middle width=39.04402919999999pt height=24.65753399999998pt/> l'évolution dans l'espace d'une charge <img src=".extra//46d29bba147ab86127a70278268c42d9.svg?invert_in_darkmode" align=middle width=17.224222949999987pt height=14.15524440000002pt/> et donc <img src=".extra//e48500a898443f79affbb15aa1ea1eb7.svg?invert_in_darkmode" align=middle width=38.03569605pt height=24.65753399999998pt/> sa vitesse.
+Soit $\vec{x}_A(t)$ l'évolution dans l'espace d'une charge $q_A$ et donc $\vec{v}_A(t)$ sa vitesse.
 Le courant est donné par :
 
-<p align="center"><img src=".extra//34f0431fabc6542e6237b3d2d33f1d61.svg?invert_in_darkmode" align=middle width=97.1842344pt height=20.00911605pt/></p>
+$$
+\vec{J}_A = q_A \vec{v}_A(t)
+$$
 
 Pour le mouvement oscillatoire le long d'une segment, on utilise :
 
-<p align="center"><img src=".extra//7f9736b9470faf8a38e964e9a11db998.svg?invert_in_darkmode" align=middle width=207.70829475pt height=17.031940199999998pt/></p>
+$$
+\vec{x}_A = \vec{x}_{A,0} + L_{A} \cos{ \left( 2 \pi t / T_{A} \right) }
+$$
 
-Avec <img src=".extra//71d5328dcc516b999b4b4630d795dc3f.svg?invert_in_darkmode" align=middle width=21.07315319999999pt height=22.465723500000017pt/> la longueur du segment et <img src=".extra//a68349737baf72a520a69e2b4aac8d32.svg?invert_in_darkmode" align=middle width=19.49209844999999pt height=22.465723500000017pt/> la période d'oscillation.
+Avec $L_A$ la longueur du segment et $T_A$ la période d'oscillation.
 
 
 ## Le code séquentiel <a id="code_sequentiel"></a>
