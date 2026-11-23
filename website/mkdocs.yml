@@ -75,6 +75,7 @@ nav:
       - 6. Python face au C et au Fortran: mpi/python-c-fortran.md
       - 7. Topologie cartésienne: mpi/topologie.md
   - HDF5: hdf5/index.md
+  - FFT distribuée: fft/index.md
   - Performance:
       - performance/index.md
       - 1. Déséquilibre et parallélisme parfait: performance/notions.md

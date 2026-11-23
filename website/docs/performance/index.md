@@ -1,4 +1,4 @@
-# V. Mesure de la performance
+# VI. Mesure de la performance
 
 Écrire un programme parallèle ne suffit pas : il faut **mesurer** ce que
 la parallélisation apporte vraiment. Ce chapitre présente les notions et

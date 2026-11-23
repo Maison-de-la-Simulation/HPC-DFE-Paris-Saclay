@@ -52,7 +52,7 @@ To parallize the poisson solver using MPI, we need to perform a parallel FFT. Un
 
 1) **Easy but not efficient:** You can use MPI to gather in rank 0 all subdomains for `omega`, perform the Poisson solver on Rank 0 and then redistribute the solution of `phi` to the different ranks.
 
-2) **Efficient solution:** there is a parallel implementation of fft using MPI via the library `mpi4py_fft`.
+2) **Efficient solution:** there is a parallel implementation of fft using MPI via the library `mpi4py_fft`. The principle of a distributed FFT and the minimal use of `mpi4py_fft` are presented in the [FFT chapter of the course](https://maison-de-la-simulation.github.io/HPC-DFE-Paris-Saclay/fft/index.html).
 
 Here is an example on how to use `mpi4py_fft`for our specific case:
 

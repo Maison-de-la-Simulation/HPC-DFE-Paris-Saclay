@@ -245,7 +245,8 @@ python -c "import h5py; print(h5py.get_config().mpi)"   # doit afficher True
 [mpi4py-fft](https://mpi4py-fft.readthedocs.io/) calcule des **FFT
 distribuées** entre plusieurs processus MPI. Il ne sert que pour la version
 MPI du TP Kelvin-Helmholtz, où il permet de résoudre l'équation de Poisson
-sans rassembler tout le domaine sur un seul processus.
+sans rassembler tout le domaine sur un seul processus (voir le chapitre
+[FFT distribuée](fft/index.md)).
 
 mpi4py-fft s'appuie sur la bibliothèque [FFTW](https://www.fftw.org/), qu'il
 faut installer avant le paquet Python. Lancez ces commandes avec

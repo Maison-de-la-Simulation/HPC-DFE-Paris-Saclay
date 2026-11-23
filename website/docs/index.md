@@ -67,7 +67,16 @@ par échange de messages avec MPI.
 
     [:octicons-arrow-right-24: Lire le chapitre](hdf5/index.md)
 
--   :material-speedometer:{ .lg .middle } __V. Mesure de la performance__
+-   :material-sine-wave:{ .lg .middle } __V. FFT distribuée__
+
+    ---
+
+    Principe d'une FFT distribuée, bibliothèque mpi4py-fft et résolution
+    de l'équation de Poisson du TP Kelvin-Helmholtz.
+
+    [:octicons-arrow-right-24: Lire le chapitre](fft/index.md)
+
+-   :material-speedometer:{ .lg .middle } __VI. Mesure de la performance__
 
     ---
 
@@ -76,7 +85,7 @@ par échange de messages avec MPI.
 
     [:octicons-arrow-right-24: Lire le chapitre](performance/index.md)
 
--   :material-flask:{ .lg .middle } __VI. Travaux pratiques__
+-   :material-flask:{ .lg .middle } __VII. Travaux pratiques__
 
     ---
 

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram diagram-wide" viewBox="0 0 700 270" role="img" aria-label="FFT 2D distribuée sur 4 rangs : en espace physique, chaque rang possède une bande de lignes en x ; il calcule les FFT 1D le long de y, qui sont locales ; une transposition globale (Alltoall) redistribue les données en bandes de colonnes en ky ; chaque rang calcule alors les FFT 1D le long de x, devenues locales">
+<defs><marker id="ar-fft" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text x="100.0" y="16">Espace physique</text>
+<text class="small" x="100.0" y="34">bandes de lignes en x</text>
+<rect class="blk-a" x="30" y="50.0" width="140" height="33.0" rx="3"/><text class="on-blk" x="100.0" y="66.5">rang 0</text>
+<rect class="blk-b" x="30" y="85.0" width="140" height="33.0" rx="3"/><text class="on-blk" x="100.0" y="101.5">rang 1</text>
+<rect class="blk-c" x="30" y="120.0" width="140" height="33.0" rx="3"/><text class="on-blk" x="100.0" y="136.5">rang 2</text>
+<rect class="blk-d" x="30" y="155.0" width="140" height="33.0" rx="3"/><text class="on-blk" x="100.0" y="171.5">rang 3</text>
+<text class="small" x="100.0" y="206">y →</text>
+<text class="small" x="18" y="120.0" transform="rotate(-90 18 120.0)">↓ x</text>
+<text x="350.0" y="16">Après les FFT en y</text>
+<text class="small" x="350.0" y="34">toujours des bandes en x</text>
+<rect class="blk-a" x="280" y="50.0" width="140" height="33.0" rx="3"/><text class="on-blk" x="350.0" y="66.5">rang 0</text>
+<rect class="blk-b" x="280" y="85.0" width="140" height="33.0" rx="3"/><text class="on-blk" x="350.0" y="101.5">rang 1</text>
+<rect class="blk-c" x="280" y="120.0" width="140" height="33.0" rx="3"/><text class="on-blk" x="350.0" y="136.5">rang 2</text>
+<rect class="blk-d" x="280" y="155.0" width="140" height="33.0" rx="3"/><text class="on-blk" x="350.0" y="171.5">rang 3</text>
+<text class="small" x="350.0" y="206">ky →</text>
+<text class="small" x="268" y="120.0" transform="rotate(-90 268 120.0)">↓ x</text>
+<text x="600.0" y="16">Espace spectral</text>
+<text class="small" x="600.0" y="34">bandes de colonnes en ky</text>
+<rect class="blk-a" x="530.0" y="50" width="33.0" height="140" rx="3"/><text class="on-blk" x="546.5" y="120.0">0</text>
+<rect class="blk-b" x="565.0" y="50" width="33.0" height="140" rx="3"/><text class="on-blk" x="581.5" y="120.0">1</text>
+<rect class="blk-c" x="600.0" y="50" width="33.0" height="140" rx="3"/><text class="on-blk" x="616.5" y="120.0">2</text>
+<rect class="blk-d" x="635.0" y="50" width="33.0" height="140" rx="3"/><text class="on-blk" x="651.5" y="120.0">3</text>
+<text class="small" x="600.0" y="206">ky →</text>
+<text class="small" x="518" y="120.0" transform="rotate(-90 518 120.0)">↓ kx</text>
+<line class="link" x1="180" y1="120" x2="252" y2="120" marker-end="url(#ar-fft)"/>
+<text class="small" x="216" y="104">1. FFT 1D en y</text><text class="small" x="216" y="140">locales</text>
+<line class="link" x1="430" y1="120" x2="502" y2="120" marker-end="url(#ar-fft)"/>
+<text class="small" x="466" y="104">2. transposition</text><text class="small" x="466" y="140">(Alltoall)</text>
+<text class="small" x="600" y="226">3. FFT 1D en x, locales</text>
+<text class="small" x="350" y="252">Seule l'étape 2 communique : chaque rang échange une partie de ses données avec tous les autres.</text>
+</svg>
