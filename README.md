@@ -30,6 +30,9 @@ dans [le dossier exercices](./exercices/).
 - Exercice HDF5
   - [Écriture parallèle de fichiers HDF5](./exercices/hdf5).
 
+- Exercice FFT distribuée
+  - [Équation de Poisson par FFT distribuée](./exercices/fft).
+
 - Exercices MPI C++
   - [Initialisation de MPI](./exercices/mpi/cpp/initialization).
   - [Initiation aux communications bloquantes](./exercices/mpi/cpp/blocking_com).

@@ -44,6 +44,8 @@ jobs:
             'exercices/performance/*_scalability.py' \
             'exercices/hdf5/*.py' \
             'exercices/hdf5/correction/*.py' \
+            'exercices/fft/*.py' \
+            'exercices/fft/correction/*.py' \
             'tp/kelvin-helmholtz/*.py' \
             'tp/mandelbulb/*.py' \
             'tp/shallow/*.py' \
@@ -60,7 +62,7 @@ jobs:
       - name: Install MPI
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y openmpi-bin libopenmpi-dev
+          sudo apt-get install -y openmpi-bin libopenmpi-dev libfftw3-dev
           mpirun --version
 
       - uses: actions/setup-python@v5
@@ -68,7 +70,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python packages
-        run: pip install numpy matplotlib mpi4py h5py
+        run: pip install numpy matplotlib mpi4py h5py mpi4py-fft
 
       - name: 1 - Initialization
         working-directory: exercices/mpi/python/initialization/correction
@@ -121,6 +123,12 @@ jobs:
           $MPIRUN -np 4 python main.py --Nx 13 --Ny 8
           python ../check.py methode1_rang_*.h5 --save methode1.png
           python ../check.py methode2.h5 --save methode2.png
+
+      - name: FFT - Poisson equation (starting code and correction)
+        working-directory: exercices/fft/correction
+        run: |
+          $MPIRUN -np 4 python ../main.py --Nx 64 --Ny 32
+          $MPIRUN -np 4 python main.py --Nx 64 --Ny 32
 
   # ____________________________________________________________________________
   # Python TPs (sequential and MPI versions, small problem sizes)

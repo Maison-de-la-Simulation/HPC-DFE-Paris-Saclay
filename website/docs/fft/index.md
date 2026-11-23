@@ -158,6 +158,21 @@ psi_hat[:] = omega_hat / K2
 fft.backward(psi_hat, psi)
 ```
 
+## Exercice : l'équation de Poisson par FFT distribuée
+
+!!! example "Exercice — Équation de Poisson par FFT distribuée"
+
+    À partir d'un code MPI qui prépare le domaine et le second membre,
+    résolvez l'équation de Poisson par deux méthodes : en rassemblant tout
+    le domaine sur le rang 0, puis par FFT distribuée avec mpi4py-fft. Le
+    second membre est choisi pour que la solution exacte soit connue : vous
+    pourrez vérifier l'erreur, puis comparer les performances des deux
+    méthodes. En bonus, calculez la vitesse par dérivation spectrale.
+
+    :material-file-document: [Énoncé de l'exercice](https://github.com/Maison-de-la-Simulation/HPC-DFE-Paris-Saclay/tree/master/exercices/fft)
+
+    Dans votre éditeur : `exercices/fft/README.md`.
+
 ## Bilan
 
 !!! success "À ce stade, vous savez"
@@ -168,4 +183,5 @@ fft.backward(psi_hat, psi)
       transposition ;
     - créer un plan et des tableaux distribués avec mpi4py-fft, et repérer
       la partie locale avec `local_slice` ;
-    - résoudre une équation de Poisson avec une FFT distribuée.
+    - résoudre une équation de Poisson avec une FFT distribuée, et comparer
+      cette méthode au rassemblement sur le rang 0.

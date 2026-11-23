@@ -33,3 +33,8 @@ h5py
 
 # vtk : sortie au format VTK, uniquement pour le TP Mandelbulb.
 vtk
+
+# mpi4py-fft : FFT distribuée, pour l'exercice FFT et la version MPI du TP
+# Kelvin-Helmholtz. Nécessite la bibliothèque FFTW (étape 5 du guide
+# d'installation) : décommentez la ligne suivante une fois FFTW installé.
+# mpi4py-fft
