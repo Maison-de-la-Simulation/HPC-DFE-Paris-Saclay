@@ -224,7 +224,3 @@ précision**.
 
 Il existe un classement mondial des super-calculateurs les plus puissants :
 le [**TOP500**](https://www.top500.org/).
-
-<figure markdown>
-![Site du TOP500](../assets/images/introduction/top500.jpg)
-</figure>
