@@ -85,7 +85,16 @@ par échange de messages avec MPI.
 
     [:octicons-arrow-right-24: Lire le chapitre](performance/index.md)
 
--   :material-flask:{ .lg .middle } __VII. Travaux pratiques__
+-   :material-cube-scan:{ .lg .middle } __VII. Visualisation avec ParaView__
+
+    ---
+
+    Interface, pipeline de filtres, particules, coupes et isosurfaces,
+    scripts `pvpython`, appliqués aux TPs Marble et Kelvin-Helmholtz.
+
+    [:octicons-arrow-right-24: Lire le chapitre](paraview/index.md)
+
+-   :material-flask:{ .lg .middle } __VIII. Travaux pratiques__
 
     ---
 
