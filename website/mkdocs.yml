@@ -81,6 +81,7 @@ nav:
       - 1. Déséquilibre et parallélisme parfait: performance/notions.md
       - 2. Scalabilité: performance/scalabilite.md
       - 3. Loi d'Amdahl: performance/amdahl.md
+  - ParaView: paraview/index.md
 
 markdown_extensions:
   - abbr
@@ -99,6 +100,7 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight
+  - pymdownx.keys
   # Diagrams are SVG files in diagrams/, inserted inline at build time
   # (--8<-- "chapter/name.svg") so they keep the theme colors (light/dark)
   - pymdownx.snippets:

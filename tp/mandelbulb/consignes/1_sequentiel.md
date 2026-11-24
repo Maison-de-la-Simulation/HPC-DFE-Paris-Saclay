@@ -17,7 +17,7 @@ scp <login>@@ruche.mesocentre.universite-paris-saclay.fr:<chemin vers fichier VT
 
 - a) Si vous utilisez votre ordinateur personnel, téléchargez et installez Paraview. Puis ouvrez le logiciel. Vous obtenez une interface proche de celle-ci :
 
-![Paraview](../../../assets/mandelbulb_paraview_1.png)
+![Paraview](../../../website/docs/assets/images/paraview/interface.png)
 
 - b) Dans le menu `File`, cliquez sur `Open` et sélectionnez le fichier `mandelbulb.vtk` généré par le code séquentiel. Le nom du fichier apparaît dans la fenêtre `Pipeline Browser` à gauche de l'interface :
 

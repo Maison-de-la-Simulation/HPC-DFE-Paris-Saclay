@@ -15,7 +15,7 @@ faut installer quelques outils, puis récupérer le dépôt du cours.
 | **h5py, VTK** (facultatifs) | h5py pour le chapitre HDF5 et le TP Kelvin-Helmholtz, VTK pour le TP Mandelbulb |
 | **HDF5 parallèle** (facultatif) | Écrire un fichier HDF5 en parallèle, pour le chapitre [HDF5](hdf5/index.md) |
 | **mpi4py-fft** (facultatif) | FFT distribuées, pour la version MPI du TP Kelvin-Helmholtz |
-| **ParaView** (facultatif) | Visualiser les résultats en 3D (TP Mandelbulb, TP Kelvin-Helmholtz) |
+| **ParaView** (facultatif) | Visualiser les résultats en 3D (TPs Mandelbulb, Marble et Kelvin-Helmholtz) |
 
 ## 1. Installer Git, Python et MPI
 
@@ -290,10 +290,12 @@ python -c "import mpi4py_fft; print(mpi4py_fft.__version__)"
 
 [ParaView](https://www.paraview.org/) est un logiciel libre de visualisation
 de données scientifiques, très utilisé en calcul haute performance. Dans ce
-cours, il sert à visualiser en 3D les résultats du TP Mandelbulb (fichiers
-`.vtk`) et l'évolution complète du TP Kelvin-Helmholtz (script `stack.py`).
+cours, il sert à visualiser en 3D les résultats des TPs Mandelbulb et Marble
+(fichiers `.vtk`) et l'évolution complète du TP Kelvin-Helmholtz (script
+`stack.py`).
 Il s'installe comme une application classique, en dehors de l'environnement
-Python.
+Python. Son utilisation est présentée dans le chapitre
+[Visualisation avec ParaView](paraview/index.md).
 
 === ":material-linux: Linux"
 

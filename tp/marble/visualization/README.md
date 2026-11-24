@@ -62,4 +62,4 @@ Dans le panneau `properties` :
 
 Vous devriez obtenir quelque chose proche de la capture ci-dessous :
 
-<img src="../../../assets/paraview_interface_3.png" height="400">
+<img src="../../../website/docs/assets/images/paraview/marble_glyph.png" height="400">

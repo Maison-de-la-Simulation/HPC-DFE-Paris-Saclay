@@ -8,13 +8,12 @@ et comment elles sont organisées.
 
 À la fin de ce chapitre, vous saurez :
 
-- expliquer ce qu'est le **Calcul Haute Performance** (HPC) et à quoi il sert ;
+- expliquer ce qu'est le **Calcul Haute Performance** (HPC) et à quoi il sert 
 - estimer un **ordre de grandeur** de temps de calcul et comprendre ce
-  qu'est un flop/s ;
-- situer les grandes étapes de l'**histoire** des super-calculateurs ;
-- distinguer **calcul séquentiel** et **calcul parallèle** ;
-- distinguer **mémoire distribuée** et **mémoire partagée**, et relier ces
-  notions aux modèles de programmation **MPI** et **OpenMP**.
+  qu'est un flop/s
+- situer les grandes étapes de l'**histoire** des super-calculateurs
+- distinguer **calcul séquentiel** et **calcul parallèle**
+- distinguer **mémoire distribuée** et **mémoire partagée**
 
 ## Plan du chapitre
 
